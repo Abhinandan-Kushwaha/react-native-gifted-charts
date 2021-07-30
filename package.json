@@ -1,0 +1,49 @@
+{
+  "name": "react-native-gifted-charts",
+  "version": "0.0.1",
+  "description": "The most complete library for Bar, Line, Area and Pie charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.",
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint ."
+  },
+  "repository": "https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts",
+  "author": "Abhinandan Kushwaha <kushabhi5@gmail.com> (https://github.com/Abhinandan-Kushwaha)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues"
+  },
+  "homepage": "https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "react": "17.0.1",
+    "react-native": "0.64.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/runtime": "^7.14.8",
+    "@react-native-community/eslint-config": "^3.0.0",
+    "babel-jest": "^27.0.6",
+    "eslint": "^7.31.0",
+    "jest": "^27.0.6",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-test-renderer": "17.0.1"
+  },
+  "keywords": [
+    "chart",
+    "charts",
+    "graph",
+    "bar",
+    "pie",
+    "donut",
+    "area",
+    "line"
+  ],
+  "jest": {
+    "preset": "react-native"
+  }
+}
