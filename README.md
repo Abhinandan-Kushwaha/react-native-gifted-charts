@@ -2,6 +2,10 @@
 
 The most complete library for Bar, Line, Area and Pie charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
 
+![alt text](/demos/line.gif)
+![alt text](/demos/area.gif)
+![alt text](/demos/movingBars.gif)
+
 ## Installation
 
 ```sh
