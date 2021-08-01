@@ -39,6 +39,7 @@ type propTypes = {
   verticalRulesColor?: ColorValue;
   verticalRulesZIndex?: number;
   hideAxesAndRules?: Boolean;
+  areaChart?: Boolean;
 
   disableScroll?: Boolean;
   showScrollIndicator?: Boolean;
@@ -70,17 +71,17 @@ type propTypes = {
 
   //Data points
 
-  hideDataPoints?: Boolean;
+  showDataPoints?: Boolean;
   dataPointsHeight?: number;
   dataPointsWidth?: number;
   dataPointsBorderRadius?: number;
   dataPointsColor?: ColorValue;
-  hideDataPoints1?: Boolean;
+  showDataPoints1?: Boolean;
   dataPointsHeight1?: number;
   dataPointsWidth1?: number;
   dataPointsBorderRadius1?: number;
   dataPointsColor1?: ColorValue;
-  hideDataPoints2?: Boolean;
+  showDataPoints2?: Boolean;
   dataPointsHeight2?: number;
   dataPointsWidth2?: number;
   dataPointsBorderRadius2?: number;
@@ -142,19 +143,22 @@ export const LineChart = (props: propTypes) => {
   const isAnimated = props.isAnimated || false;
   const animationDuration = props.animationDuration || 800;
   const animateTogether = props.animateTogether || false;
-  const hideDataPoints = props.hideDataPoints || false;
-  const hideDataPoints1 = props.hideDataPoints1 || false;
-  const hideDataPoints2 = props.hideDataPoints2 || false;
+  const showDataPoints1 =
+    props.showDataPoints || props.showDataPoints1 || false;
+  const showDataPoints2 =
+    props.showDataPoints || props.showDataPoints2 || false;
 
   const color1 = props.color1 || props.color || 'black';
   const color2 = props.color2 || props.color || 'black';
 
-  const startFillColor1 = props.startFillColor1 || props.startFillColor || '';
-  const endFillColor1 = props.endFillColor1 || props.endFillColor || '';
+  const startFillColor1 =
+    props.startFillColor1 || props.startFillColor || 'gray';
+  const endFillColor1 = props.endFillColor1 || props.endFillColor || 'white';
   const startOpacity1 = props.startOpacity1 || props.startOpacity || 1;
   const endOpacity1 = props.endOpacity1 || props.endOpacity || 1;
-  const startFillColor2 = props.startFillColor2 || props.startFillColor || '';
-  const endFillColor2 = props.endFillColor2 || props.endFillColor || '';
+  const startFillColor2 =
+    props.startFillColor2 || props.startFillColor || 'gray';
+  const endFillColor2 = props.endFillColor2 || props.endFillColor || 'white';
   const startOpacity2 = props.startOpacity2 || props.startOpacity || 1;
   const endOpacity2 = props.endOpacity2 || props.endOpacity || 1;
 
@@ -178,6 +182,7 @@ export const LineChart = (props: propTypes) => {
   const xAxisColor = props.xAxisColor || 'black';
 
   const hideRules = props.hideRules || false;
+  const areaChart = props.areaChart || false;
 
   const showVerticalRules = props.showVerticalRules || false;
 
@@ -198,16 +203,16 @@ export const LineChart = (props: propTypes) => {
   const hideYAxisText = props.hideYAxisText || false;
 
   const dataPointsHeight1 =
-    props.dataPointsHeight1 || props.dataPointsHeight || 4;
-  const dataPointsWidth1 = props.dataPointsWidth1 || props.dataPointsWidth || 4;
+    props.dataPointsHeight1 || props.dataPointsHeight || 2;
+  const dataPointsWidth1 = props.dataPointsWidth1 || props.dataPointsWidth || 2;
   const dataPointsBorderRadius1 =
     props.dataPointsBorderRadius1 || props.dataPointsBorderRadius;
   const dataPointsColor1 =
     props.dataPointsColor1 || props.dataPointsColor || 'black';
 
   const dataPointsHeight2 =
-    props.dataPointsHeight2 || props.dataPointsHeight || 4;
-  const dataPointsWidth2 = props.dataPointsWidth2 || props.dataPointsWidth || 4;
+    props.dataPointsHeight2 || props.dataPointsHeight || 2;
+  const dataPointsWidth2 = props.dataPointsWidth2 || props.dataPointsWidth || 2;
   const dataPointsBorderRadius2 =
     props.dataPointsBorderRadius2 || props.dataPointsBorderRadius;
   const dataPointsColor2 =
@@ -269,54 +274,57 @@ export const LineChart = (props: propTypes) => {
       setPoints2(pp2.replace('L', 'M'));
 
       /***************************          For Area Charts          *************************/
+      if (areaChart) {
+        let ppp = '',
+          ppp2 = '';
 
-      let ppp = '',
-        ppp2 = '';
-
-      ppp =
-        'L' +
-        (initialSpacing - dataPointsWidth1 / 2) +
-        ' ' +
-        (containerHeight + 10 - xAxisThickness) +
-        ' ';
-      ppp += pp;
-      ppp +=
-        'L' +
-        (initialSpacing - dataPointsWidth1 / 2 + spacing * (data.length - 1)) +
-        ' ' +
-        (containerHeight + 10 - xAxisThickness);
-      ppp +=
-        'L' +
-        (initialSpacing - dataPointsWidth1 / 2) +
-        ' ' +
-        (containerHeight + 10 - xAxisThickness) +
-        ' ';
-
-      if (data2.length) {
-        ppp2 =
+        ppp =
           'L' +
-          (initialSpacing - dataPointsWidth2 / 2) +
+          (initialSpacing - dataPointsWidth1 / 2) +
           ' ' +
           (containerHeight + 10 - xAxisThickness) +
           ' ';
-        ppp2 += pp2;
-        ppp2 +=
+        ppp += pp;
+        ppp +=
           'L' +
           (initialSpacing -
-            dataPointsWidth2 / 2 +
+            dataPointsWidth1 / 2 +
             spacing * (data.length - 1)) +
           ' ' +
           (containerHeight + 10 - xAxisThickness);
-        ppp2 +=
+        ppp +=
           'L' +
-          (initialSpacing - dataPointsWidth2 / 2) +
+          (initialSpacing - dataPointsWidth1 / 2) +
           ' ' +
           (containerHeight + 10 - xAxisThickness) +
           ' ';
-        setFillPoints2(ppp2.replace('L', 'M'));
-      }
 
-      setFillPoints(ppp.replace('L', 'M'));
+        if (data2.length) {
+          ppp2 =
+            'L' +
+            (initialSpacing - dataPointsWidth2 / 2) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          ppp2 += pp2;
+          ppp2 +=
+            'L' +
+            (initialSpacing -
+              dataPointsWidth2 / 2 +
+              spacing * (data.length - 1)) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness);
+          ppp2 +=
+            'L' +
+            (initialSpacing - dataPointsWidth2 / 2) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          setFillPoints2(ppp2.replace('L', 'M'));
+        }
+
+        setFillPoints(ppp.replace('L', 'M'));
+      }
 
       // console.log('pp-------->', pp);
       // console.log('ppp-------->', ppp);
@@ -350,63 +358,67 @@ export const LineChart = (props: propTypes) => {
       /***************************          For Area Charts          *************************/
 
       // console.log('xx---->>>', xx)
-      xx =
-        'M ' +
-        (initialSpacing - dataPointsWidth1 / 2) +
-        ',' +
-        (containerHeight + 10 - xAxisThickness) +
-        ' ' +
-        'L ' +
-        (initialSpacing - dataPointsWidth1 / 2) +
-        ',' +
-        (containerHeight +
-          10 -
-          ((data[0].value || maxValue / 2) * containerHeight) / maxValue) +
-        ' ' +
-        xx +
-        ' ' +
-        'L ' +
-        (initialSpacing - dataPointsWidth1 / 2 + spacing * (data.length - 1)) +
-        ',' +
-        (containerHeight + 10 - xAxisThickness) +
-        ' ' +
-        'L ' +
-        (initialSpacing - dataPointsWidth1 / 2) +
-        ',' +
-        (containerHeight + 10 - xAxisThickness) +
-        ' ';
-      setFillPoints(xx);
-      // console.log('xx later ---->>>', xx)
-
-      if (data2.length) {
-        xx2 =
+      if (areaChart) {
+        xx =
           'M ' +
-          (initialSpacing - dataPointsWidth2 / 2) +
+          (initialSpacing - dataPointsWidth1 / 2) +
           ',' +
           (containerHeight + 10 - xAxisThickness) +
           ' ' +
           'L ' +
-          (initialSpacing - dataPointsWidth2 / 2) +
+          (initialSpacing - dataPointsWidth1 / 2) +
           ',' +
           (containerHeight +
             10 -
-            ((data2[0].value || maxValue / 2) * containerHeight) / maxValue) +
+            ((data[0].value || maxValue / 2) * containerHeight) / maxValue) +
           ' ' +
-          xx2 +
+          xx +
           ' ' +
           'L ' +
           (initialSpacing -
-            dataPointsWidth2 / 2 +
-            spacing * (data2.length - 1)) +
+            dataPointsWidth1 / 2 +
+            spacing * (data.length - 1)) +
           ',' +
           (containerHeight + 10 - xAxisThickness) +
           ' ' +
           'L ' +
-          (initialSpacing - dataPointsWidth2 / 2) +
+          (initialSpacing - dataPointsWidth1 / 2) +
           ',' +
           (containerHeight + 10 - xAxisThickness) +
           ' ';
-        setFillPoints2(xx2);
+        setFillPoints(xx);
+        // console.log('xx later ---->>>', xx)
+
+        if (data2.length) {
+          xx2 =
+            'M ' +
+            (initialSpacing - dataPointsWidth2 / 2) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ' +
+            'L ' +
+            (initialSpacing - dataPointsWidth2 / 2) +
+            ',' +
+            (containerHeight +
+              10 -
+              ((data2[0].value || maxValue / 2) * containerHeight) / maxValue) +
+            ' ' +
+            xx2 +
+            ' ' +
+            'L ' +
+            (initialSpacing -
+              dataPointsWidth2 / 2 +
+              spacing * (data2.length - 1)) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ' +
+            'L ' +
+            (initialSpacing - dataPointsWidth2 / 2) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          setFillPoints2(xx2);
+        }
       }
 
       /*************************************************************************************/
@@ -421,11 +433,11 @@ export const LineChart = (props: propTypes) => {
             position: 'absolute',
             bottom: 30,
             zIndex: 10,
-            width: spacing - 2,
+            width: spacing,
             // borderColor: 'red',
             // borderWidth: 0.5,
             // top: (value * containerHeight / maxValue) - 10,
-            left: initialSpacing + 10 + spacing * index - spacing / 2,
+            left: initialSpacing + spacing * index - spacing / 2,
             // opacity: appearingOpacity,
             // backgroundColor: 'yellow',
             justifyContent: 'center',
@@ -456,8 +468,9 @@ export const LineChart = (props: propTypes) => {
             position: 'absolute',
             bottom: rotateLabel ? 10 : 30,
             zIndex: 10,
+            width: spacing,
             // top: (value * containerHeight / maxValue) - 10,
-            left: initialSpacing + 10 + spacing * index - spacing / 2,
+            left: initialSpacing + spacing * index - spacing / 2,
             opacity: appearingOpacity,
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
@@ -631,29 +644,33 @@ export const LineChart = (props: propTypes) => {
             stroke={color}
             strokeWidth={currentLineThickness || thickness}
           />
-          <LinearGradient
-            id="Gradient"
-            x1="0"
-            y1="0"
-            x2={gradientDirection === 'horizontal' ? '1' : '0'}
-            y2={gradientDirection === 'vertical' ? '1' : '0'}>
-            <Stop
-              offset="0"
-              stopColor={startFillColor}
-              stopOpacity={startOpacity.toString()}
+          {areaChart && (
+            <LinearGradient
+              id="Gradient"
+              x1="0"
+              y1="0"
+              x2={gradientDirection === 'horizontal' ? '1' : '0'}
+              y2={gradientDirection === 'vertical' ? '1' : '0'}>
+              <Stop
+                offset="0"
+                stopColor={startFillColor}
+                stopOpacity={startOpacity.toString()}
+              />
+              <Stop
+                offset="1"
+                stopColor={endFillColor}
+                stopOpacity={endOpacity.toString()}
+              />
+            </LinearGradient>
+          )}
+          {areaChart && (
+            <Path
+              d={fillPoints}
+              fill="url(#Gradient)"
+              stroke={'transparent'}
+              strokeWidth={currentLineThickness || thickness}
             />
-            <Stop
-              offset="1"
-              stopColor={endFillColor}
-              stopOpacity={endOpacity.toString()}
-            />
-          </LinearGradient>
-          <Path
-            d={fillPoints}
-            fill="url(#Gradient)"
-            stroke={'transparent'}
-            strokeWidth={currentLineThickness || thickness}
-          />
+          )}
         </Svg>
       </View>
     );
@@ -688,29 +705,33 @@ export const LineChart = (props: propTypes) => {
             stroke={color}
             strokeWidth={currentLineThickness || thickness}
           />
-          <LinearGradient
-            id="Gradient"
-            x1="0"
-            y1="0"
-            x2={gradientDirection === 'horizontal' ? '1' : '0'}
-            y2={gradientDirection === 'vertical' ? '1' : '0'}>
-            <Stop
-              offset="0"
-              stopColor={startFillColor}
-              stopOpacity={startOpacity.toString()}
+          {areaChart && (
+            <LinearGradient
+              id="Gradient"
+              x1="0"
+              y1="0"
+              x2={gradientDirection === 'horizontal' ? '1' : '0'}
+              y2={gradientDirection === 'vertical' ? '1' : '0'}>
+              <Stop
+                offset="0"
+                stopColor={startFillColor}
+                stopOpacity={startOpacity.toString()}
+              />
+              <Stop
+                offset="1"
+                stopColor={endFillColor}
+                stopOpacity={endOpacity.toString()}
+              />
+            </LinearGradient>
+          )}
+          {areaChart && (
+            <Path
+              d={fillPoints}
+              fill="url(#Gradient)"
+              stroke={'transparent'}
+              strokeWidth={currentLineThickness || thickness}
             />
-            <Stop
-              offset="1"
-              stopColor={endFillColor}
-              stopOpacity={endOpacity.toString()}
-            />
-          </LinearGradient>
-          <Path
-            d={fillPoints}
-            fill="url(#Gradient)"
-            stroke={'transparent'}
-            strokeWidth={currentLineThickness || thickness}
-          />
+          )}
         </Svg>
       </Animated.View>
     );
@@ -730,7 +751,7 @@ export const LineChart = (props: propTypes) => {
         scrollEnabled={!disableScroll}
         showsHorizontalScrollIndicator={showScrollIndicator}
         style={{
-          marginLeft: yAxisLabelWidth,
+          marginLeft: yAxisLabelWidth + yAxisThickness,
           position: 'absolute',
           bottom: stepHeight * -0.5 - 60, //stepHeight * -0.5 + xAxisThickness,
           paddingRight: 100,
@@ -820,12 +841,11 @@ export const LineChart = (props: propTypes) => {
                 endOpacity2,
               )
           : null}
-
         {data.map((item: itemType, index: number) => {
           // console.log('item', item)
           return (
             <View key={index}>
-              {!hideDataPoints && !hideDataPoints1 && (
+              {showDataPoints1 && (
                 <View
                   style={{
                     position: 'absolute',
@@ -855,7 +875,7 @@ export const LineChart = (props: propTypes) => {
         {data2.map((item: itemType, index: number) => {
           return (
             <View key={index}>
-              {!hideDataPoints && !hideDataPoints2 && (
+              {showDataPoints2 && (
                 <View
                   style={{
                     position: 'absolute',
