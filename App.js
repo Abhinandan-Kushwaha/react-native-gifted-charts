@@ -1,112 +1,56 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {View} from 'react-native';
+import {LineChart} from './src';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const App = () => {
+  const lineData = [
+    {value: 40},
+    {value: 80},
+    {value: 170},
+    {value: 90},
+    {value: 190},
+  ];
+  const lineData2 = [
+    {value: 30},
+    {value: 40},
+    {value: 60},
+    {value: 70},
+    {value: 100},
+  ];
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <LineChart
+        xAxisColor="red"
+        xAxisThickness={2}
+        yAxisColor="purple"
+        yAxisThickness={0.5}
+        yAxisTextStyle={{color: 'blue'}}
+        isAnimated
+        animationDuration={1000}
+        height={300}
+        rotateLabel
+        thickness={1}
+        dataPointsHeight={4}
+        dataPointsWidth={4}
+        dataPointsBorderRadius={2}
+        spacing={60}
+        color1="skyblue"
+        color2="orange"
+        data={[...lineData]}
+        startFillColor1="skyblue"
+        endOpacity1={0.1}
+        endFillColor1="skyblue"
+        startFillColor2="orange"
+        endFillColor2="white"
+        curved
+        showVerticalRules
+        showYAxisIndices
+        showXAxisIndices
+        data2={[...lineData2]}
+      />
     </View>
   );
 };
-
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
