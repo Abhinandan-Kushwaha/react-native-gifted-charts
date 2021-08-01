@@ -2,6 +2,7 @@
   "name": "react-native-gifted-charts",
   "version": "0.0.1",
   "description": "The most complete library for Bar, Line, Area and Pie charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.",
+  "main": "src/index.tsx",
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
