@@ -20,17 +20,17 @@ You can use the Bar chart
 import { BarChart, LineChart, PieChart } from "react-native-gifted-charts";
 
 // ...
-const data=[{value:50},{value:80},{value:90},{value:70}]
+const data=[ {value:50}, {value:80}, {value:90}, {value:70}]
 
-<BarChart data={data}/>
-<LineChart data={data}/>
-<PieChart data={PieChart}/>
+<BarChart data = {data} />
+<LineChart data = {data} />
+<PieChart data = {PieChart} />
 
 //For Area chart, just add the prop areaChart to the <LineChart/> component
-<LineChart data={data} areaChart/>
+<LineChart data = {data} areaChart />
 
 //For Donut chart, just add the prop donut to the <PieChart/> component
-<PieChart data={data} donut/>
+<PieChart data = {data} donut />
 ```
 
 ## Contributing
