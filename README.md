@@ -21,7 +21,7 @@ npm i react-native-linear-gradient react-native-svg react-native-canvas react-na
 For iOS-
 
 ```sh
-cd ios pod install
+cd ios && pod install
 ```
 
 ## Usage
