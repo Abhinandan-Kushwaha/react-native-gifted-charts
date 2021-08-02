@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import {LineChart} from './src';
+import {BarChart, LineChart, PieChart} from './src';
 
 const App = () => {
   const lineData = [
@@ -18,8 +18,19 @@ const App = () => {
     {value: 100, text: 'May'},
   ];
 
+  const data = [{value: 50}, {value: 80}, {value: 90}, {value: 70}];
+
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      {/* <LineChart data={data} curved /> */}
+      {/* <BarChart
+        data={data}
+        frontColor="lightgray"
+        cappedBars
+        capThickness={2}
+        capColor="gray"
+      /> */}
+      {/* <PieChart data={data} donut isThreeD shadow /> */}
       <LineChart
         xAxisColor="red"
         xAxisThickness={2}
@@ -30,14 +41,15 @@ const App = () => {
         animationDuration={1200}
         height={300}
         rotateLabel
-        thickness={1}
+        // thickness={1}
         dataPointsHeight={8}
         dataPointsWidth={8}
+        animateTogether
         // textColor="skyblue"
         // dataPointsShape="rectangular"
         spacing={84}
         initialSpacing={4}
-        areaChart
+        // areaChart
         color1="skyblue"
         color2="orange"
         data={[...lineData]}

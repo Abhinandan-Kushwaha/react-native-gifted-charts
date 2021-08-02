@@ -6,7 +6,7 @@ const pi = Math.PI;
 
 type propTypes = {
   radius?: number;
-  is3D?: Boolean;
+  isThreeD?: Boolean;
   donut?: Boolean;
   innerRadius?: number;
   shadow?: Boolean;
@@ -32,7 +32,7 @@ type itemType = {
   textColor?: string;
 };
 export const PieChart = (props: propTypes) => {
-  const {data, is3D, textColor} = props;
+  const {data, isThreeD, textColor} = props;
   const radius = props.radius || 120;
   const shadowWidth = props.shadowWidth || (4 * radius) / 3;
   const backgroundColor = props.backgroundColor || 'white';
@@ -59,7 +59,7 @@ export const PieChart = (props: propTypes) => {
     }
   });
 
-  const canvasHeight = is3D ? radius * 2.5 + 60 : radius * 2 + 60;
+  const canvasHeight = isThreeD ? radius * 2.5 + 60 : radius * 2 + 60;
   const canvasWidth = radius * 2 + 60;
 
   const [visibility, setVisibility] = useState(false);
@@ -73,7 +73,7 @@ export const PieChart = (props: propTypes) => {
       return null;
     }
 
-    if (is3D) {
+    if (isThreeD) {
       canvas.height = canvasHeight;
     } else {
       canvas.height = canvasHeight;
@@ -86,7 +86,7 @@ export const PieChart = (props: propTypes) => {
     const initialValue = 30;
 
     /******************       SHADOW        ***************/
-    if (is3D && shadow) {
+    if (isThreeD && shadow) {
       ctx.beginPath();
       ctx.moveTo(initialValue, radius + initialValue);
       ctx.lineTo(initialValue, shadowWidth + initialValue);
@@ -128,7 +128,7 @@ export const PieChart = (props: propTypes) => {
       /****************     being visible inside the chart content if          ***************/
       /****************     the color of sections is transparent               ***************/
 
-      if (is3D && shadow) {
+      if (isThreeD && shadow) {
         ctx.beginPath();
 
         ctx.moveTo(
@@ -211,7 +211,7 @@ export const PieChart = (props: propTypes) => {
   };
 
   return (
-    <View style={is3D && {transform: [{scaleY: 0.5}]}}>
+    <View style={isThreeD && {transform: [{scaleY: 0.5}]}}>
       <Canvas ref={handleCanvas} />
       {visibility && donut && !isDataShifted && (
         <View
@@ -225,13 +225,13 @@ export const PieChart = (props: propTypes) => {
               left: canvasWidth / 2 - innerRadius + shiftCenterX,
               top:
                 canvasHeight / 2 -
-                innerRadius * (is3D ? 1.5 : 1) +
+                innerRadius * (isThreeD ? 1.5 : 1) +
                 shiftCenterY,
               borderWidth: innerCircleBorderWidth,
               borderColor: innerCircleBorderColor,
               backgroundColor: innerCircleColor,
             },
-            is3D && {
+            isThreeD && {
               borderTopWidth: innerCircleBorderWidth * 5,
               borderLeftWidth: shiftCenterX
                 ? innerCircleBorderWidth * 2
