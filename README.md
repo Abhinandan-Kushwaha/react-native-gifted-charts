@@ -30,7 +30,7 @@ const data=[{value:50},{value:80},{value:90},{value:70}]
 <LineChart data={data} areaChart/>
 
 //For Donut chart, just add the prop donut to the <PieChart/> component
-<LineChart data={data} areaChart/>
+<PieChart data={data} donut/>
 ```
 
 ## Contributing
