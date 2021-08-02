@@ -3,25 +3,28 @@ import {View} from 'react-native';
 import {BarChart, LineChart, PieChart} from './src';
 
 const App = () => {
-  const lineData = [
-    {value: 40, text: 'Jan', textShiftX: 8, textShiftY: -10},
-    {value: 80, text: 'Feb'},
-    {value: 170, text: 'Mar', textFontSize: 16, textColor: 'blue'},
-    {value: 90, text: 'Apr'},
-    {value: 190, text: 'May'},
-  ];
-  const lineData2 = [
-    {value: 30, text: 'Jan', textShiftX: 8},
-    {value: 40, text: 'Feb'},
-    {value: 60, text: 'Mar'},
-    {value: 70, text: 'Apr'},
-    {value: 100, text: 'May'},
-  ];
+  // const lineData = [
+  //   {value: 40, text: 'Jan', textShiftX: 8, textShiftY: -10},
+  //   {value: 80, text: 'Feb'},
+  //   {value: 170, text: 'Mar', textFontSize: 16, textColor: 'blue'},
+  //   {value: 90, text: 'Apr'},
+  //   {value: 190, text: 'May'},
+  // ];
+  // const lineData2 = [
+  //   {value: 30, text: 'Jan', textShiftX: 8},
+  //   {value: 40, text: 'Feb'},
+  //   {value: 60, text: 'Mar'},
+  //   {value: 70, text: 'Apr'},
+  //   {value: 100, text: 'May'},
+  // ];
 
   const data = [{value: 50}, {value: 80}, {value: 90}, {value: 70}];
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <BarChart data={data} />
+      <LineChart data={data} />
+      <PieChart data={data} />
       {/* <LineChart data={data} curved /> */}
       {/* <BarChart
         data={data}
@@ -31,7 +34,8 @@ const App = () => {
         capColor="gray"
       /> */}
       {/* <PieChart data={data} donut isThreeD shadow /> */}
-      <LineChart
+      {/* <BarChart data={data} horizontal noOfSections={5} /> */}
+      {/* <LineChart
         xAxisColor="red"
         xAxisThickness={2}
         yAxisColor="purple"
@@ -64,7 +68,7 @@ const App = () => {
         // showYAxisIndices
         // showXAxisIndices
         data2={[...lineData2]}
-      />
+      /> */}
     </View>
   );
 };
