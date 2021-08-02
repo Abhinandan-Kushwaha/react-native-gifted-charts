@@ -30,12 +30,12 @@ const App = () => {
         animationDuration={1200}
         height={300}
         rotateLabel
-        thickness={4}
-        dataPointsHeight={4}
-        dataPointsWidth={4}
-        dataPointsBorderRadius={2}
+        thickness={1}
+        dataPointsHeight={8}
+        dataPointsWidth={8}
+        // dataPointsShape="rectangular"
         spacing={84}
-        initialSpacing={0}
+        initialSpacing={4}
         areaChart
         color1="skyblue"
         color2="orange"

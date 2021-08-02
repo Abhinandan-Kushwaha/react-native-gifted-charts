@@ -8,7 +8,7 @@ import {
   ColorValue,
 } from 'react-native';
 import {styles} from './styles';
-import Svg, {Path, LinearGradient, Stop} from 'react-native-svg';
+import Svg, {Path, LinearGradient, Stop, Circle, Rect} from 'react-native-svg';
 import {svgPath, bezierCommand} from '../utils';
 
 type propTypes = {
@@ -71,21 +71,24 @@ type propTypes = {
 
   //Data points
 
-  showDataPoints?: Boolean;
+  hideDataPoints?: Boolean;
   dataPointsHeight?: number;
   dataPointsWidth?: number;
-  dataPointsBorderRadius?: number;
-  dataPointsColor?: ColorValue;
-  showDataPoints1?: Boolean;
+  dataPointsRadius?: number;
+  dataPointsColor?: string;
+  dataPointsShape?: string;
+  hideDataPoints1?: Boolean;
   dataPointsHeight1?: number;
   dataPointsWidth1?: number;
-  dataPointsBorderRadius1?: number;
-  dataPointsColor1?: ColorValue;
-  showDataPoints2?: Boolean;
+  dataPointsRadius1?: number;
+  dataPointsColor1?: string;
+  dataPointsShape1?: string;
+  hideDataPoints2?: Boolean;
   dataPointsHeight2?: number;
   dataPointsWidth2?: number;
-  dataPointsBorderRadius2?: number;
-  dataPointsColor2?: ColorValue;
+  dataPointsRadius2?: number;
+  dataPointsColor2?: string;
+  dataPointsShape2?: string;
 
   startFillColor?: string;
   endFillColor?: string;
@@ -143,10 +146,10 @@ export const LineChart = (props: propTypes) => {
   const isAnimated = props.isAnimated || false;
   const animationDuration = props.animationDuration || 800;
   const animateTogether = props.animateTogether || false;
-  const showDataPoints1 =
-    props.showDataPoints || props.showDataPoints1 || false;
-  const showDataPoints2 =
-    props.showDataPoints || props.showDataPoints2 || false;
+  const hideDataPoints1 =
+    props.hideDataPoints || props.hideDataPoints1 || false;
+  const hideDataPoints2 =
+    props.hideDataPoints || props.hideDataPoints2 || false;
 
   const color1 = props.color1 || props.color || 'black';
   const color2 = props.color2 || props.color || 'black';
@@ -205,18 +208,22 @@ export const LineChart = (props: propTypes) => {
   const dataPointsHeight1 =
     props.dataPointsHeight1 || props.dataPointsHeight || 2;
   const dataPointsWidth1 = props.dataPointsWidth1 || props.dataPointsWidth || 2;
-  const dataPointsBorderRadius1 =
-    props.dataPointsBorderRadius1 || props.dataPointsBorderRadius;
+  const dataPointsRadius1 =
+    props.dataPointsRadius1 || props.dataPointsRadius || 2;
   const dataPointsColor1 =
     props.dataPointsColor1 || props.dataPointsColor || 'black';
+  const dataPointsShape1 =
+    props.dataPointsShape1 || props.dataPointsShape || 'circular';
 
   const dataPointsHeight2 =
     props.dataPointsHeight2 || props.dataPointsHeight || 2;
   const dataPointsWidth2 = props.dataPointsWidth2 || props.dataPointsWidth || 2;
-  const dataPointsBorderRadius2 =
-    props.dataPointsBorderRadius2 || props.dataPointsBorderRadius;
+  const dataPointsRadius2 =
+    props.dataPointsRadius2 || props.dataPointsRadius || 2;
   const dataPointsColor2 =
     props.dataPointsColor2 || props.dataPointsColor || 'blue';
+  const dataPointsShape2 =
+    props.dataPointsShape2 || props.dataPointsShape || 'circular';
 
   const backgroundColor = props.backgroundColor || 'transparent';
 
@@ -696,7 +703,7 @@ export const LineChart = (props: propTypes) => {
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
           zIndex: -1,
-          // backgroundColor: 'wheat'
+          // backgroundColor: 'wheat',
         }}>
         <Svg>
           <Path
@@ -732,6 +739,68 @@ export const LineChart = (props: propTypes) => {
               strokeWidth={currentLineThickness || thickness}
             />
           )}
+          {!hideDataPoints1 &&
+            data.map((item: itemType, index: number) => {
+              if (dataPointsShape1 === 'rectangular') {
+                return (
+                  <Rect
+                    x={initialSpacing - dataPointsWidth1 + spacing * index}
+                    y={
+                      containerHeight -
+                      dataPointsHeight1 / 2 +
+                      10 -
+                      (item.value * containerHeight) / maxValue
+                    }
+                    width={dataPointsWidth1}
+                    height={dataPointsHeight1}
+                    fill={dataPointsColor1}
+                  />
+                );
+              }
+              return (
+                <Circle
+                  cx={initialSpacing - dataPointsWidth1 / 2 + spacing * index}
+                  cy={
+                    containerHeight +
+                    10 -
+                    (item.value * containerHeight) / maxValue
+                  }
+                  r={dataPointsRadius1}
+                  fill={dataPointsColor1}
+                />
+              );
+            })}
+          {!hideDataPoints2 &&
+            data2.map((item: itemType, index: number) => {
+              if (dataPointsShape1 === 'rectangular') {
+                return (
+                  <Rect
+                    x={initialSpacing - dataPointsWidth2 + spacing * index}
+                    y={
+                      containerHeight -
+                      dataPointsHeight2 / 2 +
+                      10 -
+                      (item.value * containerHeight) / maxValue
+                    }
+                    width={dataPointsWidth2}
+                    height={dataPointsHeight2}
+                    fill={dataPointsColor2}
+                  />
+                );
+              }
+              return (
+                <Circle
+                  cx={initialSpacing - dataPointsWidth2 / 2 + spacing * index}
+                  cy={
+                    containerHeight +
+                    10 -
+                    (item.value * containerHeight) / maxValue
+                  }
+                  r={dataPointsRadius2}
+                  fill={dataPointsColor2}
+                />
+              );
+            })}
         </Svg>
       </Animated.View>
     );
@@ -845,56 +914,10 @@ export const LineChart = (props: propTypes) => {
           // console.log('item', item)
           return (
             <View key={index}>
-              {showDataPoints1 && (
-                <View
-                  style={{
-                    position: 'absolute',
-                    backgroundColor: dataPointsColor1,
-                    height: dataPointsHeight1,
-                    width: dataPointsWidth1,
-                    borderRadius: dataPointsBorderRadius1 || 0,
-                    bottom:
-                      ((item.value || maxValue / 2) * containerHeight) /
-                        maxValue +
-                      60 -
-                      dataPointsHeight1 / 2,
-                    left:
-                      index * spacing +
-                      (initialSpacing - dataPointsWidth1 / 2) -
-                      dataPointsWidth1 / 2,
-                  }}
-                />
-              )}
               {isAnimated
                 ? renderAnimatedLabel(index, item.label, item.labelTextStyle)
                 : renderLabel(index, item.label, item.labelTextStyle)}
               {/* {renderLabel(index, item.label, item.labelTextStyle)} */}
-            </View>
-          );
-        })}
-        {data2.map((item: itemType, index: number) => {
-          return (
-            <View key={index}>
-              {showDataPoints2 && (
-                <View
-                  style={{
-                    position: 'absolute',
-                    backgroundColor: dataPointsColor2,
-                    height: dataPointsHeight2,
-                    width: dataPointsWidth2,
-                    borderRadius: dataPointsBorderRadius2 || 0,
-                    bottom:
-                      ((item.value || maxValue / 2) * containerHeight) /
-                        maxValue +
-                      60 -
-                      dataPointsHeight2 / 2,
-                    left:
-                      index * spacing +
-                      (initialSpacing - dataPointsWidth2 / 2) -
-                      dataPointsWidth2 / 2,
-                  }}
-                />
-              )}
             </View>
           );
         })}
