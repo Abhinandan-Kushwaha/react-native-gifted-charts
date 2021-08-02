@@ -12,6 +12,18 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 npm install react-native-gifted-charts
 ```
 
+Since we will be using LinearGradient, Svg and Canvas-
+
+```sh
+npm i react-native-linear-gradient react-native-svg react-native-canvas react-native-webview
+```
+
+For iOS-
+
+```sh
+cd ios pod install
+```
+
 ## Usage
 
 The simplest usage of various types of charts can be done as below-
