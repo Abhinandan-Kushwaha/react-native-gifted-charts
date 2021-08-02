@@ -14,12 +14,23 @@ npm install react-native-gifted-charts
 
 ## Usage
 
+You can use the Bar chart
+
 ```js
-import GiftedCharts from "react-native-gifted-charts";
+import { BarChart, LineChart, PieChart } from "react-native-gifted-charts";
 
 // ...
+const data=[{value:50},{value:80},{value:90},{value:70}]
 
-const result = await GiftedCharts.multiply(3, 7);
+<BarChart data={data}/>
+<LineChart data={data}/>
+<PieChart data={PieChart}/>
+
+//For Area chart, just add the prop areaChart to the <LineChart/> component
+<LineChart data={data} areaChart/>
+
+//For Donut chart, just add the prop donut to the <PieChart/> component
+<LineChart data={data} areaChart/>
 ```
 
 ## Contributing
