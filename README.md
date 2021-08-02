@@ -24,7 +24,7 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 
 <BarChart data = {data} />
 <LineChart data = {data} />
-<PieChart data = {PieChart} />
+<PieChart data = {data} />
 
 // For Horizontal Bar chart, just add the prop horizontal to the <BarChart/> component
 <BarChart data = {data} horizontal />
