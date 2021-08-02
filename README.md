@@ -20,7 +20,7 @@ You can use the Bar chart
 import { BarChart, LineChart, PieChart } from "react-native-gifted-charts";
 
 // ...
-const data=[ {value:50}, {value:80}, {value:90}, {value:70}]
+const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 
 <BarChart data = {data} />
 <LineChart data = {data} />
