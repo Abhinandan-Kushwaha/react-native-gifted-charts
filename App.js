@@ -4,18 +4,18 @@ import {LineChart} from './src';
 
 const App = () => {
   const lineData = [
-    {value: 40, label: 'Jan'},
-    {value: 80, label: 'Feb'},
-    {value: 170, label: 'Mar'},
-    {value: 90, label: 'Apr'},
-    {value: 190, label: 'May'},
+    {value: 40, text: 'Jan', textShiftX: 8, textShiftY: -10},
+    {value: 80, text: 'Feb'},
+    {value: 170, text: 'Mar', textFontSize: 16, textColor: 'blue'},
+    {value: 90, text: 'Apr'},
+    {value: 190, text: 'May'},
   ];
   const lineData2 = [
-    {value: 30, label: 'Jan'},
-    {value: 40, label: 'Feb'},
-    {value: 60, label: 'Mar'},
-    {value: 70, label: 'Apr'},
-    {value: 100, label: 'May'},
+    {value: 30, text: 'Jan', textShiftX: 8},
+    {value: 40, text: 'Feb'},
+    {value: 60, text: 'Mar'},
+    {value: 70, text: 'Apr'},
+    {value: 100, text: 'May'},
   ];
 
   return (
@@ -33,6 +33,7 @@ const App = () => {
         thickness={1}
         dataPointsHeight={8}
         dataPointsWidth={8}
+        // textColor="skyblue"
         // dataPointsShape="rectangular"
         spacing={84}
         initialSpacing={4}

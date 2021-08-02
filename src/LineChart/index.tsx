@@ -8,7 +8,14 @@ import {
   ColorValue,
 } from 'react-native';
 import {styles} from './styles';
-import Svg, {Path, LinearGradient, Stop, Circle, Rect} from 'react-native-svg';
+import Svg, {
+  Path,
+  LinearGradient,
+  Stop,
+  Circle,
+  Rect,
+  Text as CanvasText,
+} from 'react-native-svg';
 import {svgPath, bezierCommand} from '../utils';
 
 type propTypes = {
@@ -103,6 +110,13 @@ type propTypes = {
   startOpacity2?: number;
   endOpacity2?: number;
   gradientDirection?: string;
+
+  textFontSize?: number;
+  textColor?: string;
+  textFontSize1?: number;
+  textColor1?: string;
+  textFontSize2?: number;
+  textColor2?: string;
 };
 type itemType = {
   value?: number;
@@ -117,6 +131,11 @@ type itemType = {
   topLabelComponent?: Function;
   topLabelContainerStyle?: any;
   disablePress?: any;
+  text?: string;
+  textShiftX?: number;
+  textShiftY?: number;
+  textColor?: string;
+  textFontSize?: number;
 };
 
 type sectionType = {
@@ -212,8 +231,8 @@ export const LineChart = (props: propTypes) => {
     props.dataPointsRadius1 || props.dataPointsRadius || 2;
   const dataPointsColor1 =
     props.dataPointsColor1 || props.dataPointsColor || 'black';
-  const dataPointsShape1 =
-    props.dataPointsShape1 || props.dataPointsShape || 'circular';
+  const dataPointsShape =
+    props.dataPointsShape || props.dataPointsShape || 'circular';
 
   const dataPointsHeight2 =
     props.dataPointsHeight2 || props.dataPointsHeight || 2;
@@ -224,6 +243,11 @@ export const LineChart = (props: propTypes) => {
     props.dataPointsColor2 || props.dataPointsColor || 'blue';
   const dataPointsShape2 =
     props.dataPointsShape2 || props.dataPointsShape || 'circular';
+
+  const textFontSize1 = props.textFontSize1 || props.textFontSize || 10;
+  const textFontSize2 = props.textFontSize2 || props.textFontSize || 10;
+  const textColor1 = props.textColor1 || props.textColor || 'gray';
+  const textColor2 = props.textColor2 || props.textColor || 'gray';
 
   const backgroundColor = props.backgroundColor || 'transparent';
 
@@ -741,64 +765,152 @@ export const LineChart = (props: propTypes) => {
           )}
           {!hideDataPoints1 &&
             data.map((item: itemType, index: number) => {
-              if (dataPointsShape1 === 'rectangular') {
+              if (dataPointsShape === 'rectangular') {
                 return (
-                  <Rect
-                    x={initialSpacing - dataPointsWidth1 + spacing * index}
-                    y={
-                      containerHeight -
-                      dataPointsHeight1 / 2 +
-                      10 -
-                      (item.value * containerHeight) / maxValue
-                    }
-                    width={dataPointsWidth1}
-                    height={dataPointsHeight1}
-                    fill={dataPointsColor1}
-                  />
+                  <>
+                    <Rect
+                      x={initialSpacing - dataPointsWidth1 + spacing * index}
+                      y={
+                        containerHeight -
+                        dataPointsHeight1 / 2 +
+                        10 -
+                        (item.value * containerHeight) / maxValue
+                      }
+                      width={dataPointsWidth1}
+                      height={dataPointsHeight1}
+                      fill={dataPointsColor1}
+                    />
+                    {item.text && (
+                      <CanvasText
+                        fill={item.textColor || textColor1}
+                        fontSize={item.textFontSize || textFontSize1}
+                        x={
+                          initialSpacing -
+                          dataPointsWidth1 +
+                          spacing * index +
+                          (item.textShiftX || 0)
+                        }
+                        y={
+                          containerHeight -
+                          dataPointsHeight1 / 2 +
+                          10 -
+                          (item.value * containerHeight) / maxValue +
+                          (item.textShiftY || 0)
+                        }>
+                        {item.text}
+                      </CanvasText>
+                    )}
+                  </>
                 );
               }
               return (
-                <Circle
-                  cx={initialSpacing - dataPointsWidth1 / 2 + spacing * index}
-                  cy={
-                    containerHeight +
-                    10 -
-                    (item.value * containerHeight) / maxValue
-                  }
-                  r={dataPointsRadius1}
-                  fill={dataPointsColor1}
-                />
+                <>
+                  <Circle
+                    cx={initialSpacing - dataPointsWidth1 / 2 + spacing * index}
+                    cy={
+                      containerHeight +
+                      10 -
+                      (item.value * containerHeight) / maxValue
+                    }
+                    r={dataPointsRadius1}
+                    fill={dataPointsColor1}
+                  />
+                  {item.text && (
+                    <CanvasText
+                      fill={item.textColor || textColor1}
+                      fontSize={item.textFontSize || textFontSize1}
+                      x={
+                        initialSpacing -
+                        dataPointsWidth1 +
+                        spacing * index +
+                        (item.textShiftX || 0)
+                      }
+                      y={
+                        containerHeight -
+                        dataPointsHeight1 / 2 +
+                        10 -
+                        (item.value * containerHeight) / maxValue +
+                        (item.textShiftY || 0)
+                      }>
+                      {item.text}
+                    </CanvasText>
+                  )}
+                </>
               );
             })}
           {!hideDataPoints2 &&
             data2.map((item: itemType, index: number) => {
-              if (dataPointsShape1 === 'rectangular') {
+              if (dataPointsShape2 === 'rectangular') {
                 return (
-                  <Rect
-                    x={initialSpacing - dataPointsWidth2 + spacing * index}
-                    y={
-                      containerHeight -
-                      dataPointsHeight2 / 2 +
-                      10 -
-                      (item.value * containerHeight) / maxValue
-                    }
-                    width={dataPointsWidth2}
-                    height={dataPointsHeight2}
-                    fill={dataPointsColor2}
-                  />
+                  <>
+                    <Rect
+                      x={initialSpacing - dataPointsWidth2 + spacing * index}
+                      y={
+                        containerHeight -
+                        dataPointsHeight2 / 2 +
+                        10 -
+                        (item.value * containerHeight) / maxValue
+                      }
+                      width={dataPointsWidth2}
+                      height={dataPointsHeight2}
+                      fill={dataPointsColor2}
+                    />
+                    {item.text && (
+                      <CanvasText
+                        fill={item.textColor || textColor2}
+                        fontSize={item.textFontSize || textFontSize2}
+                        x={
+                          initialSpacing -
+                          dataPointsWidth2 +
+                          spacing * index +
+                          (item.textShiftX || 0)
+                        }
+                        y={
+                          containerHeight -
+                          dataPointsHeight2 / 2 +
+                          10 -
+                          (item.value * containerHeight) / maxValue +
+                          (item.textShiftY || 0)
+                        }>
+                        {item.text}
+                      </CanvasText>
+                    )}
+                  </>
                 );
               }
               return (
-                <Circle
-                  cx={initialSpacing - dataPointsWidth2 / 2 + spacing * index}
-                  cy={
-                    containerHeight +
-                    10 -
-                    (item.value * containerHeight) / maxValue
-                  }
-                  r={dataPointsRadius2}
-                  fill={dataPointsColor2}
-                />
+                <>
+                  <Circle
+                    cx={initialSpacing - dataPointsWidth2 / 2 + spacing * index}
+                    cy={
+                      containerHeight +
+                      10 -
+                      (item.value * containerHeight) / maxValue
+                    }
+                    r={dataPointsRadius2}
+                    fill={dataPointsColor2}
+                  />
+                  {item.text && (
+                    <CanvasText
+                      fill={item.textColor || textColor2}
+                      fontSize={item.textFontSize || textFontSize2}
+                      x={
+                        initialSpacing -
+                        dataPointsWidth2 +
+                        spacing * index +
+                        (item.textShiftX || 0)
+                      }
+                      y={
+                        containerHeight -
+                        dataPointsHeight2 / 2 +
+                        10 -
+                        (item.value * containerHeight) / maxValue +
+                        (item.textShiftY || 0)
+                      }>
+                      {item.text}
+                    </CanvasText>
+                  )}
+                </>
               );
             })}
         </Svg>
