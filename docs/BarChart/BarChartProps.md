@@ -28,7 +28,7 @@
 | sideColor              | ColorValue | Color of the side view of the bar, only for 3 D                                |
 | topColor               | ColorValue | Color of the top view of the bar, only for 3 D                                 |
 | showGradient           | Boolean    | Prop to enable linear gradient for the bar color, defaults to false            |
-| gradientColor          | ColorValue | Along with frontColor, gradientColor constitutes the 2 colors for gradient     |
+| gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient     |
 | initialSpacing         | number     | distance of the first bar from the Y axis                                      |
 | label                  | string     | Label text appearing below the bar (under the X axis)                          |
 | labelTextStyle         | object     | Style object for the label text appearing below the bar                        |
