@@ -13,8 +13,8 @@ type propTypes = {
   innerCircleColor?: ColorValue;
   innerCircleBorderWidth?: number;
   innerCircleBorderColor?: ColorValue;
-  shiftCenterX?: number;
-  shiftCenterY?: number;
+  shiftInnerCenterX?: number;
+  shiftInnerCenterY?: number;
   shadowColor?: string;
   shadowWidth?: number;
   strokeWidth?: number;
@@ -45,8 +45,8 @@ export const PieChart = (props: propTypes) => {
   const innerCircleBorderWidth =
     props.innerCircleBorderWidth || (props.innerCircleBorderColor ? 5 : 0);
   const innerCircleBorderColor = props.innerCircleBorderColor || 'gray';
-  const shiftCenterX = props.shiftCenterX || 0;
-  const shiftCenterY = props.shiftCenterY || 0;
+  const shiftInnerCenterX = props.shiftInnerCenterX || 0;
+  const shiftInnerCenterY = props.shiftInnerCenterY || 0;
   const strokeWidth = props.strokeWidth || 0;
   const strokeColor =
     props.strokeColor || (strokeWidth ? 'gray' : 'transparent');
@@ -222,18 +222,18 @@ export const PieChart = (props: propTypes) => {
               borderRadius: innerRadius,
               position: 'absolute',
               alignSelf: 'center',
-              left: canvasWidth / 2 - innerRadius + shiftCenterX,
+              left: canvasWidth / 2 - innerRadius + shiftInnerCenterX,
               top:
                 canvasHeight / 2 -
                 innerRadius * (isThreeD ? 1.5 : 1) +
-                shiftCenterY,
+                shiftInnerCenterY,
               borderWidth: innerCircleBorderWidth,
               borderColor: innerCircleBorderColor,
               backgroundColor: innerCircleColor,
             },
             isThreeD && {
               borderTopWidth: innerCircleBorderWidth * 5,
-              borderLeftWidth: shiftCenterX
+              borderLeftWidth: shiftInnerCenterX
                 ? innerCircleBorderWidth * 2
                 : innerCircleBorderWidth,
             },
