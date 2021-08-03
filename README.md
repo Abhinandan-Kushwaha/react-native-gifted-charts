@@ -50,11 +50,9 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 
 ## Props table
 
-### [BarChart props](docs/BarChart/BarChartProps.md)
-
-### [LineChart props](docs/LineChart/LineChartProps.md)
-
-### [PieChart props](docs/PieChart/PieChartProps.md)
+**[1. BarChart props](docs/BarChart/BarChartProps.md)**
+**[2. LineChart props](docs/LineChart/LineChartProps.md)**
+**[3. PieChart props](docs/PieChart/PieChartProps.md)**
 
 ## Contributing
 
