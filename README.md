@@ -48,11 +48,11 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 <PieChart data = {data} donut />
 ```
 
-## Props table
+## Props tables
 
-**[1. BarChart props](docs/BarChart/BarChartProps.md)** \
-**[2. LineChart props](docs/LineChart/LineChartProps.md)** \
-**[3. PieChart props](docs/PieChart/PieChartProps.md)**
+**[1. BarChart and Horizontal BarChart props](docs/BarChart/BarChartProps.md)** \
+**[2. LineChart and AreaChart props](docs/LineChart/LineChartProps.md)** \
+**[3. PieChart and DonutChart props](docs/PieChart/PieChartProps.md)**
 
 ## Contributing
 
