@@ -26,7 +26,7 @@ type propTypes = {
   stepValue?: number;
   spacing?: number;
   initialSpacing?: number;
-  data?: any;
+  data?: Array<itemType>;
   data2?: any;
   thickness?: number;
   thickness1?: number;
@@ -120,18 +120,9 @@ type propTypes = {
 };
 type itemType = {
   value?: number;
-  onPress?: any;
-  frontColor?: ColorValue;
-  sideColor?: ColorValue;
-  topColor?: ColorValue;
-  showGradient?: Boolean;
-  gradientColor?: any;
   label: String;
   labelTextStyle?: any;
-  topLabelComponent?: Function;
-  topLabelContainerStyle?: any;
-  disablePress?: any;
-  text?: string;
+  dataPointText?: string;
   textShiftX?: number;
   textShiftY?: number;
   textColor?: string;
@@ -675,7 +666,7 @@ export const LineChart = (props: propTypes) => {
               height={dataPointsHeight}
               fill={dataPointsColor}
             />
-            {item.text && (
+            {item.dataPointText && (
               <CanvasText
                 fill={item.textColor || textColor}
                 fontSize={item.textFontSize || textFontSize}
@@ -692,7 +683,7 @@ export const LineChart = (props: propTypes) => {
                   (item.value * containerHeight) / maxValue +
                   (item.textShiftY || 0)
                 }>
-                {item.text}
+                {item.dataPointText}
               </CanvasText>
             )}
           </Fragment>
@@ -708,7 +699,7 @@ export const LineChart = (props: propTypes) => {
             r={dataPointsRadius}
             fill={dataPointsColor}
           />
-          {item.text && (
+          {item.dataPointText && (
             <CanvasText
               fill={item.textColor || textColor}
               fontSize={item.textFontSize || textFontSize}
@@ -725,7 +716,7 @@ export const LineChart = (props: propTypes) => {
                 (item.value * containerHeight) / maxValue +
                 (item.textShiftY || 0)
               }>
-              {item.text}
+              {item.dataPointText}
             </CanvasText>
           )}
         </Fragment>
