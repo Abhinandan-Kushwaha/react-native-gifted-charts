@@ -39,10 +39,10 @@ type PropTypes = {
   hideRules?: Boolean;
   rulesColor?: ColorValue;
   rulesThickness?: number;
-  showVerticalRules?: Boolean;
-  verticalRulesThickness?: number;
-  verticalRulesColor?: ColorValue;
-  verticalRulesZIndex?: number;
+  showVerticalLines?: Boolean;
+  verticalLinesThickness?: number;
+  verticalLinesColor?: ColorValue;
+  verticalLinesZIndex?: number;
 
   showYAxisIndices?: Boolean;
   showXAxisIndices?: Boolean;
@@ -118,14 +118,14 @@ export const BarChart = (props: PropTypes) => {
   const opacity = props.opacity || 1;
   const isThreeD = props.isThreeD || false;
 
-  const showVerticalRules = props.showVerticalRules || false;
+  const showVerticalLines = props.showVerticalLines || false;
   const rulesThickness =
     props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
   const rulesColor = props.rulesColor || 'lightgray';
-  const verticalRulesThickness =
-    props.verticalRulesThickness === 0 ? 0 : props.verticalRulesThickness || 1;
-  const verticalRulesColor = props.verticalRulesColor || 'lightgray';
-  const verticalRulesZIndex = props.verticalRulesZIndex || -1;
+  const verticalLinesThickness =
+    props.verticalLinesThickness === 0 ? 0 : props.verticalLinesThickness || 1;
+  const verticalLinesColor = props.verticalLinesColor || 'lightgray';
+  const verticalLinesZIndex = props.verticalLinesZIndex || -1;
 
   const showYAxisIndices = props.showYAxisIndices || false;
   const showXAxisIndices = props.showXAxisIndices || false;
@@ -309,6 +309,7 @@ export const BarChart = (props: PropTypes) => {
         {
           height: containerHeight,
         },
+        props.width && {width: props.width},
         horizontal && {transform: [{rotate: '90deg'}, {translateY: -15}]},
       ]}>
       {props.hideAxesAndRules !== true && renderHorizSections()}
@@ -363,10 +364,10 @@ export const BarChart = (props: PropTypes) => {
             capThickness={props.capThickness}
             capColor={props.capColor}
             capRadius={props.capRadius}
-            showVerticalRules={showVerticalRules}
-            verticalRulesThickness={verticalRulesThickness}
-            verticalRulesColor={verticalRulesColor}
-            verticalRulesZIndex={verticalRulesZIndex}
+            showVerticalLines={showVerticalLines}
+            verticalLinesThickness={verticalLinesThickness}
+            verticalLinesColor={verticalLinesColor}
+            verticalLinesZIndex={verticalLinesZIndex}
             showXAxisIndices={showXAxisIndices}
             xAxisIndicesHeight={xAxisIndicesHeight}
             xAxisIndicesWidth={xAxisIndicesWidth}

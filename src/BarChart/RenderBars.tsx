@@ -44,10 +44,10 @@ type Props = {
   capThickness?: number;
   capColor?: ColorValue;
   capRadius?: number;
-  showVerticalRules: Boolean;
-  verticalRulesThickness: number;
-  verticalRulesColor: ColorValue;
-  verticalRulesZIndex: number;
+  showVerticalLines: Boolean;
+  verticalLinesThickness: number;
+  verticalLinesColor: ColorValue;
+  verticalLinesZIndex: number;
   showXAxisIndices: Boolean;
   xAxisIndicesHeight: number;
   xAxisIndicesWidth: number;
@@ -199,8 +199,8 @@ const RenderBars = (props: Props) => {
                 height:
                   item.capThickness === 0
                     ? 0
-                    : item.capThickness || props.capThickness || 0,
-                backgroundColor: item.capColor || props.capColor || 'black',
+                    : item.capThickness || props.capThickness || 6,
+                backgroundColor: item.capColor || props.capColor || 'gray',
                 borderTopLeftRadius:
                   item.capRadius === 0
                     ? 0
@@ -279,8 +279,8 @@ const RenderBars = (props: Props) => {
                 height:
                   item.capThickness === 0
                     ? 0
-                    : item.capThickness || props.capThickness || 0,
-                backgroundColor: item.capColor || props.capColor || 'black',
+                    : item.capThickness || props.capThickness || 6,
+                backgroundColor: item.capColor || props.capColor || 'gray',
                 borderTopLeftRadius:
                   item.capRadius === 0
                     ? 0
@@ -336,16 +336,16 @@ const RenderBars = (props: Props) => {
         // { backgroundColor: item.frontColor || props.frontColor || 'black' },
         side !== 'right' && {zIndex: data.length - index},
       ]}>
-      {props.showVerticalRules && (
+      {props.showVerticalLines && (
         <View
           style={{
-            zIndex: props.verticalRulesZIndex,
+            zIndex: props.verticalLinesZIndex,
             position: 'absolute',
             height: (containerHeight || 200) + 15,
-            width: props.verticalRulesThickness,
+            width: props.verticalLinesThickness,
             bottom: 0,
             left: (item.barWidth || props.barWidth || 30) / 2,
-            backgroundColor: props.verticalRulesColor,
+            backgroundColor: props.verticalLinesColor,
           }}
         />
       )}

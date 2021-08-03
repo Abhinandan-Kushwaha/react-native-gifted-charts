@@ -48,6 +48,12 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 <PieChart data = {data} donut />
 ```
 
+## Props
+
+[a BarChart](docs/BarChart/BarChartProps.md)
+[a LineChart](docs/LineChart/LineChartProps.md)
+[a PieChart](docs/PieChart/PieChartProps.md)
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.

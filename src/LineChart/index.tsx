@@ -41,10 +41,10 @@ type propTypes = {
   hideRules?: Boolean;
   rulesColor?: ColorValue;
   rulesThickness?: number;
-  showVerticalRules?: Boolean;
-  verticalRulesThickness?: number;
-  verticalRulesColor?: ColorValue;
-  verticalRulesZIndex?: number;
+  showVerticalLines?: Boolean;
+  verticalLinesThickness?: number;
+  verticalLinesColor?: ColorValue;
+  verticalLinesZIndex?: number;
   hideAxesAndRules?: Boolean;
   areaChart?: Boolean;
 
@@ -187,10 +187,10 @@ export const LineChart = (props: propTypes) => {
   const rulesThickness =
     props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
   const rulesColor = props.rulesColor || 'lightgray';
-  const verticalRulesThickness =
-    props.verticalRulesThickness === 0 ? 0 : props.verticalRulesThickness || 1;
-  const verticalRulesColor = props.verticalRulesColor || 'lightgray';
-  const verticalRulesZIndex = props.verticalRulesZIndex || -1;
+  const verticalLinesThickness =
+    props.verticalLinesThickness === 0 ? 0 : props.verticalLinesThickness || 1;
+  const verticalLinesColor = props.verticalLinesColor || 'lightgray';
+  const verticalLinesZIndex = props.verticalLinesZIndex || -1;
 
   const gradientDirection = props.gradientDirection || 'vertical';
   // const animationEasing = props.animationEasing || Easing.ease
@@ -206,7 +206,7 @@ export const LineChart = (props: propTypes) => {
   const hideRules = props.hideRules || false;
   const areaChart = props.areaChart || false;
 
-  const showVerticalRules = props.showVerticalRules || false;
+  const showVerticalLines = props.showVerticalLines || false;
 
   const showYAxisIndices = props.showYAxisIndices || false;
   const showXAxisIndices = props.showXAxisIndices || false;
@@ -916,17 +916,17 @@ export const LineChart = (props: propTypes) => {
           bottom: stepHeight * -0.5 - 60, //stepHeight * -0.5 + xAxisThickness,
           paddingRight: 100,
         }}>
-        {showVerticalRules &&
+        {showVerticalLines &&
           data.map((item: itemType, index: number) => {
             return (
               <View
                 key={index}
                 style={{
                   position: 'absolute',
-                  zIndex: verticalRulesZIndex || -1,
+                  zIndex: verticalLinesZIndex || -1,
                   height: containerHeight + 15,
-                  width: verticalRulesThickness,
-                  backgroundColor: verticalRulesColor,
+                  width: verticalLinesThickness,
+                  backgroundColor: verticalLinesColor,
                   bottom: 60,
                   left:
                     index * spacing + (initialSpacing - dataPointsWidth1 / 2),
