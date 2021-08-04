@@ -2,6 +2,16 @@
 
 The most complete library for Bar, Line, Area, Pie, and Donut charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
 
+### Why gifted-charts when various other chart libraries are available?
+
+1. Plenty of features with minimal code
+2. Apply animations to your charts on load and on value change, just by adding a prop
+3. Smooth animations implemented using LayoutAnimation
+4. Clickable and scrollable
+5. Three-D and gradient effects
+6. Fully customizable
+7. Detailed documentation with examples
+
 ![alt text](/demos/line.gif)
 ![alt text](/demos/area.gif)
 ![alt text](/demos/movingBars.gif)
