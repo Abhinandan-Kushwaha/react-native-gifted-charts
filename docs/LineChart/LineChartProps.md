@@ -47,6 +47,8 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | textColor      | ColorValue | Color of the dataPointText                                 |
 | textFontSize   | number     | Font size of the dataPointText                             |
 
+----
+
 ### Axes and rules related props
 
 | Prop                   | Type       | Description                                  | Default value |
@@ -77,6 +79,8 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | yAxisIndicesColor      | Boolean    | To hide axes, rules, labels altogether       | false         |
 | rotateLabel            | Boolean    | To rotate the X axis labels (by 60deg)       | false         |
 
+----
+
 ### Line related props
 
 | Prop       | Type       | Description                                                  | Default value          |
@@ -88,6 +92,8 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | thickness1 | number     | Thickness of the lines joining the first set of data points  | thickness (from props) |
 | thickness2 | number     | Thickness of the lines joining the second set of data points | thickness (from props) |
 | curved     | Boolean    | To show curved line joining the data points                  | false                  |
+
+----
 
 ### Data points related props
 
@@ -111,6 +117,8 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | dataPointsRadius2 | number     | Radius of data points for the second dataset (when data points' shape is circular)    | 3             |
 | dataPointsColor2  | ColorValue | Color of data points for the second dataset                                           | blue          |
 | dataPointsShape2  | string     | Shape of data points for the second dataset (_'rectangular'_ or _'circular'_)         | 'circular'    |
+
+----
 
 ### Props for Area Chart
 
