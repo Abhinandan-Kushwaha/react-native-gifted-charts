@@ -100,11 +100,23 @@ export const BarChart = (props: PropTypes) => {
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
   const horizSections = [{value: 0}];
-  const maxValue = props.maxValue || 200;
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
-  const stepValue = props.stepValue || maxValue / noOfSections;
-  const spacing = props.spacing === 0 ? 0 : props.spacing ? props.spacing : 20;
   const data = props.data || [];
+  const spacing = props.spacing === 0 ? 0 : props.spacing ? props.spacing : 20;
+
+  let totalWidth = spacing;
+  let maxItem = 0;
+  data.forEach((item: itemType) => {
+    if (item.value > maxItem) {
+      maxItem = item.value;
+    }
+    totalWidth += (item.barWidth || props.barWidth || 30) + spacing;
+  });
+  maxItem = maxItem + (10 - (maxItem % 10));
+
+  const maxValue = props.maxValue || maxItem;
+
+  const stepValue = props.stepValue || maxValue / noOfSections;
   const disableScroll = props.disableScroll || false;
   const showScrollIndicator = props.showScrollIndicator || false;
   const initialSpacing =
@@ -166,11 +178,6 @@ export const BarChart = (props: PropTypes) => {
 
   const heightValue = new Animated.Value(0);
   const opacValue = new Animated.Value(0);
-
-  let totalWidth = spacing;
-  data.forEach((item: itemType) => {
-    totalWidth += (item.barWidth || props.barWidth || 30) + spacing;
-  });
 
   const labelsAppear = () => {
     opacValue.setValue(0);

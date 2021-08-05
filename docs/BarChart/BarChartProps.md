@@ -7,14 +7,29 @@
 | data                | Array of items | An item object represents a bar in the bar chart. It is described in the next table. | \_                  |
 | width               | number         | Width of the Bar chart                                                               | width of the parent |
 | height              | number         | Height of the Bar chart (excluding the bottom label)                                 | 200                 |
-| noOfSections        | number         | Number of sections in the Y axis                                                     | 10                  |
 | maxValue            | number         | Maximum value shown in the Y axis                                                    | 200                 |
-| stepHeight          | number         | Height of 1 step/section in the Y axis                                               | 20                  |
+| noOfSections        | number         | Number of sections in the Y axis                                                     | 10                  |
 | stepValue           | number         | Value of 1 step/section in the Y axis                                                | 20                  |
+| stepHeight          | number         | Height of 1 step/section in the Y axis                                               | 20                  |
 | spacing             | number         | Distance between 2 consecutive bars in the Bar chart                                 | 20                  |
 | backgroundColor     | ColorValue     | Background color of the Bar chart                                                    | \_                  |
 | disableScroll       | Boolean        | To disable horizontal scroll                                                         | false               |
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                  | false               |
+
+**Alert!**
+These props are correlated:
+
+1. maxValue
+2. noOfSections
+3. stepValue
+
+They must follow the relation:
+
+````
+maxValue = noOfSections \* stepValue
+```js
+
+So, all the three must be used together. Using any 1 or 2 of them may produce absurd results
 
 ### Item description
 
@@ -28,7 +43,7 @@
 | sideColor              | ColorValue | Color of the side view of the bar, only for 3 D                                |
 | topColor               | ColorValue | Color of the top view of the bar, only for 3 D                                 |
 | showGradient           | Boolean    | Prop to enable linear gradient for the bar color, defaults to false            |
-| gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient     |
+| gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
 | initialSpacing         | number     | distance of the first bar from the Y axis                                      |
 | label                  | string     | Label text appearing below the bar (under the X axis)                          |
 | labelTextStyle         | object     | Style object for the label text appearing below the bar                        |
@@ -110,3 +125,4 @@
 | horizontal     | Boolean | Render horizontal BarChart                                                                    | false         |
 | yAxisAtTop     | Boolean | In horizontal BarCharts the Y axis appears at bottom by default. Set it to true for otherwise | false         |
 | intactTopLabel | Boolean | To rotate the top label component to make it intact with the Bars                             | false         |
+````

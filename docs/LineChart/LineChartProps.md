@@ -8,14 +8,30 @@
 | data2               | Array of items | Second set of dataPoint for the second line                                             | \_                  |
 | width               | number         | Width of the Bar chart                                                                  | width of the parent |
 | height              | number         | Height of the Bar chart (excluding the bottom label)                                    | 200                 |
-| noOfSections        | number         | Number of sections in the Y axis                                                        | 10                  |
 | maxValue            | number         | Maximum value shown in the Y axis                                                       | 200                 |
-| stepHeight          | number         | Height of 1 step/section in the Y axis                                                  | 20                  |
+| noOfSections        | number         | Number of sections in the Y axis                                                        | 10                  |
 | stepValue           | number         | Value of 1 step/section in the Y axis                                                   | 20                  |
+| stepHeight          | number         | Height of 1 step/section in the Y axis                                                  | 20                  |
 | spacing             | number         | Distance between 2 consecutive bars in the Bar chart                                    | 20                  |
 | backgroundColor     | ColorValue     | Background color of the Bar chart                                                       | \_                  |
 | disableScroll       | Boolean        | To disable horizontal scroll                                                            | false               |
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                     | false               |
+
+**Alert!**
+These props are correlated-
+
+1. maxValue
+2. noOfSections
+3. stepValue
+
+They must follow the relation:
+
+````
+maxValue = noOfSections \* stepValue
+```js
+
+So, all the three must be used together. Using any 1 or 2 of them may produce absurd results
+
 
 ### Item description
 
@@ -113,3 +129,4 @@
 | startOpacity2     | number     | Start gradient color for the second dataset of the area chart  | 1             |
 | endOpacity2       | number     | End gradient opacity for the second dataset of the area chart  | 1             |
 | gradientDirection | string     | Direction of the gradient (_'horizontal'_ or _'vertical'_)     | 'vertical'    |
+````
