@@ -118,54 +118,60 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
             {opacity: opacity, position: 'absolute', bottom: 0},
             props.side === 'right' && {transform: [{rotateY: '180deg'}]},
           ]}>
-          <View style={{marginTop: width / -2}}>
-            <TriangleCorner
-              color={sideColor}
-              width={width}
-              style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
-            />
-            <View
-              style={{
-                width: width / 2,
-                height: height - width / 2, //animatedSideHeight
-                backgroundColor: sideColor,
-                opacity: opacity,
-              }}
-            />
-            <TriangleCorner
-              color={sideColor}
-              width={width}
-              style={{transform: [{rotate: '90deg'}], opacity: opacity}}
-            />
-          </View>
+          {props.height ? (
+            <View style={{marginTop: width / -2}}>
+              <TriangleCorner
+                color={sideColor}
+                width={width}
+                style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
+              />
+              <View
+                style={{
+                  width: width / 2,
+                  height: height - width / 2, //animatedSideHeight
+                  backgroundColor: sideColor,
+                  opacity: opacity,
+                }}
+              />
+              <TriangleCorner
+                color={sideColor}
+                width={width}
+                style={{transform: [{rotate: '90deg'}], opacity: opacity}}
+              />
+            </View>
+          ) : null}
 
           {/*******************          Top View             *****************/}
-
-          <View style={{position: 'absolute', top: width / -2}}>
-            <TriangleCorner
-              color={topColor}
-              width={width}
-              style={{transform: [{rotate: '90deg'}], opacity: opacity}}
-            />
-          </View>
-          <View style={{position: 'absolute', top: width / -2}}>
-            <View
-              style={{
-                width: width / 2,
-                height: width / 2,
-                left: width / 2,
-                backgroundColor: topColor,
-                opacity: opacity,
-              }}
-            />
-          </View>
-          <View style={{position: 'absolute', top: width / -2, left: width}}>
-            <TriangleCorner
-              color={topColor}
-              width={width}
-              style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
-            />
-          </View>
+          {props.height ? (
+            <>
+              <View style={{position: 'absolute', top: width / -2}}>
+                <TriangleCorner
+                  color={topColor}
+                  width={width}
+                  style={{transform: [{rotate: '90deg'}], opacity: opacity}}
+                />
+              </View>
+              <View style={{position: 'absolute', top: width / -2}}>
+                <View
+                  style={{
+                    width: width / 2,
+                    height: width / 2,
+                    left: width / 2,
+                    backgroundColor: topColor,
+                    opacity: opacity,
+                  }}
+                />
+              </View>
+              <View
+                style={{position: 'absolute', top: width / -2, left: width}}>
+                <TriangleCorner
+                  color={topColor}
+                  width={width}
+                  style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
+                />
+              </View>
+            </>
+          ) : null}
 
           {/*******************************************************************/}
 

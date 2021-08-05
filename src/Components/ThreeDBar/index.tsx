@@ -71,82 +71,84 @@ const ThreeDBar = (props: PropTypes) => {
   const opacity = props.opacity || 1;
   return (
     <View style={styles.container}>
-      <View
-        style={[
-          styles.row,
-          props.side === 'right' && {transform: [{rotateY: '180deg'}]},
-        ]}>
-        <View style={{marginTop: width / -2}}>
-          <TriangleCorner
-            color={sideColor}
-            width={width}
-            style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
-          />
-          <View
-            style={{
-              width: width / 2,
-              height: height - width / 2,
-              backgroundColor: sideColor,
-              opacity: opacity,
-            }}
-          />
-          <TriangleCorner
-            color={sideColor}
-            width={width}
-            style={{transform: [{rotate: '90deg'}], opacity: opacity}}
-          />
-        </View>
-
-        {/*******************          Top View             *****************/}
-
-        <View style={{position: 'absolute', top: width / -2}}>
-          <TriangleCorner
-            color={topColor}
-            width={width}
-            style={{transform: [{rotate: '90deg'}], opacity: opacity}}
-          />
-        </View>
-        <View style={{position: 'absolute', top: width / -2}}>
-          <View
-            style={{
-              width: width / 2,
-              height: (3 * width) / 4,
-              left: width / 2,
-              backgroundColor: topColor,
-              opacity: opacity,
-            }}
-          />
-        </View>
-        <View style={{position: 'absolute', top: width / -2, left: width}}>
-          <TriangleCorner
-            color={topColor}
-            width={width}
-            style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
-          />
-        </View>
-
-        {/*******************************************************************/}
-
+      {props.height ? (
         <View
-          style={{
-            width: width,
-            height: height,
-            backgroundColor: frontColor,
-            borderLeftWidth: StyleSheet.hairlineWidth,
-            borderTopWidth: StyleSheet.hairlineWidth,
-            borderColor: 'white',
-            opacity: opacity,
-          }}>
-          {showGradient && (
-            <LinearGradient
-              style={{position: 'absolute', width: '100%', height: '100%'}}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 1}}
-              colors={[gradientColor, frontColor]}
+          style={[
+            styles.row,
+            props.side === 'right' && {transform: [{rotateY: '180deg'}]},
+          ]}>
+          <View style={{marginTop: width / -2}}>
+            <TriangleCorner
+              color={sideColor}
+              width={width}
+              style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
             />
-          )}
+            <View
+              style={{
+                width: width / 2,
+                height: height - width / 2,
+                backgroundColor: sideColor,
+                opacity: opacity,
+              }}
+            />
+            <TriangleCorner
+              color={sideColor}
+              width={width}
+              style={{transform: [{rotate: '90deg'}], opacity: opacity}}
+            />
+          </View>
+
+          {/*******************          Top View             *****************/}
+
+          <View style={{position: 'absolute', top: width / -2}}>
+            <TriangleCorner
+              color={topColor}
+              width={width}
+              style={{transform: [{rotate: '90deg'}], opacity: opacity}}
+            />
+          </View>
+          <View style={{position: 'absolute', top: width / -2}}>
+            <View
+              style={{
+                width: width / 2,
+                height: (3 * width) / 4,
+                left: width / 2,
+                backgroundColor: topColor,
+                opacity: opacity,
+              }}
+            />
+          </View>
+          <View style={{position: 'absolute', top: width / -2, left: width}}>
+            <TriangleCorner
+              color={topColor}
+              width={width}
+              style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
+            />
+          </View>
+
+          {/*******************************************************************/}
+
+          <View
+            style={{
+              width: width,
+              height: height,
+              backgroundColor: frontColor,
+              borderLeftWidth: StyleSheet.hairlineWidth,
+              borderTopWidth: StyleSheet.hairlineWidth,
+              borderColor: 'white',
+              opacity: opacity,
+            }}>
+            {showGradient && (
+              <LinearGradient
+                style={{position: 'absolute', width: '100%', height: '100%'}}
+                start={{x: 0, y: 0}}
+                end={{x: 1, y: 1}}
+                colors={[gradientColor, frontColor]}
+              />
+            )}
+          </View>
         </View>
-      </View>
+      ) : null}
 
       {/*******************          Top Label            *****************/}
 
