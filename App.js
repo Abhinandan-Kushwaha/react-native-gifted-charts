@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import {BarChart, LineChart, PieChart} from './src';
 
 const App = () => {
@@ -22,19 +22,34 @@ const App = () => {
     {value: 15, label: 'Jan'},
     {value: 40, label: 'Feb'},
     {value: 10, label: 'Mar'},
-    {value: 0, label: 'Apr'},
+    {value: 30, label: 'Apr'},
   ];
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <BarChart
-        showGradient
-        isThreeD
-        isAnimated
-        gradientColor="gray"
-        // frontColor="white"
-        data={data}
-      />
+      <View
+        style={{
+          // flex: 1,
+          // backgroundColor: 'pink',
+          width: 300,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View>
+          <LineChart data={data} />
+          {/* <BarChart
+            showGradient
+            isThreeD
+            isAnimated
+            // width={300}
+            gradientColor="gray"
+            // backgroundColor="yellow"
+            // frontColor="white"
+            data={data}
+          /> */}
+        </View>
+        {/* <Text>Hello</Text> */}
+      </View>
       {/* <LineChart data={data} /> */}
       {/* <PieChart
         showText
