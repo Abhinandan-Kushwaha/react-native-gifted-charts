@@ -19,20 +19,30 @@ type propTypes = {
   shadowWidth?: number;
   strokeWidth?: number;
   strokeColor?: string;
-  textColor?: string;
-  textSize?: number;
   backgroundColor?: string;
   data: Array<itemType>;
+
+  showText?: Boolean;
+  textColor?: string;
+  textSize?: number;
+  showTextBackground?: Boolean;
+  textBackgroundColor?: string;
+  textBackgroundRadius?: number;
+  showValuesAsLabels?: Boolean;
 };
 type itemType = {
   value: number;
   shiftX?: number;
   shiftY?: number;
   color?: string;
+  text?: string;
   textColor?: string;
+  textSize?: number;
+  textBackgroundColor?: string;
+  textBackgroundRadius?: number;
 };
 export const PieChart = (props: propTypes) => {
-  const {data, isThreeD, textColor} = props;
+  const {data, isThreeD} = props;
   const radius = props.radius || 120;
   const shadowWidth = props.shadowWidth || (4 * radius) / 3;
   const backgroundColor = props.backgroundColor || 'white';
@@ -50,7 +60,14 @@ export const PieChart = (props: propTypes) => {
   const strokeWidth = props.strokeWidth || 0;
   const strokeColor =
     props.strokeColor || (strokeWidth ? 'gray' : 'transparent');
-  const textSize = props.textSize ? Math.min(props.textSize, radius / 5) : 24;
+
+  const showText = props.showText || false;
+  const textColor = props.textColor || '';
+  const textSize = props.textSize ? Math.min(props.textSize, radius / 5) : 16;
+
+  const showTextBackground = props.showTextBackground || false;
+  const showValuesAsLabels = props.showValuesAsLabels || false;
+
   let isDataShifted = false;
   data.forEach((item: any) => {
     total += item.value;
@@ -80,7 +97,6 @@ export const PieChart = (props: propTypes) => {
     }
     canvas.width = canvasWidth;
     const ctx = canvas.getContext('2d');
-    ctx.font = textSize + 'px Comic Sans MS';
     ctx.lineWidth = strokeWidth;
     ctx.strokeStyle = strokeColor;
     const initialValue = 30;
@@ -177,34 +193,68 @@ export const PieChart = (props: propTypes) => {
       ctx.fillStyle = dataItem.color || colors[i++ % 8];
       ctx.fill();
 
-      semiSum = angleSum + (pi * dataItem.value) / total;
-      yy = Math.sin(semiSum) * radius + (radius + initialValue + shiftX);
-      xx = Math.cos(semiSum) * radius + (radius + initialValue + shiftY);
-      // console.log('semisum==>>', semiSum);
-      // console.log('sin(semisum)==>>', Math.sin(semiSum));
-      if (semiSum > 0 && semiSum <= pi / 2) {
-        xx -= 40;
-        yy -= 10;
-      } else if (semiSum > pi / 2 && semiSum <= pi) {
-        xx += 10;
-        yy -= 10;
-      } else if (semiSum > pi && semiSum <= 1.5 * pi) {
-        xx += 10;
-        yy += 24;
-      } else {
-        xx -= 40;
-        yy += 24;
+      /*************************        Displaying Text Labels      **********************/
+
+      if (showText) {
+        let fontSize;
+        if (props.textSize) {
+          fontSize = Math.min(props.textSize, radius / 5);
+        } else if (dataItem.textSize) {
+          fontSize = Math.min(dataItem.textSize, radius / 5);
+        } else {
+          fontSize = 16;
+        }
+        ctx.font = fontSize + 'px Comic Sans MS';
+        semiSum = angleSum + (pi * dataItem.value) / total;
+        yy = Math.sin(semiSum) * radius + (radius + initialValue + shiftX);
+        xx = Math.cos(semiSum) * radius + (radius + initialValue + shiftY);
+
+        // console.log('semisum==>>', semiSum);
+        // console.log('sin(semisum)==>>', Math.sin(semiSum));
+        if (semiSum > 0 && semiSum <= pi / 2) {
+          xx -= 40;
+          yy -= 10;
+        } else if (semiSum > pi / 2 && semiSum <= pi) {
+          xx += 10;
+          yy -= 10;
+        } else if (semiSum > pi && semiSum <= 1.5 * pi) {
+          xx += 10;
+          yy += 24;
+        } else {
+          xx -= 40;
+          yy += 24;
+        }
+
+        if (showTextBackground && (dataItem.text || showValuesAsLabels)) {
+          let textBackgroundX = xx + textSize / 2;
+          let textBackgroundY = yy - textSize / 2 + 1;
+          ctx.beginPath();
+          ctx.arc(
+            textBackgroundX,
+            textBackgroundY,
+            props.textBackgroundRadius ||
+              dataItem.textBackgroundRadius ||
+              textSize,
+            0,
+            2 * pi,
+            false,
+          );
+          ctx.fillStyle =
+            props.textBackgroundColor ||
+            dataItem.textBackgroundColor ||
+            'white';
+          ctx.fill();
+        }
+
+        ctx.fillStyle = dataItem.textColor || textColor || colors[i++ % 8];
+        let labelText = dataItem.text || '';
+        if (showValuesAsLabels && !labelText) {
+          labelText = dataItem.value.toString();
+        }
+        ctx.fillText(labelText, xx, yy);
       }
 
-      // console.log('xx-->', xx)
-      // console.log('yy-->', yy)
-
-      // ctx.moveTo(xx, yy)
-
-      // ctx.arc(xx, yy, 10, 0, 2 * pi)
-
-      ctx.fillStyle = dataItem.textColor || textColor || colors[i++ % 8];
-      ctx.fillText(dataItem.value.toString(), xx, yy);
+      /****************************************************************************************/
 
       angleSum += (2 * pi * dataItem.value) / total;
     });
