@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
   View,
   ScrollView,
@@ -7,7 +7,7 @@ import {
   Text,
   ColorValue,
 } from 'react-native';
-import {styles} from './styles';
+import { styles } from './styles';
 import Svg, {
   Path,
   LinearGradient,
@@ -16,7 +16,7 @@ import Svg, {
   Rect,
   Text as CanvasText,
 } from 'react-native-svg';
-import {svgPath, bezierCommand} from '../utils';
+import { svgPath, bezierCommand } from '../utils';
 
 type propTypes = {
   height?: number;
@@ -127,6 +127,13 @@ type itemType = {
   textShiftY?: number;
   textColor?: string;
   textFontSize?: number;
+
+  showDataPoint?: Boolean;
+  dataPointHeight?: number;
+  dataPointWidth?: number;
+  dataPointRadius?: number;
+  dataPointColor?: string;
+  dataPointShape?: string;
 };
 
 type sectionType = {
@@ -155,7 +162,7 @@ export const LineChart = (props: propTypes) => {
 
   const maxValue = props.maxValue || maxItem;
 
-  const horizSections = [{value: 0}];
+  const horizSections = [{ value: 0 }];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
   const initialSpacing =
@@ -260,7 +267,7 @@ export const LineChart = (props: propTypes) => {
   // console.log('data', data);
   horizSections.pop();
   for (let i = 0; i <= noOfSections; i++) {
-    horizSections.push({value: maxValue - stepValue * i});
+    horizSections.push({ value: maxValue - stepValue * i });
   }
 
   useEffect(() => {
@@ -373,8 +380,8 @@ export const LineChart = (props: propTypes) => {
           p2Array.push([
             initialSpacing - dataPointsWidth2 / 2 + spacing * i,
             containerHeight +
-              10 -
-              (data2[i].value * containerHeight) / maxValue,
+            10 -
+            (data2[i].value * containerHeight) / maxValue,
           ]);
         }
       }
@@ -472,9 +479,9 @@ export const LineChart = (props: propTypes) => {
             justifyContent: 'center',
             // alignSelf: 'center'
           },
-          rotateLabel && {transform: [{rotate: '60deg'}]},
+          rotateLabel && { transform: [{ rotate: '60deg' }] },
         ]}>
-        <Text style={[labelTextStyle, {textAlign: 'center'}]} numberOfLines={1}>
+        <Text style={[labelTextStyle, { textAlign: 'center' }]} numberOfLines={1}>
           {label || ''}
         </Text>
       </View>
@@ -502,9 +509,9 @@ export const LineChart = (props: propTypes) => {
             left: initialSpacing + spacing * index - spacing / 2,
             opacity: appearingOpacity,
           },
-          rotateLabel && {transform: [{rotate: '60deg'}]},
+          rotateLabel && { transform: [{ rotate: '60deg' }] },
         ]}>
-        <Text style={[labelTextStyle, {textAlign: 'center'}]} numberOfLines={1}>
+        <Text style={[labelTextStyle, { textAlign: 'center' }]} numberOfLines={1}>
           {label || ''}
         </Text>
       </Animated.View>
@@ -594,8 +601,8 @@ export const LineChart = (props: propTypes) => {
                       {showFractionalValues
                         ? sectionItems.value || ''
                         : sectionItems.value
-                        ? sectionItems.value.toString().split('.')[0]
-                        : ''}
+                          ? sectionItems.value.toString().split('.')[0]
+                          : ''}
                     </Text>
                   )}
                 </View>
@@ -614,7 +621,7 @@ export const LineChart = (props: propTypes) => {
                     <View
                       style={[
                         styles.line,
-                        {height: xAxisThickness, backgroundColor: xAxisColor},
+                        { height: xAxisThickness, backgroundColor: xAxisColor },
                       ]}
                     />
                   ) : hideRules ? null : (
@@ -645,6 +652,86 @@ export const LineChart = (props: propTypes) => {
       </>
     );
   };
+
+  const renderSpecificDataPoints = (dataForRender) => {
+    return dataForRender.map((item: itemType, index: number) => {
+      if (item.showDataPoint) {
+        if (item.dataPointShape === 'rectangular') {
+          return (
+            <Fragment key={index}>
+              <Rect
+                x={initialSpacing - (item.dataPointWidth || 2) / 2 - 1 + spacing * index}
+                y={
+                  containerHeight -
+                  (item.dataPointHeight || 2) / 2 +
+                  10 -
+                  (item.value * containerHeight) / maxValue
+                }
+                width={item.dataPointWidth || 2}
+                height={item.dataPointHeight || 2}
+                fill={item.dataPointColor || 'black'}
+              />
+              {item.dataPointText && (
+                <CanvasText
+                  fill={item.textColor || 'black'}
+                  fontSize={item.textFontSize || 10}
+                  x={
+                    initialSpacing -
+                    (item.dataPointWidth || 2) +
+                    spacing * index +
+                    (item.textShiftX || 0)
+                  }
+                  y={
+                    containerHeight -
+                    (item.dataPointHeight || 2) / 2 +
+                    10 -
+                    (item.value * containerHeight) / maxValue +
+                    (item.textShiftY || 0)
+                  }>
+                  {item.dataPointText}
+                </CanvasText>
+              )}
+            </Fragment>
+          );
+        }
+        else {
+          return (
+            <Fragment key={index}>
+              <Circle
+                cx={initialSpacing - (item.dataPointWidth || 2) / 2 + spacing * index}
+                cy={
+                  containerHeight + 10 - (item.value * containerHeight) / maxValue
+                }
+                r={item.dataPointRadius || 3}
+                fill={item.dataPointColor || 'black'}
+              />
+              {item.dataPointText && (
+                <CanvasText
+                  fill={item.textColor || 'black'}
+                  fontSize={item.textFontSize || 10}
+                  x={
+                    initialSpacing -
+                    (item.dataPointWidth || 2) +
+                    spacing * index +
+                    (item.textShiftX || 0)
+                  }
+                  y={
+                    containerHeight -
+                    (item.dataPointHeight || 2) / 2 +
+                    10 -
+                    (item.value * containerHeight) / maxValue +
+                    (item.textShiftY || 0)
+                  }>
+                  {item.dataPointText}
+                </CanvasText>
+              )}
+            </Fragment>
+          )
+        }
+      }
+      return null;
+    })
+  }
 
   const renderDataPoints = (
     dataForRender,
@@ -785,7 +872,7 @@ export const LineChart = (props: propTypes) => {
               strokeWidth={currentLineThickness || thickness}
             />
           )}
-          {!hideDataPoints1 &&
+          {!hideDataPoints1 ?
             renderDataPoints(
               data,
               dataPointsShape1,
@@ -795,8 +882,11 @@ export const LineChart = (props: propTypes) => {
               dataPointsRadius1,
               textColor1,
               textFontSize1,
-            )}
-          {!hideDataPoints2 &&
+            )
+            :
+            renderSpecificDataPoints(data)
+          }
+          {!hideDataPoints2 ?
             renderDataPoints(
               data2,
               dataPointsShape2,
@@ -806,7 +896,10 @@ export const LineChart = (props: propTypes) => {
               dataPointsRadius2,
               textColor2,
               textFontSize2,
-            )}
+            )
+            :
+            renderSpecificDataPoints(data2)
+          }
         </Svg>
       </View>
     );
@@ -868,7 +961,7 @@ export const LineChart = (props: propTypes) => {
               strokeWidth={currentLineThickness || thickness}
             />
           )}
-          {!hideDataPoints1 &&
+          {!hideDataPoints1 ?
             renderDataPoints(
               data,
               dataPointsShape1,
@@ -878,8 +971,9 @@ export const LineChart = (props: propTypes) => {
               dataPointsRadius1,
               textColor1,
               textFontSize1,
-            )}
-          {!hideDataPoints2 &&
+            ) :
+            renderSpecificDataPoints(data)}
+          {!hideDataPoints2 ?
             renderDataPoints(
               data2,
               dataPointsShape2,
@@ -889,14 +983,15 @@ export const LineChart = (props: propTypes) => {
               dataPointsRadius2,
               textColor2,
               textFontSize2,
-            )}
+            ) :
+            renderSpecificDataPoints(data2)}
         </Svg>
       </Animated.View>
     );
   };
 
   return (
-    <View style={[styles.container, {height: containerHeight}]}>
+    <View style={[styles.container, { height: containerHeight }]}>
       {props.hideAxesAndRules !== true && renderHorizSections()}
       {/* {sectionsOverlay()} */}
       <ScrollView
@@ -955,49 +1050,49 @@ export const LineChart = (props: propTypes) => {
 
         {isAnimated
           ? renderAnimatedLine(
-              points,
-              animatedWidth,
-              thickness1,
-              color1,
-              fillPoints,
-              startFillColor1,
-              endFillColor1,
-              startOpacity1,
-              endOpacity1,
-            )
+            points,
+            animatedWidth,
+            thickness1,
+            color1,
+            fillPoints,
+            startFillColor1,
+            endFillColor1,
+            startOpacity1,
+            endOpacity1,
+          )
           : renderLine(
-              points,
-              thickness1,
-              color1,
-              fillPoints,
-              startFillColor1,
-              endFillColor1,
-              startOpacity1,
-              endOpacity1,
-            )}
+            points,
+            thickness1,
+            color1,
+            fillPoints,
+            startFillColor1,
+            endFillColor1,
+            startOpacity1,
+            endOpacity1,
+          )}
         {points2
           ? isAnimated
             ? renderAnimatedLine(
-                points2,
-                animatedWidth2,
-                thickness2,
-                color2,
-                fillPoints2,
-                startFillColor2,
-                endFillColor2,
-                startOpacity2,
-                endOpacity2,
-              )
+              points2,
+              animatedWidth2,
+              thickness2,
+              color2,
+              fillPoints2,
+              startFillColor2,
+              endFillColor2,
+              startOpacity2,
+              endOpacity2,
+            )
             : renderLine(
-                points2,
-                thickness2,
-                color2,
-                fillPoints2,
-                startFillColor2,
-                endFillColor2,
-                startOpacity2,
-                endOpacity2,
-              )
+              points2,
+              thickness2,
+              color2,
+              fillPoints2,
+              startFillColor2,
+              endFillColor2,
+              startOpacity2,
+              endOpacity2,
+            )
           : null}
         {data.map((item: itemType, index: number) => {
           // console.log('item', item)
