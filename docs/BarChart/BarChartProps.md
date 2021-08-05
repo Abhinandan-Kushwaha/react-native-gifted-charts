@@ -17,7 +17,7 @@
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                  | false               |
 
 **Alert!**
-These props are correlated-
+These props are correlated:
 
 1. maxValue
 2. noOfSections
