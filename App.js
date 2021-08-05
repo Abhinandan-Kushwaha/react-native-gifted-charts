@@ -18,13 +18,29 @@ const App = () => {
   //   {value: 100, text: 'May'},
   // ];
 
-  const data = [{value: 50}, {value: 80}, {value: 90}, {value: 70}];
+  const data = [
+    {value: 150},
+    {value: 80, text: 80},
+    {value: 90, text: 90, textColor: 'green', textBackgroundColor: 'pink'},
+    {value: 70},
+  ];
 
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <BarChart data={data} />
+      <BarChart
+        showGradient
+        gradientColor="gray"
+        frontColor="white"
+        data={data}
+      />
       <LineChart data={data} />
-      <PieChart data={data} />
+      <PieChart
+        showText
+        showTextBackground
+        showValuesAsLabels
+        textSize={14}
+        data={data}
+      />
       {/* <LineChart data={data} curved /> */}
       {/* <BarChart
         data={data}

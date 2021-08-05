@@ -318,7 +318,7 @@ export const BarChart = (props: PropTypes) => {
           {
             marginLeft: initialSpacing + 6,
             position: 'absolute',
-            bottom: stepHeight * -0.5 - 60,
+            bottom: stepHeight * -0.5 - 60 + xAxisThickness,
           },
           horizontal && {width: totalWidth},
         ]}
