@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {BarChart, LineChart, PieChart} from './src';
+import { View, Text } from 'react-native';
+import { BarChart, LineChart, PieChart } from './src';
 
 const App = () => {
   // const lineData = [
@@ -19,14 +19,14 @@ const App = () => {
   // ];
 
   const data = [
-    {value: 15, label: 'Jan'},
-    {value: 40, label: 'Feb'},
-    {value: 10, label: 'Mar'},
-    {value: 30, label: 'Apr'},
+    { value: 15, label: 'Jan' },
+    { value: 40, label: 'Feb', showDataPoint: true, dataPointShape: 'rectangular', dataPointHeight: 12, dataPointWidth: 12, },
+    { value: 10, label: 'Mar', showDataPoint: true, dataPointShape: 'rectangular', dataPointHeight: 20, dataPointWidth: 20, },
+    { value: 30, label: 'Apr', showDataPoint: true },
   ];
 
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <View
         style={{
           // flex: 1,
@@ -36,7 +36,13 @@ const App = () => {
           alignItems: 'center',
         }}>
         <View>
-          <LineChart data={data} />
+          <LineChart
+            data={data}
+            hideDataPoints
+          // dataPointsShape='rectangular'
+          // dataPointsHeight={12}
+          // dataPointsWidth={12}
+          />
           {/* <BarChart
             showGradient
             isThreeD

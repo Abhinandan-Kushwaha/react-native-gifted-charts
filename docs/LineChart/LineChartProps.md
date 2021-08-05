@@ -46,6 +46,12 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | textShiftY     | number     | To shift the dataPointText text vertically                 |
 | textColor      | ColorValue | Color of the dataPointText                                 |
 | textFontSize   | number     | Font size of the dataPointText                             |
+| showDataPoint | Boolean | To show data point for the particular item | 
+| dataPointHeight | number | Height of the data point (when data point's shape is rectangular)|
+| dataPointWidth | number | Width of the data point (when data point's shape is rectangular) |
+| dataPointRadius | number | Radius of the data point (when data points' shape is circular)
+| dataPointColor | ColorValue | Color of the data point |
+| dataPointShape | string | Shape of the data point (rectangular or circular) defaults to circular |
 
 ----
 
