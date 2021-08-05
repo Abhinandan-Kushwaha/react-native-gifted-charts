@@ -140,14 +140,26 @@ export const LineChart = (props: propTypes) => {
   const [fillPoints2, setFillPoints2] = useState('');
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
+  const data = props.data || [];
+  const spacing = props.spacing === 0 ? 0 : props.spacing || 60;
+
+  let totalWidth = spacing;
+  let maxItem = 0;
+  data.forEach((item: itemType) => {
+    if (item.value > maxItem) {
+      maxItem = item.value;
+    }
+    totalWidth += spacing;
+  });
+  maxItem = maxItem + (10 - (maxItem % 10));
+
+  const maxValue = props.maxValue || maxItem;
+
   const horizSections = [{value: 0}];
-  const maxValue = props.maxValue || 200;
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
-  const spacing = props.spacing === 0 ? 0 : props.spacing || 60;
   const initialSpacing =
     props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
-  const data = props.data || [];
   const data2 = props.data2 || [];
   const thickness = props.thickness || 2;
   const thickness1 = props.thickness1;
@@ -251,11 +263,6 @@ export const LineChart = (props: propTypes) => {
     horizSections.push({value: maxValue - stepValue * i});
   }
 
-  let totalWidth = initialSpacing;
-  data.forEach((item: itemType) => {
-    totalWidth += spacing;
-  });
-
   useEffect(() => {
     // console.log('comes here............')
     decreaseWidth();
@@ -279,7 +286,7 @@ export const LineChart = (props: propTypes) => {
           ' ' +
           (containerHeight +
             10 -
-            ((data[i].value || maxValue / 2) * containerHeight) / maxValue) +
+            (data[i].value * containerHeight) / maxValue) +
           ' ';
         if (data2.length) {
           pp2 +=
@@ -288,7 +295,7 @@ export const LineChart = (props: propTypes) => {
             ' ' +
             (containerHeight +
               10 -
-              ((data2[i].value || maxValue / 2) * containerHeight) / maxValue) +
+              (data2[i].value * containerHeight) / maxValue) +
             ' ';
         }
       }
@@ -392,7 +399,7 @@ export const LineChart = (props: propTypes) => {
           ',' +
           (containerHeight +
             10 -
-            ((data[0].value || maxValue / 2) * containerHeight) / maxValue) +
+            (data[0].value * containerHeight) / maxValue) +
           ' ' +
           xx +
           ' ' +
@@ -423,7 +430,7 @@ export const LineChart = (props: propTypes) => {
             ',' +
             (containerHeight +
               10 -
-              ((data2[0].value || maxValue / 2) * containerHeight) / maxValue) +
+              (data2[0].value * containerHeight) / maxValue) +
             ' ' +
             xx2 +
             ' ' +

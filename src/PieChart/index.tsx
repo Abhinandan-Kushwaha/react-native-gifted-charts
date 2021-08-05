@@ -136,7 +136,9 @@ export const PieChart = (props: propTypes) => {
     i = 0;
     let semiSum, yy, xx;
     data.forEach(dataItem => {
-      // if (index !== 0) return
+      if (!dataItem.value) {
+        return;
+      }
       const shiftX = dataItem.shiftX || 0;
       const shiftY = dataItem.shiftY || 0;
 

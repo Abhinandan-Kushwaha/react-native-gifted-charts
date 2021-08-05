@@ -327,9 +327,7 @@ const RenderBars = (props: Props) => {
           // overflow: 'visible',
           marginBottom: 60,
           width: item.barWidth || props.barWidth || 30,
-          height:
-            ((item.value || maxValue / 2) * (containerHeight || 200)) /
-            (maxValue || 200),
+          height: (item.value * (containerHeight || 200)) / (maxValue || 200),
           marginRight: spacing,
         },
         // !isThreeD && !item.showGradient && !props.showGradient &&
@@ -376,10 +374,7 @@ const RenderBars = (props: Props) => {
             topLabelComponent={item.topLabelComponent}
             opacity={opacity || 1}
             animationDuration={animationDuration || 800}
-            height={
-              ((item.value || maxValue / 2) * (containerHeight || 200)) /
-              (maxValue || 200)
-            }
+            height={(item.value * (containerHeight || 200)) / (maxValue || 200)}
             intactTopLabel={props.intactTopLabel}
             horizontal={props.horizontal}
           />
@@ -399,10 +394,7 @@ const RenderBars = (props: Props) => {
             opacity={opacity || 1}
             horizontal={props.horizontal}
             intactTopLabel={props.intactTopLabel}
-            height={
-              ((item.value || maxValue / 2) * (containerHeight || 200)) /
-              (maxValue || 200)
-            }
+            height={(item.value * (containerHeight || 200)) / (maxValue || 200)}
           />
         )
       ) : item.showGradient || props.showGradient ? (
@@ -416,10 +408,7 @@ const RenderBars = (props: Props) => {
             roundedTop={props.roundedTop || false}
             gradientColor={props.gradientColor}
             frontColor={props.frontColor || 'black'}
-            height={
-              ((item.value || maxValue / 2) * (containerHeight || 200)) /
-              (maxValue || 200)
-            }
+            height={(item.value * (containerHeight || 200)) / (maxValue || 200)}
             cappedBars={props.cappedBars}
             capThickness={props.capThickness}
             capColor={props.capColor}
@@ -441,10 +430,7 @@ const RenderBars = (props: Props) => {
           gradientColor={props.gradientColor}
           noGradient
           frontColor={props.frontColor || 'black'}
-          height={
-            ((item.value || maxValue / 2) * (containerHeight || 200)) /
-            (maxValue || 200)
-          }
+          height={(item.value * (containerHeight || 200)) / (maxValue || 200)}
           cappedBars={props.cappedBars}
           capThickness={props.capThickness}
           capColor={props.capColor}
