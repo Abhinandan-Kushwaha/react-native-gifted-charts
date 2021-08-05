@@ -16,7 +16,8 @@
 | disableScroll       | Boolean        | To disable horizontal scroll                                                         | false               |
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                  | false               |
 
-**Alert!**
+-----
+**Alert!**\
 These props are correlated:
 
 1. maxValue
@@ -25,11 +26,13 @@ These props are correlated:
 
 They must follow the relation:
 
-````
-maxValue = noOfSections \* stepValue
 ```js
+maxValue = noOfSections * stepValue
+```
 
 So, all the three must be used together. Using any 1 or 2 of them may produce absurd results
+
+-----
 
 ### Item description
 
