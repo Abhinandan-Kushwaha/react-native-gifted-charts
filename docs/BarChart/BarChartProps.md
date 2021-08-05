@@ -58,6 +58,8 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | capColor               | ColorValue | Color of the bar cap                                                           |
 | capRadius              | number     | Border radius of the bar cap                                                   |
 
+----
+
 ### Axes and rules related props
 
 | Prop                   | Type       | Description                                  | Default value |
@@ -88,6 +90,8 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | yAxisIndicesColor      | Boolean    | To hide axes, rules, labels altogether       | false         |
 | rotateLabel            | Boolean    | To rotate the X axis labels (by 60deg)       | false         |
 
+----
+
 ### Bar related props
 
 | Prop          | Type       | Description                                                                | Default value            |
@@ -104,7 +108,9 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | activeOpacity | number     | activeOpacity on pressing the bar                                          | 0.2                      |
 | disablePress  | Boolean    | Prop to disable the bar press action                                       | false                    |
 
-#### Animation related props
+----
+
+### Animation related props
 
 | Prop              | Type    | Description                                                           | Default value |
 | ----------------- | ------- | --------------------------------------------------------------------- | ------------- |
@@ -112,7 +118,9 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | animationDuration | number  | Duration of the animations                                            | 800           |
 | animationEasing   | Easing  | Easing applied to the animation                                       | Easing.ease   |
 
-#### Bar related props for making Capped Bar chart
+----
+
+### Bar related props for making Capped Bar chart
 
 | Prop         | Type       | Description                     | Default value |
 | ------------ | ---------- | ------------------------------- | ------------- |
@@ -121,7 +129,9 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | capColor     | ColorValue | Color of the bar caps           | gray          |
 | capRadius    | number     | Border radius of the bar caps   | 0             |
 
-#### Props for horizontal BarChart
+----
+
+### Props for horizontal BarChart
 
 | Prop           | Type    | Description                                                                                   | Default value |
 | -------------- | ------- | --------------------------------------------------------------------------------------------- | ------------- |
