@@ -57,7 +57,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | capThickness           | number     | Thickness of the bar cap                                                       |
 | capColor               | ColorValue | Color of the bar cap                                                           |
 | capRadius              | number     | Border radius of the bar cap                                                   |
-
+| barBorderRadius | number | Border radius of the bar |
 ----
 
 ### Axes and rules related props
@@ -107,6 +107,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | roundedBottom | Boolean    | To show rounded bottom                                                     | white                    |
 | activeOpacity | number     | activeOpacity on pressing the bar                                          | 0.2                      |
 | disablePress  | Boolean    | Prop to disable the bar press action                                       | false                    |
+| barBorderRadius | number | Border radius of the bar | 0 |
 
 ----
 

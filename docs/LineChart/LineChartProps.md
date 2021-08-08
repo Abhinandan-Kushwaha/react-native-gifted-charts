@@ -52,6 +52,9 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | dataPointRadius | number | Radius of the data point (when data points' shape is circular)
 | dataPointColor | ColorValue | Color of the data point |
 | dataPointShape | string | Shape of the data point (rectangular or circular) defaults to circular |
+| showVerticalLine | Boolean | When set to true, a vertical line will be displayed along that data point |
+| verticalLineColor | ColorValue | Color of the vertical Line displayed along the data point |
+| verticalLineThickness | number | Thickness of the vertical Line displayed along the data point |
 
 **Alert!**\
 If you are adding showDataPoint to an item, you must set hideDataPoints prop to true

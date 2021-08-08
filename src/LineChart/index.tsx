@@ -134,6 +134,10 @@ type itemType = {
   dataPointRadius?: number;
   dataPointColor?: string;
   dataPointShape?: string;
+
+  showVerticalLine?: Boolean;
+  verticalLineColor?: string;
+  verticalLineThickness?: number;
 };
 
 type sectionType = {
@@ -818,6 +822,27 @@ export const LineChart = (props: propTypes) => {
     });
   };
 
+  const renderSpecificVerticalLines = (dataForRender: any) => {
+    return dataForRender.map((item: itemType, index: number) => {
+      if (item.showVerticalLine) {
+        return (
+          <Rect
+            x={initialSpacing - (item.verticalLineThickness || 1) / 2 - 1 + spacing * index}
+            y={
+              containerHeight -
+              (item.value * containerHeight) / maxValue +
+              9
+            }
+            width={item.verticalLineThickness || 1}
+            height={(item.value * containerHeight) / maxValue}
+            fill={item.verticalLineColor || 'lightgray'}
+          />
+        )
+      }
+      return null;
+    })
+  }
+
   const renderLine = (
     points: any,
     currentLineThickness: number | undefined,
@@ -845,6 +870,10 @@ export const LineChart = (props: propTypes) => {
             stroke={color}
             strokeWidth={currentLineThickness || thickness}
           />
+
+
+          {/***********************      For Area Chart        ************/}
+
           {areaChart && (
             <LinearGradient
               id="Gradient"
@@ -872,6 +901,13 @@ export const LineChart = (props: propTypes) => {
               strokeWidth={currentLineThickness || thickness}
             />
           )}
+
+          {/******************************************************************/}
+
+
+          {renderSpecificVerticalLines(data)}
+          {renderSpecificVerticalLines(data2)}
+
           {!hideDataPoints1 ?
             renderDataPoints(
               data,
@@ -934,6 +970,10 @@ export const LineChart = (props: propTypes) => {
             stroke={color}
             strokeWidth={currentLineThickness || thickness}
           />
+
+
+          {/***********************      For Area Chart        ************/}
+
           {areaChart && (
             <LinearGradient
               id="Gradient"
@@ -961,6 +1001,13 @@ export const LineChart = (props: propTypes) => {
               strokeWidth={currentLineThickness || thickness}
             />
           )}
+
+          {/******************************************************************/}
+
+
+          {renderSpecificVerticalLines(data)}
+          {renderSpecificVerticalLines(data2)}
+
           {!hideDataPoints1 ?
             renderDataPoints(
               data,
