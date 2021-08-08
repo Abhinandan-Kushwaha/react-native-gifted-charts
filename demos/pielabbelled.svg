@@ -1,0 +1,71 @@
+<svg id="UI_Element_Light_Donut_03-categories" data-name="UI Element/Light/Donut/03-categories" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="315" height="402" viewBox="0 0 315 402">
+  <defs>
+    <filter id="Oval_Copy_17" x="188.5" y="140.5" width="98" height="97" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="8.5" result="blur"/>
+      <feFlood flood-opacity="0.165"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Oval_Copy_17-2" x="27" y="175.5" width="98" height="97" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="8.5" result="blur-2"/>
+      <feFlood flood-opacity="0.165"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Oval_Copy_17-3" x="40.5" y="57.5" width="98" height="97" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="8.5" result="blur-3"/>
+      <feFlood flood-opacity="0.165"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="UI_elements_Donut_03-categories" data-name="UI elements/Donut/03-categories">
+    <g id="Mobile-chart-background">
+      <rect id="Rectangle_Copy_16" data-name="Rectangle Copy 16" width="315" height="402" rx="12" fill="#fff"/>
+    </g>
+    <g id="Labels" transform="translate(65 297)">
+      <g id="Category-03" transform="translate(1 60)">
+        <text id="Long_category_label_03" data-name="Long category label 03" transform="translate(17)" fill="#7c828a" font-size="16" font-family="NunitoSans-Regular, Nunito Sans"><tspan x="0" y="16">Long category label 03</tspan></text>
+        <circle id="Category_03_-_color" data-name="Category 03 - color" cx="5" cy="5" r="5" transform="translate(0 6)" fill="#ec6666"/>
+      </g>
+      <g id="Category-02" transform="translate(1 30)">
+        <text id="Long_category_label_02" data-name="Long category label 02" transform="translate(17)" fill="#7c828a" font-size="16" font-family="NunitoSans-Regular, Nunito Sans"><tspan x="0" y="16">Long category label 02</tspan></text>
+        <circle id="Category_02_-_color" data-name="Category 02 - color" cx="5" cy="5" r="5" transform="translate(0 6)" fill="#79d2de"/>
+      </g>
+      <g id="Category-01">
+        <text id="Long_category_label_01" data-name="Long category label 01" transform="translate(17)" fill="#7c828a" font-size="16" font-family="NunitoSans-Regular, Nunito Sans"><tspan x="0" y="16">Long category label 01</tspan></text>
+        <circle id="Category_01_-_color" data-name="Category 01 - color" cx="5" cy="5" r="5" transform="translate(0 6)" fill="#147ad6"/>
+      </g>
+    </g>
+    <g id="Donut_size_04" data-name="Donut/size 04" transform="translate(49 80)">
+      <g id="Donut_chart" data-name="Donut chart" transform="translate(10 1)">
+        <rect id="Rectangle_Copy_13" data-name="Rectangle Copy 13" width="157" height="172" rx="12" transform="translate(13 12.5)" fill="none"/>
+        <path id="Donut_0" d="M18.646,0A91.484,91.484,0,0,1,100.7,50.644a89.774,89.774,0,0,1-9.982,95.5A91.87,91.87,0,0,1,1.023,179.3L0,179.094,8.084,139.92A51.878,51.878,0,0,0,59.294,121.4a49.774,49.774,0,0,0,5.564-53A51.475,51.475,0,0,0,19.236,40l-.59,0Z" transform="translate(72.958 0.5)" fill="#147ad6"/>
+        <path id="Donut_1" d="M.756,0,40.425,5.132a50.441,50.441,0,0,0,38.9,55.69l.77.167-8.188,39.153A90.439,90.439,0,0,1,.585,1.4Z" transform="translate(0.998 78.934)" fill="#79d2de"/>
+        <path id="Donut_2" d="M89.837,0V40A50.763,50.763,0,0,0,39.778,83.785l-.1.763L0,79.452A90.782,90.782,0,0,1,88.472.01Z" transform="translate(1.163 0.5)" fill="#ec6666"/>
+      </g>
+    </g>
+    <g id="Tooltip_circle" data-name="Tooltip/circle" transform="translate(214 166)">
+      <g transform="matrix(1, 0, 0, 1, -214, -166)" filter="url(#Oval_Copy_17)">
+        <ellipse id="Oval_Copy_17-4" data-name="Oval Copy 17" cx="23.5" cy="23" rx="23.5" ry="23" transform="translate(214 166)" fill="#fff"/>
+      </g>
+      <text id="_26_" data-name="26%" transform="translate(3 13.5)" font-size="16" font-family="NunitoSans-Bold, Nunito Sans" font-weight="700"><tspan x="4.34" y="16">54%</tspan></text>
+    </g>
+    <g id="Tooltip_circle-2" data-name="Tooltip/circle" transform="translate(52.5 201)">
+      <g transform="matrix(1, 0, 0, 1, -52.5, -201)" filter="url(#Oval_Copy_17-2)">
+        <ellipse id="Oval_Copy_17-5" data-name="Oval Copy 17" cx="23.5" cy="23" rx="23.5" ry="23" transform="translate(52.5 201)" fill="#fff"/>
+      </g>
+      <text id="_26_2" data-name="26%" transform="translate(3 13.5)" font-size="16" font-family="NunitoSans-Bold, Nunito Sans" font-weight="700"><tspan x="4.34" y="16">30%</tspan></text>
+    </g>
+    <g id="Tooltip_circle-3" data-name="Tooltip/circle" transform="translate(66 83)">
+      <g transform="matrix(1, 0, 0, 1, -66, -83)" filter="url(#Oval_Copy_17-3)">
+        <ellipse id="Oval_Copy_17-6" data-name="Oval Copy 17" cx="23.5" cy="23" rx="23.5" ry="23" transform="translate(66 83)" fill="#fff"/>
+      </g>
+      <text id="_26_3" data-name="26%" transform="translate(3 13.5)" font-size="16" font-family="NunitoSans-Bold, Nunito Sans" font-weight="700"><tspan x="4.332" y="16">26%</tspan></text>
+    </g>
+    <text id="Chart_title" data-name="Chart title" transform="translate(0 28)" font-size="22" font-family="NunitoSans-Bold, Nunito Sans" font-weight="700"><tspan x="54.034" y="22">Chart title goes here</tspan></text>
+  </g>
+</svg>
