@@ -139,4 +139,69 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | horizontal     | Boolean | Render horizontal BarChart                                                                    | false         |
 | yAxisAtTop     | Boolean | In horizontal BarCharts the Y axis appears at bottom by default. Set it to true for otherwise | false         |
 | intactTopLabel | Boolean | To rotate the top label component to make it intact with the Bars                             | false         |
+
+## Props for Stacked Bar Charts
+
+#### To render stacked charts, you need to pass the prop stackData instead of data.
+
+The structure of stackData is-
+[
+    {
+      stacks:
+        [
+            {
+                value: 10, color: 'red', onPres: someFunction
+            },
+            {
+                value: 20, color: 'blue', marginBottom: 1, onPres: someFunction
+            },
+            ...
+        ],
+      label: 'Jan',
+      ...otherProps,
+    },
+    {
+      stacks:
+        [
+            {
+                value: 8, color: 'red', onPres: someFunction
+            },
+            {
+                value: 17, color: 'blue', marginBottom: 1, onPres: someFunction
+            },
+            ...
+        ],
+      label: 'Feb',
+      ...otherProps,
+    },
+    ...
+]
+
+| Prop           | Type    | Description                                                                                   | Default value |
+| -------------- | ------- | --------------------------------------------------------------------------------------------- | ------------- |
+| stackData     | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table | false         |
+
+### Stack Array description
+
+| Key            | Value type       | Description                                                                                   |
+| -------------- | ---------------- | --------------------------------------------------------------------------------------------- |
+| stacks array   | Array of stacks  | A stack is made of 1 or more objects of the type described in the next table                  |
+| label | string | Label text appearing below the stack (under the X axis) |
+| labelTextStyle | Style object for the label text appearing below the stack |
+
+### Stack item description
+
+| Key            | Value type       | Description                                                                                   |
+| -------------- | ---------------- | --------------------------------------------------------------------------------------------- |
+| value | number | Value of the item representing height of the stack item | 
+| color | ColorValue | Color of the stack item |
+| onPress | function | Function called on pressing the stack item |
+| marginBottom | number | margin below a particular stack section |
+| barBorderRadius | number | Border radius of a stack section |
+| borderTopLeftRadius | number | borderTopLeftRadius for a stack section |
+| borderTopRightRadius | number | borderTopRightRadius for a stack section |
+| borderBottomLeftRadius | number | borderBottomLeftRadius for a stack section |
+| borderBottomRightRadius | number | borderBottomRightRadius for a stack section |
+
+
 ````

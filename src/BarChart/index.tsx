@@ -61,7 +61,7 @@ type PropTypes = {
   showScrollIndicator?: Boolean;
   roundedTop?: Boolean;
   roundedBottom?: Boolean;
-  disablePress?: Boolean;
+  disablePress?: boolean;
 
   frontColor?: ColorValue;
   sideColor?: ColorValue;
@@ -111,7 +111,7 @@ export const BarChart = (props: PropTypes) => {
   if (props.stackData) {
     props.stackData.forEach(stackItem => {
       console.log('stackItem', stackItem);
-      let stackSum = stackItem.stacks.reduce((acc, stack) => acc + stack.val, 0)
+      let stackSum = stackItem.stacks.reduce((acc, stack) => acc + stack.value, 0)
       console.log('stackSum--->', stackSum)
       if (stackSum > maxItem) {
         maxItem = stackSum
@@ -329,8 +329,7 @@ export const BarChart = (props: PropTypes) => {
       style={[
         styles.container,
         {
-          height: containerHeight,
-          backgroundColor: 'yellow'
+          height: containerHeight
         },
         props.width && { width: props.width },
         horizontal && { transform: [{ rotate: '90deg' }, { translateY: -15 }] },
@@ -350,7 +349,6 @@ export const BarChart = (props: PropTypes) => {
           height: containerHeight + 130,
           width: totalWidth,
           paddingLeft: ((data && data[0] && data[0].barWidth) || props.barWidth || 30) / 2,
-          backgroundColor: 'pink',
           alignItems: 'flex-end',
         }}
         showsHorizontalScrollIndicator={showScrollIndicator}
@@ -367,29 +365,10 @@ export const BarChart = (props: PropTypes) => {
               containerHeight={containerHeight}
               maxValue={maxValue}
               spacing={spacing}
-              side={side}
-              data={data}
               barWidth={props.barWidth}
               opacity={opacity}
-              isThreeD={isThreeD}
-              isAnimated={isAnimated}
-              animationDuration={animationDuration}
-              rotateLabel={rotateLabel}
-              animatedHeight={animatedHeight}
-              appearingOpacity={appearingOpacity}
-              roundedTop={props.roundedTop}
-              roundedBottom={props.roundedBottom}
               disablePress={props.disablePress}
-              frontColor={props.frontColor}
-              sideColor={props.sideColor}
-              topColor={props.topColor}
-              showGradient={props.showGradient}
-              gradientColor={props.gradientColor}
-              activeOpacity={props.activeOpacity}
-              cappedBars={props.cappedBars}
-              capThickness={props.capThickness}
-              capColor={props.capColor}
-              capRadius={props.capRadius}
+              rotateLabel={rotateLabel}
               showVerticalLines={showVerticalLines}
               verticalLinesThickness={verticalLinesThickness}
               verticalLinesColor={verticalLinesColor}

@@ -99,7 +99,8 @@ const RenderBars = (props: Props) => {
       <View
         style={[
           {
-            width: rotateLabel ? '150%' : '120%',
+            width: (item.barWidth || props.barWidth || 30) + spacing / 2,
+            left: -6,
             position: 'absolute',
             bottom: rotateLabel ? -40 : -25,
           },

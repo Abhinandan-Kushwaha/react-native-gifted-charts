@@ -25,6 +25,40 @@ const App = () => {
     { value: 30, label: 'Apr', showVerticalLine: true, showDataPoint: true },
   ];
 
+  const stackData = [
+    {
+      stacks:
+        [{
+          value: 10, color: 'red'
+        },
+        {
+          value: 20, color: 'blue', marginBottom: 1
+        }],
+      label: 'Jan'
+    },
+    {
+      stacks:
+        [{
+          value: 14, color: 'red'
+        },
+        {
+          value: 18, color: 'blue', marginBottom: 1
+        }],
+      label: 'Feb'
+    },
+    {
+      stacks:
+        [{
+          value: 7, color: 'red'
+        },
+        { value: 11, color: 'green', marginBottom: 1 },
+        {
+          value: 10, color: 'blue', marginBottom: 1
+        }],
+      label: 'Mar'
+    }
+  ];
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <View
@@ -73,37 +107,16 @@ const App = () => {
 
         <BarChart
           width={300}
-          stackData={
-            [
-              {
-                stacks:
-                  [{
-                    value: 10, color: 'red'
-                  },
-                  {
-                    value: 20, color: 'blue'
-                  }]
-              },
-              {
-                stacks:
-                  [{
-                    value: 14, color: 'red'
-                  },
-                  {
-                    value: 18, color: 'blue'
-                  }]
-              },
-              {
-                stacks:
-                  [{
-                    value: 7, color: 'red'
-                  },
-                  {
-                    value: 10, color: 'blue'
-                  }]
-              }
-            ]
-          } />
+          rotateLabel
+          // isAnimated
+          horizontal
+          barWidth={8}
+          spacing={40}
+          noOfSections={4}
+          initialSpacing={50}
+          barBorderRadius={20}
+          stackData={stackData}
+        />
 
 
         {/* <Text>Hello</Text> */}
