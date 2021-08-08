@@ -1,6 +1,5 @@
-import React, { Component, useEffect } from 'react';
-import { View, TouchableOpacity, Animated, Text, ColorValue } from 'react-native';
-import Animated2DWithGradient from './Animated2DWithGradient';
+import React, { Component } from 'react';
+import { View, TouchableOpacity, Text, ColorValue } from 'react-native';
 import { Style } from 'util';
 
 type Props = {
@@ -8,16 +7,11 @@ type Props = {
     width?: number;
     height?: number;
     color?: ColorValue;
-    showGradient?: Boolean;
-    gradientColor?: any;
-    frontColor?: ColorValue;
-    sideColor?: ColorValue;
-    topColor?: ColorValue;
     topLabelComponent?: Component;
     topLabelContainerStyle?: Style;
     opacity?: number;
-    side?: String;
     labelTextStyle?: any;
+    disablePress?: boolean;
 
     item: itemType;
     index: number;
@@ -27,20 +21,7 @@ type Props = {
     data?: any;
     barWidth?: number;
 
-    isThreeD?: Boolean;
-    isAnimated?: Boolean;
     rotateLabel?: Boolean;
-    animatedHeight?: any;
-    appearingOpacity?: any;
-    animationDuration?: number;
-    roundedTop?: Boolean;
-    roundedBottom?: Boolean;
-    disablePress?: Boolean;
-    activeOpacity?: number;
-    cappedBars?: Boolean;
-    capThickness?: number;
-    capColor?: ColorValue;
-    capRadius?: number;
     showVerticalLines: Boolean;
     verticalLinesThickness: number;
     verticalLinesColor: ColorValue;
@@ -56,11 +37,6 @@ type Props = {
 type itemType = {
     value?: number;
     onPress?: any;
-    frontColor?: ColorValue;
-    sideColor?: ColorValue;
-    topColor?: ColorValue;
-    showGradient?: Boolean;
-    gradientColor?: any;
     label?: String;
     barWidth?: number;
     labelTextStyle?: any;
@@ -71,111 +47,61 @@ type itemType = {
     capColor?: ColorValue;
     capRadius?: number;
     labelComponent?: Function;
-    barBorderRadius?: number;
+    borderRadius?: number;
     stacks?: Array<any>
 };
 const RenderStackBars = (props: Props) => {
     const {
         item,
-        index,
         containerHeight,
         maxValue,
         spacing,
-        side,
-        data,
-        // oldValue,
-
-        isThreeD,
-        isAnimated,
         rotateLabel,
-        appearingOpacity,
-        opacity,
-        animationDuration,
     } = props;
-    // const renderLabel = (label: String, labelTextStyle: any) => {
-    //     return (
-    //         <View
-    //             style={[
-    //                 {
-    //                     width: rotateLabel ? '150%' : '120%',
-    //                     position: 'absolute',
-    //                     bottom: rotateLabel ? -40 : -25,
-    //                 },
-    //                 rotateLabel
-    //                     ? props.horizontal
-    //                         ? { transform: [{ rotate: '330deg' }] }
-    //                         : { transform: [{ rotate: '60deg' }] }
-    //                     : props.horizontal
-    //                         ? { transform: [{ rotate: '-90deg' }] }
-    //                         : {},
-    //             ]}>
-    //             {item.labelComponent ? (
-    //                 item.labelComponent()
-    //             ) : (
-    //                     <Text
-    //                         style={[labelTextStyle, { textAlign: 'center' }]}
-    //                         numberOfLines={1}>
-    //                         {label || ''}
-    //                     </Text>
-    //                 )}
-    //         </View>
-    //     );
-    // };
-
-    // const renderAnimatedLabel = (label: String, labelTextStyle: any) => {
-    //     return (
-    //         <Animated.View
-    //             style={[
-    //                 {
-    //                     width: rotateLabel ? '150%' : '120%',
-    //                     position: 'absolute',
-    //                     bottom: rotateLabel ? -40 : -25,
-    //                     opacity: appearingOpacity,
-    //                 },
-    //                 rotateLabel
-    //                     ? props.horizontal
-    //                         ? { transform: [{ rotate: '330deg' }] }
-    //                         : { transform: [{ rotate: '60deg' }] }
-    //                     : props.horizontal
-    //                         ? { transform: [{ rotate: '-90deg' }] }
-    //                         : {},
-    //             ]}>
-    //             {item.labelComponent ? (
-    //                 item.labelComponent()
-    //             ) : (
-    //                     <Text
-    //                         style={[labelTextStyle, { textAlign: 'center' }]}
-    //                         numberOfLines={1}>
-    //                         {label || ''}
-    //                     </Text>
-    //                 )}
-    //         </Animated.View>
-    //     );
-    // };
+    const disablePress = props.disablePress || false;
+    const renderLabel = (label: String, labelTextStyle: any) => {
+        return (
+            <View
+                style={[
+                    {
+                        width: (item.stacks[0].barWidth || props.barWidth || 30) + spacing / 2,
+                        left: -6,
+                        position: 'absolute',
+                        bottom: rotateLabel ? -40 : -25
+                    },
+                    rotateLabel
+                        ? props.horizontal
+                            ? { transform: [{ rotate: '330deg' }] }
+                            : { transform: [{ rotate: '60deg' }] }
+                        : props.horizontal
+                            ? { transform: [{ rotate: '-90deg' }] }
+                            : {},
+                ]}>
+                {item.labelComponent ? (
+                    item.labelComponent()
+                ) : (
+                        <Text
+                            style={[labelTextStyle]}
+                            numberOfLines={1}>
+                            {label || ''}
+                        </Text>
+                    )}
+            </View>
+        );
+    };
 
     const getPosition = (index: number) => {
         let position = 0;
-        for (let i = 0; i < index - 1; i++) {
-            position += (props.item.stacks[index].value * (containerHeight || 200)) / (maxValue || 200)
+        for (let i = 0; i < index; i++) {
+            position += (props.item.stacks[i].value * (containerHeight || 200)) / (maxValue || 200)
         }
         return position;
     }
 
     const getTotalHeight = () => {
-        return props.item.stacks.reduce((acc, stack) => {
-            // console.log('stack-->', stack)
-            return acc + stack.value
-        }, 0)
+        return props.item.stacks.reduce((acc, stack) => acc + stack.value, 0)
     }
 
-    // useEffect(() => {
-    //     const he = props.item.stacks.reduce((acc, stack) => {
-    //         console.log('stack-->', stack)
-    //         console.log('acc-->', acc)
-    //         return acc + stack.value
-    //     }, 0)
-    //     console.log('he', he);
-    // }, [])
 
 
     const static2DSimple = (item: itemType) => {
@@ -186,69 +112,36 @@ const RenderStackBars = (props: Props) => {
                     style={[
                         {
                             position: 'absolute',
-                            width: '100%',
+                            width: item.stacks[0].barWidth || props.barWidth || 30,
                             height: '100%',
-                            backgroundColor: item.frontColor || props.frontColor || 'black',
-                            borderRadius: props.barBorderRadius || item.barBorderRadius || 0
-                        },
-                        props.roundedBottom && {
-                            borderBottomLeftRadius:
-                                (item.barWidth || props.barWidth || 30) / 2,
-                            borderBottomRightRadius:
-                                (item.barWidth || props.barWidth || 30) / 2,
-                        },
-                        props.cappedBars && {
-                            borderTopLeftRadius:
-                                item.capRadius === 0
-                                    ? 0
-                                    : item.capRadius || props.capRadius || 0,
-                            borderTopRightRadius:
-                                item.capRadius === 0
-                                    ? 0
-                                    : item.capRadius || props.capRadius || 0,
-                        },
-                        props.roundedTop && {
-                            borderTopLeftRadius: (item.barWidth || props.barWidth || 30) / 2,
-                            borderTopRightRadius: (item.barWidth || props.barWidth || 30) / 2,
                         },
                     ]}>
                     {
                         item.stacks.map((stackItem, index) => {
                             return (
-                                <View
+                                <TouchableOpacity
+                                    onPress={stackItem.onPress}
+                                    disabled={disablePress}
                                     style={[
                                         {
                                             position: 'absolute',
-                                            bottom: getPosition(index),
+                                            bottom: getPosition(index) + (stackItem.marginBottom || 0),
                                             width: '100%',
-                                            height: (stackItem.value * (containerHeight || 200)) / (maxValue || 200),
+                                            height: (stackItem.value * (containerHeight || 200)) / (maxValue || 200) - (stackItem.marginBottom || 0),
                                             backgroundColor: stackItem.color || 'black',
-                                            borderRadius: stackItem.borderRadius || 0
-                                        },]} />
+                                            borderRadius: stackItem.borderRadius || props.barBorderRadius || 0,
+                                        },
+                                        (!props.barBorderRadius && !stackItem.borderRadius) && {
+                                            borderTopLeftRadius: stackItem.borderTopLeftRadius || 0,
+                                            borderTopRightRadius: stackItem.borderTopRightRadius || 0,
+                                            borderBottomLeftRadius: stackItem.borderBottomLeftRadius || 0,
+                                            borderBottomRightRadius: stackItem.borderBottomRightRadius || 0,
+                                        }
+                                    ]} />
                             )
                         })
                     }
-                    {props.cappedBars && (
-                        <View
-                            style={{
-                                position: 'absolute',
-                                width: '100%',
-                                height:
-                                    item.capThickness === 0
-                                        ? 0
-                                        : item.capThickness || props.capThickness || 6,
-                                backgroundColor: item.capColor || props.capColor || 'gray',
-                                borderTopLeftRadius:
-                                    item.capRadius === 0
-                                        ? 0
-                                        : item.capRadius || props.capRadius || 0,
-                                borderTopRightRadius:
-                                    item.capRadius === 0
-                                        ? 0
-                                        : item.capRadius || props.capRadius || 0,
-                            }}
-                        />
-                    )}
+
                 </View>
                 {item.topLabelComponent && (
                     <View
@@ -281,13 +174,10 @@ const RenderStackBars = (props: Props) => {
                 {
                     // overflow: 'visible',
                     marginBottom: 60,
-                    width: item.stacks[0].barWidth || props.barWidth || 30,
+                    width: (item.stacks[0].barWidth || props.barWidth || 30) + spacing / 2,
                     height: getTotalHeight(),
                     marginRight: spacing,
-                },
-                // !isThreeD && !item.showGradient && !props.showGradient &&
-                // { backgroundColor: item.frontColor || props.frontColor || 'black' },
-                side !== 'right' && data && { zIndex: data.length - index },
+                }
             ]}
         >
             {props.showVerticalLines && (
@@ -319,9 +209,7 @@ const RenderStackBars = (props: Props) => {
             {
                 static2DSimple(item)
             }
-            {/* {isAnimated
-                ? renderAnimatedLabel(item.label || '', item.labelTextStyle)
-                : renderLabel(item.label || '', item.labelTextStyle)} */}
+            {renderLabel(item.label || '', item.labelTextStyle)}
         </View>
     );
 };
