@@ -1,0 +1,53 @@
+<svg id="UI_Element_Light_Column_charts_Single_chart_01" data-name="UI Element/Light/Column charts/Single chart 01" xmlns="http://www.w3.org/2000/svg" width="315" height="390" viewBox="0 0 315 390">
+  <g id="UI_Element_Column_charts_Single_chart_01" data-name="UI Element/Column charts/Single chart 01">
+    <g id="Mobile-chart-background">
+      <rect id="Rectangle_Copy_16" data-name="Rectangle Copy 16" width="315" height="390" rx="12" fill="#fff"/>
+    </g>
+    <g id="Chart" transform="translate(5 114)">
+      <g id="Chart-grid">
+        <g id="y-axis">
+          <text id="_0" data-name="0" transform="translate(0 221)" fill="#7c828a" font-size="12" font-family="NunitoSans-Regular, Nunito Sans"><tspan x="26.8" y="12">0</tspan></text>
+          <text id="_250" data-name="250" transform="translate(0 144)" fill="#7c828a" font-size="12" font-family="NunitoSans-Regular, Nunito Sans"><tspan x="12.4" y="12">250</tspan></text>
+          <text id="_500" data-name="500" transform="translate(0 67)" fill="#7c828a" font-size="12" font-family="NunitoSans-Regular, Nunito Sans"><tspan x="12.4" y="12">500</tspan></text>
+          <text id="_750" data-name="750" transform="translate(0 0)" fill="#7c828a" font-size="12" font-family="NunitoSans-Regular, Nunito Sans"><tspan x="12.4" y="12">750</tspan></text>
+        </g>
+        <g id="x-axis" transform="translate(42 244)">
+          <text id="M" transform="translate(0 0)" font-size="12" font-family="NunitoSans-ExtraBold, Nunito Sans" font-weight="800"><tspan x="8.948" y="12">M</tspan></text>
+          <text id="T" transform="translate(106.5 0)" font-size="12" font-family="NunitoSans-ExtraBold, Nunito Sans" font-weight="800"><tspan x="10.268" y="12">T</tspan></text>
+          <text id="S" transform="translate(179.5 0)" font-size="12" font-family="NunitoSans-ExtraBold, Nunito Sans" font-weight="800"><tspan x="10.094" y="12">S</tspan></text>
+          <text id="S-2" data-name="S" transform="translate(216 0)" font-size="12" font-family="NunitoSans-ExtraBold, Nunito Sans" font-weight="800"><tspan x="10.094" y="12">S</tspan></text>
+          <text id="T-2" data-name="T" transform="translate(36.5 0)" font-size="12" font-family="NunitoSans-ExtraBold, Nunito Sans" font-weight="800"><tspan x="10.268" y="12">T</tspan></text>
+          <text id="F" transform="translate(143 0)" font-size="12" font-family="NunitoSans-ExtraBold, Nunito Sans" font-weight="800"><tspan x="10.568" y="12">F</tspan></text>
+          <text id="W" transform="translate(73 0)" font-size="12" font-family="NunitoSans-ExtraBold, Nunito Sans" font-weight="800"><tspan x="5.81" y="12">W</tspan></text>
+        </g>
+      </g>
+      <path id="Average-line" d="M.5.5h248" transform="translate(33 90)" fill="none" stroke="#7c828a" stroke-miterlimit="10" stroke-width="1" stroke-dasharray="1 3"/>
+      <g id="column-charts" transform="translate(46 11)">
+        <g id="Charts_Columns_Bars_Single-column-size01" data-name="Charts/Columns&amp;Bars/Single-column-size01" transform="translate(216 103)">
+          <rect id="Rectangle_Copy_21" data-name="Rectangle Copy 21" width="20" height="118" rx="4" fill="rgba(115,136,169,0.35)"/>
+        </g>
+        <g id="Charts_Columns_Bars_Single-column-size01-2" data-name="Charts/Columns&amp;Bars/Single-column-size01" transform="translate(180 130)">
+          <rect id="Rectangle_Copy_21-2" data-name="Rectangle Copy 21" width="20" height="91" rx="4" fill="rgba(115,136,169,0.35)"/>
+        </g>
+        <g id="Charts_Columns_Bars_Single-column-size01-3" data-name="Charts/Columns&amp;Bars/Single-column-size01" transform="translate(144 40)">
+          <rect id="Rectangle_Copy_21-3" data-name="Rectangle Copy 21" width="20" height="181" rx="4" fill="#147ad6"/>
+        </g>
+        <g id="Charts_Columns_Bars_Single-column-size01-4" data-name="Charts/Columns&amp;Bars/Single-column-size01" transform="translate(108 110)">
+          <rect id="Rectangle_Copy_21-4" data-name="Rectangle Copy 21" width="20" height="111" rx="4" fill="rgba(115,136,169,0.35)"/>
+        </g>
+        <g id="Charts_Columns_Bars_Single-column-size01-5" data-name="Charts/Columns&amp;Bars/Single-column-size01" transform="translate(72)">
+          <rect id="Rectangle_Copy_21-5" data-name="Rectangle Copy 21" width="20" height="221" rx="4" fill="#147ad6"/>
+        </g>
+        <g id="Charts_Columns_Bars_Single-column-size01-6" data-name="Charts/Columns&amp;Bars/Single-column-size01" transform="translate(36 66)">
+          <rect id="Rectangle_Copy_21-6" data-name="Rectangle Copy 21" width="20" height="155" rx="4" fill="#147ad6"/>
+        </g>
+        <g id="Charts_Columns_Bars_Single-column-size01-7" data-name="Charts/Columns&amp;Bars/Single-column-size01" transform="translate(0 143)">
+          <rect id="Rectangle_Copy_21-7" data-name="Rectangle Copy 21" width="20" height="78" rx="4" fill="rgba(115,136,169,0.35)"/>
+        </g>
+      </g>
+    </g>
+    <path id="more" d="M14.684,4.019A2.269,2.269,0,0,1,14,2.352,2.269,2.269,0,0,1,14.684.684a2.376,2.376,0,0,1,3.336,0A2.269,2.269,0,0,1,18.7,2.352a2.269,2.269,0,0,1-.683,1.668,2.376,2.376,0,0,1-3.336,0Zm-7,0A2.269,2.269,0,0,1,7,2.352,2.269,2.269,0,0,1,7.683.684a2.376,2.376,0,0,1,3.336,0A2.269,2.269,0,0,1,11.7,2.352a2.269,2.269,0,0,1-.683,1.668,2.376,2.376,0,0,1-3.336,0Zm-7,0A2.267,2.267,0,0,1,0,2.352,2.267,2.267,0,0,1,.684.684,2.267,2.267,0,0,1,2.352,0,2.267,2.267,0,0,1,4.019.684,2.267,2.267,0,0,1,4.7,2.352a2.267,2.267,0,0,1-.684,1.668A2.267,2.267,0,0,1,2.352,4.7,2.267,2.267,0,0,1,.684,4.019Z" transform="translate(274 32.148)"/>
+    <text id="Additional_text" data-name="Additional text" transform="translate(16 56)" fill="#7c828a" font-size="16" font-family="NunitoSans-Regular, Nunito Sans"><tspan x="0" y="16">Daily average</tspan></text>
+    <text id="Numbers" transform="translate(16 17)" font-size="28" font-family="NunitoSans-Bold, Nunito Sans" font-weight="700"><tspan x="0" y="28">$ 476</tspan></text>
+  </g>
+</svg>
