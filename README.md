@@ -4,6 +4,8 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 
 ### Yet another chart library? Why?
 
+**_To bring Life to your data_** 
+
 1. Plenty of features with minimal code
 2. Apply animations to your charts on load and on value change, just by adding a prop
 3. Smooth animations implemented using LayoutAnimation
@@ -12,9 +14,12 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 6. Fully customizable
 7. Detailed documentation with examples
 
-![alt text](/demos/line.gif)
-![alt text](/demos/area.gif)
+![alt text](/demos/altBars.svg)
+![alt text](/demos/barPairs.svg)
 ![alt text](/demos/movingBars.gif)
+![alt text](/demos/lineArea.png)
+![alt text](/demos/line.gif)
+![alt text](/demos/pielabbelled.svg)
 
 ## Installation
 
