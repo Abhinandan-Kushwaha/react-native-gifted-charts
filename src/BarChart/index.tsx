@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
-import {View, FlatList, Animated, Easing, Text, ColorValue} from 'react-native';
-import {styles} from './styles';
+import React, { useEffect } from 'react';
+import { View, FlatList, Animated, Easing, Text, ColorValue } from 'react-native';
+import { styles } from './styles';
 import RenderBars from './RenderBars';
+import RenderStackBars from './RenderStackBars';
 
 type PropTypes = {
   width?: number;
@@ -12,7 +13,7 @@ type PropTypes = {
   stepValue?: number;
   spacing?: number;
   data?: any;
-  // oldData?: any,
+  stackData?: any,
   side?: String;
   rotateLabel?: Boolean;
   isAnimated?: Boolean;
@@ -75,6 +76,7 @@ type PropTypes = {
   intactTopLabel?: Boolean;
 
   horizSections?: Array<sectionType>;
+  barBorderRadius?: number;
 };
 type sectionType = {
   value: number;
@@ -99,19 +101,32 @@ type itemType = {
 export const BarChart = (props: PropTypes) => {
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
-  const horizSections = [{value: 0}];
+  const horizSections = [{ value: 0 }];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const data = props.data || [];
   const spacing = props.spacing === 0 ? 0 : props.spacing ? props.spacing : 20;
 
   let totalWidth = spacing;
   let maxItem = 0;
-  data.forEach((item: itemType) => {
-    if (item.value > maxItem) {
-      maxItem = item.value;
-    }
-    totalWidth += (item.barWidth || props.barWidth || 30) + spacing;
-  });
+  if (props.stackData) {
+    props.stackData.forEach(stackItem => {
+      console.log('stackItem', stackItem);
+      let stackSum = stackItem.stacks.reduce((acc, stack) => acc + stack.val, 0)
+      console.log('stackSum--->', stackSum)
+      if (stackSum > maxItem) {
+        maxItem = stackSum
+      }
+      totalWidth += (stackItem.stacks[0].barWidth || props.barWidth || 30) + spacing;
+    })
+  }
+  else {
+    data.forEach((item: itemType) => {
+      if (item.value > maxItem) {
+        maxItem = item.value;
+      }
+      totalWidth += (item.barWidth || props.barWidth || 30) + spacing;
+    });
+  }
   maxItem = maxItem + (10 - (maxItem % 10));
 
   const maxValue = props.maxValue || maxItem;
@@ -173,7 +188,7 @@ export const BarChart = (props: PropTypes) => {
 
   horizSections.pop();
   for (let i = 0; i <= noOfSections; i++) {
-    horizSections.push({value: maxValue - stepValue * i});
+    horizSections.push({ value: maxValue - stepValue * i });
   }
 
   const heightValue = new Animated.Value(0);
@@ -218,7 +233,7 @@ export const BarChart = (props: PropTypes) => {
       <>
         {horizSections.map((sectionItems, index) => {
           return (
-            <View key={index} style={[styles.horizBar, {width: totalWidth}]}>
+            <View key={index} style={[styles.horizBar, { width: totalWidth }]}>
               <View
                 style={[
                   styles.leftLabel,
@@ -227,9 +242,9 @@ export const BarChart = (props: PropTypes) => {
                     borderColor: yAxisColor,
                   },
                   horizontal &&
-                    !yAxisAtTop && {
-                      transform: [{translateX: totalWidth + yAxisThickness}],
-                    },
+                  !yAxisAtTop && {
+                    transform: [{ translateX: totalWidth + yAxisThickness }],
+                  },
                   {
                     height:
                       index === noOfSections ? stepHeight / 2 : stepHeight,
@@ -244,16 +259,16 @@ export const BarChart = (props: PropTypes) => {
                       yAxisTextStyle,
                       horizontal && {
                         transform: [
-                          {rotate: '270deg'},
-                          {translateY: yAxisAtTop ? 0 : 50},
+                          { rotate: '270deg' },
+                          { translateY: yAxisAtTop ? 0 : 50 },
                         ],
                       },
                     ]}>
                     {showFractionalValues
                       ? sectionItems.value || ''
                       : sectionItems.value
-                      ? sectionItems.value.toString().split('.')[0]
-                      : ''}
+                        ? sectionItems.value.toString().split('.')[0]
+                        : ''}
                   </Text>
                 )}
               </View>
@@ -262,13 +277,13 @@ export const BarChart = (props: PropTypes) => {
                   index === noOfSections
                     ? styles.lastLeftPart
                     : styles.leftPart,
-                  {backgroundColor: backgroundColor},
+                  { backgroundColor: backgroundColor },
                 ]}>
                 {index === noOfSections ? (
                   <View
                     style={[
                       styles.line,
-                      {height: xAxisThickness, backgroundColor: xAxisColor},
+                      { height: xAxisThickness, backgroundColor: xAxisColor },
                     ]}
                   />
                 ) : hideRules ? null : (
@@ -293,11 +308,11 @@ export const BarChart = (props: PropTypes) => {
                         backgroundColor: yAxisIndicesColor,
                       },
                       horizontal &&
-                        !yAxisAtTop && {
-                          transform: [
-                            {translateX: totalWidth + yAxisThickness},
-                          ],
-                        },
+                      !yAxisAtTop && {
+                        transform: [
+                          { translateX: totalWidth + yAxisThickness },
+                        ],
+                      },
                     ]}
                   />
                 ) : null}
@@ -315,9 +330,10 @@ export const BarChart = (props: PropTypes) => {
         styles.container,
         {
           height: containerHeight,
+          backgroundColor: 'yellow'
         },
-        props.width && {width: props.width},
-        horizontal && {transform: [{rotate: '90deg'}, {translateY: -15}]},
+        props.width && { width: props.width },
+        horizontal && { transform: [{ rotate: '90deg' }, { translateY: -15 }] },
       ]}>
       {props.hideAxesAndRules !== true && renderHorizSections()}
       <FlatList
@@ -327,22 +343,66 @@ export const BarChart = (props: PropTypes) => {
             position: 'absolute',
             bottom: stepHeight * -0.5 - 60 + xAxisThickness,
           },
-          horizontal && {width: totalWidth},
+          horizontal && { width: totalWidth },
         ]}
         scrollEnabled={!disableScroll}
         contentContainerStyle={{
           height: containerHeight + 130,
           width: totalWidth,
-          paddingLeft: (data[0].barWidth || props.barWidth || 30) / 2,
-          // backgroundColor: 'black',
+          paddingLeft: ((data && data[0] && data[0].barWidth) || props.barWidth || 30) / 2,
+          backgroundColor: 'pink',
           alignItems: 'flex-end',
         }}
         showsHorizontalScrollIndicator={showScrollIndicator}
         horizontal
-        data={data}
+        data={props.stackData || data}
         keyExtractor={(item, index) => index.toString()}
-        renderItem={({item, index}) => (
-          <RenderBars
+        renderItem={({ item, index }) => {
+          console.log('index--->', index);
+          console.log('itemhere--->', item);
+          if (props.stackData) {
+            return <RenderStackBars
+              item={item}
+              index={index}
+              containerHeight={containerHeight}
+              maxValue={maxValue}
+              spacing={spacing}
+              side={side}
+              data={data}
+              barWidth={props.barWidth}
+              opacity={opacity}
+              isThreeD={isThreeD}
+              isAnimated={isAnimated}
+              animationDuration={animationDuration}
+              rotateLabel={rotateLabel}
+              animatedHeight={animatedHeight}
+              appearingOpacity={appearingOpacity}
+              roundedTop={props.roundedTop}
+              roundedBottom={props.roundedBottom}
+              disablePress={props.disablePress}
+              frontColor={props.frontColor}
+              sideColor={props.sideColor}
+              topColor={props.topColor}
+              showGradient={props.showGradient}
+              gradientColor={props.gradientColor}
+              activeOpacity={props.activeOpacity}
+              cappedBars={props.cappedBars}
+              capThickness={props.capThickness}
+              capColor={props.capColor}
+              capRadius={props.capRadius}
+              showVerticalLines={showVerticalLines}
+              verticalLinesThickness={verticalLinesThickness}
+              verticalLinesColor={verticalLinesColor}
+              verticalLinesZIndex={verticalLinesZIndex}
+              showXAxisIndices={showXAxisIndices}
+              xAxisIndicesHeight={xAxisIndicesHeight}
+              xAxisIndicesWidth={xAxisIndicesWidth}
+              xAxisIndicesColor={xAxisIndicesColor}
+              horizontal={horizontal}
+              intactTopLabel={intactTopLabel}
+              barBorderRadius={props.barBorderRadius} />
+          }
+          return <RenderBars
             item={item}
             index={index}
             containerHeight={containerHeight}
@@ -381,8 +441,9 @@ export const BarChart = (props: PropTypes) => {
             xAxisIndicesColor={xAxisIndicesColor}
             horizontal={horizontal}
             intactTopLabel={intactTopLabel}
+            barBorderRadius={props.barBorderRadius}
           />
-        )}
+        }}
       />
     </View>
   );

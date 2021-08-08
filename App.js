@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { BarChart, LineChart, PieChart } from './src';
 
 const App = () => {
@@ -19,10 +19,10 @@ const App = () => {
   // ];
 
   const data = [
-    { value: 15, label: 'Jan' },
-    { value: 40, label: 'Feb', showDataPoint: true, dataPointShape: 'rectangular', dataPointHeight: 12, dataPointWidth: 12, },
+    { value: 15, label: 'Jan', showVerticalLine: true },
+    { value: 40, label: 'Feb', verticalLineColor: 'red', showVerticalLine: true, verticalLineThickness: StyleSheet.hairlineWidth },
     { value: 10, label: 'Mar', showDataPoint: true, dataPointShape: 'rectangular', dataPointHeight: 20, dataPointWidth: 20, },
-    { value: 30, label: 'Apr', showDataPoint: true },
+    { value: 30, label: 'Apr', showVerticalLine: true, showDataPoint: true },
   ];
 
   return (
@@ -35,25 +35,77 @@ const App = () => {
           justifyContent: 'center',
           alignItems: 'center',
         }}>
-        <View>
-          <LineChart
+        {/* <LineChart
             data={data}
             hideDataPoints
+            areaChart
+            curved
+            color='rgb(220,140,140)'
+            startFillColor='rgb(220,140,140)'
+            endFillColor='rgba(250,240,240)'
+            startOpacity={0.9}
+            endOpacity={0.3}
           // dataPointsShape='rectangular'
           // dataPointsHeight={12}
           // dataPointsWidth={12}
-          />
-          {/* <BarChart
-            showGradient
-            isThreeD
-            isAnimated
-            // width={300}
-            gradientColor="gray"
-            // backgroundColor="yellow"
-            // frontColor="white"
-            data={data}
           /> */}
-        </View>
+
+
+        {/* <BarChart
+          showGradient
+          // isThreeD
+          // isAnimated
+          // width={300}
+          gradientColor="lightgray"
+          // backgroundColor="yellow"
+          hideRules
+          // yAxisThickness={0}
+          roundedTop
+          showYAxisIndices
+          xAxisThickness={0}
+          spacing={30}
+          noOfSections={4}
+          // hideAxesAndRules
+          frontColor="#eeeeee"
+          barBorderRadius={10}
+          data={data}
+        /> */}
+
+        <BarChart
+          width={300}
+          stackData={
+            [
+              {
+                stacks:
+                  [{
+                    value: 10, color: 'red'
+                  },
+                  {
+                    value: 20, color: 'blue'
+                  }]
+              },
+              {
+                stacks:
+                  [{
+                    value: 14, color: 'red'
+                  },
+                  {
+                    value: 18, color: 'blue'
+                  }]
+              },
+              {
+                stacks:
+                  [{
+                    value: 7, color: 'red'
+                  },
+                  {
+                    value: 10, color: 'blue'
+                  }]
+              }
+            ]
+          } />
+
+
         {/* <Text>Hello</Text> */}
       </View>
       {/* <LineChart data={data} /> */}

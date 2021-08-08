@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {View, ColorValue, LayoutAnimation, Platform} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, ColorValue, LayoutAnimation, Platform } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 type propTypes = {
@@ -19,6 +19,7 @@ type propTypes = {
   capRadius?: number;
   horizontal: Boolean;
   intactTopLabel: Boolean;
+  barBorderRadius?: number
 };
 type itemType = {
   value?: number;
@@ -37,10 +38,11 @@ type itemType = {
   capThickness?: number;
   capColor?: ColorValue;
   capRadius?: number;
+  barBorderRadius?: number;
 };
 
 const Animated2DWithGradient = (props: propTypes) => {
-  const {item, opacity, animationDuration, noGradient} = props;
+  const { item, opacity, animationDuration, noGradient } = props;
   const [height, setHeight] = useState(0);
   const [initialRender, setInitialRender] = useState(true);
   // console.log('comes to animated2DWithGradient', item);
@@ -56,7 +58,7 @@ const Animated2DWithGradient = (props: propTypes) => {
   const elevate = () => {
     LayoutAnimation.configureNext({
       duration: animationDuration,
-      update: {type: 'linear', property: 'scaleXY'},
+      update: { type: 'linear', property: 'scaleXY' },
     });
     setHeight(props.height);
   };
@@ -64,8 +66,8 @@ const Animated2DWithGradient = (props: propTypes) => {
   const layoutAppear = () => {
     LayoutAnimation.configureNext({
       duration: Platform.OS == 'ios' ? animationDuration : 20,
-      create: {type: 'linear', property: 'opacity'},
-      update: {type: 'linear', property: 'scaleXY'},
+      create: { type: 'linear', property: 'opacity' },
+      update: { type: 'linear', property: 'scaleXY' },
     });
     setInitialRender(false);
     setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
@@ -81,7 +83,7 @@ const Animated2DWithGradient = (props: propTypes) => {
             width: '100%',
             height: height,
           }}>
-          <View style={{width: '100%', height: height}}>
+          <View style={{ width: '100%', height: height }}>
             {noGradient ? (
               <View
                 style={[
@@ -91,6 +93,7 @@ const Animated2DWithGradient = (props: propTypes) => {
                     height: '100%',
                     backgroundColor:
                       item.frontColor || props.frontColor || 'black',
+                    borderRadius: props.barBorderRadius || item.barBorderRadius || 0
                   },
                   props.roundedBottom && {
                     borderBottomLeftRadius: (item.barWidth || 30) / 2,
@@ -135,49 +138,19 @@ const Animated2DWithGradient = (props: propTypes) => {
                 )}
               </View>
             ) : (
-              <LinearGradient
-                style={[
-                  {
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                  },
-                  props.roundedBottom && {
-                    borderBottomLeftRadius: (item.barWidth || 30) / 2,
-                    borderBottomRightRadius: (item.barWidth || 30) / 2,
-                  },
-                  props.cappedBars && {
-                    borderTopLeftRadius:
-                      item.capRadius === 0
-                        ? 0
-                        : item.capRadius || props.capRadius || 0,
-                    borderTopRightRadius:
-                      item.capRadius === 0
-                        ? 0
-                        : item.capRadius || props.capRadius || 0,
-                  },
-                  props.roundedTop && {
-                    borderTopLeftRadius: (item.barWidth || 30) / 2,
-                    borderTopRightRadius: (item.barWidth || 30) / 2,
-                  },
-                ]}
-                start={{x: 0, y: 0}}
-                end={{x: 1, y: 1}}
-                colors={[
-                  item.gradientColor || props.gradientColor || 'white',
-                  item.frontColor || props.frontColor || 'black',
-                ]}>
-                {props.cappedBars && (
-                  <View
-                    style={{
-                      // position: 'absolute',
-                      // width: '100%',
-                      height:
-                        item.capThickness === 0
-                          ? 0
-                          : item.capThickness || props.capThickness || 0,
-                      backgroundColor:
-                        item.capColor || props.capColor || 'black',
+                <LinearGradient
+                  style={[
+                    {
+                      position: 'absolute',
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: props.barBorderRadius || item.barBorderRadius || 0
+                    },
+                    props.roundedBottom && {
+                      borderBottomLeftRadius: (item.barWidth || 30) / 2,
+                      borderBottomRightRadius: (item.barWidth || 30) / 2,
+                    },
+                    props.cappedBars && {
                       borderTopLeftRadius:
                         item.capRadius === 0
                           ? 0
@@ -186,11 +159,42 @@ const Animated2DWithGradient = (props: propTypes) => {
                         item.capRadius === 0
                           ? 0
                           : item.capRadius || props.capRadius || 0,
-                    }}
-                  />
-                )}
-              </LinearGradient>
-            )}
+                    },
+                    props.roundedTop && {
+                      borderTopLeftRadius: (item.barWidth || 30) / 2,
+                      borderTopRightRadius: (item.barWidth || 30) / 2,
+                    },
+                  ]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  colors={[
+                    item.gradientColor || props.gradientColor || 'white',
+                    item.frontColor || props.frontColor || 'black',
+                  ]}>
+                  {props.cappedBars && (
+                    <View
+                      style={{
+                        // position: 'absolute',
+                        // width: '100%',
+                        height:
+                          item.capThickness === 0
+                            ? 0
+                            : item.capThickness || props.capThickness || 0,
+                        backgroundColor:
+                          item.capColor || props.capColor || 'black',
+                        borderTopLeftRadius:
+                          item.capRadius === 0
+                            ? 0
+                            : item.capRadius || props.capRadius || 0,
+                        borderTopRightRadius:
+                          item.capRadius === 0
+                            ? 0
+                            : item.capRadius || props.capRadius || 0,
+                      }}
+                    />
+                  )}
+                </LinearGradient>
+              )}
           </View>
           {item.topLabelComponent && (
             <View
@@ -208,14 +212,15 @@ const Animated2DWithGradient = (props: propTypes) => {
                   opacity: opacity,
                 },
                 props.horizontal &&
-                  !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
+                !props.intactTopLabel && { transform: [{ rotate: '270deg' }] },
                 item.topLabelContainerStyle,
               ]}>
               {item.topLabelComponent()}
             </View>
           )}
         </View>
-      )}
+      )
+      }
     </>
   );
 };
