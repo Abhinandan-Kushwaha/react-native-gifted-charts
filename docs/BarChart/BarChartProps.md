@@ -145,6 +145,8 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 #### To render stacked charts, you need to pass the prop stackData instead of data.
 
 The structure of stackData is-
+
+```js
 [
     {
       stacks:
@@ -176,6 +178,7 @@ The structure of stackData is-
     },
     ...
 ]
+```
 
 | Prop           | Type    | Description                                                                                   | Default value |
 | -------------- | ------- | --------------------------------------------------------------------------------------------- | ------------- |
