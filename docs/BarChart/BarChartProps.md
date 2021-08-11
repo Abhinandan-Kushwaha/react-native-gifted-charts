@@ -16,7 +16,8 @@
 | disableScroll       | Boolean        | To disable horizontal scroll                                                         | false               |
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                  | false               |
 
------
+---
+
 **Alert!**\
 These props are correlated:
 
@@ -27,12 +28,12 @@ These props are correlated:
 They must follow the relation:
 
 ```js
-maxValue = noOfSections * stepValue
+maxValue = noOfSections * stepValue;
 ```
 
 So, all the three must be used together. Using any 1 or 2 of them may produce absurd results
 
------
+---
 
 ### Item description
 
@@ -57,8 +58,9 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | capThickness           | number     | Thickness of the bar cap                                                       |
 | capColor               | ColorValue | Color of the bar cap                                                           |
 | capRadius              | number     | Border radius of the bar cap                                                   |
-| barBorderRadius | number | Border radius of the bar |
-----
+| barBorderRadius        | number     | Border radius of the bar                                                       |
+
+---
 
 ### Axes and rules related props
 
@@ -89,27 +91,28 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | yAxisIndicesColor      | ColorValue | Color of the pointers on the X axis          | black         |
 | yAxisIndicesColor      | Boolean    | To hide axes, rules, labels altogether       | false         |
 | rotateLabel            | Boolean    | To rotate the X axis labels (by 60deg)       | false         |
+| hideOrigin             | Boolean    | To hide the y Axis label at origin (i.e. 0)  | false         |
 
-----
+---
 
 ### Bar related props
 
-| Prop          | Type       | Description                                                                | Default value            |
-| ------------- | ---------- | -------------------------------------------------------------------------- | ------------------------ |
-| barWidth      | number     | Width of the bar                                                           | 30                       |
-| isThreeD      | Boolean    | Prop to render 3 dimensional bars                                          | false                    |
-| frontColor    | ColorValue | Color of the bar                                                           | black for 2D, red for 3D |
-| sideColor     | ColorValue | Color of the side view of the bar, only for 3 D                            | red                      |
-| topColor      | ColorValue | Color of the top view of the bar, only for 3 D                             | red                      |
-| showGradient  | Boolean    | Prop to enable linear gradient for the bar color                           | false                    |
-| gradientColor | ColorValue | Along with frontColor, gradientColor constitutes the 2 colors for gradient | white                    |
-| roundedTop    | Boolean    | To show rounded top                                                        | white                    |
-| roundedBottom | Boolean    | To show rounded bottom                                                     | white                    |
-| activeOpacity | number     | activeOpacity on pressing the bar                                          | 0.2                      |
-| disablePress  | Boolean    | Prop to disable the bar press action                                       | false                    |
-| barBorderRadius | number | Border radius of the bar | 0 |
+| Prop            | Type       | Description                                                                | Default value            |
+| --------------- | ---------- | -------------------------------------------------------------------------- | ------------------------ |
+| barWidth        | number     | Width of the bar                                                           | 30                       |
+| isThreeD        | Boolean    | Prop to render 3 dimensional bars                                          | false                    |
+| frontColor      | ColorValue | Color of the bar                                                           | black for 2D, red for 3D |
+| sideColor       | ColorValue | Color of the side view of the bar, only for 3 D                            | red                      |
+| topColor        | ColorValue | Color of the top view of the bar, only for 3 D                             | red                      |
+| showGradient    | Boolean    | Prop to enable linear gradient for the bar color                           | false                    |
+| gradientColor   | ColorValue | Along with frontColor, gradientColor constitutes the 2 colors for gradient | white                    |
+| roundedTop      | Boolean    | To show rounded top                                                        | white                    |
+| roundedBottom   | Boolean    | To show rounded bottom                                                     | white                    |
+| activeOpacity   | number     | activeOpacity on pressing the bar                                          | 0.2                      |
+| disablePress    | Boolean    | Prop to disable the bar press action                                       | false                    |
+| barBorderRadius | number     | Border radius of the bar                                                   | 0                        |
 
-----
+---
 
 ### Animation related props
 
@@ -119,7 +122,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | animationDuration | number  | Duration of the animations                                            | 800           |
 | animationEasing   | Easing  | Easing applied to the animation                                       | Easing.ease   |
 
-----
+---
 
 ### Bar related props for making Capped Bar chart
 
@@ -130,7 +133,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | capColor     | ColorValue | Color of the bar caps           | gray          |
 | capRadius    | number     | Border radius of the bar caps   | 0             |
 
-----
+---
 
 ### Props for horizontal BarChart
 
@@ -180,31 +183,32 @@ The structure of stackData is-
 ]
 ```
 
-| Prop           | Type    | Description                                                                                   | Default value |
-| -------------- | ------- | --------------------------------------------------------------------------------------------- | ------------- |
-| stackData     | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table | false         |
+| Prop      | Type                  | Description                                                                                  | Default value |
+| --------- | --------------------- | -------------------------------------------------------------------------------------------- | ------------- |
+| stackData | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table | false         |
 
 ### Stack Array description
 
-| Key            | Value type       | Description                                                                                   |
-| -------------- | ---------------- | --------------------------------------------------------------------------------------------- |
-| stacks array   | Array of stacks  | A stack is made of 1 or more objects of the type described in the next table                  |
-| label | string | Label text appearing below the stack (under the X axis) |
+| Key            | Value type                                                | Description                                                                  |
+| -------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| stacks array   | Array of stacks                                           | A stack is made of 1 or more objects of the type described in the next table |
+| label          | string                                                    | Label text appearing below the stack (under the X axis)                      |
 | labelTextStyle | Style object for the label text appearing below the stack |
 
 ### Stack item description
 
-| Key            | Value type       | Description                                                                                   |
-| -------------- | ---------------- | --------------------------------------------------------------------------------------------- |
-| value | number | Value of the item representing height of the stack item | 
-| color | ColorValue | Color of the stack item |
-| onPress | function | Function called on pressing the stack item |
-| marginBottom | number | margin below a particular stack section |
-| barBorderRadius | number | Border radius of a stack section |
-| borderTopLeftRadius | number | borderTopLeftRadius for a stack section |
-| borderTopRightRadius | number | borderTopRightRadius for a stack section |
-| borderBottomLeftRadius | number | borderBottomLeftRadius for a stack section |
-| borderBottomRightRadius | number | borderBottomRightRadius for a stack section |
+| Key                     | Value type | Description                                             |
+| ----------------------- | ---------- | ------------------------------------------------------- |
+| value                   | number     | Value of the item representing height of the stack item |
+| color                   | ColorValue | Color of the stack item                                 |
+| onPress                 | function   | Function called on pressing the stack item              |
+| marginBottom            | number     | margin below a particular stack section                 |
+| barBorderRadius         | number     | Border radius of a stack section                        |
+| borderTopLeftRadius     | number     | borderTopLeftRadius for a stack section                 |
+| borderTopRightRadius    | number     | borderTopRightRadius for a stack section                |
+| borderBottomLeftRadius  | number     | borderBottomLeftRadius for a stack section              |
+| borderBottomRightRadius | number     | borderBottomRightRadius for a stack section             |
 
+```
 
-````
+```

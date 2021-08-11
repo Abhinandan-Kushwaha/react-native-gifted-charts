@@ -17,7 +17,8 @@
 | disableScroll       | Boolean        | To disable horizontal scroll                                                            | false               |
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                     | false               |
 
------
+---
+
 **Alert!**\
 These props are correlated:
 
@@ -28,38 +29,39 @@ These props are correlated:
 They must follow the relation:
 
 ```js
-maxValue = noOfSections * stepValue
+maxValue = noOfSections * stepValue;
 ```
 
 So, all the three must be used together. Using any 1 or 2 of them may produce absurd results
 
------
+---
+
 ### Item description
 
-| Key            | Value type | Description                                                |
-| -------------- | ---------- | ---------------------------------------------------------- |
-| value          | number     | Value of the item representing representing its position   |
-| label          | string     | Label text appearing under the X axis                      |
-| labelTextStyle | object     | Style object for the label text appearing under the X axis |
-| dataPointText  | string     | Text appearing near the data points                        |
-| textShiftX     | number     | To shift the dataPointText text horizontally               |
-| textShiftY     | number     | To shift the dataPointText text vertically                 |
-| textColor      | ColorValue | Color of the dataPointText                                 |
-| textFontSize   | number     | Font size of the dataPointText                             |
-| showDataPoint | Boolean | To show data point for the particular item | 
-| dataPointHeight | number | Height of the data point (when data point's shape is rectangular)|
-| dataPointWidth | number | Width of the data point (when data point's shape is rectangular) |
-| dataPointRadius | number | Radius of the data point (when data points' shape is circular)
-| dataPointColor | ColorValue | Color of the data point |
-| dataPointShape | string | Shape of the data point (rectangular or circular) defaults to circular |
-| showVerticalLine | Boolean | When set to true, a vertical line will be displayed along that data point |
-| verticalLineColor | ColorValue | Color of the vertical Line displayed along the data point |
-| verticalLineThickness | number | Thickness of the vertical Line displayed along the data point |
+| Key                   | Value type | Description                                                               |
+| --------------------- | ---------- | ------------------------------------------------------------------------- |
+| value                 | number     | Value of the item representing representing its position                  |
+| label                 | string     | Label text appearing under the X axis                                     |
+| labelTextStyle        | object     | Style object for the label text appearing under the X axis                |
+| dataPointText         | string     | Text appearing near the data points                                       |
+| textShiftX            | number     | To shift the dataPointText text horizontally                              |
+| textShiftY            | number     | To shift the dataPointText text vertically                                |
+| textColor             | ColorValue | Color of the dataPointText                                                |
+| textFontSize          | number     | Font size of the dataPointText                                            |
+| showDataPoint         | Boolean    | To show data point for the particular item                                |
+| dataPointHeight       | number     | Height of the data point (when data point's shape is rectangular)         |
+| dataPointWidth        | number     | Width of the data point (when data point's shape is rectangular)          |
+| dataPointRadius       | number     | Radius of the data point (when data points' shape is circular)            |
+| dataPointColor        | ColorValue | Color of the data point                                                   |
+| dataPointShape        | string     | Shape of the data point (rectangular or circular) defaults to circular    |
+| showVerticalLine      | Boolean    | When set to true, a vertical line will be displayed along that data point |
+| verticalLineColor     | ColorValue | Color of the vertical Line displayed along the data point                 |
+| verticalLineThickness | number     | Thickness of the vertical Line displayed along the data point             |
 
 **Alert!**\
 If you are adding showDataPoint to an item, you must set hideDataPoints prop to true
 
-----
+---
 
 ### Axes and rules related props
 
@@ -90,8 +92,9 @@ If you are adding showDataPoint to an item, you must set hideDataPoints prop to 
 | yAxisIndicesColor      | ColorValue | Color of the pointers on the X axis          | black         |
 | yAxisIndicesColor      | Boolean    | To hide axes, rules, labels altogether       | false         |
 | rotateLabel            | Boolean    | To rotate the X axis labels (by 60deg)       | false         |
+| hideOrigin             | Boolean    | To hide the y Axis label at origin (i.e. 0)  | false         |
 
-----
+---
 
 ### Line related props
 
@@ -105,7 +108,7 @@ If you are adding showDataPoint to an item, you must set hideDataPoints prop to 
 | thickness2 | number     | Thickness of the lines joining the second set of data points | thickness (from props) |
 | curved     | Boolean    | To show curved line joining the data points                  | false                  |
 
-----
+---
 
 ### Data points related props
 
@@ -130,7 +133,7 @@ If you are adding showDataPoint to an item, you must set hideDataPoints prop to 
 | dataPointsColor2  | ColorValue | Color of data points for the second dataset                                           | blue          |
 | dataPointsShape2  | string     | Shape of data points for the second dataset (_'rectangular'_ or _'circular'_)         | 'circular'    |
 
-----
+---
 
 ### Props for Area Chart
 
@@ -150,4 +153,7 @@ If you are adding showDataPoint to an item, you must set hideDataPoints prop to 
 | startOpacity2     | number     | Start gradient color for the second dataset of the area chart  | 1             |
 | endOpacity2       | number     | End gradient opacity for the second dataset of the area chart  | 1             |
 | gradientDirection | string     | Direction of the gradient (_'horizontal'_ or _'vertical'_)     | 'vertical'    |
-````
+
+```
+
+```
