@@ -182,6 +182,10 @@ The structure of stackData is-
     ...
 ]
 ```
+The stackData passed to the BarChart component is an array of objects.\
+Each object contains a mandatory key named stacks.\
+The value corresponding to the stacks key is an array of objects, each object representing a section of the stack.
+
 
 | Prop      | Type                  | Description                                                                                  | Default value |
 | --------- | --------------------- | -------------------------------------------------------------------------------------------- | ------------- |
