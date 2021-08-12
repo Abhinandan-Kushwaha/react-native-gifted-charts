@@ -195,9 +195,13 @@ The value corresponding to the stacks key is an array of objects, each object re
 
 | Key            | Value type                                                | Description                                                                  |
 | -------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| stacks array   | Array of stacks                                           | A stack is made of 1 or more objects of the type described in the next table |
+| stacks array   | Array of stack items                                           | A stack is made of 1 or more objects of the type described in the next table |
 | label          | string                                                    | Label text appearing below the stack (under the X axis)                      |
 | labelTextStyle | Style object for the label text appearing below the stack |
+
+A single stack item can be depicted as-
+
+![alt text](../../demos/stackdesc.png)
 
 ### Stack item description
 
