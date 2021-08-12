@@ -18,6 +18,7 @@
 | textBackgroundColor  | ColorValue     | Background color for the label texts                                             | white         |
 | textBackgroundRadius | number         | Radius for the background of the text labels                                     | textSize      |
 | showValuesAsLabels   | Boolean        | When set to true, the values of the Pie sections are displayed as labels         | false         |
+| centerLabelComponent | Function       | Component to be rendered at the center of the Pie chart                          | \_            |
 
 ### Item description
 

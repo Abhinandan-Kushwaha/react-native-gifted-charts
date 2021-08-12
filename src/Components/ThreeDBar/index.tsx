@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {View, StyleSheet, ColorValue} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {styles} from './styles';
@@ -6,6 +6,7 @@ import {styles} from './styles';
 type PropTypes = {
   style: any;
   width: number;
+  sideWidth: number;
   height: number;
   color: ColorValue;
   showGradient: Boolean;
@@ -55,8 +56,9 @@ const aStyles = StyleSheet.create({
 });
 
 const ThreeDBar = (props: PropTypes) => {
-  const width = props.width || 40;
-  const height = props.height || 200;
+  const width = props.width;
+  const sideWidth = props.sideWidth;
+  const height = props.height;
 
   const showGradient = props.showGradient || false;
   const gradientColor = props.gradientColor || 'white';
@@ -77,56 +79,57 @@ const ThreeDBar = (props: PropTypes) => {
             styles.row,
             props.side === 'right' && {transform: [{rotateY: '180deg'}]},
           ]}>
-          <View style={{marginTop: width / -2}}>
+          {/*******************          Top View             *****************/}
+
+          <View style={{position: 'absolute', top: sideWidth / -2}}>
+            <TriangleCorner
+              color={topColor}
+              width={sideWidth}
+              style={{transform: [{rotate: '90deg'}], opacity: opacity}}
+            />
+          </View>
+          <View style={{position: 'absolute', top: sideWidth / -2}}>
+            <View
+              style={{
+                width: width,
+                height: (3 * width) / 4,
+                // left: width / -8,
+                backgroundColor: topColor,
+                opacity: opacity,
+              }}
+            />
+          </View>
+          <View
+            style={{position: 'absolute', top: sideWidth / -2, left: width}}>
+            <TriangleCorner
+              color={topColor}
+              width={sideWidth}
+              style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
+            />
+          </View>
+
+          {/*******************************************************************/}
+
+          <View style={{marginTop: sideWidth / -2}}>
             <TriangleCorner
               color={sideColor}
-              width={width}
+              width={sideWidth}
               style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
             />
             <View
               style={{
-                width: width / 2,
-                height: height - width / 2,
+                width: sideWidth / 2,
+                height: height - sideWidth / 2,
                 backgroundColor: sideColor,
                 opacity: opacity,
               }}
             />
             <TriangleCorner
               color={sideColor}
-              width={width}
+              width={sideWidth}
               style={{transform: [{rotate: '90deg'}], opacity: opacity}}
             />
           </View>
-
-          {/*******************          Top View             *****************/}
-
-          <View style={{position: 'absolute', top: width / -2}}>
-            <TriangleCorner
-              color={topColor}
-              width={width}
-              style={{transform: [{rotate: '90deg'}], opacity: opacity}}
-            />
-          </View>
-          <View style={{position: 'absolute', top: width / -2}}>
-            <View
-              style={{
-                width: width / 2,
-                height: (3 * width) / 4,
-                left: width / 2,
-                backgroundColor: topColor,
-                opacity: opacity,
-              }}
-            />
-          </View>
-          <View style={{position: 'absolute', top: width / -2, left: width}}>
-            <TriangleCorner
-              color={topColor}
-              width={width}
-              style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
-            />
-          </View>
-
-          {/*******************************************************************/}
 
           <View
             style={{

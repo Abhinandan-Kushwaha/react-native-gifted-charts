@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
   },
   horizBar: {
     flexDirection: 'row',
-    width: '90%',
   },
   leftLabel: {
     justifyContent: 'center',

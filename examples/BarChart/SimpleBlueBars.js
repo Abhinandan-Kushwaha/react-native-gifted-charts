@@ -16,8 +16,6 @@ const SimpleBlueBars = () => {
     <View>
       <BarChart
         barWidth={22}
-        spacing={16}
-        height={260}
         noOfSections={3}
         barBorderRadius={4}
         frontColor="lightgray"

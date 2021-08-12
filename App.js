@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { BarChart, LineChart, PieChart } from './src';
+import {View, Text, StyleSheet} from 'react-native';
+import {BarChart, LineChart, PieChart} from './src';
 
 const App = () => {
   // const lineData = [
@@ -19,73 +19,174 @@ const App = () => {
   // ];
 
   const data = [
-    { value: 15, label: 'Jan', showVerticalLine: true },
-    { value: 40, label: 'Feb', verticalLineColor: 'red', showVerticalLine: true, verticalLineThickness: StyleSheet.hairlineWidth },
-    { value: 10, label: 'Mar', showDataPoint: true, dataPointShape: 'rectangular', dataPointHeight: 20, dataPointWidth: 20, },
-    { value: 30, label: 'Apr', showVerticalLine: true, showDataPoint: true },
+    {value: 15, label: 'Jan', showVerticalLine: true},
+    {
+      value: 40,
+      label: 'Feb',
+      verticalLineColor: 'red',
+      showVerticalLine: true,
+      verticalLineThickness: StyleSheet.hairlineWidth,
+    },
+    {
+      value: 10,
+      label: 'Mar',
+      showDataPoint: true,
+      dataPointShape: 'rectangular',
+      dataPointHeight: 20,
+      dataPointWidth: 20,
+    },
+    {value: 30, label: 'Apr', showVerticalLine: true, showDataPoint: true},
   ];
 
   const stackData = [
     {
-      stacks:
-        [{
-          value: 10, color: 'red'
-        },
-        {
-          value: 20, color: 'blue', marginBottom: 1
-        }],
-      label: 'Jan'
+      stacks: [
+        {value: 10, color: 'orange'},
+        {value: 20, color: '#4ABFF4', marginBottom: 2},
+      ],
+      label: 'Jan',
     },
     {
-      stacks:
-        [{
-          value: 14, color: 'red'
-        },
-        {
-          value: 18, color: 'blue', marginBottom: 1
-        }],
-      label: 'Feb'
+      stacks: [
+        {value: 10, color: '#4ABFF4'},
+        {value: 11, color: 'orange', marginBottom: 2},
+        {value: 15, color: '#28B2B3', marginBottom: 2},
+      ],
+      label: 'Mar',
     },
     {
-      stacks:
-        [{
-          value: 7, color: 'red'
-        },
-        { value: 11, color: 'green', marginBottom: 1 },
-        {
-          value: 10, color: 'blue', marginBottom: 1
-        }],
-      label: 'Mar'
-    }
+      stacks: [
+        {value: 14, color: 'orange'},
+        {value: 18, color: '#4ABFF4', marginBottom: 2},
+      ],
+      label: 'Feb',
+    },
+    {
+      stacks: [
+        {value: 7, color: '#4ABFF4'},
+        {value: 11, color: 'orange', marginBottom: 2},
+        {value: 10, color: '#28B2B3', marginBottom: 2},
+      ],
+      label: 'Mar',
+    },
   ];
 
+  // const barData1 = [
+  //   {value: 250, label: 'M'},
+  //   {value: 500, label: 'T', frontColor: '#177AD5'},
+  //   {value: 745, label: 'W', frontColor: '#177AD5'},
+  //   {value: 320, label: 'T'},
+  //   {value: 600, label: 'F', frontColor: '#177AD5'},
+  //   {value: 256, label: 'S'},
+  //   {value: 300, label: 'S'},
+  // ];
+
+  // const lineData1 = [
+  //   {value: 0},
+  //   {value: 20},
+  //   {value: 18},
+  //   {value: 40},
+  //   {value: 36},
+  //   {value: 60},
+  //   {value: 54},
+  //   {value: 85},
+  // ];
+
+  // const MyComponent = () => {
+  //   return (
+  //     <View style={{backgroundColor: 'yellow'}}>
+  //       <Text>Hello</Text>
+  //     </View>
+  //   );
+  // };
+
+  const barData = [
+    {value: 230, label: 'Jan', frontColor: '#4ABFF4'},
+    {value: 180, label: 'Feb', frontColor: '#79C3DB'},
+    {value: 195, label: 'Mar', frontColor: '#28B2B3'},
+    {value: 250, label: 'Apr', frontColor: '#4ADDBA'},
+    {value: 320, label: 'May', frontColor: '#91E3E3'},
+  ];
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <View
-        style={{
-          // flex: 1,
-          // backgroundColor: 'pink',
-          width: 300,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        {/* <LineChart
-            data={data}
-            hideDataPoints
-            areaChart
-            curved
-            color='rgb(220,140,140)'
-            startFillColor='rgb(220,140,140)'
-            endFillColor='rgba(250,240,240)'
-            startOpacity={0.9}
-            endOpacity={0.3}
+    <View
+      style={{
+        marginTop: 200,
+        paddingVertical: 50,
+      }}>
+      {/* <BarChart
+        data={data}
+        showGradient
+        cappedBars
+        capColor={'rgba(78, 0, 142)'}
+        capThickness={4}
+        barWidth={35}
+        gradientColor={'rgba(200, 100, 244,0.8)'}
+        frontColor={'rgba(219, 182, 249,0.2)'}
+      /> */}
+
+      <BarChart
+        width={340}
+        rotateLabel
+        barWidth={12}
+        spacing={40}
+        noOfSections={4}
+        barBorderRadius={6}
+        stackData={stackData}
+      />
+      {/* <BarChart
+        frontColor={'#177AD5'}
+        barWidth={22}
+        data={[{value: 15}, {value: 30}, {value: 26}, {value: 40}]}
+      /> */}
+
+      {/* <LineChart
+        initialSpacing={0}
+        data={lineData1}
+        spacing={30}
+        hideDataPoints
+        thickness={5}
+        hideRules
+        hideYAxisText
+        yAxisColor="#0BA5A4"
+        showVerticalLines
+        verticalLinesColor="rgba(14,164,164,0.5)"
+        xAxisColor="#0BA5A4"
+        color="#0BA5A4"
+      /> */}
+      {/* <View style={{marginLeft: 20}}>
+        <BarChart
+          barWidth={22}
+          // spacing={16}
+          // height={260}
+          noOfSections={3}
+          barBorderRadius={4}
+          frontColor="lightgray"
+          data={barData1}
+          yAxisThickness={0}
+          xAxisThickness={0}
+          // horizontal
+        />
+      </View> */}
+
+      {/* <View style={{marginLeft: 40}}>
+        <LineChart
+          data={data}
+          hideDataPoints
+          areaChart
+          curved
+          color="rgb(220,140,140)"
+          startFillColor="rgb(220,140,140)"
+          endFillColor="rgba(250,240,240)"
+          startOpacity={0.9}
+          endOpacity={0.3}
+          noOfSections={3}
           // dataPointsShape='rectangular'
           // dataPointsHeight={12}
           // dataPointsWidth={12}
-          /> */}
+        />
+      </View> */}
 
-
-        {/* <BarChart
+      {/* <BarChart
           showGradient
           // isThreeD
           // isAnimated
@@ -105,6 +206,14 @@ const App = () => {
           data={data}
         /> */}
 
+      {/* <View
+        style={{
+          // flex: 1,
+          // backgroundColor: 'pink',
+          width: 300,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
         <BarChart
           width={300}
           rotateLabel
@@ -117,10 +226,9 @@ const App = () => {
           barBorderRadius={20}
           stackData={stackData}
         />
+      </View> */}
 
-
-        {/* <Text>Hello</Text> */}
-      </View>
+      {/* <Text>Hello</Text> */}
       {/* <LineChart data={data} /> */}
       {/* <PieChart
         showText

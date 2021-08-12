@@ -29,6 +29,8 @@ type propTypes = {
   textBackgroundColor?: string;
   textBackgroundRadius?: number;
   showValuesAsLabels?: Boolean;
+
+  centerLabelComponent?: Function;
 };
 type itemType = {
   value: number;
@@ -228,8 +230,18 @@ export const PieChart = (props: propTypes) => {
         }
 
         if (showTextBackground && (dataItem.text || showValuesAsLabels)) {
-          let textBackgroundX = xx + textSize / 2;
-          let textBackgroundY = yy - textSize / 2 + 1;
+          let textBackgroundX =
+            xx +
+            (props.textBackgroundRadius ||
+              dataItem.textBackgroundRadius ||
+              textSize) /
+              2;
+          let textBackgroundY =
+            yy -
+            (props.textBackgroundRadius ||
+              dataItem.textBackgroundRadius ||
+              textSize) /
+              3;
           ctx.beginPath();
           ctx.arc(
             textBackgroundX,
@@ -265,7 +277,7 @@ export const PieChart = (props: propTypes) => {
   return (
     <View style={isThreeD && {transform: [{scaleY: 0.5}]}}>
       <Canvas ref={handleCanvas} />
-      {visibility && donut && !isDataShifted && (
+      {visibility && (props.centerLabelComponent || (donut && !isDataShifted)) && (
         <View
           style={[
             {
@@ -282,6 +294,8 @@ export const PieChart = (props: propTypes) => {
               borderWidth: innerCircleBorderWidth,
               borderColor: innerCircleBorderColor,
               backgroundColor: innerCircleColor,
+              justifyContent: 'center',
+              alignItems: 'center',
             },
             isThreeD && {
               borderTopWidth: innerCircleBorderWidth * 5,
@@ -289,8 +303,9 @@ export const PieChart = (props: propTypes) => {
                 ? innerCircleBorderWidth * 2
                 : innerCircleBorderWidth,
             },
-          ]}
-        />
+          ]}>
+          {props.centerLabelComponent ? props.centerLabelComponent() : null}
+        </View>
       )}
     </View>
   );
