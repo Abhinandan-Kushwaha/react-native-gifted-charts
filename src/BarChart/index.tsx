@@ -30,6 +30,7 @@ type PropTypes = {
   hideYAxisText?: Boolean;
   initialSpacing?: number;
   barWidth?: number;
+  sideWidth?: number;
 
   cappedBars?: Boolean;
   capThickness?: number;
@@ -55,6 +56,7 @@ type PropTypes = {
   yAxisIndicesColor?: ColorValue;
 
   showFractionalValues?: Boolean;
+  roundToDigits?: number;
   backgroundColor?: ColorValue;
 
   disableScroll?: Boolean;
@@ -92,6 +94,7 @@ type itemType = {
   gradientColor?: any;
   label?: String;
   barWidth?: number;
+  sideWidth?: number;
   labelTextStyle?: any;
   topLabelComponent?: Function;
   topLabelContainerStyle?: any;
@@ -111,7 +114,7 @@ export const BarChart = (props: PropTypes) => {
   let maxItem = 0;
   if (props.stackData) {
     props.stackData.forEach(stackItem => {
-      console.log('stackItem', stackItem);
+      // console.log('stackItem', stackItem);
       let stackSum = stackItem.stacks.reduce(
         (acc, stack) => acc + stack.value,
         0,
@@ -122,6 +125,7 @@ export const BarChart = (props: PropTypes) => {
       }
       totalWidth +=
         (stackItem.stacks[0].barWidth || props.barWidth || 30) + spacing;
+      // console.log('totalWidth for stack===', totalWidth);
     });
   } else {
     data.forEach((item: itemType) => {
@@ -129,9 +133,17 @@ export const BarChart = (props: PropTypes) => {
         maxItem = item.value;
       }
       totalWidth += (item.barWidth || props.barWidth || 30) + spacing;
+      // console.log('totalWidth for bar===', totalWidth);
     });
   }
-  maxItem = maxItem + (10 - (maxItem % 10));
+  if (props.showFractionalValues || props.roundToDigits) {
+    maxItem *= 10 * (props.roundToDigits || 1);
+    maxItem = maxItem + (10 - (maxItem % 10));
+    maxItem /= 10 * (props.roundToDigits || 1);
+    maxItem = parseFloat(maxItem.toFixed(props.roundToDigits || 1));
+  } else {
+    maxItem = maxItem + (10 - (maxItem % 10));
+  }
 
   const maxValue = props.maxValue || maxItem;
 
@@ -193,7 +205,11 @@ export const BarChart = (props: PropTypes) => {
 
   horizSections.pop();
   for (let i = 0; i <= noOfSections; i++) {
-    horizSections.push({value: maxValue - stepValue * i});
+    let value = maxValue - stepValue * i;
+    if (props.showFractionalValues || props.roundToDigits) {
+      value = parseFloat(value.toFixed(props.roundToDigits || 1));
+    }
+    horizSections.push({value});
   }
 
   const heightValue = new Animated.Value(0);
@@ -271,7 +287,11 @@ export const BarChart = (props: PropTypes) => {
                       },
                     ]}>
                     {showFractionalValues
-                      ? sectionItems.value || ''
+                      ? sectionItems.value
+                        ? sectionItems.value
+                        : hideOrigin
+                        ? ''
+                        : '0'
                       : sectionItems.value
                       ? sectionItems.value.toString().split('.')[0]
                       : hideOrigin
@@ -365,8 +385,8 @@ export const BarChart = (props: PropTypes) => {
         data={props.stackData || data}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item, index}) => {
-          console.log('index--->', index);
-          console.log('itemhere--->', item);
+          // console.log('index--->', index);
+          // console.log('itemhere--->', item);
           if (props.stackData) {
             return (
               <RenderStackBars
@@ -403,6 +423,7 @@ export const BarChart = (props: PropTypes) => {
               side={side}
               data={data}
               barWidth={props.barWidth}
+              sideWidth={props.sideWidth}
               opacity={opacity}
               isThreeD={isThreeD}
               isAnimated={isAnimated}

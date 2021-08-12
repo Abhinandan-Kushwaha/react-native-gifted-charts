@@ -18,6 +18,7 @@ type trianglePropTypes = {
 type animatedBarPropTypes = {
   animationDuration: number;
   width: number;
+  sideWidth?: number;
   height: number;
   showGradient: Boolean;
   gradientColor: any;
@@ -96,6 +97,7 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
   };
 
   const width = props.width;
+  const sideWidth = props.sideWidth;
 
   const showGradient = props.showGradient || false;
   const gradientColor = props.gradientColor || 'white';
@@ -118,55 +120,36 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
             {opacity: opacity, position: 'absolute', bottom: 0},
             props.side === 'right' && {transform: [{rotateY: '180deg'}]},
           ]}>
-          {props.height ? (
-            <View style={{marginTop: width / -2}}>
-              <TriangleCorner
-                color={sideColor}
-                width={width}
-                style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
-              />
-              <View
-                style={{
-                  width: width / 2,
-                  height: height - width / 2, //animatedSideHeight
-                  backgroundColor: sideColor,
-                  opacity: opacity,
-                }}
-              />
-              <TriangleCorner
-                color={sideColor}
-                width={width}
-                style={{transform: [{rotate: '90deg'}], opacity: opacity}}
-              />
-            </View>
-          ) : null}
-
           {/*******************          Top View             *****************/}
           {props.height ? (
             <>
-              <View style={{position: 'absolute', top: width / -2}}>
+              <View style={{position: 'absolute', top: sideWidth / -2}}>
                 <TriangleCorner
                   color={topColor}
-                  width={width}
+                  width={sideWidth}
                   style={{transform: [{rotate: '90deg'}], opacity: opacity}}
                 />
               </View>
-              <View style={{position: 'absolute', top: width / -2}}>
+              <View style={{position: 'absolute', top: sideWidth / -2}}>
                 <View
                   style={{
-                    width: width / 2,
-                    height: width / 2,
-                    left: width / 2,
+                    width: width,
+                    height: (3 * width) / 4,
+                    // left: width / 2,
                     backgroundColor: topColor,
                     opacity: opacity,
                   }}
                 />
               </View>
               <View
-                style={{position: 'absolute', top: width / -2, left: width}}>
+                style={{
+                  position: 'absolute',
+                  top: sideWidth / -2,
+                  left: width,
+                }}>
                 <TriangleCorner
                   color={topColor}
-                  width={width}
+                  width={sideWidth}
                   style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
                 />
               </View>
@@ -174,6 +157,29 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
           ) : null}
 
           {/*******************************************************************/}
+
+          {props.height ? (
+            <View style={{marginTop: sideWidth / -2}}>
+              <TriangleCorner
+                color={sideColor}
+                width={sideWidth}
+                style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
+              />
+              <View
+                style={{
+                  width: sideWidth / 2,
+                  height: height - sideWidth / 2, //animatedSideHeight
+                  backgroundColor: sideColor,
+                  opacity: opacity,
+                }}
+              />
+              <TriangleCorner
+                color={sideColor}
+                width={sideWidth}
+                style={{transform: [{rotate: '90deg'}], opacity: opacity}}
+              />
+            </View>
+          ) : null}
 
           <View
             style={{

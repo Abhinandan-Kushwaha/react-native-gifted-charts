@@ -69,6 +69,7 @@ type propTypes = {
   yAxisColor?: ColorValue;
   yAxisTextStyle?: any;
   showFractionalValues?: Boolean;
+  roundToDigits?: number;
   yAxisLabelWidth?: number;
   hideYAxisText?: Boolean;
 
@@ -163,7 +164,14 @@ export const LineChart = (props: propTypes) => {
     }
     totalWidth += spacing;
   });
-  maxItem = maxItem + (10 - (maxItem % 10));
+  if (props.showFractionalValues || props.roundToDigits) {
+    maxItem *= 10 * (props.roundToDigits || 1);
+    maxItem = maxItem + (10 - (maxItem % 10));
+    maxItem /= 10 * (props.roundToDigits || 1);
+    maxItem = parseFloat(maxItem.toFixed(props.roundToDigits || 1));
+  } else {
+    maxItem = maxItem + (10 - (maxItem % 10));
+  }
 
   const maxValue = props.maxValue || maxItem;
 
@@ -273,7 +281,11 @@ export const LineChart = (props: propTypes) => {
   // console.log('data', data);
   horizSections.pop();
   for (let i = 0; i <= noOfSections; i++) {
-    horizSections.push({value: maxValue - stepValue * i});
+    let value = maxValue - stepValue * i;
+    if (props.showFractionalValues || props.roundToDigits) {
+      value = parseFloat(value.toFixed(props.roundToDigits || 1));
+    }
+    horizSections.push({value});
   }
 
   useEffect(() => {
@@ -540,7 +552,6 @@ export const LineChart = (props: propTypes) => {
   });
 
   const decreaseWidth = () => {
-    // console.log('i m called, totalWidth is', totalWidth)
     widthValue.setValue(0);
     Animated.timing(widthValue, {
       toValue: 1,
@@ -589,7 +600,7 @@ export const LineChart = (props: propTypes) => {
         {props.hideAxesAndRules !== true &&
           horizSections.map((sectionItems, index) => {
             return (
-              <View key={index} style={styles.horizBar}>
+              <View key={index} style={[styles.horizBar, {width: totalWidth}]}>
                 <View
                   style={[
                     styles.leftLabel,
@@ -610,7 +621,11 @@ export const LineChart = (props: propTypes) => {
                         },
                       ]}>
                       {showFractionalValues
-                        ? sectionItems.value || ''
+                        ? sectionItems.value
+                          ? sectionItems.value
+                          : hideOrigin
+                          ? ''
+                          : '0'
                         : sectionItems.value
                         ? sectionItems.value.toString().split('.')[0]
                         : hideOrigin
@@ -633,7 +648,7 @@ export const LineChart = (props: propTypes) => {
                   {index === noOfSections ? (
                     <View
                       style={[
-                        styles.line,
+                        styles.lastLine,
                         {height: xAxisThickness, backgroundColor: xAxisColor},
                       ]}
                     />

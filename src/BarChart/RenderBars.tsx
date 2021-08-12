@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { View, TouchableOpacity, Animated, Text, ColorValue } from 'react-native';
+import React, {Component} from 'react';
+import {View, TouchableOpacity, Animated, Text, ColorValue} from 'react-native';
 import ThreeDBar from '../Components/ThreeDBar';
 import AnimatedBar from '../Components/AnimatedBar';
 import LinearGradient from 'react-native-linear-gradient';
 import Animated2DWithGradient from './Animated2DWithGradient';
-import { Style } from 'util';
+import {Style} from 'util';
 
 type Props = {
   style?: any;
@@ -29,6 +29,7 @@ type Props = {
   spacing?: number;
   data?: any;
   barWidth?: number;
+  sideWidth?: number;
 
   isThreeD?: Boolean;
   isAnimated?: Boolean;
@@ -54,7 +55,7 @@ type Props = {
   xAxisIndicesColor: ColorValue;
   horizontal: Boolean;
   intactTopLabel: Boolean;
-  barBorderRadius?: number
+  barBorderRadius?: number;
 };
 type itemType = {
   value?: number;
@@ -66,6 +67,7 @@ type itemType = {
   gradientColor?: any;
   label?: String;
   barWidth?: number;
+  sideWidth?: number;
   labelTextStyle?: any;
   topLabelComponent?: Function;
   topLabelContainerStyle?: any;
@@ -74,7 +76,7 @@ type itemType = {
   capColor?: ColorValue;
   capRadius?: number;
   labelComponent?: Function;
-  barBorderRadius?: number
+  barBorderRadius?: number;
 };
 const RenderBars = (props: Props) => {
   const {
@@ -106,21 +108,21 @@ const RenderBars = (props: Props) => {
           },
           rotateLabel
             ? props.horizontal
-              ? { transform: [{ rotate: '330deg' }] }
-              : { transform: [{ rotate: '60deg' }] }
+              ? {transform: [{rotate: '330deg'}]}
+              : {transform: [{rotate: '60deg'}]}
             : props.horizontal
-              ? { transform: [{ rotate: '-90deg' }] }
-              : {},
+            ? {transform: [{rotate: '-90deg'}]}
+            : {},
         ]}>
         {item.labelComponent ? (
           item.labelComponent()
         ) : (
-            <Text
-              style={[labelTextStyle, { textAlign: 'center' }]}
-              numberOfLines={1}>
-              {label || ''}
-            </Text>
-          )}
+          <Text
+            style={[labelTextStyle, {textAlign: 'center'}]}
+            numberOfLines={1}>
+            {label || ''}
+          </Text>
+        )}
       </View>
     );
   };
@@ -137,21 +139,21 @@ const RenderBars = (props: Props) => {
           },
           rotateLabel
             ? props.horizontal
-              ? { transform: [{ rotate: '330deg' }] }
-              : { transform: [{ rotate: '60deg' }] }
+              ? {transform: [{rotate: '330deg'}]}
+              : {transform: [{rotate: '60deg'}]}
             : props.horizontal
-              ? { transform: [{ rotate: '-90deg' }] }
-              : {},
+            ? {transform: [{rotate: '-90deg'}]}
+            : {},
         ]}>
         {item.labelComponent ? (
           item.labelComponent()
         ) : (
-            <Text
-              style={[labelTextStyle, { textAlign: 'center' }]}
-              numberOfLines={1}>
-              {label || ''}
-            </Text>
-          )}
+          <Text
+            style={[labelTextStyle, {textAlign: 'center'}]}
+            numberOfLines={1}>
+            {label || ''}
+          </Text>
+        )}
       </Animated.View>
     );
   };
@@ -166,7 +168,7 @@ const RenderBars = (props: Props) => {
               position: 'absolute',
               width: '100%',
               height: '100%',
-              borderRadius: props.barBorderRadius || item.barBorderRadius || 0
+              borderRadius: props.barBorderRadius || item.barBorderRadius || 0,
             },
             props.roundedBottom && {
               borderBottomLeftRadius:
@@ -189,8 +191,8 @@ const RenderBars = (props: Props) => {
               borderTopRightRadius: (item.barWidth || props.barWidth || 30) / 2,
             },
           ]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 0, y: 1 }}
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 1}}
           colors={[
             item.gradientColor || props.gradientColor || 'white',
             item.frontColor || props.frontColor || 'black',
@@ -232,7 +234,7 @@ const RenderBars = (props: Props) => {
                 alignItems: 'center',
               },
               props.horizontal &&
-              !props.intactTopLabel && { transform: [{ rotate: '270deg' }] },
+                !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
               item.topLabelContainerStyle,
             ]}>
             {item.topLabelComponent()}
@@ -253,7 +255,7 @@ const RenderBars = (props: Props) => {
               width: '100%',
               height: '100%',
               backgroundColor: item.frontColor || props.frontColor || 'black',
-              borderRadius: props.barBorderRadius || item.barBorderRadius || 0
+              borderRadius: props.barBorderRadius || item.barBorderRadius || 0,
             },
             props.roundedBottom && {
               borderBottomLeftRadius:
@@ -313,7 +315,7 @@ const RenderBars = (props: Props) => {
                 alignItems: 'center',
               },
               props.horizontal &&
-              !props.intactTopLabel && { transform: [{ rotate: '270deg' }] },
+                !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
               item.topLabelContainerStyle,
             ]}>
             {item.topLabelComponent()}
@@ -337,7 +339,7 @@ const RenderBars = (props: Props) => {
         },
         // !isThreeD && !item.showGradient && !props.showGradient &&
         // { backgroundColor: item.frontColor || props.frontColor || 'black' },
-        side !== 'right' && { zIndex: data.length - index },
+        side !== 'right' && {zIndex: data.length - index},
       ]}>
       {props.showVerticalLines && (
         <View
@@ -370,6 +372,11 @@ const RenderBars = (props: Props) => {
           <AnimatedBar
             topLabelContainerStyle={item.topLabelContainerStyle}
             width={item.barWidth || props.barWidth || 30}
+            sideWidth={
+              item.sideWidth ||
+              props.sideWidth ||
+              (item.barWidth || props.barWidth || 30) / 2
+            }
             side={side || 'left'}
             frontColor={item.frontColor || props.frontColor || ''}
             sideColor={item.sideColor || props.sideColor || ''}
@@ -384,24 +391,29 @@ const RenderBars = (props: Props) => {
             horizontal={props.horizontal}
           />
         ) : (
-            <ThreeDBar
-              style={{}}
-              color={''}
-              topLabelContainerStyle={item.topLabelContainerStyle}
-              width={item.barWidth || props.barWidth || 30}
-              side={side || 'left'}
-              frontColor={item.frontColor || props.frontColor || ''}
-              sideColor={item.sideColor || props.sideColor || ''}
-              topColor={item.topColor || props.topColor || ''}
-              showGradient={item.showGradient || props.showGradient || false}
-              gradientColor={item.gradientColor || props.gradientColor}
-              topLabelComponent={item.topLabelComponent || Function}
-              opacity={opacity || 1}
-              horizontal={props.horizontal}
-              intactTopLabel={props.intactTopLabel}
-              height={(item.value * (containerHeight || 200)) / (maxValue || 200)}
-            />
-          )
+          <ThreeDBar
+            style={{}}
+            color={''}
+            topLabelContainerStyle={item.topLabelContainerStyle}
+            width={item.barWidth || props.barWidth || 30}
+            sideWidth={
+              item.sideWidth ||
+              props.sideWidth ||
+              (item.barWidth || props.barWidth || 30) / 2
+            }
+            side={side || 'left'}
+            frontColor={item.frontColor || props.frontColor || ''}
+            sideColor={item.sideColor || props.sideColor || ''}
+            topColor={item.topColor || props.topColor || ''}
+            showGradient={item.showGradient || props.showGradient || false}
+            gradientColor={item.gradientColor || props.gradientColor}
+            topLabelComponent={item.topLabelComponent || Function}
+            opacity={opacity || 1}
+            horizontal={props.horizontal}
+            intactTopLabel={props.intactTopLabel}
+            height={(item.value * (containerHeight || 200)) / (maxValue || 200)}
+          />
+        )
       ) : item.showGradient || props.showGradient ? (
         isAnimated ? (
           <Animated2DWithGradient
@@ -423,8 +435,8 @@ const RenderBars = (props: Props) => {
             barBorderRadius={props.barBorderRadius || 0}
           />
         ) : (
-            static2DWithGradient(item)
-          )
+          static2DWithGradient(item)
+        )
       ) : isAnimated ? (
         <Animated2DWithGradient
           barWidth={0}
@@ -446,8 +458,8 @@ const RenderBars = (props: Props) => {
           barBorderRadius={props.barBorderRadius || 0}
         />
       ) : (
-              static2DSimple(item)
-            )}
+        static2DSimple(item)
+      )}
       {isAnimated
         ? renderAnimatedLabel(item.label || '', item.labelTextStyle)
         : renderLabel(item.label || '', item.labelTextStyle)}
