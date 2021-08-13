@@ -4,7 +4,7 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 
 ### Yet another chart library? Why?
 
-**_To bring Life to your data_** 
+**_To bring Life to your data_**
 
 1. Plenty of features with minimal code
 2. Apply animations to your charts on load and on value change, just by adding a prop
@@ -37,7 +37,7 @@ For Pie chart and Donut chart, these additional packages should be installed-
 npm i react-native-canvas react-native-webview
 ```
 
-You can omit the above packages if you don't intend to use Pie chart or Donuut chart.
+You can omit the above packages if you don't intend to use Pie chart or Donut chart.
 
 For iOS-
 
@@ -46,6 +46,7 @@ cd ios && pod install
 ```
 
 # Docs
+
 [Documentation and gallery](https://gifted-charts.web.app/)
 
 ## Usage
