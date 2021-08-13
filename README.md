@@ -45,6 +45,9 @@ For iOS-
 cd ios && pod install
 ```
 
+# Docs
+[Documentation and gallery](https://gifted-charts.web.app/)
+
 ## Usage
 
 The simplest usage of various types of charts can be done as below-
