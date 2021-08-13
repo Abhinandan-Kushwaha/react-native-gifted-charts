@@ -133,6 +133,10 @@ If you are adding showDataPoint to an item, you must set hideDataPoints prop to 
 | dataPointsRadius2 | number     | Radius of data points for the second dataset (when data points' shape is circular)    | 3             |
 | dataPointsColor2  | ColorValue | Color of data points for the second dataset                                           | blue          |
 | dataPointsShape2  | string     | Shape of data points for the second dataset (_'rectangular'_ or _'circular'_)         | 'circular'    |
+| textColor         | ColorValue | Color of the dataPointText                                                            | 'black'       |
+| textFontSize      | number     | Font size of the dataPointText                                                        | \_            |
+| textShiftX        | number     | To shift the dataPointText text horizontally                                          | 0             |
+| textShiftY        | number     | To shift the dataPointText text vertically                                            | 0             |
 
 ---
 

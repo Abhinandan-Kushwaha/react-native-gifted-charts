@@ -71,26 +71,32 @@ const App = () => {
     },
   ];
 
-  // const barData1 = [
-  //   {value: 250, label: 'M'},
-  //   {value: 500, label: 'T', frontColor: '#177AD5'},
-  //   {value: 745, label: 'W', frontColor: '#177AD5'},
-  //   {value: 320, label: 'T'},
-  //   {value: 600, label: 'F', frontColor: '#177AD5'},
-  //   {value: 256, label: 'S'},
-  //   {value: 300, label: 'S'},
-  // ];
+  const barData1 = [
+    {value: 250, label: 'M'},
+    {value: 500, label: 'T', frontColor: '#177AD5'},
+    {value: 745, label: 'W', frontColor: '#177AD5'},
+    {value: 320, label: 'T'},
+    {value: 600, label: 'F', frontColor: '#177AD5'},
+    {value: 256, label: 'S'},
+    {value: 300, label: 'S'},
+  ];
 
-  // const lineData1 = [
-  //   {value: 0},
-  //   {value: 20},
-  //   {value: 18},
-  //   {value: 40},
-  //   {value: 36},
-  //   {value: 60},
-  //   {value: 54},
-  //   {value: 85},
-  // ];
+  const lineData1 = [
+    {value: 0, dataPointText: '0'},
+    {value: 20, dataPointText: '20'},
+    {value: 18, dataPointText: '18'},
+    {value: 40, dataPointText: '40'},
+    {value: 36, dataPointText: '36'},
+    {value: 60, dataPointText: '60'},
+    {value: 54, dataPointText: '54'},
+    {value: 85, dataPointText: '85'},
+  ];
+  const ldata = [
+    {value: 15, label: '15'},
+    {value: 30, label: '30'},
+    {value: 26, label: '26'},
+    {value: 40, label: '40'},
+  ];
 
   // const MyComponent = () => {
   //   return (
@@ -107,14 +113,28 @@ const App = () => {
     {value: 250, label: 'Apr', frontColor: '#4ADDBA'},
     {value: 320, label: 'May', frontColor: '#91E3E3'},
   ];
+  const lineData = [
+    {value: 0},
+    {value: 20},
+    {value: 18},
+    {value: 40},
+    {value: 36},
+    {value: 60},
+    {value: 54},
+    {value: 85},
+  ];
   return (
     <View
       style={{
         marginTop: 200,
         paddingVertical: 50,
+        backgroundColor: '#1A3461',
       }}>
+      {/* <LineChart data={ldata} /> */}
+
       {/* <BarChart
         data={data}
+        horizontal
         showGradient
         cappedBars
         capColor={'rgba(78, 0, 142)'}
@@ -124,7 +144,7 @@ const App = () => {
         frontColor={'rgba(219, 182, 249,0.2)'}
       /> */}
 
-      <BarChart
+      {/* <BarChart
         width={340}
         rotateLabel
         barWidth={12}
@@ -132,16 +152,16 @@ const App = () => {
         noOfSections={4}
         barBorderRadius={6}
         stackData={stackData}
-      />
+      /> */}
       {/* <BarChart
         frontColor={'#177AD5'}
         barWidth={22}
         data={[{value: 15}, {value: 30}, {value: 26}, {value: 40}]}
       /> */}
-
       {/* <LineChart
+        curved
         initialSpacing={0}
-        data={lineData1}
+        data={lineData}
         spacing={30}
         hideDataPoints
         thickness={5}
@@ -153,9 +173,30 @@ const App = () => {
         xAxisColor="#0BA5A4"
         color="#0BA5A4"
       /> */}
+
+      <LineChart
+        initialSpacing={0}
+        data={lineData1}
+        spacing={40}
+        textShiftY={-10}
+        textShiftX={-5}
+        // hideDataPoints
+        textColor="yellow"
+        textFontSize={12}
+        thickness={5}
+        hideRules
+        hideYAxisText
+        yAxisColor="#0BA5A4"
+        showVerticalLines
+        verticalLinesColor="rgba(14,164,164,0.5)"
+        xAxisColor="#0BA5A4"
+        color="#0BA5A4"
+      />
       {/* <View style={{marginLeft: 20}}>
         <BarChart
           barWidth={22}
+          horizontal
+          yAxisAtTop
           // spacing={16}
           // height={260}
           noOfSections={3}

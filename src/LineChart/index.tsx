@@ -119,6 +119,8 @@ type propTypes = {
   textFontSize2?: number;
   textColor2?: string;
   hideOrigin?: Boolean;
+  textShiftX?: number;
+  textShiftY?: number;
 };
 type itemType = {
   value?: number;
@@ -712,14 +714,14 @@ export const LineChart = (props: propTypes) => {
                     initialSpacing -
                     (item.dataPointWidth || 2) +
                     spacing * index +
-                    (item.textShiftX || 0)
+                    (item.textShiftX || props.textShiftX || 0)
                   }
                   y={
                     containerHeight -
                     (item.dataPointHeight || 2) / 2 +
                     10 -
                     (item.value * containerHeight) / maxValue +
-                    (item.textShiftY || 0)
+                    (item.textShiftY || props.textShiftY || 0)
                   }>
                   {item.dataPointText}
                 </CanvasText>
@@ -751,14 +753,14 @@ export const LineChart = (props: propTypes) => {
                     initialSpacing -
                     (item.dataPointWidth || 2) +
                     spacing * index +
-                    (item.textShiftX || 0)
+                    (item.textShiftX || props.textShiftX || 0)
                   }
                   y={
                     containerHeight -
                     (item.dataPointHeight || 2) / 2 +
                     10 -
                     (item.value * containerHeight) / maxValue +
-                    (item.textShiftY || 0)
+                    (item.textShiftY || props.textShiftY || 0)
                   }>
                   {item.dataPointText}
                 </CanvasText>
@@ -806,14 +808,14 @@ export const LineChart = (props: propTypes) => {
                   initialSpacing -
                   dataPointsWidth +
                   spacing * index +
-                  (item.textShiftX || 0)
+                  (item.textShiftX || props.textShiftX || props.textShiftX || 0)
                 }
                 y={
                   containerHeight -
                   dataPointsHeight / 2 +
                   10 -
                   (item.value * containerHeight) / maxValue +
-                  (item.textShiftY || 0)
+                  (item.textShiftY || props.textShiftY || 0)
                 }>
                 {item.dataPointText}
               </CanvasText>
@@ -839,14 +841,14 @@ export const LineChart = (props: propTypes) => {
                 initialSpacing -
                 dataPointsWidth +
                 spacing * index +
-                (item.textShiftX || 0)
+                (item.textShiftX || props.textShiftX || 0)
               }
               y={
                 containerHeight -
                 dataPointsHeight / 2 +
                 10 -
                 (item.value * containerHeight) / maxValue +
-                (item.textShiftY || 0)
+                (item.textShiftY || props.textShiftY || 0)
               }>
               {item.dataPointText}
             </CanvasText>
