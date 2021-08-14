@@ -19,6 +19,7 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 ![alt text](/demos/altBars.svg)
 ![alt text](/demos/barPairs.svg)
 <img src='/demos/movingBars.gif' alt='' width=300/>
+![alt text](/demos/lineLabelled.png)
 ![alt text](/demos/lineArea.png)
 <img src='/demos/line.gif' alt='' height=400/>
 ![alt text](/demos/pielabbelled.svg)
