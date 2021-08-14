@@ -113,6 +113,26 @@ const App = () => {
     {value: 250, label: 'Apr', frontColor: '#4ADDBA'},
     {value: 320, label: 'May', frontColor: '#91E3E3'},
   ];
+  // const lineData = [
+  //   {value: 0},
+  //   {value: 10},
+  //   {value: 8},
+  //   {value: 58},
+  //   {value: 56},
+  //   {value: 78},
+  //   {value: 74},
+  //   {value: 98},
+  // ];
+  // const lineData2 = [
+  //   {value: 0},
+  //   {value: 20},
+  //   {value: 18},
+  //   {value: 40},
+  //   {value: 36},
+  //   {value: 60},
+  //   {value: 54},
+  //   {value: 85},
+  // ];
   const lineData = [
     {value: 0},
     {value: 20},
@@ -123,15 +143,27 @@ const App = () => {
     {value: 54},
     {value: 85},
   ];
+  const pieData = [
+    {value: 70, color: '#177AD5' /*text: '54%'*/},
+    {value: 30, color: 'lightgray' /*text: '30%'*/},
+    // {value: 20, color: '#ED6665' /*text: '26%'*/},
+  ];
   return (
     <View
       style={{
         marginTop: 200,
         paddingVertical: 50,
-        backgroundColor: '#1A3461',
       }}>
       {/* <LineChart data={ldata} /> */}
 
+      <PieChart
+        donut
+        innerRadius={80}
+        data={pieData}
+        centerLabelComponent={() => {
+          return <Text style={{fontSize: 30}}>70%</Text>;
+        }}
+      />
       {/* <BarChart
         data={data}
         horizontal
@@ -174,15 +206,17 @@ const App = () => {
         color="#0BA5A4"
       /> */}
 
-      <LineChart
+      {/* <LineChart
+        areaChart
+        hideDataPoints
+        isAnimated
+        animationDuration={1200}
+        startFillColor="#0BA5A4"
+        startOpacity={1}
+        endOpacity={0.3}
         initialSpacing={0}
-        data={lineData1}
-        spacing={40}
-        textShiftY={-10}
-        textShiftX={-5}
-        // hideDataPoints
-        textColor="yellow"
-        textFontSize={12}
+        data={lineData}
+        spacing={30}
         thickness={5}
         hideRules
         hideYAxisText
@@ -191,7 +225,31 @@ const App = () => {
         verticalLinesColor="rgba(14,164,164,0.5)"
         xAxisColor="#0BA5A4"
         color="#0BA5A4"
-      />
+      /> */}
+
+      {/* <LineChart
+        areaChart
+        curved
+        data={lineData}
+        data2={lineData2}
+        height={250}
+        showVerticalLines
+        spacing={44}
+        initialSpacing={0}
+        color1="skyblue"
+        color2="orange"
+        textColor1="green"
+        hideDataPoints
+        dataPointsColor1="blue"
+        dataPointsColor2="red"
+        startFillColor1="skyblue"
+        startFillColor2="orange"
+        startOpacity={0.8}
+        endOpacity={0.3}
+        textShiftY={-2}
+        textShiftX={-5}
+        textFontSize={13}
+      /> */}
       {/* <View style={{marginLeft: 20}}>
         <BarChart
           barWidth={22}
@@ -286,7 +344,6 @@ const App = () => {
         capThickness={2}
         capColor="gray"
       /> */}
-      {/* <PieChart data={data} donut isThreeD shadow /> */}
       {/* <BarChart data={data} horizontal noOfSections={5} /> */}
       {/* <LineChart
         xAxisColor="red"
