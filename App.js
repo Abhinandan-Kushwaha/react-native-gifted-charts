@@ -1,4 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {TouchableOpacity} from 'react-native';
+import {Alert} from 'react-native';
 import {View, Text, StyleSheet} from 'react-native';
 import {BarChart, LineChart, PieChart} from './src';
 
@@ -18,13 +20,15 @@ const App = () => {
   //   {value: 100, text: 'May'},
   // ];
 
+  const [toggle, setToggle] = useState(true);
+
   const data = [
     {value: 15, label: 'Jan', showVerticalLine: true},
     {
       value: 40,
       label: 'Feb',
       verticalLineColor: 'red',
-      showVerticalLine: true,
+      // showVerticalLine: true,
       verticalLineThickness: StyleSheet.hairlineWidth,
     },
     {
@@ -35,7 +39,24 @@ const App = () => {
       dataPointHeight: 20,
       dataPointWidth: 20,
     },
-    {value: 30, label: 'Apr', showVerticalLine: true, showDataPoint: true},
+    {
+      value: 30,
+      label: 'Apr',
+      // showVerticalLine: true,
+      showDataPoint: true,
+    },
+    {value: 20, label: 'May'},
+    {value: 40, label: 'Jun'},
+    {value: 48, label: 'Jul'},
+    {value: 30, label: 'Aug'},
+    {value: 20, label: 'Sep'},
+    {value: 40, label: 'Oct'},
+    {
+      value: 48,
+      label: 'Nov',
+      onPress: () => Alert.alert('Sales in Nov skyrocketed to $48 M'),
+    },
+    {value: 30, label: 'Dec'},
   ];
 
   const stackData = [
@@ -156,25 +177,62 @@ const App = () => {
       }}>
       {/* <LineChart data={ldata} /> */}
 
-      <PieChart
+      {/* <PieChart
         donut
         innerRadius={80}
         data={pieData}
         centerLabelComponent={() => {
           return <Text style={{fontSize: 30}}>70%</Text>;
         }}
-      />
-      {/* <BarChart
-        data={data}
-        horizontal
-        showGradient
-        cappedBars
-        capColor={'rgba(78, 0, 142)'}
-        capThickness={4}
-        barWidth={35}
-        gradientColor={'rgba(200, 100, 244,0.8)'}
-        frontColor={'rgba(219, 182, 249,0.2)'}
       /> */}
+      {toggle ? (
+        <BarChart
+          data={data}
+          // horizontal
+          isAnimated
+          showGradient
+          cappedBars
+          yAxisColor={'rgb(78, 0, 142)'}
+          xAxisColor={'rgb(78, 0, 142)'}
+          xAxisThickness={3}
+          yAxisThickness={3}
+          yAxisTextStyle={{color: 'rgb(78, 0, 142)'}}
+          capColor={'rgb(78, 0, 142)'}
+          capThickness={4}
+          barWidth={35}
+          gradientColor={'rgba(200, 100, 244,0.8)'}
+          frontColor={'rgba(219, 182, 249,0.2)'}
+        />
+      ) : (
+        <LineChart
+          data={data}
+          areaChart
+          initialSpacing={0}
+          curved
+          isAnimated
+          showGradient
+          cappedBars
+          color={'rgb(78, 0, 142)'}
+          yAxisColor={'rgb(78, 0, 142)'}
+          xAxisColor={'rgb(78, 0, 142)'}
+          dataPointsColor={'rgb(78, 0, 142)'}
+          dataPointsWidth={1}
+          dataPointsHeight={1}
+          xAxisThickness={3}
+          yAxisThickness={3}
+          yAxisTextStyle={{color: 'rgb(78, 0, 142)'}}
+          startFillColor={'rgb(200, 100, 244)'}
+          startOpacity={0.9}
+          endFillColor={'rgb(255, 255, 255)'}
+          endOpacity={0.2}
+        />
+      )}
+
+      <TouchableOpacity
+        onPress={() => setToggle(!toggle)}
+        style={{marginTop: 100, alignSelf: 'center'}}>
+        <Text>Line Chart</Text>
+      </TouchableOpacity>
 
       {/* <BarChart
         width={340}
