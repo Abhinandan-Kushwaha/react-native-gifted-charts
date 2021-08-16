@@ -310,7 +310,7 @@ export const BarChart = (props: PropTypes) => {
                 {index === noOfSections ? (
                   <View
                     style={[
-                      styles.line,
+                      styles.lastLine,
                       {height: xAxisThickness, backgroundColor: xAxisColor},
                     ]}
                   />
