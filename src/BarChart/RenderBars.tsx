@@ -77,6 +77,7 @@ type itemType = {
   capRadius?: number;
   labelComponent?: Function;
   barBorderRadius?: number;
+  topLabelComponentHeight?: number;
 };
 const RenderBars = (props: Props) => {
   const {
@@ -244,86 +245,6 @@ const RenderBars = (props: Props) => {
     );
   };
 
-  const static2DSimple = (item: itemType) => {
-    // console.log('comes to static2DSimple', item);
-    return (
-      <>
-        <View
-          style={[
-            {
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              backgroundColor: item.frontColor || props.frontColor || 'black',
-              borderRadius: props.barBorderRadius || item.barBorderRadius || 0,
-            },
-            props.roundedBottom && {
-              borderBottomLeftRadius:
-                (item.barWidth || props.barWidth || 30) / 2,
-              borderBottomRightRadius:
-                (item.barWidth || props.barWidth || 30) / 2,
-            },
-            props.cappedBars && {
-              borderTopLeftRadius:
-                item.capRadius === 0
-                  ? 0
-                  : item.capRadius || props.capRadius || 0,
-              borderTopRightRadius:
-                item.capRadius === 0
-                  ? 0
-                  : item.capRadius || props.capRadius || 0,
-            },
-            props.roundedTop && {
-              borderTopLeftRadius: (item.barWidth || props.barWidth || 30) / 2,
-              borderTopRightRadius: (item.barWidth || props.barWidth || 30) / 2,
-            },
-          ]}>
-          {props.cappedBars && (
-            <View
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height:
-                  item.capThickness === 0
-                    ? 0
-                    : item.capThickness || props.capThickness || 6,
-                backgroundColor: item.capColor || props.capColor || 'gray',
-                borderTopLeftRadius:
-                  item.capRadius === 0
-                    ? 0
-                    : item.capRadius || props.capRadius || 0,
-                borderTopRightRadius:
-                  item.capRadius === 0
-                    ? 0
-                    : item.capRadius || props.capRadius || 0,
-              }}
-            />
-          )}
-        </View>
-        {item.topLabelComponent && (
-          <View
-            style={[
-              {
-                position: 'absolute',
-                top: (item.barWidth || props.barWidth || 30) * -1,
-                height: item.barWidth || props.barWidth || 30,
-                width: item.barWidth || props.barWidth || 30,
-                justifyContent:
-                  props.horizontal && !props.intactTopLabel
-                    ? 'center'
-                    : 'flex-end',
-                alignItems: 'center',
-              },
-              props.horizontal &&
-                !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
-              item.topLabelContainerStyle,
-            ]}>
-            {item.topLabelComponent()}
-          </View>
-        )}
-      </>
-    );
-  };
   return (
     <TouchableOpacity
       disabled={item.disablePress || props.disablePress}
@@ -334,7 +255,10 @@ const RenderBars = (props: Props) => {
           // overflow: 'visible',
           marginBottom: 60,
           width: item.barWidth || props.barWidth || 30,
-          height: (item.value * (containerHeight || 200)) / (maxValue || 200),
+          height: item.topLabelComponent
+            ? (item.topLabelComponentHeight || 30) +
+              (item.value * (containerHeight || 200)) / (maxValue || 200)
+            : (item.value * (containerHeight || 200)) / (maxValue || 200),
           marginRight: spacing,
         },
         // !isThreeD && !item.showGradient && !props.showGradient &&
@@ -458,7 +382,26 @@ const RenderBars = (props: Props) => {
           barBorderRadius={props.barBorderRadius || 0}
         />
       ) : (
-        static2DSimple(item)
+        <Animated2DWithGradient
+          barWidth={0}
+          item={item}
+          opacity={opacity}
+          animationDuration={animationDuration || 800}
+          roundedBottom={props.roundedBottom || false}
+          roundedTop={props.roundedTop || false}
+          gradientColor={props.gradientColor}
+          noGradient
+          noAnimation
+          frontColor={props.frontColor || 'black'}
+          height={(item.value * (containerHeight || 200)) / (maxValue || 200)}
+          cappedBars={props.cappedBars}
+          capThickness={props.capThickness}
+          capColor={props.capColor}
+          capRadius={props.capRadius}
+          horizontal={props.horizontal}
+          intactTopLabel={props.intactTopLabel}
+          barBorderRadius={props.barBorderRadius || 0}
+        />
       )}
       {isAnimated
         ? renderAnimatedLabel(item.label || '', item.labelTextStyle)
