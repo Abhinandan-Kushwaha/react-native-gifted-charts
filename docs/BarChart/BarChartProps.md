@@ -51,6 +51,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
 | initialSpacing         | number     | distance of the first bar from the Y axis                                      |
 | label                  | string     | Label text appearing below the bar (under the X axis)                          |
+| labelWidth             | number     | Width of the Label text appearing below the bar (under the X axis)             |
 | labelTextStyle         | object     | Style object for the label text appearing below the bar                        |
 | labelComponent         | Component  | Custom label component appearing below the bar                                 |
 | topLabelComponent      | Component  | Custom component appearing above the bar                                       |
@@ -60,6 +61,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | capColor               | ColorValue | Color of the bar cap                                                           |
 | capRadius              | number     | Border radius of the bar cap                                                   |
 | barBorderRadius        | number     | Border radius of the bar                                                       |
+| spacing                | number     | Distance of the next Bar from the currennt Bar                                 |
 
 ---
 
@@ -94,6 +96,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | yAxisIndicesColor      | Boolean    | To hide axes, rules, labels altogether                                 | false         |
 | rotateLabel            | Boolean    | To rotate the X axis labels (by 60deg)                                 | false         |
 | hideOrigin             | Boolean    | To hide the y Axis label at origin (i.e. 0)                            | false         |
+| labelWidth             | number     | Width of the Label text appearing below the bar (under the X axis)     | barWidth      |
 
 ---
 
@@ -185,10 +188,10 @@ The structure of stackData is-
     ...
 ]
 ```
+
 The stackData passed to the BarChart component is an array of objects.\
 Each object contains a mandatory key named stacks.\
 The value corresponding to the stacks key is an array of objects, each object representing a section of the stack.
-
 
 | Prop      | Type                  | Description                                                                                  | Default value |
 | --------- | --------------------- | -------------------------------------------------------------------------------------------- | ------------- |
@@ -198,7 +201,7 @@ The value corresponding to the stacks key is an array of objects, each object re
 
 | Key            | Value type                                                | Description                                                                  |
 | -------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| stacks array   | Array of stack items                                           | A stack is made of 1 or more objects of the type described in the next table |
+| stacks array   | Array of stack items                                      | A stack is made of 1 or more objects of the type described in the next table |
 | label          | string                                                    | Label text appearing below the stack (under the X axis)                      |
 | labelTextStyle | Style object for the label text appearing below the stack |
 

@@ -30,6 +30,7 @@ type Props = {
   data?: any;
   barWidth?: number;
   sideWidth?: number;
+  labelWidth?: number;
 
   isThreeD?: Boolean;
   isAnimated?: Boolean;
@@ -78,6 +79,8 @@ type itemType = {
   labelComponent?: Function;
   barBorderRadius?: number;
   topLabelComponentHeight?: number;
+  spacing?: number;
+  labelWidth?: number;
 };
 const RenderBars = (props: Props) => {
   const {
@@ -102,7 +105,13 @@ const RenderBars = (props: Props) => {
       <View
         style={[
           {
-            width: (item.barWidth || props.barWidth || 30) + spacing / 2,
+            width:
+              (item.labelWidth ||
+                props.labelWidth ||
+                item.barWidth ||
+                props.barWidth ||
+                30) +
+              spacing / 2,
             left: -6,
             position: 'absolute',
             bottom: rotateLabel ? -40 : -25,
@@ -133,7 +142,13 @@ const RenderBars = (props: Props) => {
       <Animated.View
         style={[
           {
-            width: rotateLabel ? '150%' : '120%',
+            width:
+              (item.labelWidth ||
+                props.labelWidth ||
+                item.barWidth ||
+                props.barWidth ||
+                30) +
+              spacing / 2,
             position: 'absolute',
             bottom: rotateLabel ? -40 : -25,
             opacity: appearingOpacity,
