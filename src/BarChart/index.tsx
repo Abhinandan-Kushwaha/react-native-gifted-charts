@@ -80,6 +80,7 @@ type PropTypes = {
   horizSections?: Array<sectionType>;
   barBorderRadius?: number;
   hideOrigin?: Boolean;
+  labelWidth?: number;
 };
 type sectionType = {
   value: number;
@@ -100,6 +101,7 @@ type itemType = {
   topLabelContainerStyle?: any;
   disablePress?: any;
   labelComponent?: View;
+  spacing?: number;
 };
 
 export const BarChart = (props: PropTypes) => {
@@ -109,6 +111,7 @@ export const BarChart = (props: PropTypes) => {
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const data = props.data || [];
   const spacing = props.spacing === 0 ? 0 : props.spacing ? props.spacing : 20;
+  const labelWidth = props.labelWidth || 0;
 
   let totalWidth = spacing;
   let maxItem = 0;
@@ -132,7 +135,9 @@ export const BarChart = (props: PropTypes) => {
       if (item.value > maxItem) {
         maxItem = item.value;
       }
-      totalWidth += (item.barWidth || props.barWidth || 30) + spacing;
+      totalWidth +=
+        (item.barWidth || props.barWidth || 30) +
+        (item.spacing === 0 ? 0 : item.spacing || spacing);
       // console.log('totalWidth for bar===', totalWidth);
     });
   }
@@ -419,11 +424,12 @@ export const BarChart = (props: PropTypes) => {
               index={index}
               containerHeight={containerHeight}
               maxValue={maxValue}
-              spacing={spacing}
+              spacing={item.spacing === 0 ? 0 : item.spacing || spacing}
               side={side}
               data={data}
               barWidth={props.barWidth}
               sideWidth={props.sideWidth}
+              labelWidth={labelWidth}
               opacity={opacity}
               isThreeD={isThreeD}
               isAnimated={isAnimated}
