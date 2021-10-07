@@ -43,6 +43,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | value                 | number     | Value of the item representing representing its position                  |
 | label                 | string     | Label text appearing under the X axis                                     |
 | labelTextStyle        | object     | Style object for the label text appearing under the X axis                |
+| yAxisLabelText        | string     | Y axis label text                                                         |
 | dataPointText         | string     | Text appearing near the data points                                       |
 | textShiftX            | number     | To shift the dataPointText text horizontally                              |
 | textShiftY            | number     | To shift the dataPointText text vertically                                |

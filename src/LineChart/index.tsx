@@ -142,10 +142,11 @@ type itemType = {
   showVerticalLine?: Boolean;
   verticalLineColor?: string;
   verticalLineThickness?: number;
+  yAxisLabelText?: string;
 };
 
 type sectionType = {
-  value: number;
+  value: string;
 };
 
 export const LineChart = (props: propTypes) => {
@@ -177,7 +178,7 @@ export const LineChart = (props: propTypes) => {
 
   const maxValue = props.maxValue || maxItem;
 
-  const horizSections = [{value: 0}];
+  const horizSections = [{value: '0'}];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
   const initialSpacing =
@@ -287,7 +288,11 @@ export const LineChart = (props: propTypes) => {
     if (props.showFractionalValues || props.roundToDigits) {
       value = parseFloat(value.toFixed(props.roundToDigits || 1));
     }
-    horizSections.push({value});
+    horizSections.push({
+      value:
+        data[i].yAxisLabelText ??
+        (data2 ? data2[i].yAxisLabelText : value.toString()),
+    });
   }
 
   useEffect(() => {
@@ -612,7 +617,7 @@ export const LineChart = (props: propTypes) => {
                       width: yAxisLabelWidth,
                     },
                   ]}>
-                  {!hideYAxisText && (
+                  {!hideYAxisText ? (
                     <Text
                       numberOfLines={1}
                       ellipsizeMode={'clip'}
@@ -634,7 +639,7 @@ export const LineChart = (props: propTypes) => {
                         ? ''
                         : '0'}
                     </Text>
-                  )}
+                  ) : null}
                 </View>
                 <View
                   style={[
