@@ -56,6 +56,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | labelComponent         | Component  | Custom label component appearing below the bar                                 |
 | topLabelComponent      | Component  | Custom component appearing above the bar                                       |
 | topLabelContainerStyle | object     | Style object for the container of the custom component appearing above the bar |
+| yAxisLabelText         | string     | Y axis label text                                                              |
 | cappedBars             | Boolean    | To show caps on the top of bar                                                 |
 | capThickness           | number     | Thickness of the bar cap                                                       |
 | capColor               | ColorValue | Color of the bar cap                                                           |

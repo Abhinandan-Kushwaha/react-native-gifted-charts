@@ -83,7 +83,7 @@ type PropTypes = {
   labelWidth?: number;
 };
 type sectionType = {
-  value: number;
+  value: string;
 };
 type itemType = {
   value?: number;
@@ -102,12 +102,13 @@ type itemType = {
   disablePress?: any;
   labelComponent?: View;
   spacing?: number;
+  yAxisLabelText?: string;
 };
 
 export const BarChart = (props: PropTypes) => {
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
-  const horizSections = [{value: 0}];
+  const horizSections = [{value: '0'}];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const data = props.data || [];
   const spacing = props.spacing === 0 ? 0 : props.spacing ? props.spacing : 20;
@@ -214,7 +215,7 @@ export const BarChart = (props: PropTypes) => {
     if (props.showFractionalValues || props.roundToDigits) {
       value = parseFloat(value.toFixed(props.roundToDigits || 1));
     }
-    horizSections.push({value});
+    horizSections.push({value: data[i].yAxisLabelText ?? value.toString()});
   }
 
   const heightValue = new Animated.Value(0);
@@ -277,7 +278,7 @@ export const BarChart = (props: PropTypes) => {
                     width: yAxisLabelWidth,
                   },
                 ]}>
-                {!hideYAxisText && (
+                {!hideYAxisText ? (
                   <Text
                     numberOfLines={1}
                     ellipsizeMode={'clip'}
@@ -303,7 +304,7 @@ export const BarChart = (props: PropTypes) => {
                       ? ''
                       : '0'}
                   </Text>
-                )}
+                ) : null}
               </View>
               <View
                 style={[
