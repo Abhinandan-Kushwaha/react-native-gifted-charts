@@ -290,7 +290,7 @@ export const LineChart = (props: propTypes) => {
     }
     horizSections.push({
       value: props.yAxisLabelTexts
-        ? props.yAxisLabelTexts[i] ?? value.toString()
+        ? props.yAxisLabelTexts[noOfSections - i] ?? value.toString()
         : value.toString(),
     });
   }
