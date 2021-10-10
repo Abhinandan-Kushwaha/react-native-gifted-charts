@@ -56,7 +56,6 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | labelComponent         | Component  | Custom label component appearing below the bar                                 |
 | topLabelComponent      | Component  | Custom component appearing above the bar                                       |
 | topLabelContainerStyle | object     | Style object for the container of the custom component appearing above the bar |
-| yAxisLabelText         | string     | Y axis label text                                                              |
 | cappedBars             | Boolean    | To show caps on the top of bar                                                 |
 | capThickness           | number     | Thickness of the bar cap                                                       |
 | capColor               | ColorValue | Color of the bar cap                                                           |
@@ -68,36 +67,37 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 
 ### Axes and rules related props
 
-| Prop                   | Type       | Description                                                            | Default value |
-| ---------------------- | ---------- | ---------------------------------------------------------------------- | ------------- |
-| xAxisColor             | ColorValue | X axis color                                                           | black         |
-| xAxisThickness         | number     | X axis thickness                                                       | 1             |
-| yAxisColor             | ColorValue | Y axis color                                                           | black         |
-| yAxisThickness         | number     | Y axis thickness                                                       | 1             |
-| yAxisLabelWidth        | number     | Width of the Y axis Label container                                    | 35            |
-| yAxisTextStyle         | object     | Style object for the Y axis text style                                 | \_            |
-| showFractionalValues   | Boolean    | Allow fractional values for the Y axis label                           | false         |
-| roundToDigits          | number     | Rounds the y axis values to given number of digits after decimal point | 1             |
-| hideYAxisText          | Boolean    | To hide Y axis label text                                              | false         |
-| rulesColor             | ColorValue | Color of the horizontal rules                                          | lightgray     |
-| rulesThickness         | number     | Thickness of the horizontal rules                                      | 1             |
-| hideRules              | Boolean    | To hide the horizontal rules                                           | false         |
-| showVerticalLines      | Boolean    | To show vertical lines                                                 | false         |
-| verticalLinesColor     | ColorValue | Color of the vertical lines                                            | lightgray     |
-| verticallinesThickness | number     | Thickness of the vertical lines                                        | 1             |
-| verticalLinesZIndex    | number     | Z index of the vertical lines                                          | -1            |
-| showXAxisIndices       | Boolean    | To show the pointers on the X axis                                     | false         |
-| xAxisIndicesHeight     | number     | Height of the pointers on the X axis                                   | 2             |
-| xAxisIndicesWidth      | number     | Width of the pointers on the X axis                                    | 4             |
-| xAxisIndicesColor      | ColorValue | Color of the pointers on the X axis                                    | black         |
-| showYAxisIndices       | Boolean    | To show the pointers on the Y axis                                     | false         |
-| yAxisIndicesHeight     | number     | Height of the pointers on the Y axis                                   | 2             |
-| yAxisIndicesWidth      | number     | Width of the pointers on the Y axis                                    | 4             |
-| yAxisIndicesColor      | ColorValue | Color of the pointers on the X axis                                    | black         |
-| yAxisIndicesColor      | Boolean    | To hide axes, rules, labels altogether                                 | false         |
-| rotateLabel            | Boolean    | To rotate the X axis labels (by 60deg)                                 | false         |
-| hideOrigin             | Boolean    | To hide the y Axis label at origin (i.e. 0)                            | false         |
-| labelWidth             | number     | Width of the Label text appearing below the bar (under the X axis)     | barWidth      |
+| Prop                   | Type          | Description                                                            | Default value |
+| ---------------------- | ------------- | ---------------------------------------------------------------------- | ------------- |
+| xAxisColor             | ColorValue    | X axis color                                                           | black         |
+| xAxisThickness         | number        | X axis thickness                                                       | 1             |
+| yAxisColor             | ColorValue    | Y axis color                                                           | black         |
+| yAxisThickness         | number        | Y axis thickness                                                       | 1             |
+| yAxisLabelWidth        | number        | Width of the Y axis Label container                                    | 35            |
+| yAxisTextStyle         | object        | Style object for the Y axis text style                                 | \_            |
+| showFractionalValues   | Boolean       | Allow fractional values for the Y axis label                           | false         |
+| roundToDigits          | number        | Rounds the y axis values to given number of digits after decimal point | 1             |
+| hideYAxisText          | Boolean       | To hide Y axis label text                                              | false         |
+| rulesColor             | ColorValue    | Color of the horizontal rules                                          | lightgray     |
+| rulesThickness         | number        | Thickness of the horizontal rules                                      | 1             |
+| hideRules              | Boolean       | To hide the horizontal rules                                           | false         |
+| showVerticalLines      | Boolean       | To show vertical lines                                                 | false         |
+| verticalLinesColor     | ColorValue    | Color of the vertical lines                                            | lightgray     |
+| verticallinesThickness | number        | Thickness of the vertical lines                                        | 1             |
+| verticalLinesZIndex    | number        | Z index of the vertical lines                                          | -1            |
+| showXAxisIndices       | Boolean       | To show the pointers on the X axis                                     | false         |
+| xAxisIndicesHeight     | number        | Height of the pointers on the X axis                                   | 2             |
+| xAxisIndicesWidth      | number        | Width of the pointers on the X axis                                    | 4             |
+| xAxisIndicesColor      | ColorValue    | Color of the pointers on the X axis                                    | black         |
+| showYAxisIndices       | Boolean       | To show the pointers on the Y axis                                     | false         |
+| yAxisIndicesHeight     | number        | Height of the pointers on the Y axis                                   | 2             |
+| yAxisIndicesWidth      | number        | Width of the pointers on the Y axis                                    | 4             |
+| yAxisIndicesColor      | ColorValue    | Color of the pointers on the X axis                                    | black         |
+| yAxisIndicesColor      | Boolean       | To hide axes, rules, labels altogether                                 | false         |
+| yAxisLabelTexts        | Array<string> | Array of label texts to be displayed along y axis                      | null          |
+| rotateLabel            | Boolean       | To rotate the X axis labels (by 60deg)                                 | false         |
+| hideOrigin             | Boolean       | To hide the y Axis label at origin (i.e. 0)                            | false         |
+| labelWidth             | number        | Width of the Label text appearing below the bar (under the X axis)     | barWidth      |
 
 ---
 

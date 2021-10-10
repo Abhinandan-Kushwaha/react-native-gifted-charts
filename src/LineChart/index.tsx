@@ -121,6 +121,7 @@ type propTypes = {
   hideOrigin?: Boolean;
   textShiftX?: number;
   textShiftY?: number;
+  yAxisLabelTexts?: Array<string>;
 };
 type itemType = {
   value?: number;
@@ -142,7 +143,6 @@ type itemType = {
   showVerticalLine?: Boolean;
   verticalLineColor?: string;
   verticalLineThickness?: number;
-  yAxisLabelText?: string;
 };
 
 type sectionType = {
@@ -289,9 +289,9 @@ export const LineChart = (props: propTypes) => {
       value = parseFloat(value.toFixed(props.roundToDigits || 1));
     }
     horizSections.push({
-      value:
-        data[i].yAxisLabelText ??
-        (data2 ? data2[i].yAxisLabelText : value.toString()),
+      value: props.yAxisLabelTexts
+        ? props.yAxisLabelTexts[i] ?? value.toString()
+        : value.toString(),
     });
   }
 
