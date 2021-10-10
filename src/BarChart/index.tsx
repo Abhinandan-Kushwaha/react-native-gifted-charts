@@ -81,6 +81,7 @@ type PropTypes = {
   barBorderRadius?: number;
   hideOrigin?: Boolean;
   labelWidth?: number;
+  yAxisLabelTexts?: Array<string>;
 };
 type sectionType = {
   value: string;
@@ -102,7 +103,6 @@ type itemType = {
   disablePress?: any;
   labelComponent?: View;
   spacing?: number;
-  yAxisLabelText?: string;
 };
 
 export const BarChart = (props: PropTypes) => {
@@ -215,7 +215,11 @@ export const BarChart = (props: PropTypes) => {
     if (props.showFractionalValues || props.roundToDigits) {
       value = parseFloat(value.toFixed(props.roundToDigits || 1));
     }
-    horizSections.push({value: data[i].yAxisLabelText ?? value.toString()});
+    horizSections.push({
+      value: props.yAxisLabelTexts
+        ? props.yAxisLabelTexts[i] ?? value.toString()
+        : value.toString(),
+    });
   }
 
   const heightValue = new Animated.Value(0);
