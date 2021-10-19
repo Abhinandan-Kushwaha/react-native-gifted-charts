@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {ColorValue, View} from 'react-native';
 import Canvas from 'react-native-canvas';
 
@@ -82,12 +82,6 @@ export const PieChart = (props: propTypes) => {
 
   const canvasHeight = isThreeD ? radius * 2.5 + 60 : radius * 2 + 60;
   const canvasWidth = radius * 2 + 60;
-
-  const [visibility, setVisibility] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setVisibility(true), 410);
-  }, []);
 
   const handleCanvas = async (canvas: Canvas) => {
     if (!canvas) {
@@ -285,7 +279,7 @@ export const PieChart = (props: propTypes) => {
   return (
     <View style={isThreeD && {transform: [{scaleY: 0.5}]}}>
       <Canvas ref={handleCanvas} />
-      {visibility && (props.centerLabelComponent || (donut && !isDataShifted)) && (
+      {(props.centerLabelComponent || (donut && !isDataShifted)) && (
         <View
           style={[
             {
