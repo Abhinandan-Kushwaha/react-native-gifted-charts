@@ -27,6 +27,8 @@
 | value                | number     | Value of the item, representing a section of the Pie chart             |
 | shiftX               | number     | Translates (shifts) the particular section horizontally by given value |
 | shiftY               | number     | Translates (shifts) the particular section vertically by given value   |
+| shiftTextX           | number     | Translates (shifts) the position of label text horizontally            |
+| shiftTextY           | number     | Translates (shifts) the position of label text vertically              |
 | color                | ColorValue | Color (background color) of the section                                |
 | text                 | string     | Label text for the sections                                            |
 | textColor            | ColorValue | Color of the text (label) inside the section                           |
