@@ -38,12 +38,13 @@
 
 ### Donut chart related props
 
-| Prop                   | Type       | Description                                                   | Default value                        |
-| ---------------------- | ---------- | ------------------------------------------------------------- | ------------------------------------ |
-| donut                  | Boolean    | When set to true, renders a Donut chart (makes an inner ring) | false                                |
-| innerRadius            | number     | Radius of the inner ring                                      | radius/2                             |
-| innerCircleColor       | ColorValue | Color of the inner ring                                       | white                                |
-| innerCircleBorderWidth | number     | Stroke (border) width of the inner ring                       | props.innerCircleBorderColor ? 5 : 0 |
-| innerCircleBorderColor | ColorValue | Stroke (border) color of the inner ring                       | gray                                 |
-| shiftInnerCenterX      | number     | Shifts the inner ring horizontally to enhance the 3D effect   | 0                                    |
-| shiftInnerCenterY      | number     | Shifts the inner ring vertically to enhance the 3D effect     | 0                                    |
+| Prop                   | Type       | Description                                                       | Default value                        |
+| ---------------------- | ---------- | ----------------------------------------------------------------- | ------------------------------------ |
+| donut                  | Boolean    | When set to true, renders a Donut chart (makes an inner ring)     | false                                |
+| innerRadius            | number     | Radius of the inner ring                                          | radius/2                             |
+| innerCircleColor       | ColorValue | Color of the inner ring                                           | white                                |
+| innerCircleBorderWidth | number     | Stroke (border) width of the inner ring                           | props.innerCircleBorderColor ? 5 : 0 |
+| innerCircleBorderColor | ColorValue | Stroke (border) color of the inner ring                           | gray                                 |
+| shiftInnerCenterX      | number     | Shifts the inner ring horizontally to enhance the 3D effect       | 0                                    |
+| shiftInnerCenterY      | number     | Shifts the inner ring vertically to enhance the 3D effect         | 0                                    |
+| tilt                   | number     | The factor (between 0 annd 1) by which the chart should be tilted | if threeD then 0.5 else 1            |

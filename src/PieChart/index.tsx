@@ -31,6 +31,7 @@ type propTypes = {
   showValuesAsLabels?: Boolean;
 
   centerLabelComponent?: Function;
+  tilt?: number;
 };
 type itemType = {
   value: number;
@@ -68,6 +69,7 @@ export const PieChart = (props: propTypes) => {
   const showText = props.showText || false;
   const textColor = props.textColor || '';
   const textSize = props.textSize ? Math.min(props.textSize, radius / 5) : 16;
+  const tilt = props.tilt ? Math.min(props.tilt, 1) : props.isThreeD ? 0.5 : 1;
 
   const showTextBackground = props.showTextBackground || false;
   const showValuesAsLabels = props.showValuesAsLabels || false;
@@ -277,7 +279,7 @@ export const PieChart = (props: propTypes) => {
   };
 
   return (
-    <View style={isThreeD && {transform: [{scaleY: 0.5}]}}>
+    <View style={{transform: [{scaleY: tilt}]}}>
       <Canvas ref={handleCanvas} />
       {(props.centerLabelComponent || (donut && !isDataShifted)) && (
         <View
