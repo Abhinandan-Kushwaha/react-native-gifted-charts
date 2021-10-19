@@ -278,7 +278,7 @@ export const PieChart = (props: propTypes) => {
     });
   };
 
-  return (
+  return total === 0 ? null : (
     <View style={{transform: [{scaleY: tilt}]}}>
       <Canvas ref={handleCanvas} />
       {(props.centerLabelComponent || (donut && !isDataShifted)) && (
