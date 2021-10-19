@@ -42,6 +42,8 @@ type itemType = {
   textSize?: number;
   textBackgroundColor?: string;
   textBackgroundRadius?: number;
+  shiftTextX?: number;
+  shiftTextY?: number;
 };
 export const PieChart = (props: propTypes) => {
   const {data, isThreeD} = props;
@@ -143,6 +145,9 @@ export const PieChart = (props: propTypes) => {
       }
       const shiftX = dataItem.shiftX || 0;
       const shiftY = dataItem.shiftY || 0;
+
+      const shiftTextX = dataItem.shiftTextX || 0;
+      const shiftTextY = dataItem.shiftTextY || 0;
 
       /****************     This section is to prevent the shadow from         ***************/
       /****************     being visible inside the chart content if          ***************/
@@ -259,6 +264,9 @@ export const PieChart = (props: propTypes) => {
             'white';
           ctx.fill();
         }
+
+        xx += shiftTextX;
+        yy += shiftTextY;
 
         ctx.fillStyle = dataItem.textColor || textColor || colors[i++ % 8];
         let labelText = dataItem.text || '';
