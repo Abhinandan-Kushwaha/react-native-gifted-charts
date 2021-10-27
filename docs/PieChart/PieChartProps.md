@@ -1,24 +1,27 @@
 # Pie Chart props
 
-| Prop                 | Type           | Description                                                                      | Default value |
-| -------------------- | -------------- | -------------------------------------------------------------------------------- | ------------- |
-| data                 | Array of items | An item object represents a section in the Pie chart. Descibed in the next table | \_            |
-| radius               | number         | Radius of the Pie chart                                                          | 120           |
-| isThreeD             | Boolean        | If set to true, it rotates and translates the chart to give it a 3D effect       | false         |
-| shadow               | Boolean        | Shadow to the Pie chart, when set to true, it enhances the 3D effect             | false         |
-| shadowColor          | ColorValue     | Color of the shadow                                                              | lightgray     |
-| shadowWidth          | number         | Width of the shadow                                                              | radius\*4/3   |
-| strokeWidth          | number         | Stroke (line) width for the Pie chart and its section                            | 0             |
-| strokeColor          | ColorValue     | Stroke (line) color                                                              | gray          |
-| backgroundColor      | ColorValue     | Background color of the container that contains the Pie chart                    | white         |
-| showText             | Boolean        | When set to true, displays text on the Pie sections                              | false         |
-| textColor            | ColorValue     | Color of the label texts                                                         | random colors |
-| textSize             | number         | Size of the label texts (max allowed: radius / 5)                                | 16            |
-| showTextBackground   | Boolean        | When set to true, displays background for text on the Pie sections               | false         |
-| textBackgroundColor  | ColorValue     | Background color for the label texts                                             | white         |
-| textBackgroundRadius | number         | Radius for the background of the text labels                                     | textSize      |
-| showValuesAsLabels   | Boolean        | When set to true, the values of the Pie sections are displayed as labels         | false         |
-| centerLabelComponent | Function       | Component to be rendered at the center of the Pie chart                          | \_            |
+| Prop                 | Type           | Description                                                                      | Default value   |
+| -------------------- | -------------- | -------------------------------------------------------------------------------- | --------------- |
+| data                 | Array of items | An item object represents a section in the Pie chart. Descibed in the next table | \_              |
+| radius               | number         | Radius of the Pie chart                                                          | 120             |
+| isThreeD             | Boolean        | If set to true, it rotates and translates the chart to give it a 3D effect       | false           |
+| shadow               | Boolean        | Shadow to the Pie chart, when set to true, it enhances the 3D effect             | false           |
+| shadowColor          | ColorValue     | Color of the shadow                                                              | lightgray       |
+| shadowWidth          | number         | Width of the shadow                                                              | radius\*4/3     |
+| strokeWidth          | number         | Stroke (line) width for the Pie chart and its section                            | 0               |
+| strokeColor          | ColorValue     | Stroke (line) color                                                              | gray            |
+| backgroundColor      | ColorValue     | Background color of the container that contains the Pie chart                    | white           |
+| showText             | Boolean        | When set to true, displays text on the Pie sections                              | false           |
+| textColor            | ColorValue     | Color of the label texts                                                         | random colors   |
+| textSize             | number         | Size of the label texts (max allowed: radius / 5)                                | 16              |
+| fontStyle            | string         | Style of the text - 'normal', 'italic' or 'oblique'                              | 'normal'        |
+| fontWeight           | string         | Weight of the text - 'bold', 'bolder', 'lighter', '100', '200' etc               | 'normal'        |
+| font                 | string         | Font family of the text - 'Arial', 'Cursive', 'Comic Sans MS' etc                | 'Comic Sans MS' |
+| showTextBackground   | Boolean        | When set to true, displays background for text on the Pie sections               | false           |
+| textBackgroundColor  | ColorValue     | Background color for the label texts                                             | white           |
+| textBackgroundRadius | number         | Radius for the background of the text labels                                     | textSize        |
+| showValuesAsLabels   | Boolean        | When set to true, the values of the Pie sections are displayed as labels         | false           |
+| centerLabelComponent | Function       | Component to be rendered at the center of the Pie chart                          | \_              |
 
 ### Item description
 
@@ -33,6 +36,9 @@
 | text                 | string     | Label text for the sections                                            |
 | textColor            | ColorValue | Color of the text (label) inside the section                           |
 | textSize             | number     | Size of the text (label) inside the section                            |
+| fontStyle            | string     | Style of the text - 'normal', 'italic' or 'oblique'                    |
+| fontWeight           | string     | Weight of the text - 'bold', 'bolder', 'lighter', '100', '200' etc     |
+| font                 | string     | Font family of the text - 'Arial', 'Cursive', 'Comic Sans MS' etc      |
 | textBackgroundColor  | ColorValue | Background color for the label text                                    |
 | textBackgroundRadius | number     | Radius for the background of the text label                            |
 

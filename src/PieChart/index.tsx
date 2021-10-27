@@ -25,6 +25,9 @@ type propTypes = {
   showText?: Boolean;
   textColor?: string;
   textSize?: number;
+  fontStyle?: string;
+  fontWeight?: string;
+  font?: string;
   showTextBackground?: Boolean;
   textBackgroundColor?: string;
   textBackgroundRadius?: number;
@@ -41,6 +44,9 @@ type itemType = {
   text?: string;
   textColor?: string;
   textSize?: number;
+  fontStyle?: string;
+  fontWeight?: string;
+  font?: string;
   textBackgroundColor?: string;
   textBackgroundRadius?: number;
   shiftTextX?: number;
@@ -73,6 +79,23 @@ export const PieChart = (props: propTypes) => {
 
   const showTextBackground = props.showTextBackground || false;
   const showValuesAsLabels = props.showValuesAsLabels || false;
+
+  const fontStyleList = ['normal', 'italic', 'oblique'];
+  const fontWeightList = [
+    'normal',
+    'bold',
+    'bolder',
+    'lighter',
+    '100',
+    '200',
+    '300',
+    '400',
+    '500',
+    '600',
+    '700',
+    '800',
+    '900',
+  ];
 
   let isDataShifted = false;
   data.forEach((item: any) => {
@@ -201,15 +224,49 @@ export const PieChart = (props: propTypes) => {
       /*************************        Displaying Text Labels      **********************/
 
       if (showText) {
-        let fontSize;
-        if (props.textSize) {
-          fontSize = Math.min(props.textSize, radius / 5);
-        } else if (dataItem.textSize) {
+        let fontSize, font;
+
+        /***************        Font size      **************/
+        if (dataItem.textSize) {
           fontSize = Math.min(dataItem.textSize, radius / 5);
+        } else if (props.textSize) {
+          fontSize = Math.min(props.textSize, radius / 5);
         } else {
           fontSize = 16;
         }
-        ctx.font = fontSize + 'px Comic Sans MS';
+
+        /***************        Font family      **************/
+        if (dataItem.font) {
+          font = dataItem.font;
+        } else if (props.font) {
+          font = props.font;
+        } else {
+          font = 'Comic Sans MS';
+        }
+
+        let fontText = fontSize + 'px ' + font;
+
+        /***************        Font weight      **************/
+        if (
+          dataItem.fontWeight &&
+          fontWeightList.includes(dataItem.fontWeight)
+        ) {
+          fontText = dataItem.fontWeight + ' ' + fontText;
+        } else if (
+          props.fontWeight &&
+          fontWeightList.includes(props.fontWeight)
+        ) {
+          fontText = props.fontWeight + ' ' + fontText;
+        }
+
+        /***************        Font style      **************/
+        if (dataItem.fontStyle && fontStyleList.includes(dataItem.fontStyle)) {
+          fontText = dataItem.fontStyle + ' ' + fontText;
+        } else if (props.fontStyle && fontStyleList.includes(props.fontStyle)) {
+          fontText = props.fontStyle + ' ' + fontText;
+        }
+
+        ctx.font = fontText;
         semiSum = angleSum + (pi * dataItem.value) / total;
         yy = Math.sin(semiSum) * radius + (radius + initialValue + shiftX);
         xx = Math.cos(semiSum) * radius + (radius + initialValue + shiftY);
