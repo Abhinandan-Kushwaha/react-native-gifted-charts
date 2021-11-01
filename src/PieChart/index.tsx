@@ -194,6 +194,18 @@ export const PieChart = (props: propTypes) => {
 
         ctx.fillStyle = backgroundColor;
         ctx.fill();
+
+        // Stroke at the end again
+
+        ctx.moveTo(
+          radius + initialValue + shiftX,
+          radius + initialValue + shiftY,
+        )
+        ctx.lineTo(
+          radius + initialValue + shiftX,
+          radius + initialValue + shiftY,
+        );
+        ctx.stroke();
       }
 
       /*************************************************************************************/
@@ -220,6 +232,18 @@ export const PieChart = (props: propTypes) => {
 
       ctx.fillStyle = dataItem.color || colors[i++ % 8];
       ctx.fill();
+
+      // Stroke at the end again
+
+      ctx.moveTo(
+        radius + initialValue + shiftX,
+        radius + initialValue + shiftY,
+      )
+      ctx.lineTo(
+        radius + initialValue + shiftX,
+        radius + initialValue + shiftY,
+      );
+      ctx.stroke();
 
       /*************************        Displaying Text Labels      **********************/
 
