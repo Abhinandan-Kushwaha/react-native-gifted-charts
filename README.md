@@ -1,4 +1,4 @@
-# react-native-gifted-charts
+# react-native-gifted-charts [![Rate on Openbase](https://badges.openbase.com/js/rating/react-native-gifted-charts.svg)](https://openbase.com/js/react-native-gifted-charts?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
 The most complete library for Bar, Line, Area, Pie, and Donut charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
 
@@ -29,7 +29,12 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 ## Installation
 
 ```sh
-npm install react-native-gifted-charts react-native-linear-gradient react-native-svg
+npm install react-native-gifted-charts react-native-linear-gradient
+```
+
+For Line and Area charts, add the react-native-svg package too -
+```
+npm install react-native-svg
 ```
 
 For Pie chart and Donut chart, these additional packages should be installed-
@@ -38,7 +43,6 @@ For Pie chart and Donut chart, these additional packages should be installed-
 npm i react-native-canvas react-native-webview
 ```
 
-You can omit the above packages if you don't intend to use Pie chart or Donut chart.
 
 For iOS-
 
@@ -86,6 +90,13 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+
+## Common issues
+
+| Issue | Solution |
+| ---- | ---- |
+| [When the isAnimated is enabled the labels are not showing for Bar Charts](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/18) | [Comment by Abhinav](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/18#issuecomment-971662656) |
+| [BarChart - Value and section line don't match](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35) | [Comment by the owner](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35#issuecomment-972673281) |
 
 ## License
 
