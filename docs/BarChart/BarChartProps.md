@@ -122,12 +122,23 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 ---
 
 ### Animation related props
-
+ 
 | Prop              | Type    | Description                                                           | Default value |
 | ----------------- | ------- | --------------------------------------------------------------------- | ------------- |
 | isAnimated        | Boolean | To show animates BarChart. Animation occurs onLoad and on valu change | false         |
 | animationDuration | number  | Duration of the animations                                            | 800           |
 | animationEasing   | Easing  | Easing applied to the animation                                       | Easing.ease   |
+
+       
+**Alert!**\
+While rendering an Animated Bar chart, y axis labels may not appear sometimes. This can be fixed using a key prop as shown - 
+    
+```js
+    <BarChart
+      key={'xyz'}
+      data={data}
+      isAnimated/>
+```
 
 ---
 
