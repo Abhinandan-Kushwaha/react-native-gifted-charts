@@ -95,7 +95,7 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 
 | Issue | Solution |
 | ---- | ---- |
-| [#18](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/18) | [Comment by Abhinav](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/18#issuecomment-971662656) |
+| [When the isAnimated is enabled the labels are not showing for Bar Charts](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/18) | [Comment by Abhinav](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/18#issuecomment-971662656) |
 
 ## License
 
