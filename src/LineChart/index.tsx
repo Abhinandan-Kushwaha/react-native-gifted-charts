@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
   View,
   ScrollView,
@@ -7,7 +7,7 @@ import {
   Text,
   ColorValue,
 } from 'react-native';
-import {styles} from './styles';
+import { styles } from './styles';
 import Svg, {
   Path,
   LinearGradient,
@@ -16,7 +16,7 @@ import Svg, {
   Rect,
   Text as CanvasText,
 } from 'react-native-svg';
-import {svgPath, bezierCommand} from '../utils';
+import { svgPath, bezierCommand } from '../utils';
 
 type propTypes = {
   height?: number;
@@ -27,10 +27,12 @@ type propTypes = {
   spacing?: number;
   initialSpacing?: number;
   data?: Array<itemType>;
-  data2?: any;
+  data2?: Array<itemType>;
+  data3?: Array<itemType>;
   thickness?: number;
   thickness1?: number;
   thickness2?: number;
+  thickness3?: number;
   rotateLabel?: Boolean;
   isAnimated?: Boolean;
   animationDuration?: number;
@@ -65,6 +67,7 @@ type propTypes = {
   color?: string;
   color1?: string;
   color2?: string;
+  color3?: string;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
   yAxisTextStyle?: any;
@@ -97,6 +100,12 @@ type propTypes = {
   dataPointsRadius2?: number;
   dataPointsColor2?: string;
   dataPointsShape2?: string;
+  hideDataPoints3?: Boolean;
+  dataPointsHeight3?: number;
+  dataPointsWidth3?: number;
+  dataPointsRadius3?: number;
+  dataPointsColor3?: string;
+  dataPointsShape3?: string;
 
   startFillColor?: string;
   endFillColor?: string;
@@ -110,6 +119,10 @@ type propTypes = {
   endFillColor2?: string;
   startOpacity2?: number;
   endOpacity2?: number;
+  startFillColor3?: string;
+  endFillColor3?: string;
+  startOpacity3?: number;
+  endOpacity3?: number;
   gradientDirection?: string;
 
   textFontSize?: number;
@@ -118,6 +131,8 @@ type propTypes = {
   textColor1?: string;
   textFontSize2?: number;
   textColor2?: string;
+  textFontSize3?: number;
+  textColor3?: string;
   hideOrigin?: Boolean;
   textShiftX?: number;
   textShiftY?: number;
@@ -152,8 +167,10 @@ type sectionType = {
 export const LineChart = (props: propTypes) => {
   const [points, setPoints] = useState('');
   const [points2, setPoints2] = useState('');
+  const [points3, setPoints3] = useState('');
   const [fillPoints, setFillPoints] = useState('');
   const [fillPoints2, setFillPoints2] = useState('');
+  const [fillPoints3, setFillPoints3] = useState('');
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
   const data = props.data || [];
@@ -178,15 +195,17 @@ export const LineChart = (props: propTypes) => {
 
   const maxValue = props.maxValue || maxItem;
 
-  const horizSections = [{value: '0'}];
+  const horizSections = [{ value: '0' }];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
   const initialSpacing =
     props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
   const data2 = props.data2 || [];
+  const data3 = props.data3 || [];
   const thickness = props.thickness || 2;
   const thickness1 = props.thickness1;
   const thickness2 = props.thickness2;
+  const thickness3 = props.thickness3;
   const rotateLabel = props.rotateLabel || false;
   const isAnimated = props.isAnimated || false;
   const animationDuration = props.animationDuration || 800;
@@ -195,20 +214,30 @@ export const LineChart = (props: propTypes) => {
     props.hideDataPoints || props.hideDataPoints1 || false;
   const hideDataPoints2 =
     props.hideDataPoints || props.hideDataPoints2 || false;
+  const hideDataPoints3 =
+    props.hideDataPoints || props.hideDataPoints3 || false;
 
   const color1 = props.color1 || props.color || 'black';
   const color2 = props.color2 || props.color || 'black';
+  const color3 = props.color3 || props.color || 'black';
 
   const startFillColor1 =
     props.startFillColor1 || props.startFillColor || 'gray';
   const endFillColor1 = props.endFillColor1 || props.endFillColor || 'white';
   const startOpacity1 = props.startOpacity1 || props.startOpacity || 1;
   const endOpacity1 = props.endOpacity1 || props.endOpacity || 1;
+
   const startFillColor2 =
     props.startFillColor2 || props.startFillColor || 'gray';
   const endFillColor2 = props.endFillColor2 || props.endFillColor || 'white';
   const startOpacity2 = props.startOpacity2 || props.startOpacity || 1;
   const endOpacity2 = props.endOpacity2 || props.endOpacity || 1;
+
+  const startFillColor3 =
+    props.startFillColor3 || props.startFillColor || 'gray';
+  const endFillColor3 = props.endFillColor3 || props.endFillColor || 'white';
+  const startOpacity3 = props.startOpacity3 || props.startOpacity || 1;
+  const endOpacity3 = props.endOpacity3 || props.endOpacity || 1;
 
   const rulesThickness =
     props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
@@ -225,6 +254,7 @@ export const LineChart = (props: propTypes) => {
 
   const widthValue = new Animated.Value(0);
   const widthValue2 = new Animated.Value(0);
+  const widthValue3 = new Animated.Value(0);
 
   const xAxisThickness = props.xAxisThickness || 1;
   const xAxisColor = props.xAxisColor || 'black';
@@ -270,10 +300,22 @@ export const LineChart = (props: propTypes) => {
   const dataPointsShape2 =
     props.dataPointsShape2 || props.dataPointsShape || 'circular';
 
+  const dataPointsHeight3 =
+    props.dataPointsHeight3 || props.dataPointsHeight || 2;
+  const dataPointsWidth3 = props.dataPointsWidth3 || props.dataPointsWidth || 2;
+  const dataPointsRadius3 =
+    props.dataPointsRadius3 || props.dataPointsRadius || 3;
+  const dataPointsColor3 =
+    props.dataPointsColor3 || props.dataPointsColor || 'red';
+  const dataPointsShape3 =
+    props.dataPointsShape3 || props.dataPointsShape || 'circular';
+
   const textFontSize1 = props.textFontSize1 || props.textFontSize || 10;
   const textFontSize2 = props.textFontSize2 || props.textFontSize || 10;
+  const textFontSize3 = props.textFontSize3 || props.textFontSize || 10;
   const textColor1 = props.textColor1 || props.textColor || 'gray';
   const textColor2 = props.textColor2 || props.textColor || 'gray';
+  const textColor3 = props.textColor3 || props.textColor || 'gray';
 
   const backgroundColor = props.backgroundColor || 'transparent';
 
@@ -291,7 +333,7 @@ export const LineChart = (props: propTypes) => {
     horizSections.push({
       value: props.yAxisLabelTexts
         ? props.yAxisLabelTexts[noOfSections - i] ?? value.toString()
-        : value.toString(),
+          : value.toString(),
     });
   }
 
@@ -305,11 +347,17 @@ export const LineChart = (props: propTypes) => {
       },
       animateTogether ? 0 : animationDuration,
     );
+    setTimeout(
+      () => {
+        decreaseWidth3();
+      },
+      animateTogether ? 0 : animationDuration * 2,
+    );
   });
 
   useEffect(() => {
     let pp = '',
-      pp2 = '';
+      pp2 = '', pp3 = '';
     if (!props.curved) {
       for (let i = 0; i < data.length; i++) {
         pp +=
@@ -330,14 +378,25 @@ export const LineChart = (props: propTypes) => {
               (data2[i].value * containerHeight) / maxValue) +
             ' ';
         }
+        if (data3.length) {
+          pp3 +=
+            'L' +
+            (initialSpacing - dataPointsWidth3 / 2 + spacing * i) +
+            ' ' +
+            (containerHeight +
+              10 -
+              (data3[i].value * containerHeight) / maxValue) +
+            ' ';
+        }
       }
       setPoints(pp.replace('L', 'M'));
       setPoints2(pp2.replace('L', 'M'));
+      setPoints3(pp3.replace('L', 'M'));
 
       /***************************          For Area Charts          *************************/
       if (areaChart) {
         let ppp = '',
-          ppp2 = '';
+          ppp2 = '', ppp3 = '';
 
         ppp =
           'L' +
@@ -384,6 +443,30 @@ export const LineChart = (props: propTypes) => {
           setFillPoints2(ppp2.replace('L', 'M'));
         }
 
+        if (data3.length) {
+          ppp3 =
+            'L' +
+            (initialSpacing - dataPointsWidth3 / 2) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          ppp3 += pp3;
+          ppp3 +=
+            'L' +
+            (initialSpacing -
+              dataPointsWidth3 / 2 +
+              spacing * (data.length - 1)) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness);
+          ppp3 +=
+            'L' +
+            (initialSpacing - dataPointsWidth3 / 2) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          setFillPoints3(ppp3.replace('L', 'M'));
+        }
+
         setFillPoints(ppp.replace('L', 'M'));
       }
 
@@ -395,7 +478,7 @@ export const LineChart = (props: propTypes) => {
       /*************************************************************************************/
     } else {
       let p1Array = [],
-        p2Array = [];
+        p2Array = [], p3Array = [];
       for (let i = 0; i < data.length; i++) {
         p1Array.push([
           initialSpacing - dataPointsWidth1 / 2 + spacing * i,
@@ -405,16 +488,26 @@ export const LineChart = (props: propTypes) => {
           p2Array.push([
             initialSpacing - dataPointsWidth2 / 2 + spacing * i,
             containerHeight +
-              10 -
-              (data2[i].value * containerHeight) / maxValue,
+            10 -
+            (data2[i].value * containerHeight) / maxValue,
+          ]);
+        }
+        if (data3.length) {
+          p3Array.push([
+            initialSpacing - dataPointsWidth3 / 2 + spacing * i,
+            containerHeight +
+            10 -
+            (data3[i].value * containerHeight) / maxValue,
           ]);
         }
       }
       let xx = svgPath(p1Array, bezierCommand);
       let xx2 = svgPath(p2Array, bezierCommand);
+      let xx3 = svgPath(p3Array, bezierCommand);
       // console.log('xx', xx);
       setPoints(xx);
       setPoints2(xx2);
+      setPoints3(xx3);
 
       /***************************          For Area Charts          *************************/
 
@@ -480,6 +573,37 @@ export const LineChart = (props: propTypes) => {
             ' ';
           setFillPoints2(xx2);
         }
+
+        if (data3.length) {
+          xx3 =
+            'M ' +
+            (initialSpacing - dataPointsWidth3 / 2) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ' +
+            'L ' +
+            (initialSpacing - dataPointsWidth3 / 2) +
+            ',' +
+            (containerHeight +
+              10 -
+              (data3[0].value * containerHeight) / maxValue) +
+            ' ' +
+            xx3 +
+            ' ' +
+            'L ' +
+            (initialSpacing -
+              dataPointsWidth3 / 2 +
+              spacing * (data3.length - 1)) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ' +
+            'L ' +
+            (initialSpacing - dataPointsWidth3 / 2) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          setFillPoints3(xx3);
+        }
       }
 
       /*************************************************************************************/
@@ -504,9 +628,9 @@ export const LineChart = (props: propTypes) => {
             justifyContent: 'center',
             // alignSelf: 'center'
           },
-          rotateLabel && {transform: [{rotate: '60deg'}]},
+          rotateLabel && { transform: [{ rotate: '60deg' }] },
         ]}>
-        <Text style={[labelTextStyle, {textAlign: 'center'}]} numberOfLines={1}>
+        <Text style={[labelTextStyle, { textAlign: 'center' }]} numberOfLines={1}>
           {label || ''}
         </Text>
       </View>
@@ -534,9 +658,9 @@ export const LineChart = (props: propTypes) => {
             left: initialSpacing + spacing * index - spacing / 2,
             opacity: appearingOpacity,
           },
-          rotateLabel && {transform: [{rotate: '60deg'}]},
+          rotateLabel && { transform: [{ rotate: '60deg' }] },
         ]}>
-        <Text style={[labelTextStyle, {textAlign: 'center'}]} numberOfLines={1}>
+        <Text style={[labelTextStyle, { textAlign: 'center' }]} numberOfLines={1}>
           {label || ''}
         </Text>
       </Animated.View>
@@ -567,9 +691,20 @@ export const LineChart = (props: propTypes) => {
       useNativeDriver: false,
     }).start();
   };
+
   const decreaseWidth2 = () => {
     widthValue2.setValue(0);
     Animated.timing(widthValue2, {
+      toValue: 1,
+      duration: animationDuration,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const decreaseWidth3 = () => {
+    widthValue3.setValue(0);
+    Animated.timing(widthValue3, {
       toValue: 1,
       duration: animationDuration,
       easing: Easing.linear,
@@ -583,6 +718,11 @@ export const LineChart = (props: propTypes) => {
   });
 
   const animatedWidth2 = widthValue2.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, totalWidth],
+  });
+
+  const animatedWidth3 = widthValue3.interpolate({
     inputRange: [0, 1],
     outputRange: [0, totalWidth],
   });
@@ -607,7 +747,7 @@ export const LineChart = (props: propTypes) => {
         {props.hideAxesAndRules !== true &&
           horizSections.map((sectionItems, index) => {
             return (
-              <View key={index} style={[styles.horizBar, {width: totalWidth}]}>
+              <View key={index} style={[styles.horizBar, { width: totalWidth }]}>
                 <View
                   style={[
                     styles.leftLabel,
@@ -631,13 +771,13 @@ export const LineChart = (props: propTypes) => {
                         ? sectionItems.value
                           ? sectionItems.value
                           : hideOrigin
-                          ? ''
-                          : '0'
+                            ? ''
+                            : '0'
                         : sectionItems.value
-                        ? sectionItems.value.toString().split('.')[0]
-                        : hideOrigin
-                        ? ''
-                        : '0'}
+                          ? sectionItems.value.toString().split('.')[0]
+                          : hideOrigin
+                            ? ''
+                            : '0'}
                     </Text>
                   ) : null}
                 </View>
@@ -656,7 +796,7 @@ export const LineChart = (props: propTypes) => {
                     <View
                       style={[
                         styles.lastLine,
-                        {height: xAxisThickness, backgroundColor: xAxisColor},
+                        { height: xAxisThickness, backgroundColor: xAxisColor },
                       ]}
                     />
                   ) : hideRules ? null : (
@@ -950,28 +1090,40 @@ export const LineChart = (props: propTypes) => {
 
           {!hideDataPoints1
             ? renderDataPoints(
-                data,
-                dataPointsShape1,
-                dataPointsWidth1,
-                dataPointsHeight1,
-                dataPointsColor1,
-                dataPointsRadius1,
-                textColor1,
-                textFontSize1,
-              )
+              data,
+              dataPointsShape1,
+              dataPointsWidth1,
+              dataPointsHeight1,
+              dataPointsColor1,
+              dataPointsRadius1,
+              textColor1,
+              textFontSize1,
+            )
             : renderSpecificDataPoints(data)}
           {!hideDataPoints2
             ? renderDataPoints(
-                data2,
-                dataPointsShape2,
-                dataPointsWidth2,
-                dataPointsHeight2,
-                dataPointsColor2,
-                dataPointsRadius2,
-                textColor2,
-                textFontSize2,
-              )
+              data2,
+              dataPointsShape2,
+              dataPointsWidth2,
+              dataPointsHeight2,
+              dataPointsColor2,
+              dataPointsRadius2,
+              textColor2,
+              textFontSize2,
+            )
             : renderSpecificDataPoints(data2)}
+          {!hideDataPoints3
+            ? renderDataPoints(
+              data3,
+              dataPointsShape3,
+              dataPointsWidth3,
+              dataPointsHeight3,
+              dataPointsColor3,
+              dataPointsRadius3,
+              textColor3,
+              textFontSize3,
+            )
+            : renderSpecificDataPoints(data3)}
         </Svg>
       </View>
     );
@@ -1044,27 +1196,27 @@ export const LineChart = (props: propTypes) => {
 
           {!hideDataPoints1
             ? renderDataPoints(
-                data,
-                dataPointsShape1,
-                dataPointsWidth1,
-                dataPointsHeight1,
-                dataPointsColor1,
-                dataPointsRadius1,
-                textColor1,
-                textFontSize1,
-              )
+              data,
+              dataPointsShape1,
+              dataPointsWidth1,
+              dataPointsHeight1,
+              dataPointsColor1,
+              dataPointsRadius1,
+              textColor1,
+              textFontSize1,
+            )
             : renderSpecificDataPoints(data)}
           {!hideDataPoints2
             ? renderDataPoints(
-                data2,
-                dataPointsShape2,
-                dataPointsWidth2,
-                dataPointsHeight2,
-                dataPointsColor2,
-                dataPointsRadius2,
-                textColor2,
-                textFontSize2,
-              )
+              data2,
+              dataPointsShape2,
+              dataPointsWidth2,
+              dataPointsHeight2,
+              dataPointsColor2,
+              dataPointsRadius2,
+              textColor2,
+              textFontSize2,
+            )
             : renderSpecificDataPoints(data2)}
         </Svg>
       </Animated.View>
@@ -1072,7 +1224,7 @@ export const LineChart = (props: propTypes) => {
   };
 
   return (
-    <View style={[styles.container, {height: containerHeight}]}>
+    <View style={[styles.container, { height: containerHeight }]}>
       {props.hideAxesAndRules !== true && renderHorizSections()}
       {/* {sectionsOverlay()} */}
       <ScrollView
@@ -1131,49 +1283,73 @@ export const LineChart = (props: propTypes) => {
 
         {isAnimated
           ? renderAnimatedLine(
-              points,
-              animatedWidth,
-              thickness1,
-              color1,
-              fillPoints,
-              startFillColor1,
-              endFillColor1,
-              startOpacity1,
-              endOpacity1,
-            )
+            points,
+            animatedWidth,
+            thickness1,
+            color1,
+            fillPoints,
+            startFillColor1,
+            endFillColor1,
+            startOpacity1,
+            endOpacity1,
+          )
           : renderLine(
-              points,
-              thickness1,
-              color1,
-              fillPoints,
-              startFillColor1,
-              endFillColor1,
-              startOpacity1,
-              endOpacity1,
-            )}
+            points,
+            thickness1,
+            color1,
+            fillPoints,
+            startFillColor1,
+            endFillColor1,
+            startOpacity1,
+            endOpacity1,
+          )}
         {points2
           ? isAnimated
             ? renderAnimatedLine(
-                points2,
-                animatedWidth2,
-                thickness2,
-                color2,
-                fillPoints2,
-                startFillColor2,
-                endFillColor2,
-                startOpacity2,
-                endOpacity2,
-              )
+              points2,
+              animatedWidth2,
+              thickness2,
+              color2,
+              fillPoints2,
+              startFillColor2,
+              endFillColor2,
+              startOpacity2,
+              endOpacity2,
+            )
             : renderLine(
-                points2,
-                thickness2,
-                color2,
-                fillPoints2,
-                startFillColor2,
-                endFillColor2,
-                startOpacity2,
-                endOpacity2,
-              )
+              points2,
+              thickness2,
+              color2,
+              fillPoints2,
+              startFillColor2,
+              endFillColor2,
+              startOpacity2,
+              endOpacity2,
+            )
+          : null}
+        {points3
+          ? isAnimated
+            ? renderAnimatedLine(
+              points3,
+              animatedWidth3,
+              thickness3,
+              color3,
+              fillPoints3,
+              startFillColor3,
+              endFillColor3,
+              startOpacity3,
+              endOpacity3,
+            )
+            : renderLine(
+              points3,
+              thickness3,
+              color3,
+              fillPoints3,
+              startFillColor3,
+              endFillColor3,
+              startOpacity3,
+              endOpacity3,
+            )
           : null}
         {data.map((item: itemType, index: number) => {
           // console.log('item', item)
