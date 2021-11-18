@@ -96,6 +96,7 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 | Issue | Solution |
 | ---- | ---- |
 | [When the isAnimated is enabled the labels are not showing for Bar Charts](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/18) | [Comment by Abhinav](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/18#issuecomment-971662656) |
+| [BarChart - Value and section line don't match](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35) | [Comment by the owner](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35#issuecomment-972673281) |
 
 ## License
 
