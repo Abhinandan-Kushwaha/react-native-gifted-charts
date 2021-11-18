@@ -1193,6 +1193,7 @@ export const LineChart = (props: propTypes) => {
 
           {renderSpecificVerticalLines(data)}
           {renderSpecificVerticalLines(data2)}
+          {renderSpecificVerticalLines(data3)}
 
           {!hideDataPoints1
             ? renderDataPoints(
@@ -1218,6 +1219,18 @@ export const LineChart = (props: propTypes) => {
               textFontSize2,
             )
             : renderSpecificDataPoints(data2)}
+          {!hideDataPoints3
+            ? renderDataPoints(
+              data3,
+              dataPointsShape3,
+              dataPointsWidth3,
+              dataPointsHeight3,
+              dataPointsColor3,
+              dataPointsRadius3,
+              textColor3,
+              textFontSize3,
+            )
+            : renderSpecificDataPoints(data3)}
         </Svg>
       </Animated.View>
     );

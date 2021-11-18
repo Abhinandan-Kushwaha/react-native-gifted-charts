@@ -6,6 +6,7 @@
 | ------------------- | -------------- | --------------------------------------------------------------------------------------- | ------------------- |
 | data                | Array of items | An item object represents a point in the line chart. It is described in the next table. | \_                  |
 | data2               | Array of items | Second set of dataPoint for the second line                                             | \_                  |
+| data3               | Array of items | Third set of dataPoint for the third line                                               | \_                  |
 | width               | number         | Width of the Bar chart                                                                  | width of the parent |
 | height              | number         | Height of the Bar chart (excluding the bottom label)                                    | 200                 |
 | maxValue            | number         | Maximum value shown in the Y axis                                                       | 200                 |
@@ -106,9 +107,11 @@ If you are adding showDataPoint to an item, you must set hideDataPoints prop to 
 | color      | ColorValue | Color of the lines joining the data points                   | black                  |
 | color1     | ColorValue | Color of the lines joining the first set of data points      | color (from props)     |
 | color2     | ColorValue | Color of the lines joining the second set of data points     | color (from props)     |
+| color3     | ColorValue | Color of the lines joining the third set of data points      | color (from props)     |
 | thickness  | number     | Thickness of the lines joining the data points               | 2                      |
 | thickness1 | number     | Thickness of the lines joining the first set of data points  | thickness (from props) |
 | thickness2 | number     | Thickness of the lines joining the second set of data points | thickness (from props) |
+| thickness3 | number     | Thickness of the lines joining the third set of data points  | thickness (from props) |
 | curved     | Boolean    | To show curved line joining the data points                  | false                  |
 
 ---
@@ -135,6 +138,12 @@ If you are adding showDataPoint to an item, you must set hideDataPoints prop to 
 | dataPointsRadius2 | number     | Radius of data points for the second dataset (when data points' shape is circular)    | 3             |
 | dataPointsColor2  | ColorValue | Color of data points for the second dataset                                           | blue          |
 | dataPointsShape2  | string     | Shape of data points for the second dataset (_'rectangular'_ or _'circular'_)         | 'circular'    |
+| hideDataPoints3   | Boolean    | To hide data points for the third set of data                                         | false         |
+| dataPointsHeight3 | number     | Height of data points for the third dataset (when data points' shape is rectangular)  | 2             |
+| dataPointsWidth3  | number     | Width of data points for the third dataset (when data points' shape is rectangular)   | 2             |
+| dataPointsRadius3 | number     | Radius of data points for the third dataset (when data points' shape is circular)     | 3             |
+| dataPointsColor3  | ColorValue | Color of data points for the third dataset                                            | red          |
+| dataPointsShape3  | string     | Shape of data points for the third dataset (_'rectangular'_ or _'circular'_)          | 'circular'    |
 | textColor         | ColorValue | Color of the dataPointText                                                            | 'black'       |
 | textFontSize      | number     | Font size of the dataPointText                                                        | \_            |
 | textShiftX        | number     | To shift the dataPointText text horizontally                                          | 0             |
@@ -159,6 +168,10 @@ If you are adding showDataPoint to an item, you must set hideDataPoints prop to 
 | endFillColor2     | ColorValue | End gradient color for the second dataset of the area chart    | white         |
 | startOpacity2     | number     | Start gradient color for the second dataset of the area chart  | 1             |
 | endOpacity2       | number     | End gradient opacity for the second dataset of the area chart  | 1             |
+| startFillColor3   | ColorValue | Start gradient color for the third dataset of the area chart   | gray          |
+| endFillColor3     | ColorValue | End gradient color for the third dataset of the area chart     | white         |
+| startOpacity3     | number     | Start gradient color for the third dataset of the area chart   | 1             |
+| endOpacity3       | number     | End gradient opacity for the third dataset of the area chart   | 1             |
 | gradientDirection | string     | Direction of the gradient (_'horizontal'_ or _'vertical'_)     | 'vertical'    |
 
 ```
