@@ -67,36 +67,61 @@ If you are adding showDataPoint to an item, you must set hideDataPoints prop to 
 
 ### Axes and rules related props
 
-| Prop                   | Type          | Description                                                            | Default value |
-| ---------------------- | ------------- | ---------------------------------------------------------------------- | ------------- |
-| xAxisColor             | ColorValue    | X axis color                                                           | black         |
-| xAxisThickness         | number        | X axis thickness                                                       | 1             |
-| yAxisColor             | ColorValue    | Y axis color                                                           | black         |
-| yAxisThickness         | number        | Y axis thickness                                                       | 1             |
-| yAxisLabelWidth        | number        | Width of the Y axis Label container                                    | 35            |
-| yAxisTextStyle         | object        | Style object for the Y axis text style                                 | \_            |
-| showFractionalValues   | Boolean       | Allow fractional values for the Y axis label                           | false         |
-| roundToDigits          | number        | Rounds the y axis values to given number of digits after decimal point | 1             |
-| hideYAxisText          | Boolean       | To hide Y axis label text                                              | false         |
-| rulesColor             | ColorValue    | Color of the horizontal rules                                          | lightgray     |
-| rulesThickness         | number        | Thickness of the horizontal rules                                      | 1             |
-| hideRules              | Boolean       | To hide the horizontal rules                                           | false         |
-| showVerticalLines      | Boolean       | To show vertical lines                                                 | false         |
-| verticalLinesColor     | ColorValue    | Color of the vertical lines                                            | lightgray     |
-| verticallinesThickness | number        | Thickness of the vertical lines                                        | 1             |
-| verticalLinesZIndex    | number        | Z index of the vertical lines                                          | -1            |
-| showXAxisIndices       | Boolean       | To show the pointers on the X axis                                     | false         |
-| xAxisIndicesHeight     | number        | Height of the pointers on the X axis                                   | 2             |
-| xAxisIndicesWidth      | number        | Width of the pointers on the X axis                                    | 4             |
-| xAxisIndicesColor      | ColorValue    | Color of the pointers on the X axis                                    | black         |
-| showYAxisIndices       | Boolean       | To show the pointers on the Y axis                                     | false         |
-| yAxisIndicesHeight     | number        | Height of the pointers on the Y axis                                   | 2             |
-| yAxisIndicesWidth      | number        | Width of the pointers on the Y axis                                    | 4             |
-| yAxisIndicesColor      | ColorValue    | Color of the pointers on the X axis                                    | black         |
-| yAxisIndicesColor      | Boolean       | To hide axes, rules, labels altogether                                 | false         |
-| yAxisLabelTexts        | Array<string> | Array of label texts to be displayed along y axis                      | null          |
-| rotateLabel            | Boolean       | To rotate the X axis labels (by 60deg)                                 | false         |
-| hideOrigin             | Boolean       | To hide the y Axis label at origin (i.e. 0)                            | false         |
+| Prop                   | Type                | Description                                                                        | Default value          |
+| ---------------------- | ------------------- | ---------------------------------------------------------------------------------- | ---------------------- |
+| xAxisColor             | ColorValue          | X axis color                                                                       | black                  |
+| xAxisThickness         | number              | X axis thickness                                                                   | 1                      |
+| yAxisColor             | ColorValue          | Y axis color                                                                       | black                  |
+| yAxisThickness         | number              | Y axis thickness                                                                   | 1                      |
+| yAxisLabelWidth        | number              | Width of the Y axis Label container                                                | 35                     |
+| yAxisTextStyle         | object              | Style object for the Y axis text style                                             | \_                     |
+| showFractionalValues   | Boolean             | Allow fractional values for the Y axis label                                       | false                  |
+| roundToDigits          | number              | Rounds the y axis values to given number of digits after decimal point             | 1                      |
+| hideYAxisText          | Boolean             | To hide Y axis label text                                                          | false                  |
+| rulesColor             | ColorValue          | Color of the horizontal rules                                                      | lightgray              |
+| rulesThickness         | number              | Thickness of the horizontal rules                                                  | 1                      |
+| hideRules              | Boolean             | To hide the horizontal rules                                                       | false                  |
+| rulesType              | String              | solid or dotted/dashed                                                             | solid                  |
+| dashWidth              | number              | width of each dash                                                                 | 4                      |
+| dashGap                | number              | gap between 2 dashes                                                               | 8                      |
+| showReferenceLine1     | Boolean             | show reference line                                                                | false                  |
+| referenceLine1Config   | referenceConfigType | properties of reference line like thickness, color etc (described below the table) | \_                     |
+| referenceLine1Position | number              | position of reference line                                                         | containerHeight / 2    |
+| showReferenceLine2     | Boolean             | show second reference line                                                         | false                  |
+| referenceLine2Config   | referenceConfigType | properties of reference line like thickness, color etc (described below the table) | \_                     |
+| referenceLine2Position | number              | position of second reference line                                                  | 3\*containerHeight / 2 |
+| showReferenceLine3     | Boolean             | show third reference line                                                          | false                  |
+| referenceLine3Config   | referenceConfigType | properties of reference line like thickness, color etc (described below the table) | \_                     |
+| referenceLine3Position | number              | position of third reference line                                                   | containerHeight / 3    |
+| showVerticalLines      | Boolean             | To show vertical lines                                                             | false                  |
+| verticalLinesColor     | ColorValue          | Color of the vertical lines                                                        | lightgray              |
+| verticallinesThickness | number              | Thickness of the vertical lines                                                    | 1                      |
+| verticalLinesZIndex    | number              | Z index of the vertical lines                                                      | -1                     |
+| showXAxisIndices       | Boolean             | To show the pointers on the X axis                                                 | false                  |
+| xAxisIndicesHeight     | number              | Height of the pointers on the X axis                                               | 2                      |
+| xAxisIndicesWidth      | number              | Width of the pointers on the X axis                                                | 4                      |
+| xAxisIndicesColor      | ColorValue          | Color of the pointers on the X axis                                                | black                  |
+| showYAxisIndices       | Boolean             | To show the pointers on the Y axis                                                 | false                  |
+| yAxisIndicesHeight     | number              | Height of the pointers on the Y axis                                               | 2                      |
+| yAxisIndicesWidth      | number              | Width of the pointers on the Y axis                                                | 4                      |
+| yAxisIndicesColor      | ColorValue          | Color of the pointers on the X axis                                                | black                  |
+| yAxisIndicesColor      | Boolean             | To hide axes, rules, labels altogether                                             | false                  |
+| yAxisLabelTexts        | Array<string>       | Array of label texts to be displayed along y axis                                  | null                   |
+| rotateLabel            | Boolean             | To rotate the X axis labels (by 60deg)                                             | false                  |
+| hideOrigin             | Boolean             | To hide the y Axis label at origin (i.e. 0)                                        | false                  |
+
+ReferenceConfigType has following properties-
+
+```js
+type referenceConfigType = {
+  thickness: number,
+  width: number,
+  color: ColorValue | String | any,
+  type: String,
+  dashWidth: number,
+  dashGap: number,
+};
+```
 
 ---
 
@@ -142,7 +167,7 @@ If you are adding showDataPoint to an item, you must set hideDataPoints prop to 
 | dataPointsHeight3 | number     | Height of data points for the third dataset (when data points' shape is rectangular)  | 2             |
 | dataPointsWidth3  | number     | Width of data points for the third dataset (when data points' shape is rectangular)   | 2             |
 | dataPointsRadius3 | number     | Radius of data points for the third dataset (when data points' shape is circular)     | 3             |
-| dataPointsColor3  | ColorValue | Color of data points for the third dataset                                            | red          |
+| dataPointsColor3  | ColorValue | Color of data points for the third dataset                                            | red           |
 | dataPointsShape3  | string     | Shape of data points for the third dataset (_'rectangular'_ or _'circular'_)          | 'circular'    |
 | textColor         | ColorValue | Color of the dataPointText                                                            | 'black'       |
 | textFontSize      | number     | Font size of the dataPointText                                                        | \_            |
