@@ -187,8 +187,37 @@ const App = () => {
       /> */}
       {toggle ? (
         <BarChart
+          // width={190}
           data={data}
           // horizontal
+          showReferenceLine1
+          referenceLine1Position={50}
+          referenceLine1Config={{
+            type: 'solid',
+            color: 'red',
+            thickness: 1,
+            dashWidth: 5,
+            dashGap: 13,
+          }}
+          showReferenceLine2
+          referenceLine2Position={10}
+          referenceLine2Config={{
+            type: 'solid',
+            // color: 'red',
+            thickness: 1,
+            dashWidth: 5,
+            dashGap: 13,
+          }}
+          showReferenceLine3
+          referenceLine3Position={20}
+          referenceLine3Config={{
+            type: 'solid',
+            color: 'red',
+            thickness: 1,
+            dashWidth: 5,
+            dashGap: 13,
+          }}
+          // showYAxisIndices
           isAnimated
           showGradient
           cappedBars
@@ -201,13 +230,19 @@ const App = () => {
           capThickness={4}
           barWidth={35}
           gradientColor={'rgba(200, 100, 244,0.8)'}
-          frontColor={'rgba(219, 182, 249,0.2)'}
+          frontColor={'rgb(78, 0, 142)'}
+          rulesType="dashed"
+          rulesColor={'rgba(0,200,0,0.4)'}
+          rulesThickness={1}
+          dashWidth={12}
+          dashGap={2}
         />
       ) : (
         <LineChart
+          // width={150}
           data={data}
           areaChart
-          initialSpacing={0}
+          initialSpacing={10}
           curved
           isAnimated
           showGradient

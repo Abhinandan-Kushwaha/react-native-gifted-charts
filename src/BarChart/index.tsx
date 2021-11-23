@@ -3,6 +3,7 @@ import {View, FlatList, Animated, Easing, Text, ColorValue} from 'react-native';
 import {styles} from './styles';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
+import Rule from '../Components/lineSvg';
 
 type PropTypes = {
   width?: number;
@@ -41,6 +42,18 @@ type PropTypes = {
   hideRules?: Boolean;
   rulesColor?: ColorValue;
   rulesThickness?: number;
+  rulesType?: String;
+  dashWidth?: number;
+  dashGap?: number;
+  showReferenceLine1?: Boolean;
+  referenceLine1Config?: referenceConfigType;
+  referenceLine1Position?: number;
+  showReferenceLine2?: Boolean;
+  referenceLine2Config?: referenceConfigType;
+  referenceLine2Position?: number;
+  showReferenceLine3?: Boolean;
+  referenceLine3Config?: referenceConfigType;
+  referenceLine3Position?: number;
   showVerticalLines?: Boolean;
   verticalLinesThickness?: number;
   verticalLinesColor?: ColorValue;
@@ -82,6 +95,14 @@ type PropTypes = {
   hideOrigin?: Boolean;
   labelWidth?: number;
   yAxisLabelTexts?: Array<string>;
+};
+type referenceConfigType = {
+  thickness: number;
+  width: number;
+  color: ColorValue | String | any;
+  type: String;
+  dashWidth: number;
+  dashGap: number;
 };
 type sectionType = {
   value: string;
@@ -209,6 +230,78 @@ export const BarChart = (props: PropTypes) => {
   const intactTopLabel = props.intactTopLabel || false;
   const hideOrigin = props.hideOrigin || false;
 
+  const rulesType = props.rulesType || 'line';
+  const dashWidth = props.dashWidth === 0 ? 0 : props.dashWidth || 4;
+  const dashGap = props.dashGap === 0 ? 0 : props.dashGap || 8;
+
+  const defaultReferenceConfig = {
+    thickness: rulesThickness,
+    width: horizontal
+      ? props.width || totalWidth
+      : (props.width || totalWidth) + 11,
+    color: 'black',
+    type: rulesType,
+    dashWidth: dashWidth,
+    dashGap: dashGap,
+  };
+
+  const showReferenceLine1 = props.showReferenceLine1 || false;
+  const referenceLine1Position =
+    props.referenceLine1Position === 0
+      ? 0
+      : props.referenceLine1Position || containerHeight / 2;
+  const referenceLine1Config = props.referenceLine1Config
+    ? {
+        thickness: props.referenceLine1Config.thickness || rulesThickness,
+        width: horizontal
+          ? props.referenceLine1Config.width || props.width || totalWidth
+          : (props.referenceLine1Config.width || props.width || totalWidth) +
+            11,
+        color: props.referenceLine1Config.color || 'black',
+        type: props.referenceLine1Config.type || rulesType,
+        dashWidth: props.referenceLine1Config.dashWidth || dashWidth,
+        dashGap: props.referenceLine1Config.dashGap || dashGap,
+      }
+    : defaultReferenceConfig;
+
+  const showReferenceLine2 = props.showReferenceLine2 || false;
+  const referenceLine2Position =
+    props.referenceLine2Position === 0
+      ? 0
+      : props.referenceLine2Position || (3 * containerHeight) / 2;
+  const referenceLine2Config = props.referenceLine2Config
+    ? {
+        thickness: props.referenceLine2Config.thickness || rulesThickness,
+        width: horizontal
+          ? props.referenceLine2Config.width || props.width || totalWidth
+          : (props.referenceLine2Config.width || props.width || totalWidth) +
+            11,
+        color: props.referenceLine2Config.color || 'black',
+        type: props.referenceLine2Config.type || rulesType,
+        dashWidth: props.referenceLine2Config.dashWidth || dashWidth,
+        dashGap: props.referenceLine2Config.dashGap || dashGap,
+      }
+    : defaultReferenceConfig;
+
+  const showReferenceLine3 = props.showReferenceLine3 || false;
+  const referenceLine3Position =
+    props.referenceLine3Position === 0
+      ? 0
+      : props.referenceLine3Position || containerHeight / 3;
+  const referenceLine3Config = props.referenceLine3Config
+    ? {
+        thickness: props.referenceLine3Config.thickness || rulesThickness,
+        width: horizontal
+          ? props.referenceLine3Config.width || props.width || totalWidth
+          : (props.referenceLine3Config.width || props.width || totalWidth) +
+            11,
+        color: props.referenceLine3Config.color || 'black',
+        type: props.referenceLine3Config.type || rulesType,
+        dashWidth: props.referenceLine3Config.dashWidth || dashWidth,
+        dashGap: props.referenceLine3Config.dashGap || dashGap,
+      }
+    : defaultReferenceConfig;
+
   horizSections.pop();
   for (let i = 0; i <= noOfSections; i++) {
     let value = maxValue - stepValue * i;
@@ -264,7 +357,16 @@ export const BarChart = (props: PropTypes) => {
       <>
         {horizSections.map((sectionItems, index) => {
           return (
-            <View key={index} style={[styles.horizBar, {width: totalWidth}]}>
+            <View
+              key={index}
+              style={[
+                styles.horizBar,
+                {
+                  width: horizontal
+                    ? props.width || totalWidth
+                    : props.width || totalWidth + 11,
+                },
+              ]}>
               <View
                 style={[
                   styles.leftLabel,
@@ -325,16 +427,58 @@ export const BarChart = (props: PropTypes) => {
                     ]}
                   />
                 ) : hideRules ? null : (
-                  <View
-                    style={[
-                      styles.line,
-                      {
-                        height: rulesThickness,
-                        backgroundColor: rulesColor,
-                      },
-                    ]}
+                  <Rule
+                    config={{
+                      thickness: rulesThickness,
+                      color: rulesColor,
+                      width: horizontal
+                        ? props.width || totalWidth
+                        : (props.width || totalWidth) + 11,
+                      dashWidth: dashWidth,
+                      dashGap: dashGap,
+                      type: rulesType,
+                    }}
                   />
                 )}
+                {index === 0 && showReferenceLine1 ? (
+                  <View
+                    style={{
+                      position: 'absolute',
+                      bottom:
+                        (referenceLine1Position * containerHeight) / maxValue +
+                        stepHeight / 2 -
+                        referenceLine1Config.thickness / 2,
+                      transform: [{translateY: containerHeight}],
+                    }}>
+                    <Rule config={referenceLine1Config} />
+                  </View>
+                ) : null}
+                {index === 0 && showReferenceLine2 ? (
+                  <View
+                    style={{
+                      position: 'absolute',
+                      bottom:
+                        (referenceLine2Position * containerHeight) / maxValue +
+                        stepHeight / 2 -
+                        referenceLine2Config.thickness / 2,
+                      transform: [{translateY: containerHeight}],
+                    }}>
+                    <Rule config={referenceLine2Config} />
+                  </View>
+                ) : null}
+                {index === 0 && showReferenceLine3 ? (
+                  <View
+                    style={{
+                      position: 'absolute',
+                      bottom:
+                        (referenceLine3Position * containerHeight) / maxValue +
+                        stepHeight / 2 -
+                        referenceLine3Config.thickness / 2,
+                      transform: [{translateY: containerHeight}],
+                    }}>
+                    <Rule config={referenceLine3Config} />
+                  </View>
+                ) : null}
                 {showYAxisIndices && index !== noOfSections ? (
                   <View
                     style={[
@@ -380,16 +524,20 @@ export const BarChart = (props: PropTypes) => {
             position: 'absolute',
             bottom: stepHeight * -0.5 - 60 + xAxisThickness,
           },
+          props.width && {width: props.width - 11},
           horizontal && {width: totalWidth},
         ]}
         scrollEnabled={!disableScroll}
-        contentContainerStyle={{
-          height: containerHeight + 130,
-          width: totalWidth,
-          paddingLeft:
-            ((data && data[0] && data[0].barWidth) || props.barWidth || 30) / 2,
-          alignItems: 'flex-end',
-        }}
+        contentContainerStyle={[
+          {
+            height: containerHeight + 130,
+            paddingLeft:
+              ((data && data[0] && data[0].barWidth) || props.barWidth || 30) /
+              2,
+            alignItems: 'flex-end',
+          },
+          !props.width && {width: totalWidth},
+        ]}
         showsHorizontalScrollIndicator={showScrollIndicator}
         horizontal
         data={props.stackData || data}
