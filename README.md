@@ -11,7 +11,7 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 3. Smooth animations implemented using LayoutAnimation
 4. Clickable and scrollable
 5. Three-D and gradient effects
-6. Fully customizable
+6. Fully customizable (see the [props](docs/docs.md))
 7. Detailed [documentation](https://gifted-charts.web.app/) with examples
 
 ---
