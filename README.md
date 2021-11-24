@@ -84,6 +84,12 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 
 ## Contributing
 
+_Dear developers_! Your small contribution can make someone's day 😊
+
+One of the ways you can contribute is to address an [open issue](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues).
+
+Sometimes people report issues which don't exist, or request for features which are already present. Such issues can be addressed without pushing any code to the repo. Just show them in the comments how to do it.
+
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
 ## Common issues
