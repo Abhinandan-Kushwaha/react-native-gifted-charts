@@ -11,8 +11,9 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 3. Smooth animations implemented using LayoutAnimation
 4. Clickable and scrollable
 5. Three-D and gradient effects
-6. Fully customizable
-7. Detailed documentation with examples
+6. Fully customizable (see the [props](docs/docs.md))
+7. Detailed [documentation](https://gifted-charts.web.app/) with examples
+8. Support for **_combined_** Bar and Line charts
 
 ---
 
@@ -29,13 +30,7 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 ## Installation
 
 ```sh
-npm install react-native-gifted-charts react-native-linear-gradient
-```
-
-For Line and Area charts, add the react-native-svg package too -
-
-```
-npm install react-native-svg
+npm install react-native-gifted-charts react-native-linear-gradient react-native-svg
 ```
 
 For Pie chart and Donut chart, these additional packages should be installed-
@@ -88,6 +83,12 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 **[3. PieChart and DonutChart props](docs/PieChart/PieChartProps.md)**
 
 ## Contributing
+
+_Dear developers_! Your small contribution can make someone's day 😊
+
+One of the ways you can contribute is to address an [open issue](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues).
+
+Sometimes people report issues which don't exist, or request for features which are already present. Such issues can be addressed without pushing any code to the repo. Just show them in the comments how to do it.
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
