@@ -1,9 +1,24 @@
-import React, {useEffect} from 'react';
-import {View, FlatList, Animated, Easing, Text, ColorValue} from 'react-native';
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
+import {
+  View,
+  Animated,
+  Easing,
+  Text,
+  ColorValue,
+  ScrollView,
+} from 'react-native';
 import {styles} from './styles';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
 import Rule from '../Components/lineSvg';
+import {bezierCommand, svgPath} from '../utils';
+import Svg, {Circle, Path, Rect, Text as CanvasText} from 'react-native-svg';
 
 type PropTypes = {
   width?: number;
@@ -19,7 +34,7 @@ type PropTypes = {
   rotateLabel?: Boolean;
   isAnimated?: Boolean;
   animationDuration?: number;
-  animationEasing?: any;
+  // animationEasing?: any;
   opacity?: number;
   isThreeD?: Boolean;
   xAxisThickness?: number;
@@ -32,6 +47,8 @@ type PropTypes = {
   initialSpacing?: number;
   barWidth?: number;
   sideWidth?: number;
+  showLine?: Boolean;
+  lineConfig?: lineConfigType;
 
   cappedBars?: Boolean;
   capThickness?: number;
@@ -96,6 +113,24 @@ type PropTypes = {
   labelWidth?: number;
   yAxisLabelTexts?: Array<string>;
 };
+type lineConfigType = {
+  curved?: Boolean;
+  isAnimated?: Boolean;
+  delay?: number;
+  thickness?: number;
+  color?: ColorValue | String | any;
+  hideDataPoints?: Boolean;
+  dataPointsShape?: String;
+  dataPointsWidth?: number;
+  dataPointsHeight?: number;
+  dataPointsColor?: ColorValue | String | any;
+  dataPointsRadius?: number;
+  textColor?: ColorValue | String | any;
+  textFontSize?: number;
+  textShiftX?: number;
+  textShiftY?: number;
+  shiftY?: number;
+};
 type referenceConfigType = {
   thickness: number;
   width: number;
@@ -127,11 +162,60 @@ type itemType = {
 };
 
 export const BarChart = (props: PropTypes) => {
+  const [points, setPoints] = useState('');
+  const showLine = props.showLine || false;
+  const defaultLineConfig = {
+    curved: false,
+    isAnimated: false,
+    thickness: 1,
+    color: 'black',
+    hideDataPoints: false,
+    dataPointsShape: 'circular',
+    dataPointsWidth: 2,
+    dataPointsHeight: 2,
+    dataPointsColor: 'black',
+    dataPointsRadius: 3,
+    textColor: 'gray',
+    textFontSize: 10,
+    textShiftX: 0,
+    textShiftY: 0,
+    shiftY: 0,
+    delay: 0,
+  };
+  const lineConfig = props.lineConfig
+    ? {
+        curved: props.lineConfig.curved || defaultLineConfig.curved,
+        isAnimated: props.lineConfig.isAnimated || defaultLineConfig.isAnimated,
+        thickness: props.lineConfig.thickness || defaultLineConfig.thickness,
+        color: props.lineConfig.color || defaultLineConfig.color,
+        hideDataPoints:
+          props.lineConfig.hideDataPoints || defaultLineConfig.hideDataPoints,
+        dataPointsShape:
+          props.lineConfig.dataPointsShape || defaultLineConfig.dataPointsShape,
+        dataPointsHeight:
+          props.lineConfig.dataPointsHeight ||
+          defaultLineConfig.dataPointsHeight,
+        dataPointsWidth:
+          props.lineConfig.dataPointsWidth || defaultLineConfig.dataPointsWidth,
+        dataPointsColor:
+          props.lineConfig.dataPointsColor || defaultLineConfig.dataPointsColor,
+        dataPointsRadius:
+          props.lineConfig.dataPointsRadius ||
+          defaultLineConfig.dataPointsRadius,
+        textColor: props.lineConfig.textColor || defaultLineConfig.textColor,
+        textFontSize:
+          props.lineConfig.textFontSize || defaultLineConfig.textFontSize,
+        textShiftX: props.lineConfig.textShiftX || defaultLineConfig.textShiftX,
+        textShiftY: props.lineConfig.textShiftY || defaultLineConfig.textShiftY,
+        shiftY: props.lineConfig.shiftY || defaultLineConfig.shiftY,
+        delay: props.lineConfig.delay || defaultLineConfig.delay,
+      }
+    : defaultLineConfig;
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
   const horizSections = [{value: '0'}];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
-  const data = props.data || [];
+  const data = useMemo(() => props.data || [], [props.data]);
   const spacing = props.spacing === 0 ? 0 : props.spacing ? props.spacing : 20;
   const labelWidth = props.labelWidth || 0;
 
@@ -184,7 +268,7 @@ export const BarChart = (props: PropTypes) => {
   const rotateLabel = props.rotateLabel || false;
   const isAnimated = props.isAnimated || false;
   const animationDuration = props.animationDuration || 800;
-  const animationEasing = props.animationEasing || Easing.ease;
+  // const animationEasing = props.animationEasing || Easing.ease;
   const opacity = props.opacity || 1;
   const isThreeD = props.isThreeD || false;
 
@@ -233,6 +317,108 @@ export const BarChart = (props: PropTypes) => {
   const rulesType = props.rulesType || 'line';
   const dashWidth = props.dashWidth === 0 ? 0 : props.dashWidth || 4;
   const dashGap = props.dashGap === 0 ? 0 : props.dashGap || 8;
+
+  const heightValue = useMemo(() => new Animated.Value(0), []);
+  const opacValue = useMemo(() => new Animated.Value(0), []);
+  const widthValue = useMemo(() => new Animated.Value(0), []);
+
+  const labelsAppear = useCallback(() => {
+    opacValue.setValue(0);
+    Animated.timing(opacValue, {
+      toValue: 1,
+      duration: 500,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  }, [opacValue]);
+  // const moveBar = useCallback(() => {
+  //   heightValue.setValue(0);
+  //   Animated.timing(heightValue, {
+  //     toValue: 1,
+  //     duration: animationDuration,
+  //     easing: animationEasing,
+  //     useNativeDriver: false,
+  //   }).start();
+  // }, [animationDuration, animationEasing, heightValue]);
+
+  const decreaseWidth = useCallback(() => {
+    widthValue.setValue(0);
+    Animated.timing(widthValue, {
+      toValue: 1,
+      duration: animationDuration,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start();
+  }, [animationDuration, widthValue]);
+  // console.log('olddata', oldData);
+
+  useEffect(() => {
+    if (showLine) {
+      let pp = '';
+      if (!lineConfig.curved) {
+        for (let i = 0; i < data.length; i++) {
+          const currentBarWidth =
+            (data && data[i] && data[i].barWidth) || props.barWidth || 30;
+          pp +=
+            'L' +
+            (yAxisLabelWidth +
+              6 -
+              (initialSpacing - currentBarWidth / 2) -
+              lineConfig.dataPointsWidth / 2 +
+              (currentBarWidth + spacing) * i) +
+            ' ' +
+            (containerHeight -
+              lineConfig.shiftY +
+              10 -
+              (data[i].value * containerHeight) / maxValue) +
+            ' ';
+        }
+        setPoints(pp.replace('L', 'M'));
+      } else {
+        let p1Array = [];
+        for (let i = 0; i < data.length; i++) {
+          const currentBarWidth =
+            (data && data[i] && data[i].barWidth) || props.barWidth || 30;
+          p1Array.push([
+            yAxisLabelWidth +
+              6 -
+              (initialSpacing - currentBarWidth / 2) -
+              lineConfig.dataPointsWidth / 2 +
+              (currentBarWidth + spacing) * i,
+            containerHeight -
+              lineConfig.shiftY +
+              10 -
+              (data[i].value * containerHeight) / maxValue,
+          ]);
+          let xx = svgPath(p1Array, bezierCommand);
+          setPoints(xx);
+        }
+      }
+      if (lineConfig.isAnimated) {
+        setTimeout(() => decreaseWidth(), lineConfig.delay || 0);
+      }
+    }
+    // moveBar();
+    setTimeout(() => labelsAppear(), animationDuration);
+  }, [
+    animationDuration,
+    containerHeight,
+    data,
+    decreaseWidth,
+    initialSpacing,
+    labelsAppear,
+    lineConfig.curved,
+    lineConfig.dataPointsWidth,
+    lineConfig.shiftY,
+    lineConfig.isAnimated,
+    lineConfig.delay,
+    maxValue,
+    // moveBar,
+    props.barWidth,
+    showLine,
+    spacing,
+    yAxisLabelWidth,
+  ]);
 
   const defaultReferenceConfig = {
     thickness: rulesThickness,
@@ -315,34 +501,6 @@ export const BarChart = (props: PropTypes) => {
     });
   }
 
-  const heightValue = new Animated.Value(0);
-  const opacValue = new Animated.Value(0);
-
-  const labelsAppear = () => {
-    opacValue.setValue(0);
-    Animated.timing(opacValue, {
-      toValue: 1,
-      duration: 500,
-      easing: Easing.ease,
-      useNativeDriver: false,
-    }).start();
-  };
-  const moveBar = () => {
-    heightValue.setValue(0);
-    Animated.timing(heightValue, {
-      toValue: 1,
-      duration: animationDuration,
-      easing: animationEasing,
-      useNativeDriver: false,
-    }).start();
-  };
-  // console.log('olddata', oldData);
-
-  useEffect(() => {
-    moveBar();
-    setTimeout(() => labelsAppear(), animationDuration);
-  }, []);
-
   const animatedHeight = heightValue.interpolate({
     inputRange: [0, 1],
     outputRange: ['0%', '100%'],
@@ -350,6 +508,11 @@ export const BarChart = (props: PropTypes) => {
   const appearingOpacity = opacValue.interpolate({
     inputRange: [0, 1],
     outputRange: [0, 1],
+  });
+
+  const animatedWidth = widthValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, totalWidth],
   });
 
   const renderHorizSections = () => {
@@ -506,6 +669,289 @@ export const BarChart = (props: PropTypes) => {
     );
   };
 
+  const renderSpecificVerticalLines = (dataForRender: any) => {
+    return dataForRender.map((item: any, index: number) => {
+      if (item.showVerticalLine) {
+        const currentBarWidth = item.barWidth || props.barWidth || 30;
+        return (
+          <Rect
+            x={
+              yAxisLabelWidth +
+              6 -
+              (item.verticalLineThickness || 1) / 2 -
+              1 -
+              (initialSpacing - currentBarWidth / 2) +
+              (currentBarWidth + spacing) * index
+            }
+            y={
+              containerHeight -
+              lineConfig.shiftY -
+              (item.value * containerHeight) / maxValue +
+              9
+            }
+            width={item.verticalLineThickness || 1}
+            height={
+              (item.value * containerHeight) / maxValue + lineConfig.shiftY
+            }
+            fill={item.verticalLineColor || 'lightgray'}
+          />
+        );
+      }
+      return null;
+    });
+  };
+
+  const renderDataPoints = () => {
+    return data.map((item: any, index: number) => {
+      // console.log('comes in');
+      const currentBarWidth = item.barWidth || props.barWidth || 30;
+      if (lineConfig.dataPointsShape === 'rectangular') {
+        return (
+          <Fragment key={index}>
+            <Rect
+              x={
+                yAxisLabelWidth +
+                6 -
+                (initialSpacing - currentBarWidth / 2) -
+                lineConfig.dataPointsWidth +
+                (currentBarWidth + spacing) * index
+              }
+              y={
+                containerHeight -
+                lineConfig.shiftY -
+                lineConfig.dataPointsHeight / 2 +
+                10 -
+                (item.value * containerHeight) / maxValue
+              }
+              width={lineConfig.dataPointsWidth}
+              height={lineConfig.dataPointsHeight}
+              fill={lineConfig.dataPointsColor}
+            />
+            {item.dataPointText && (
+              <CanvasText
+                fill={item.textColor || lineConfig.textColor}
+                fontSize={item.textFontSize || lineConfig.textFontSize}
+                x={
+                  yAxisLabelWidth +
+                  6 -
+                  (initialSpacing - currentBarWidth / 2) -
+                  lineConfig.dataPointsWidth +
+                  (currentBarWidth + spacing) * index +
+                  (item.textShiftX || lineConfig.textShiftX || 0)
+                }
+                y={
+                  containerHeight -
+                  lineConfig.shiftY -
+                  lineConfig.dataPointsHeight / 2 +
+                  10 -
+                  (item.value * containerHeight) / maxValue +
+                  (item.textShiftY || lineConfig.textShiftY || 0)
+                }>
+                {item.dataPointText}
+              </CanvasText>
+            )}
+          </Fragment>
+        );
+      }
+      return (
+        <Fragment key={index}>
+          <Circle
+            cx={
+              yAxisLabelWidth +
+              6 -
+              (initialSpacing - currentBarWidth / 2) -
+              lineConfig.dataPointsWidth / 2 +
+              (currentBarWidth + spacing) * index
+            }
+            cy={
+              containerHeight -
+              lineConfig.shiftY +
+              10 -
+              (item.value * containerHeight) / maxValue
+            }
+            r={lineConfig.dataPointsRadius}
+            fill={lineConfig.dataPointsColor}
+          />
+          {item.dataPointText && (
+            <CanvasText
+              fill={item.textColor || lineConfig.textColor}
+              fontSize={item.textFontSize || lineConfig.textFontSize}
+              x={
+                yAxisLabelWidth +
+                6 -
+                (initialSpacing - currentBarWidth / 2) -
+                lineConfig.dataPointsWidth +
+                (currentBarWidth + spacing) * index +
+                (item.textShiftX || lineConfig.textShiftX || 0)
+              }
+              y={
+                containerHeight -
+                lineConfig.shiftY -
+                lineConfig.dataPointsHeight / 2 +
+                10 -
+                (item.value * containerHeight) / maxValue +
+                (item.textShiftY || lineConfig.textShiftY || 0)
+              }>
+              {item.dataPointText}
+            </CanvasText>
+          )}
+        </Fragment>
+      );
+    });
+  };
+  const renderSpecificDataPoints = dataForRender => {
+    return dataForRender.map((item: any, index: number) => {
+      const currentBarWidth = item.barWidth || props.barWidth || 30;
+      if (item.showDataPoint) {
+        if (item.dataPointShape === 'rectangular') {
+          return (
+            <Fragment key={index}>
+              <Rect
+                x={
+                  initialSpacing -
+                  (item.dataPointWidth || 2) / 2 -
+                  1 +
+                  (currentBarWidth + spacing) * index
+                }
+                y={
+                  containerHeight -
+                  lineConfig.shiftY -
+                  (item.dataPointHeight || 2) / 2 +
+                  10 -
+                  (item.value * containerHeight) / maxValue
+                }
+                width={item.dataPointWidth || 2}
+                height={item.dataPointHeight || 2}
+                fill={item.dataPointColor || 'black'}
+              />
+              {item.dataPointText && (
+                <CanvasText
+                  fill={item.textColor || 'black'}
+                  fontSize={item.textFontSize || 10}
+                  x={
+                    initialSpacing -
+                    (item.dataPointWidth || 2) +
+                    spacing * index +
+                    (item.textShiftX || lineConfig.textShiftX || 0)
+                  }
+                  y={
+                    containerHeight -
+                    lineConfig.shiftY -
+                    (item.dataPointHeight || 2) / 2 +
+                    10 -
+                    (item.value * containerHeight) / maxValue +
+                    (item.textShiftY || lineConfig.textShiftY || 0)
+                  }>
+                  {item.dataPointText}
+                </CanvasText>
+              )}
+            </Fragment>
+          );
+        } else {
+          return (
+            <Fragment key={index}>
+              <Circle
+                cx={
+                  initialSpacing -
+                  (item.dataPointWidth || 2) / 2 +
+                  spacing * index
+                }
+                cy={
+                  containerHeight -
+                  lineConfig.shiftY +
+                  10 -
+                  (item.value * containerHeight) / maxValue
+                }
+                r={item.dataPointRadius || 3}
+                fill={item.dataPointColor || 'black'}
+              />
+              {item.dataPointText && (
+                <CanvasText
+                  fill={item.textColor || 'black'}
+                  fontSize={item.textFontSize || 10}
+                  x={
+                    initialSpacing -
+                    (item.dataPointWidth || 2) +
+                    spacing * index +
+                    (item.textShiftX || lineConfig.textShiftX || 0)
+                  }
+                  y={
+                    containerHeight -
+                    lineConfig.shiftY -
+                    (item.dataPointHeight || 2) / 2 +
+                    10 -
+                    (item.value * containerHeight) / maxValue +
+                    (item.textShiftY || lineConfig.textShiftY || 0)
+                  }>
+                  {item.dataPointText}
+                </CanvasText>
+              )}
+            </Fragment>
+          );
+        }
+      }
+      return null;
+    });
+  };
+
+  const renderAnimatedLine = () => {
+    // console.log('animatedWidth is-------->', animatedWidth);
+    return (
+      <Animated.View
+        style={{
+          position: 'absolute',
+          height: containerHeight + 10,
+          bottom: 60, //stepHeight * -0.5 + xAxisThickness,
+          width: animatedWidth,
+          zIndex: -1,
+          // backgroundColor: 'wheat',
+        }}>
+        <Svg>
+          <Path
+            d={points}
+            fill="none"
+            stroke={lineConfig.color}
+            strokeWidth={lineConfig.thickness}
+          />
+
+          {renderSpecificVerticalLines(data)}
+
+          {!lineConfig.hideDataPoints
+            ? renderDataPoints()
+            : renderSpecificDataPoints(data)}
+        </Svg>
+      </Animated.View>
+    );
+  };
+
+  const renderLine = () => {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          height: containerHeight + 10,
+          bottom: 60, //stepHeight * -0.5 + xAxisThickness,
+          width: totalWidth,
+          zIndex: -1,
+          // backgroundColor: 'rgba(200,150,150,0.1)'
+        }}>
+        <Svg>
+          <Path
+            d={points}
+            fill="none"
+            stroke={lineConfig.color}
+            strokeWidth={lineConfig.thickness}
+          />
+          {renderSpecificVerticalLines(data)}
+
+          {!lineConfig.hideDataPoints
+            ? renderDataPoints()
+            : renderSpecificDataPoints(data)}
+        </Svg>
+      </View>
+    );
+  };
+
   return (
     <View
       style={[
@@ -517,10 +963,10 @@ export const BarChart = (props: PropTypes) => {
         horizontal && {transform: [{rotate: '90deg'}, {translateY: -15}]},
       ]}>
       {props.hideAxesAndRules !== true && renderHorizSections()}
-      <FlatList
+      <ScrollView
         style={[
           {
-            marginLeft: initialSpacing + 6,
+            marginLeft: 36,
             position: 'absolute',
             bottom: stepHeight * -0.5 - 60 + xAxisThickness,
           },
@@ -530,94 +976,99 @@ export const BarChart = (props: PropTypes) => {
         scrollEnabled={!disableScroll}
         contentContainerStyle={[
           {
+            // backgroundColor: 'yellow',
             height: containerHeight + 130,
-            paddingLeft:
-              ((data && data[0] && data[0].barWidth) || props.barWidth || 30) /
-              2,
+            paddingLeft: initialSpacing,
             alignItems: 'flex-end',
           },
           !props.width && {width: totalWidth},
         ]}
         showsHorizontalScrollIndicator={showScrollIndicator}
         horizontal
-        data={props.stackData || data}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({item, index}) => {
-          // console.log('index--->', index);
-          // console.log('itemhere--->', item);
-          if (props.stackData) {
-            return (
-              <RenderStackBars
-                item={item}
-                index={index}
-                containerHeight={containerHeight}
-                maxValue={maxValue}
-                spacing={spacing}
-                barWidth={props.barWidth}
-                opacity={opacity}
-                disablePress={props.disablePress}
-                rotateLabel={rotateLabel}
-                showVerticalLines={showVerticalLines}
-                verticalLinesThickness={verticalLinesThickness}
-                verticalLinesColor={verticalLinesColor}
-                verticalLinesZIndex={verticalLinesZIndex}
-                showXAxisIndices={showXAxisIndices}
-                xAxisIndicesHeight={xAxisIndicesHeight}
-                xAxisIndicesWidth={xAxisIndicesWidth}
-                xAxisIndicesColor={xAxisIndicesColor}
-                horizontal={horizontal}
-                intactTopLabel={intactTopLabel}
-                barBorderRadius={props.barBorderRadius}
-              />
-            );
-          }
-          return (
-            <RenderBars
-              item={item}
-              index={index}
-              containerHeight={containerHeight}
-              maxValue={maxValue}
-              spacing={item.spacing === 0 ? 0 : item.spacing || spacing}
-              side={side}
-              data={data}
-              barWidth={props.barWidth}
-              sideWidth={props.sideWidth}
-              labelWidth={labelWidth}
-              opacity={opacity}
-              isThreeD={isThreeD}
-              isAnimated={isAnimated}
-              animationDuration={animationDuration}
-              rotateLabel={rotateLabel}
-              animatedHeight={animatedHeight}
-              appearingOpacity={appearingOpacity}
-              roundedTop={props.roundedTop}
-              roundedBottom={props.roundedBottom}
-              disablePress={props.disablePress}
-              frontColor={props.frontColor}
-              sideColor={props.sideColor}
-              topColor={props.topColor}
-              showGradient={props.showGradient}
-              gradientColor={props.gradientColor}
-              activeOpacity={props.activeOpacity}
-              cappedBars={props.cappedBars}
-              capThickness={props.capThickness}
-              capColor={props.capColor}
-              capRadius={props.capRadius}
-              showVerticalLines={showVerticalLines}
-              verticalLinesThickness={verticalLinesThickness}
-              verticalLinesColor={verticalLinesColor}
-              verticalLinesZIndex={verticalLinesZIndex}
-              showXAxisIndices={showXAxisIndices}
-              xAxisIndicesHeight={xAxisIndicesHeight}
-              xAxisIndicesWidth={xAxisIndicesWidth}
-              xAxisIndicesColor={xAxisIndicesColor}
-              horizontal={horizontal}
-              intactTopLabel={intactTopLabel}
-              barBorderRadius={props.barBorderRadius}
-            />
-          );
-        }}
-      />
+        // data={props.stackData || data}
+        keyExtractor={(item, index) => index.toString()}>
+        <Fragment>
+          {showLine
+            ? lineConfig.isAnimated
+              ? renderAnimatedLine()
+              : renderLine()
+            : null}
+          {props.stackData
+            ? props.stackData.map((item, index) => {
+                return (
+                  <RenderStackBars
+                    key={index}
+                    item={item}
+                    index={index}
+                    containerHeight={containerHeight}
+                    maxValue={maxValue}
+                    spacing={spacing}
+                    barWidth={props.barWidth}
+                    opacity={opacity}
+                    disablePress={props.disablePress}
+                    rotateLabel={rotateLabel}
+                    showVerticalLines={showVerticalLines}
+                    verticalLinesThickness={verticalLinesThickness}
+                    verticalLinesColor={verticalLinesColor}
+                    verticalLinesZIndex={verticalLinesZIndex}
+                    showXAxisIndices={showXAxisIndices}
+                    xAxisIndicesHeight={xAxisIndicesHeight}
+                    xAxisIndicesWidth={xAxisIndicesWidth}
+                    xAxisIndicesColor={xAxisIndicesColor}
+                    horizontal={horizontal}
+                    intactTopLabel={intactTopLabel}
+                    barBorderRadius={props.barBorderRadius}
+                  />
+                );
+              })
+            : data.map((item, index) => (
+                <RenderBars
+                  key={index}
+                  item={item}
+                  index={index}
+                  containerHeight={containerHeight}
+                  maxValue={maxValue}
+                  spacing={item.spacing === 0 ? 0 : item.spacing || spacing}
+                  side={side}
+                  data={data}
+                  barWidth={props.barWidth}
+                  sideWidth={props.sideWidth}
+                  labelWidth={labelWidth}
+                  opacity={opacity}
+                  isThreeD={isThreeD}
+                  isAnimated={isAnimated}
+                  animationDuration={animationDuration}
+                  rotateLabel={rotateLabel}
+                  animatedHeight={animatedHeight}
+                  appearingOpacity={appearingOpacity}
+                  roundedTop={props.roundedTop}
+                  roundedBottom={props.roundedBottom}
+                  disablePress={props.disablePress}
+                  frontColor={props.frontColor}
+                  sideColor={props.sideColor}
+                  topColor={props.topColor}
+                  showGradient={props.showGradient}
+                  gradientColor={props.gradientColor}
+                  activeOpacity={props.activeOpacity}
+                  cappedBars={props.cappedBars}
+                  capThickness={props.capThickness}
+                  capColor={props.capColor}
+                  capRadius={props.capRadius}
+                  showVerticalLines={showVerticalLines}
+                  verticalLinesThickness={verticalLinesThickness}
+                  verticalLinesColor={verticalLinesColor}
+                  verticalLinesZIndex={verticalLinesZIndex}
+                  showXAxisIndices={showXAxisIndices}
+                  xAxisIndicesHeight={xAxisIndicesHeight}
+                  xAxisIndicesWidth={xAxisIndicesWidth}
+                  xAxisIndicesColor={xAxisIndicesColor}
+                  horizontal={horizontal}
+                  intactTopLabel={intactTopLabel}
+                  barBorderRadius={props.barBorderRadius}
+                />
+              ))}
+        </Fragment>
+      </ScrollView>
     </View>
   );
 };

@@ -200,7 +200,7 @@ export const PieChart = (props: propTypes) => {
         ctx.moveTo(
           radius + initialValue + shiftX,
           radius + initialValue + shiftY,
-        )
+        );
         ctx.lineTo(
           radius + initialValue + shiftX,
           radius + initialValue + shiftY,
@@ -238,7 +238,7 @@ export const PieChart = (props: propTypes) => {
       ctx.moveTo(
         radius + initialValue + shiftX,
         radius + initialValue + shiftY,
-      )
+      );
       ctx.lineTo(
         radius + initialValue + shiftX,
         radius + initialValue + shiftY,
