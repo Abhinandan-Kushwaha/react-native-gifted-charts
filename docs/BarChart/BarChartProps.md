@@ -2,19 +2,21 @@
 
 ### Basic props
 
-| Prop                | Type           | Description                                                                          | Default value       |
-| ------------------- | -------------- | ------------------------------------------------------------------------------------ | ------------------- |
-| data                | Array of items | An item object represents a bar in the bar chart. It is described in the next table. | \_                  |
-| width               | number         | Width of the Bar chart                                                               | width of the parent |
-| height              | number         | Height of the Bar chart (excluding the bottom label)                                 | 200                 |
-| maxValue            | number         | Maximum value shown in the Y axis                                                    | 200                 |
-| noOfSections        | number         | Number of sections in the Y axis                                                     | 10                  |
-| stepValue           | number         | Value of 1 step/section in the Y axis                                                | 20                  |
-| stepHeight          | number         | Height of 1 step/section in the Y axis                                               | 20                  |
-| spacing             | number         | Distance between 2 consecutive bars in the Bar chart                                 | 20                  |
-| backgroundColor     | ColorValue     | Background color of the Bar chart                                                    | \_                  |
-| disableScroll       | Boolean        | To disable horizontal scroll                                                         | false               |
-| showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                  | false               |
+| Prop                | Type           | Description                                                                               | Default value       |
+| ------------------- | -------------- | ----------------------------------------------------------------------------------------- | ------------------- |
+| data                | Array of items | An item object represents a bar in the bar chart. It is described in the next table.      | \_                  |
+| width               | number         | Width of the Bar chart                                                                    | width of the parent |
+| height              | number         | Height of the Bar chart (excluding the bottom label)                                      | 200                 |
+| maxValue            | number         | Maximum value shown in the Y axis                                                         | 200                 |
+| noOfSections        | number         | Number of sections in the Y axis                                                          | 10                  |
+| stepValue           | number         | Value of 1 step/section in the Y axis                                                     | 20                  |
+| stepHeight          | number         | Height of 1 step/section in the Y axis                                                    | 20                  |
+| spacing             | number         | Distance between 2 consecutive bars in the Bar chart                                      | 20                  |
+| backgroundColor     | ColorValue     | Background color of the Bar chart                                                         | \_                  |
+| disableScroll       | Boolean        | To disable horizontal scroll                                                              | false               |
+| showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                       | false               |
+| showLine            | Boolean        | To show a Line chart over the Bar chart with the same data                                | false               |
+| lineConfig          | lineConfigType | Properties of the Line chart shown over the Bar chart (lineConfigType) is described below | defaultLineConfig   |
 
 ---
 
@@ -32,6 +34,54 @@ maxValue = noOfSections * stepValue;
 ```
 
 So, all the three must be used together. Using any 1 or 2 of them may produce absurd results
+
+---
+
+**lineConfigType**
+
+```js
+type lineConfigType = {
+  curved?: Boolean,
+  isAnimated?: Boolean,
+  delay?: number,
+  thickness?: number,
+  color?: ColorValue,
+  hideDataPoints?: Boolean,
+  dataPointsShape?: String,
+  dataPointsWidth?: number,
+  dataPointsHeight?: number,
+  dataPointsColor?: ColorValue,
+  dataPointsRadius?: number,
+  textColor?: ColorValue,
+  textFontSize?: number,
+  textShiftX?: number,
+  textShiftY?: number,
+  shiftY?: number,
+};
+```
+
+**defaultLineConfig**
+
+```js
+defaultLineConfig = {
+  curved: false,
+  isAnimated: false,
+  thickness: 1,
+  color: 'black',
+  hideDataPoints: false,
+  dataPointsShape: 'circular',
+  dataPointsWidth: 2,
+  dataPointsHeight: 2,
+  dataPointsColor: 'black',
+  dataPointsRadius: 3,
+  textColor: 'gray',
+  textFontSize: 10,
+  textShiftX: 0,
+  textShiftY: 0,
+  shiftY: 0,
+  delay: 0,
+};
+```
 
 ---
 

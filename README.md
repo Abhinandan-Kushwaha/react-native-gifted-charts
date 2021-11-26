@@ -13,6 +13,7 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 5. Three-D and gradient effects
 6. Fully customizable (see the [props](docs/docs.md))
 7. Detailed [documentation](https://gifted-charts.web.app/) with examples
+8. Support for **_combined_** Bar and Line charts
 
 ---
 
@@ -37,7 +38,6 @@ For Pie chart and Donut chart, these additional packages should be installed-
 ```sh
 npm i react-native-canvas react-native-webview
 ```
-
 
 For iOS-
 
@@ -94,9 +94,8 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 
 ## Common issues
 
-| Issue | Solution |
-| ---- | ---- |
-| [When the isAnimated is enabled the labels are not showing for Bar Charts](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/18) | [Comment by Abhinav](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/18#issuecomment-971662656) |
+| Issue                                                                                                                        | Solution                                                                                                                   |
+| ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | [BarChart - Value and section line don't match](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35) | [Comment by the owner](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35#issuecomment-972673281) |
 
 ## License

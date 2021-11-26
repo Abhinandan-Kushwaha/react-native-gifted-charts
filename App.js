@@ -23,7 +23,7 @@ const App = () => {
   const [toggle, setToggle] = useState(true);
 
   const data = [
-    {value: 15, label: 'Jan', showVerticalLine: true},
+    {value: 15, label: 'Jan'},
     {
       value: 40,
       label: 'Feb',
@@ -172,7 +172,7 @@ const App = () => {
   return (
     <View
       style={{
-        marginTop: 200,
+        marginTop: 100,
         paddingVertical: 50,
       }}>
       {/* <LineChart data={ldata} /> */}
@@ -187,40 +187,71 @@ const App = () => {
       /> */}
       {toggle ? (
         <BarChart
+          isThreeD
+          key={'xyz'}
+          height={300}
+          maxValue={360}
+          showLine
+          initialSpacing={20}
+          // showVerticalLines
+          lineConfig={{
+            // isAnimated: true,
+            delay: 800,
+            color: 'green',
+            // hideDataPoints: true,
+            // showDataPoint: false,
+            // dataPointsRadius: 5,
+            dataPointsColor: 'purple',
+            dataPointsRadius: 4,
+            thickness: 2,
+            shiftY: 25,
+            curved: true,
+          }}
+          barWidth={32}
           // width={190}
-          data={data}
+          data={[
+            {
+              value: 270,
+              label: 'Jan',
+            },
+            {value: 250, label: 'Feb'},
+            {value: 200, label: 'Mar'},
+            {
+              value: 150,
+              label: 'Apr',
+              showVerticalLine: true,
+              verticalLineColor: 'black',
+            },
+            {value: 200, label: 'May'},
+            {value: 250, label: 'Jun'},
+            {value: 270, label: 'Jul'},
+          ]}
           // horizontal
-          showReferenceLine1
-          referenceLine1Position={50}
-          referenceLine1Config={{
-            type: 'solid',
-            color: 'red',
-            thickness: 1,
-            dashWidth: 5,
-            dashGap: 13,
-          }}
-          showReferenceLine2
-          referenceLine2Position={10}
-          referenceLine2Config={{
-            type: 'solid',
-            // color: 'red',
-            thickness: 1,
-            dashWidth: 5,
-            dashGap: 13,
-          }}
-          showReferenceLine3
-          referenceLine3Position={20}
-          referenceLine3Config={{
-            type: 'solid',
-            color: 'red',
-            thickness: 1,
-            dashWidth: 5,
-            dashGap: 13,
-          }}
+          // showReferenceLine1
+          // referenceLine1Position={120}
+          // referenceLine1Config={{
+          //   type: 'solid',
+          //   color: 'rgba(200,0,0,0.6)',
+          //   thickness: 1,
+          // }}
+          // showReferenceLine2
+          // referenceLine2Position={240}
+          // referenceLine2Config={{
+          //   type: 'solid',
+          //   color: 'rgba(0,0,0,0.6)',
+          //   thickness: 1,
+          // }}
+          // showReferenceLine3
+          // referenceLine3Position={330}
+          // referenceLine3Config={{
+          //   type: 'solid',
+          //   color: 'rgba(0,0,200,0.6)',
+          //   thickness: 1,
+          // }}
           // showYAxisIndices
           isAnimated
           showGradient
-          cappedBars
+          // cappedBars
           yAxisColor={'rgb(78, 0, 142)'}
           xAxisColor={'rgb(78, 0, 142)'}
           xAxisThickness={3}
@@ -228,20 +259,20 @@ const App = () => {
           yAxisTextStyle={{color: 'rgb(78, 0, 142)'}}
           capColor={'rgb(78, 0, 142)'}
           capThickness={4}
-          barWidth={35}
-          gradientColor={'rgba(200, 100, 244,0.8)'}
-          frontColor={'rgb(78, 0, 142)'}
-          rulesType="dashed"
-          rulesColor={'rgba(0,200,0,0.4)'}
-          rulesThickness={1}
-          dashWidth={12}
-          dashGap={2}
+          // barWidth={35}
+          frontColor={'rgba(200, 100, 244,0.2)'}
+          gradientColor={'rgba(78, 0, 142,1)'}
+          // rulesType="dashed"
+          // rulesColor={'rgba(0,200,0,0.5)'}
+          // rulesThickness={1}
+          // dashWidth={12}
+          // dashGap={2}
         />
       ) : (
         <LineChart
           // width={150}
           data={data}
-          areaChart
+          // areaChart
           initialSpacing={10}
           curved
           isAnimated

@@ -1,4 +1,10 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {
   View,
   ScrollView,
@@ -197,113 +203,64 @@ export const LineChart = (props: propTypes) => {
   const [fillPoints3, setFillPoints3] = useState('');
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
-  const data = props.data || [];
-  const spacing = props.spacing === 0 ? 0 : props.spacing || 60;
+  const data = useMemo(() => props.data || [], [props.data]);
+  const data2 = useMemo(() => props.data2 || [], [props.data2]);
+  const data3 = useMemo(() => props.data3 || [], [props.data3]);
 
-  let totalWidth = spacing;
-  let maxItem = 0;
-  data.forEach((item: itemType) => {
-    if (item.value > maxItem) {
-      maxItem = item.value;
-    }
-    totalWidth += spacing;
-  });
-  if (props.showFractionalValues || props.roundToDigits) {
-    maxItem *= 10 * (props.roundToDigits || 1);
-    maxItem = maxItem + (10 - (maxItem % 10));
-    maxItem /= 10 * (props.roundToDigits || 1);
-    maxItem = parseFloat(maxItem.toFixed(props.roundToDigits || 1));
-  } else {
-    maxItem = maxItem + (10 - (maxItem % 10));
-  }
+  const opacValue = useMemo(() => new Animated.Value(0), []);
+  const widthValue = useMemo(() => new Animated.Value(0), []);
+  const widthValue2 = useMemo(() => new Animated.Value(0), []);
+  const widthValue3 = useMemo(() => new Animated.Value(0), []);
 
-  const maxValue = props.maxValue || maxItem;
-
-  const horizSections = [{value: '0'}];
-  const stepHeight = props.stepHeight || containerHeight / noOfSections;
-  const stepValue = props.stepValue || maxValue / noOfSections;
-  const initialSpacing =
-    props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
-  const data2 = props.data2 || [];
-  const data3 = props.data3 || [];
-  const thickness = props.thickness || 2;
-  const thickness1 = props.thickness1;
-  const thickness2 = props.thickness2;
-  const thickness3 = props.thickness3;
-  const rotateLabel = props.rotateLabel || false;
-  const isAnimated = props.isAnimated || false;
   const animationDuration = props.animationDuration || 800;
   const animateTogether = props.animateTogether || false;
-  const hideDataPoints1 =
-    props.hideDataPoints || props.hideDataPoints1 || false;
-  const hideDataPoints2 =
-    props.hideDataPoints || props.hideDataPoints2 || false;
-  const hideDataPoints3 =
-    props.hideDataPoints || props.hideDataPoints3 || false;
 
-  const color1 = props.color1 || props.color || 'black';
-  const color2 = props.color2 || props.color || 'black';
-  const color3 = props.color3 || props.color || 'black';
+  const labelsAppear = useCallback(() => {
+    opacValue.setValue(0);
+    Animated.timing(opacValue, {
+      toValue: 1,
+      duration: 500,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+  }, [opacValue]);
 
-  const startFillColor1 =
-    props.startFillColor1 || props.startFillColor || 'gray';
-  const endFillColor1 = props.endFillColor1 || props.endFillColor || 'white';
-  const startOpacity1 = props.startOpacity1 || props.startOpacity || 1;
-  const endOpacity1 = props.endOpacity1 || props.endOpacity || 1;
+  const appearingOpacity = opacValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
 
-  const startFillColor2 =
-    props.startFillColor2 || props.startFillColor || 'gray';
-  const endFillColor2 = props.endFillColor2 || props.endFillColor || 'white';
-  const startOpacity2 = props.startOpacity2 || props.startOpacity || 1;
-  const endOpacity2 = props.endOpacity2 || props.endOpacity || 1;
+  const decreaseWidth = useCallback(() => {
+    widthValue.setValue(0);
+    Animated.timing(widthValue, {
+      toValue: 1,
+      duration: animationDuration,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start();
+  }, [animationDuration, widthValue]);
 
-  const startFillColor3 =
-    props.startFillColor3 || props.startFillColor || 'gray';
-  const endFillColor3 = props.endFillColor3 || props.endFillColor || 'white';
-  const startOpacity3 = props.startOpacity3 || props.startOpacity || 1;
-  const endOpacity3 = props.endOpacity3 || props.endOpacity || 1;
+  const decreaseWidth2 = useCallback(() => {
+    widthValue2.setValue(0);
+    Animated.timing(widthValue2, {
+      toValue: 1,
+      duration: animationDuration,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start();
+  }, [animationDuration, widthValue2]);
 
-  const rulesThickness =
-    props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
-  const rulesColor = props.rulesColor || 'lightgray';
-  const verticalLinesThickness =
-    props.verticalLinesThickness === 0 ? 0 : props.verticalLinesThickness || 1;
-  const verticalLinesColor = props.verticalLinesColor || 'lightgray';
-  const verticalLinesZIndex = props.verticalLinesZIndex || -1;
+  const decreaseWidth3 = useCallback(() => {
+    widthValue3.setValue(0);
+    Animated.timing(widthValue3, {
+      toValue: 1,
+      duration: animationDuration,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start();
+  }, [animationDuration, widthValue3]);
 
-  const gradientDirection = props.gradientDirection || 'vertical';
-  // const animationEasing = props.animationEasing || Easing.ease
-  // const opacity = props.opacity || 1;
-  const opacValue = new Animated.Value(0);
-
-  const widthValue = new Animated.Value(0);
-  const widthValue2 = new Animated.Value(0);
-  const widthValue3 = new Animated.Value(0);
-
-  const xAxisThickness = props.xAxisThickness || 1;
-  const xAxisColor = props.xAxisColor || 'black';
-
-  const hideRules = props.hideRules || false;
   const areaChart = props.areaChart || false;
-
-  const showVerticalLines = props.showVerticalLines || false;
-
-  const showYAxisIndices = props.showYAxisIndices || false;
-  const showXAxisIndices = props.showXAxisIndices || false;
-  const yAxisIndicesHeight = props.yAxisIndicesHeight || 4;
-  const xAxisIndicesHeight = props.xAxisIndicesHeight || 2;
-  const yAxisIndicesWidth = props.yAxisIndicesWidth || 2;
-  const xAxisIndicesWidth = props.xAxisIndicesWidth || 4;
-  const xAxisIndicesColor = props.xAxisIndicesColor || 'black';
-  const yAxisIndicesColor = props.yAxisIndicesColor || 'black';
-
-  const yAxisThickness = props.yAxisThickness || 1;
-  const yAxisColor = props.yAxisColor || 'black';
-  const yAxisTextStyle = props.yAxisTextStyle;
-  const showFractionalValues = props.showFractionalValues || false;
-  const yAxisLabelWidth = props.yAxisLabelWidth || 35;
-  const hideYAxisText = props.hideYAxisText || false;
-
   const dataPointsHeight1 =
     props.dataPointsHeight1 || props.dataPointsHeight || 2;
   const dataPointsWidth1 = props.dataPointsWidth1 || props.dataPointsWidth || 2;
@@ -340,90 +297,25 @@ export const LineChart = (props: propTypes) => {
   const textColor1 = props.textColor1 || props.textColor || 'gray';
   const textColor2 = props.textColor2 || props.textColor || 'gray';
   const textColor3 = props.textColor3 || props.textColor || 'gray';
+  const initialSpacing =
+    props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
+  const thickness = props.thickness || 2;
 
-  const backgroundColor = props.backgroundColor || 'transparent';
+  const spacing = props.spacing === 0 ? 0 : props.spacing || 60;
 
-  const disableScroll = props.disableScroll || false;
-  const showScrollIndicator = props.showScrollIndicator || false;
-  const hideOrigin = props.hideOrigin || false;
+  const xAxisThickness = props.xAxisThickness || 1;
+  const xAxisColor = props.xAxisColor || 'black';
 
-  const rulesType = props.rulesType || 'line';
-  const dashWidth = props.dashWidth === 0 ? 0 : props.dashWidth || 4;
-  const dashGap = props.dashGap === 0 ? 0 : props.dashGap || 8;
-
-  const defaultReferenceConfig = {
-    thickness: rulesThickness,
-    width: (props.width || totalWidth) + 11,
-    color: 'black',
-    type: rulesType,
-    dashWidth: dashWidth,
-    dashGap: dashGap,
-  };
-
-  const showReferenceLine1 = props.showReferenceLine1 || false;
-  const referenceLine1Position =
-    props.referenceLine1Position === 0
-      ? 0
-      : props.referenceLine1Position || containerHeight / 2;
-  const referenceLine1Config = props.referenceLine1Config
-    ? {
-        thickness: props.referenceLine1Config.thickness || rulesThickness,
-        width:
-          (props.referenceLine1Config.width || props.width || totalWidth) + 11,
-        color: props.referenceLine1Config.color || 'black',
-        type: props.referenceLine1Config.type || rulesType,
-        dashWidth: props.referenceLine1Config.dashWidth || dashWidth,
-        dashGap: props.referenceLine1Config.dashGap || dashGap,
-      }
-    : defaultReferenceConfig;
-
-  const showReferenceLine2 = props.showReferenceLine2 || false;
-  const referenceLine2Position =
-    props.referenceLine2Position === 0
-      ? 0
-      : props.referenceLine2Position || (3 * containerHeight) / 2;
-  const referenceLine2Config = props.referenceLine2Config
-    ? {
-        thickness: props.referenceLine2Config.thickness || rulesThickness,
-        width:
-          (props.referenceLine2Config.width || props.width || totalWidth) + 11,
-        color: props.referenceLine2Config.color || 'black',
-        type: props.referenceLine2Config.type || rulesType,
-        dashWidth: props.referenceLine2Config.dashWidth || dashWidth,
-        dashGap: props.referenceLine2Config.dashGap || dashGap,
-      }
-    : defaultReferenceConfig;
-
-  const showReferenceLine3 = props.showReferenceLine3 || false;
-  const referenceLine3Position =
-    props.referenceLine3Position === 0
-      ? 0
-      : props.referenceLine3Position || containerHeight / 3;
-  const referenceLine3Config = props.referenceLine3Config
-    ? {
-        thickness: props.referenceLine3Config.thickness || rulesThickness,
-        width:
-          (props.referenceLine3Config.width || props.width || totalWidth) + 11,
-        color: props.referenceLine3Config.color || 'black',
-        type: props.referenceLine3Config.type || rulesType,
-        dashWidth: props.referenceLine3Config.dashWidth || dashWidth,
-        dashGap: props.referenceLine3Config.dashGap || dashGap,
-      }
-    : defaultReferenceConfig;
-
-  // console.log('data', data);
-  horizSections.pop();
-  for (let i = 0; i <= noOfSections; i++) {
-    let value = maxValue - stepValue * i;
-    if (props.showFractionalValues || props.roundToDigits) {
-      value = parseFloat(value.toFixed(props.roundToDigits || 1));
+  let totalWidth = spacing;
+  let maxItem = 0;
+  data.forEach((item: itemType) => {
+    if (item.value > maxItem) {
+      maxItem = item.value;
     }
-    horizSections.push({
-      value: props.yAxisLabelTexts
-        ? props.yAxisLabelTexts[noOfSections - i] ?? value.toString()
-        : value.toString(),
-    });
-  }
+    totalWidth += spacing;
+  });
+
+  const maxValue = props.maxValue || maxItem;
 
   useEffect(() => {
     // console.log('comes here............')
@@ -441,7 +333,14 @@ export const LineChart = (props: propTypes) => {
       },
       animateTogether ? 0 : animationDuration * 2,
     );
-  });
+  }, [
+    animateTogether,
+    animationDuration,
+    decreaseWidth,
+    decreaseWidth2,
+    decreaseWidth3,
+    labelsAppear,
+  ]);
 
   useEffect(() => {
     let pp = '',
@@ -699,7 +598,182 @@ export const LineChart = (props: propTypes) => {
 
       /*************************************************************************************/
     }
-  }, [data]);
+  }, [
+    areaChart,
+    containerHeight,
+    data,
+    data2,
+    data3,
+    dataPointsWidth1,
+    dataPointsWidth2,
+    dataPointsWidth3,
+    initialSpacing,
+    maxValue,
+    props.curved,
+    spacing,
+    xAxisThickness,
+  ]);
+
+  if (props.showFractionalValues || props.roundToDigits) {
+    maxItem *= 10 * (props.roundToDigits || 1);
+    maxItem = maxItem + (10 - (maxItem % 10));
+    maxItem /= 10 * (props.roundToDigits || 1);
+    maxItem = parseFloat(maxItem.toFixed(props.roundToDigits || 1));
+  } else {
+    maxItem = maxItem + (10 - (maxItem % 10));
+  }
+
+  const horizSections = [{value: '0'}];
+  const stepHeight = props.stepHeight || containerHeight / noOfSections;
+  const stepValue = props.stepValue || maxValue / noOfSections;
+  const thickness1 = props.thickness1;
+  const thickness2 = props.thickness2;
+  const thickness3 = props.thickness3;
+  const rotateLabel = props.rotateLabel || false;
+  const isAnimated = props.isAnimated || false;
+  const hideDataPoints1 =
+    props.hideDataPoints || props.hideDataPoints1 || false;
+  const hideDataPoints2 =
+    props.hideDataPoints || props.hideDataPoints2 || false;
+  const hideDataPoints3 =
+    props.hideDataPoints || props.hideDataPoints3 || false;
+
+  const color1 = props.color1 || props.color || 'black';
+  const color2 = props.color2 || props.color || 'black';
+  const color3 = props.color3 || props.color || 'black';
+
+  const startFillColor1 =
+    props.startFillColor1 || props.startFillColor || 'gray';
+  const endFillColor1 = props.endFillColor1 || props.endFillColor || 'white';
+  const startOpacity1 = props.startOpacity1 || props.startOpacity || 1;
+  const endOpacity1 = props.endOpacity1 || props.endOpacity || 1;
+
+  const startFillColor2 =
+    props.startFillColor2 || props.startFillColor || 'gray';
+  const endFillColor2 = props.endFillColor2 || props.endFillColor || 'white';
+  const startOpacity2 = props.startOpacity2 || props.startOpacity || 1;
+  const endOpacity2 = props.endOpacity2 || props.endOpacity || 1;
+
+  const startFillColor3 =
+    props.startFillColor3 || props.startFillColor || 'gray';
+  const endFillColor3 = props.endFillColor3 || props.endFillColor || 'white';
+  const startOpacity3 = props.startOpacity3 || props.startOpacity || 1;
+  const endOpacity3 = props.endOpacity3 || props.endOpacity || 1;
+
+  const rulesThickness =
+    props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
+  const rulesColor = props.rulesColor || 'lightgray';
+  const verticalLinesThickness =
+    props.verticalLinesThickness === 0 ? 0 : props.verticalLinesThickness || 1;
+  const verticalLinesColor = props.verticalLinesColor || 'lightgray';
+  const verticalLinesZIndex = props.verticalLinesZIndex || -1;
+
+  const gradientDirection = props.gradientDirection || 'vertical';
+  // const animationEasing = props.animationEasing || Easing.ease
+  // const opacity = props.opacity || 1;
+
+  const hideRules = props.hideRules || false;
+  const showVerticalLines = props.showVerticalLines || false;
+
+  const showYAxisIndices = props.showYAxisIndices || false;
+  const showXAxisIndices = props.showXAxisIndices || false;
+  const yAxisIndicesHeight = props.yAxisIndicesHeight || 4;
+  const xAxisIndicesHeight = props.xAxisIndicesHeight || 2;
+  const yAxisIndicesWidth = props.yAxisIndicesWidth || 2;
+  const xAxisIndicesWidth = props.xAxisIndicesWidth || 4;
+  const xAxisIndicesColor = props.xAxisIndicesColor || 'black';
+  const yAxisIndicesColor = props.yAxisIndicesColor || 'black';
+
+  const yAxisThickness = props.yAxisThickness || 1;
+  const yAxisColor = props.yAxisColor || 'black';
+  const yAxisTextStyle = props.yAxisTextStyle;
+  const showFractionalValues = props.showFractionalValues || false;
+  const yAxisLabelWidth = props.yAxisLabelWidth || 35;
+  const hideYAxisText = props.hideYAxisText || false;
+
+  const backgroundColor = props.backgroundColor || 'transparent';
+
+  const disableScroll = props.disableScroll || false;
+  const showScrollIndicator = props.showScrollIndicator || false;
+  const hideOrigin = props.hideOrigin || false;
+
+  const rulesType = props.rulesType || 'line';
+  const dashWidth = props.dashWidth === 0 ? 0 : props.dashWidth || 4;
+  const dashGap = props.dashGap === 0 ? 0 : props.dashGap || 8;
+
+  const defaultReferenceConfig = {
+    thickness: rulesThickness,
+    width: (props.width || totalWidth) + 11,
+    color: 'black',
+    type: rulesType,
+    dashWidth: dashWidth,
+    dashGap: dashGap,
+  };
+
+  const showReferenceLine1 = props.showReferenceLine1 || false;
+  const referenceLine1Position =
+    props.referenceLine1Position === 0
+      ? 0
+      : props.referenceLine1Position || containerHeight / 2;
+  const referenceLine1Config = props.referenceLine1Config
+    ? {
+        thickness: props.referenceLine1Config.thickness || rulesThickness,
+        width:
+          (props.referenceLine1Config.width || props.width || totalWidth) + 11,
+        color: props.referenceLine1Config.color || 'black',
+        type: props.referenceLine1Config.type || rulesType,
+        dashWidth: props.referenceLine1Config.dashWidth || dashWidth,
+        dashGap: props.referenceLine1Config.dashGap || dashGap,
+      }
+    : defaultReferenceConfig;
+
+  const showReferenceLine2 = props.showReferenceLine2 || false;
+  const referenceLine2Position =
+    props.referenceLine2Position === 0
+      ? 0
+      : props.referenceLine2Position || (3 * containerHeight) / 2;
+  const referenceLine2Config = props.referenceLine2Config
+    ? {
+        thickness: props.referenceLine2Config.thickness || rulesThickness,
+        width:
+          (props.referenceLine2Config.width || props.width || totalWidth) + 11,
+        color: props.referenceLine2Config.color || 'black',
+        type: props.referenceLine2Config.type || rulesType,
+        dashWidth: props.referenceLine2Config.dashWidth || dashWidth,
+        dashGap: props.referenceLine2Config.dashGap || dashGap,
+      }
+    : defaultReferenceConfig;
+
+  const showReferenceLine3 = props.showReferenceLine3 || false;
+  const referenceLine3Position =
+    props.referenceLine3Position === 0
+      ? 0
+      : props.referenceLine3Position || containerHeight / 3;
+  const referenceLine3Config = props.referenceLine3Config
+    ? {
+        thickness: props.referenceLine3Config.thickness || rulesThickness,
+        width:
+          (props.referenceLine3Config.width || props.width || totalWidth) + 11,
+        color: props.referenceLine3Config.color || 'black',
+        type: props.referenceLine3Config.type || rulesType,
+        dashWidth: props.referenceLine3Config.dashWidth || dashWidth,
+        dashGap: props.referenceLine3Config.dashGap || dashGap,
+      }
+    : defaultReferenceConfig;
+
+  // console.log('data', data);
+  horizSections.pop();
+  for (let i = 0; i <= noOfSections; i++) {
+    let value = maxValue - stepValue * i;
+    if (props.showFractionalValues || props.roundToDigits) {
+      value = parseFloat(value.toFixed(props.roundToDigits || 1));
+    }
+    horizSections.push({
+      value: props.yAxisLabelTexts
+        ? props.yAxisLabelTexts[noOfSections - i] ?? value.toString()
+        : value.toString(),
+    });
+  }
 
   const renderLabel = (index: number, label: String, labelTextStyle: any) => {
     return (
@@ -754,51 +828,6 @@ export const LineChart = (props: propTypes) => {
         </Text>
       </Animated.View>
     );
-  };
-
-  const labelsAppear = () => {
-    opacValue.setValue(0);
-    Animated.timing(opacValue, {
-      toValue: 1,
-      duration: 500,
-      easing: Easing.ease,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const appearingOpacity = opacValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, 1],
-  });
-
-  const decreaseWidth = () => {
-    widthValue.setValue(0);
-    Animated.timing(widthValue, {
-      toValue: 1,
-      duration: animationDuration,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const decreaseWidth2 = () => {
-    widthValue2.setValue(0);
-    Animated.timing(widthValue2, {
-      toValue: 1,
-      duration: animationDuration,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
-  };
-
-  const decreaseWidth3 = () => {
-    widthValue3.setValue(0);
-    Animated.timing(widthValue3, {
-      toValue: 1,
-      duration: animationDuration,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
   };
 
   const animatedWidth = widthValue.interpolate({
