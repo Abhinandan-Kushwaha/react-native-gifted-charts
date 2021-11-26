@@ -23,8 +23,8 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 <img src='/demos/lineLabelled.png' alt='' height=370 width=360/>
 ![alt text](/demos/lineArea.png)
 <img src='/demos/cappedCombined.png' alt='' height=280 width=280/>
-<img src='/demos/line.gif' alt='' height=280 width=260/>
-<img src='/demos/pielabbelled.svg' alt='' height=280 width=260/>
+<img src='/demos/line.gif' alt='' height=280 width=270/>
+<img src='/demos/pielabbelled.svg' alt='' height=280 width=270/>
 
 ---
 
