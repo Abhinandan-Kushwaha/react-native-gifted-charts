@@ -17,6 +17,7 @@
 | backgroundColor     | ColorValue     | Background color of the Bar chart                                                       | \_                  |
 | disableScroll       | Boolean        | To disable horizontal scroll                                                            | false               |
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                     | false               |
+| isAnimated          | Boolean        | To show animates Line or Area Chart. Animation occurs onLoad and on value change        | false               |
 
 ---
 

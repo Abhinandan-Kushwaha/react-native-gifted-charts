@@ -37,51 +37,29 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 
 ---
 
-**lineConfigType**
+### Combine Line Chart using `showLine`
 
-```js
-type lineConfigType = {
-  curved?: Boolean,
-  isAnimated?: Boolean,
-  delay?: number,
-  thickness?: number,
-  color?: ColorValue,
-  hideDataPoints?: Boolean,
-  dataPointsShape?: String,
-  dataPointsWidth?: number,
-  dataPointsHeight?: number,
-  dataPointsColor?: ColorValue,
-  dataPointsRadius?: number,
-  textColor?: ColorValue,
-  textFontSize?: number,
-  textShiftX?: number,
-  textShiftY?: number,
-  shiftY?: number,
-};
-```
+You can add a line chart to your **<BarChart/>** component by passing the `showLine` prop.
+The properties of this line chart can be controlled using the `lineConfig` prop which is an object. The `lineConfig` object is described below-
 
-**defaultLineConfig**
-
-```js
-defaultLineConfig = {
-  curved: false,
-  isAnimated: false,
-  thickness: 1,
-  color: 'black',
-  hideDataPoints: false,
-  dataPointsShape: 'circular',
-  dataPointsWidth: 2,
-  dataPointsHeight: 2,
-  dataPointsColor: 'black',
-  dataPointsRadius: 3,
-  textColor: 'gray',
-  textFontSize: 10,
-  textShiftX: 0,
-  textShiftY: 0,
-  shiftY: 0,
-  delay: 0,
-};
-```
+| Property         | Type       | Description                                                       | Default value |
+| ---------------- | ---------- | ----------------------------------------------------------------- | ------------- |
+| curved           | Boolean    | To show curved line joining the data points                       | false         |
+| isAnimated       | Boolean    | To show animates Line Chart                                       | false         |
+| delay            | number     | Delay (in milliseconds) before starting the animation of the line | 0             |
+| thickness        | number     | Thickness of the Line                                             | 1             |
+| color            | ColorValue | Color of the Line                                                 | 'black'       |
+| hideDataPoints   | Boolean    | To hide data points along the Line chart                          | false         |
+| dataPointsShape  | String     | Shape of the data points (_'rectangular'_ or _'circular'_)        | 'circular'    |
+| dataPointsWidth  | number     | Width of data points (when data points' shape is rectangular)     | 2             |
+| dataPointsHeight | number     | Height of data points (when data points' shape is rectangular)    | 2             |
+| dataPointsColor  | ColorValue | Color of the data points                                          | 'black'       |
+| dataPointsRadius | number     | Radius of data points (when data points' shape is _circular_)     | 3             |
+| textColor        | ColorValue | Color of the dataPointText                                        | 'gray'        |
+| textFontSize     | number     | Font size of the dataPointText                                    | 10            |
+| textShiftX       | number     | To shift the dataPointText text horizontally                      | 0             |
+| textShiftY       | number     | To shift the dataPointText text vertically                        | 0             |
+| shiftY           | number     | To shift the Lift the Line chart up or down by the given quantity | 0             |
 
 ---
 
@@ -198,11 +176,11 @@ type referenceConfigType = {
 
 ### Animation related props
 
-| Prop              | Type    | Description                                                           | Default value |
-| ----------------- | ------- | --------------------------------------------------------------------- | ------------- |
-| isAnimated        | Boolean | To show animates BarChart. Animation occurs onLoad and on valu change | false         |
-| animationDuration | number  | Duration of the animations                                            | 800           |
-| animationEasing   | Easing  | Easing applied to the animation                                       | Easing.ease   |
+| Prop              | Type    | Description                                                            | Default value |
+| ----------------- | ------- | ---------------------------------------------------------------------- | ------------- |
+| isAnimated        | Boolean | To show animates BarChart. Animation occurs onLoad and on value change | false         |
+| animationDuration | number  | Duration of the animations                                             | 800           |
+| animationEasing   | Easing  | Easing applied to the animation                                        | Easing.ease   |
 
 **Alert!**\
 While rendering an Animated Bar chart, y axis labels may not appear sometimes. This can be fixed using a key prop as shown -
