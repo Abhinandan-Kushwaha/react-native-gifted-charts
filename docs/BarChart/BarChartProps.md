@@ -46,7 +46,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | ---------------- | ---------- | ----------------------------------------------------------------- | ------------- |
 | curved           | Boolean    | To show curved line joining the data points                       | false         |
 | isAnimated       | Boolean    | To show animates Line Chart                                       | false         |
-| delay            | number     | Delay before starting the animation of the line                   | 0             |
+| delay            | number     | Delay (in milliseconds) before starting the animation of the line | 0             |
 | thickness        | number     | Thickness of the Line                                             | 1             |
 | color            | ColorValue | Color of the Line                                                 | 'black'       |
 | hideDataPoints   | Boolean    | To hide data points along the Line chart                          | false         |
@@ -54,7 +54,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | dataPointsWidth  | number     | Width of data points (when data points' shape is rectangular)     | 2             |
 | dataPointsHeight | number     | Height of data points (when data points' shape is rectangular)    | 2             |
 | dataPointsColor  | ColorValue | Color of the data points                                          | 'black'       |
-| dataPointsRadius | number     | Radius of data points (when data points' shape is circular)       | 3             |
+| dataPointsRadius | number     | Radius of data points (when data points' shape is _circular_)     | 3             |
 | textColor        | ColorValue | Color of the dataPointText                                        | 'gray'        |
 | textFontSize     | number     | Font size of the dataPointText                                    | 10            |
 | textShiftX       | number     | To shift the dataPointText text horizontally                      | 0             |
