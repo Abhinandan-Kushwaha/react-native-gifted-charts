@@ -51,7 +51,7 @@ const App = () => {
           height={300}
           maxValue={360}
           showLine
-          initialSpacing={20}
+          initialSpacing={30}
           // showVerticalLines
           lineConfig={{
             // isAnimated: true,
@@ -135,21 +135,57 @@ const App = () => {
           data={data}
           // data2={lineData1}
           areaChart
-          initialSpacing={10}
-          onPress={(item, index) => {
-            console.log('index-->', index);
-            setData(data => {
-              item.dataPointColor = 'green';
-              item.dataPointRadius = 6;
-              item.dataPointText = item.value;
-              // item.dataPointShape = 'rectangular';
-              // item.dataPointWidth = 10;
-              // item.dataPointHeight = 10;
-              data[index] = item;
-              console.log('data------.....', data);
-              return data;
-            });
-          }}
+          initialSpacing={20}
+          // customDataPoint={() => {
+          //   return (
+          //     <View
+          //       style={{
+          //         height: 10,
+          //         width: 10,
+          //         backgroundColor: 'red',
+          //         borderWidth: 2,
+          //         borderColor: 'blue',
+          //         borderRadius: 5,
+          //       }}
+          //     />
+          //   );
+          // }}
+          // focusedCustomDataPoint={() => {
+          //   return (
+          //     <View
+          //       style={{
+          //         height: 14,
+          //         width: 14,
+          //         backgroundColor: 'green',
+          //         borderWidth: 2,
+          //         borderColor: 'yellow',
+          //         borderRadius: 7,
+          //       }}
+          //     />
+          //   );
+          // }}
+          // onPress={(item, index) => {
+          //   console.log('index-->', index);
+          //   setData(data => {
+          //     item.focusedCustomDataPoint = () => {
+          //       return (
+          //         <View
+          //           style={{
+          //             height: 14,
+          //             width: 14,
+          //             backgroundColor: 'green',
+          //             borderWidth: 2,
+          //             borderColor: 'yellow',
+          //             borderRadius: 7,
+          //           }}
+          //         />
+          //       );
+          //     };
+          //     data[index] = item;
+          //     console.log('data------.....', data);
+          //     return data;
+          //   });
+          // }}
           // disableScroll
           pressEnabled
           // showDataPointOnPress
@@ -160,9 +196,9 @@ const App = () => {
           textFontSize={18}
           textColor={'green'}
           stripWidth={1}
-          stripHeight={200}
           // stripHeight={200}
-          stripOpacity={0.4}
+          // stripHeight={200}
+          stripOpacity={1}
           curved
           isAnimated
           animationDuration={2000}
@@ -172,12 +208,13 @@ const App = () => {
           color={'rgb(78, 0, 142)'}
           yAxisColor={'rgb(78, 0, 142)'}
           xAxisColor={'rgb(78, 0, 142)'}
-          dataPointsColor={'rgb(78, 0, 142)'}
-          dataPointsWidth={8}
-          dataPointsHeight={8}
+          // dataPointsColor={'yellow'}
+          dataPointsWidth={22}
+          dataPointsHeight={22}
           xAxisThickness={3}
           yAxisThickness={3}
           dataPointsRadius={4}
+          focusedDataPointRadius={10}
           yAxisTextStyle={{color: 'rgb(78, 0, 142)'}}
           startFillColor={'rgb(200, 100, 244)'}
           startOpacity={0.9}
