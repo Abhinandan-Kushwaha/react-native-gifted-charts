@@ -138,6 +138,7 @@ type propTypes = {
   dataPointsRadius3?: number;
   dataPointsColor3?: string;
   dataPointsShape3?: string;
+  customDataPoint?: Function;
 
   startFillColor?: string;
   endFillColor?: string;
@@ -1182,24 +1183,18 @@ export const LineChart = (props: propTypes) => {
               )}
               {index === selectedIndex && showStripOnPress ? (
                 <Rect
-                  x={
-                    initialSpacing / 2 +
-                    (spacing * index - stripWidth) +
-                    stripWidth / 2 +
-                    1
-                  }
+                  x={initialSpacing + (spacing * index - dataPointsWidth / 2)}
                   y={
                     stripHeight
                       ? containerHeight - stripHeight + 8
                       : containerHeight -
                         dataPointsHeight / 2 +
-                        15 -
+                        20 -
                         (item.value * containerHeight) / maxValue
                   }
                   width={stripWidth}
                   height={
-                    stripHeight ||
-                    containerHeight - dataPointsHeight / 2 + 10 - 0
+                    stripHeight || containerHeight - dataPointsHeight / 2 + 20
                   }
                   opacity={stripOpacity}
                   fill={stripColor}
@@ -1207,26 +1202,44 @@ export const LineChart = (props: propTypes) => {
               ) : null}
             </>
           ) : null}
+          {props.customDataPoint ? (
+            <View
+              style={{
+                position: 'absolute',
+                height: dataPointsHeight,
+                width: dataPointsWidth,
+                // backgroundColor: 'orange',
+                top:
+                  containerHeight - (item.value * containerHeight) / maxValue,
+                left: initialSpacing - dataPointsWidth + spacing * index,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              {props.customDataPoint()}
+            </View>
+          ) : null}
           {dataPointsShape === 'rectangular' ? (
             <Fragment key={index}>
-              <Rect
-                x={initialSpacing - dataPointsWidth + spacing * index}
-                y={
-                  containerHeight -
-                  dataPointsHeight / 2 +
-                  10 -
-                  (item.value * containerHeight) / maxValue
-                }
-                width={dataPointsWidth}
-                height={dataPointsHeight}
-                fill={
-                  showDataPointOnPress
-                    ? index === selectedIndex
-                      ? dataPointsColor
-                      : 'none'
-                    : dataPointsColor
-                }
-              />
+              {props.customDataPoint ? null : (
+                <Rect
+                  x={initialSpacing - dataPointsWidth + spacing * index}
+                  y={
+                    containerHeight -
+                    dataPointsHeight / 2 +
+                    10 -
+                    (item.value * containerHeight) / maxValue
+                  }
+                  width={dataPointsWidth}
+                  height={dataPointsHeight}
+                  fill={
+                    showDataPointOnPress
+                      ? index === selectedIndex
+                        ? dataPointsColor
+                        : 'none'
+                      : dataPointsColor
+                  }
+                />
+              )}
               {text ? (
                 !showTextOnPress || index === selectedIndex ? (
                   <CanvasText
@@ -1255,22 +1268,24 @@ export const LineChart = (props: propTypes) => {
             </Fragment>
           ) : (
             <Fragment key={index}>
-              <Circle
-                cx={initialSpacing - dataPointsWidth / 2 + spacing * index}
-                cy={
-                  containerHeight +
-                  10 -
-                  (item.value * containerHeight) / maxValue
-                }
-                r={dataPointsRadius}
-                fill={
-                  showDataPointOnPress
-                    ? index === selectedIndex
-                      ? dataPointsColor
-                      : 'none'
-                    : dataPointsColor
-                }
-              />
+              {props.customDataPoint ? null : (
+                <Circle
+                  cx={initialSpacing - dataPointsWidth / 2 + spacing * index}
+                  cy={
+                    containerHeight +
+                    10 -
+                    (item.value * containerHeight) / maxValue
+                  }
+                  r={dataPointsRadius}
+                  fill={
+                    showDataPointOnPress
+                      ? index === selectedIndex
+                        ? dataPointsColor
+                        : 'none'
+                      : dataPointsColor
+                  }
+                />
+              )}
               {text ? (
                 !showTextOnPress || index === selectedIndex ? (
                   <CanvasText

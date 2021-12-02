@@ -174,6 +174,7 @@ type referenceConfigType = {
 | textFontSize      | number     | Font size of the dataPointText                                                        | \_            |
 | textShiftX        | number     | To shift the dataPointText text horizontally                                          | 0             |
 | textShiftY        | number     | To shift the dataPointText text vertically                                            | 0             |
+| customDataPoint   | Function   | A callback function to render a custom component as the data points                   | \_            |
 
 ---
 
