@@ -240,4 +240,4 @@ Above code changes the pressed data point's color and radius. Since in this exam
 | endOpacity3       | number     | End gradient opacity for the third dataset of the area chart   | 1             |
 | gradientDirection | string     | Direction of the gradient (_'horizontal'_ or _'vertical'_)     | 'vertical'    |
 
-```
+---
