@@ -181,7 +181,7 @@ type referenceConfigType = {
 
 Line or Area charts can be made interactive by allowing users to press on the chart and highlight that particular data point. For example-
 
-![focus points](../../demos/focusPoint.gif)
+  <img src='../../demos/focusPoint.gif' alt='' height=450 width=300/>
 
 To achieve this the `pressEnabled` props must be set to true. In addition, use below props to handle the press event.
 
