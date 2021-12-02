@@ -50,6 +50,17 @@ type propTypes = {
   hideRules?: Boolean;
   rulesColor?: ColorValue;
   rulesThickness?: number;
+  pressEnabled?: Boolean;
+  showDataPointOnPress?: Boolean;
+  showStripOnPress?: Boolean;
+  showTextOnPress?: Boolean;
+  stripHeight?: number;
+  stripWidth?: number;
+  stripColor?: ColorValue | String | any;
+  stripOpacity?: number;
+  onPress?: Function;
+  unFocusOnPressOut?: Boolean;
+  delayBeforeUnFocus?: number;
 
   rulesType?: String;
   dashWidth?: number;
@@ -201,6 +212,7 @@ export const LineChart = (props: propTypes) => {
   const [fillPoints, setFillPoints] = useState('');
   const [fillPoints2, setFillPoints2] = useState('');
   const [fillPoints3, setFillPoints3] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
   const data = useMemo(() => props.data || [], [props.data]);
@@ -701,6 +713,18 @@ export const LineChart = (props: propTypes) => {
   const dashWidth = props.dashWidth === 0 ? 0 : props.dashWidth || 4;
   const dashGap = props.dashGap === 0 ? 0 : props.dashGap || 8;
 
+  const pressEnabled = props.pressEnabled || false;
+  const showDataPointOnPress = props.showDataPointOnPress || false;
+  const showStripOnPress = props.showStripOnPress || false;
+  const showTextOnPress = props.showTextOnPress || false;
+  const stripHeight = props.stripHeight;
+  const stripWidth = props.stripWidth === 0 ? 0 : props.stripWidth || 2;
+  const stripColor = props.stripColor || color1;
+  const stripOpacity = props.stripOpacity || (startOpacity1 + endOpacity1) / 2;
+  const unFocusOnPressOut = props.unFocusOnPressOut === false ? false : true;
+  const delayBeforeUnFocus =
+    props.delayBeforeUnFocus === 0 ? 0 : props.delayBeforeUnFocus || 300;
+
   const defaultReferenceConfig = {
     thickness: rulesThickness,
     width: (props.width || totalWidth) + 11,
@@ -1086,85 +1110,190 @@ export const LineChart = (props: propTypes) => {
     });
   };
 
+  const onStripPress = (item, index) => {
+    setSelectedIndex(index);
+    if (props.onPress) {
+      props.onPress(item, index);
+    }
+  };
+
   const renderDataPoints = (
     dataForRender,
-    dataPointsShape,
-    dataPointsWidth,
-    dataPointsHeight,
-    dataPointsColor,
-    dataPointsRadius,
+    dataPtsShape,
+    dataPtsWidth,
+    dataPtsHeight,
+    dataPtsColor,
+    dataPtsRadius,
     textColor,
     textFontSize,
   ) => {
     return dataForRender.map((item: itemType, index: number) => {
+      let dataPointsShape,
+        dataPointsWidth,
+        dataPointsHeight,
+        dataPointsColor,
+        dataPointsRadius,
+        text;
+      if (index === selectedIndex) {
+        dataPointsShape = item.dataPointShape || dataPtsShape;
+        dataPointsWidth = item.dataPointWidth || dataPtsWidth;
+        dataPointsHeight = item.dataPointHeight || dataPtsHeight;
+        dataPointsColor = item.dataPointColor || dataPtsColor;
+        dataPointsRadius = item.dataPointRadius || dataPtsRadius;
+        if (showTextOnPress) {
+          text = item.dataPointText;
+        }
+      } else {
+        dataPointsShape = dataPtsShape;
+        dataPointsWidth = dataPtsWidth;
+        dataPointsHeight = dataPtsHeight;
+        dataPointsColor = dataPtsColor;
+        dataPointsRadius = dataPtsRadius;
+        if (showTextOnPress) {
+          text = '';
+        }
+      }
       // console.log('comes in');
-      if (dataPointsShape === 'rectangular') {
-        return (
-          <Fragment key={index}>
-            <Rect
-              x={initialSpacing - dataPointsWidth + spacing * index}
-              y={
-                containerHeight -
-                dataPointsHeight / 2 +
-                10 -
-                (item.value * containerHeight) / maxValue
-              }
-              width={dataPointsWidth}
-              height={dataPointsHeight}
-              fill={dataPointsColor}
-            />
-            {item.dataPointText && (
-              <CanvasText
-                fill={item.textColor || textColor}
-                fontSize={item.textFontSize || textFontSize}
-                x={
-                  initialSpacing -
-                  dataPointsWidth +
-                  spacing * index +
-                  (item.textShiftX || props.textShiftX || props.textShiftX || 0)
-                }
+      return (
+        <Fragment key={index}>
+          {pressEnabled ? (
+            <>
+              {unFocusOnPressOut ? (
+                <Rect
+                  onPressIn={() => onStripPress(item, index)}
+                  onPressOut={() =>
+                    setTimeout(() => setSelectedIndex(-1), delayBeforeUnFocus)
+                  }
+                  x={initialSpacing + (spacing * index - spacing / 2)}
+                  y={8}
+                  width={spacing}
+                  height={containerHeight - 0}
+                  fill={'none'}
+                />
+              ) : (
+                <Rect
+                  onPress={() => onStripPress(item, index)}
+                  x={initialSpacing + (spacing * index - spacing / 2)}
+                  y={8}
+                  width={spacing}
+                  height={containerHeight - 0}
+                  fill={'none'}
+                />
+              )}
+              {index === selectedIndex && showStripOnPress ? (
+                <Rect
+                  x={
+                    initialSpacing / 2 +
+                    (spacing * index - stripWidth) +
+                    stripWidth / 2 +
+                    1
+                  }
+                  y={
+                    stripHeight
+                      ? containerHeight - stripHeight + 8
+                      : containerHeight -
+                        dataPointsHeight / 2 +
+                        15 -
+                        (item.value * containerHeight) / maxValue
+                  }
+                  width={stripWidth}
+                  height={
+                    stripHeight ||
+                    containerHeight - dataPointsHeight / 2 + 10 - 0
+                  }
+                  opacity={stripOpacity}
+                  fill={stripColor}
+                />
+              ) : null}
+            </>
+          ) : null}
+          {dataPointsShape === 'rectangular' ? (
+            <Fragment key={index}>
+              <Rect
+                x={initialSpacing - dataPointsWidth + spacing * index}
                 y={
                   containerHeight -
                   dataPointsHeight / 2 +
                   10 -
-                  (item.value * containerHeight) / maxValue +
-                  (item.textShiftY || props.textShiftY || 0)
-                }>
-                {item.dataPointText}
-              </CanvasText>
-            )}
-          </Fragment>
-        );
-      }
-      return (
-        <Fragment key={index}>
-          <Circle
-            cx={initialSpacing - dataPointsWidth / 2 + spacing * index}
-            cy={
-              containerHeight + 10 - (item.value * containerHeight) / maxValue
-            }
-            r={dataPointsRadius}
-            fill={dataPointsColor}
-          />
-          {item.dataPointText && (
-            <CanvasText
-              fill={item.textColor || textColor}
-              fontSize={item.textFontSize || textFontSize}
-              x={
-                initialSpacing -
-                dataPointsWidth +
-                spacing * index +
-                (item.textShiftX || props.textShiftX || 0)
-              }
-              y={
-                containerHeight -
-                dataPointsHeight / 2 +
-                10 -
-                (item.value * containerHeight) / maxValue +
-                (item.textShiftY || props.textShiftY || 0)
-              }>
-              {item.dataPointText}
-            </CanvasText>
+                  (item.value * containerHeight) / maxValue
+                }
+                width={dataPointsWidth}
+                height={dataPointsHeight}
+                fill={
+                  showDataPointOnPress
+                    ? index === selectedIndex
+                      ? dataPointsColor
+                      : 'none'
+                    : dataPointsColor
+                }
+              />
+              {text ? (
+                !showTextOnPress || index === selectedIndex ? (
+                  <CanvasText
+                    fill={item.textColor || textColor}
+                    fontSize={item.textFontSize || textFontSize}
+                    x={
+                      initialSpacing -
+                      dataPointsWidth +
+                      spacing * index +
+                      (item.textShiftX ||
+                        props.textShiftX ||
+                        props.textShiftX ||
+                        0)
+                    }
+                    y={
+                      containerHeight -
+                      dataPointsHeight / 2 +
+                      10 -
+                      (item.value * containerHeight) / maxValue +
+                      (item.textShiftY || props.textShiftY || 0)
+                    }>
+                    {text}
+                  </CanvasText>
+                ) : null
+              ) : null}
+            </Fragment>
+          ) : (
+            <Fragment key={index}>
+              <Circle
+                cx={initialSpacing - dataPointsWidth / 2 + spacing * index}
+                cy={
+                  containerHeight +
+                  10 -
+                  (item.value * containerHeight) / maxValue
+                }
+                r={dataPointsRadius}
+                fill={
+                  showDataPointOnPress
+                    ? index === selectedIndex
+                      ? dataPointsColor
+                      : 'none'
+                    : dataPointsColor
+                }
+              />
+              {text ? (
+                !showTextOnPress || index === selectedIndex ? (
+                  <CanvasText
+                    fill={item.textColor || textColor}
+                    fontSize={item.textFontSize || textFontSize}
+                    x={
+                      initialSpacing -
+                      dataPointsWidth +
+                      spacing * index +
+                      (item.textShiftX || props.textShiftX || 0)
+                    }
+                    y={
+                      containerHeight -
+                      dataPointsHeight / 2 +
+                      10 -
+                      (item.value * containerHeight) / maxValue +
+                      (item.textShiftY || props.textShiftY || 0)
+                    }>
+                    {text}
+                  </CanvasText>
+                ) : null
+              ) : null}
+            </Fragment>
           )}
         </Fragment>
       );

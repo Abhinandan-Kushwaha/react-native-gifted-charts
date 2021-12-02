@@ -177,6 +177,46 @@ type referenceConfigType = {
 
 ---
 
+### onPress and strip related props
+
+Line or Area charts can be made interactive by allowing users to press on the chart and highlight that particular data point. For example-
+
+![focus points](../../demos/focusPoint.gif)
+
+To achieve this the `pressEnabled` props must be set to true. In addition, use below props to handle the press event.
+
+| Prop                 | Type       | Description                                                                                                | Default value               |
+| -------------------- | ---------- | ---------------------------------------------------------------------------------------------------------- | --------------------------- |
+| pressEnabled         | Boolean    | If set true, allows users to press on the chart (press event can be then handled using the `onPress` prop) | false                       |
+| showDataPointOnPress | Boolean    | If set true, it shows the data point corresponding to the pressed area of the chart                        | false                       |
+| showStripOnPress     | Boolean    | If set true, it shows a vertical strip corresponding to the pressed area of the chart                      | false                       |
+| showTextOnPress      | Boolean    | If set true, it shows the data point text corresponding to the pressed area of the chart                   | false                       |
+| stripHeight          | number     | Height of the vertical strip that becomes visible on pressing the corresponding area of the chart          | height of the data point    |
+| stripWidth           | number     | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart           | 2                           |
+| stripColor           | ColorValue | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart           | color of the line           |
+| stripOpacity         | number     | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart         | (startOpacity+endOpacity)/2 |
+| onPress              | Function   | The callback function that handles the press event. `item` and `index` are received as props               | \_                          |
+| unFocusOnPressOut    | Boolean    | If set true, it unselects/unfocuses the focused/selected data point                                        | true                        |
+| delayBeforeUnFocus   | number     | Delay (in milliseconds) between the release of the press and ghe unfocusing of the data point              | 300                         |
+
+#### Example of onPress :
+
+```js
+onPress={(item, index) => {
+  setData(data => {
+    item.dataPointColor = 'green';
+    item.dataPointRadius = 6;
+    item.dataPointText = item.value;
+    data[index] = item;
+    return data;
+  });
+}}
+```
+
+Above code changes the pressed data point's color and radius. Since in this example, we are changing the data on th onPress event, the data must be a state variable.
+
+---
+
 ### Props for Area Chart
 
 | Prop              | Type       | Description                                                    | Default value |
@@ -199,6 +239,10 @@ type referenceConfigType = {
 | startOpacity3     | number     | Start gradient color for the third dataset of the area chart   | 1             |
 | endOpacity3       | number     | End gradient opacity for the third dataset of the area chart   | 1             |
 | gradientDirection | string     | Direction of the gradient (_'horizontal'_ or _'vertical'_)     | 'vertical'    |
+
+```
+
+```
 
 ```
 
