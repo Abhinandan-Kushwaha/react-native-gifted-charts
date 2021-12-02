@@ -140,6 +140,13 @@ type propTypes = {
   dataPointsShape3?: string;
   customDataPoint?: Function;
 
+  focusedDataPointShape?: String;
+  focusedDataPointWidth?: number;
+  focusedDataPointHeight?: number;
+  focusedDataPointColor?: ColorValue | String | any;
+  focusedDataPointRadius?: number;
+  focusedCustomDataPoint?: Function;
+
   startFillColor?: string;
   endFillColor?: string;
   startOpacity?: number;
@@ -196,6 +203,14 @@ type itemType = {
   dataPointRadius?: number;
   dataPointColor?: string;
   dataPointShape?: string;
+  customDataPoint?: Function;
+
+  focusedDataPointShape?: String;
+  focusedDataPointWidth?: number;
+  focusedDataPointHeight?: number;
+  focusedDataPointColor?: ColorValue | String | any;
+  focusedDataPointRadius?: number;
+  focusedCustomDataPoint?: Function;
 
   showVerticalLine?: Boolean;
   verticalLineColor?: string;
@@ -1134,25 +1149,52 @@ export const LineChart = (props: propTypes) => {
         dataPointsHeight,
         dataPointsColor,
         dataPointsRadius,
-        text;
+        text,
+        customDataPoint;
       if (index === selectedIndex) {
+        dataPointsShape =
+          item.focusedDataPointShape ||
+          props.focusedDataPointShape ||
+          item.dataPointShape ||
+          dataPtsShape;
+        dataPointsWidth =
+          item.focusedDataPointWidth ||
+          props.focusedDataPointWidth ||
+          item.dataPointWidth ||
+          dataPtsWidth;
+        dataPointsHeight =
+          item.focusedDataPointHeight ||
+          props.focusedDataPointHeight ||
+          item.dataPointHeight ||
+          dataPtsHeight;
+        dataPointsColor =
+          item.focusedDataPointColor ||
+          props.focusedDataPointColor ||
+          item.dataPointColor ||
+          dataPtsColor;
+        dataPointsRadius =
+          item.focusedDataPointRadius ||
+          props.focusedDataPointRadius ||
+          item.dataPointRadius ||
+          dataPtsRadius;
+        if (showTextOnPress) {
+          text = item.dataPointText;
+        }
+        customDataPoint =
+          item.focusedCustomDataPoint ||
+          props.focusedCustomDataPoint ||
+          item.customDataPoint ||
+          props.customDataPoint;
+      } else {
         dataPointsShape = item.dataPointShape || dataPtsShape;
         dataPointsWidth = item.dataPointWidth || dataPtsWidth;
         dataPointsHeight = item.dataPointHeight || dataPtsHeight;
         dataPointsColor = item.dataPointColor || dataPtsColor;
         dataPointsRadius = item.dataPointRadius || dataPtsRadius;
         if (showTextOnPress) {
-          text = item.dataPointText;
-        }
-      } else {
-        dataPointsShape = dataPtsShape;
-        dataPointsWidth = dataPtsWidth;
-        dataPointsHeight = dataPtsHeight;
-        dataPointsColor = dataPtsColor;
-        dataPointsRadius = dataPtsRadius;
-        if (showTextOnPress) {
           text = '';
         }
+        customDataPoint = item.customDataPoint || props.customDataPoint;
       }
       // console.log('comes in');
       return (
@@ -1202,7 +1244,7 @@ export const LineChart = (props: propTypes) => {
               ) : null}
             </>
           ) : null}
-          {props.customDataPoint ? (
+          {customDataPoint ? (
             <View
               style={{
                 position: 'absolute',
@@ -1215,12 +1257,12 @@ export const LineChart = (props: propTypes) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              {props.customDataPoint()}
+              {customDataPoint()}
             </View>
           ) : null}
           {dataPointsShape === 'rectangular' ? (
             <Fragment key={index}>
-              {props.customDataPoint ? null : (
+              {customDataPoint ? null : (
                 <Rect
                   x={initialSpacing - dataPointsWidth + spacing * index}
                   y={

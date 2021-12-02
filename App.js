@@ -136,34 +136,56 @@ const App = () => {
           // data2={lineData1}
           areaChart
           initialSpacing={20}
-          customDataPoint={() => {
-            return (
-              <View
-                style={{
-                  height: 10,
-                  width: 10,
-                  backgroundColor: 'red',
-                  borderWidth: 2,
-                  borderColor: 'blue',
-                  borderRadius: 5,
-                }}
-              />
-            );
-          }}
-          onPress={(item, index) => {
-            console.log('index-->', index);
-            setData(data => {
-              item.dataPointColor = 'green';
-              // item.dataPointRadius = 5;
-              item.dataPointText = item.value;
-              // item.dataPointShape = 'rectangular';
-              // item.dataPointWidth = 10;
-              // item.dataPointHeight = 10;
-              data[index] = item;
-              console.log('data------.....', data);
-              return data;
-            });
-          }}
+          // customDataPoint={() => {
+          //   return (
+          //     <View
+          //       style={{
+          //         height: 10,
+          //         width: 10,
+          //         backgroundColor: 'red',
+          //         borderWidth: 2,
+          //         borderColor: 'blue',
+          //         borderRadius: 5,
+          //       }}
+          //     />
+          //   );
+          // }}
+          // focusedCustomDataPoint={() => {
+          //   return (
+          //     <View
+          //       style={{
+          //         height: 14,
+          //         width: 14,
+          //         backgroundColor: 'green',
+          //         borderWidth: 2,
+          //         borderColor: 'yellow',
+          //         borderRadius: 7,
+          //       }}
+          //     />
+          //   );
+          // }}
+          // onPress={(item, index) => {
+          //   console.log('index-->', index);
+          //   setData(data => {
+          //     item.focusedCustomDataPoint = () => {
+          //       return (
+          //         <View
+          //           style={{
+          //             height: 14,
+          //             width: 14,
+          //             backgroundColor: 'green',
+          //             borderWidth: 2,
+          //             borderColor: 'yellow',
+          //             borderRadius: 7,
+          //           }}
+          //         />
+          //       );
+          //     };
+          //     data[index] = item;
+          //     console.log('data------.....', data);
+          //     return data;
+          //   });
+          // }}
           // disableScroll
           pressEnabled
           // showDataPointOnPress
@@ -192,6 +214,7 @@ const App = () => {
           xAxisThickness={3}
           yAxisThickness={3}
           dataPointsRadius={4}
+          focusedDataPointRadius={10}
           yAxisTextStyle={{color: 'rgb(78, 0, 142)'}}
           startFillColor={'rgb(200, 100, 244)'}
           startOpacity={0.9}
