@@ -39,7 +39,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 
 ### Combine Line Chart using `showLine`
 
-You can add a line chart to your **<BarChart/>** component by passing the `showLine` prop.
+You can add a line chart to your **`<BarChart/>`** component by passing the `showLine` prop.
 The properties of this line chart can be controlled using the `lineConfig` prop which is an object. The `lineConfig` object is described below-
 
 | Property         | Type       | Description                                                       | Default value |
