@@ -146,6 +146,9 @@ type propTypes = {
   focusedDataPointColor?: ColorValue | String | any;
   focusedDataPointRadius?: number;
   focusedCustomDataPoint?: Function;
+  dataPointLabelWidth?: number;
+  dataPointLabelShiftX?: number;
+  dataPointLabelShiftY?: number;
 
   startFillColor?: string;
   endFillColor?: string;
@@ -190,6 +193,7 @@ type referenceConfigType = {
 type itemType = {
   value?: number;
   label: String;
+  labelComponent: Function;
   labelTextStyle?: any;
   dataPointText?: string;
   textShiftX?: number;
@@ -197,7 +201,7 @@ type itemType = {
   textColor?: string;
   textFontSize?: number;
 
-  showDataPoint?: Boolean;
+  hideDataPoint?: Boolean;
   dataPointHeight?: number;
   dataPointWidth?: number;
   dataPointRadius?: number;
@@ -205,12 +209,24 @@ type itemType = {
   dataPointShape?: string;
   customDataPoint?: Function;
 
+  stripHeight?: number;
+  stripWidth?: number;
+  stripColor?: ColorValue | String | any;
+  stripOpacity?: number;
+
   focusedDataPointShape?: String;
   focusedDataPointWidth?: number;
   focusedDataPointHeight?: number;
   focusedDataPointColor?: ColorValue | String | any;
   focusedDataPointRadius?: number;
   focusedCustomDataPoint?: Function;
+
+  dataPointLabelComponent?: Function;
+  focusedDataPointLabelComponent?: Function;
+  dataPointLabelWidth?: number;
+  dataPointLabelShiftX?: number;
+  dataPointLabelShiftY?: number;
+  showStrip?: Boolean;
 
   showVerticalLine?: Boolean;
   verticalLineColor?: string;
@@ -815,7 +831,12 @@ export const LineChart = (props: propTypes) => {
     });
   }
 
-  const renderLabel = (index: number, label: String, labelTextStyle: any) => {
+  const renderLabel = (
+    index: number,
+    label: String,
+    labelTextStyle: any,
+    labelComponent: Function,
+  ) => {
     return (
       <View
         style={[
@@ -832,9 +853,15 @@ export const LineChart = (props: propTypes) => {
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
         ]}>
-        <Text style={[labelTextStyle, {textAlign: 'center'}]} numberOfLines={1}>
-          {label || ''}
-        </Text>
+        {labelComponent ? (
+          labelComponent()
+        ) : (
+          <Text
+            style={[labelTextStyle, {textAlign: 'center'}]}
+            numberOfLines={1}>
+            {label || ''}
+          </Text>
+        )}
       </View>
     );
   };
@@ -843,6 +870,7 @@ export const LineChart = (props: propTypes) => {
     index: number,
     label: String,
     labelTextStyle: any,
+    labelComponent: Function,
   ) => {
     // console.log('label', label);
     return (
@@ -863,9 +891,15 @@ export const LineChart = (props: propTypes) => {
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
         ]}>
-        <Text style={[labelTextStyle, {textAlign: 'center'}]} numberOfLines={1}>
-          {label || ''}
-        </Text>
+        {labelComponent ? (
+          labelComponent()
+        ) : (
+          <Text
+            style={[labelTextStyle, {textAlign: 'center'}]}
+            numberOfLines={1}>
+            {label || ''}
+          </Text>
+        )}
       </Animated.View>
     );
   };
@@ -1036,96 +1070,6 @@ export const LineChart = (props: propTypes) => {
     );
   };
 
-  const renderSpecificDataPoints = dataForRender => {
-    return dataForRender.map((item: itemType, index: number) => {
-      if (item.showDataPoint) {
-        if (item.dataPointShape === 'rectangular') {
-          return (
-            <Fragment key={index}>
-              <Rect
-                x={
-                  initialSpacing -
-                  (item.dataPointWidth || 2) / 2 -
-                  1 +
-                  spacing * index
-                }
-                y={
-                  containerHeight -
-                  (item.dataPointHeight || 2) / 2 +
-                  10 -
-                  (item.value * containerHeight) / maxValue
-                }
-                width={item.dataPointWidth || 2}
-                height={item.dataPointHeight || 2}
-                fill={item.dataPointColor || 'black'}
-              />
-              {item.dataPointText && (
-                <CanvasText
-                  fill={item.textColor || 'black'}
-                  fontSize={item.textFontSize || 10}
-                  x={
-                    initialSpacing -
-                    (item.dataPointWidth || 2) +
-                    spacing * index +
-                    (item.textShiftX || props.textShiftX || 0)
-                  }
-                  y={
-                    containerHeight -
-                    (item.dataPointHeight || 2) / 2 +
-                    10 -
-                    (item.value * containerHeight) / maxValue +
-                    (item.textShiftY || props.textShiftY || 0)
-                  }>
-                  {item.dataPointText}
-                </CanvasText>
-              )}
-            </Fragment>
-          );
-        } else {
-          return (
-            <Fragment key={index}>
-              <Circle
-                cx={
-                  initialSpacing -
-                  (item.dataPointWidth || 2) / 2 +
-                  spacing * index
-                }
-                cy={
-                  containerHeight +
-                  10 -
-                  (item.value * containerHeight) / maxValue
-                }
-                r={item.dataPointRadius || 3}
-                fill={item.dataPointColor || 'black'}
-              />
-              {item.dataPointText && (
-                <CanvasText
-                  fill={item.textColor || 'black'}
-                  fontSize={item.textFontSize || 10}
-                  x={
-                    initialSpacing -
-                    (item.dataPointWidth || 2) +
-                    spacing * index +
-                    (item.textShiftX || props.textShiftX || 0)
-                  }
-                  y={
-                    containerHeight -
-                    (item.dataPointHeight || 2) / 2 +
-                    10 -
-                    (item.value * containerHeight) / maxValue +
-                    (item.textShiftY || props.textShiftY || 0)
-                  }>
-                  {item.dataPointText}
-                </CanvasText>
-              )}
-            </Fragment>
-          );
-        }
-      }
-      return null;
-    });
-  };
-
   const onStripPress = (item, index) => {
     setSelectedIndex(index);
     if (props.onPress) {
@@ -1144,13 +1088,17 @@ export const LineChart = (props: propTypes) => {
     textFontSize,
   ) => {
     return dataForRender.map((item: itemType, index: number) => {
+      if (item.hideDataPoint) {
+        return null;
+      }
       let dataPointsShape,
         dataPointsWidth,
         dataPointsHeight,
         dataPointsColor,
         dataPointsRadius,
         text,
-        customDataPoint;
+        customDataPoint,
+        dataPointLabelComponent;
       if (index === selectedIndex) {
         dataPointsShape =
           item.focusedDataPointShape ||
@@ -1185,6 +1133,8 @@ export const LineChart = (props: propTypes) => {
           props.focusedCustomDataPoint ||
           item.customDataPoint ||
           props.customDataPoint;
+        dataPointLabelComponent =
+          item.focusedDataPointLabelComponent || item.dataPointLabelComponent;
       } else {
         dataPointsShape = item.dataPointShape || dataPtsShape;
         dataPointsWidth = item.dataPointWidth || dataPtsWidth;
@@ -1195,8 +1145,17 @@ export const LineChart = (props: propTypes) => {
           text = '';
         }
         customDataPoint = item.customDataPoint || props.customDataPoint;
+        dataPointLabelComponent = item.dataPointLabelComponent;
       }
-      // console.log('comes in');
+
+      const currentStripHeight =
+        item.stripHeight === 0 ? 0 : item.stripHeight || stripHeight;
+      const currentStripWidth =
+        item.stripWidth === 0 ? 0 : item.stripWidth || stripWidth;
+      const currentStripOpacity =
+        item.stripOpacity === 0 ? 0 : item.stripOpacity || stripOpacity;
+      const currentStripColor = item.stripColor || stripColor;
+
       return (
         <Fragment key={index}>
           {pressEnabled ? (
@@ -1223,40 +1182,41 @@ export const LineChart = (props: propTypes) => {
                   fill={'none'}
                 />
               )}
-              {index === selectedIndex && showStripOnPress ? (
-                <Rect
-                  x={initialSpacing + (spacing * index - dataPointsWidth / 2)}
-                  y={
-                    stripHeight
-                      ? containerHeight - stripHeight + 8
-                      : containerHeight -
-                        dataPointsHeight / 2 +
-                        20 -
-                        (item.value * containerHeight) / maxValue
-                  }
-                  width={stripWidth}
-                  height={
-                    stripHeight || containerHeight - dataPointsHeight / 2 + 20
-                  }
-                  opacity={stripOpacity}
-                  fill={stripColor}
-                />
-              ) : null}
             </>
+          ) : null}
+          {item.showStrip ||
+          (pressEnabled && index === selectedIndex && showStripOnPress) ? (
+            <Rect
+              x={initialSpacing + (spacing * index - dataPointsWidth / 2)}
+              y={
+                currentStripHeight
+                  ? containerHeight - currentStripHeight + 8
+                  : containerHeight -
+                    dataPointsHeight / 2 +
+                    20 -
+                    (item.value * containerHeight) / maxValue
+              }
+              width={currentStripWidth}
+              height={
+                currentStripHeight ||
+                containerHeight - dataPointsHeight / 2 + 20
+              }
+              opacity={currentStripOpacity}
+              fill={currentStripColor}
+            />
           ) : null}
           {customDataPoint ? (
             <View
-              style={{
-                position: 'absolute',
-                height: dataPointsHeight,
-                width: dataPointsWidth,
-                // backgroundColor: 'orange',
-                top:
-                  containerHeight - (item.value * containerHeight) / maxValue,
-                left: initialSpacing - dataPointsWidth + spacing * index,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+              style={[
+                styles.customDataPointContainer,
+                {
+                  height: dataPointsHeight,
+                  width: dataPointsWidth,
+                  top:
+                    containerHeight - (item.value * containerHeight) / maxValue,
+                  left: initialSpacing - dataPointsWidth + spacing * index,
+                },
+              ]}>
               {customDataPoint()}
             </View>
           ) : null}
@@ -1282,35 +1242,10 @@ export const LineChart = (props: propTypes) => {
                   }
                 />
               )}
-              {text ? (
-                !showTextOnPress || index === selectedIndex ? (
-                  <CanvasText
-                    fill={item.textColor || textColor}
-                    fontSize={item.textFontSize || textFontSize}
-                    x={
-                      initialSpacing -
-                      dataPointsWidth +
-                      spacing * index +
-                      (item.textShiftX ||
-                        props.textShiftX ||
-                        props.textShiftX ||
-                        0)
-                    }
-                    y={
-                      containerHeight -
-                      dataPointsHeight / 2 +
-                      10 -
-                      (item.value * containerHeight) / maxValue +
-                      (item.textShiftY || props.textShiftY || 0)
-                    }>
-                    {text}
-                  </CanvasText>
-                ) : null
-              ) : null}
             </Fragment>
           ) : (
             <Fragment key={index}>
-              {props.customDataPoint ? null : (
+              {customDataPoint ? null : (
                 <Circle
                   cx={initialSpacing - dataPointsWidth / 2 + spacing * index}
                   cy={
@@ -1328,30 +1263,59 @@ export const LineChart = (props: propTypes) => {
                   }
                 />
               )}
-              {text ? (
-                !showTextOnPress || index === selectedIndex ? (
-                  <CanvasText
-                    fill={item.textColor || textColor}
-                    fontSize={item.textFontSize || textFontSize}
-                    x={
-                      initialSpacing -
-                      dataPointsWidth +
-                      spacing * index +
-                      (item.textShiftX || props.textShiftX || 0)
-                    }
-                    y={
-                      containerHeight -
-                      dataPointsHeight / 2 +
-                      10 -
-                      (item.value * containerHeight) / maxValue +
-                      (item.textShiftY || props.textShiftY || 0)
-                    }>
-                    {text}
-                  </CanvasText>
-                ) : null
-              ) : null}
             </Fragment>
           )}
+          {dataPointLabelComponent ? (
+            !showTextOnPress || index === selectedIndex ? (
+              <View
+                style={[
+                  styles.customDataPointContainer,
+                  {
+                    top:
+                      containerHeight +
+                      (item.dataPointLabelShiftY ||
+                        props.dataPointLabelShiftY ||
+                        0) -
+                      (item.value * containerHeight) / maxValue,
+                    left:
+                      initialSpacing +
+                      (item.dataPointLabelShiftX ||
+                        props.dataPointLabelShiftX ||
+                        0) -
+                      (item.dataPointLabelWidth
+                        ? item.dataPointLabelWidth + 20
+                        : props.dataPointLabelWidth
+                        ? props.dataPointLabelWidth + 20
+                        : 50) /
+                        2 +
+                      spacing * index,
+                  },
+                ]}>
+                {dataPointLabelComponent()}
+              </View>
+            ) : null
+          ) : text ? (
+            !showTextOnPress || index === selectedIndex ? (
+              <CanvasText
+                fill={item.textColor || textColor}
+                fontSize={item.textFontSize || textFontSize}
+                x={
+                  initialSpacing -
+                  dataPointsWidth +
+                  spacing * index +
+                  (item.textShiftX || props.textShiftX || 0)
+                }
+                y={
+                  containerHeight -
+                  dataPointsHeight / 2 +
+                  10 -
+                  (item.value * containerHeight) / maxValue +
+                  (item.textShiftY || props.textShiftY || 0)
+                }>
+                {text}
+              </CanvasText>
+            ) : null
+          ) : null}
         </Fragment>
       );
     });
@@ -1453,7 +1417,7 @@ export const LineChart = (props: propTypes) => {
                 textColor1,
                 textFontSize1,
               )
-            : renderSpecificDataPoints(data)}
+            : null}
           {!hideDataPoints2
             ? renderDataPoints(
                 data2,
@@ -1465,7 +1429,7 @@ export const LineChart = (props: propTypes) => {
                 textColor2,
                 textFontSize2,
               )
-            : renderSpecificDataPoints(data2)}
+            : null}
           {!hideDataPoints3
             ? renderDataPoints(
                 data3,
@@ -1477,7 +1441,7 @@ export const LineChart = (props: propTypes) => {
                 textColor3,
                 textFontSize3,
               )
-            : renderSpecificDataPoints(data3)}
+            : null}
         </Svg>
       </View>
     );
@@ -1560,7 +1524,7 @@ export const LineChart = (props: propTypes) => {
                 textColor1,
                 textFontSize1,
               )
-            : renderSpecificDataPoints(data)}
+            : null}
           {!hideDataPoints2
             ? renderDataPoints(
                 data2,
@@ -1572,7 +1536,7 @@ export const LineChart = (props: propTypes) => {
                 textColor2,
                 textFontSize2,
               )
-            : renderSpecificDataPoints(data2)}
+            : null}
           {!hideDataPoints3
             ? renderDataPoints(
                 data3,
@@ -1584,7 +1548,7 @@ export const LineChart = (props: propTypes) => {
                 textColor3,
                 textFontSize3,
               )
-            : renderSpecificDataPoints(data3)}
+            : null}
         </Svg>
       </Animated.View>
     );
@@ -1729,8 +1693,18 @@ export const LineChart = (props: propTypes) => {
           return (
             <View key={index}>
               {isAnimated
-                ? renderAnimatedLabel(index, item.label, item.labelTextStyle)
-                : renderLabel(index, item.label, item.labelTextStyle)}
+                ? renderAnimatedLabel(
+                    index,
+                    item.label,
+                    item.labelTextStyle,
+                    item.labelComponent,
+                  )
+                : renderLabel(
+                    index,
+                    item.label,
+                    item.labelTextStyle,
+                    item.labelComponent,
+                  )}
               {/* {renderLabel(index, item.label, item.labelTextStyle)} */}
             </View>
           );

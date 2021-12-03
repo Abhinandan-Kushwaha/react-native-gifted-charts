@@ -40,29 +40,40 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 
 ### Item description
 
-| Key                   | Value type | Description                                                               |
-| --------------------- | ---------- | ------------------------------------------------------------------------- |
-| value                 | number     | Value of the item representing representing its position                  |
-| label                 | string     | Label text appearing under the X axis                                     |
-| labelTextStyle        | object     | Style object for the label text appearing under the X axis                |
-| yAxisLabelText        | string     | Y axis label text                                                         |
-| dataPointText         | string     | Text appearing near the data points                                       |
-| textShiftX            | number     | To shift the dataPointText text horizontally                              |
-| textShiftY            | number     | To shift the dataPointText text vertically                                |
-| textColor             | ColorValue | Color of the dataPointText                                                |
-| textFontSize          | number     | Font size of the dataPointText                                            |
-| showDataPoint         | Boolean    | To show data point for the particular item                                |
-| dataPointHeight       | number     | Height of the data point (when data point's shape is rectangular)         |
-| dataPointWidth        | number     | Width of the data point (when data point's shape is rectangular)          |
-| dataPointRadius       | number     | Radius of the data point (when data points' shape is circular)            |
-| dataPointColor        | ColorValue | Color of the data point                                                   |
-| dataPointShape        | string     | Shape of the data point (rectangular or circular) defaults to circular    |
-| showVerticalLine      | Boolean    | When set to true, a vertical line will be displayed along that data point |
-| verticalLineColor     | ColorValue | Color of the vertical Line displayed along the data point                 |
-| verticalLineThickness | number     | Thickness of the vertical Line displayed along the data point             |
+| Key                            | Value type | Description                                                                                                                          |
+| ------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| value                          | number     | Value of the item representing representing its position                                                                             |
+| label                          | string     | Label text appearing under the X axis                                                                                                |
+| labelTextStyle                 | object     | Style object for the label text appearing under the X axis                                                                           |
+| labelComponent                 | Function   | custom label component appearing under the X axis                                                                                    |
+| yAxisLabelText                 | string     | Y axis label text                                                                                                                    |
+| dataPointText                  | string     | Text appearing near the data points                                                                                                  |
+| textShiftX                     | number     | To shift the dataPointText text horizontally                                                                                         |
+| textShiftY                     | number     | To shift the dataPointText text vertically                                                                                           |
+| textColor                      | ColorValue | Color of the dataPointText                                                                                                           |
+| textFontSize                   | number     | Font size of the dataPointText                                                                                                       |
+| dataPointHeight                | number     | Height of the data point (when data point's shape is rectangular)                                                                    |
+| dataPointWidth                 | number     | Width of the data point (when data point's shape is rectangular)                                                                     |
+| dataPointRadius                | number     | Radius of the data point (when data points' shape is circular)                                                                       |
+| dataPointColor                 | ColorValue | Color of the data point                                                                                                              |
+| dataPointShape                 | string     | Shape of the data point (rectangular or circular) defaults to circular                                                               |
+| hideDataPoint                  | Boolean    | To hide the data point                                                                                                               |
+| showVerticalLine               | Boolean    | When set to true, a vertical line will be displayed along that data point                                                            |
+| verticalLineColor              | ColorValue | Color of the vertical Line displayed along the data point                                                                            |
+| verticalLineThickness          | number     | Thickness of the vertical Line displayed along the data point                                                                        |
+| dataPointLabelWidth            | number     | width of the label shown beside a data point                                                                                         |
+| dataPointLabelShiftX           | number     | horizontal shift of a label from its corresponding data point                                                                        |
+| dataPointLabelShiftY           | number     | vertical shift of a label from its corresponding data point                                                                          |
+| dataPointLabelComponent        | Function   | custom component rendered above a data point                                                                                         |
+| focusedDataPointLabelComponent | Function   | custom component rendered above a data point only when focused/selected (when the user presses)                                      |
+| showStrip                      | Boolean    | To show a vertical strip along the data point (even if it's not focused/selected)                                                    |
+| stripHeight                    | number     | Height of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true  |
+| stripWidth                     | number     | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
+| stripColor                     | ColorValue | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
+| stripOpacity                   | number     | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true |
 
-**Alert!**\
-If you are adding showDataPoint to an item, you must set hideDataPoints prop to true
+**Alert**\
+When you are using the `dataPointLabelComponent`, make sure to provide the `dataPointsHeight` and `dataPointsWidth` values too (either in the corresponding item object, or directly as a props of the <LineChart> component). Otherwise the data points might appear shifted from their intended positions.
 
 ---
 
@@ -181,6 +192,9 @@ type referenceConfigType = {
 | textShiftX             | number     | To shift the dataPointText text horizontally                                          | 0                                         |
 | textShiftY             | number     | To shift the dataPointText text vertically                                            | 0                                         |
 | customDataPoint        | Function   | A callback function to render a custom component as the data points                   | \_                                        |
+| dataPointLabelWidth    | number     | width of the label shown beside a data point                                          | 30                                        |
+| dataPointLabelShiftX   | number     | horizontal shift of a label from its corresponding data point                         | 0                                         |
+| dataPointLabelShiftY   | number     | vertical shift of a label from its corresponding data point                           | 0                                         |
 
 ---
 
@@ -220,7 +234,7 @@ onPress={(item, index) => {
 }}
 ```
 
-Above code changes the pressed data point's color and radius. Since in this example, we are changing the data on th onPress event, the data must be a state variable.
+Above code changes the pressed data point's color and radius. Since in this example, we are changing the data on the onPress event, the data must be a state variable.
 
 ---
 

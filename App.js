@@ -6,7 +6,111 @@ import {BarChart, LineChart} from './src';
 
 const App = () => {
   const [toggle, setToggle] = useState(true);
+  const dPoint = () => {
+    return (
+      <View
+        style={{
+          width: 20,
+          height: 20,
+          backgroundColor: 'white',
+          borderWidth: 4,
+          borderRadius: 10,
+          borderColor: '#07BAD1',
+        }}
+      />
+    );
+  };
+  const lcomp = val => {
+    return (
+      <View style={{width: 70, marginLeft: 7}}>
+        <Text style={{color: 'white', fontWeight: 'bold'}}>{val}</Text>
+      </View>
+    );
+  };
+  const latestData = [
+    {
+      value: 100,
+      labelComponent: () => lcomp('22 Nov'),
+      customDataPoint: dPoint,
+    },
+    {
+      value: 140,
+      hideDataPoint: true,
+    },
+    {
+      value: 250,
+      customDataPoint: dPoint,
+    },
+    {
+      value: 290,
+      hideDataPoint: true,
+    },
+    {
+      value: 410,
+      labelComponent: () => lcomp('24 Nov'),
+      customDataPoint: dPoint,
+      showStrip: true,
+      stripHeight: 190,
+      stripColor: 'black',
+      dataPointLabelComponent: () => {
+        return (
+          <View
+            style={{
+              backgroundColor: 'black',
+              paddingHorizontal: 8,
+              paddingVertical: 5,
+              borderRadius: 4,
+            }}>
+            <Text style={{color: 'white'}}>410</Text>
+          </View>
+        );
+      },
+      dataPointLabelShiftY: -70,
+      dataPointLabelShiftX: -14,
+    },
+    {
+      value: 440,
+      hideDataPoint: true,
+    },
+    {
+      value: 300,
+      customDataPoint: dPoint,
+    },
+    {
+      value: 280,
+      hideDataPoint: true,
+    },
+    {
+      value: 180,
+      labelComponent: () => lcomp('26 Nov'),
+      customDataPoint: dPoint,
+    },
+    {
+      value: 150,
+      hideDataPoint: true,
+    },
+    {
+      value: 150,
+      customDataPoint: dPoint,
+    },
+  ];
 
+  const customLabel = val => {
+    return (
+      <View
+        style={{
+          backgroundColor: 'black',
+          // padding: 16,
+          borderRadius: 8,
+          width: 30,
+          paddingVertical: 4,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text style={{color: 'white'}}>{val}</Text>
+      </View>
+    );
+  };
   const [data, setData] = useState([
     {value: 15, label: 'Jan'},
     {
@@ -15,17 +119,28 @@ const App = () => {
       verticalLineColor: 'red',
       // showVerticalLine: true,
       verticalLineThickness: StyleSheet.hairlineWidth,
+      dataPointLabelComponent: () => customLabel(40),
     },
     {
       value: 10,
       label: 'Mar',
+      dataPointLabelComponent: () => customLabel(10),
     },
     {
       value: 30,
       label: 'Apr',
+      dataPointLabelComponent: () => customLabel(30),
     },
-    {value: 20, label: 'May'},
-    {value: 40, label: 'Jun'},
+    {
+      value: 20,
+      label: 'May',
+      dataPointLabelComponent: () => customLabel(20),
+    },
+    {
+      value: 40,
+      label: 'Jun',
+      focusedDataPointLabelComponent: () => customLabel(40),
+    },
     {value: 48, label: 'Jul'},
     {value: 30, label: 'Aug'},
     {value: 20, label: 'Sep'},
@@ -43,8 +158,33 @@ const App = () => {
       style={{
         marginTop: 100,
         paddingVertical: 50,
+        backgroundColor: '#414141',
       }}>
-      {!toggle ? (
+      <LineChart
+        thickness={6}
+        color="#07BAD1"
+        maxValue={600}
+        noOfSections={3}
+        areaChart
+        yAxisTextStyle={{color: 'lightgray'}}
+        data={latestData}
+        curved
+        startFillColor={'rgb(84,219,234)'}
+        endFillColor={'rgb(84,219,234)'}
+        startOpacity={0.4}
+        endOpacity={0.4}
+        spacing={38}
+        backgroundColor="#414141"
+        rulesColor="gray"
+        rulesType="solid"
+        initialSpacing={10}
+        yAxisColor="lightgray"
+        xAxisColor="lightgray"
+        dataPointsHeight={20}
+        dataPointsWidth={20}
+      />
+
+      {/* {!toggle ? (
         <BarChart
           isThreeD
           key={'xyz'}
@@ -133,23 +273,25 @@ const App = () => {
           // hideDataPoints1
           // spacing={30}
           data={data}
+          dataPointLabelWidth={30}
+          dataPointLabelShiftY={-30}
           // data2={lineData1}
           areaChart
           initialSpacing={20}
-          // customDataPoint={() => {
-          //   return (
-          //     <View
-          //       style={{
-          //         height: 10,
-          //         width: 10,
-          //         backgroundColor: 'red',
-          //         borderWidth: 2,
-          //         borderColor: 'blue',
-          //         borderRadius: 5,
-          //       }}
-          //     />
-          //   );
-          // }}
+          customDataPoint={() => {
+            return (
+              <View
+                style={{
+                  height: 10,
+                  width: 10,
+                  backgroundColor: 'red',
+                  borderWidth: 2,
+                  borderColor: 'blue',
+                  borderRadius: 5,
+                }}
+              />
+            );
+          }}
           // focusedCustomDataPoint={() => {
           //   return (
           //     <View
@@ -190,18 +332,18 @@ const App = () => {
           pressEnabled
           // showDataPointOnPress
           showStripOnPress
-          showTextOnPress
-          textShiftY={-10}
-          textShiftX={-5}
-          textFontSize={18}
-          textColor={'green'}
-          stripWidth={1}
+          // showTextOnPress
+          // textShiftY={-10}
+          // textShiftX={-5}
+          // textFontSize={18}
+          // textColor={'green'}
+          // stripWidth={1}
           // stripHeight={200}
           // stripHeight={200}
-          stripOpacity={1}
-          curved
-          isAnimated
-          animationDuration={2000}
+          // stripOpacity={1}
+          // curved
+          // isAnimated
+          // animationDuration={2000}
           // animationDuration={2000}
           // dataPointsShape="rectangular"
           // showGradient
@@ -209,25 +351,25 @@ const App = () => {
           yAxisColor={'rgb(78, 0, 142)'}
           xAxisColor={'rgb(78, 0, 142)'}
           // dataPointsColor={'yellow'}
-          dataPointsWidth={22}
-          dataPointsHeight={22}
+          dataPointsWidth={20}
+          dataPointsHeight={20}
           xAxisThickness={3}
           yAxisThickness={3}
-          dataPointsRadius={4}
-          focusedDataPointRadius={10}
+          // dataPointsRadius={4}
+          // focusedDataPointRadius={10}
           yAxisTextStyle={{color: 'rgb(78, 0, 142)'}}
           startFillColor={'rgb(200, 100, 244)'}
           startOpacity={0.9}
           endFillColor={'rgb(255, 255, 255)'}
           endOpacity={0.2}
         />
-      )}
+      )} */}
 
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => setToggle(!toggle)}
         style={{marginTop: 100, alignSelf: 'center'}}>
         <Text>Line Chart</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
