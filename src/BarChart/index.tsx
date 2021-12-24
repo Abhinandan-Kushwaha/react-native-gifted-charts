@@ -966,7 +966,7 @@ export const BarChart = (props: PropTypes) => {
       <ScrollView
         style={[
           {
-            marginLeft: 36,
+            marginLeft: yAxisLabelWidth,
             position: 'absolute',
             bottom: stepHeight * -0.5 - 60 + xAxisThickness,
           },
