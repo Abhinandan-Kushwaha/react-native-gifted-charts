@@ -98,6 +98,7 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 | Issue                                                                                                                        | Solution                                                                                                                   |
 | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | [BarChart - Value and section line don't match](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35) | [Comment by the owner](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35#issuecomment-972673281) |
+| **Invariant Violation: requireNativeComponent: "RNCWebView" was not found in the UIManager.** | install `react-native-webview`  |
 
 ## License
 
