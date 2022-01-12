@@ -6,34 +6,34 @@ import {BarChart, LineChart} from './src';
 
 const App = () => {
   const [toggle, setToggle] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setCurrentData(latestData5);
-    }, 1100 + 100 + 310);
-    setTimeout(() => {
-      setCurrentData(latestData2);
-    }, 1100 + 300 + 620);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setCurrentData(latestData5);
+  //   }, 1100 + 100 + 310);
+  //   setTimeout(() => {
+  //     setCurrentData(latestData2);
+  //   }, 1100 + 300 + 620);
 
-    setTimeout(() => {
-      setCurrentData(latestData5);
-    }, 1100 + 500 + 930);
+  //   setTimeout(() => {
+  //     setCurrentData(latestData5);
+  //   }, 1100 + 500 + 930);
 
-    setTimeout(() => {
-      setCurrentData(latestData3);
-    }, 1100 + 1000 + 1240);
+  //   setTimeout(() => {
+  //     setCurrentData(latestData3);
+  //   }, 1100 + 1000 + 1240);
 
-    setTimeout(() => {
-      setCurrentData(latestData4);
-    }, 1100 + 1500 + 1550);
+  //   setTimeout(() => {
+  //     setCurrentData(latestData4);
+  //   }, 1100 + 1500 + 1550);
 
-    setTimeout(() => {
-      setCurrentData(latestData5);
-    }, 6000);
+  //   setTimeout(() => {
+  //     setCurrentData(latestData5);
+  //   }, 6000);
 
-    setTimeout(() => {
-      setCurrentData(latestData);
-    }, 7000);
-  }, []);
+  //   setTimeout(() => {
+  //     setCurrentData(latestData);
+  //   }, 7000);
+  // }, []);
   const dPoint = () => {
     return (
       <View
@@ -485,6 +485,11 @@ const App = () => {
       </View>
     );
   };
+  const ndd = [
+    {label: 'Jan', value: 30},
+    {label: 'Feb', value: 10},
+    {label: 'Mar', value: 20},
+  ];
   const [data, setData] = useState([
     {value: 15, label: 'Jan'},
     {
@@ -533,9 +538,10 @@ const App = () => {
         style={{
           marginVertical: 100,
           paddingVertical: 50,
-          backgroundColor: '#414141',
+          // backgroundColor: '#414141',
         }}>
-        <LineChart
+        <BarChart hideOrigin data={ndd} yAxisLabelTexts={['0', '£10', '£20']} />
+        {/* <LineChart
           isAnimated
           thickness={3}
           color="#07BAD1"
@@ -562,7 +568,7 @@ const App = () => {
           xAxisColor="lightgray"
           dataPointsHeight={20}
           dataPointsWidth={20}
-        />
+        /> */}
       </View>
 
       {/* <TouchableOpacity
