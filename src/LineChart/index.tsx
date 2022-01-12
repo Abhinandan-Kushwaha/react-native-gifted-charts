@@ -450,7 +450,7 @@ export const LineChart = (props: propTypes) => {
     totalWidth += spacing;
   });
 
-  const maxValue = props.maxValue || maxItem;
+  const maxValue = props.maxValue || maxItem || 10;
 
   useEffect(() => {
     // console.log('comes here............')
