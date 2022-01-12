@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-charts",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "The most complete library for Bar, Line, Area, Pie and Donut charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.",
   "main": "src/index.tsx",
   "files": [
@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues"
   },
-  "homepage": "https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts#readme",
+  "homepage": "https://gifted-charts.web.app/",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
