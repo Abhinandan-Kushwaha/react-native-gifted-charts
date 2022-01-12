@@ -25,6 +25,9 @@ import Svg, {
 import {svgPath, bezierCommand} from '../utils';
 import Rule from '../Components/lineSvg';
 
+let initialData = null;
+let animations = [];
+
 type propTypes = {
   height?: number;
   noOfSections?: number;
@@ -42,7 +45,9 @@ type propTypes = {
   thickness3?: number;
   rotateLabel?: Boolean;
   isAnimated?: Boolean;
+  animateOnDataChange?: Boolean;
   animationDuration?: number;
+  onDataChangeAnimationDuration?: number;
   animationEasing?: any;
   animateTogether?: boolean;
   xAxisThickness?: number;
@@ -247,7 +252,7 @@ export const LineChart = (props: propTypes) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
-  const data = useMemo(() => props.data || [], [props.data]);
+  let data = useMemo(() => props.data || [], [props.data]);
   const data2 = useMemo(() => props.data2 || [], [props.data2]);
   const data3 = useMemo(() => props.data3 || [], [props.data3]);
 
@@ -257,7 +262,93 @@ export const LineChart = (props: propTypes) => {
   const widthValue3 = useMemo(() => new Animated.Value(0), []);
 
   const animationDuration = props.animationDuration || 800;
+  const onDataChangeAnimationDuration =
+    props.onDataChangeAnimationDuration || 400;
   const animateTogether = props.animateTogether || false;
+  const animateOnDataChange = props.animateOnDataChange || false;
+
+  if (!initialData) {
+    initialData = [...data];
+    animations = initialData.map(item => new Animated.Value(item.value));
+  }
+
+  let newPoints = '',
+    newFillPoints = '';
+  let counter = 0;
+
+  if (animateOnDataChange) {
+    animations.forEach((item, index) => {
+      item.addListener(val => {
+        data[index].value = val.value;
+        let pp = '',
+          ppp = '';
+        if (!props.curved) {
+          for (let i = 0; i < data.length; i++) {
+            pp +=
+              'L' +
+              (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
+              ' ' +
+              (containerHeight +
+                10 -
+                (data[i].value * containerHeight) / maxValue) +
+              ' ';
+          }
+          if (areaChart) {
+            ppp =
+              'L' +
+              (initialSpacing - dataPointsWidth1 / 2) +
+              ' ' +
+              (containerHeight + 10 - xAxisThickness) +
+              ' ';
+            ppp += pp;
+            ppp +=
+              'L' +
+              (initialSpacing -
+                dataPointsWidth1 / 2 +
+                spacing * (data.length - 1)) +
+              ' ' +
+              (containerHeight + 10 - xAxisThickness);
+            ppp +=
+              'L' +
+              (initialSpacing - dataPointsWidth1 / 2) +
+              ' ' +
+              (containerHeight + 10 - xAxisThickness) +
+              ' ';
+          }
+          newPoints = pp;
+          newFillPoints = ppp;
+          setPointsOnChange();
+        }
+        counter++;
+      });
+    });
+  }
+
+  const setPointsOnChange = () => {
+    if (counter === data.length) {
+      // console.log('here.......');
+      if (!props.curved) {
+        setPoints(newPoints.replace('L', 'M'));
+        if (areaChart) {
+          setFillPoints(newFillPoints.replace('L', 'M'));
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (animateOnDataChange) {
+      Animated.parallel(
+        animations.map((anItem, index) =>
+          Animated.timing(anItem, {
+            toValue: data[index].value,
+            useNativeDriver: true,
+            duration: onDataChangeAnimationDuration,
+          }),
+        ),
+      ).start();
+    }
+  }, [animateOnDataChange, data, onDataChangeAnimationDuration]);
 
   const labelsAppear = useCallback(() => {
     opacValue.setValue(0);
@@ -392,14 +483,17 @@ export const LineChart = (props: propTypes) => {
       pp3 = '';
     if (!props.curved) {
       for (let i = 0; i < data.length; i++) {
-        pp +=
-          'L' +
-          (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
-          ' ' +
-          (containerHeight +
-            10 -
-            (data[i].value * containerHeight) / maxValue) +
-          ' ';
+        if (!animateOnDataChange) {
+          pp +=
+            'L' +
+            (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
+            ' ' +
+            (containerHeight +
+              10 -
+              (data[i].value * containerHeight) / maxValue) +
+            ' ';
+          setPoints(pp.replace('L', 'M'));
+        }
         if (data2.length) {
           pp2 +=
             'L' +
@@ -421,7 +515,6 @@ export const LineChart = (props: propTypes) => {
             ' ';
         }
       }
-      setPoints(pp.replace('L', 'M'));
       setPoints2(pp2.replace('L', 'M'));
       setPoints3(pp3.replace('L', 'M'));
 
@@ -431,26 +524,29 @@ export const LineChart = (props: propTypes) => {
           ppp2 = '',
           ppp3 = '';
 
-        ppp =
-          'L' +
-          (initialSpacing - dataPointsWidth1 / 2) +
-          ' ' +
-          (containerHeight + 10 - xAxisThickness) +
-          ' ';
-        ppp += pp;
-        ppp +=
-          'L' +
-          (initialSpacing -
-            dataPointsWidth1 / 2 +
-            spacing * (data.length - 1)) +
-          ' ' +
-          (containerHeight + 10 - xAxisThickness);
-        ppp +=
-          'L' +
-          (initialSpacing - dataPointsWidth1 / 2) +
-          ' ' +
-          (containerHeight + 10 - xAxisThickness) +
-          ' ';
+        if (!animateOnDataChange) {
+          ppp =
+            'L' +
+            (initialSpacing - dataPointsWidth1 / 2) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          ppp += pp;
+          ppp +=
+            'L' +
+            (initialSpacing -
+              dataPointsWidth1 / 2 +
+              spacing * (data.length - 1)) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness);
+          ppp +=
+            'L' +
+            (initialSpacing - dataPointsWidth1 / 2) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          setFillPoints(ppp.replace('L', 'M'));
+        }
 
         if (data2.length) {
           ppp2 =
@@ -499,8 +595,6 @@ export const LineChart = (props: propTypes) => {
             ' ';
           setFillPoints3(ppp3.replace('L', 'M'));
         }
-
-        setFillPoints(ppp.replace('L', 'M'));
       }
 
       // console.log('pp-------->', pp);
@@ -643,6 +737,7 @@ export const LineChart = (props: propTypes) => {
       /*************************************************************************************/
     }
   }, [
+    animateOnDataChange,
     areaChart,
     containerHeight,
     data,

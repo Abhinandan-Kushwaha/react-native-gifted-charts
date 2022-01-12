@@ -2,22 +2,24 @@
 
 ### Basic props
 
-| Prop                | Type           | Description                                                                             | Default value       |
-| ------------------- | -------------- | --------------------------------------------------------------------------------------- | ------------------- |
-| data                | Array of items | An item object represents a point in the line chart. It is described in the next table. | \_                  |
-| data2               | Array of items | Second set of dataPoint for the second line                                             | \_                  |
-| data3               | Array of items | Third set of dataPoint for the third line                                               | \_                  |
-| width               | number         | Width of the Bar chart                                                                  | width of the parent |
-| height              | number         | Height of the Bar chart (excluding the bottom label)                                    | 200                 |
-| maxValue            | number         | Maximum value shown in the Y axis                                                       | 200                 |
-| noOfSections        | number         | Number of sections in the Y axis                                                        | 10                  |
-| stepValue           | number         | Value of 1 step/section in the Y axis                                                   | 20                  |
-| stepHeight          | number         | Height of 1 step/section in the Y axis                                                  | 20                  |
-| spacing             | number         | Distance between 2 consecutive bars in the Bar chart                                    | 20                  |
-| backgroundColor     | ColorValue     | Background color of the Bar chart                                                       | \_                  |
-| disableScroll       | Boolean        | To disable horizontal scroll                                                            | false               |
-| showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                     | false               |
-| isAnimated          | Boolean        | To show animates Line or Area Chart. Animation occurs onLoad and on value change        | false               |
+| Prop                          | Type           | Description                                                                                        | Default value       |
+| ----------------------------- | -------------- | -------------------------------------------------------------------------------------------------- | ------------------- |
+| data                          | Array of items | An item object represents a point in the line chart. It is described in the next table.            | \_                  |
+| data2                         | Array of items | Second set of dataPoint for the second line                                                        | \_                  |
+| data3                         | Array of items | Third set of dataPoint for the third line                                                          | \_                  |
+| width                         | number         | Width of the Bar chart                                                                             | width of the parent |
+| height                        | number         | Height of the Bar chart (excluding the bottom label)                                               | 200                 |
+| maxValue                      | number         | Maximum value shown in the Y axis                                                                  | 200                 |
+| noOfSections                  | number         | Number of sections in the Y axis                                                                   | 10                  |
+| stepValue                     | number         | Value of 1 step/section in the Y axis                                                              | 20                  |
+| stepHeight                    | number         | Height of 1 step/section in the Y axis                                                             | 20                  |
+| spacing                       | number         | Distance between 2 consecutive bars in the Bar chart                                               | 20                  |
+| backgroundColor               | ColorValue     | Background color of the Bar chart                                                                  | \_                  |
+| disableScroll                 | Boolean        | To disable horizontal scroll                                                                       | false               |
+| showScrollIndicator           | Boolean        | To show horizontal scroll indicator                                                                | false               |
+| isAnimated                    | Boolean        | To show animated Line or Area Chart. Animation occurs when the chart load for the first time       | false               |
+| animateOnDataChange           | Boolean        | To show animation on change in data. A smooth transition takes place between the iold and new line | false               |
+| onDataChangeAnimationDuration | number         | Duration (milliseconds) in which the transition animation takes place on a change in data          | 400                 |
 
 ---
 
