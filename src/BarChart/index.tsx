@@ -561,16 +561,22 @@ export const BarChart = (props: PropTypes) => {
                         ],
                       },
                     ]}>
-                    {showFractionalValues
+                    {hideOrigin
+                      ? index === horizSections.length - 1
+                        ? ''
+                        : showFractionalValues
+                        ? sectionItems.value
+                          ? sectionItems.value
+                          : '0'
+                        : sectionItems.value
+                        ? sectionItems.value.toString().split('.')[0]
+                        : '0'
+                      : showFractionalValues
                       ? sectionItems.value
                         ? sectionItems.value
-                        : hideOrigin
-                        ? ''
                         : '0'
                       : sectionItems.value
                       ? sectionItems.value.toString().split('.')[0]
-                      : hideOrigin
-                      ? ''
                       : '0'}
                   </Text>
                 ) : null}
