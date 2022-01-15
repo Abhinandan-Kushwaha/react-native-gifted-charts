@@ -1,6 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {View, ColorValue, LayoutAnimation, Platform} from 'react-native';
+import {
+  View,
+  ColorValue,
+  LayoutAnimation,
+  Platform,
+  UIManager,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+
+if (Platform.OS === 'android') {
+  UIManager.setLayoutAnimationEnabledExperimental &&
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 type propTypes = {
   item: itemType;
@@ -44,7 +55,7 @@ type itemType = {
 
 const Animated2DWithGradient = (props: propTypes) => {
   const {item, opacity, animationDuration, noGradient, noAnimation} = props;
-  const [height, setHeight] = useState(noAnimation ? props.height : 0);
+  const [height, setHeight] = useState(noAnimation ? props.height : 2);
   const [initialRender, setInitialRender] = useState(
     noAnimation ? false : true,
   );

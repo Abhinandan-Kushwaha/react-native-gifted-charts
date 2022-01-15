@@ -5,9 +5,15 @@ import {
   ColorValue,
   LayoutAnimation,
   Platform,
+  UIManager,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {styles} from './styles';
+
+if (Platform.OS === 'android') {
+  UIManager.setLayoutAnimationEnabledExperimental &&
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 type trianglePropTypes = {
   style: any;
@@ -89,7 +95,7 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
   const layoutAppear = () => {
     LayoutAnimation.configureNext({
       duration: Platform.OS == 'ios' ? animationDuration : 20,
-      create: {type: 'linear', property: 'opacity'},
+      create: {type: 'linear', property: 'scaleXY'},
       // update: { type: 'linear' }
     });
     setInitialRender(false);
