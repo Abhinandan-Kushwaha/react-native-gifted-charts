@@ -112,6 +112,8 @@ type PropTypes = {
   hideOrigin?: Boolean;
   labelWidth?: number;
   yAxisLabelTexts?: Array<string>;
+  yAxisLabelPrefix?: String;
+  yAxisLabelSuffix?: String;
 };
 type lineConfigType = {
   curved?: Boolean;
@@ -289,6 +291,9 @@ export const BarChart = (props: PropTypes) => {
   const xAxisIndicesWidth = props.xAxisIndicesWidth || 4;
   const xAxisIndicesColor = props.xAxisIndicesColor || 'black';
   const yAxisIndicesColor = props.yAxisIndicesColor || 'black';
+
+  const yAxisLabelPrefix = props.yAxisLabelPrefix || '';
+  const yAxisLabelSuffix = props.yAxisLabelSuffix || '';
 
   const xAxisThickness =
     props.xAxisThickness === 0
@@ -515,10 +520,33 @@ export const BarChart = (props: PropTypes) => {
     outputRange: [0, totalWidth],
   });
 
+  const getLabel = val => {
+    let label = '';
+    if (showFractionalValues) {
+      if (val) {
+        label = val;
+      } else {
+        label = '0';
+      }
+    } else {
+      if (val) {
+        label = val.toString().split('.')[0];
+      } else {
+        label = '0';
+      }
+    }
+
+    return yAxisLabelPrefix + label + yAxisLabelSuffix;
+  };
+
   const renderHorizSections = () => {
     return (
       <>
         {horizSections.map((sectionItems, index) => {
+          let label = getLabel(sectionItems.value);
+          if (hideOrigin && index === horizSections.length - 1) {
+            label = '';
+          }
           return (
             <View
               key={index}
@@ -561,23 +589,7 @@ export const BarChart = (props: PropTypes) => {
                         ],
                       },
                     ]}>
-                    {hideOrigin
-                      ? index === horizSections.length - 1
-                        ? ''
-                        : showFractionalValues
-                        ? sectionItems.value
-                          ? sectionItems.value
-                          : '0'
-                        : sectionItems.value
-                        ? sectionItems.value.toString().split('.')[0]
-                        : '0'
-                      : showFractionalValues
-                      ? sectionItems.value
-                        ? sectionItems.value
-                        : '0'
-                      : sectionItems.value
-                      ? sectionItems.value.toString().split('.')[0]
-                      : '0'}
+                    {label}
                   </Text>
                 ) : null}
               </View>

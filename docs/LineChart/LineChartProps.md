@@ -91,6 +91,8 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | yAxisTextStyle         | object              | Style object for the Y axis text style                                             | \_                     |
 | showFractionalValues   | Boolean             | Allow fractional values for the Y axis label                                       | false                  |
 | roundToDigits          | number              | Rounds the y axis values to given number of digits after decimal point             | 1                      |
+| yAxisLabelPrefix       | String              | The String prepended to the y axis label text (for example- '$')                   | ''                     |
+| yAxisLabelSuffix       | String              | The String appended to the y axis label text                                       | ''                     |
 | hideYAxisText          | Boolean             | To hide Y axis label text                                                          | false                  |
 | rulesColor             | ColorValue          | Color of the horizontal rules                                                      | lightgray              |
 | rulesThickness         | number              | Thickness of the horizontal rules                                                  | 1                      |

@@ -186,6 +186,8 @@ type propTypes = {
   textShiftY?: number;
   yAxisLabelTexts?: Array<string>;
   width?: number;
+  yAxisLabelPrefix?: String;
+  yAxisLabelSuffix?: String;
 };
 type referenceConfigType = {
   thickness: number;
@@ -266,6 +268,9 @@ export const LineChart = (props: propTypes) => {
     props.onDataChangeAnimationDuration || 400;
   const animateTogether = props.animateTogether || false;
   const animateOnDataChange = props.animateOnDataChange || false;
+
+  const yAxisLabelPrefix = props.yAxisLabelPrefix || '';
+  const yAxisLabelSuffix = props.yAxisLabelSuffix || '';
 
   if (!initialData) {
     initialData = [...data];
@@ -1028,11 +1033,34 @@ export const LineChart = (props: propTypes) => {
   //     )
   // }
 
+  const getLabel = val => {
+    let label = '';
+    if (showFractionalValues) {
+      if (val) {
+        label = val;
+      } else {
+        label = '0';
+      }
+    } else {
+      if (val) {
+        label = val.toString().split('.')[0];
+      } else {
+        label = '0';
+      }
+    }
+
+    return yAxisLabelPrefix + label + yAxisLabelSuffix;
+  };
+
   const renderHorizSections = () => {
     return (
       <>
         {props.hideAxesAndRules !== true &&
           horizSections.map((sectionItems, index) => {
+            let label = getLabel(sectionItems.value);
+            if (hideOrigin && index === horizSections.length - 1) {
+              label = '';
+            }
             return (
               <View
                 key={index}
@@ -1061,23 +1089,7 @@ export const LineChart = (props: propTypes) => {
                           marginBottom: stepHeight / -2,
                         },
                       ]}>
-                      {hideOrigin
-                        ? index === horizSections.length - 1
-                          ? ''
-                          : showFractionalValues
-                          ? sectionItems.value
-                            ? sectionItems.value
-                            : '0'
-                          : sectionItems.value
-                          ? sectionItems.value.toString().split('.')[0]
-                          : '0'
-                        : showFractionalValues
-                        ? sectionItems.value
-                          ? sectionItems.value
-                          : '0'
-                        : sectionItems.value
-                        ? sectionItems.value.toString().split('.')[0]
-                        : '0'}
+                      {label}
                     </Text>
                   ) : null}
                 </View>
