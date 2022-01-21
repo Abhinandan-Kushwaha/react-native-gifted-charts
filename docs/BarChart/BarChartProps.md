@@ -1,5 +1,7 @@
 # Bar Chart Props
 
+![Example](../../demos/barLabelled.png)
+
 ### Basic props
 
 | Prop                | Type           | Description                                                                               | Default value       |
