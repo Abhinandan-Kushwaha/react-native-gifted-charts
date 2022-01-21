@@ -19,7 +19,7 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 
 ![alt text](/demos/altBars.svg)
 ![alt text](/demos/barPairs.svg)
-<img src='/demos/animatedDataLineChart.gif' alt='' width=300/>
+<img src='/demos/animatedDataLine.gif' alt='' width=300/>
 <img src='/demos/pielabbelled.svg' alt='' height=280 width=270/>
 <img src='/demos/movingBars.gif' alt='' width=300/>
 <img src='/demos/lineLabelled.png' alt='' height=370 width=360/>
@@ -99,7 +99,7 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 | Issue                                                                                                                        | Solution                                                                                                                   |
 | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | [BarChart - Value and section line don't match](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35) | [Comment by the owner](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35#issuecomment-972673281) |
-| **Invariant Violation: requireNativeComponent: "RNCWebView" was not found in the UIManager.** | install `react-native-webview`  |
+| **Invariant Violation: requireNativeComponent: "RNCWebView" was not found in the UIManager.**                                | install `react-native-webview`                                                                                             |
 
 ## License
 
