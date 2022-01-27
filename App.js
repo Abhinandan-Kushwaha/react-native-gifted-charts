@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {Alert} from 'react-native';
 import {View, Text, StyleSheet} from 'react-native';
-import {BarChart, LineChart} from './src';
+import {BarChart, LineChart, PieChart} from './src';
 
 const App = () => {
   const [toggle, setToggle] = useState(true);
@@ -486,9 +486,9 @@ const App = () => {
     );
   };
   const ndd = [
-    {label: 'Jan', value: 30},
-    {label: 'Feb', value: 10},
-    {label: 'Mar', value: 20},
+    {value: 30, color: 'rgb(84,219,234)'},
+    {value: 40, color: 'lightgreen'},
+    {value: 20, color: 'orange'},
   ];
   const [data, setData] = useState([
     {value: 15, label: 'Jan'},
@@ -532,44 +532,115 @@ const App = () => {
     {value: 30, label: 'Dec'},
   ]);
 
+  const renderLegend = (text, color) => {
+    return (
+      <View style={{flexDirection: 'row', marginBottom: 12}}>
+        <View
+          style={{
+            height: 18,
+            width: 18,
+            marginRight: 10,
+            borderRadius: 4,
+            backgroundColor: color || 'white',
+          }}
+        />
+        <Text style={{color: 'white', fontSize: 16}}>{text || ''}</Text>
+      </View>
+    );
+  };
+  const barData = [
+    {
+      value: 15,
+      label: 'Mon',
+    },
+    {value: 30, label: 'Tue'},
+    {value: 26, label: 'Wed'},
+    // {value: 40, label: 'Thu'},
+    {value: 16, label: 'Wed'},
+    {value: 40, label: 'Thu'},
+  ];
+
   return (
-    <View>
-      <View
+    <View
+      style={{
+        marginVertical: 100,
+        marginLeft: 6,
+      }}>
+      {/* <BarChart backgroundColor={'green'} data={barData} /> */}
+      <PieChart
+        backgroundColor={'red'}
+        maxValue={40}
+        data={barData}
+        height={140}
+        radius={170}
+        donut={true}
+        showText={true}
+        showValuesAsLabels={true}
+        semiCircle={true}
+        isThreeD={true}
+        // shiftInnerCenterY={100}
+        shadow={true}
+        strokeWidth={5}
+        innerCircleBorderColor={'gray'}
+        // showTextBackground={true}
+      />
+      {/* <View
         style={{
           marginVertical: 100,
+          marginHorizontal: 30,
+          borderRadius: 10,
           paddingVertical: 50,
-          // backgroundColor: '#414141',
+          backgroundColor: '#414141',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}>
-        <BarChart hideOrigin data={ndd} yAxisLabelTexts={['0', '£10', '£20']} />
-        {/* <LineChart
-          isAnimated
-          thickness={3}
-          color="#07BAD1"
-          maxValue={600}
-          noOfSections={3}
-          animateOnDataChange
-          animationDuration={1000}
-          onDataChangeAnimationDuration={300}
-          areaChart
-          yAxisTextStyle={{color: 'lightgray'}}
-          data={currentData}
-          // curved
-          hideDataPoints
-          startFillColor={'rgb(84,219,234)'}
-          endFillColor={'rgb(84,219,234)'}
-          startOpacity={0.4}
-          endOpacity={0.1}
-          spacing={22}
-          backgroundColor="#414141"
-          rulesColor="gray"
-          rulesType="solid"
-          initialSpacing={10}
-          yAxisColor="lightgray"
-          xAxisColor="lightgray"
-          dataPointsHeight={20}
-          dataPointsWidth={20}
-        /> */}
-      </View>
+        <Text
+          style={{
+            color: 'white',
+            fontSize: 32,
+            fontWeight: 'bold',
+            marginBottom: 12,
+          }}>
+          Quarterly Sales
+        </Text>
+        <PieChart
+          strokeColor="white"
+          strokeWidth={4}
+          donut
+          data={[
+            {value: 30, color: 'rgb(84,219,234)'},
+            {value: 40, color: 'lightgreen'},
+            {value: 20, color: 'orange'},
+          ]}
+          innerCircleColor="#414141"
+          innerCircleBorderWidth={4}
+          innerCircleBorderColor={'white'}
+          showValuesAsLabels={true}
+          showText
+          textSize={18}
+          showTextBackground={true}
+          centerLabelComponent={() => {
+            return (
+              <View>
+                <Text style={{color: 'white', fontSize: 36}}>90</Text>
+                <Text style={{color: 'white', fontSize: 18}}>Total</Text>
+              </View>
+            );
+          }}
+        />
+
+        <View
+          style={{
+            width: '100%',
+            flexDirection: 'row',
+            justifyContent: 'space-evenly',
+            marginTop: 20,
+          }}>
+          {renderLegend('Jan', 'rgb(84,219,234)')}
+          {renderLegend('Feb', 'lightgreen')}
+          {renderLegend('Mar', 'orange')}
+        </View>
+      </View> */}
 
       {/* <TouchableOpacity
         onPress={() => setCurrentData(latestData)}
@@ -597,13 +668,15 @@ const App = () => {
         <Text>Straight</Text>
       </TouchableOpacity> */}
 
-      {/* {!toggle ? (
-        <BarChart
+      {/* {true ? (
+        <LineChart
           isThreeD
           key={'xyz'}
-          height={300}
+          height={320}
           maxValue={360}
           showLine
+          hideOrigin
+          // animationDuration={000}
           initialSpacing={30}
           // showVerticalLines
           lineConfig={{
@@ -619,12 +692,17 @@ const App = () => {
             shiftY: 25,
             curved: true,
           }}
+          yAxisLabelPrefix={'$'}
+          yAxisLabelSuffix={'.0'}
           barWidth={32}
           // width={190}
           data={[
             {
-              value: 270,
+              value: 70,
               label: 'Jan',
+              topLabelComponent: () => {
+                return <Text>30</Text>;
+              },
             },
             {value: 250, label: 'Feb'},
             {value: 200, label: 'Mar'},
@@ -672,8 +750,8 @@ const App = () => {
           capColor={'rgb(78, 0, 142)'}
           capThickness={4}
           // barWidth={35}
-          frontColor={'rgba(200, 100, 244,0.2)'}
-          gradientColor={'rgba(78, 0, 142,1)'}
+          gradientColor={'rgba(200, 100, 244,0.2)'}
+          frontColor={'rgba(78, 0, 142,1)'}
           // rulesType="dashed"
           // rulesColor={'rgba(0,200,0,0.5)'}
           // rulesThickness={1}
