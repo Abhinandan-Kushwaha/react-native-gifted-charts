@@ -2,8 +2,6 @@ import React from 'react';
 import {ColorValue, View} from 'react-native';
 import Canvas from 'react-native-canvas';
 
-const pi = Math.PI;
-
 type propTypes = {
   radius?: number;
   isThreeD?: Boolean;
@@ -21,6 +19,7 @@ type propTypes = {
   strokeColor?: string;
   backgroundColor?: string;
   data: Array<itemType>;
+  semiCircle?: Boolean;
 
   showText?: Boolean;
   textColor?: string;
@@ -59,6 +58,7 @@ export const PieChart = (props: propTypes) => {
   const backgroundColor = props.backgroundColor || 'white';
   const shadowColor = props.shadowColor || 'lightgray';
   let total = 0;
+  let pi = Math.PI;
   const shadow = props.shadow || false;
   const donut = props.donut || false;
   const innerRadius = props.innerRadius || radius / 2;
@@ -79,7 +79,7 @@ export const PieChart = (props: propTypes) => {
 
   const showTextBackground = props.showTextBackground || false;
   const showValuesAsLabels = props.showValuesAsLabels || false;
-
+  const semiCircle = props.semiCircle || false;
   const fontStyleList = ['normal', 'italic', 'oblique'];
   const fontWeightList = [
     'normal',
@@ -105,6 +105,10 @@ export const PieChart = (props: propTypes) => {
     }
   });
 
+  if (semiCircle) {
+    pi = Math.PI / 2;
+  }
+
   const canvasHeight = isThreeD ? radius * 2.5 + 60 : radius * 2 + 60;
   const canvasWidth = radius * 2 + 60;
 
@@ -125,7 +129,7 @@ export const PieChart = (props: propTypes) => {
     const initialValue = 30;
 
     /******************       SHADOW        ***************/
-    if (isThreeD && shadow) {
+    if (!semiCircle && isThreeD && shadow) {
       ctx.beginPath();
       ctx.moveTo(initialValue, radius + initialValue);
       ctx.lineTo(initialValue, shadowWidth + initialValue);
@@ -230,7 +234,7 @@ export const PieChart = (props: propTypes) => {
         radius + initialValue + shiftY,
       );
 
-      ctx.fillStyle = dataItem.color || colors[i++ % 8];
+      ctx.fillStyle = dataItem.color || colors[i++ % 9];
       ctx.fill();
 
       // Stroke at the end again
@@ -297,29 +301,41 @@ export const PieChart = (props: propTypes) => {
 
         // console.log('semisum==>>', semiSum);
         // console.log('sin(semisum)==>>', Math.sin(semiSum));
-        if (semiSum > 0 && semiSum <= pi / 2) {
-          xx -= 40;
-          yy -= 10;
-        } else if (semiSum > pi / 2 && semiSum <= pi) {
-          xx += 10;
-          yy -= 10;
-        } else if (semiSum > pi && semiSum <= 1.5 * pi) {
-          xx += 10;
-          yy += 24;
+        if (semiCircle) {
+          if (semiSum > 0 && semiSum <= pi / 2) {
+            yy -= 6;
+          } else if (semiSum > pi / 2 && semiSum <= pi) {
+            yy -= 10;
+          } else if (semiSum > pi && semiSum <= 1.5 * pi) {
+            xx += 10;
+            yy -= 20;
+          } else {
+            xx += 25;
+            yy -= 8;
+          }
         } else {
-          xx -= 40;
-          yy += 24;
+          if (semiSum > 0 && semiSum <= pi / 2) {
+            xx -= 20;
+          } else if (semiSum > pi && semiSum <= 1.5 * pi) {
+            xx += 10;
+            yy += 16;
+          } else if (semiSum > 1.5 * pi) {
+            xx -= 16;
+            yy += 16;
+          }
         }
 
         if (showTextBackground && (dataItem.text || showValuesAsLabels)) {
           let textBackgroundX =
-            xx +
+            xx -
+            (semiCircle ? 18 : 0) +
             (props.textBackgroundRadius ||
               dataItem.textBackgroundRadius ||
               textSize) /
               2;
           let textBackgroundY =
-            yy -
+            yy +
+            (semiCircle ? 8 : 0) -
             (props.textBackgroundRadius ||
               dataItem.textBackgroundRadius ||
               textSize) /
@@ -332,7 +348,7 @@ export const PieChart = (props: propTypes) => {
               dataItem.textBackgroundRadius ||
               textSize,
             0,
-            2 * pi,
+            2 * Math.PI,
             false,
           );
           ctx.fillStyle =
@@ -345,12 +361,20 @@ export const PieChart = (props: propTypes) => {
         xx += shiftTextX;
         yy += shiftTextY;
 
-        ctx.fillStyle = dataItem.textColor || textColor || colors[i++ % 8];
+        ctx.fillStyle = dataItem.textColor || textColor || colors[i++ % 9];
         let labelText = dataItem.text || '';
         if (showValuesAsLabels && !labelText) {
           labelText = dataItem.value.toString();
         }
-        ctx.fillText(labelText, xx, yy);
+        if (semiCircle) {
+          ctx.translate(xx, yy);
+          ctx.rotate(Math.PI);
+          ctx.fillText(labelText, 4, 4);
+          ctx.rotate(Math.PI);
+          ctx.translate(-xx, -yy);
+        } else {
+          ctx.fillText(labelText, xx, yy);
+        }
       }
 
       /****************************************************************************************/
@@ -361,7 +385,10 @@ export const PieChart = (props: propTypes) => {
 
   return total === 0 ? null : (
     <View style={{transform: [{scaleY: tilt}]}}>
-      <Canvas ref={handleCanvas} />
+      <Canvas
+        style={semiCircle && {transform: [{rotate: '180deg'}]}}
+        ref={handleCanvas}
+      />
       {(props.centerLabelComponent || (donut && !isDataShifted)) && (
         <View
           style={[
@@ -375,7 +402,8 @@ export const PieChart = (props: propTypes) => {
               top:
                 canvasHeight / 2 -
                 innerRadius * (isThreeD ? 1.5 : 1) +
-                shiftInnerCenterY,
+                shiftInnerCenterY +
+                (isThreeD && semiCircle ? radius / 2 : 0),
               borderWidth: innerCircleBorderWidth,
               borderColor: innerCircleBorderColor,
               backgroundColor: innerCircleColor,
@@ -387,6 +415,14 @@ export const PieChart = (props: propTypes) => {
               borderLeftWidth: shiftInnerCenterX
                 ? innerCircleBorderWidth * 2
                 : innerCircleBorderWidth,
+            },
+            semiCircle && {
+              borderTopWidth: isThreeD
+                ? innerCircleBorderWidth * 5
+                : innerCircleBorderWidth,
+              borderLeftWidth: 0.001,
+              borderBottomWidth: 0,
+              borderRightWidth: 0.001,
             },
           ]}>
           {props.centerLabelComponent ? props.centerLabelComponent() : null}
