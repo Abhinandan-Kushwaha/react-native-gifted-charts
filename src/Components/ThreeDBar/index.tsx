@@ -20,6 +20,7 @@ type PropTypes = {
   side: String;
   horizontal: Boolean;
   intactTopLabel: Boolean;
+  value:number;
 };
 
 type TriangleProps = {
@@ -59,6 +60,7 @@ const ThreeDBar = (props: PropTypes) => {
   const width = props.width;
   const sideWidth = props.sideWidth;
   const height = props.height;
+  const value = props.value;
 
   const showGradient = props.showGradient || false;
   const gradientColor = props.gradientColor || 'white';
@@ -160,12 +162,13 @@ const ThreeDBar = (props: PropTypes) => {
           style={[
             {
               position: 'absolute',
-              top: width * -2,
+              top: value<0 ? width * -1 : width * -2,
               height: (width * 3) / 2,
               width: width,
               justifyContent: 'flex-end',
               alignItems: 'center',
             },
+            value<0&&{transform:[{rotate:'180deg'}]},
             props.horizontal &&
               !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
             props.side === 'right'

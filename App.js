@@ -550,14 +550,15 @@ const App = () => {
   };
   const barData = [
     {
-      value: 15,
+      value: -15,
       label: 'Mon',
+      topLabelComponent:()=><Text>-15</Text>
     },
-    {value: 30, label: 'Tue'},
-    {value: 26, label: 'Wed'},
+    {value: 6, label: 'Tue'},
+    {value: -26, label: 'Wed'},
     // {value: 40, label: 'Thu'},
-    {value: 16, label: 'Wed'},
-    {value: 40, label: 'Thu'},
+    {value: -16, label: 'Wed'},
+    {value:-36, label: 'Thu'},
   ];
 
   return (
@@ -567,17 +568,27 @@ const App = () => {
         marginLeft: 6,
       }}>
       {/* <BarChart backgroundColor={'green'} data={barData} /> */}
-      <PieChart
-        backgroundColor={'red'}
-        maxValue={40}
+      <BarChart
+        // backgroundColor={'red'}
+        // noOfSections={1}
+        // maxValue={40}
+        // isAnimated
+        noOfSections={2}
+        maxValue={8}
+        minValue={-44}
+        stepValue={4}
+        noOfSectionsBelowXAxis={11}
         data={barData}
-        height={140}
+        height={40}
         radius={170}
         donut={true}
         showText={true}
         showValuesAsLabels={true}
         semiCircle={true}
-        isThreeD={true}
+        showGradient
+        autoShiftLabels
+        // rotateLabel
+        // isThreeD={true}
         // shiftInnerCenterY={100}
         shadow={true}
         strokeWidth={5}
