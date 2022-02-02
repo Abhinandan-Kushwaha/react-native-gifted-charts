@@ -124,7 +124,7 @@ const RenderBars = (props: Props) => {
               : {transform: [{rotate: value < 0 ? '240deg' : '60deg'}, {translateX: value < 0 ? 56 : 0}, {translateY: value < 0 ? 32 : 0}]}
             : props.horizontal
             ? {transform: [{rotate: '-90deg'}]}
-            : value<0
+            : value < 0
             ?{transform:[{rotate:'180deg'},{translateY:autoShiftLabels?0:32}]}
             :{},
         ]}>
@@ -158,7 +158,7 @@ const RenderBars = (props: Props) => {
             bottom: rotateLabel ? -40 : -25,
             opacity: appearingOpacity,
           },
-          value<0&&{transform:[{rotate:'180deg'}]},
+          value < 0 && {transform:[{rotate:'180deg'}]},
           rotateLabel
             ? props.horizontal
               ? {transform: [{rotate: '330deg'}]}
@@ -250,12 +250,12 @@ const RenderBars = (props: Props) => {
                 height: item.barWidth || props.barWidth || 30,
                 width: item.barWidth || props.barWidth || 30,
                 justifyContent:
-                  (props.horizontal && !props.intactTopLabel)||item.value<0
+                  (props.horizontal && !props.intactTopLabel) || item.value < 0
                     ? 'center'
                     : 'flex-end',
                 alignItems: 'center',
               },
-              item.value<0&&{transform:[{rotate:'180deg'}]},
+              item.value < 0 && {transform:[{rotate:'180deg'}]},
               props.horizontal &&
                 !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
               item.topLabelContainerStyle,
@@ -283,7 +283,7 @@ const RenderBars = (props: Props) => {
             : (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200),
           marginRight: spacing,
         },
-        item.value<0&&{transform:[{translateY:(Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)},{rotateZ:'180deg'}]},
+        item.value < 0 && {transform:[{translateY:(Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)},{rotateZ:'180deg'}]},
         // !isThreeD && !item.showGradient && !props.showGradient &&
         // { backgroundColor: item.frontColor || props.frontColor || 'black' },
         side !== 'right' && {zIndex: data.length - index},

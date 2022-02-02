@@ -162,13 +162,13 @@ const ThreeDBar = (props: PropTypes) => {
           style={[
             {
               position: 'absolute',
-              top: value<0 ? width * -1 : width * -2,
+              top: value < 0 ? width * -1 : width * -2,
               height: (width * 3) / 2,
               width: width,
               justifyContent: 'flex-end',
               alignItems: 'center',
             },
-            value<0&&{transform:[{rotate:'180deg'}]},
+            value < 0 && {transform:[{rotate:'180deg'}]},
             props.horizontal &&
               !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
             props.side === 'right'

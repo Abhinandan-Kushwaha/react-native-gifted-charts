@@ -223,13 +223,13 @@ const Animated2DWithGradient = (props: propTypes) => {
                   height: item.barWidth || 30,
                   width: item.barWidth || 30,
                   justifyContent:
-                    (props.horizontal && !props.intactTopLabel)||item.value<0
+                    (props.horizontal && !props.intactTopLabel) || item.value < 0
                       ? 'center'
                       : 'flex-end',
                   alignItems: 'center',
                   opacity: opacity,
                 },
-                item.value<0&&{transform:[{rotate:'180deg'}]},
+                item.value < 0 && {transform:[{rotate:'180deg'}]},
                 props.horizontal &&
                   !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
                 item.topLabelContainerStyle,
