@@ -20,7 +20,7 @@ type PropTypes = {
   side: String;
   horizontal: Boolean;
   intactTopLabel: Boolean;
-  value:number;
+  value: number;
 };
 
 type TriangleProps = {

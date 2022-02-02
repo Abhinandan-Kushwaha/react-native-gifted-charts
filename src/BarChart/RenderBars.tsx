@@ -102,7 +102,7 @@ const RenderBars = (props: Props) => {
     animationDuration,
     autoShiftLabels,
   } = props;
-  const renderLabel = (label: String, labelTextStyle: any, value:number) => {
+  const renderLabel = (label: String, labelTextStyle: any, value: number) => {
     return (
       <View
         style={[
@@ -121,7 +121,7 @@ const RenderBars = (props: Props) => {
           rotateLabel
             ? props.horizontal
               ? {transform: [{rotate: '330deg'}]}
-              : {transform: [{rotate:value<0 ? '240deg' : '60deg'},{translateX:value<0?56:0},{translateY:value<0?32:0}]}
+              : {transform: [{rotate: value < 0 ? '240deg' : '60deg'}, {translateX: value < 0 ? 56 : 0}, {translateY: value < 0 ? 32 : 0}]}
             : props.horizontal
             ? {transform: [{rotate: '-90deg'}]}
             : value<0
@@ -141,7 +141,7 @@ const RenderBars = (props: Props) => {
     );
   };
 
-  const renderAnimatedLabel = (label: String, labelTextStyle: any, value:number) => {
+  const renderAnimatedLabel = (label: String, labelTextStyle: any, value: number) => {
     return (
       <Animated.View
         style={[

@@ -226,7 +226,7 @@ export const BarChart = (props: PropTypes) => {
   const labelWidth = props.labelWidth || 0;
 
   let totalWidth = spacing;
-  let maxItem = 0,minItem=0;
+  let maxItem = 0, minItem = 0;
   if (props.stackData) {
     props.stackData.forEach(stackItem => {
       // console.log('stackItem', stackItem);
@@ -1076,7 +1076,7 @@ export const BarChart = (props: PropTypes) => {
       style={[
         styles.container,
         {
-          height: containerHeight + horizSectionsBelow.length*stepHeight,
+          height: containerHeight + horizSectionsBelow.length * stepHeight,
         },
         props.width && {width: props.width},
         horizontal && {transform: [{rotate: '90deg'}, {translateY: -15}]},
@@ -1096,9 +1096,9 @@ export const BarChart = (props: PropTypes) => {
         contentContainerStyle={[
           {
             // backgroundColor: 'yellow',
-            height: containerHeight + 130 + horizSectionsBelow.length*stepHeight,
+            height: containerHeight + 130 + horizSectionsBelow.length * stepHeight,
             paddingLeft: initialSpacing,
-            paddingBottom:horizSectionsBelow.length*stepHeight,
+            paddingBottom:horizSectionsBelow.length * stepHeight,
             alignItems: 'flex-end',
           },
           !props.width && {width: totalWidth},
