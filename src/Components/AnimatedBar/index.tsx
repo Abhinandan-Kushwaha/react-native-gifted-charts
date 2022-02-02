@@ -87,7 +87,7 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
   const elevate = () => {
     LayoutAnimation.configureNext({
       duration: animationDuration,
-      update: {type: 'linear', property: 'scaleXY'},
+      update: {type: 'linear', property: 'scaleY'},
     });
     setHeight(props.height);
   };
@@ -95,7 +95,7 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
   const layoutAppear = () => {
     LayoutAnimation.configureNext({
       duration: Platform.OS == 'ios' ? animationDuration : 20,
-      create: {type: 'linear', property: 'scaleXY'},
+      create: {type: 'linear', property: 'scaleY'},
       // update: { type: 'linear' }
     });
     setInitialRender(false);
