@@ -33,6 +33,7 @@ type Props = {
   horizontal: Boolean;
   intactTopLabel: Boolean;
   barBorderRadius?: number;
+  xAxisThickness: number;
 };
 type itemType = {
   value?: number;
@@ -51,7 +52,7 @@ type itemType = {
   stacks?: Array<any>;
 };
 const RenderStackBars = (props: Props) => {
-  const {item, containerHeight, maxValue, spacing, rotateLabel} = props;
+  const {item, containerHeight, maxValue, spacing, rotateLabel,xAxisThickness} = props;
   const disablePress = props.disablePress || false;
   const renderLabel = (label: String, labelTextStyle: any) => {
     return (
@@ -60,7 +61,6 @@ const RenderStackBars = (props: Props) => {
           {
             width:
               (item.stacks[0].barWidth || props.barWidth || 30) + spacing / 2,
-            left: -6,
             position: 'absolute',
             bottom: rotateLabel ? -40 : -25,
           },
@@ -87,18 +87,16 @@ const RenderStackBars = (props: Props) => {
     let position = 0;
     for (let i = 0; i < index; i++) {
       position +=
-        (props.item.stacks[i].value * (containerHeight || 200)) /
+        (Math.abs(props.item.stacks[i].value) * (containerHeight || 200)) /
         (maxValue || 200);
     }
     return position;
   };
 
-  const getTotalHeight = () => {
-    return props.item.stacks.reduce((acc, stack) => acc + stack.value, 0);
-  };
+  const totalHeight = props.item.stacks.reduce((acc, stack) => acc + Math.abs(stack.value) * (containerHeight || 200) / (maxValue || 200), 0)
 
   const static2DSimple = (item: itemType) => {
-    // console.log('comes to static2DSimple', item);
+    const cotainsNegative = item.stacks.some(item => item.value < 0)
     return (
       <>
         <View
@@ -108,6 +106,11 @@ const RenderStackBars = (props: Props) => {
               width: item.stacks[0].barWidth || props.barWidth || 30,
               height: '100%',
             },
+            cotainsNegative && {
+              transform: [
+                {translateY: totalHeight + xAxisThickness / 2},
+                {rotate:'180deg'}
+              ]}
           ]}>
           {item.stacks.map((stackItem, index) => {
             return (
@@ -121,7 +124,7 @@ const RenderStackBars = (props: Props) => {
                     bottom: getPosition(index) + (stackItem.marginBottom || 0),
                     width: '100%',
                     height:
-                      (stackItem.value * (containerHeight || 200)) /
+                      (Math.abs(stackItem.value) * (containerHeight || 200)) /
                         (maxValue || 200) -
                       (stackItem.marginBottom || 0),
                     backgroundColor: stackItem.color || 'black',
@@ -147,15 +150,13 @@ const RenderStackBars = (props: Props) => {
             style={[
               {
                 position: 'absolute',
-                top: (item.barWidth || props.barWidth || 30) * -1,
+                top: cotainsNegative ? 0 : (item.barWidth || props.barWidth || 30) * -1,
                 height: item.barWidth || props.barWidth || 30,
                 width: item.barWidth || props.barWidth || 30,
-                justifyContent:
-                  props.horizontal && !props.intactTopLabel
-                    ? 'center'
-                    : 'flex-end',
+                justifyContent: 'center',
                 alignItems: 'center',
               },
+              cotainsNegative && {transform: [{translateY: totalHeight * 2}]},
               props.horizontal &&
                 !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
               item.topLabelContainerStyle,
@@ -174,7 +175,7 @@ const RenderStackBars = (props: Props) => {
           // overflow: 'visible',
           marginBottom: 60,
           width: item.stacks[0].barWidth || props.barWidth || 30,
-          height: getTotalHeight(),
+          height: totalHeight,
           marginRight: spacing,
         },
       ]}>

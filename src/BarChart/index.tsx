@@ -19,6 +19,7 @@ import RenderStackBars from './RenderStackBars';
 import Rule from '../Components/lineSvg';
 import {bezierCommand, svgPath} from '../utils';
 import Svg, {Circle, Path, Rect, Text as CanvasText} from 'react-native-svg';
+import { useRef } from 'react';
 
 type PropTypes = {
   width?: number;
@@ -117,6 +118,8 @@ type PropTypes = {
   yAxisLabelPrefix?: String;
   yAxisLabelSuffix?: String;
   autoShiftLabels?: Boolean;
+  scrollToEnd?: Boolean;
+  scrollAnimation?: Boolean
 };
 type lineConfigType = {
   curved?: Boolean;
@@ -167,6 +170,7 @@ type itemType = {
 };
 
 export const BarChart = (props: PropTypes) => {
+  const scrollRef = useRef();
   const [points, setPoints] = useState('');
   const showLine = props.showLine || false;
   const defaultLineConfig = {
@@ -224,6 +228,8 @@ export const BarChart = (props: PropTypes) => {
   const data = useMemo(() => props.data || [], [props.data]);
   const spacing = props.spacing === 0 ? 0 : props.spacing ? props.spacing : 20;
   const labelWidth = props.labelWidth || 0;
+  const scrollToEnd = props.scrollToEnd || false;
+  const scrollAnimation = props.scrollAnimation === false ? false : true;
 
   let totalWidth = spacing;
   let maxItem = 0, minItem = 0;
@@ -237,6 +243,9 @@ export const BarChart = (props: PropTypes) => {
       // console.log('stackSum--->', stackSum);
       if (stackSum > maxItem) {
         maxItem = stackSum;
+      }
+      if(stackSum < minItem){
+        minItem = stackSum;
       }
       totalWidth +=
         (stackItem.stacks[0].barWidth || props.barWidth || 30) + spacing;
@@ -261,9 +270,15 @@ export const BarChart = (props: PropTypes) => {
     maxItem = maxItem + (10 - (maxItem % 10));
     maxItem /= 10 * (props.roundToDigits || 1);
     maxItem = parseFloat(maxItem.toFixed(props.roundToDigits || 1));
+    if(minItem !== 0){
+      minItem *= 10 * (props.roundToDigits || 1);
+      minItem = minItem - (10 + (minItem % 10));
+      minItem /= 10 * (props.roundToDigits || 1);
+      minItem = parseFloat(minItem.toFixed(props.roundToDigits || 1));
+    }
   } else {
     maxItem = maxItem + (10 - (maxItem % 10));
-    if(minItem!==0){
+    if(minItem !== 0){
       minItem = minItem - (10 + (minItem % 10))
     }
   }
@@ -1083,6 +1098,12 @@ export const BarChart = (props: PropTypes) => {
       ]}>
       {props.hideAxesAndRules !== true && renderHorizSections()}
       <ScrollView
+        ref={scrollRef}
+        onContentSizeChange={()=>{
+          if(scrollRef.current && scrollToEnd){        
+            scrollRef.current.scrollToEnd({animated: scrollAnimation});
+          }
+        }}
         style={[
           {
             marginLeft: yAxisLabelWidth,
@@ -1123,6 +1144,7 @@ export const BarChart = (props: PropTypes) => {
                     containerHeight={containerHeight}
                     maxValue={maxValue}
                     spacing={spacing}
+                    xAxisThickness={xAxisThickness}
                     barWidth={props.barWidth}
                     opacity={opacity}
                     disablePress={props.disablePress}

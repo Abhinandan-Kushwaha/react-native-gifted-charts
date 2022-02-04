@@ -22,6 +22,8 @@
 | showLine            | Boolean        | To show a Line chart over the Bar chart with the same data                                | false               |
 | lineConfig          | lineConfigType | Properties of the Line chart shown over the Bar chart (lineConfigType) is described below | defaultLineConfig   |
 | autoShiftLabels | Boolean | When set to true, automatically shifts the X axis labels for negative values | false |
+| scrollToEnd | Boolean | When set to true, the chart automatically scrolls to the rightmost bar | false |
+| scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost bar | true |
 
 ---
 

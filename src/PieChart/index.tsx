@@ -420,9 +420,11 @@ export const PieChart = (props: propTypes) => {
               borderTopWidth: isThreeD
                 ? innerCircleBorderWidth * 5
                 : innerCircleBorderWidth,
-              borderLeftWidth: 0.001,
+              borderLeftWidth: 0.5,
+              borderLeftColor:innerCircleColor,
               borderBottomWidth: 0,
-              borderRightWidth: 0.001,
+              borderRightWidth: 0.5,
+              borderRightColor:innerCircleColor,
             },
           ]}>
           {props.centerLabelComponent ? props.centerLabelComponent() : null}
