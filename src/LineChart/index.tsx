@@ -100,6 +100,7 @@ type propTypes = {
   xAxisIndicesWidth?: number;
   xAxisIndicesColor?: ColorValue;
   yAxisIndicesColor?: ColorValue;
+  yAxisSide?: string;
 
   color?: string;
   color1?: string;
@@ -271,6 +272,8 @@ export const LineChart = (props: propTypes) => {
 
   const yAxisLabelPrefix = props.yAxisLabelPrefix || '';
   const yAxisLabelSuffix = props.yAxisLabelSuffix || '';
+  const yAxisSide = props.yAxisSide || 'left';
+
 
   if (!initialData) {
     initialData = [...data];
@@ -1069,6 +1072,7 @@ export const LineChart = (props: propTypes) => {
                   {
                     width: props.width ? props.width + 15 : totalWidth,
                   },
+                  yAxisSide === 'right' && {transform:[{rotateY:'180deg'}]}
                 ]}>
                 <View
                   style={[
@@ -1085,6 +1089,7 @@ export const LineChart = (props: propTypes) => {
                       ellipsizeMode={'clip'}
                       style={[
                         yAxisTextStyle,
+                        yAxisSide === 'right' && {transform:[{rotateY:'180deg'}]},
                         index === noOfSections && {
                           marginBottom: stepHeight / -2,
                         },
@@ -1668,7 +1673,7 @@ export const LineChart = (props: propTypes) => {
   };
 
   return (
-    <View style={[styles.container, {height: containerHeight}]}>
+    <View style={[styles.container, {height: containerHeight}, yAxisSide === 'right' && {marginLeft: yAxisLabelWidth + yAxisThickness }]}>
       {props.hideAxesAndRules !== true && renderHorizSections()}
       {/* {sectionsOverlay()} */}
       <ScrollView
@@ -1685,7 +1690,7 @@ export const LineChart = (props: propTypes) => {
         showsHorizontalScrollIndicator={showScrollIndicator}
         style={[
           {
-            marginLeft: yAxisLabelWidth + yAxisThickness,
+            marginLeft: yAxisSide === 'right' ? -yAxisLabelWidth - yAxisThickness + 6 : yAxisLabelWidth + yAxisThickness,
             position: 'absolute',
             bottom: stepHeight * -0.5 - 60, //stepHeight * -0.5 + xAxisThickness,
             paddingRight: 100,
