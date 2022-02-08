@@ -115,6 +115,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | yAxisLabelPrefix       | String              | The String prepended to the y axis label text (for example- '$')                   | ''                     |
 | yAxisLabelSuffix       | String              | The String appended to the y axis label text                                       | ''                     |
 | hideYAxisText          | Boolean             | To hide Y axis label text                                                          | false                  |
+| yAxisSide | String | Tells which side of the chart, should the y axis be present, defaults to 'left' | 'left' |
 | rulesColor             | ColorValue          | Color of the horizontal rules                                                      | lightgray              |
 | rulesThickness         | number              | Thickness of the horizontal rules                                                  | 1                      |
 | hideRules              | Boolean             | To hide the horizontal rules                                                       | false                  |
@@ -147,6 +148,8 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | rotateLabel            | Boolean             | To rotate the X axis labels (by 60deg)                                             | false                  |
 | hideOrigin             | Boolean             | To hide the y Axis label at origin (i.e. 0)                                        | false                  |
 | labelWidth             | number              | Width of the Label text appearing below the bar (under the X axis)                 | barWidth               |
+
+**Note** If you are setting yAxisSide to 'right', make sure to specify the width of the chart, using the `width` prop
 
 ReferenceConfigType has following properties-
 

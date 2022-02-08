@@ -47,6 +47,7 @@ type PropTypes = {
   yAxisTextStyle?: any;
   yAxisLabelWidth?: number;
   hideYAxisText?: Boolean;
+  yAxisSide?: string;
   initialSpacing?: number;
   barWidth?: number;
   sideWidth?: number;
@@ -321,6 +322,7 @@ export const BarChart = (props: PropTypes) => {
 
   const yAxisLabelPrefix = props.yAxisLabelPrefix || '';
   const yAxisLabelSuffix = props.yAxisLabelSuffix || '';
+  const yAxisSide = props.yAxisSide || 'left';
 
   const xAxisThickness =
     props.xAxisThickness === 0
@@ -598,6 +600,7 @@ export const BarChart = (props: PropTypes) => {
                     ? props.width || totalWidth
                     : props.width || totalWidth + 11,
                 },
+                yAxisSide === 'right' && {transform:[{rotateY:'180deg'}]}
               ]}>
               <View
                 style={[
@@ -623,12 +626,13 @@ export const BarChart = (props: PropTypes) => {
                     style={[
                       yAxisTextStyle,
                       index === noOfSections && {marginBottom: stepHeight / -2},
-                      horizontal && {
+                      horizontal ? {
                         transform: [
                           {rotate: '270deg'},
                           {translateY: yAxisAtTop ? 0 : 50},
                         ],
-                      },
+                      }:
+                      yAxisSide === 'right' && {transform:[{rotateY:'180deg'}]}
                     ]}>
                     {label}
                   </Text>
@@ -1093,6 +1097,7 @@ export const BarChart = (props: PropTypes) => {
         {
           height: containerHeight + horizSectionsBelow.length * stepHeight,
         },
+        yAxisSide === 'right' && {marginLeft: yAxisLabelWidth + yAxisThickness },
         props.width && {width: props.width},
         horizontal && {transform: [{rotate: '90deg'}, {translateY: -15}]},
       ]}>
@@ -1106,7 +1111,7 @@ export const BarChart = (props: PropTypes) => {
         }}
         style={[
           {
-            marginLeft: yAxisLabelWidth,
+            marginLeft: yAxisSide === 'right' ? -yAxisLabelWidth+10 : yAxisLabelWidth,
             position: 'absolute',
             bottom: stepHeight * -0.5 - 60 + xAxisThickness,
           },

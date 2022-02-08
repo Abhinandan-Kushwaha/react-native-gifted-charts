@@ -555,7 +555,7 @@ const App = () => {
     },
     {value: 30, label: 'Tue'},
     {value: 26, label: 'Wed'},
-    // {value: 40, label: 'Thu'},
+    {value: 40, label: 'Thu'},
     {value: 16, label: 'Wed'},
     {value: 40, label: 'Thu'},
   ];
@@ -564,23 +564,28 @@ const App = () => {
     <View
       style={{
         marginVertical: 100,
-        marginLeft: 6,
+        // marginLeft: 46,
+        marginLeft:20
       }}>
       {/* <BarChart backgroundColor={'green'} data={barData} /> */}
-      <PieChart
-        backgroundColor={'red'}
+      <BarChart
+        // backgroundColor={'red'}
+        initialSpacing={10}
+        yAxisSide='right'
         maxValue={40}
         data={barData}
-        height={140}
+        width={240}
         radius={170}
         donut={true}
         showText={true}
         showValuesAsLabels={true}
         semiCircle={true}
         isThreeD={true}
+        rulesType='solid'
         // shiftInnerCenterY={100}
         shadow={true}
         strokeWidth={5}
+        noOfSections={4}
         innerCircleBorderColor={'gray'}
         // showTextBackground={true}
       />
