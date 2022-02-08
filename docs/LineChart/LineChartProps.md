@@ -127,7 +127,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | rotateLabel            | Boolean             | To rotate the X axis labels (by 60deg)                                             | false                  |
 | hideOrigin             | Boolean             | To hide the y Axis label at origin (i.e. 0)                                        | false                  |
 
-**Note** If you are setting yAxisSide to 'right', make sure to specify the width of fthe chart, using the `width` prop
+**Note** If you are setting yAxisSide to 'right', make sure to specify the width of the chart, using the `width` prop
 
 ReferenceConfigType has following properties-
 

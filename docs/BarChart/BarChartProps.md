@@ -149,7 +149,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | hideOrigin             | Boolean             | To hide the y Axis label at origin (i.e. 0)                                        | false                  |
 | labelWidth             | number              | Width of the Label text appearing below the bar (under the X axis)                 | barWidth               |
 
-**Note** If you are setting yAxisSide to 'right', make sure to specify the width of fthe chart, using the `width` prop
+**Note** If you are setting yAxisSide to 'right', make sure to specify the width of the chart, using the `width` prop
 
 ReferenceConfigType has following properties-
 
