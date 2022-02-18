@@ -20,6 +20,8 @@
 | isAnimated                    | Boolean        | To show animated Line or Area Chart. Animation occurs when the chart load for the first time       | false               |
 | animateOnDataChange           | Boolean        | To show animation on change in data. A smooth transition takes place between the iold and new line | false               |
 | onDataChangeAnimationDuration | number         | Duration (milliseconds) in which the transition animation takes place on a change in data          | 400                 |
+| scrollToEnd | Boolean | When set to true, the chart automatically scrolls to the rightmost data point | false |
+| scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true |
 
 ---
 

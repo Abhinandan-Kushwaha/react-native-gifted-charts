@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useMemo,
   useState,
+  useRef,
 } from 'react';
 import {
   View,
@@ -189,6 +190,8 @@ type propTypes = {
   width?: number;
   yAxisLabelPrefix?: String;
   yAxisLabelSuffix?: String;
+  scrollToEnd?: Boolean;
+  scrollAnimation?: Boolean;
 };
 type referenceConfigType = {
   thickness: number;
@@ -246,6 +249,7 @@ type sectionType = {
 };
 
 export const LineChart = (props: propTypes) => {
+  const scrollRef = useRef();
   const [points, setPoints] = useState('');
   const [points2, setPoints2] = useState('');
   const [points3, setPoints3] = useState('');
@@ -258,6 +262,8 @@ export const LineChart = (props: propTypes) => {
   let data = useMemo(() => props.data || [], [props.data]);
   const data2 = useMemo(() => props.data2 || [], [props.data2]);
   const data3 = useMemo(() => props.data3 || [], [props.data3]);
+  const scrollToEnd = props.scrollToEnd || false;
+  const scrollAnimation = props.scrollAnimation === false ? false : true;
 
   const opacValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
@@ -449,7 +455,7 @@ export const LineChart = (props: propTypes) => {
   const xAxisThickness = props.xAxisThickness || 1;
   const xAxisColor = props.xAxisColor || 'black';
 
-  let totalWidth = spacing;
+  let totalWidth = initialSpacing;
   let maxItem = 0;
   data.forEach((item: itemType) => {
     if (item.value > maxItem) {
@@ -1070,7 +1076,7 @@ export const LineChart = (props: propTypes) => {
                 style={[
                   styles.horizBar,
                   {
-                    width: props.width ? props.width + 15 : totalWidth,
+                    width: (props.width ? props.width : totalWidth) + 15,
                   },
                   yAxisSide === 'right' && {transform:[{rotateY:'180deg'}]}
                 ]}>
@@ -1681,12 +1687,18 @@ export const LineChart = (props: propTypes) => {
         contentContainerStyle={[
           {
             height: containerHeight + 130,
-            width: totalWidth,
+            width: totalWidth -20,
             // backgroundColor: 'yellow'
           },
-          !props.width && {width: totalWidth},
+          !props.width && {width: totalWidth -20},
         ]}
         scrollEnabled={!disableScroll}
+        ref={scrollRef}
+        onContentSizeChange={()=>{
+          if(scrollRef.current && scrollToEnd){        
+            scrollRef.current.scrollToEnd({animated: scrollAnimation});
+          }
+        }}
         showsHorizontalScrollIndicator={showScrollIndicator}
         style={[
           {

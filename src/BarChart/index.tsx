@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useMemo,
   useState,
+  useRef,
 } from 'react';
 import {
   View,
@@ -19,7 +20,6 @@ import RenderStackBars from './RenderStackBars';
 import Rule from '../Components/lineSvg';
 import {bezierCommand, svgPath} from '../utils';
 import Svg, {Circle, Path, Rect, Text as CanvasText} from 'react-native-svg';
-import { useRef } from 'react';
 
 type PropTypes = {
   width?: number;
@@ -120,7 +120,7 @@ type PropTypes = {
   yAxisLabelSuffix?: String;
   autoShiftLabels?: Boolean;
   scrollToEnd?: Boolean;
-  scrollAnimation?: Boolean
+  scrollAnimation?: Boolean;
 };
 type lineConfigType = {
   curved?: Boolean;
