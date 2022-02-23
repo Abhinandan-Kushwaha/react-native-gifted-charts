@@ -966,7 +966,7 @@ export const LineChart = (props: propTypes) => {
           labelComponent()
         ) : (
           <Text
-            style={[labelTextStyle, {textAlign: 'center'}]}
+            style={labelTextStyle || {textAlign: 'center'}}
             numberOfLines={1}>
             {label || ''}
           </Text>
@@ -1004,7 +1004,7 @@ export const LineChart = (props: propTypes) => {
           labelComponent()
         ) : (
           <Text
-            style={[labelTextStyle, {textAlign: 'center'}]}
+            style={labelTextStyle || {textAlign: 'center'}}
             numberOfLines={1}>
             {label || ''}
           </Text>

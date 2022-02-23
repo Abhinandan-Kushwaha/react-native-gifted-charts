@@ -32,6 +32,8 @@ type propTypes = {
   horizontal: Boolean;
   intactTopLabel: Boolean;
   barBorderRadius?: number;
+  containerHeight?: number;
+  maxValue?: number;
 };
 type itemType = {
   value?: number;
@@ -54,12 +56,19 @@ type itemType = {
 };
 
 const Animated2DWithGradient = (props: propTypes) => {
-  const {item, opacity, animationDuration, noGradient, noAnimation} = props;
+  const {
+    item,
+    opacity,
+    animationDuration,
+    noGradient,
+    noAnimation,
+    containerHeight,
+    maxValue,
+  } = props;
   const [height, setHeight] = useState(noAnimation ? props.height : 2);
   const [initialRender, setInitialRender] = useState(
     noAnimation ? false : true,
   );
-  // console.log('comes to animated2DWithGradient', item);
 
   useEffect(() => {
     if (!noAnimation) {
@@ -97,9 +106,19 @@ const Animated2DWithGradient = (props: propTypes) => {
             position: 'absolute',
             bottom: 0,
             width: '100%',
-            height: height,
+            height: noAnimation
+              ? (Math.abs(item.value) * (containerHeight || 200)) /
+                (maxValue || 200)
+              : height,
           }}>
-          <View style={{width: '100%', height: height}}>
+          <View
+            style={{
+              width: '100%',
+              height: noAnimation
+                ? (Math.abs(item.value) * (containerHeight || 200)) /
+                  (maxValue || 200)
+                : height,
+            }}>
             {noGradient ? (
               <View
                 style={[
@@ -223,13 +242,14 @@ const Animated2DWithGradient = (props: propTypes) => {
                   height: item.barWidth || 30,
                   width: item.barWidth || 30,
                   justifyContent:
-                    (props.horizontal && !props.intactTopLabel) || item.value < 0
+                    (props.horizontal && !props.intactTopLabel) ||
+                    item.value < 0
                       ? 'center'
                       : 'flex-end',
                   alignItems: 'center',
                   opacity: opacity,
                 },
-                item.value < 0 && {transform:[{rotate:'180deg'}]},
+                item.value < 0 && {transform: [{rotate: '180deg'}]},
                 props.horizontal &&
                   !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
                 item.topLabelContainerStyle,

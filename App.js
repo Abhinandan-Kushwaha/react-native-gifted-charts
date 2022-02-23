@@ -560,35 +560,85 @@ const App = () => {
     {value: 40, label: 'Thu'},
   ];
 
+  const styleObject = {
+    marginLeft: -95,
+    paddingLeft: 120,
+    transform: [{rotate: '90deg'}],
+  };
+  const ddtt = [
+    {
+      value: 10,
+      label: 'January month',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 20,
+      label: 'February month',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 30,
+      label: 'March month',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 20,
+      label: 'April month',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+  ];
+
+  const [dtt,setDtt] = useState([
+    {value: 110},
+    {value: 130},
+    {value: 120},
+    {value: 160},
+    {value: 190},
+  ]);
+
   return (
     <View
       style={{
         marginVertical: 100,
         // marginLeft: 46,
-        marginLeft:20
+        marginLeft: 20,
       }}>
       {/* <BarChart backgroundColor={'green'} data={barData} /> */}
       <BarChart
+      // isAnimated={true}
+      isThreeD={true}
+        data={dtt}
+        labelsExtraHeight={60}
+        // maxValue={100}
+        // yAxisLabelTexts={['100','110','120','130','140','150','160','170','180','190','200']}
         // backgroundColor={'red'}
-        initialSpacing={10}
-        yAxisSide='right'
-        maxValue={40}
-        data={barData}
-        width={240}
-        radius={170}
-        donut={true}
-        showText={true}
-        showValuesAsLabels={true}
-        semiCircle={true}
-        isThreeD={true}
-        rulesType='solid'
-        // shiftInnerCenterY={100}
-        shadow={true}
-        strokeWidth={5}
-        noOfSections={4}
-        innerCircleBorderColor={'gray'}
+        // initialSpacing={10}
+        // yAxisSide='right'
+        // maxValue={40}
+        // data={barData}
+        // width={240}
+        // radius={170}
+        // donut={true}
+        // showText={true}
+        // showValuesAsLabels={true}
+        // semiCircle={true}
+        // isThreeD={true}
+        // rulesType='solid'
+        // // shiftInnerCenterY={100}
+        // shadow={true}
+        // strokeWidth={5}
+        // noOfSections={4}
+        // innerCircleBorderColor={'gray'}
         // showTextBackground={true}
       />
+      <TouchableOpacity
+      onPress={()=>{dtt[1].value+=20;setDtt([...dtt])}}>
+        <Text>Press me</Text>
+      </TouchableOpacity>
       {/* <View
         style={{
           marginVertical: 100,

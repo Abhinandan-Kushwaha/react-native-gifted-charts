@@ -121,18 +121,29 @@ const RenderBars = (props: Props) => {
           rotateLabel
             ? props.horizontal
               ? {transform: [{rotate: '330deg'}]}
-              : {transform: [{rotate: value < 0 ? '240deg' : '60deg'}, {translateX: value < 0 ? 56 : 0}, {translateY: value < 0 ? 32 : 0}]}
+              : {
+                  transform: [
+                    {rotate: value < 0 ? '240deg' : '60deg'},
+                    {translateX: value < 0 ? 56 : 0},
+                    {translateY: value < 0 ? 32 : 0},
+                  ],
+                }
             : props.horizontal
             ? {transform: [{rotate: '-90deg'}]}
             : value < 0
-            ?{transform:[{rotate:'180deg'},{translateY:autoShiftLabels?0:32}]}
-            :{},
+            ? {
+                transform: [
+                  {rotate: '180deg'},
+                  {translateY: autoShiftLabels ? 0 : 32},
+                ],
+              }
+            : {},
         ]}>
         {item.labelComponent ? (
           item.labelComponent()
         ) : (
           <Text
-            style={[labelTextStyle, {textAlign: 'center'}]}
+            style={labelTextStyle || {textAlign: 'center'}}
             numberOfLines={1}>
             {label || ''}
           </Text>
@@ -141,7 +152,11 @@ const RenderBars = (props: Props) => {
     );
   };
 
-  const renderAnimatedLabel = (label: String, labelTextStyle: any, value: number) => {
+  const renderAnimatedLabel = (
+    label: String,
+    labelTextStyle: any,
+    value: number,
+  ) => {
     return (
       <Animated.View
         style={[
@@ -158,7 +173,7 @@ const RenderBars = (props: Props) => {
             bottom: rotateLabel ? -40 : -25,
             opacity: appearingOpacity,
           },
-          value < 0 && {transform:[{rotate:'180deg'}]},
+          value < 0 && {transform: [{rotate: '180deg'}]},
           rotateLabel
             ? props.horizontal
               ? {transform: [{rotate: '330deg'}]}
@@ -171,7 +186,7 @@ const RenderBars = (props: Props) => {
           item.labelComponent()
         ) : (
           <Text
-            style={[labelTextStyle, {textAlign: 'center'}]}
+            style={labelTextStyle || {textAlign: 'center'}}
             numberOfLines={1}>
             {label || ''}
           </Text>
@@ -255,7 +270,7 @@ const RenderBars = (props: Props) => {
                     : 'flex-end',
                 alignItems: 'center',
               },
-              item.value < 0 && {transform:[{rotate:'180deg'}]},
+              item.value < 0 && {transform: [{rotate: '180deg'}]},
               props.horizontal &&
                 !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
               item.topLabelContainerStyle,
@@ -277,13 +292,27 @@ const RenderBars = (props: Props) => {
           // overflow: 'visible',
           marginBottom: 60,
           width: item.barWidth || props.barWidth || 30,
-          height: item.value>=0 &&(!isThreeD || isAnimated) && item.topLabelComponent
-            ? (item.topLabelComponentHeight || 30) +
-              (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)
-            : (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200),
+          height:
+            item.value >= 0 &&
+            (!isThreeD || isAnimated) &&
+            item.topLabelComponent
+              ? (item.topLabelComponentHeight || 30) +
+                (Math.abs(item.value) * (containerHeight || 200)) /
+                  (maxValue || 200)
+              : (Math.abs(item.value) * (containerHeight || 200)) /
+                (maxValue || 200),
           marginRight: spacing,
         },
-        item.value < 0 && {transform:[{translateY:(Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)},{rotateZ:'180deg'}]},
+        item.value < 0 && {
+          transform: [
+            {
+              translateY:
+                (Math.abs(item.value) * (containerHeight || 200)) /
+                (maxValue || 200),
+            },
+            {rotateZ: '180deg'},
+          ],
+        },
         // !isThreeD && !item.showGradient && !props.showGradient &&
         // { backgroundColor: item.frontColor || props.frontColor || 'black' },
         side !== 'right' && {zIndex: data.length - index},
@@ -333,7 +362,10 @@ const RenderBars = (props: Props) => {
             topLabelComponent={item.topLabelComponent}
             opacity={opacity || 1}
             animationDuration={animationDuration || 800}
-            height={(Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)}
+            height={
+              (Math.abs(item.value) * (containerHeight || 200)) /
+              (maxValue || 200)
+            }
             intactTopLabel={props.intactTopLabel}
             horizontal={props.horizontal}
           />
@@ -358,7 +390,10 @@ const RenderBars = (props: Props) => {
             opacity={opacity || 1}
             horizontal={props.horizontal}
             intactTopLabel={props.intactTopLabel}
-            height={(Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)}
+            height={
+              (Math.abs(item.value) * (containerHeight || 200)) /
+              (maxValue || 200)
+            }
             value={item.value}
           />
         )
@@ -373,7 +408,12 @@ const RenderBars = (props: Props) => {
             roundedTop={props.roundedTop || false}
             gradientColor={props.gradientColor}
             frontColor={props.frontColor || 'black'}
-            height={(Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)}
+            containerHeight={containerHeight}
+            maxValue={maxValue}
+            height={
+              (Math.abs(item.value) * (containerHeight || 200)) /
+              (maxValue || 200)
+            }
             cappedBars={props.cappedBars}
             capThickness={props.capThickness}
             capColor={props.capColor}
@@ -396,7 +436,12 @@ const RenderBars = (props: Props) => {
           gradientColor={props.gradientColor}
           noGradient
           frontColor={props.frontColor || 'black'}
-          height={(Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)}
+          containerHeight={containerHeight}
+          maxValue={maxValue}
+          height={
+            (Math.abs(item.value) * (containerHeight || 200)) /
+            (maxValue || 200)
+          }
           cappedBars={props.cappedBars}
           capThickness={props.capThickness}
           capColor={props.capColor}
@@ -417,7 +462,12 @@ const RenderBars = (props: Props) => {
           noGradient
           noAnimation
           frontColor={props.frontColor || 'black'}
-          height={(Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)}
+          containerHeight={containerHeight}
+          maxValue={maxValue}
+          height={
+            (Math.abs(item.value) * (containerHeight || 200)) /
+            (maxValue || 200)
+          }
           cappedBars={props.cappedBars}
           capThickness={props.capThickness}
           capColor={props.capColor}
@@ -428,8 +478,8 @@ const RenderBars = (props: Props) => {
         />
       )}
       {isAnimated
-        ? renderAnimatedLabel(item.label || '', item.labelTextStyle,item.value)
-        : renderLabel(item.label || '', item.labelTextStyle,item.value)}
+        ? renderAnimatedLabel(item.label || '', item.labelTextStyle, item.value)
+        : renderLabel(item.label || '', item.labelTextStyle, item.value)}
     </TouchableOpacity>
   );
 };
