@@ -141,7 +141,9 @@ const RenderStackBars = (props: Props) => {
                         stackItem.borderBottomRightRadius || 0,
                     },
                 ]}
-              />
+              >
+                {stackItem.innerBarComponent && stackItem.innerBarComponent()}
+              </TouchableOpacity>
             );
           })}
         </View>
