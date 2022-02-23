@@ -121,6 +121,7 @@ type PropTypes = {
   autoShiftLabels?: Boolean;
   scrollToEnd?: Boolean;
   scrollAnimation?: Boolean;
+  labelsExtraHeight?: number;
 };
 type lineConfigType = {
   curved?: Boolean;
@@ -231,6 +232,7 @@ export const BarChart = (props: PropTypes) => {
   const labelWidth = props.labelWidth || 0;
   const scrollToEnd = props.scrollToEnd || false;
   const scrollAnimation = props.scrollAnimation === false ? false : true;
+  const labelsExtraHeight = props.labelsExtraHeight || 0;
 
   let totalWidth = spacing;
   let maxItem = 0, minItem = 0;
@@ -1095,9 +1097,12 @@ export const BarChart = (props: PropTypes) => {
       style={[
         styles.container,
         {
-          height: containerHeight + horizSectionsBelow.length * stepHeight,
+          height:
+            containerHeight +
+            horizSectionsBelow.length * stepHeight +
+            labelsExtraHeight,
         },
-        yAxisSide === 'right' && {marginLeft: yAxisLabelWidth + yAxisThickness },
+        yAxisSide === 'right' && {marginLeft: yAxisLabelWidth + yAxisThickness},
         props.width && {width: props.width},
         horizontal && {transform: [{rotate: '90deg'}, {translateY: -15}]},
       ]}>
@@ -1124,7 +1129,7 @@ export const BarChart = (props: PropTypes) => {
             // backgroundColor: 'yellow',
             height: containerHeight + 130 + horizSectionsBelow.length * stepHeight,
             paddingLeft: initialSpacing,
-            paddingBottom:horizSectionsBelow.length * stepHeight,
+            paddingBottom:horizSectionsBelow.length * stepHeight + labelsExtraHeight,
             alignItems: 'flex-end',
           },
           !props.width && {width: totalWidth},
