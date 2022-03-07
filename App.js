@@ -548,17 +548,6 @@ const App = () => {
       </View>
     );
   };
-  const barData = [
-    {
-      value: 15,
-      label: 'Mon',
-    },
-    {value: 30, label: 'Tue'},
-    {value: 26, label: 'Wed'},
-    {value: 40, label: 'Thu'},
-    {value: 16, label: 'Wed'},
-    {value: 40, label: 'Thu'},
-  ];
 
   const styleObject = {
     marginLeft: -95,
@@ -600,6 +589,18 @@ const App = () => {
     {value: 190},
   ]);
 
+  const barData = [
+    {
+      value: 15,
+      label: 'Mon',
+    },
+    {value: 30, label: 'Tue'},
+    {value: -23, label: 'Wed'},
+    {value: 40, label: 'Thu'},
+    {value: -16, label: 'Wed'},
+    {value: 40, label: 'Thu'},
+  ];
+
   return (
     <View
       style={{
@@ -607,8 +608,8 @@ const App = () => {
         // marginLeft: 46,
         marginLeft: 20,
       }}>
-      {/* <BarChart backgroundColor={'green'} data={barData} /> */}
-      <BarChart
+      <BarChart yAxisSide='right' width={260} scrollToEnd curved data={barData} />
+      {/* <BarChart
       // isAnimated={true}
       isThreeD={true}
         data={dtt}
@@ -634,7 +635,7 @@ const App = () => {
         // noOfSections={4}
         // innerCircleBorderColor={'gray'}
         // showTextBackground={true}
-      />
+      /> */}
       <TouchableOpacity
       onPress={()=>{dtt[1].value+=20;setDtt([...dtt])}}>
         <Text>Press me</Text>

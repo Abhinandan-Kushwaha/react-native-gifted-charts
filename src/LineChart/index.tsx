@@ -33,6 +33,7 @@ type propTypes = {
   height?: number;
   noOfSections?: number;
   maxValue?: number;
+  minValue?: number;
   stepHeight?: number;
   stepValue?: number;
   spacing?: number;
@@ -192,6 +193,7 @@ type propTypes = {
   yAxisLabelSuffix?: String;
   scrollToEnd?: Boolean;
   scrollAnimation?: Boolean;
+  noOfSectionsBelowXAxis?: number;
 };
 type referenceConfigType = {
   thickness: number;
@@ -279,7 +281,6 @@ export const LineChart = (props: propTypes) => {
   const yAxisLabelPrefix = props.yAxisLabelPrefix || '';
   const yAxisLabelSuffix = props.yAxisLabelSuffix || '';
   const yAxisSide = props.yAxisSide || 'left';
-
 
   if (!initialData) {
     initialData = [...data];
@@ -456,15 +457,39 @@ export const LineChart = (props: propTypes) => {
   const xAxisColor = props.xAxisColor || 'black';
 
   let totalWidth = initialSpacing;
-  let maxItem = 0;
+  let maxItem = 0,
+    minItem = 0;
   data.forEach((item: itemType) => {
     if (item.value > maxItem) {
       maxItem = item.value;
     }
+    if (item.value < minItem) {
+      minItem = item.value;
+    }
     totalWidth += spacing;
   });
 
-  const maxValue = props.maxValue || maxItem || 10;
+  if (props.showFractionalValues || props.roundToDigits) {
+    maxItem *= 10 * (props.roundToDigits || 1);
+    maxItem = maxItem + (10 - (maxItem % 10));
+    maxItem /= 10 * (props.roundToDigits || 1);
+    maxItem = parseFloat(maxItem.toFixed(props.roundToDigits || 1));
+
+    if (minItem !== 0) {
+      minItem *= 10 * (props.roundToDigits || 1);
+      minItem = minItem - (10 + (minItem % 10));
+      minItem /= 10 * (props.roundToDigits || 1);
+      minItem = parseFloat(minItem.toFixed(props.roundToDigits || 1));
+    }
+  } else {
+    maxItem = maxItem + (10 - (maxItem % 10));
+    if (minItem !== 0) {
+      minItem = minItem - (10 + (minItem % 10));
+    }
+  }
+
+  const maxValue = props.maxValue || maxItem;
+  const minValue = props.minValue || minItem;
 
   useEffect(() => {
     // console.log('comes here............')
@@ -767,18 +792,12 @@ export const LineChart = (props: propTypes) => {
     xAxisThickness,
   ]);
 
-  if (props.showFractionalValues || props.roundToDigits) {
-    maxItem *= 10 * (props.roundToDigits || 1);
-    maxItem = maxItem + (10 - (maxItem % 10));
-    maxItem /= 10 * (props.roundToDigits || 1);
-    maxItem = parseFloat(maxItem.toFixed(props.roundToDigits || 1));
-  } else {
-    maxItem = maxItem + (10 - (maxItem % 10));
-  }
-
   const horizSections = [{value: '0'}];
+  const horizSectionsBelow = [];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
+  const noOfSectionsBelowXAxis =
+    props.noOfSectionsBelowXAxis || -minValue / stepValue;
   const thickness1 = props.thickness1;
   const thickness2 = props.thickness2;
   const thickness3 = props.thickness3;
@@ -939,6 +958,20 @@ export const LineChart = (props: propTypes) => {
         : value.toString(),
     });
   }
+  if (noOfSectionsBelowXAxis) {
+    for (let i = 1; i <= noOfSectionsBelowXAxis; i++) {
+      let value = stepValue * -i;
+      if (props.showFractionalValues || props.roundToDigits) {
+        value = parseFloat(value.toFixed(props.roundToDigits || 1));
+      }
+      horizSectionsBelow.push({
+        value: props.yAxisLabelTexts
+          ? props.yAxisLabelTexts[noOfSectionsBelowXAxis - i] ??
+            value.toString()
+          : value.toString(),
+      });
+    }
+  }
 
   const renderLabel = (
     index: number,
@@ -1078,7 +1111,7 @@ export const LineChart = (props: propTypes) => {
                   {
                     width: (props.width ? props.width : totalWidth) + 15,
                   },
-                  yAxisSide === 'right' && {transform:[{rotateY:'180deg'}]}
+                  yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
                 ]}>
                 <View
                   style={[
@@ -1095,7 +1128,9 @@ export const LineChart = (props: propTypes) => {
                       ellipsizeMode={'clip'}
                       style={[
                         yAxisTextStyle,
-                        yAxisSide === 'right' && {transform:[{rotateY:'180deg'}]},
+                        yAxisSide === 'right' && {
+                          transform: [{rotateY: '180deg'}],
+                        },
                         index === noOfSections && {
                           marginBottom: stepHeight / -2,
                         },
@@ -1190,6 +1225,70 @@ export const LineChart = (props: propTypes) => {
               </View>
             );
           })}
+
+        {horizSectionsBelow.map((sectionItems, index) => {
+          let label = getLabel(sectionItems.value);
+          if (hideOrigin && index === horizSections.length - 1) {
+            label = '';
+          }
+          return (
+            <View
+              key={index}
+              style={[
+                styles.horizBar,
+                {
+                  width: (props.width ? props.width : totalWidth) + 15,
+                },
+                index === 0 && {marginTop: stepHeight / 2},
+                yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
+              ]}>
+              <View
+                style={[
+                  styles.leftLabel,
+                  {
+                    borderRightWidth: yAxisThickness,
+                    borderColor: yAxisColor,
+                    marginLeft: 1,
+                  },
+                  {
+                    height: index === 0 ? stepHeight * 1.5 : stepHeight,
+                    width: yAxisLabelWidth,
+                  },
+                  index === 0 && {marginTop: -stepHeight / 2},
+                ]}>
+                {!hideYAxisText ? (
+                  <Text
+                    numberOfLines={1}
+                    ellipsizeMode={'clip'}
+                    style={[
+                      yAxisTextStyle,
+                      index === 0 && {marginBottom: stepHeight / -2},
+                      yAxisSide === 'right' && {
+                        transform: [{rotateY: '180deg'}],
+                      },
+                    ]}>
+                    {label}
+                  </Text>
+                ) : null}
+              </View>
+              <View
+                style={[styles.leftPart, {backgroundColor: backgroundColor}]}>
+                {hideRules ? null : (
+                  <Rule
+                    config={{
+                      thickness: rulesThickness,
+                      color: rulesColor,
+                      width: (props.width || totalWidth) + 11,
+                      dashWidth: dashWidth,
+                      dashGap: dashGap,
+                      type: rulesType,
+                    }}
+                  />
+                )}
+              </View>
+            </View>
+          );
+        })}
       </>
     );
   };
@@ -1481,11 +1580,11 @@ export const LineChart = (props: propTypes) => {
       <View
         style={{
           position: 'absolute',
-          height: containerHeight + 10,
+          height: containerHeight + 10 + horizSectionsBelow.length * stepHeight,
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: totalWidth,
           zIndex: -1,
-          // backgroundColor: 'rgba(200,150,150,0.1)'
+          // backgroundColor: 'rgba(200,150,150,0.6)'
         }}>
         <Svg>
           <Path
@@ -1587,7 +1686,7 @@ export const LineChart = (props: propTypes) => {
       <Animated.View
         style={{
           position: 'absolute',
-          height: containerHeight + 10,
+          height: containerHeight + 10 + horizSectionsBelow.length * stepHeight,
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
           zIndex: -1,
@@ -1678,31 +1777,43 @@ export const LineChart = (props: propTypes) => {
     );
   };
 
+  console.log('horizSectionsBelow -- >', horizSectionsBelow);
+
   return (
-    <View style={[styles.container, {height: containerHeight}, yAxisSide === 'right' && {marginLeft: yAxisLabelWidth + yAxisThickness }]}>
+    <View
+      style={[
+        styles.container,
+        {height: containerHeight + horizSectionsBelow.length * stepHeight},
+        yAxisSide === 'right' && {marginLeft: yAxisLabelWidth + yAxisThickness},
+      ]}>
       {props.hideAxesAndRules !== true && renderHorizSections()}
       {/* {sectionsOverlay()} */}
       <ScrollView
         horizontal
         contentContainerStyle={[
           {
-            height: containerHeight + 130,
-            width: totalWidth -20,
+            height:
+              containerHeight + 130 + horizSectionsBelow.length * stepHeight,
+            width: totalWidth - 20,
+            paddingBottom: horizSectionsBelow.length * stepHeight,
             // backgroundColor: 'yellow'
           },
-          !props.width && {width: totalWidth -20},
+          !props.width && {width: totalWidth - 20},
         ]}
         scrollEnabled={!disableScroll}
         ref={scrollRef}
-        onContentSizeChange={()=>{
-          if(scrollRef.current && scrollToEnd){        
+        onContentSizeChange={() => {
+          if (scrollRef.current && scrollToEnd) {
             scrollRef.current.scrollToEnd({animated: scrollAnimation});
           }
         }}
         showsHorizontalScrollIndicator={showScrollIndicator}
         style={[
           {
-            marginLeft: yAxisSide === 'right' ? -yAxisLabelWidth - yAxisThickness + 6 : yAxisLabelWidth + yAxisThickness,
+            marginLeft:
+              yAxisSide === 'right'
+                ? -yAxisLabelWidth - yAxisThickness + 6
+                : yAxisLabelWidth + yAxisThickness,
             position: 'absolute',
             bottom: stepHeight * -0.5 - 60, //stepHeight * -0.5 + xAxisThickness,
             paddingRight: 100,

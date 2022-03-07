@@ -10,7 +10,9 @@
 | width                         | number         | Width of the Bar chart                                                                             | width of the parent |
 | height                        | number         | Height of the Bar chart (excluding the bottom label)                                               | 200                 |
 | maxValue                      | number         | Maximum value shown in the Y axis                                                                  | 200                 |
+| minValue | number | Minimum negative value shown in the Y axis (to be used only if the data set has negative values too) | \_ |
 | noOfSections                  | number         | Number of sections in the Y axis                                                                   | 10                  |
+| noOfSectionsBelowXAxis | number | Number of sections in the Y axis below X axis (in case the data set has negative values too) | 0 |
 | stepValue                     | number         | Value of 1 step/section in the Y axis                                                              | 20                  |
 | stepHeight                    | number         | Height of 1 step/section in the Y axis                                                             | 20                  |
 | spacing                       | number         | Distance between 2 consecutive bars in the Bar chart                                               | 20                  |

@@ -235,7 +235,8 @@ export const BarChart = (props: PropTypes) => {
   const labelsExtraHeight = props.labelsExtraHeight || 0;
 
   let totalWidth = spacing;
-  let maxItem = 0, minItem = 0;
+  let maxItem = 0,
+    minItem = 0;
   if (props.stackData) {
     props.stackData.forEach(stackItem => {
       // console.log('stackItem', stackItem);
@@ -247,7 +248,7 @@ export const BarChart = (props: PropTypes) => {
       if (stackSum > maxItem) {
         maxItem = stackSum;
       }
-      if(stackSum < minItem){
+      if (stackSum < minItem) {
         minItem = stackSum;
       }
       totalWidth +=
@@ -259,7 +260,7 @@ export const BarChart = (props: PropTypes) => {
       if (item.value > maxItem) {
         maxItem = item.value;
       }
-      if(item.value < minItem){
+      if (item.value < minItem) {
         minItem = item.value;
       }
       totalWidth +=
@@ -273,7 +274,7 @@ export const BarChart = (props: PropTypes) => {
     maxItem = maxItem + (10 - (maxItem % 10));
     maxItem /= 10 * (props.roundToDigits || 1);
     maxItem = parseFloat(maxItem.toFixed(props.roundToDigits || 1));
-    if(minItem !== 0){
+    if (minItem !== 0) {
       minItem *= 10 * (props.roundToDigits || 1);
       minItem = minItem - (10 + (minItem % 10));
       minItem /= 10 * (props.roundToDigits || 1);
@@ -281,8 +282,8 @@ export const BarChart = (props: PropTypes) => {
     }
   } else {
     maxItem = maxItem + (10 - (maxItem % 10));
-    if(minItem !== 0){
-      minItem = minItem - (10 + (minItem % 10))
+    if (minItem !== 0) {
+      minItem = minItem - (10 + (minItem % 10));
     }
   }
 
@@ -290,7 +291,8 @@ export const BarChart = (props: PropTypes) => {
   const minValue = props.minValue || minItem;
 
   const stepValue = props.stepValue || maxValue / noOfSections;
-  const noOfSectionsBelowXAxis = props.noOfSectionsBelowXAxis || (-minValue / stepValue);
+  const noOfSectionsBelowXAxis =
+    props.noOfSectionsBelowXAxis || -minValue / stepValue;
   const disableScroll = props.disableScroll || false;
   const showScrollIndicator = props.showScrollIndicator || false;
   const initialSpacing =
@@ -537,7 +539,7 @@ export const BarChart = (props: PropTypes) => {
         : value.toString(),
     });
   }
-  if(noOfSectionsBelowXAxis){
+  if (noOfSectionsBelowXAxis) {
     for (let i = 1; i <= noOfSectionsBelowXAxis; i++) {
       let value = stepValue * -i;
       if (props.showFractionalValues || props.roundToDigits) {
@@ -545,9 +547,10 @@ export const BarChart = (props: PropTypes) => {
       }
       horizSectionsBelow.push({
         value: props.yAxisLabelTexts
-        ? props.yAxisLabelTexts[noOfSectionsBelowXAxis - i] ?? value.toString()
-        : value.toString(),
-      })
+          ? props.yAxisLabelTexts[noOfSectionsBelowXAxis - i] ??
+            value.toString()
+          : value.toString(),
+      });
     }
   }
 
@@ -602,7 +605,7 @@ export const BarChart = (props: PropTypes) => {
                     ? props.width || totalWidth
                     : props.width || totalWidth + 11,
                 },
-                yAxisSide === 'right' && {transform:[{rotateY:'180deg'}]}
+                yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
               ]}>
               <View
                 style={[
@@ -628,13 +631,16 @@ export const BarChart = (props: PropTypes) => {
                     style={[
                       yAxisTextStyle,
                       index === noOfSections && {marginBottom: stepHeight / -2},
-                      horizontal ? {
-                        transform: [
-                          {rotate: '270deg'},
-                          {translateY: yAxisAtTop ? 0 : 50},
-                        ],
-                      }:
-                      yAxisSide === 'right' && {transform:[{rotateY:'180deg'}]}
+                      horizontal
+                        ? {
+                            transform: [
+                              {rotate: '270deg'},
+                              {translateY: yAxisAtTop ? 0 : 50},
+                            ],
+                          }
+                        : yAxisSide === 'right' && {
+                            transform: [{rotateY: '180deg'}],
+                          },
                     ]}>
                     {label}
                   </Text>
@@ -745,7 +751,8 @@ export const BarChart = (props: PropTypes) => {
                     ? props.width || totalWidth
                     : props.width || totalWidth + 11,
                 },
-                index===0&&{marginTop:stepHeight/2}
+                yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
+                index === 0 && {marginTop: stepHeight / 2},
               ]}>
               <View
                 style={[
@@ -759,10 +766,10 @@ export const BarChart = (props: PropTypes) => {
                       transform: [{translateX: totalWidth + yAxisThickness}],
                     },
                   {
-                    height: index===0?stepHeight*1.5:stepHeight,
+                    height: index === 0 ? stepHeight * 1.5 : stepHeight,
                     width: yAxisLabelWidth,
                   },
-                  index===0&&{marginTop:-stepHeight/2}
+                  index === 0 && {marginTop: -stepHeight / 2},
                 ]}>
                 {!hideYAxisText ? (
                   <Text
@@ -777,16 +784,16 @@ export const BarChart = (props: PropTypes) => {
                           {translateY: yAxisAtTop ? 0 : 50},
                         ],
                       },
+                      yAxisSide === 'right' && {
+                        transform: [{rotateY: '180deg'}],
+                      },
                     ]}>
                     {label}
                   </Text>
                 ) : null}
               </View>
               <View
-                style={[
-                   styles.leftPart,
-                   {backgroundColor: backgroundColor},
-                ]}>
+                style={[styles.leftPart, {backgroundColor: backgroundColor}]}>
                 {hideRules ? null : (
                   <Rule
                     config={{
@@ -803,7 +810,7 @@ export const BarChart = (props: PropTypes) => {
                 )}
               </View>
             </View>
-          )
+          );
         })}
       </>
     );
@@ -1109,14 +1116,15 @@ export const BarChart = (props: PropTypes) => {
       {props.hideAxesAndRules !== true && renderHorizSections()}
       <ScrollView
         ref={scrollRef}
-        onContentSizeChange={()=>{
-          if(scrollRef.current && scrollToEnd){        
+        onContentSizeChange={() => {
+          if (scrollRef.current && scrollToEnd) {
             scrollRef.current.scrollToEnd({animated: scrollAnimation});
           }
         }}
         style={[
           {
-            marginLeft: yAxisSide === 'right' ? -yAxisLabelWidth+10 : yAxisLabelWidth,
+            marginLeft:
+              yAxisSide === 'right' ? -yAxisLabelWidth + 10 : yAxisLabelWidth,
             position: 'absolute',
             bottom: stepHeight * -0.5 - 60 + xAxisThickness,
           },
@@ -1127,9 +1135,11 @@ export const BarChart = (props: PropTypes) => {
         contentContainerStyle={[
           {
             // backgroundColor: 'yellow',
-            height: containerHeight + 130 + horizSectionsBelow.length * stepHeight,
+            height:
+              containerHeight + 130 + horizSectionsBelow.length * stepHeight,
             paddingLeft: initialSpacing,
-            paddingBottom:horizSectionsBelow.length * stepHeight + labelsExtraHeight,
+            paddingBottom:
+              horizSectionsBelow.length * stepHeight + labelsExtraHeight,
             alignItems: 'flex-end',
           },
           !props.width && {width: totalWidth},
