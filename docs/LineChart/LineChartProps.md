@@ -24,6 +24,7 @@
 | onDataChangeAnimationDuration | number         | Duration (milliseconds) in which the transition animation takes place on a change in data          | 400                 |
 | scrollToEnd | Boolean | When set to true, the chart automatically scrolls to the rightmost data point | false |
 | scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true |
+| initialSpacing         | number     | distance of the first data point from the Y axis                                      | 40 |
 
 ---
 
@@ -160,6 +161,14 @@ type referenceConfigType = {
 | thickness1 | number     | Thickness of the lines joining the first set of data points  | thickness (from props) |
 | thickness2 | number     | Thickness of the lines joining the second set of data points | thickness (from props) |
 | thickness3 | number     | Thickness of the lines joining the third set of data points  | thickness (from props) |
+| startIndex | number     | Start index for data line (used to display data lines having breaks) | 0              |
+| startIndex1 | number     | Start index for data line 1 (used to display data lines having breaks) | 0              |
+| startIndex2 | number     | Start index for data line 2 (used to display data lines having breaks) | 0              |
+| startIndex3 | number     | Start index for data line 3 (used to display data lines having breaks) | 0              |
+| endIndex | number     | End index for data line (used to display data lines having breaks) | data.length -1        |
+| endIndex1 | number     | End index for data line 1 (used to display data lines having breaks) | data.length -1     |
+| endIndex2 | number     | End index for data line 2 (used to display data lines having breaks) | data2.length -1    |
+| endIndex3 | number     | End index for data line 3 (used to display data lines having breaks) | data3.length -1    |
 | curved     | Boolean    | To show curved line joining the data points                  | false                  |
 
 ---

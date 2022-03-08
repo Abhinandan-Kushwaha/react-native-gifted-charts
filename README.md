@@ -102,6 +102,10 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 | **Invariant Violation: requireNativeComponent: "RNCWebView" was not found in the UIManager.**                                | install `react-native-webview`                                                                                                                                              |
 | Setting `height`, `maxValue`, `stepValue`, `stepHeight`, or `noOfSections` breaks the chart                                  | Please make sure that<br/> `maxValue = noOfSections * stepValue;` <br/>is followed. [See this](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/71) |
 
+## To-dos
+
+[To do list](./src/todos.md)
+
 ## License
 
 MIT

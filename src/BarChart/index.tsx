@@ -52,6 +52,7 @@ type PropTypes = {
   barWidth?: number;
   sideWidth?: number;
   showLine?: Boolean;
+  lineData?: any;
   lineConfig?: lineConfigType;
 
   cappedBars?: Boolean;
@@ -124,6 +125,7 @@ type PropTypes = {
   labelsExtraHeight?: number;
 };
 type lineConfigType = {
+  initialSpacing?: number;
   curved?: Boolean;
   isAnimated?: Boolean;
   delay?: number;
@@ -140,6 +142,8 @@ type lineConfigType = {
   textShiftX?: number;
   textShiftY?: number;
   shiftY?: number;
+  startIndex?: number;
+  endIndex?: number;
 };
 type referenceConfigType = {
   thickness: number;
@@ -175,7 +179,12 @@ export const BarChart = (props: PropTypes) => {
   const scrollRef = useRef();
   const [points, setPoints] = useState('');
   const showLine = props.showLine || false;
+  const initialSpacing =
+    props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
+  const data = useMemo(() => props.data || [], [props.data]);
+  const lineData = props.lineData || data;
   const defaultLineConfig = {
+    initialSpacing: initialSpacing,
     curved: false,
     isAnimated: false,
     thickness: 1,
@@ -192,9 +201,16 @@ export const BarChart = (props: PropTypes) => {
     textShiftY: 0,
     shiftY: 0,
     delay: 0,
+    startIndex: 0,
+    endIndex: lineData.length - 1,
   };
   const lineConfig = props.lineConfig
     ? {
+        initialSpacing:
+          props.lineConfig.initialSpacing === 0
+            ? 0
+            : props.lineConfig.initialSpacing ||
+              defaultLineConfig.initialSpacing,
         curved: props.lineConfig.curved || defaultLineConfig.curved,
         isAnimated: props.lineConfig.isAnimated || defaultLineConfig.isAnimated,
         thickness: props.lineConfig.thickness || defaultLineConfig.thickness,
@@ -220,6 +236,11 @@ export const BarChart = (props: PropTypes) => {
         textShiftY: props.lineConfig.textShiftY || defaultLineConfig.textShiftY,
         shiftY: props.lineConfig.shiftY || defaultLineConfig.shiftY,
         delay: props.lineConfig.delay || defaultLineConfig.delay,
+        startIndex: props.lineConfig.startIndex || defaultLineConfig.startIndex,
+        endIndex:
+          props.lineConfig.endIndex === 0
+            ? 0
+            : props.lineConfig.endIndex || defaultLineConfig.endIndex,
       }
     : defaultLineConfig;
   const containerHeight = props.height || 200;
@@ -227,7 +248,6 @@ export const BarChart = (props: PropTypes) => {
   const horizSections = [{value: '0'}];
   const horizSectionsBelow = [];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
-  const data = useMemo(() => props.data || [], [props.data]);
   const spacing = props.spacing === 0 ? 0 : props.spacing ? props.spacing : 20;
   const labelWidth = props.labelWidth || 0;
   const scrollToEnd = props.scrollToEnd || false;
@@ -295,8 +315,6 @@ export const BarChart = (props: PropTypes) => {
     props.noOfSectionsBelowXAxis || -minValue / stepValue;
   const disableScroll = props.disableScroll || false;
   const showScrollIndicator = props.showScrollIndicator || false;
-  const initialSpacing =
-    props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
   // const oldData = props.oldData || [];
   const side = props.side || '';
   const rotateLabel = props.rotateLabel || false;
@@ -395,39 +413,41 @@ export const BarChart = (props: PropTypes) => {
     if (showLine) {
       let pp = '';
       if (!lineConfig.curved) {
-        for (let i = 0; i < data.length; i++) {
+        for (let i = 0; i < lineData.length; i++) {
+          if (i < lineConfig.startIndex || i > lineConfig.endIndex) continue;
           const currentBarWidth =
             (data && data[i] && data[i].barWidth) || props.barWidth || 30;
           pp +=
             'L' +
             (yAxisLabelWidth +
+              lineConfig.initialSpacing +
               6 -
               (initialSpacing - currentBarWidth / 2) -
               lineConfig.dataPointsWidth / 2 +
               (currentBarWidth + spacing) * i) +
             ' ' +
             (containerHeight -
-              lineConfig.shiftY +
-              10 -
-              (data[i].value * containerHeight) / maxValue) +
+              lineConfig.shiftY -
+              (lineData[i].value * containerHeight) / maxValue) +
             ' ';
         }
         setPoints(pp.replace('L', 'M'));
       } else {
         let p1Array = [];
-        for (let i = 0; i < data.length; i++) {
+        for (let i = 0; i < lineData.length; i++) {
+          if (i < lineConfig.startIndex || i > lineConfig.endIndex) continue;
           const currentBarWidth =
             (data && data[i] && data[i].barWidth) || props.barWidth || 30;
           p1Array.push([
             yAxisLabelWidth +
+              lineConfig.initialSpacing +
               6 -
               (initialSpacing - currentBarWidth / 2) -
               lineConfig.dataPointsWidth / 2 +
               (currentBarWidth + spacing) * i,
             containerHeight -
-              lineConfig.shiftY +
-              10 -
-              (data[i].value * containerHeight) / maxValue,
+              lineConfig.shiftY -
+              (lineData[i].value * containerHeight) / maxValue,
           ]);
           let xx = svgPath(p1Array, bezierCommand);
           setPoints(xx);
@@ -443,14 +463,18 @@ export const BarChart = (props: PropTypes) => {
     animationDuration,
     containerHeight,
     data,
+    lineData,
     decreaseWidth,
     initialSpacing,
     labelsAppear,
+    lineConfig.initialSpacing,
     lineConfig.curved,
     lineConfig.dataPointsWidth,
     lineConfig.shiftY,
     lineConfig.isAnimated,
     lineConfig.delay,
+    lineConfig.startIndex,
+    lineConfig.endIndex,
     maxValue,
     // moveBar,
     props.barWidth,
@@ -849,7 +873,10 @@ export const BarChart = (props: PropTypes) => {
   };
 
   const renderDataPoints = () => {
-    return data.map((item: any, index: number) => {
+    return lineData.map((item: any, index: number) => {
+      if (index < lineConfig.startIndex || index > lineConfig.endIndex){
+        return null;
+      }
       // console.log('comes in');
       const currentBarWidth = item.barWidth || props.barWidth || 30;
       if (lineConfig.dataPointsShape === 'rectangular') {
@@ -858,6 +885,7 @@ export const BarChart = (props: PropTypes) => {
             <Rect
               x={
                 yAxisLabelWidth +
+                lineConfig.initialSpacing +
                 6 -
                 (initialSpacing - currentBarWidth / 2) -
                 lineConfig.dataPointsWidth +
@@ -866,8 +894,7 @@ export const BarChart = (props: PropTypes) => {
               y={
                 containerHeight -
                 lineConfig.shiftY -
-                lineConfig.dataPointsHeight / 2 +
-                10 -
+                lineConfig.dataPointsHeight / 2 -
                 (item.value * containerHeight) / maxValue
               }
               width={lineConfig.dataPointsWidth}
@@ -880,6 +907,7 @@ export const BarChart = (props: PropTypes) => {
                 fontSize={item.textFontSize || lineConfig.textFontSize}
                 x={
                   yAxisLabelWidth +
+                  lineConfig.initialSpacing +
                   6 -
                   (initialSpacing - currentBarWidth / 2) -
                   lineConfig.dataPointsWidth +
@@ -889,8 +917,7 @@ export const BarChart = (props: PropTypes) => {
                 y={
                   containerHeight -
                   lineConfig.shiftY -
-                  lineConfig.dataPointsHeight / 2 +
-                  10 -
+                  lineConfig.dataPointsHeight / 2 -
                   (item.value * containerHeight) / maxValue +
                   (item.textShiftY || lineConfig.textShiftY || 0)
                 }>
@@ -905,6 +932,7 @@ export const BarChart = (props: PropTypes) => {
           <Circle
             cx={
               yAxisLabelWidth +
+              lineConfig.initialSpacing +
               6 -
               (initialSpacing - currentBarWidth / 2) -
               lineConfig.dataPointsWidth / 2 +
@@ -912,8 +940,7 @@ export const BarChart = (props: PropTypes) => {
             }
             cy={
               containerHeight -
-              lineConfig.shiftY +
-              10 -
+              lineConfig.shiftY -
               (item.value * containerHeight) / maxValue
             }
             r={lineConfig.dataPointsRadius}
@@ -925,6 +952,7 @@ export const BarChart = (props: PropTypes) => {
               fontSize={item.textFontSize || lineConfig.textFontSize}
               x={
                 yAxisLabelWidth +
+                lineConfig.initialSpacing +
                 6 -
                 (initialSpacing - currentBarWidth / 2) -
                 lineConfig.dataPointsWidth +
@@ -934,8 +962,7 @@ export const BarChart = (props: PropTypes) => {
               y={
                 containerHeight -
                 lineConfig.shiftY -
-                lineConfig.dataPointsHeight / 2 +
-                10 -
+                lineConfig.dataPointsHeight / 2 -
                 (item.value * containerHeight) / maxValue +
                 (item.textShiftY || lineConfig.textShiftY || 0)
               }>

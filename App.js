@@ -581,7 +581,7 @@ const App = () => {
     },
   ];
 
-  const [dtt,setDtt] = useState([
+  const [dtt, setDtt] = useState([
     {value: 110},
     {value: 130},
     {value: 120},
@@ -599,6 +599,8 @@ const App = () => {
     {value: 40, label: 'Thu'},
     {value: -16, label: 'Wed'},
     {value: 40, label: 'Thu'},
+    {value: -16, label: 'Wed'},
+    {value: 40, label: 'Thu'},
   ];
 
   return (
@@ -608,7 +610,20 @@ const App = () => {
         // marginLeft: 46,
         marginLeft: 20,
       }}>
-      <BarChart yAxisSide='right' width={260} scrollToEnd curved data={barData} />
+      <BarChart
+        data={dtt}
+        // frontColor='rgba(0,0,0,0.2)'
+        // lineData={barData}
+        lineConfig={{
+          curved: true,
+          startIndex: 1,
+          endIndex: 3,
+          shiftY: 20,
+          isAnimated: true,
+        }}
+        showLine
+      />
+      {/* <LineChart color1='red' color2='blue' curved={true} data={barData} startIndex={0} endIndex={2} data2={barData} startIndex2={3} endIndex2={5} /> */}
       {/* <BarChart
       // isAnimated={true}
       isThreeD={true}
@@ -637,7 +652,10 @@ const App = () => {
         // showTextBackground={true}
       /> */}
       <TouchableOpacity
-      onPress={()=>{dtt[1].value+=20;setDtt([...dtt])}}>
+        onPress={() => {
+          dtt[1].value += 20;
+          setDtt([...dtt]);
+        }}>
         <Text>Press me</Text>
       </TouchableOpacity>
       {/* <View

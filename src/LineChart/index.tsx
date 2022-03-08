@@ -104,6 +104,15 @@ type propTypes = {
   yAxisIndicesColor?: ColorValue;
   yAxisSide?: string;
 
+  startIndex?: number;
+  startIndex1?: number;
+  startIndex2?: number;
+  startIndex3?: number;
+  endIndex?: number;
+  endIndex1?: number;
+  endIndex2?: number;
+  endIndex3?: number;
+
   color?: string;
   color1?: string;
   color2?: string;
@@ -281,6 +290,28 @@ export const LineChart = (props: propTypes) => {
   const yAxisLabelPrefix = props.yAxisLabelPrefix || '';
   const yAxisLabelSuffix = props.yAxisLabelSuffix || '';
   const yAxisSide = props.yAxisSide || 'left';
+
+  const startIndex1 =
+    props.startIndex1 === 0 ? 0 : props.startIndex1 || props.startIndex || 0;
+
+  let endIndex1;
+  if (props.endIndex1 === undefined || props.endIndex1 === null) {
+    if (props.endIndex === undefined || props.endIndex === null) {
+      endIndex1 = data.length - 1;
+    } else {
+      endIndex1 = props.endIndex;
+    }
+  } else {
+    endIndex1 = props.endIndex1;
+  }
+
+  const startIndex2 = props.startIndex2 || 0;
+  const endIndex2 =
+    props.endIndex2 === 0 ? 0 : props.endIndex2 || data2.length - 1;
+
+  const startIndex3 = props.startIndex3 || 0;
+  const endIndex3 =
+    props.endIndex3 === 0 ? 0 : props.endIndex3 || data3.length - 1;
 
   if (!initialData) {
     initialData = [...data];
@@ -522,7 +553,7 @@ export const LineChart = (props: propTypes) => {
       pp3 = '';
     if (!props.curved) {
       for (let i = 0; i < data.length; i++) {
-        if (!animateOnDataChange) {
+        if (i >= startIndex1 && i <= endIndex1 && !animateOnDataChange) {
           pp +=
             'L' +
             (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
@@ -533,7 +564,7 @@ export const LineChart = (props: propTypes) => {
             ' ';
           setPoints(pp.replace('L', 'M'));
         }
-        if (data2.length) {
+        if (data2.length && i >= startIndex2 && i <= endIndex2) {
           pp2 +=
             'L' +
             (initialSpacing - dataPointsWidth2 / 2 + spacing * i) +
@@ -543,7 +574,7 @@ export const LineChart = (props: propTypes) => {
               (data2[i].value * containerHeight) / maxValue) +
             ' ';
         }
-        if (data3.length) {
+        if (data3.length && i >= startIndex3 && i <= endIndex3) {
           pp3 +=
             'L' +
             (initialSpacing - dataPointsWidth3 / 2 + spacing * i) +
@@ -647,11 +678,13 @@ export const LineChart = (props: propTypes) => {
         p2Array = [],
         p3Array = [];
       for (let i = 0; i < data.length; i++) {
-        p1Array.push([
-          initialSpacing - dataPointsWidth1 / 2 + spacing * i,
-          containerHeight + 10 - (data[i].value * containerHeight) / maxValue,
-        ]);
-        if (data2.length) {
+        if (i >= startIndex1 && i <= endIndex1) {
+          p1Array.push([
+            initialSpacing - dataPointsWidth1 / 2 + spacing * i,
+            containerHeight + 10 - (data[i].value * containerHeight) / maxValue,
+          ]);
+        }
+        if (data2.length && i >= startIndex2 && i <= endIndex2) {
           p2Array.push([
             initialSpacing - dataPointsWidth2 / 2 + spacing * i,
             containerHeight +
@@ -659,7 +692,7 @@ export const LineChart = (props: propTypes) => {
               (data2[i].value * containerHeight) / maxValue,
           ]);
         }
-        if (data3.length) {
+        if (data3.length && i >= startIndex3 && i <= endIndex3) {
           p3Array.push([
             initialSpacing - dataPointsWidth3 / 2 + spacing * i,
             containerHeight +
@@ -790,6 +823,12 @@ export const LineChart = (props: propTypes) => {
     props.curved,
     spacing,
     xAxisThickness,
+    startIndex1,
+    endIndex1,
+    startIndex2,
+    endIndex2,
+    startIndex3,
+    endIndex3,
   ]);
 
   const horizSections = [{value: '0'}];
@@ -1309,8 +1348,11 @@ export const LineChart = (props: propTypes) => {
     dataPtsRadius,
     textColor,
     textFontSize,
+    startIndex,
+    endIndex,
   ) => {
     return dataForRender.map((item: itemType, index: number) => {
+      if (index < startIndex || index > endIndex) return null;
       if (item.hideDataPoint) {
         return null;
       }
@@ -1575,6 +1617,16 @@ export const LineChart = (props: propTypes) => {
     endFillColor: string,
     startOpacity: number,
     endOpacity: number,
+    hideDataPoints: Boolean,
+    dataPointsShape,
+    dataPointsWidth,
+    dataPointsHeight,
+    dataPointsColor,
+    dataPointsRadius,
+    textColor,
+    textFontSize,
+    startIndex,
+    endIndex,
   ) => {
     return (
       <View
@@ -1629,40 +1681,18 @@ export const LineChart = (props: propTypes) => {
           {renderSpecificVerticalLines(data)}
           {renderSpecificVerticalLines(data2)}
 
-          {!hideDataPoints1
+          {!hideDataPoints
             ? renderDataPoints(
                 data,
-                dataPointsShape1,
-                dataPointsWidth1,
-                dataPointsHeight1,
-                dataPointsColor1,
-                dataPointsRadius1,
-                textColor1,
-                textFontSize1,
-              )
-            : null}
-          {!hideDataPoints2
-            ? renderDataPoints(
-                data2,
-                dataPointsShape2,
-                dataPointsWidth2,
-                dataPointsHeight2,
-                dataPointsColor2,
-                dataPointsRadius2,
-                textColor2,
-                textFontSize2,
-              )
-            : null}
-          {!hideDataPoints3
-            ? renderDataPoints(
-                data3,
-                dataPointsShape3,
-                dataPointsWidth3,
-                dataPointsHeight3,
-                dataPointsColor3,
-                dataPointsRadius3,
-                textColor3,
-                textFontSize3,
+                dataPointsShape,
+                dataPointsWidth,
+                dataPointsHeight,
+                dataPointsColor,
+                dataPointsRadius,
+                textColor,
+                textFontSize,
+                startIndex,
+                endIndex,
               )
             : null}
         </Svg>
@@ -1680,6 +1710,16 @@ export const LineChart = (props: propTypes) => {
     endFillColor: string,
     startOpacity: number,
     endOpacity: number,
+    hideDataPoints: Boolean,
+    dataPointsShape,
+    dataPointsWidth,
+    dataPointsHeight,
+    dataPointsColor,
+    dataPointsRadius,
+    textColor,
+    textFontSize,
+    startIndex,
+    endIndex,
   ) => {
     // console.log('animatedWidth is-------->', animatedWidth);
     return (
@@ -1736,48 +1776,24 @@ export const LineChart = (props: propTypes) => {
           {renderSpecificVerticalLines(data2)}
           {renderSpecificVerticalLines(data3)}
 
-          {!hideDataPoints1
+          {!hideDataPoints
             ? renderDataPoints(
                 data,
-                dataPointsShape1,
-                dataPointsWidth1,
-                dataPointsHeight1,
-                dataPointsColor1,
-                dataPointsRadius1,
-                textColor1,
-                textFontSize1,
-              )
-            : null}
-          {!hideDataPoints2
-            ? renderDataPoints(
-                data2,
-                dataPointsShape2,
-                dataPointsWidth2,
-                dataPointsHeight2,
-                dataPointsColor2,
-                dataPointsRadius2,
-                textColor2,
-                textFontSize2,
-              )
-            : null}
-          {!hideDataPoints3
-            ? renderDataPoints(
-                data3,
-                dataPointsShape3,
-                dataPointsWidth3,
-                dataPointsHeight3,
-                dataPointsColor3,
-                dataPointsRadius3,
-                textColor3,
-                textFontSize3,
+                dataPointsShape,
+                dataPointsWidth,
+                dataPointsHeight,
+                dataPointsColor,
+                dataPointsRadius,
+                textColor,
+                textFontSize,
+                startIndex,
+                endIndex,
               )
             : null}
         </Svg>
       </Animated.View>
     );
   };
-
-  console.log('horizSectionsBelow -- >', horizSectionsBelow);
 
   return (
     <View
@@ -1870,6 +1886,16 @@ export const LineChart = (props: propTypes) => {
               endFillColor1,
               startOpacity1,
               endOpacity1,
+              hideDataPoints1,
+              dataPointsShape1,
+              dataPointsWidth1,
+              dataPointsHeight1,
+              dataPointsColor1,
+              dataPointsRadius1,
+              textColor1,
+              textFontSize1,
+              startIndex1,
+              endIndex1,
             )
           : renderLine(
               points,
@@ -1880,6 +1906,16 @@ export const LineChart = (props: propTypes) => {
               endFillColor1,
               startOpacity1,
               endOpacity1,
+              hideDataPoints1,
+              dataPointsShape1,
+              dataPointsWidth1,
+              dataPointsHeight1,
+              dataPointsColor1,
+              dataPointsRadius1,
+              textColor1,
+              textFontSize1,
+              startIndex1,
+              endIndex1,
             )}
         {points2
           ? isAnimated
@@ -1893,6 +1929,16 @@ export const LineChart = (props: propTypes) => {
                 endFillColor2,
                 startOpacity2,
                 endOpacity2,
+                hideDataPoints2,
+                dataPointsShape2,
+                dataPointsWidth2,
+                dataPointsHeight2,
+                dataPointsColor2,
+                dataPointsRadius2,
+                textColor2,
+                textFontSize2,
+                startIndex2,
+                endIndex2,
               )
             : renderLine(
                 points2,
@@ -1903,6 +1949,16 @@ export const LineChart = (props: propTypes) => {
                 endFillColor2,
                 startOpacity2,
                 endOpacity2,
+                hideDataPoints2,
+                dataPointsShape2,
+                dataPointsWidth2,
+                dataPointsHeight2,
+                dataPointsColor2,
+                dataPointsRadius2,
+                textColor2,
+                textFontSize2,
+                startIndex2,
+                endIndex2,
               )
           : null}
         {points3
@@ -1917,6 +1973,16 @@ export const LineChart = (props: propTypes) => {
                 endFillColor3,
                 startOpacity3,
                 endOpacity3,
+                hideDataPoints3,
+                dataPointsShape3,
+                dataPointsWidth3,
+                dataPointsHeight3,
+                dataPointsColor3,
+                dataPointsRadius3,
+                textColor3,
+                textFontSize3,
+                startIndex3,
+                endIndex3,
               )
             : renderLine(
                 points3,
@@ -1927,6 +1993,16 @@ export const LineChart = (props: propTypes) => {
                 endFillColor3,
                 startOpacity3,
                 endOpacity3,
+                hideDataPoints3,
+                dataPointsShape3,
+                dataPointsWidth3,
+                dataPointsHeight3,
+                dataPointsColor3,
+                dataPointsRadius3,
+                textColor3,
+                textFontSize3,
+                startIndex3,
+                endIndex3,
               )
           : null}
         {data.map((item: itemType, index: number) => {
