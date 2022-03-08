@@ -1559,7 +1559,7 @@ export const LineChart = (props: propTypes) => {
                 {dataPointLabelComponent()}
               </View>
             ) : null
-          ) : text ? (
+          ) : text || item.dataPointText ? (
             !showTextOnPress || index === selectedIndex ? (
               <CanvasText
                 fill={item.textColor || textColor}
@@ -1577,7 +1577,7 @@ export const LineChart = (props: propTypes) => {
                   (item.value * containerHeight) / maxValue +
                   (item.textShiftY || props.textShiftY || 0)
                 }>
-                {text}
+                {!showTextOnPress ? item.dataPointText : text}
               </CanvasText>
             ) : null
           ) : null}
@@ -1617,16 +1617,6 @@ export const LineChart = (props: propTypes) => {
     endFillColor: string,
     startOpacity: number,
     endOpacity: number,
-    hideDataPoints: Boolean,
-    dataPointsShape,
-    dataPointsWidth,
-    dataPointsHeight,
-    dataPointsColor,
-    dataPointsRadius,
-    textColor,
-    textFontSize,
-    startIndex,
-    endIndex,
   ) => {
     return (
       <View
@@ -1681,18 +1671,47 @@ export const LineChart = (props: propTypes) => {
           {renderSpecificVerticalLines(data)}
           {renderSpecificVerticalLines(data2)}
 
-          {!hideDataPoints
+          {/***  !!! Here it's done thrice intentionally, trying to make it to only 1 breaks things !!!  ***/}
+          {!hideDataPoints1
             ? renderDataPoints(
                 data,
-                dataPointsShape,
-                dataPointsWidth,
-                dataPointsHeight,
-                dataPointsColor,
-                dataPointsRadius,
-                textColor,
-                textFontSize,
-                startIndex,
-                endIndex,
+                dataPointsShape1,
+                dataPointsWidth1,
+                dataPointsHeight1,
+                dataPointsColor1,
+                dataPointsRadius1,
+                textColor1,
+                textFontSize1,
+                startIndex1,
+                endIndex1,
+              )
+            : null}
+          {!hideDataPoints2
+            ? renderDataPoints(
+                data2,
+                dataPointsShape2,
+                dataPointsWidth2,
+                dataPointsHeight2,
+                dataPointsColor2,
+                dataPointsRadius2,
+                textColor2,
+                textFontSize2,
+                startIndex2,
+                endIndex2,
+              )
+            : null}
+          {!hideDataPoints3
+            ? renderDataPoints(
+                data3,
+                dataPointsShape3,
+                dataPointsWidth3,
+                dataPointsHeight3,
+                dataPointsColor3,
+                dataPointsRadius3,
+                textColor3,
+                textFontSize3,
+                startIndex3,
+                endIndex3,
               )
             : null}
         </Svg>
@@ -1710,16 +1729,6 @@ export const LineChart = (props: propTypes) => {
     endFillColor: string,
     startOpacity: number,
     endOpacity: number,
-    hideDataPoints: Boolean,
-    dataPointsShape,
-    dataPointsWidth,
-    dataPointsHeight,
-    dataPointsColor,
-    dataPointsRadius,
-    textColor,
-    textFontSize,
-    startIndex,
-    endIndex,
   ) => {
     // console.log('animatedWidth is-------->', animatedWidth);
     return (
@@ -1776,18 +1785,47 @@ export const LineChart = (props: propTypes) => {
           {renderSpecificVerticalLines(data2)}
           {renderSpecificVerticalLines(data3)}
 
-          {!hideDataPoints
+          {/***  !!! Here it's done thrice intentionally, trying to make it to only 1 breaks things !!!  ***/}
+          {!hideDataPoints1
             ? renderDataPoints(
                 data,
-                dataPointsShape,
-                dataPointsWidth,
-                dataPointsHeight,
-                dataPointsColor,
-                dataPointsRadius,
-                textColor,
-                textFontSize,
-                startIndex,
-                endIndex,
+                dataPointsShape1,
+                dataPointsWidth1,
+                dataPointsHeight1,
+                dataPointsColor1,
+                dataPointsRadius1,
+                textColor1,
+                textFontSize1,
+                startIndex1,
+                endIndex1,
+              )
+            : null}
+          {!hideDataPoints2
+            ? renderDataPoints(
+                data2,
+                dataPointsShape2,
+                dataPointsWidth2,
+                dataPointsHeight2,
+                dataPointsColor2,
+                dataPointsRadius2,
+                textColor2,
+                textFontSize2,
+                startIndex2,
+                endIndex2,
+              )
+            : null}
+          {!hideDataPoints3
+            ? renderDataPoints(
+                data3,
+                dataPointsShape3,
+                dataPointsWidth3,
+                dataPointsHeight3,
+                dataPointsColor3,
+                dataPointsRadius3,
+                textColor3,
+                textFontSize3,
+                startIndex3,
+                endIndex3,
               )
             : null}
         </Svg>
@@ -1886,16 +1924,6 @@ export const LineChart = (props: propTypes) => {
               endFillColor1,
               startOpacity1,
               endOpacity1,
-              hideDataPoints1,
-              dataPointsShape1,
-              dataPointsWidth1,
-              dataPointsHeight1,
-              dataPointsColor1,
-              dataPointsRadius1,
-              textColor1,
-              textFontSize1,
-              startIndex1,
-              endIndex1,
             )
           : renderLine(
               points,
@@ -1906,16 +1934,6 @@ export const LineChart = (props: propTypes) => {
               endFillColor1,
               startOpacity1,
               endOpacity1,
-              hideDataPoints1,
-              dataPointsShape1,
-              dataPointsWidth1,
-              dataPointsHeight1,
-              dataPointsColor1,
-              dataPointsRadius1,
-              textColor1,
-              textFontSize1,
-              startIndex1,
-              endIndex1,
             )}
         {points2
           ? isAnimated
@@ -1929,16 +1947,6 @@ export const LineChart = (props: propTypes) => {
                 endFillColor2,
                 startOpacity2,
                 endOpacity2,
-                hideDataPoints2,
-                dataPointsShape2,
-                dataPointsWidth2,
-                dataPointsHeight2,
-                dataPointsColor2,
-                dataPointsRadius2,
-                textColor2,
-                textFontSize2,
-                startIndex2,
-                endIndex2,
               )
             : renderLine(
                 points2,
@@ -1949,16 +1957,6 @@ export const LineChart = (props: propTypes) => {
                 endFillColor2,
                 startOpacity2,
                 endOpacity2,
-                hideDataPoints2,
-                dataPointsShape2,
-                dataPointsWidth2,
-                dataPointsHeight2,
-                dataPointsColor2,
-                dataPointsRadius2,
-                textColor2,
-                textFontSize2,
-                startIndex2,
-                endIndex2,
               )
           : null}
         {points3
@@ -1973,16 +1971,6 @@ export const LineChart = (props: propTypes) => {
                 endFillColor3,
                 startOpacity3,
                 endOpacity3,
-                hideDataPoints3,
-                dataPointsShape3,
-                dataPointsWidth3,
-                dataPointsHeight3,
-                dataPointsColor3,
-                dataPointsRadius3,
-                textColor3,
-                textFontSize3,
-                startIndex3,
-                endIndex3,
               )
             : renderLine(
                 points3,
@@ -1993,16 +1981,6 @@ export const LineChart = (props: propTypes) => {
                 endFillColor3,
                 startOpacity3,
                 endOpacity3,
-                hideDataPoints3,
-                dataPointsShape3,
-                dataPointsWidth3,
-                dataPointsHeight3,
-                dataPointsColor3,
-                dataPointsRadius3,
-                textColor3,
-                textFontSize3,
-                startIndex3,
-                endIndex3,
               )
           : null}
         {data.map((item: itemType, index: number) => {
