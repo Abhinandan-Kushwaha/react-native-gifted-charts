@@ -20,10 +20,12 @@
 | disableScroll       | Boolean        | To disable horizontal scroll                                                              | false               |
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                       | false               |
 | showLine            | Boolean        | To show a Line chart over the Bar chart with the same data                                | false               |
+| lineData            | Array of items | The data object for the line chart (use only when showLine is true)                       | data                |
 | lineConfig          | lineConfigType | Properties of the Line chart shown over the Bar chart (lineConfigType) is described below | defaultLineConfig   |
 | autoShiftLabels | Boolean | When set to true, automatically shifts the X axis labels for negative values | false |
 | scrollToEnd | Boolean | When set to true, the chart automatically scrolls to the rightmost bar | false |
 | scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost bar | true |
+| initialSpacing         | number     | distance of the first bar from the Y axis                                      | 40 |
 
 ---
 
@@ -51,6 +53,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 
 | Property         | Type       | Description                                                       | Default value |
 | ---------------- | ---------- | ----------------------------------------------------------------- | ------------- |
+| initialSpacing   | number     | distance of the first data point from the Y axis                  | initialSpacing for the Bar Chart |
 | curved           | Boolean    | To show curved line joining the data points                       | false         |
 | isAnimated       | Boolean    | To show animates Line Chart                                       | false         |
 | delay            | number     | Delay (in milliseconds) before starting the animation of the line | 0             |
@@ -67,6 +70,8 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | textShiftX       | number     | To shift the dataPointText text horizontally                      | 0             |
 | textShiftY       | number     | To shift the dataPointText text vertically                        | 0             |
 | shiftY           | number     | To shift the Lift the Line chart up or down by the given quantity | 0             |
+| startIndex       | number     | Start index for data line (used to display data lines having breaks) | 0                |
+| endIndex         | number     | End index for data line (used to display data lines having breaks) | lineData.length -1 |
 
 ---
 
@@ -84,7 +89,6 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | topColor               | ColorValue | Color of the top view of the bar, only for 3 D                                 |
 | showGradient           | Boolean    | Prop to enable linear gradient for the bar color, defaults to false            |
 | gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
-| initialSpacing         | number     | distance of the first bar from the Y axis                                      |
 | label                  | string     | Label text appearing below the bar (under the X axis)                          |
 | labelWidth             | number     | Width of the Label text appearing below the bar (under the X axis)             |
 | labelTextStyle         | object     | Style object for the label text appearing below the bar                        |
