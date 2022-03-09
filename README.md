@@ -22,7 +22,7 @@ The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts
 <img src='/demos/animatedDataLine.gif' alt='' width=300/>
 <img src='/demos/pielabbelled.svg' alt='' height=280 width=270/>
 <img src='/demos/movingBars.gif' alt='' width=300/>
-<img src='/demos/stacks.png' alt='' height=360 width=350/>
+<img src='/demos/stacks.png' alt='' height=360 width=320/>
 ![alt text](/demos/lineArea.png)
 <img src='/demos/cappedCombined.png' alt='' height=280 width=280/>
 <img src='/demos/line.gif' alt='' height=300 width=290/>
