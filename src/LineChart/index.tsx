@@ -41,10 +41,14 @@ type propTypes = {
   data?: Array<itemType>;
   data2?: Array<itemType>;
   data3?: Array<itemType>;
+  data4?: Array<itemType>;
+  data5?: Array<itemType>;
   thickness?: number;
   thickness1?: number;
   thickness2?: number;
   thickness3?: number;
+  thickness4?: number;
+  thickness5?: number;
   rotateLabel?: Boolean;
   isAnimated?: Boolean;
   animateOnDataChange?: Boolean;
@@ -81,6 +85,12 @@ type propTypes = {
   showReferenceLine3?: Boolean;
   referenceLine3Config?: referenceConfigType;
   referenceLine3Position?: number;
+  showReferenceLine4?: Boolean;
+  referenceLine4Config?: referenceConfigType;
+  referenceLine4Position?: number;
+  showReferenceLine5?: Boolean;
+  referenceLine5Config?: referenceConfigType;
+  referenceLine5Position?: number;
 
   showVerticalLines?: Boolean;
   verticalLinesThickness?: number;
@@ -108,15 +118,21 @@ type propTypes = {
   startIndex1?: number;
   startIndex2?: number;
   startIndex3?: number;
+  startIndex4?: number;
+  startIndex5?: number;
   endIndex?: number;
   endIndex1?: number;
   endIndex2?: number;
   endIndex3?: number;
+  endIndex4?: number;
+  endIndex5?: number;
 
   color?: string;
   color1?: string;
   color2?: string;
   color3?: string;
+  color4?: string;
+  color5?: string;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
   yAxisTextStyle?: any;
@@ -155,6 +171,18 @@ type propTypes = {
   dataPointsRadius3?: number;
   dataPointsColor3?: string;
   dataPointsShape3?: string;
+  hideDataPoints4?: Boolean;
+  dataPointsHeight4?: number;
+  dataPointsWidth4?: number;
+  dataPointsRadius4?: number;
+  dataPointsColor4?: string;
+  dataPointsShape4?: string;
+  hideDataPoints5?: Boolean;
+  dataPointsHeight5?: number;
+  dataPointsWidth5?: number;
+  dataPointsRadius5?: number;
+  dataPointsColor5?: string;
+  dataPointsShape5?: string;
   customDataPoint?: Function;
 
   focusedDataPointShape?: String;
@@ -183,6 +211,14 @@ type propTypes = {
   endFillColor3?: string;
   startOpacity3?: number;
   endOpacity3?: number;
+  startFillColor4?: string;
+  endFillColor4?: string;
+  startOpacity4?: number;
+  endOpacity4?: number;
+  startFillColor5?: string;
+  endFillColor5?: string;
+  startOpacity5?: number;
+  endOpacity5?: number;
   gradientDirection?: string;
 
   textFontSize?: number;
@@ -193,6 +229,10 @@ type propTypes = {
   textColor2?: string;
   textFontSize3?: number;
   textColor3?: string;
+  textFontSize4?: number;
+  textColor4?: string;
+  textFontSize5?: number;
+  textColor5?: string;
   hideOrigin?: Boolean;
   textShiftX?: number;
   textShiftY?: number;
@@ -264,15 +304,21 @@ export const LineChart = (props: propTypes) => {
   const [points, setPoints] = useState('');
   const [points2, setPoints2] = useState('');
   const [points3, setPoints3] = useState('');
+  const [points4, setPoints4] = useState('');
+  const [points5, setPoints5] = useState('');
   const [fillPoints, setFillPoints] = useState('');
   const [fillPoints2, setFillPoints2] = useState('');
   const [fillPoints3, setFillPoints3] = useState('');
+  const [fillPoints4, setFillPoints4] = useState('');
+  const [fillPoints5, setFillPoints5] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
   let data = useMemo(() => props.data || [], [props.data]);
   const data2 = useMemo(() => props.data2 || [], [props.data2]);
   const data3 = useMemo(() => props.data3 || [], [props.data3]);
+  const data4 = useMemo(() => props.data4 || [], [props.data4]);
+  const data5 = useMemo(() => props.data5 || [], [props.data5]);
   const scrollToEnd = props.scrollToEnd || false;
   const scrollAnimation = props.scrollAnimation === false ? false : true;
 
@@ -280,6 +326,8 @@ export const LineChart = (props: propTypes) => {
   const widthValue = useMemo(() => new Animated.Value(0), []);
   const widthValue2 = useMemo(() => new Animated.Value(0), []);
   const widthValue3 = useMemo(() => new Animated.Value(0), []);
+  const widthValue4 = useMemo(() => new Animated.Value(0), []);
+  const widthValue5 = useMemo(() => new Animated.Value(0), []);
 
   const animationDuration = props.animationDuration || 800;
   const onDataChangeAnimationDuration =
@@ -312,6 +360,12 @@ export const LineChart = (props: propTypes) => {
   const startIndex3 = props.startIndex3 || 0;
   const endIndex3 =
     props.endIndex3 === 0 ? 0 : props.endIndex3 || data3.length - 1;
+  const startIndex4 = props.startIndex4 || 0;
+  const endIndex4 =
+    props.endIndex4 === 0 ? 0 : props.endIndex4 || data4.length - 1;
+  const startIndex5 = props.startIndex5 || 0;
+  const endIndex5 =
+    props.endIndex5 === 0 ? 0 : props.endIndex5 || data5.length - 1;
 
   if (!initialData) {
     initialData = [...data];
@@ -441,6 +495,26 @@ export const LineChart = (props: propTypes) => {
     }).start();
   }, [animationDuration, widthValue3]);
 
+  const decreaseWidth4 = useCallback(() => {
+    widthValue4.setValue(0);
+    Animated.timing(widthValue4, {
+      toValue: 1,
+      duration: animationDuration,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start();
+  }, [animationDuration, widthValue4]);
+
+  const decreaseWidth5 = useCallback(() => {
+    widthValue5.setValue(0);
+    Animated.timing(widthValue5, {
+      toValue: 1,
+      duration: animationDuration,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start();
+  }, [animationDuration, widthValue5]);
+
   const areaChart = props.areaChart || false;
   const dataPointsHeight1 =
     props.dataPointsHeight1 || props.dataPointsHeight || 2;
@@ -472,12 +546,36 @@ export const LineChart = (props: propTypes) => {
   const dataPointsShape3 =
     props.dataPointsShape3 || props.dataPointsShape || 'circular';
 
+  const dataPointsHeight4 =
+    props.dataPointsHeight4 || props.dataPointsHeight || 2;
+  const dataPointsWidth4 = props.dataPointsWidth4 || props.dataPointsWidth || 2;
+  const dataPointsRadius4 =
+    props.dataPointsRadius4 || props.dataPointsRadius || 3;
+  const dataPointsColor4 =
+    props.dataPointsColor4 || props.dataPointsColor || 'red';
+  const dataPointsShape4 =
+    props.dataPointsShape4 || props.dataPointsShape || 'circular';
+
+  const dataPointsHeight5 =
+    props.dataPointsHeight5 || props.dataPointsHeight || 2;
+  const dataPointsWidth5 = props.dataPointsWidth5 || props.dataPointsWidth || 2;
+  const dataPointsRadius5 =
+    props.dataPointsRadius5 || props.dataPointsRadius || 3;
+  const dataPointsColor5 =
+    props.dataPointsColor5 || props.dataPointsColor || 'red';
+  const dataPointsShape5 =
+    props.dataPointsShape5 || props.dataPointsShape || 'circular';
+
   const textFontSize1 = props.textFontSize1 || props.textFontSize || 10;
   const textFontSize2 = props.textFontSize2 || props.textFontSize || 10;
   const textFontSize3 = props.textFontSize3 || props.textFontSize || 10;
+  const textFontSize4 = props.textFontSize4 || props.textFontSize || 10;
+  const textFontSize5 = props.textFontSize5 || props.textFontSize || 10;
   const textColor1 = props.textColor1 || props.textColor || 'gray';
   const textColor2 = props.textColor2 || props.textColor || 'gray';
   const textColor3 = props.textColor3 || props.textColor || 'gray';
+  const textColor4 = props.textColor4 || props.textColor || 'gray';
+  const textColor5 = props.textColor5 || props.textColor || 'gray';
   const initialSpacing =
     props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
   const thickness = props.thickness || 2;
@@ -538,19 +636,35 @@ export const LineChart = (props: propTypes) => {
       },
       animateTogether ? 0 : animationDuration * 2,
     );
+    setTimeout(
+      () => {
+        decreaseWidth4();
+      },
+      animateTogether ? 0 : animationDuration * 3,
+    );
+    setTimeout(
+      () => {
+        decreaseWidth5();
+      },
+      animateTogether ? 0 : animationDuration * 4,
+    );
   }, [
     animateTogether,
     animationDuration,
     decreaseWidth,
     decreaseWidth2,
     decreaseWidth3,
+    decreaseWidth4,
+    decreaseWidth5,
     labelsAppear,
   ]);
 
   useEffect(() => {
     let pp = '',
       pp2 = '',
-      pp3 = '';
+      pp3 = '',
+      pp4 = '',
+      pp5 = '';
     if (!props.curved) {
       for (let i = 0; i < data.length; i++) {
         if (i >= startIndex1 && i <= endIndex1 && !animateOnDataChange) {
@@ -584,15 +698,39 @@ export const LineChart = (props: propTypes) => {
               (data3[i].value * containerHeight) / maxValue) +
             ' ';
         }
+        if (data4.length && i >= startIndex4 && i <= endIndex4) {
+          pp4 +=
+            'L' +
+            (initialSpacing - dataPointsWidth4 / 2 + spacing * i) +
+            ' ' +
+            (containerHeight +
+              10 -
+              (data4[i].value * containerHeight) / maxValue) +
+            ' ';
+        }
+        if (data5.length && i >= startIndex5 && i <= endIndex5) {
+          pp5 +=
+            'L' +
+            (initialSpacing - dataPointsWidth5 / 2 + spacing * i) +
+            ' ' +
+            (containerHeight +
+              10 -
+              (data5[i].value * containerHeight) / maxValue) +
+            ' ';
+        }
       }
       setPoints2(pp2.replace('L', 'M'));
       setPoints3(pp3.replace('L', 'M'));
+      setPoints4(pp4.replace('L', 'M'));
+      setPoints5(pp5.replace('L', 'M'));
 
       /***************************          For Area Charts          *************************/
       if (areaChart) {
         let ppp = '',
           ppp2 = '',
-          ppp3 = '';
+          ppp3 = '',
+          ppp4 = '',
+          ppp5 = '';
 
         if (!animateOnDataChange) {
           ppp =
@@ -665,6 +803,53 @@ export const LineChart = (props: propTypes) => {
             ' ';
           setFillPoints3(ppp3.replace('L', 'M'));
         }
+        if (data4.length) {
+          ppp4 =
+            'L' +
+            (initialSpacing - dataPointsWidth4 / 2) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          ppp4 += pp4;
+          ppp4 +=
+            'L' +
+            (initialSpacing -
+              dataPointsWidth4 / 2 +
+              spacing * (data.length - 1)) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness);
+          ppp4 +=
+            'L' +
+            (initialSpacing - dataPointsWidth4 / 2) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          setFillPoints4(ppp4.replace('L', 'M'));
+        }
+
+        if (data5.length) {
+          ppp5 =
+            'L' +
+            (initialSpacing - dataPointsWidth5 / 2) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          ppp5 += pp5;
+          ppp5 +=
+            'L' +
+            (initialSpacing -
+              dataPointsWidth5 / 2 +
+              spacing * (data.length - 1)) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness);
+          ppp5 +=
+            'L' +
+            (initialSpacing - dataPointsWidth5 / 2) +
+            ' ' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          setFillPoints5(ppp5.replace('L', 'M'));
+        }
       }
 
       // console.log('pp-------->', pp);
@@ -676,7 +861,9 @@ export const LineChart = (props: propTypes) => {
     } else {
       let p1Array = [],
         p2Array = [],
-        p3Array = [];
+        p3Array = [],
+        p4Array = [],
+        p5Array = [];
       for (let i = 0; i < data.length; i++) {
         if (i >= startIndex1 && i <= endIndex1) {
           p1Array.push([
@@ -700,14 +887,34 @@ export const LineChart = (props: propTypes) => {
               (data3[i].value * containerHeight) / maxValue,
           ]);
         }
+        if (data4.length && i >= startIndex4 && i <= endIndex4) {
+          p4Array.push([
+            initialSpacing - dataPointsWidth4 / 2 + spacing * i,
+            containerHeight +
+              10 -
+              (data4[i].value * containerHeight) / maxValue,
+          ]);
+        }
+        if (data5.length && i >= startIndex5 && i <= endIndex5) {
+          p5Array.push([
+            initialSpacing - dataPointsWidth5 / 2 + spacing * i,
+            containerHeight +
+              10 -
+              (data5[i].value * containerHeight) / maxValue,
+          ]);
+        }
       }
       let xx = svgPath(p1Array, bezierCommand);
       let xx2 = svgPath(p2Array, bezierCommand);
       let xx3 = svgPath(p3Array, bezierCommand);
+      let xx4 = svgPath(p4Array, bezierCommand);
+      let xx5 = svgPath(p5Array, bezierCommand);
       // console.log('xx', xx);
       setPoints(xx);
       setPoints2(xx2);
       setPoints3(xx3);
+      setPoints4(xx4);
+      setPoints5(xx5);
 
       /***************************          For Area Charts          *************************/
 
@@ -804,6 +1011,68 @@ export const LineChart = (props: propTypes) => {
             ' ';
           setFillPoints3(xx3);
         }
+
+        if (data4.length) {
+          xx4 =
+            'M ' +
+            (initialSpacing - dataPointsWidth4 / 2) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ' +
+            'L ' +
+            (initialSpacing - dataPointsWidth4 / 2) +
+            ',' +
+            (containerHeight +
+              10 -
+              (data4[0].value * containerHeight) / maxValue) +
+            ' ' +
+            xx4 +
+            ' ' +
+            'L ' +
+            (initialSpacing -
+              dataPointsWidth4 / 2 +
+              spacing * (data4.length - 1)) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ' +
+            'L ' +
+            (initialSpacing - dataPointsWidth4 / 2) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          setFillPoints4(xx4);
+        }
+
+        if (data5.length) {
+          xx5 =
+            'M ' +
+            (initialSpacing - dataPointsWidth5 / 2) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ' +
+            'L ' +
+            (initialSpacing - dataPointsWidth5 / 2) +
+            ',' +
+            (containerHeight +
+              10 -
+              (data5[0].value * containerHeight) / maxValue) +
+            ' ' +
+            xx5 +
+            ' ' +
+            'L ' +
+            (initialSpacing -
+              dataPointsWidth5 / 2 +
+              spacing * (data5.length - 1)) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ' +
+            'L ' +
+            (initialSpacing - dataPointsWidth5 / 2) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          setFillPoints5(xx5);
+        }
       }
 
       /*************************************************************************************/
@@ -815,9 +1084,13 @@ export const LineChart = (props: propTypes) => {
     data,
     data2,
     data3,
+    data4,
+    data5,
     dataPointsWidth1,
     dataPointsWidth2,
     dataPointsWidth3,
+    dataPointsWidth4,
+    dataPointsWidth5,
     initialSpacing,
     maxValue,
     props.curved,
@@ -829,6 +1102,10 @@ export const LineChart = (props: propTypes) => {
     endIndex2,
     startIndex3,
     endIndex3,
+    startIndex4,
+    endIndex4,
+    startIndex5,
+    endIndex5,
   ]);
 
   const horizSections = [{value: '0'}];
@@ -840,6 +1117,8 @@ export const LineChart = (props: propTypes) => {
   const thickness1 = props.thickness1;
   const thickness2 = props.thickness2;
   const thickness3 = props.thickness3;
+  const thickness4 = props.thickness4;
+  const thickness5 = props.thickness5;
   const rotateLabel = props.rotateLabel || false;
   const isAnimated = props.isAnimated || false;
   const hideDataPoints1 =
@@ -848,10 +1127,16 @@ export const LineChart = (props: propTypes) => {
     props.hideDataPoints || props.hideDataPoints2 || false;
   const hideDataPoints3 =
     props.hideDataPoints || props.hideDataPoints3 || false;
+  const hideDataPoints4 =
+    props.hideDataPoints || props.hideDataPoints4 || false;
+  const hideDataPoints5 =
+    props.hideDataPoints || props.hideDataPoints5 || false;
 
   const color1 = props.color1 || props.color || 'black';
   const color2 = props.color2 || props.color || 'black';
   const color3 = props.color3 || props.color || 'black';
+  const color4 = props.color4 || props.color || 'black';
+  const color5 = props.color5 || props.color || 'black';
 
   const startFillColor1 =
     props.startFillColor1 || props.startFillColor || 'gray';
@@ -870,6 +1155,18 @@ export const LineChart = (props: propTypes) => {
   const endFillColor3 = props.endFillColor3 || props.endFillColor || 'white';
   const startOpacity3 = props.startOpacity3 || props.startOpacity || 1;
   const endOpacity3 = props.endOpacity3 || props.endOpacity || 1;
+
+  const startFillColor4 =
+    props.startFillColor4 || props.startFillColor || 'gray';
+  const endFillColor4 = props.endFillColor4 || props.endFillColor || 'white';
+  const startOpacity4 = props.startOpacity4 || props.startOpacity || 1;
+  const endOpacity4 = props.endOpacity4 || props.endOpacity || 1;
+
+  const startFillColor5 =
+    props.startFillColor5 || props.startFillColor || 'gray';
+  const endFillColor5 = props.endFillColor5 || props.endFillColor || 'white';
+  const startOpacity5 = props.startOpacity5 || props.startOpacity || 1;
+  const endOpacity5 = props.endOpacity5 || props.endOpacity || 1;
 
   const rulesThickness =
     props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
@@ -1096,6 +1393,16 @@ export const LineChart = (props: propTypes) => {
   });
 
   const animatedWidth3 = widthValue3.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, totalWidth],
+  });
+
+  const animatedWidth4 = widthValue4.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, totalWidth],
+  });
+
+  const animatedWidth5 = widthValue5.interpolate({
     inputRange: [0, 1],
     outputRange: [0, totalWidth],
   });
@@ -1670,6 +1977,9 @@ export const LineChart = (props: propTypes) => {
 
           {renderSpecificVerticalLines(data)}
           {renderSpecificVerticalLines(data2)}
+          {renderSpecificVerticalLines(data3)}
+          {renderSpecificVerticalLines(data4)}
+          {renderSpecificVerticalLines(data5)}
 
           {/***  !!! Here it's done thrice intentionally, trying to make it to only 1 breaks things !!!  ***/}
           {!hideDataPoints1
@@ -1712,6 +2022,34 @@ export const LineChart = (props: propTypes) => {
                 textFontSize3,
                 startIndex3,
                 endIndex3,
+              )
+            : null}
+          {!hideDataPoints4
+            ? renderDataPoints(
+                data4,
+                dataPointsShape4,
+                dataPointsWidth4,
+                dataPointsHeight4,
+                dataPointsColor4,
+                dataPointsRadius4,
+                textColor4,
+                textFontSize4,
+                startIndex4,
+                endIndex4,
+              )
+            : null}
+          {!hideDataPoints5
+            ? renderDataPoints(
+                data5,
+                dataPointsShape5,
+                dataPointsWidth5,
+                dataPointsHeight5,
+                dataPointsColor5,
+                dataPointsRadius5,
+                textColor5,
+                textFontSize5,
+                startIndex5,
+                endIndex5,
               )
             : null}
         </Svg>
@@ -1784,6 +2122,8 @@ export const LineChart = (props: propTypes) => {
           {renderSpecificVerticalLines(data)}
           {renderSpecificVerticalLines(data2)}
           {renderSpecificVerticalLines(data3)}
+          {renderSpecificVerticalLines(data4)}
+          {renderSpecificVerticalLines(data5)}
 
           {/***  !!! Here it's done thrice intentionally, trying to make it to only 1 breaks things !!!  ***/}
           {!hideDataPoints1
@@ -1826,6 +2166,34 @@ export const LineChart = (props: propTypes) => {
                 textFontSize3,
                 startIndex3,
                 endIndex3,
+              )
+            : null}
+          {!hideDataPoints4
+            ? renderDataPoints(
+                data4,
+                dataPointsShape4,
+                dataPointsWidth4,
+                dataPointsHeight4,
+                dataPointsColor4,
+                dataPointsRadius4,
+                textColor4,
+                textFontSize4,
+                startIndex4,
+                endIndex4,
+              )
+            : null}
+          {!hideDataPoints5
+            ? renderDataPoints(
+                data5,
+                dataPointsShape5,
+                dataPointsWidth5,
+                dataPointsHeight5,
+                dataPointsColor5,
+                dataPointsRadius5,
+                textColor5,
+                textFontSize5,
+                startIndex5,
+                endIndex5,
               )
             : null}
         </Svg>
@@ -1981,6 +2349,54 @@ export const LineChart = (props: propTypes) => {
                 endFillColor3,
                 startOpacity3,
                 endOpacity3,
+              )
+          : null}
+        {points4
+          ? isAnimated
+            ? renderAnimatedLine(
+                points4,
+                animatedWidth4,
+                thickness4,
+                color4,
+                fillPoints4,
+                startFillColor4,
+                endFillColor4,
+                startOpacity4,
+                endOpacity4,
+              )
+            : renderLine(
+                points4,
+                thickness4,
+                color4,
+                fillPoints4,
+                startFillColor4,
+                endFillColor4,
+                startOpacity4,
+                endOpacity4,
+              )
+          : null}
+        {points5
+          ? isAnimated
+            ? renderAnimatedLine(
+                points5,
+                animatedWidth5,
+                thickness5,
+                color5,
+                fillPoints5,
+                startFillColor5,
+                endFillColor5,
+                startOpacity5,
+                endOpacity5,
+              )
+            : renderLine(
+                points5,
+                thickness5,
+                color5,
+                fillPoints5,
+                startFillColor5,
+                endFillColor5,
+                startOpacity5,
+                endOpacity5,
               )
           : null}
         {data.map((item: itemType, index: number) => {

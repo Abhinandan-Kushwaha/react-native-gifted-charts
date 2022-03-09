@@ -603,6 +603,59 @@ const App = () => {
     {value: 40, label: 'Thu'},
   ];
 
+  const sdata = [
+    {value:1.0,label:'1'},
+    {value:0.75,label:'2'},
+    {value:0.25,label:'3'},
+    {value:0.00,label:'4'},
+    {value:0.50,label:'5'},
+    {value:0.72,label:'6'},
+    {value:0.85,label:'7'},
+    {value:0.00,label:'8'},
+    {value:0.50,label:'9'},
+    {value:0.72,label:'10'},
+    {value:0.85,label:'11'},
+    {value:0.72,label:'12'},
+    {value:0.85,label:'13'},
+    {value:0.72,label:'14'},
+    {value:0.85,label:'15'},
+  ];
+//   const lineData = [
+//     {value: 0, dataPointText: '0'},
+//     {value: 20, dataPointText: '20'},
+//     {value: 18, dataPointText: '18'},
+//     {value: 40, dataPointText: '40'},
+//     {value: 36, dataPointText: '36'},
+//     {value: 60, dataPointText: '60'},
+//     {value: 54, dataPointText: '54'},
+//     {value: 85, dataPointText: '85'}
+// ];
+
+// const lineData = [
+//   {value: 0, dataPointText: '0'},
+//   {value: 10, dataPointText: '10'},
+//   {value: 8, dataPointText: '8'},
+//   {value: 58, dataPointText: '58'},
+//   {value: 56, dataPointText: '56'},
+//   {value: 78, dataPointText: '78'},
+//   {value: 74, dataPointText: '74'},
+//   {value: 98, dataPointText: '98'},
+// ];
+
+// const lineData2 = [
+//   {value: 0, dataPointText: '0'},
+//   {value: 20, dataPointText: '20'},
+//   {value: 18, dataPointText: '18'},
+//   {value: 40, dataPointText: '40'},
+//   {value: 36, dataPointText: '36'},
+//   {value: 60, dataPointText: '60'},
+//   {value: 54, dataPointText: '54'},
+//   {value: 85, dataPointText: '85'},
+// ];
+
+const lineData = [{value: 0},{value: 10},{value: 8},{value: 58},{value: 56},{value: 78},{value: 74},{value: 98}];
+const lineData2 = [{value: 0},{value: 20},{value: 18},{value: 40},{value: 36},{value: 60},{value: 54},{value: 85}];
+
   return (
     <View
       style={{
@@ -610,7 +663,7 @@ const App = () => {
         // marginLeft: 46,
         marginLeft: 20,
       }}>
-      <BarChart
+      {/* <BarChart
         data={dtt}
         // frontColor='rgba(0,0,0,0.2)'
         // lineData={barData}
@@ -622,8 +675,118 @@ const App = () => {
           isAnimated: true,
         }}
         showLine
-      />
-      {/* <LineChart color1='red' color2='blue' curved={true} data={barData} startIndex={0} endIndex={2} data2={barData} startIndex2={3} endIndex2={5} /> */}
+      /> */}
+      {/* <LineChart
+            areaChart
+            curved
+            data={lineData}
+            data2={lineData2}
+            height={250}
+            showVerticalLines
+            spacing={44}
+            initialSpacing={0}
+            color1="skyblue"
+            color2="orange"
+            textColor1="green"
+            hideDataPoints
+            dataPointsColor1="blue"
+            dataPointsColor2="red"
+            startFillColor1="skyblue"
+            startFillColor2="orange"
+            startOpacity={0.8}
+            endOpacity={0.3}
+            /> */}
+      {/* <View style={{backgroundColor: '#1A3461'}}>
+        <LineChart
+            initialSpacing={0}
+            data={lineData}
+            isAnimated
+            spacing={30}
+            textColor1="yellow"
+            textShiftY={-8}
+            textShiftX={-10}
+            textFontSize={13}
+            thickness={5}
+            hideRules
+            hideYAxisText
+            yAxisColor="#0BA5A4"
+            showVerticalLines
+            verticalLinesColor="rgba(14,164,164,0.5)"
+            xAxisColor="#0BA5A4"
+            color="#0BA5A4"
+        />
+    </View> */}
+      {/* <LineChart
+      // curved={true}
+      // isAnimated={true}
+      // animateTogether
+      pressEnabled={true}
+      showStripOnPress={true}
+      showTextOnPress={true}
+          data={lineData}
+          disableScroll={true}
+          // data2={lineData2}
+          height={250}
+          showVerticalLines
+          spacing={44}
+          initialSpacing={0}
+          color1="skyblue"
+          color2="orange"
+          textColor1="green"
+          dataPointsHeight={6}
+          dataPointsWidth={6}
+          dataPointsHeight2={6}
+          dataPointsWidth2={6}
+          dataPointsColor1="blue"
+          dataPointsColor2="red"
+          textShiftY={-2}
+          textShiftX={-5}
+          textFontSize={13}
+      /> */}
+      <LineChart
+      isAnimated={true}
+      curved
+      areaChart={true}
+        color1='red'
+        color2='blue'
+        color3='green'
+        color4='purple'
+        data={sdata.slice(0,4)}
+        // startIndex={0}
+        // endIndex={1}
+        data2={sdata.slice(2,6)}
+        // startIndex2={3}
+        // endIndex2={4}
+        data3={sdata.slice(3,7)}
+        // startIndex3={5}
+        // endIndex3={6}
+        data4={sdata.slice(4,8)}
+        // startIndex4={7}
+        // endIndex4={8}
+        data5={sdata.slice(1,5)}
+        // startIndex5={9}
+        // endIndex5={10}
+        showFractionalValues
+        maxValue={1.5}
+        noOfSections={3}
+        spacing={90}
+        // stepHeight={40}
+        stepValue={0.5}
+        height={300}
+        thickness={3}
+        hideDataPoints1
+        hideDataPoints2
+        hideDataPoints3
+        hideDataPoints4
+        hideDataPoints5
+        startFillColor1='gray'
+        startFillColor2='yellow'
+        startFillColor3='lightgreen'
+        startFillColor4='pink'
+        startFillColor5='orange'
+        startOpacity={0.8}
+        endOpacity={0.3}
+        />
       {/* <BarChart
       // isAnimated={true}
       isThreeD={true}
@@ -651,13 +814,13 @@ const App = () => {
         // innerCircleBorderColor={'gray'}
         // showTextBackground={true}
       /> */}
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => {
           dtt[1].value += 20;
           setDtt([...dtt]);
         }}>
         <Text>Press me</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       {/* <View
         style={{
           marginVertical: 100,
