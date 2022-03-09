@@ -114,7 +114,13 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | referenceLine2Position | number              | position of second reference line                                                  | 3\*containerHeight / 2 |
 | showReferenceLine3     | Boolean             | show third reference line                                                          | false                  |
 | referenceLine3Config   | referenceConfigType | properties of reference line like thickness, color etc (described below the table) | \_                     |
-| referenceLine3Position | number              | position of third reference line                                                   | containerHeight / 3    |
+| referenceLine3Position | number              | position of third reference line                                                   | containerHeight / 2    |
+| showReferenceLine4     | Boolean             | show fourth reference line                                                          | false                  |
+| referenceLine4Config   | referenceConfigType | properties of reference line like thickness, color etc (described below the table) | \_                     |
+| referenceLine4Position | number              | position of fourth reference line                                                   | containerHeight / 2    |
+| showReferenceLine5     | Boolean             | show fifth reference line                                                          | false                  |
+| referenceLine5Config   | referenceConfigType | properties of reference line like thickness, color etc (described below the table) | \_                     |
+| referenceLine5Position | number              | position of fifth reference line                                                   | containerHeight / 2    |
 | showVerticalLines      | Boolean             | To show vertical lines                                                             | false                  |
 | verticalLinesColor     | ColorValue          | Color of the vertical lines                                                        | lightgray              |
 | verticallinesThickness | number              | Thickness of the vertical lines                                                    | 1                      |
@@ -157,18 +163,26 @@ type referenceConfigType = {
 | color1     | ColorValue | Color of the lines joining the first set of data points      | color (from props)     |
 | color2     | ColorValue | Color of the lines joining the second set of data points     | color (from props)     |
 | color3     | ColorValue | Color of the lines joining the third set of data points      | color (from props)     |
+| color4     | ColorValue | Color of the lines joining the fourth set of data points     | color (from props)     |
+| color5     | ColorValue | Color of the lines joining the fifth set of data points      | color (from props)     |
 | thickness  | number     | Thickness of the lines joining the data points               | 2                      |
 | thickness1 | number     | Thickness of the lines joining the first set of data points  | thickness (from props) |
 | thickness2 | number     | Thickness of the lines joining the second set of data points | thickness (from props) |
 | thickness3 | number     | Thickness of the lines joining the third set of data points  | thickness (from props) |
+| thickness4 | number     | Thickness of the lines joining the fourth set of data points  | thickness (from props) |
+| thickness5 | number     | Thickness of the lines joining the fifth set of data points  | thickness (from props) |
 | startIndex | number     | Start index for data line (used to display data lines having breaks) | 0              |
 | startIndex1 | number     | Start index for data line 1 (used to display data lines having breaks) | 0              |
 | startIndex2 | number     | Start index for data line 2 (used to display data lines having breaks) | 0              |
 | startIndex3 | number     | Start index for data line 3 (used to display data lines having breaks) | 0              |
+| startIndex4 | number     | Start index for data line 4 (used to display data lines having breaks) | 0              |
+| startIndex5 | number     | Start index for data line 5 (used to display data lines having breaks) | 0              |
 | endIndex | number     | End index for data line (used to display data lines having breaks) | data.length -1        |
 | endIndex1 | number     | End index for data line 1 (used to display data lines having breaks) | data.length -1     |
 | endIndex2 | number     | End index for data line 2 (used to display data lines having breaks) | data2.length -1    |
 | endIndex3 | number     | End index for data line 3 (used to display data lines having breaks) | data3.length -1    |
+| endIndex4 | number     | End index for data line 4 (used to display data lines having breaks) | data3.length -1    |
+| endIndex5 | number     | End index for data line 5 (used to display data lines having breaks) | data3.length -1    |
 | curved     | Boolean    | To show curved line joining the data points                  | false                  |
 
 ---
@@ -201,6 +215,18 @@ type referenceConfigType = {
 | dataPointsRadius3      | number     | Radius of data points for the third dataset (when data points' shape is circular)     | 3                                         |
 | dataPointsColor3       | ColorValue | Color of data points for the third dataset                                            | red                                       |
 | dataPointsShape3       | string     | Shape of data points for the third dataset (_'rectangular'_ or _'circular'_)          | 'circular'                                |
+| hideDataPoints4        | Boolean    | To hide data points for the fourth set of data                                         | false                                     |
+| dataPointsHeight4      | number     | Height of data points for the fourth dataset (when data points' shape is rectangular)  | 2                                         |
+| dataPointsWidth4       | number     | Width of data points for the fourth dataset (when data points' shape is rectangular)   | 2                                         |
+| dataPointsRadius4      | number     | Radius of data points for the fourth dataset (when data points' shape is circular)     | 4                                         |
+| dataPointsColor4       | ColorValue | Color of data points for the fourth dataset                                            | red                                       |
+| dataPointsShape4       | string     | Shape of data points for the fourth dataset (_'rectangular'_ or _'circular'_)          | 'circular'                                |
+| hideDataPoints5        | Boolean    | To hide data points for the fifth set of data                                         | false                                     |
+| dataPointsHeight5      | number     | Height of data points for the fifth dataset (when data points' shape is rectangular)  | 2                                         |
+| dataPointsWidth5       | number     | Width of data points for the fifth dataset (when data points' shape is rectangular)   | 2                                         |
+| dataPointsRadius5      | number     | Radius of data points for the fifth dataset (when data points' shape is circular)     | 5                                         |
+| dataPointsColor5       | ColorValue | Color of data points for the fifth dataset                                            | red                                       |
+| dataPointsShape5       | string     | Shape of data points for the fifth dataset (_'rectangular'_ or _'circular'_)          | 'circular'                                |
 | focusedDataPointShape  | String     | Shape of the data points when focused due to press event                              | item.dataPointsShape OR dataPointsShape   |
 | focusedDataPointWidth  | number     | Width of the data points when focused due to press event                              | item.dataPointsWidth OR dataPointsWidth   |
 | focusedDataPointHeight | number     | Height of the data points when focused due to press event                             | item.dataPointsHeight OR dataPointsHeight |
@@ -279,6 +305,14 @@ Above code changes the pressed data point's color and radius. Since in this exam
 | endFillColor3     | ColorValue | End gradient color for the third dataset of the area chart     | white         |
 | startOpacity3     | number     | Start gradient color for the third dataset of the area chart   | 1             |
 | endOpacity3       | number     | End gradient opacity for the third dataset of the area chart   | 1             |
+| startFillColor4   | ColorValue | Start gradient color for the fourth dataset of the area chart   | gray          |
+| endFillColor4     | ColorValue | End gradient color for the fourth dataset of the area chart     | white         |
+| startOpacity4     | number     | Start gradient color for the fourth dataset of the area chart   | 1             |
+| endOpacity4       | number     | End gradient opacity for the fourth dataset of the area chart   | 1             |
+| startFillColor5   | ColorValue | Start gradient color for the fifth dataset of the area chart   | gray          |
+| endFillColor5     | ColorValue | End gradient color for the fifth dataset of the area chart     | white         |
+| startOpacity5     | number     | Start gradient color for the fifth dataset of the area chart   | 1             |
+| endOpacity5       | number     | End gradient opacity for the fifth dataset of the area chart   | 1             |
 | gradientDirection | string     | Direction of the gradient (_'horizontal'_ or _'vertical'_)     | 'vertical'    |
 
 ---
