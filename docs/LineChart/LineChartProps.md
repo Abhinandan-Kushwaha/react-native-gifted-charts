@@ -66,6 +66,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | dataPointShape                 | string     | Shape of the data point (rectangular or circular) defaults to circular                                                               |
 | hideDataPoint                  | Boolean    | To hide the data point                                                                                                               |
 | showVerticalLine               | Boolean    | When set to true, a vertical line will be displayed along that data point                                                            |
+| verticalLineUptoDataPoint      | Boolean    | When set to true, it sets the height of the vertical line upto the corresponding data point                                         |
 | verticalLineColor              | ColorValue | Color of the vertical Line displayed along the data point                                                                            |
 | verticalLineThickness          | number     | Thickness of the vertical Line displayed along the data point                                                                        |
 | dataPointLabelWidth            | number     | width of the label shown beside a data point                                                                                         |
@@ -122,6 +123,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | referenceLine5Config   | referenceConfigType | properties of reference line like thickness, color etc (described below the table) | \_                     |
 | referenceLine5Position | number              | position of fifth reference line                                                   | containerHeight / 2    |
 | showVerticalLines      | Boolean             | To show vertical lines                                                             | false                  |
+| verticalLinesUptoDataPoint | Boolean         | To set the height of the vertical lines upto the corresponding data point          | false                  |
 | verticalLinesColor     | ColorValue          | Color of the vertical lines                                                        | lightgray              |
 | verticallinesThickness | number              | Thickness of the vertical lines                                                    | 1                      |
 | verticalLinesZIndex    | number              | Z index of the vertical lines                                                      | -1                     |

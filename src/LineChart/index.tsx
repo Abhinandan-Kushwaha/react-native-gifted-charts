@@ -93,6 +93,7 @@ type propTypes = {
   referenceLine5Position?: number;
 
   showVerticalLines?: Boolean;
+  verticalLinesUptoDataPoint?: Boolean;
   verticalLinesThickness?: number;
   verticalLinesColor?: ColorValue;
   verticalLinesZIndex?: number;
@@ -291,6 +292,7 @@ type itemType = {
   showStrip?: Boolean;
 
   showVerticalLine?: Boolean;
+  verticalLineUptoDataPoint?: Boolean;
   verticalLineColor?: string;
   verticalLineThickness?: number;
 };
@@ -1182,6 +1184,7 @@ export const LineChart = (props: propTypes) => {
 
   const hideRules = props.hideRules || false;
   const showVerticalLines = props.showVerticalLines || false;
+  const verticalLinesUptoDataPoint = props.verticalLinesUptoDataPoint || false;
 
   const showYAxisIndices = props.showYAxisIndices || false;
   const showXAxisIndices = props.showXAxisIndices || false;
@@ -1904,9 +1907,19 @@ export const LineChart = (props: propTypes) => {
               1 +
               spacing * index
             }
-            y={containerHeight - (item.value * containerHeight) / maxValue + 9}
+            y={
+              item.verticalLineUptoDataPoint
+                ? containerHeight -
+                  (item.value * containerHeight) / maxValue +
+                  10
+                : -xAxisThickness
+            }
             width={item.verticalLineThickness || 1}
-            height={(item.value * containerHeight) / maxValue}
+            height={
+              item.verticalLineUptoDataPoint
+                ? (item.value * containerHeight) / maxValue - xAxisThickness
+                : containerHeight + 10 - xAxisThickness
+            }
             fill={item.verticalLineColor || 'lightgray'}
           />
         );
@@ -2250,7 +2263,10 @@ export const LineChart = (props: propTypes) => {
                 style={{
                   position: 'absolute',
                   zIndex: verticalLinesZIndex || -1,
-                  height: containerHeight + 15,
+                  marginBottom: xAxisThickness,
+                  height: verticalLinesUptoDataPoint
+                    ? (item.value * containerHeight) / maxValue - xAxisThickness
+                    : containerHeight + 15 - xAxisThickness,
                   width: verticalLinesThickness,
                   backgroundColor: verticalLinesColor,
                   bottom: 60,
