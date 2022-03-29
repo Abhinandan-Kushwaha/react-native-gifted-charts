@@ -44,6 +44,7 @@ type PropTypes = {
   xAxisColor?: ColorValue;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
+  yAxisLabelContainerStyle?: any;
   yAxisTextStyle?: any;
   yAxisLabelWidth?: number;
   hideYAxisText?: Boolean;
@@ -360,6 +361,7 @@ export const BarChart = (props: PropTypes) => {
       : props.yAxisThickness || 1;
   const yAxisColor = props.yAxisColor || 'black';
   const yAxisTextStyle = props.yAxisTextStyle;
+  const yAxisLabelContainerStyle = props.yAxisLabelContainerStyle;
   const showFractionalValues = props.showFractionalValues || false;
   const yAxisLabelWidth = props.yAxisLabelWidth || 35;
   const hideYAxisText = props.hideYAxisText || false;
@@ -647,6 +649,7 @@ export const BarChart = (props: PropTypes) => {
                       index === noOfSections ? stepHeight / 2 : stepHeight,
                     width: yAxisLabelWidth,
                   },
+                  yAxisLabelContainerStyle,
                 ]}>
                 {!hideYAxisText ? (
                   <Text

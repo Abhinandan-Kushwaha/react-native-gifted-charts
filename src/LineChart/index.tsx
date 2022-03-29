@@ -142,6 +142,7 @@ type propTypes = {
   color5?: string;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
+  yAxisLabelContainerStyle?: any;
   yAxisTextStyle?: any;
   showFractionalValues?: Boolean;
   roundToDigits?: number;
@@ -1211,6 +1212,7 @@ export const LineChart = (props: propTypes) => {
   const yAxisThickness = props.yAxisThickness || 1;
   const yAxisColor = props.yAxisColor || 'black';
   const yAxisTextStyle = props.yAxisTextStyle;
+  const yAxisLabelContainerStyle = props.yAxisLabelContainerStyle;
   const showFractionalValues = props.showFractionalValues || false;
   const yAxisLabelWidth = props.yAxisLabelWidth || 35;
   const hideYAxisText = props.hideYAxisText || false;
@@ -1483,6 +1485,7 @@ export const LineChart = (props: propTypes) => {
                         index === noOfSections ? stepHeight / 2 : stepHeight,
                       width: yAxisLabelWidth,
                     },
+                    yAxisLabelContainerStyle,
                   ]}>
                   {!hideYAxisText ? (
                     <Text
