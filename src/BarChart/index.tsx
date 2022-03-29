@@ -45,6 +45,7 @@ type PropTypes = {
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
   yAxisLabelContainerStyle?: any;
+  horizontalRulesStyle?: any;
   yAxisTextStyle?: any;
   yAxisLabelWidth?: number;
   hideYAxisText?: Boolean;
@@ -362,6 +363,7 @@ export const BarChart = (props: PropTypes) => {
   const yAxisColor = props.yAxisColor || 'black';
   const yAxisTextStyle = props.yAxisTextStyle;
   const yAxisLabelContainerStyle = props.yAxisLabelContainerStyle;
+  const horizontalRulesStyle = props.horizontalRulesStyle;
   const showFractionalValues = props.showFractionalValues || false;
   const yAxisLabelWidth = props.yAxisLabelWidth || 35;
   const hideYAxisText = props.hideYAxisText || false;
@@ -632,6 +634,7 @@ export const BarChart = (props: PropTypes) => {
                     : props.width || totalWidth + 11,
                 },
                 yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
+                horizontalRulesStyle,
               ]}>
               <View
                 style={[
