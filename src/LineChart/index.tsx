@@ -143,6 +143,7 @@ type propTypes = {
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
   yAxisLabelContainerStyle?: any;
+  horizontalRulesStyle?: any;
   yAxisTextStyle?: any;
   showFractionalValues?: Boolean;
   roundToDigits?: number;
@@ -1213,6 +1214,7 @@ export const LineChart = (props: propTypes) => {
   const yAxisColor = props.yAxisColor || 'black';
   const yAxisTextStyle = props.yAxisTextStyle;
   const yAxisLabelContainerStyle = props.yAxisLabelContainerStyle;
+  const horizontalRulesStyle = props.horizontalRulesStyle;
   const showFractionalValues = props.showFractionalValues || false;
   const yAxisLabelWidth = props.yAxisLabelWidth || 35;
   const hideYAxisText = props.hideYAxisText || false;
@@ -1476,6 +1478,7 @@ export const LineChart = (props: propTypes) => {
                     width: (props.width ? props.width : totalWidth) + 15,
                   },
                   yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
+                  horizontalRulesStyle,
                 ]}>
                 <View
                   style={[
