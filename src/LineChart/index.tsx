@@ -49,6 +49,12 @@ type propTypes = {
   thickness3?: number;
   thickness4?: number;
   thickness5?: number;
+  strokeDashArray?: Array<number>;
+  strokeDashArray1?: Array<number>;
+  strokeDashArray2?: Array<number>;
+  strokeDashArray3?: Array<number>;
+  strokeDashArray4?: Array<number>;
+  strokeDashArray5?: Array<number>;
   rotateLabel?: Boolean;
   isAnimated?: Boolean;
   animateOnDataChange?: Boolean;
@@ -1116,11 +1122,18 @@ export const LineChart = (props: propTypes) => {
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
     props.noOfSectionsBelowXAxis || -minValue / stepValue;
-  const thickness1 = props.thickness1;
-  const thickness2 = props.thickness2;
-  const thickness3 = props.thickness3;
-  const thickness4 = props.thickness4;
-  const thickness5 = props.thickness5;
+  const thickness1 = props.thickness1 === 0 ? 0 : props.thickness || 1;
+  const thickness2 = props.thickness2 === 0 ? 0 : props.thickness || 1;
+  const thickness3 = props.thickness3 === 0 ? 0 : props.thickness || 1;
+  const thickness4 = props.thickness4 === 0 ? 0 : props.thickness || 1;
+  const thickness5 = props.thickness5 === 0 ? 0 : props.thickness || 1;
+
+  const strokeDashArray1 = props.strokeDashArray1 || props.strokeDashArray;
+  const strokeDashArray2 = props.strokeDashArray2 || props.strokeDashArray;
+  const strokeDashArray3 = props.strokeDashArray3 || props.strokeDashArray;
+  const strokeDashArray4 = props.strokeDashArray4 || props.strokeDashArray;
+  const strokeDashArray5 = props.strokeDashArray5 || props.strokeDashArray;
+
   const rotateLabel = props.rotateLabel || false;
   const isAnimated = props.isAnimated || false;
   const hideDataPoints1 =
@@ -1937,6 +1950,7 @@ export const LineChart = (props: propTypes) => {
     endFillColor: string,
     startOpacity: number,
     endOpacity: number,
+    strokeDashArray: Array<number> | undefined | null,
   ) => {
     return (
       <View
@@ -1949,12 +1963,25 @@ export const LineChart = (props: propTypes) => {
           // backgroundColor: 'rgba(200,150,150,0.6)'
         }}>
         <Svg>
-          <Path
-            d={points}
-            fill="none"
-            stroke={color}
-            strokeWidth={currentLineThickness || thickness}
-          />
+          {strokeDashArray &&
+          strokeDashArray.length === 2 &&
+          typeof strokeDashArray[0] === 'number' &&
+          typeof strokeDashArray[1] === 'number' ? (
+            <Path
+              d={points}
+              fill="none"
+              stroke={color}
+              strokeWidth={currentLineThickness || thickness}
+              strokeDasharray={strokeDashArray}
+            />
+          ) : (
+            <Path
+              d={points}
+              fill="none"
+              stroke={color}
+              strokeWidth={currentLineThickness || thickness}
+            />
+          )}
 
           {/***********************      For Area Chart        ************/}
 
@@ -2080,6 +2107,7 @@ export const LineChart = (props: propTypes) => {
     endFillColor: string,
     startOpacity: number,
     endOpacity: number,
+    strokeDashArray: Array<number> | undefined | null,
   ) => {
     // console.log('animatedWidth is-------->', animatedWidth);
     return (
@@ -2093,12 +2121,25 @@ export const LineChart = (props: propTypes) => {
           // backgroundColor: 'wheat',
         }}>
         <Svg>
-          <Path
-            d={points}
-            fill="none"
-            stroke={color}
-            strokeWidth={currentLineThickness || thickness}
-          />
+          {strokeDashArray &&
+          strokeDashArray.length === 2 &&
+          typeof strokeDashArray[0] === 'number' &&
+          typeof strokeDashArray[1] === 'number' ? (
+            <Path
+              d={points}
+              fill="none"
+              stroke={color}
+              strokeWidth={currentLineThickness || thickness}
+              strokeDasharray={strokeDashArray}
+            />
+          ) : (
+            <Path
+              d={points}
+              fill="none"
+              stroke={color}
+              strokeWidth={currentLineThickness || thickness}
+            />
+          )}
 
           {/***********************      For Area Chart        ************/}
 
@@ -2308,6 +2349,7 @@ export const LineChart = (props: propTypes) => {
               endFillColor1,
               startOpacity1,
               endOpacity1,
+              strokeDashArray1,
             )
           : renderLine(
               points,
@@ -2318,6 +2360,7 @@ export const LineChart = (props: propTypes) => {
               endFillColor1,
               startOpacity1,
               endOpacity1,
+              strokeDashArray1,
             )}
         {points2
           ? isAnimated
@@ -2331,6 +2374,7 @@ export const LineChart = (props: propTypes) => {
                 endFillColor2,
                 startOpacity2,
                 endOpacity2,
+                strokeDashArray2,
               )
             : renderLine(
                 points2,
@@ -2341,6 +2385,7 @@ export const LineChart = (props: propTypes) => {
                 endFillColor2,
                 startOpacity2,
                 endOpacity2,
+                strokeDashArray2,
               )
           : null}
         {points3
@@ -2355,6 +2400,7 @@ export const LineChart = (props: propTypes) => {
                 endFillColor3,
                 startOpacity3,
                 endOpacity3,
+                strokeDashArray3,
               )
             : renderLine(
                 points3,
@@ -2365,6 +2411,7 @@ export const LineChart = (props: propTypes) => {
                 endFillColor3,
                 startOpacity3,
                 endOpacity3,
+                strokeDashArray3,
               )
           : null}
         {points4
@@ -2379,6 +2426,7 @@ export const LineChart = (props: propTypes) => {
                 endFillColor4,
                 startOpacity4,
                 endOpacity4,
+                strokeDashArray4,
               )
             : renderLine(
                 points4,
@@ -2389,6 +2437,7 @@ export const LineChart = (props: propTypes) => {
                 endFillColor4,
                 startOpacity4,
                 endOpacity4,
+                strokeDashArray4,
               )
           : null}
         {points5
@@ -2403,6 +2452,7 @@ export const LineChart = (props: propTypes) => {
                 endFillColor5,
                 startOpacity5,
                 endOpacity5,
+                strokeDashArray5,
               )
             : renderLine(
                 points5,
@@ -2413,6 +2463,7 @@ export const LineChart = (props: propTypes) => {
                 endFillColor5,
                 startOpacity5,
                 endOpacity5,
+                strokeDashArray5,
               )
           : null}
         {data.map((item: itemType, index: number) => {
