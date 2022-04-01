@@ -1196,7 +1196,7 @@ export const BarChart = (props: PropTypes) => {
                     index={index}
                     containerHeight={containerHeight}
                     maxValue={maxValue}
-                    spacing={spacing}
+                    spacing={item.spacing === 0 ? 0 : item.spacing || spacing}
                     xAxisThickness={xAxisThickness}
                     barWidth={props.barWidth}
                     opacity={opacity}
