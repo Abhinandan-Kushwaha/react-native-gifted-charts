@@ -2,7 +2,9 @@ import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {Alert} from 'react-native';
 import {View, Text, StyleSheet} from 'react-native';
+import {MyPattern} from './src/pattern';
 import {BarChart, LineChart, PieChart} from './src';
+import {Path, Pattern} from 'react-native-svg';
 
 const App = () => {
   const [toggle, setToggle] = useState(true);
@@ -581,12 +583,65 @@ const App = () => {
     },
   ];
 
+  const TrianglePattern = () => {
+    return (
+      <Pattern
+        id="DiagonalLines"
+        patternUnits="userSpaceOnUse"
+        x="0"
+        y="0"
+        width="20"
+        height="20"
+        viewBox="0 0 10 10">
+        <Path d="M 0 0 L 7 0 L 3.5 7 z" fill="red" stroke="blue" />
+      </Pattern>
+    );
+  };
+
+  const MyPattern = () => {
+    return (
+      <Pattern
+        id="DiagonalLines"
+        patternUnits="userSpaceOnUse"
+        x="0"
+        y="0"
+        width={60}
+        height={14}
+        viewBox="0 0 40 20">
+        <Path
+          d={`M ${-1220} ${38} L ${465} ${0}`}
+          stroke={'white'}
+          strokeWidth={1.5}
+          transform={{rotation: '-16'}}
+        />
+      </Pattern>
+    );
+  };
+
   const [dtt, setDtt] = useState([
-    {value: 110},
+    {
+      value: 110,
+      barBackgroundPattern: MyPattern,
+      patternId: 'DiagonalLines',
+      frontColor: '#4444dd',
+      spacing: 8,
+    },
     {value: 130},
-    {value: 120},
+    {
+      value: 120,
+      barBackgroundPattern: MyPattern,
+      patternId: 'DiagonalLines',
+      frontColor: '#4444dd',
+      spacing: 8,
+    },
     {value: 160},
-    {value: 190},
+    {
+      value: 190,
+      barBackgroundPattern: MyPattern,
+      patternId: 'DiagonalLines',
+      frontColor: '#4444dd',
+      spacing: 8,
+    },
   ]);
 
   const barData = [
@@ -604,57 +659,122 @@ const App = () => {
   ];
 
   const sdata = [
-    {value:1.0,label:'1'},
-    {value:0.75,label:'2'},
-    {value:0.25,label:'3'},
-    {value:0.00,label:'4'},
-    {value:0.50,label:'5'},
-    {value:0.72,label:'6'},
-    {value:0.85,label:'7'},
-    {value:0.00,label:'8'},
-    {value:0.50,label:'9'},
-    {value:0.72,label:'10'},
-    {value:0.85,label:'11'},
-    {value:0.72,label:'12'},
-    {value:0.85,label:'13'},
-    {value:0.72,label:'14'},
-    {value:0.85,label:'15'},
+    {
+      value: 1.0,
+      label: '1',
+      showVerticalLine: true,
+      verticalLineUptoDataPoint: true,
+      verticalLineColor: 'green',
+    },
+    {value: 0.75, label: '2'},
+    {value: 0.25, label: '3'},
+    {value: 0.0, label: '4'},
+    {value: 0.5, label: '5'},
+    {value: 0.72, label: '6'},
+    {value: 0.85, label: '7'},
+    {value: 0.0, label: '8'},
+    {value: 0.5, label: '9'},
+    {value: 0.72, label: '10'},
+    {value: 0.85, label: '11'},
+    {value: 0.72, label: '12'},
+    {value: 0.85, label: '13'},
+    {value: 0.72, label: '14'},
+    {value: 0.85, label: '15'},
   ];
-//   const lineData = [
-//     {value: 0, dataPointText: '0'},
-//     {value: 20, dataPointText: '20'},
-//     {value: 18, dataPointText: '18'},
-//     {value: 40, dataPointText: '40'},
-//     {value: 36, dataPointText: '36'},
-//     {value: 60, dataPointText: '60'},
-//     {value: 54, dataPointText: '54'},
-//     {value: 85, dataPointText: '85'}
-// ];
+  //   const lineData = [
+  //     {value: 0, dataPointText: '0'},
+  //     {value: 20, dataPointText: '20'},
+  //     {value: 18, dataPointText: '18'},
+  //     {value: 40, dataPointText: '40'},
+  //     {value: 36, dataPointText: '36'},
+  //     {value: 60, dataPointText: '60'},
+  //     {value: 54, dataPointText: '54'},
+  //     {value: 85, dataPointText: '85'}
+  // ];
 
-// const lineData = [
-//   {value: 0, dataPointText: '0'},
-//   {value: 10, dataPointText: '10'},
-//   {value: 8, dataPointText: '8'},
-//   {value: 58, dataPointText: '58'},
-//   {value: 56, dataPointText: '56'},
-//   {value: 78, dataPointText: '78'},
-//   {value: 74, dataPointText: '74'},
-//   {value: 98, dataPointText: '98'},
-// ];
+  // const lineData = [
+  //   {value: 0, dataPointText: '0'},
+  //   {value: 10, dataPointText: '10'},
+  //   {value: 8, dataPointText: '8'},
+  //   {value: 58, dataPointText: '58'},
+  //   {value: 56, dataPointText: '56'},
+  //   {value: 78, dataPointText: '78'},
+  //   {value: 74, dataPointText: '74'},
+  //   {value: 98, dataPointText: '98'},
+  // ];
 
-// const lineData2 = [
-//   {value: 0, dataPointText: '0'},
-//   {value: 20, dataPointText: '20'},
-//   {value: 18, dataPointText: '18'},
-//   {value: 40, dataPointText: '40'},
-//   {value: 36, dataPointText: '36'},
-//   {value: 60, dataPointText: '60'},
-//   {value: 54, dataPointText: '54'},
-//   {value: 85, dataPointText: '85'},
-// ];
+  // const lineData2 = [
+  //   {value: 0, dataPointText: '0'},
+  //   {value: 20, dataPointText: '20'},
+  //   {value: 18, dataPointText: '18'},
+  //   {value: 40, dataPointText: '40'},
+  //   {value: 36, dataPointText: '36'},
+  //   {value: 60, dataPointText: '60'},
+  //   {value: 54, dataPointText: '54'},
+  //   {value: 85, dataPointText: '85'},
+  // ];
 
-const lineData = [{value: 0},{value: 10},{value: 8},{value: 58},{value: 56},{value: 78},{value: 74},{value: 98}];
-const lineData2 = [{value: 0},{value: 20},{value: 18},{value: 40},{value: 36},{value: 60},{value: 54},{value: 85}];
+  const lineData1 = [
+    {value: 20},
+    {value: 40},
+    {value: 48},
+    {value: 50},
+    {value: 56},
+    {value: 70},
+    {value: 90},
+    {value: 95},
+  ];
+  const lineData2 = [
+    {value: 0},
+    {value: 5},
+    {value: 8},
+    {value: 18},
+    {value: 22},
+    {value: 30},
+    {value: 44},
+    {value: 52},
+  ];
+
+  const stackData = [
+    {
+      stacks: [
+        {value: 10, color: 'orange'},
+        {value: 20, color: '#4ABFF4', marginBottom: 2},
+      ],
+      spacing: 15,
+      label: 'Jan',
+    },
+    {
+      stacks: [
+        {value: 10, color: '#4ABFF4'},
+        {value: 11, color: 'orange', marginBottom: 2},
+        {value: 15, color: '#28B2B3', marginBottom: 2},
+      ],
+      label: 'Mar',
+    },
+    {
+      stacks: [
+        {value: 14, color: 'orange'},
+        {value: 18, color: '#4ABFF4', marginBottom: 2},
+      ],
+      spacing: 15,
+      label: 'Feb',
+    },
+    {
+      stacks: [
+        {value: 7, color: '#4ABFF4'},
+        {value: 11, color: 'orange', marginBottom: 2},
+        {value: 10, color: '#28B2B3', marginBottom: 2},
+      ],
+      label: 'Mar',
+    },
+  ];
+
+  const showChart = [
+    {value: 50, label: 'archieved', labelTextStyle: {textAlign: 'left'}},
+    {value: 450, label: 'discared', labelTextStyle: {textAlign: 'left'}},
+    {value: 1387, label: 'active', labelTextStyle: {textAlign: 'left'}},
+  ];
 
   return (
     <View
@@ -663,19 +783,18 @@ const lineData2 = [{value: 0},{value: 20},{value: 18},{value: 40},{value: 36},{v
         // marginLeft: 46,
         marginLeft: 20,
       }}>
-      {/* <BarChart
-        data={dtt}
-        // frontColor='rgba(0,0,0,0.2)'
-        // lineData={barData}
-        lineConfig={{
-          curved: true,
-          startIndex: 1,
-          endIndex: 3,
-          shiftY: 20,
-          isAnimated: true,
-        }}
-        showLine
+      {/* <MyPattern/> */}
+      {/* <LineChart
+        data={lineData1}
+        // areaChart
+        yAxisSide='right'
+        horizontalRulesStyle={{zIndex:1}}
+        // backgroundColor='rgba(255,0,0,0.8)'
+        yAxisLabelContainerStyle={{zIndex:100000,elevation:1,textAlign:'left'}}
+        yAxisTextStyle={{fontWeight:'bold',marginRight:-110,zIndex:10000,textAlign:'left'}}
+        spacing={30}
       /> */}
+      <BarChart data={dtt} barWidth={40} spacing={30} />
       {/* <LineChart
             areaChart
             curved
@@ -700,7 +819,8 @@ const lineData2 = [{value: 0},{value: 20},{value: 18},{value: 40},{value: 36},{v
         <LineChart
             initialSpacing={0}
             data={lineData}
-            isAnimated
+            curved
+            // isAnimated
             spacing={30}
             textColor1="yellow"
             textShiftY={-8}
@@ -743,7 +863,7 @@ const lineData2 = [{value: 0},{value: 20},{value: 18},{value: 40},{value: 36},{v
           textShiftX={-5}
           textFontSize={13}
       /> */}
-      <LineChart
+      {/* <LineChart
       isAnimated={true}
       curved
       areaChart={true}
@@ -786,7 +906,18 @@ const lineData2 = [{value: 0},{value: 20},{value: 18},{value: 40},{value: 36},{v
         startFillColor5='orange'
         startOpacity={0.8}
         endOpacity={0.3}
-        />
+        /> */}
+
+      <BarChart
+        width={340}
+        rotateLabel
+        barWidth={12}
+        spacing={40}
+        noOfSections={4}
+        barBorderRadius={6}
+        stackData={stackData}
+      />
+
       {/* <BarChart
       // isAnimated={true}
       isThreeD={true}

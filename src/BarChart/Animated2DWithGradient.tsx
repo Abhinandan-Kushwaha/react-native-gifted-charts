@@ -141,9 +141,9 @@ const Animated2DWithGradient = (props: propTypes) => {
                   },
                   props.roundedBottom && {
                     borderBottomLeftRadius:
-                      (barWidth || item.barWidth || 30) / 2,
+                      (item.barWidth || barWidth || 30) / 2,
                     borderBottomRightRadius:
-                      (barWidth || item.barWidth || 30) / 2,
+                      (item.barWidth || barWidth || 30) / 2,
                   },
                   props.cappedBars && {
                     borderTopLeftRadius:
@@ -156,8 +156,8 @@ const Animated2DWithGradient = (props: propTypes) => {
                         : item.capRadius || props.capRadius || 0,
                   },
                   props.roundedTop && {
-                    borderTopLeftRadius: (barWidth || item.barWidth || 30) / 2,
-                    borderTopRightRadius: (barWidth || item.barWidth || 30) / 2,
+                    borderTopLeftRadius: (item.barWidth || barWidth || 30) / 2,
+                    borderTopRightRadius: (item.barWidth || barWidth || 30) / 2,
                   },
                 ]}>
                 {props.cappedBars && (
@@ -195,9 +195,9 @@ const Animated2DWithGradient = (props: propTypes) => {
                   },
                   props.roundedBottom && {
                     borderBottomLeftRadius:
-                      (barWidth || item.barWidth || 30) / 2,
+                      (item.barWidth || barWidth || 30) / 2,
                     borderBottomRightRadius:
-                      (barWidth || item.barWidth || 30) / 2,
+                      (item.barWidth || barWidth || 30) / 2,
                   },
                   props.cappedBars && {
                     borderTopLeftRadius:
@@ -210,8 +210,8 @@ const Animated2DWithGradient = (props: propTypes) => {
                         : item.capRadius || props.capRadius || 0,
                   },
                   props.roundedTop && {
-                    borderTopLeftRadius: (barWidth || item.barWidth || 30) / 2,
-                    borderTopRightRadius: (barWidth || item.barWidth || 30) / 2,
+                    borderTopLeftRadius: (item.barWidth || barWidth || 30) / 2,
+                    borderTopRightRadius: (item.barWidth || barWidth || 30) / 2,
                   },
                 ]}
                 start={{x: 0, y: 0}}
@@ -272,9 +272,9 @@ const Animated2DWithGradient = (props: propTypes) => {
               style={[
                 {
                   position: 'absolute',
-                  top: (barWidth || item.barWidth || 30) * -1,
-                  height: barWidth || item.barWidth || 30,
-                  width: barWidth || item.barWidth || 30,
+                  top: (item.barWidth || barWidth || 30) * -1,
+                  height: item.barWidth || barWidth || 30,
+                  width: item.barWidth || barWidth || 30,
                   justifyContent:
                     (props.horizontal && !props.intactTopLabel) ||
                     item.value < 0
