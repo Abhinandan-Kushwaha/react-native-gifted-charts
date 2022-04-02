@@ -5,6 +5,7 @@ import AnimatedBar from '../Components/AnimatedBar';
 import LinearGradient from 'react-native-linear-gradient';
 import Animated2DWithGradient from './Animated2DWithGradient';
 import {Style} from 'util';
+import Svg, {Defs, Rect} from 'react-native-svg';
 
 type Props = {
   style?: any;
@@ -58,6 +59,8 @@ type Props = {
   intactTopLabel: Boolean;
   barBorderRadius?: number;
   autoShiftLabels?: Boolean;
+  barBackgroundPattern?: Function;
+  patternId?: String;
 };
 type itemType = {
   value?: number;
@@ -82,6 +85,8 @@ type itemType = {
   topLabelComponentHeight?: number;
   spacing?: number;
   labelWidth?: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
 };
 const RenderBars = (props: Props) => {
   const {
@@ -102,6 +107,7 @@ const RenderBars = (props: Props) => {
     animationDuration,
     autoShiftLabels,
   } = props;
+
   const renderLabel = (label: String, labelTextStyle: any, value: number) => {
     return (
       <View
@@ -256,6 +262,23 @@ const RenderBars = (props: Props) => {
             />
           )}
         </LinearGradient>
+        {(item.barBackgroundPattern || props.barBackgroundPattern) && (
+          <Svg>
+            <Defs>
+              {item.barBackgroundPattern
+                ? item.barBackgroundPattern()
+                : props.barBackgroundPattern()}
+            </Defs>
+            <Rect
+              stroke="transparent"
+              x="1"
+              y="1"
+              width="100%"
+              height="100%"
+              fill={`url(#${item.patternId || props.patternId})`}
+            />
+          </Svg>
+        )}
         {item.topLabelComponent && (
           <View
             style={[
@@ -346,6 +369,10 @@ const RenderBars = (props: Props) => {
       {isThreeD ? (
         isAnimated ? (
           <AnimatedBar
+            barBackgroundPattern={
+              item.barBackgroundPattern || props.barBackgroundPattern
+            }
+            patternId={item.patternId || props.patternId}
             topLabelContainerStyle={item.topLabelContainerStyle}
             width={item.barWidth || props.barWidth || 30}
             sideWidth={
@@ -371,6 +398,10 @@ const RenderBars = (props: Props) => {
           />
         ) : (
           <ThreeDBar
+            barBackgroundPattern={
+              item.barBackgroundPattern || props.barBackgroundPattern
+            }
+            patternId={item.patternId || props.patternId}
             style={{}}
             color={''}
             topLabelContainerStyle={item.topLabelContainerStyle}
@@ -400,7 +431,9 @@ const RenderBars = (props: Props) => {
       ) : item.showGradient || props.showGradient ? (
         isAnimated ? (
           <Animated2DWithGradient
-            barWidth={0}
+            barBackgroundPattern={props.barBackgroundPattern}
+            patternId={props.patternId}
+            barWidth={props.barWidth}
             item={item}
             opacity={opacity}
             animationDuration={animationDuration || 800}
@@ -427,7 +460,9 @@ const RenderBars = (props: Props) => {
         )
       ) : isAnimated ? (
         <Animated2DWithGradient
-          barWidth={0}
+          barBackgroundPattern={props.barBackgroundPattern}
+          patternId={props.patternId}
+          barWidth={props.barWidth}
           item={item}
           opacity={opacity}
           animationDuration={animationDuration || 800}
@@ -452,7 +487,9 @@ const RenderBars = (props: Props) => {
         />
       ) : (
         <Animated2DWithGradient
-          barWidth={0}
+          barBackgroundPattern={props.barBackgroundPattern}
+          patternId={props.patternId}
+          barWidth={props.barWidth}
           item={item}
           opacity={opacity}
           animationDuration={animationDuration || 800}

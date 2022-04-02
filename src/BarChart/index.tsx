@@ -125,6 +125,8 @@ type PropTypes = {
   scrollToEnd?: Boolean;
   scrollAnimation?: Boolean;
   labelsExtraHeight?: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
 };
 type lineConfigType = {
   initialSpacing?: number;
@@ -175,6 +177,8 @@ type itemType = {
   disablePress?: any;
   labelComponent?: View;
   spacing?: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
 };
 
 export const BarChart = (props: PropTypes) => {
@@ -880,7 +884,7 @@ export const BarChart = (props: PropTypes) => {
 
   const renderDataPoints = () => {
     return lineData.map((item: any, index: number) => {
-      if (index < lineConfig.startIndex || index > lineConfig.endIndex){
+      if (index < lineConfig.startIndex || index > lineConfig.endIndex) {
         return null;
       }
       // console.log('comes in');
@@ -1213,6 +1217,8 @@ export const BarChart = (props: PropTypes) => {
                     horizontal={horizontal}
                     intactTopLabel={intactTopLabel}
                     barBorderRadius={props.barBorderRadius}
+                    barBackgroundPattern={props.barBackgroundPattern}
+                    patternId={props.patternId}
                   />
                 );
               })
@@ -1261,6 +1267,8 @@ export const BarChart = (props: PropTypes) => {
                   intactTopLabel={intactTopLabel}
                   barBorderRadius={props.barBorderRadius}
                   autoShiftLabels={autoShiftLabels}
+                  barBackgroundPattern={props.barBackgroundPattern}
+                  patternId={props.patternId}
                 />
               ))}
         </Fragment>

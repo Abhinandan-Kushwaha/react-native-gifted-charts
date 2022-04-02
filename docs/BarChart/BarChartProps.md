@@ -101,6 +101,8 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | capRadius              | number     | Border radius of the bar cap                                                   |
 | barBorderRadius        | number     | Border radius of the bar                                                       |
 | spacing                | number     | Distance of the next Bar from the currennt Bar                                 |
+| barBackgroundPattern   | Component  | A svg component containing the background pattern for bars                     |
+| patternId              | String     | ID of the pattern component                                                    | 
 
 ---
 
@@ -190,6 +192,8 @@ type referenceConfigType = {
 | activeOpacity   | number     | activeOpacity on pressing the bar                                          | 0.2                      |
 | disablePress    | Boolean    | Prop to disable the bar press action                                       | false                    |
 | barBorderRadius | number     | Border radius of the bar                                                   | 0                        |
+| barBackgroundPattern | Component | A svg component containing the background pattern for bars             | \_ |
+| patternId | String | ID of the pattern component                                                          | \_ | 
 
 ---
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, ColorValue} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Svg, {Defs, Rect} from 'react-native-svg';
 import {styles} from './styles';
 
 type PropTypes = {
@@ -21,6 +22,8 @@ type PropTypes = {
   horizontal: Boolean;
   intactTopLabel: Boolean;
   value: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
 };
 
 type TriangleProps = {
@@ -57,10 +60,8 @@ const aStyles = StyleSheet.create({
 });
 
 const ThreeDBar = (props: PropTypes) => {
-  const width = props.width;
-  const sideWidth = props.sideWidth;
-  const height = props.height;
-  const value = props.value;
+  const {width, sideWidth, height, value, barBackgroundPattern, patternId} =
+    props;
 
   const showGradient = props.showGradient || false;
   const gradientColor = props.gradientColor || 'white';
@@ -151,6 +152,19 @@ const ThreeDBar = (props: PropTypes) => {
                 colors={[gradientColor, frontColor]}
               />
             )}
+            {barBackgroundPattern && (
+              <Svg>
+                <Defs>{barBackgroundPattern()}</Defs>
+                <Rect
+                  stroke="transparent"
+                  x="1"
+                  y="1"
+                  width={width || 30}
+                  height={height}
+                  fill={`url(#${patternId})`}
+                />
+              </Svg>
+            )}
           </View>
         </View>
       ) : null}
@@ -168,7 +182,7 @@ const ThreeDBar = (props: PropTypes) => {
               justifyContent: 'flex-end',
               alignItems: 'center',
             },
-            value < 0 && {transform:[{rotate:'180deg'}]},
+            value < 0 && {transform: [{rotate: '180deg'}]},
             props.horizontal &&
               !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
             props.side === 'right'
