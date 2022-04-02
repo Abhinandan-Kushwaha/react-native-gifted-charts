@@ -7,6 +7,7 @@ import {
   UIManager,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Svg, {Defs, Rect} from 'react-native-svg';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -34,6 +35,8 @@ type propTypes = {
   barBorderRadius?: number;
   containerHeight?: number;
   maxValue?: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
 };
 type itemType = {
   value?: number;
@@ -53,10 +56,15 @@ type itemType = {
   capColor?: ColorValue;
   capRadius?: number;
   barBorderRadius?: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
 };
 
 const Animated2DWithGradient = (props: propTypes) => {
   const {
+    barBackgroundPattern,
+    patternId,
+    barWidth,
     item,
     opacity,
     animationDuration,
@@ -132,8 +140,10 @@ const Animated2DWithGradient = (props: propTypes) => {
                       props.barBorderRadius || item.barBorderRadius || 0,
                   },
                   props.roundedBottom && {
-                    borderBottomLeftRadius: (item.barWidth || 30) / 2,
-                    borderBottomRightRadius: (item.barWidth || 30) / 2,
+                    borderBottomLeftRadius:
+                      (barWidth || item.barWidth || 30) / 2,
+                    borderBottomRightRadius:
+                      (barWidth || item.barWidth || 30) / 2,
                   },
                   props.cappedBars && {
                     borderTopLeftRadius:
@@ -146,8 +156,8 @@ const Animated2DWithGradient = (props: propTypes) => {
                         : item.capRadius || props.capRadius || 0,
                   },
                   props.roundedTop && {
-                    borderTopLeftRadius: (item.barWidth || 30) / 2,
-                    borderTopRightRadius: (item.barWidth || 30) / 2,
+                    borderTopLeftRadius: (barWidth || item.barWidth || 30) / 2,
+                    borderTopRightRadius: (barWidth || item.barWidth || 30) / 2,
                   },
                 ]}>
                 {props.cappedBars && (
@@ -184,8 +194,10 @@ const Animated2DWithGradient = (props: propTypes) => {
                       props.barBorderRadius || item.barBorderRadius || 0,
                   },
                   props.roundedBottom && {
-                    borderBottomLeftRadius: (item.barWidth || 30) / 2,
-                    borderBottomRightRadius: (item.barWidth || 30) / 2,
+                    borderBottomLeftRadius:
+                      (barWidth || item.barWidth || 30) / 2,
+                    borderBottomRightRadius:
+                      (barWidth || item.barWidth || 30) / 2,
                   },
                   props.cappedBars && {
                     borderTopLeftRadius:
@@ -198,8 +210,8 @@ const Animated2DWithGradient = (props: propTypes) => {
                         : item.capRadius || props.capRadius || 0,
                   },
                   props.roundedTop && {
-                    borderTopLeftRadius: (item.barWidth || 30) / 2,
-                    borderTopRightRadius: (item.barWidth || 30) / 2,
+                    borderTopLeftRadius: (barWidth || item.barWidth || 30) / 2,
+                    borderTopRightRadius: (barWidth || item.barWidth || 30) / 2,
                   },
                 ]}
                 start={{x: 0, y: 0}}
@@ -232,15 +244,37 @@ const Animated2DWithGradient = (props: propTypes) => {
                 )}
               </LinearGradient>
             )}
+            {(item.barBackgroundPattern || barBackgroundPattern) && (
+              <Svg>
+                <Defs>
+                  {item.barBackgroundPattern
+                    ? item.barBackgroundPattern()
+                    : barBackgroundPattern()}
+                </Defs>
+                <Rect
+                  stroke="transparent"
+                  x="1"
+                  y="1"
+                  width={item.barWidth || props.barWidth || 30}
+                  height={
+                    noAnimation
+                      ? (Math.abs(item.value) * (containerHeight || 200)) /
+                        (maxValue || 200)
+                      : height
+                  }
+                  fill={`url(#${item.patternId || patternId})`}
+                />
+              </Svg>
+            )}
           </View>
           {item.topLabelComponent && (
             <View
               style={[
                 {
                   position: 'absolute',
-                  top: (item.barWidth || 30) * -1,
-                  height: item.barWidth || 30,
-                  width: item.barWidth || 30,
+                  top: (barWidth || item.barWidth || 30) * -1,
+                  height: barWidth || item.barWidth || 30,
+                  width: barWidth || item.barWidth || 30,
                   justifyContent:
                     (props.horizontal && !props.intactTopLabel) ||
                     item.value < 0

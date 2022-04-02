@@ -8,6 +8,7 @@ import {
   UIManager,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Svg, {Defs, Rect} from 'react-native-svg';
 import {styles} from './styles';
 
 if (Platform.OS === 'android') {
@@ -37,6 +38,8 @@ type animatedBarPropTypes = {
   side: String;
   horizontal: Boolean;
   intactTopLabel: Boolean;
+  barBackgroundPattern?: Function;
+  patternId?: String;
 };
 
 const TriangleCorner = (props: trianglePropTypes) => {
@@ -104,6 +107,8 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
 
   const width = props.width;
   const sideWidth = props.sideWidth;
+
+  const {barBackgroundPattern, patternId} = props;
 
   const showGradient = props.showGradient || false;
   const gradientColor = props.gradientColor || 'white';
@@ -204,6 +209,19 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
                 end={{x: 1, y: 1}}
                 colors={[gradientColor, frontColor]}
               />
+            )}
+            {barBackgroundPattern && (
+              <Svg>
+                <Defs>{barBackgroundPattern()}</Defs>
+                <Rect
+                  stroke="transparent"
+                  x="1"
+                  y="1"
+                  width={width || 30}
+                  height={height}
+                  fill={`url(#${patternId})`}
+                />
+              </Svg>
             )}
           </View>
 

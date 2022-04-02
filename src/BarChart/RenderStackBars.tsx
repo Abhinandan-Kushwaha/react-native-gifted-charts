@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, Text, ColorValue} from 'react-native';
+import Svg, {Defs, Rect} from 'react-native-svg';
 import {Style} from 'util';
 
 type Props = {
@@ -34,6 +35,8 @@ type Props = {
   intactTopLabel: Boolean;
   barBorderRadius?: number;
   xAxisThickness: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
 };
 type itemType = {
   value?: number;
@@ -50,9 +53,20 @@ type itemType = {
   labelComponent?: Function;
   borderRadius?: number;
   stacks?: Array<any>;
+  barBackgroundPattern?: Function;
+  patternId?: String;
 };
 const RenderStackBars = (props: Props) => {
-  const {item, containerHeight, maxValue, spacing, rotateLabel,xAxisThickness} = props;
+  const {
+    barBackgroundPattern,
+    patternId,
+    item,
+    containerHeight,
+    maxValue,
+    spacing,
+    rotateLabel,
+    xAxisThickness,
+  } = props;
   const disablePress = props.disablePress || false;
   const renderLabel = (label: String, labelTextStyle: any) => {
     return (
@@ -93,10 +107,15 @@ const RenderStackBars = (props: Props) => {
     return position;
   };
 
-  const totalHeight = props.item.stacks.reduce((acc, stack) => acc + Math.abs(stack.value) * (containerHeight || 200) / (maxValue || 200), 0)
+  const totalHeight = props.item.stacks.reduce(
+    (acc, stack) =>
+      acc +
+      (Math.abs(stack.value) * (containerHeight || 200)) / (maxValue || 200),
+    0,
+  );
 
   const static2DSimple = (item: itemType) => {
-    const cotainsNegative = item.stacks.some(item => item.value < 0)
+    const cotainsNegative = item.stacks.some(item => item.value < 0);
     return (
       <>
         <View
@@ -109,8 +128,9 @@ const RenderStackBars = (props: Props) => {
             cotainsNegative && {
               transform: [
                 {translateY: totalHeight + xAxisThickness / 2},
-                {rotate:'180deg'}
-              ]}
+                {rotate: '180deg'},
+              ],
+            },
           ]}>
           {item.stacks.map((stackItem, index) => {
             return (
@@ -140,19 +160,37 @@ const RenderStackBars = (props: Props) => {
                       borderBottomRightRadius:
                         stackItem.borderBottomRightRadius || 0,
                     },
-                ]}
-              >
+                ]}>
                 {stackItem.innerBarComponent && stackItem.innerBarComponent()}
               </TouchableOpacity>
             );
           })}
+          {(item.barBackgroundPattern || barBackgroundPattern) && (
+            <Svg>
+              <Defs>
+                {item.barBackgroundPattern
+                  ? item.barBackgroundPattern()
+                  : barBackgroundPattern()}
+              </Defs>
+              <Rect
+                stroke="transparent"
+                x="1"
+                y="1"
+                width="100%"
+                height="100%"
+                fill={`url(#${item.patternId || patternId})`}
+              />
+            </Svg>
+          )}
         </View>
         {item.topLabelComponent && (
           <View
             style={[
               {
                 position: 'absolute',
-                top: cotainsNegative ? 0 : (item.barWidth || props.barWidth || 30) * -1,
+                top: cotainsNegative
+                  ? 0
+                  : (item.barWidth || props.barWidth || 30) * -1,
                 height: item.barWidth || props.barWidth || 30,
                 width: item.barWidth || props.barWidth || 30,
                 justifyContent: 'center',
