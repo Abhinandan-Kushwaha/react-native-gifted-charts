@@ -254,6 +254,38 @@ type referenceConfigType = {
 
 ---
 
+## pointerConfig
+
+pointerConfig is an object, when passed as a prop, creates a magical effect. It lets the user scroll over chart to move the pointer along the chart. Here is an example-
+
+<img src='../../demos/scrollLine.gif' alt='' height=400 width=500/>
+
+To enable such kind of csroll effect, just pass the prop pointerConfig.
+The pointerConfig object has following fields-
+
+```js
+type Pointer = {
+  height?: number;
+  width?: number;
+  radius?: number;
+  color?: ColorValue;
+  pointerComponent?: Function;
+  showPointerStrip?: boolean;
+  pointerStripWidth?: number;
+  pointerStripHeight?: number;
+  pointerStripColor?: ColorValue;
+  pointerStripUptoDataPoint?: boolean;
+  pointerLabelComponent?: Function;
+  shiftPointerLabelX?: number;
+  shiftPointerLabelY?: number;
+  pointerLabelWidth?: number;
+  pointerVanishDelay?: number;
+};
+```
+
+The above properties can be understood with this labelled diagram-
+<img src='../../demos/rainbow.png' alt='' height=400 width=500/>
+
 ### onPress and strip related props
 
 Line or Area charts can be made interactive by allowing users to press on the chart and highlight that particular data point. For example-
