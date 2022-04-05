@@ -682,38 +682,34 @@ const App = () => {
     {value: 0.85, label: '15'},
   ];
   const lineData = [
-    {value: 0, dataPointText: '0'},
-    {value: 20, dataPointText: '20'},
+    {value: 8, dataPointText: '8'},
+    {value: 10, dataPointText: '10'},
+    {value: 12, dataPointText: '12'},
+    {value: 8, dataPointText: '8'},
+    {value: 11, dataPointText: '11'},
+    {value: 13, dataPointText: '13'},
+    {value: 19, dataPointText: '19'},
     {value: 18, dataPointText: '18'},
+    {value: 22, dataPointText: '22'},
+    {value: 20, dataPointText: '20'},
+    {value: 28, dataPointText: '28'},
+    {value: 32, dataPointText: '32'},
+    {value: 36, dataPointText: '36'},
+    {value: 40, dataPointText: '40'},
+    {value: 38, dataPointText: '38'},
+    {value: 40, dataPointText: '40'},
+    {value: 42, dataPointText: '42'},
+    {value: 46, dataPointText: '46'},
+    {value: 44, dataPointText: '44'},
     {value: 40, dataPointText: '40'},
     {value: 36, dataPointText: '36'},
-    {value: 60, dataPointText: '60'},
-    {value: 54, dataPointText: '54'},
-    {value: 85, dataPointText: '85'},
+    {value: 32, dataPointText: '32'},
+    {value: 38, dataPointText: '38'},
     {value: 36, dataPointText: '36'},
-    {value: 60, dataPointText: '60'},
-    {value: 54, dataPointText: '54'},
-    {value: 85, dataPointText: '85'},
-    {value: 36, dataPointText: '36'},
-    {value: 60, dataPointText: '60'},
-    {value: 54, dataPointText: '54'},
-    {value: 85, dataPointText: '85'},
-    {value: 36, dataPointText: '36'},
-    {value: 60, dataPointText: '60'},
-    {value: 54, dataPointText: '54'},
-    {value: 85, dataPointText: '85'},
-    {value: 36, dataPointText: '36'},
-    {value: 60, dataPointText: '60'},
-    {value: 54, dataPointText: '54'},
-    {value: 85, dataPointText: '85'},
-    {value: 36, dataPointText: '36'},
-    {value: 60, dataPointText: '60'},
-    {value: 54, dataPointText: '54'},
-    {value: 85, dataPointText: '85'},
-    {value: 36, dataPointText: '36'},
-    {value: 60, dataPointText: '60'},
-    {value: 54, dataPointText: '54'},
-    {value: 85, dataPointText: '85'},
+    {value: 32, dataPointText: '32'},
+    {value: 28, dataPointText: '28'},
+    {value: 22, dataPointText: '22'},
+    {value: 20, dataPointText: '20'},
   ];
 
   // const lineData = [
@@ -816,9 +812,9 @@ const App = () => {
   return (
     <View
       style={{
-        marginVertical: 100,
-        // marginLeft: 46,
-        marginLeft: 20,
+        flex:1,
+        paddingVertical: 100,
+        backgroundColor:'black'
       }}>
       {/* <MyPattern/> */}
       {/* <LineChart
@@ -880,7 +876,36 @@ const App = () => {
             color="#0BA5A4"
         />
     </View> */}
+
       <LineChart
+        data={lineData}
+        initialSpacing={0}
+        spacing={12}
+        areaChart
+        curved
+        hideDataPoints
+        startFillColor1="lightgreen"
+        endOpacity={0.6}
+        hideRules
+        xAxisColor="white"
+        yAxisColor="white"
+        yAxisTextStyle={{color:'white'}}
+        height={250}
+        pointerConfig={{
+          color: 'white',
+          pointerStripColor: 'white',
+          pointerStripHeight: 235,
+          pointerLabelComponent: item => {
+            return (
+              <View>
+                <Text style={{color:'yellow',fontWeight:'bold'}}>{item.value}</Text>
+              </View>
+            );
+          },
+        }}
+      />
+
+      {/* <LineChart
         curved={true}
         isAnimated={true}
         // animateTogether
@@ -921,7 +946,7 @@ const App = () => {
         hideRules
         spacing={10}
         areaChart
-      />
+      /> */}
       {/* <LineChart
       isAnimated={true}
       curved

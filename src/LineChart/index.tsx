@@ -332,6 +332,7 @@ export const LineChart = (props: propTypes) => {
   const scrollRef = useRef();
   const [pointerX, setPointerX] = useState(0);
   const [pointerY, setPointerY] = useState(0);
+  const [pointerItem, setPointerItem] = useState({});
   const [points, setPoints] = useState('');
   const [points2, setPoints2] = useState('');
   const [points3, setPoints3] = useState('');
@@ -2086,7 +2087,7 @@ export const LineChart = (props: propTypes) => {
             style={{
               position: 'absolute',
               left:
-                (pointerRadius || pointerWidth / 2) - 20 + shiftPointerLabelX,
+                (pointerRadius || pointerWidth / 2) - 10 + shiftPointerLabelX,
               top:
                 (pointerStripUptoDataPoint
                   ? pointerRadius || pointerStripHeight / 2
@@ -2098,7 +2099,7 @@ export const LineChart = (props: propTypes) => {
                 : containerHeight - pointerStripHeight,
               width: pointerLabelWidth,
             }}>
-            {pointerLabelComponent()}
+            {pointerLabelComponent(pointerItem)}
           </View>
         )}
       </View>
@@ -2125,6 +2126,8 @@ export const LineChart = (props: propTypes) => {
           let x = evt.nativeEvent.locationX;
           let factor = x / (initialSpacing + spacing);
           factor = Math.round(factor);
+          factor = Math.min(factor, data.length - 1);
+          factor = Math.max(factor, 0);
           let z =
             initialSpacing +
             spacing * factor -
@@ -2138,12 +2141,15 @@ export const LineChart = (props: propTypes) => {
             (pointerRadius || pointerHeight / 2) +
             10;
           setPointerY(y);
+          setPointerItem(item);
         }}
         onResponderMove={evt => {
           if (!pointerConfig) return;
           let x = evt.nativeEvent.locationX;
           let factor = x / (initialSpacing + spacing);
           factor = Math.round(factor);
+          factor = Math.min(factor, data.length - 1);
+          factor = Math.max(factor, 0);
           let z =
             initialSpacing +
             spacing * factor -
@@ -2157,6 +2163,7 @@ export const LineChart = (props: propTypes) => {
             (pointerRadius || pointerHeight / 2) +
             10;
           setPointerY(y);
+          setPointerItem(item);
         }}
         onResponderRelease={evt => {
           setTimeout(() => setPointerX(0), pointerVanishDelay);
@@ -2326,6 +2333,8 @@ export const LineChart = (props: propTypes) => {
           let x = evt.nativeEvent.locationX;
           let factor = x / (initialSpacing + spacing);
           factor = Math.round(factor);
+          factor = Math.min(factor, data.length - 1);
+          factor = Math.max(factor, 0);
           let z =
             initialSpacing +
             spacing * factor -
@@ -2339,12 +2348,15 @@ export const LineChart = (props: propTypes) => {
             (pointerRadius || pointerHeight / 2) +
             10;
           setPointerY(y);
+          setPointerItem(item);
         }}
         onResponderMove={evt => {
           if (!pointerConfig) return;
           let x = evt.nativeEvent.locationX;
           let factor = x / (initialSpacing + spacing);
           factor = Math.round(factor);
+          factor = Math.min(factor, data.length - 1);
+          factor = Math.max(factor, 0);
           let z =
             initialSpacing +
             spacing * factor -
@@ -2358,6 +2370,7 @@ export const LineChart = (props: propTypes) => {
             (pointerRadius || pointerHeight / 2) +
             10;
           setPointerY(y);
+          setPointerItem(item);
         }}
         onResponderRelease={evt => {
           setTimeout(() => setPointerX(0), pointerVanishDelay);
