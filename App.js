@@ -583,7 +583,7 @@ const App = () => {
     },
   ];
 
-  const TrianglePattern = () => {
+  const MyPattern = () => {
     return (
       <Pattern
         id="DiagonalLines"
@@ -598,7 +598,7 @@ const App = () => {
     );
   };
 
-  const MyPattern = () => {
+  const nn = () => {
     return (
       <Pattern
         id="DiagonalLines"
@@ -681,16 +681,40 @@ const App = () => {
     {value: 0.72, label: '14'},
     {value: 0.85, label: '15'},
   ];
-  //   const lineData = [
-  //     {value: 0, dataPointText: '0'},
-  //     {value: 20, dataPointText: '20'},
-  //     {value: 18, dataPointText: '18'},
-  //     {value: 40, dataPointText: '40'},
-  //     {value: 36, dataPointText: '36'},
-  //     {value: 60, dataPointText: '60'},
-  //     {value: 54, dataPointText: '54'},
-  //     {value: 85, dataPointText: '85'}
-  // ];
+  const lineData = [
+    {value: 0, dataPointText: '0'},
+    {value: 20, dataPointText: '20'},
+    {value: 18, dataPointText: '18'},
+    {value: 40, dataPointText: '40'},
+    {value: 36, dataPointText: '36'},
+    {value: 60, dataPointText: '60'},
+    {value: 54, dataPointText: '54'},
+    {value: 85, dataPointText: '85'},
+    {value: 36, dataPointText: '36'},
+    {value: 60, dataPointText: '60'},
+    {value: 54, dataPointText: '54'},
+    {value: 85, dataPointText: '85'},
+    {value: 36, dataPointText: '36'},
+    {value: 60, dataPointText: '60'},
+    {value: 54, dataPointText: '54'},
+    {value: 85, dataPointText: '85'},
+    {value: 36, dataPointText: '36'},
+    {value: 60, dataPointText: '60'},
+    {value: 54, dataPointText: '54'},
+    {value: 85, dataPointText: '85'},
+    {value: 36, dataPointText: '36'},
+    {value: 60, dataPointText: '60'},
+    {value: 54, dataPointText: '54'},
+    {value: 85, dataPointText: '85'},
+    {value: 36, dataPointText: '36'},
+    {value: 60, dataPointText: '60'},
+    {value: 54, dataPointText: '54'},
+    {value: 85, dataPointText: '85'},
+    {value: 36, dataPointText: '36'},
+    {value: 60, dataPointText: '60'},
+    {value: 54, dataPointText: '54'},
+    {value: 85, dataPointText: '85'},
+  ];
 
   // const lineData = [
   //   {value: 0, dataPointText: '0'},
@@ -776,6 +800,19 @@ const App = () => {
     {value: 1387, label: 'active', labelTextStyle: {textAlign: 'left'}},
   ];
 
+  const ldt = [
+    {value: -10},
+    {value: 25},
+    {value: 24},
+    {value: 45},
+    {value: 60},
+    {value: -34},
+    {value: 24},
+    {value: 45},
+    {value: 60},
+    {value: -34},
+  ];
+
   return (
     <View
       style={{
@@ -794,7 +831,14 @@ const App = () => {
         yAxisTextStyle={{fontWeight:'bold',marginRight:-110,zIndex:10000,textAlign:'left'}}
         spacing={30}
       /> */}
-      <BarChart data={dtt} barWidth={40} spacing={30} />
+      {/* <BarChart
+        data={ldt}
+        maxValue={80}
+        stepValue={20}
+        noOfSections={4}
+        minValue={-60}
+        noOfSectionsBelowXAxis={3}
+      /> */}
       {/* <LineChart
             areaChart
             curved
@@ -836,33 +880,48 @@ const App = () => {
             color="#0BA5A4"
         />
     </View> */}
-      {/* <LineChart
-      // curved={true}
-      // isAnimated={true}
-      // animateTogether
-      pressEnabled={true}
-      showStripOnPress={true}
-      showTextOnPress={true}
-          data={lineData}
-          disableScroll={true}
-          // data2={lineData2}
-          height={250}
-          showVerticalLines
-          spacing={44}
-          initialSpacing={0}
-          color1="skyblue"
-          color2="orange"
-          textColor1="green"
-          dataPointsHeight={6}
-          dataPointsWidth={6}
-          dataPointsHeight2={6}
-          dataPointsWidth2={6}
-          dataPointsColor1="blue"
-          dataPointsColor2="red"
-          textShiftY={-2}
-          textShiftX={-5}
-          textFontSize={13}
-      /> */}
+      <LineChart
+        curved={true}
+        isAnimated={true}
+        // animateTogether
+        pressEnabled={true}
+        showStripOnPress={true}
+        showTextOnPress={true}
+        data={lineData}
+        disableScroll={true}
+        pointerConfig={{
+          radius: 5,
+          // pointerStripHeight:120,
+          pointerLabelComponent: () => {
+            return (
+              <View>
+                <Text>{'1234'}</Text>
+              </View>
+            );
+          },
+        }}
+        // data2={lineData2}
+        hideDataPoints
+        height={250}
+        // showVerticalLines
+        // spacing={44}
+        initialSpacing={0}
+        color1="skyblue"
+        color2="orange"
+        textColor1="green"
+        dataPointsHeight={6}
+        dataPointsWidth={6}
+        dataPointsHeight2={6}
+        dataPointsWidth2={6}
+        dataPointsColor1="blue"
+        dataPointsColor2="red"
+        textShiftY={-2}
+        textShiftX={-5}
+        textFontSize={13}
+        hideRules
+        spacing={10}
+        areaChart
+      />
       {/* <LineChart
       isAnimated={true}
       curved
@@ -908,7 +967,7 @@ const App = () => {
         endOpacity={0.3}
         /> */}
 
-      <BarChart
+      {/* <BarChart
         width={340}
         rotateLabel
         barWidth={12}
@@ -916,7 +975,7 @@ const App = () => {
         noOfSections={4}
         barBorderRadius={6}
         stackData={stackData}
-      />
+      /> */}
 
       {/* <BarChart
       // isAnimated={true}

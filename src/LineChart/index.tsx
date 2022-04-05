@@ -107,6 +107,7 @@ type propTypes = {
   areaChart?: Boolean;
 
   disableScroll?: Boolean;
+  pointerConfig?: Pointer;
   showScrollIndicator?: Boolean;
 
   //Indices
@@ -309,8 +310,28 @@ type sectionType = {
   value: string;
 };
 
+type Pointer = {
+  height?: number;
+  width?: number;
+  radius?: number;
+  color?: ColorValue;
+  pointerComponent?: Function;
+  showPointerStrip?: boolean;
+  pointerStripWidth?: number;
+  pointerStripHeight?: number;
+  pointerStripColor?: ColorValue;
+  pointerStripUptoDataPoint?: boolean;
+  pointerLabelComponent?: Function;
+  shiftPointerLabelX?: number;
+  shiftPointerLabelY?: number;
+  pointerLabelWidth?: number;
+  pointerVanishDelay?: number;
+};
+
 export const LineChart = (props: propTypes) => {
   const scrollRef = useRef();
+  const [pointerX, setPointerX] = useState(0);
+  const [pointerY, setPointerY] = useState(0);
   const [points, setPoints] = useState('');
   const [points2, setPoints2] = useState('');
   const [points3, setPoints3] = useState('');
@@ -1221,7 +1242,87 @@ export const LineChart = (props: propTypes) => {
 
   const backgroundColor = props.backgroundColor || 'transparent';
 
-  const disableScroll = props.disableScroll || false;
+  const defaultPointerConfig = {
+    height: 0,
+    width: 0,
+    radius: 5,
+    color: 'red',
+    pointerComponent: null,
+    showPointerStrip: true,
+    pointerStripHeight: containerHeight,
+    pointerStripWidth: 1,
+    pointerStripColor: 'black',
+    pointerStripUptoDataPoint: false,
+    pointerLabelComponent: null,
+    shiftPointerLabelX: 0,
+    shiftPointerLabelY: 0,
+    pointerLabelWidth: 40,
+    pointerVanishDelay: 200,
+  };
+  const pointerConfig = props.pointerConfig || null;
+  const pointerHeight =
+    pointerConfig && pointerConfig.height
+      ? props.pointerConfig.height
+      : defaultPointerConfig.height;
+  const pointerWidth =
+    pointerConfig && pointerConfig.width
+      ? props.pointerConfig.width
+      : defaultPointerConfig.width;
+  const pointerRadius =
+    pointerConfig && pointerConfig.radius
+      ? props.pointerConfig.radius
+      : defaultPointerConfig.radius;
+  const pointerColor =
+    pointerConfig && pointerConfig.color
+      ? props.pointerConfig.color
+      : defaultPointerConfig.color;
+  const pointerComponent =
+    pointerConfig && pointerConfig.pointerComponent
+      ? props.pointerConfig.pointerComponent
+      : defaultPointerConfig.pointerComponent;
+
+  const showPointerStrip =
+    pointerConfig && pointerConfig.showPointerStrip
+      ? props.pointerConfig.showPointerStrip
+      : defaultPointerConfig.showPointerStrip;
+  const pointerStripHeight =
+    pointerConfig && pointerConfig.pointerStripHeight
+      ? props.pointerConfig.pointerStripHeight
+      : defaultPointerConfig.pointerStripHeight;
+  const pointerStripWidth =
+    pointerConfig && pointerConfig.pointerStripWidth
+      ? props.pointerConfig.pointerStripWidth
+      : defaultPointerConfig.pointerStripWidth;
+  const pointerStripColor =
+    pointerConfig && pointerConfig.pointerStripColor
+      ? props.pointerConfig.pointerStripColor
+      : defaultPointerConfig.pointerStripColor;
+  const pointerStripUptoDataPoint =
+    pointerConfig && pointerConfig.pointerStripUptoDataPoint
+      ? props.pointerConfig.pointerStripUptoDataPoint
+      : defaultPointerConfig.pointerStripUptoDataPoint;
+  const pointerLabelComponent =
+    pointerConfig && pointerConfig.pointerLabelComponent
+      ? props.pointerConfig.pointerLabelComponent
+      : defaultPointerConfig.pointerLabelComponent;
+  const shiftPointerLabelX =
+    pointerConfig && pointerConfig.shiftPointerLabelX
+      ? props.pointerConfig.shiftPointerLabelX
+      : defaultPointerConfig.shiftPointerLabelX;
+  const shiftPointerLabelY =
+    pointerConfig && pointerConfig.shiftPointerLabelY
+      ? props.pointerConfig.shiftPointerLabelY
+      : defaultPointerConfig.shiftPointerLabelY;
+  const pointerLabelWidth =
+    pointerConfig && pointerConfig.pointerLabelWidth
+      ? props.pointerConfig.pointerLabelWidth
+      : defaultPointerConfig.pointerLabelWidth;
+  const pointerVanishDelay =
+    pointerConfig && pointerConfig.pointerVanishDelay
+      ? props.pointerConfig.pointerVanishDelay
+      : defaultPointerConfig.pointerVanishDelay;
+
+  const disableScroll = props.disableScroll || pointerConfig || false;
   const showScrollIndicator = props.showScrollIndicator || false;
   const hideOrigin = props.hideOrigin || false;
 
@@ -1947,6 +2048,63 @@ export const LineChart = (props: propTypes) => {
     });
   };
 
+  const renderPointer = () => {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          height: pointerHeight || pointerRadius * 2,
+          width: pointerWidth || pointerRadius * 2,
+          backgroundColor: pointerColor,
+          borderRadius: pointerRadius || 0,
+          left: pointerX,
+          top: pointerY,
+        }}>
+        {pointerComponent ? pointerComponent() : null}
+        {showPointerStrip && (
+          <View
+            style={{
+              position: 'absolute',
+              left: pointerRadius || pointerWidth / 2,
+              top: pointerStripUptoDataPoint
+                ? pointerRadius || pointerStripHeight / 2
+                : -pointerY + 8,
+              height: pointerStripUptoDataPoint
+                ? containerHeight - pointerY - 10
+                : pointerStripHeight,
+              width: pointerStripWidth,
+              backgroundColor: pointerStripColor,
+              marginTop: pointerStripUptoDataPoint
+                ? 0
+                : containerHeight - pointerStripHeight,
+            }}
+          />
+        )}
+
+        {pointerLabelComponent && (
+          <View
+            style={{
+              position: 'absolute',
+              left:
+                (pointerRadius || pointerWidth / 2) - 20 + shiftPointerLabelX,
+              top:
+                (pointerStripUptoDataPoint
+                  ? pointerRadius || pointerStripHeight / 2
+                  : -pointerY + 8) -
+                pointerLabelWidth / 2 +
+                shiftPointerLabelY,
+              marginTop: pointerStripUptoDataPoint
+                ? 0
+                : containerHeight - pointerStripHeight,
+              width: pointerLabelWidth,
+            }}>
+            {pointerLabelComponent()}
+          </View>
+        )}
+      </View>
+    );
+  };
+
   const renderLine = (
     points: any,
     currentLineThickness: number | undefined,
@@ -1960,13 +2118,55 @@ export const LineChart = (props: propTypes) => {
   ) => {
     return (
       <View
+        onStartShouldSetResponder={evt => (pointerConfig ? true : false)}
+        onMoveShouldSetResponder={evt => (pointerConfig ? true : false)}
+        onResponderGrant={evt => {
+          if (!pointerConfig) return;
+          let x = evt.nativeEvent.locationX;
+          let factor = x / (initialSpacing + spacing);
+          factor = Math.round(factor);
+          let z =
+            initialSpacing +
+            spacing * factor -
+            (pointerRadius || pointerWidth / 2) -
+            3;
+          setPointerX(z);
+          let item = data[factor];
+          let y =
+            containerHeight -
+            (item.value * containerHeight) / maxValue -
+            (pointerRadius || pointerHeight / 2) +
+            10;
+          setPointerY(y);
+        }}
+        onResponderMove={evt => {
+          if (!pointerConfig) return;
+          let x = evt.nativeEvent.locationX;
+          let factor = x / (initialSpacing + spacing);
+          factor = Math.round(factor);
+          let z =
+            initialSpacing +
+            spacing * factor -
+            (pointerRadius || pointerWidth / 2) -
+            3;
+          setPointerX(z);
+          let item = data[factor];
+          let y =
+            containerHeight -
+            (item.value * containerHeight) / maxValue -
+            (pointerRadius || pointerHeight / 2) +
+            10;
+          setPointerY(y);
+        }}
+        onResponderRelease={evt => {
+          setTimeout(() => setPointerX(0), pointerVanishDelay);
+        }}
         style={{
           position: 'absolute',
           height: containerHeight + 10 + horizSectionsBelow.length * stepHeight,
-          bottom: 60, //stepHeight * -0.5 + xAxisThickness,
+          bottom: 60,
           width: totalWidth,
-          zIndex: -1,
-          // backgroundColor: 'rgba(200,150,150,0.6)'
+          zIndex: 20,
         }}>
         <Svg>
           {strokeDashArray &&
@@ -2099,6 +2299,7 @@ export const LineChart = (props: propTypes) => {
               )
             : null}
         </Svg>
+        {pointerX ? renderPointer() : null}
       </View>
     );
   };
@@ -2118,6 +2319,49 @@ export const LineChart = (props: propTypes) => {
     // console.log('animatedWidth is-------->', animatedWidth);
     return (
       <Animated.View
+        onStartShouldSetResponder={evt => (pointerConfig ? true : false)}
+        onMoveShouldSetResponder={evt => (pointerConfig ? true : false)}
+        onResponderGrant={evt => {
+          if (!pointerConfig) return;
+          let x = evt.nativeEvent.locationX;
+          let factor = x / (initialSpacing + spacing);
+          factor = Math.round(factor);
+          let z =
+            initialSpacing +
+            spacing * factor -
+            (pointerRadius || pointerWidth / 2) -
+            3;
+          setPointerX(z);
+          let item = data[factor];
+          let y =
+            containerHeight -
+            (item.value * containerHeight) / maxValue -
+            (pointerRadius || pointerHeight / 2) +
+            10;
+          setPointerY(y);
+        }}
+        onResponderMove={evt => {
+          if (!pointerConfig) return;
+          let x = evt.nativeEvent.locationX;
+          let factor = x / (initialSpacing + spacing);
+          factor = Math.round(factor);
+          let z =
+            initialSpacing +
+            spacing * factor -
+            (pointerRadius || pointerWidth / 2) -
+            3;
+          setPointerX(z);
+          let item = data[factor];
+          let y =
+            containerHeight -
+            (item.value * containerHeight) / maxValue -
+            (pointerRadius || pointerHeight / 2) +
+            10;
+          setPointerY(y);
+        }}
+        onResponderRelease={evt => {
+          setTimeout(() => setPointerX(0), pointerVanishDelay);
+        }}
         style={{
           position: 'absolute',
           height: containerHeight + 10 + horizSectionsBelow.length * stepHeight,
@@ -2257,6 +2501,7 @@ export const LineChart = (props: propTypes) => {
               )
             : null}
         </Svg>
+        {pointerX ? renderPointer() : null}
       </Animated.View>
     );
   };
