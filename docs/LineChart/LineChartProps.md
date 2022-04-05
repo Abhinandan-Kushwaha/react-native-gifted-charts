@@ -284,6 +284,7 @@ type Pointer = {
 ```
 
 The above properties can be understood with this labelled diagram-
+  
 <img src='../../demos/rainbow.png' alt='' height=400 width=500/>
 
 ### onPress and strip related props
