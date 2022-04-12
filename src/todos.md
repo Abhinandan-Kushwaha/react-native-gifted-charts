@@ -1,7 +1,7 @@
 ## Feature requests
 
 1. OnPress function on Pie Chart https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/111
-2. Bottom margin between bar and x axis https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/126
+2. Change startingPoint default props on PieChart https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/132
 
 ## To-dos in documentation-
 
