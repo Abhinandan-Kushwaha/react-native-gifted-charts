@@ -61,6 +61,7 @@ type Props = {
   autoShiftLabels?: Boolean;
   barBackgroundPattern?: Function;
   patternId?: String;
+  barMarginBottom?: number;
 };
 type itemType = {
   value?: number;
@@ -87,6 +88,7 @@ type itemType = {
   labelWidth?: number;
   barBackgroundPattern?: Function;
   patternId?: String;
+  barMarginBottom?: number;
 };
 const RenderBars = (props: Props) => {
   const {
@@ -107,6 +109,9 @@ const RenderBars = (props: Props) => {
     animationDuration,
     autoShiftLabels,
   } = props;
+
+  const barMarginBottom =
+    item.barMarginBottom === 0 ? 0 : props.barMarginBottom || 0;
 
   const renderLabel = (label: String, labelTextStyle: any, value: number) => {
     return (
@@ -313,17 +318,17 @@ const RenderBars = (props: Props) => {
       style={[
         {
           // overflow: 'visible',
-          marginBottom: 60,
+          marginBottom: 60 + barMarginBottom,
           width: item.barWidth || props.barWidth || 30,
           height:
-            item.value >= 0 &&
+            (item.value >= 0 &&
             (!isThreeD || isAnimated) &&
             item.topLabelComponent
               ? (item.topLabelComponentHeight || 30) +
                 (Math.abs(item.value) * (containerHeight || 200)) /
                   (maxValue || 200)
               : (Math.abs(item.value) * (containerHeight || 200)) /
-                (maxValue || 200),
+                (maxValue || 200)) - barMarginBottom,
           marginRight: spacing,
         },
         item.value < 0 && {
@@ -391,7 +396,8 @@ const RenderBars = (props: Props) => {
             animationDuration={animationDuration || 800}
             height={
               (Math.abs(item.value) * (containerHeight || 200)) /
-              (maxValue || 200)
+                (maxValue || 200) -
+              barMarginBottom
             }
             intactTopLabel={props.intactTopLabel}
             horizontal={props.horizontal}
@@ -423,7 +429,8 @@ const RenderBars = (props: Props) => {
             intactTopLabel={props.intactTopLabel}
             height={
               (Math.abs(item.value) * (containerHeight || 200)) /
-              (maxValue || 200)
+                (maxValue || 200) -
+              barMarginBottom
             }
             value={item.value}
           />
@@ -447,6 +454,7 @@ const RenderBars = (props: Props) => {
               (Math.abs(item.value) * (containerHeight || 200)) /
               (maxValue || 200)
             }
+            barMarginBottom={barMarginBottom}
             cappedBars={props.cappedBars}
             capThickness={props.capThickness}
             capColor={props.capColor}
@@ -477,6 +485,7 @@ const RenderBars = (props: Props) => {
             (Math.abs(item.value) * (containerHeight || 200)) /
             (maxValue || 200)
           }
+          barMarginBottom={barMarginBottom}
           cappedBars={props.cappedBars}
           capThickness={props.capThickness}
           capColor={props.capColor}
@@ -505,6 +514,7 @@ const RenderBars = (props: Props) => {
             (Math.abs(item.value) * (containerHeight || 200)) /
             (maxValue || 200)
           }
+          barMarginBottom={barMarginBottom}
           cappedBars={props.cappedBars}
           capThickness={props.capThickness}
           capColor={props.capColor}

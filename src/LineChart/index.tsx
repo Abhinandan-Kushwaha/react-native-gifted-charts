@@ -304,6 +304,9 @@ type itemType = {
   verticalLineUptoDataPoint?: Boolean;
   verticalLineColor?: string;
   verticalLineThickness?: number;
+  pointerShiftX?: number;
+  pointerShiftY?: number;
+  onPress?: Function;
 };
 
 type sectionType = {
@@ -332,7 +335,10 @@ export const LineChart = (props: propTypes) => {
   const scrollRef = useRef();
   const [pointerX, setPointerX] = useState(0);
   const [pointerY, setPointerY] = useState(0);
-  const [pointerItem, setPointerItem] = useState({});
+  const [pointerItem, setPointerItem] = useState({
+    pointerShiftX: 0,
+    pointerShiftY: 0,
+  });
   const [points, setPoints] = useState('');
   const [points2, setPoints2] = useState('');
   const [points3, setPoints3] = useState('');
@@ -407,6 +413,63 @@ export const LineChart = (props: propTypes) => {
   let newPoints = '',
     newFillPoints = '';
   let counter = 0;
+
+  const initialSpacing =
+    props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
+  const thickness = props.thickness || 2;
+
+  const spacing = props.spacing === 0 ? 0 : props.spacing || 60;
+
+  const xAxisThickness = props.xAxisThickness || 1;
+  const dataPointsHeight1 =
+    props.dataPointsHeight1 || props.dataPointsHeight || 2;
+  const dataPointsWidth1 = props.dataPointsWidth1 || props.dataPointsWidth || 2;
+  const dataPointsRadius1 =
+    props.dataPointsRadius1 || props.dataPointsRadius || 3;
+  const dataPointsColor1 =
+    props.dataPointsColor1 || props.dataPointsColor || 'black';
+  const dataPointsShape1 =
+    props.dataPointsShape1 || props.dataPointsShape || 'circular';
+
+  const dataPointsHeight2 =
+    props.dataPointsHeight2 || props.dataPointsHeight || 2;
+  const dataPointsWidth2 = props.dataPointsWidth2 || props.dataPointsWidth || 2;
+  const dataPointsRadius2 =
+    props.dataPointsRadius2 || props.dataPointsRadius || 3;
+  const dataPointsColor2 =
+    props.dataPointsColor2 || props.dataPointsColor || 'blue';
+  const dataPointsShape2 =
+    props.dataPointsShape2 || props.dataPointsShape || 'circular';
+
+  const dataPointsHeight3 =
+    props.dataPointsHeight3 || props.dataPointsHeight || 2;
+  const dataPointsWidth3 = props.dataPointsWidth3 || props.dataPointsWidth || 2;
+  const dataPointsRadius3 =
+    props.dataPointsRadius3 || props.dataPointsRadius || 3;
+  const dataPointsColor3 =
+    props.dataPointsColor3 || props.dataPointsColor || 'red';
+  const dataPointsShape3 =
+    props.dataPointsShape3 || props.dataPointsShape || 'circular';
+
+  const dataPointsHeight4 =
+    props.dataPointsHeight4 || props.dataPointsHeight || 2;
+  const dataPointsWidth4 = props.dataPointsWidth4 || props.dataPointsWidth || 2;
+  const dataPointsRadius4 =
+    props.dataPointsRadius4 || props.dataPointsRadius || 3;
+  const dataPointsColor4 =
+    props.dataPointsColor4 || props.dataPointsColor || 'red';
+  const dataPointsShape4 =
+    props.dataPointsShape4 || props.dataPointsShape || 'circular';
+
+  const dataPointsHeight5 =
+    props.dataPointsHeight5 || props.dataPointsHeight || 2;
+  const dataPointsWidth5 = props.dataPointsWidth5 || props.dataPointsWidth || 2;
+  const dataPointsRadius5 =
+    props.dataPointsRadius5 || props.dataPointsRadius || 3;
+  const dataPointsColor5 =
+    props.dataPointsColor5 || props.dataPointsColor || 'red';
+  const dataPointsShape5 =
+    props.dataPointsShape5 || props.dataPointsShape || 'circular';
 
   if (animateOnDataChange) {
     animations.forEach((item, index) => {
@@ -548,56 +611,6 @@ export const LineChart = (props: propTypes) => {
   }, [animationDuration, widthValue5]);
 
   const areaChart = props.areaChart || false;
-  const dataPointsHeight1 =
-    props.dataPointsHeight1 || props.dataPointsHeight || 2;
-  const dataPointsWidth1 = props.dataPointsWidth1 || props.dataPointsWidth || 2;
-  const dataPointsRadius1 =
-    props.dataPointsRadius1 || props.dataPointsRadius || 3;
-  const dataPointsColor1 =
-    props.dataPointsColor1 || props.dataPointsColor || 'black';
-  const dataPointsShape1 =
-    props.dataPointsShape1 || props.dataPointsShape || 'circular';
-
-  const dataPointsHeight2 =
-    props.dataPointsHeight2 || props.dataPointsHeight || 2;
-  const dataPointsWidth2 = props.dataPointsWidth2 || props.dataPointsWidth || 2;
-  const dataPointsRadius2 =
-    props.dataPointsRadius2 || props.dataPointsRadius || 3;
-  const dataPointsColor2 =
-    props.dataPointsColor2 || props.dataPointsColor || 'blue';
-  const dataPointsShape2 =
-    props.dataPointsShape2 || props.dataPointsShape || 'circular';
-
-  const dataPointsHeight3 =
-    props.dataPointsHeight3 || props.dataPointsHeight || 2;
-  const dataPointsWidth3 = props.dataPointsWidth3 || props.dataPointsWidth || 2;
-  const dataPointsRadius3 =
-    props.dataPointsRadius3 || props.dataPointsRadius || 3;
-  const dataPointsColor3 =
-    props.dataPointsColor3 || props.dataPointsColor || 'red';
-  const dataPointsShape3 =
-    props.dataPointsShape3 || props.dataPointsShape || 'circular';
-
-  const dataPointsHeight4 =
-    props.dataPointsHeight4 || props.dataPointsHeight || 2;
-  const dataPointsWidth4 = props.dataPointsWidth4 || props.dataPointsWidth || 2;
-  const dataPointsRadius4 =
-    props.dataPointsRadius4 || props.dataPointsRadius || 3;
-  const dataPointsColor4 =
-    props.dataPointsColor4 || props.dataPointsColor || 'red';
-  const dataPointsShape4 =
-    props.dataPointsShape4 || props.dataPointsShape || 'circular';
-
-  const dataPointsHeight5 =
-    props.dataPointsHeight5 || props.dataPointsHeight || 2;
-  const dataPointsWidth5 = props.dataPointsWidth5 || props.dataPointsWidth || 2;
-  const dataPointsRadius5 =
-    props.dataPointsRadius5 || props.dataPointsRadius || 3;
-  const dataPointsColor5 =
-    props.dataPointsColor5 || props.dataPointsColor || 'red';
-  const dataPointsShape5 =
-    props.dataPointsShape5 || props.dataPointsShape || 'circular';
-
   const textFontSize1 = props.textFontSize1 || props.textFontSize || 10;
   const textFontSize2 = props.textFontSize2 || props.textFontSize || 10;
   const textFontSize3 = props.textFontSize3 || props.textFontSize || 10;
@@ -608,13 +621,6 @@ export const LineChart = (props: propTypes) => {
   const textColor3 = props.textColor3 || props.textColor || 'gray';
   const textColor4 = props.textColor4 || props.textColor || 'gray';
   const textColor5 = props.textColor5 || props.textColor || 'gray';
-  const initialSpacing =
-    props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
-  const thickness = props.thickness || 2;
-
-  const spacing = props.spacing === 0 ? 0 : props.spacing || 60;
-
-  const xAxisThickness = props.xAxisThickness || 1;
   const xAxisColor = props.xAxisColor || 'black';
 
   let totalWidth = initialSpacing;
@@ -1936,6 +1942,9 @@ export const LineChart = (props: propTypes) => {
                         : 'none'
                       : dataPointsColor
                   }
+                  onPress={() => {
+                    item.onPress ? item.onPress(item, index) : null;
+                  }}
                 />
               )}
             </Fragment>
@@ -1957,6 +1966,9 @@ export const LineChart = (props: propTypes) => {
                         : 'none'
                       : dataPointsColor
                   }
+                  onPress={() => {
+                    item.onPress ? item.onPress(item, index) : null;
+                  }}
                 />
               )}
             </Fragment>
@@ -2054,14 +2066,22 @@ export const LineChart = (props: propTypes) => {
       <View
         style={{
           position: 'absolute',
-          height: pointerHeight || pointerRadius * 2,
-          width: pointerWidth || pointerRadius * 2,
-          backgroundColor: pointerColor,
-          borderRadius: pointerRadius || 0,
-          left: pointerX,
+          left: pointerX + (pointerItem.pointerShiftX || 0),
           top: pointerY,
         }}>
-        {pointerComponent ? pointerComponent() : null}
+        {pointerComponent ? (
+          pointerComponent()
+        ) : (
+          <View
+            style={{
+              height: pointerHeight || pointerRadius * 2,
+              width: pointerWidth || pointerRadius * 2,
+              marginTop: pointerItem.pointerShiftY || 0,
+              backgroundColor: pointerColor,
+              borderRadius: pointerRadius || 0,
+            }}
+          />
+        )}
         {showPointerStrip && (
           <View
             style={{
@@ -2124,7 +2144,7 @@ export const LineChart = (props: propTypes) => {
         onResponderGrant={evt => {
           if (!pointerConfig) return;
           let x = evt.nativeEvent.locationX;
-          let factor = x / (initialSpacing + spacing);
+          let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
           factor = Math.min(factor, data.length - 1);
           factor = Math.max(factor, 0);
@@ -2146,7 +2166,7 @@ export const LineChart = (props: propTypes) => {
         onResponderMove={evt => {
           if (!pointerConfig) return;
           let x = evt.nativeEvent.locationX;
-          let factor = x / (initialSpacing + spacing);
+          let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
           factor = Math.min(factor, data.length - 1);
           factor = Math.max(factor, 0);
@@ -2331,7 +2351,7 @@ export const LineChart = (props: propTypes) => {
         onResponderGrant={evt => {
           if (!pointerConfig) return;
           let x = evt.nativeEvent.locationX;
-          let factor = x / (initialSpacing + spacing);
+          let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
           factor = Math.min(factor, data.length - 1);
           factor = Math.max(factor, 0);
@@ -2353,7 +2373,7 @@ export const LineChart = (props: propTypes) => {
         onResponderMove={evt => {
           if (!pointerConfig) return;
           let x = evt.nativeEvent.locationX;
-          let factor = x / (initialSpacing + spacing);
+          let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
           factor = Math.min(factor, data.length - 1);
           factor = Math.max(factor, 0);
