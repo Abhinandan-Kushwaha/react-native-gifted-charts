@@ -127,6 +127,7 @@ type PropTypes = {
   labelsExtraHeight?: number;
   barBackgroundPattern?: Function;
   patternId?: String;
+  barMarginBottom?: number;
 };
 type lineConfigType = {
   initialSpacing?: number;
@@ -1269,6 +1270,7 @@ export const BarChart = (props: PropTypes) => {
                   autoShiftLabels={autoShiftLabels}
                   barBackgroundPattern={props.barBackgroundPattern}
                   patternId={props.patternId}
+                  barMarginBottom={props.barMarginBottom}
                 />
               ))}
         </Fragment>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {TouchableOpacity} from 'react-native';
+import {ScrollView, TouchableOpacity} from 'react-native';
 import {Alert} from 'react-native';
 import {View, Text, StyleSheet} from 'react-native';
 import {MyPattern} from './src/pattern';
@@ -682,34 +682,34 @@ const App = () => {
     {value: 0.85, label: '15'},
   ];
   const lineData = [
-    {value: 8, dataPointText: '8'},
-    {value: 10, dataPointText: '10'},
-    {value: 12, dataPointText: '12'},
-    {value: 8, dataPointText: '8'},
-    {value: 11, dataPointText: '11'},
-    {value: 13, dataPointText: '13'},
-    {value: 19, dataPointText: '19'},
-    {value: 18, dataPointText: '18'},
-    {value: 22, dataPointText: '22'},
-    {value: 20, dataPointText: '20'},
-    {value: 28, dataPointText: '28'},
-    {value: 32, dataPointText: '32'},
-    {value: 36, dataPointText: '36'},
-    {value: 40, dataPointText: '40'},
-    {value: 38, dataPointText: '38'},
-    {value: 40, dataPointText: '40'},
-    {value: 42, dataPointText: '42'},
-    {value: 46, dataPointText: '46'},
-    {value: 44, dataPointText: '44'},
-    {value: 40, dataPointText: '40'},
-    {value: 36, dataPointText: '36'},
-    {value: 32, dataPointText: '32'},
-    {value: 38, dataPointText: '38'},
-    {value: 36, dataPointText: '36'},
-    {value: 32, dataPointText: '32'},
-    {value: 28, dataPointText: '28'},
-    {value: 22, dataPointText: '22'},
-    {value: 20, dataPointText: '20'},
+    {value: 8,pointerShiftX:10,pointerShiftY:-10},
+    {value: 10},
+    {value: 12},
+    {value: 8},
+    {value: 11},
+    {value: 13},
+    {value: 19},
+    {value: 18},
+    {value: 22},
+    {value: 20},
+    {value: 28},
+    {value: 32},
+    {value: 36},
+    {value: 40},
+    {value: 38},
+    {value: 40},
+    {value: 42},
+    {value: 46},
+    {value: 44},
+    {value: 40},
+    {value: 36},
+    {value: 32},
+    {value: 38},
+    {value: 36},
+    {value: 32},
+    {value: 28},
+    {value: 22},
+    {value: 20},
   ];
 
   // const lineData = [
@@ -735,11 +735,14 @@ const App = () => {
   // ];
 
   const lineData1 = [
-    {value: 20},
+    {value: 20,pointerShiftX:10},
     {value: 40},
-    {value: 48},
+    {value: 48, onPress:(item)=>Alert.alert(item.value+'')},
     {value: 50},
     {value: 56},
+    {value: 70},
+    {value: 90},
+    {value: 95},
     {value: 70},
     {value: 90},
     {value: 95},
@@ -812,21 +815,31 @@ const App = () => {
   return (
     <View
       style={{
-        flex:1,
+        // flex: 1,
         paddingVertical: 100,
-        backgroundColor:'black'
+        backgroundColor: 'black',
       }}>
+         
       {/* <MyPattern/> */}
-      {/* <LineChart
+      <LineChart
         data={lineData1}
-        // areaChart
-        yAxisSide='right'
-        horizontalRulesStyle={{zIndex:1}}
+        areaChart
+        // isAnimated
+        curved
+        dataPointsShape='rectangular'
+        // yAxisSide='right'
+        // pressEnabled
+        // showStripOnPress
+        // pointerConfig={{pointerStripColor: 'blue'}}
+        initialSpacing={0}
+        hideRules
+        // scrollToEnd
+        // horizontalRulesStyle={{zIndex:1}}
         // backgroundColor='rgba(255,0,0,0.8)'
-        yAxisLabelContainerStyle={{zIndex:100000,elevation:1,textAlign:'left'}}
-        yAxisTextStyle={{fontWeight:'bold',marginRight:-110,zIndex:10000,textAlign:'left'}}
-        spacing={30}
-      /> */}
+        // yAxisLabelContainerStyle={{zIndex:100000,elevation:1,textAlign:'left'}}
+        // yAxisTextStyle={{fontWeight:'bold',marginRight:-110,zIndex:10000,textAlign:'left'}}
+        // spacing={30}
+      />
       {/* <BarChart
         data={ldt}
         maxValue={80}
@@ -857,25 +870,26 @@ const App = () => {
             /> */}
       {/* <View style={{backgroundColor: '#1A3461'}}>
         <LineChart
-            initialSpacing={0}
-            data={lineData}
-            curved
-            // isAnimated
-            spacing={30}
-            textColor1="yellow"
-            textShiftY={-8}
-            textShiftX={-10}
-            textFontSize={13}
-            thickness={5}
-            hideRules
-            hideYAxisText
-            yAxisColor="#0BA5A4"
-            showVerticalLines
-            verticalLinesColor="rgba(14,164,164,0.5)"
-            xAxisColor="#0BA5A4"
-            color="#0BA5A4"
+          initialSpacing={0}
+          data={lineData}
+          curved
+          // isAnimated
+          spacing={30}
+          textColor1="yellow"
+          textShiftY={-8}
+          textShiftX={-10}
+          textFontSize={13}
+          thickness={5}
+          hideRules
+          hideYAxisText
+          yAxisColor="#0BA5A4"
+          showVerticalLines
+          verticalLinesColor="rgba(14,164,164,0.5)"
+          xAxisColor="#0BA5A4"
+          color="#0BA5A4"
         />
-    </View> */}
+      </View> */}
+      {/* <PieChart data={[]} isThreeD shadow donut/> */}
 
       <LineChart
         data={lineData}
@@ -883,6 +897,7 @@ const App = () => {
         spacing={12}
         areaChart
         curved
+        isAnimated
         hideDataPoints
         startFillColor1="lightgreen"
         endOpacity={0.6}

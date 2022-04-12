@@ -50,6 +50,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | Key                            | Value type | Description                                                                                                                          |
 | ------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | value                          | number     | Value of the item representing representing its position                                                                             |
+| onPress                        | function   | Function called on pressing the bar                                                                                                  |
 | label                          | string     | Label text appearing under the X axis                                                                                                |
 | labelTextStyle                 | object     | Style object for the label text appearing under the X axis                                                                           |
 | labelComponent                 | Function   | custom label component appearing under the X axis                                                                                    |
@@ -66,7 +67,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | dataPointShape                 | string     | Shape of the data point (rectangular or circular) defaults to circular                                                               |
 | hideDataPoint                  | Boolean    | To hide the data point                                                                                                               |
 | showVerticalLine               | Boolean    | When set to true, a vertical line will be displayed along that data point                                                            |
-| verticalLineUptoDataPoint      | Boolean    | When set to true, it sets the height of the vertical line upto the corresponding data point                                         |
+| verticalLineUptoDataPoint      | Boolean    | When set to true, it sets the height of the vertical line upto the corresponding data point                                          |
 | verticalLineColor              | ColorValue | Color of the vertical Line displayed along the data point                                                                            |
 | verticalLineThickness          | number     | Thickness of the vertical Line displayed along the data point                                                                        |
 | dataPointLabelWidth            | number     | width of the label shown beside a data point                                                                                         |
@@ -79,6 +80,8 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | stripWidth                     | number     | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
 | stripColor                     | ColorValue | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
 | stripOpacity                   | number     | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true |
+| pointerShiftX                  | number     | Shifts the pointer for that item horizontally by given quantity (used only when pointerConfig prop is passed)                        |
+| pointerShiftY                  | number     | Shifts the pointer for that item vertically by given quantity (used only when pointerConfig prop is passed)                          |
 
 **Alert**\
 When you are using the `dataPointLabelComponent`, make sure to provide the `dataPointsHeight` and `dataPointsWidth` values too (either in the corresponding item object, or directly as a props of the <LineChart> component). Otherwise the data points might appear shifted from their intended positions.

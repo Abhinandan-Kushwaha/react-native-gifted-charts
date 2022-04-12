@@ -37,6 +37,7 @@ type propTypes = {
   maxValue?: number;
   barBackgroundPattern?: Function;
   patternId?: String;
+  barMarginBottom?: number;
 };
 type itemType = {
   value?: number;
@@ -58,6 +59,7 @@ type itemType = {
   barBorderRadius?: number;
   barBackgroundPattern?: Function;
   patternId?: String;
+  barMarginBottom?: number;
 };
 
 const Animated2DWithGradient = (props: propTypes) => {
@@ -72,6 +74,7 @@ const Animated2DWithGradient = (props: propTypes) => {
     noAnimation,
     containerHeight,
     maxValue,
+    barMarginBottom,
   } = props;
   const [height, setHeight] = useState(noAnimation ? props.height : 2);
   const [initialRender, setInitialRender] = useState(
@@ -114,18 +117,20 @@ const Animated2DWithGradient = (props: propTypes) => {
             position: 'absolute',
             bottom: 0,
             width: '100%',
-            height: noAnimation
-              ? (Math.abs(item.value) * (containerHeight || 200)) /
-                (maxValue || 200)
-              : height,
+            height:
+              (noAnimation
+                ? (Math.abs(item.value) * (containerHeight || 200)) /
+                  (maxValue || 200)
+                : height) - (barMarginBottom || 0),
           }}>
           <View
             style={{
               width: '100%',
-              height: noAnimation
-                ? (Math.abs(item.value) * (containerHeight || 200)) /
-                  (maxValue || 200)
-                : height,
+              height:
+                (noAnimation
+                  ? (Math.abs(item.value) * (containerHeight || 200)) /
+                    (maxValue || 200)
+                  : height) - (barMarginBottom || 0),
             }}>
             {noGradient ? (
               <View
@@ -168,7 +173,7 @@ const Animated2DWithGradient = (props: propTypes) => {
                       height:
                         item.capThickness === 0
                           ? 0
-                          : item.capThickness || props.capThickness || 0,
+                          : item.capThickness || props.capThickness || 6,
                       backgroundColor:
                         item.capColor || props.capColor || 'black',
                       borderTopLeftRadius:
@@ -223,12 +228,12 @@ const Animated2DWithGradient = (props: propTypes) => {
                 {props.cappedBars && (
                   <View
                     style={{
-                      // position: 'absolute',
-                      // width: '100%',
+                      position: 'absolute',
+                      width: '100%',
                       height:
                         item.capThickness === 0
                           ? 0
-                          : item.capThickness || props.capThickness || 0,
+                          : item.capThickness || props.capThickness || 6,
                       backgroundColor:
                         item.capColor || props.capColor || 'black',
                       borderTopLeftRadius:
