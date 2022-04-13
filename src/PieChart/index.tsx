@@ -34,6 +34,7 @@ type propTypes = {
 
   centerLabelComponent?: Function;
   tilt?: number;
+  initialAngle?: number;
 };
 type itemType = {
   value: number;
@@ -96,6 +97,7 @@ export const PieChart = (props: propTypes) => {
     '800',
     '900',
   ];
+  const initialAngle = props.initialAngle || 0;
 
   let isDataShifted = false;
   data.forEach((item: any) => {
@@ -148,7 +150,7 @@ export const PieChart = (props: propTypes) => {
     /******************************************************/
 
     let i = 0,
-      angleSum = 0;
+      angleSum = initialAngle;
     let colors = [
       'cyan',
       'green',
