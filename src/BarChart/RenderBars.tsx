@@ -111,7 +111,9 @@ const RenderBars = (props: Props) => {
   } = props;
 
   const barMarginBottom =
-    item.barMarginBottom === 0 ? 0 : props.barMarginBottom || 0;
+    item.barMarginBottom === 0
+      ? 0
+      : item.barMarginBottom || props.barMarginBottom || 0;
 
   const renderLabel = (label: String, labelTextStyle: any, value: number) => {
     return (

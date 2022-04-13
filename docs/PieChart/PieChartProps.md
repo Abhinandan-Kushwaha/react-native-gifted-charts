@@ -4,6 +4,7 @@
 | -------------------- | -------------- | --------------------------------------------------------------------------------------------------------- | --------------- |
 | data                 | Array of items | An item object represents a section in the Pie chart. Descibed in the next table                          | \_              |
 | radius               | number         | Radius of the Pie chart                                                                                   | 120             |
+| initialAngle         | number         | Starting angle in radians (illustrated below this table)                                                  | 0               |
 | isThreeD             | Boolean        | If set to true, it rotates and translates the chart to give it a 3D effect                                | false           |
 | shadow               | Boolean        | Shadow to the Pie chart, when set to true, it enhances the 3D effect                                      | false           |
 | shadowColor          | ColorValue     | Color of the shadow                                                                                       | lightgray       |
@@ -23,6 +24,11 @@
 | showValuesAsLabels   | Boolean        | When set to true, the values of the Pie sections are displayed as labels                                  | false           |
 | centerLabelComponent | Function       | Component to be rendered at the center of the Pie chart                                                   | \_              |
 | semiCircle           | Boolean        | When set to true, renders the Pie Chart in a semi-circle. donut semiCircle charts look like a speed-meter | false           |
+
+#### initialAngle
+
+The default value is 0. The angles are distributed differently from the usual coordinate system. It is illustrated below-
+<img src='../../demos/pie.png' alt='' height=400 width=400/>
 
 ### Item description
 
