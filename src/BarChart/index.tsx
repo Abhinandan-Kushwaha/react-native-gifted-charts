@@ -157,6 +157,8 @@ type referenceConfigType = {
   type: String;
   dashWidth: number;
   dashGap: number;
+  labelText: String;
+  labelTextStyle: any;
 };
 type sectionType = {
   value: string;
@@ -501,6 +503,8 @@ export const BarChart = (props: PropTypes) => {
     type: rulesType,
     dashWidth: dashWidth,
     dashGap: dashGap,
+    labelText: '',
+    labelTextStyle: null,
   };
 
   const showReferenceLine1 = props.showReferenceLine1 || false;
@@ -519,6 +523,12 @@ export const BarChart = (props: PropTypes) => {
         type: props.referenceLine1Config.type || rulesType,
         dashWidth: props.referenceLine1Config.dashWidth || dashWidth,
         dashGap: props.referenceLine1Config.dashGap || dashGap,
+        labelText:
+          props.referenceLine1Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          props.referenceLine1Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
       }
     : defaultReferenceConfig;
 
@@ -538,6 +548,12 @@ export const BarChart = (props: PropTypes) => {
         type: props.referenceLine2Config.type || rulesType,
         dashWidth: props.referenceLine2Config.dashWidth || dashWidth,
         dashGap: props.referenceLine2Config.dashGap || dashGap,
+        labelText:
+          props.referenceLine2Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          props.referenceLine2Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
       }
     : defaultReferenceConfig;
 
@@ -557,6 +573,12 @@ export const BarChart = (props: PropTypes) => {
         type: props.referenceLine3Config.type || rulesType,
         dashWidth: props.referenceLine3Config.dashWidth || dashWidth,
         dashGap: props.referenceLine3Config.dashGap || dashGap,
+        labelText:
+          props.referenceLine3Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          props.referenceLine3Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
       }
     : defaultReferenceConfig;
 
@@ -709,43 +731,61 @@ export const BarChart = (props: PropTypes) => {
                     }}
                   />
                 )}
-                {index === 0 && showReferenceLine1 ? (
+                {index === noOfSections && showReferenceLine1 ? (
                   <View
                     style={{
                       position: 'absolute',
                       bottom:
-                        (referenceLine1Position * containerHeight) / maxValue +
-                        stepHeight / 2 -
-                        referenceLine1Config.thickness / 2,
-                      transform: [{translateY: containerHeight}],
+                        (referenceLine1Position * containerHeight) / maxValue,
                     }}>
                     <Rule config={referenceLine1Config} />
+                    {referenceLine1Config.labelText ? (
+                      <Text
+                        style={[
+                          {position: 'absolute'},
+                          referenceLine1Config.labelTextStyle,
+                        ]}>
+                        {referenceLine1Config.labelText}
+                      </Text>
+                    ) : null}
                   </View>
                 ) : null}
-                {index === 0 && showReferenceLine2 ? (
+                {index === noOfSections && showReferenceLine2 ? (
                   <View
                     style={{
                       position: 'absolute',
                       bottom:
-                        (referenceLine2Position * containerHeight) / maxValue +
-                        stepHeight / 2 -
-                        referenceLine2Config.thickness / 2,
-                      transform: [{translateY: containerHeight}],
+                        (referenceLine2Position * containerHeight) / maxValue,
                     }}>
                     <Rule config={referenceLine2Config} />
+                    {referenceLine2Config.labelText ? (
+                      <Text
+                        style={[
+                          {position: 'absolute'},
+                          referenceLine2Config.labelTextStyle,
+                        ]}>
+                        {referenceLine2Config.labelText}
+                      </Text>
+                    ) : null}
                   </View>
                 ) : null}
-                {index === 0 && showReferenceLine3 ? (
+                {index === noOfSections && showReferenceLine3 ? (
                   <View
                     style={{
                       position: 'absolute',
                       bottom:
-                        (referenceLine3Position * containerHeight) / maxValue +
-                        stepHeight / 2 -
-                        referenceLine3Config.thickness / 2,
-                      transform: [{translateY: containerHeight}],
+                        (referenceLine3Position * containerHeight) / maxValue,
                     }}>
                     <Rule config={referenceLine3Config} />
+                    {referenceLine3Config.labelText ? (
+                      <Text
+                        style={[
+                          {position: 'absolute'},
+                          referenceLine3Config.labelTextStyle,
+                        ]}>
+                        {referenceLine3Config.labelText}
+                      </Text>
+                    ) : null}
                   </View>
                 ) : null}
                 {showYAxisIndices && index !== noOfSections ? (

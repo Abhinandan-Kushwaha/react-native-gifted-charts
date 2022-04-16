@@ -171,6 +171,8 @@ type referenceConfigType = {
   type: String,
   dashWidth: number,
   dashGap: number,
+  labelText: String,
+  labelTextStyle: object,
 };
 ```
 

@@ -253,6 +253,7 @@ type propTypes = {
   scrollToEnd?: Boolean;
   scrollAnimation?: Boolean;
   noOfSectionsBelowXAxis?: number;
+  labelsExtraHeight?: number;
 };
 type referenceConfigType = {
   thickness: number;
@@ -261,6 +262,8 @@ type referenceConfigType = {
   type: String;
   dashWidth: number;
   dashGap: number;
+  labelText: String;
+  labelTextStyle: any;
 };
 type itemType = {
   value?: number;
@@ -366,6 +369,7 @@ export const LineChart = (props: propTypes) => {
   const widthValue3 = useMemo(() => new Animated.Value(0), []);
   const widthValue4 = useMemo(() => new Animated.Value(0), []);
   const widthValue5 = useMemo(() => new Animated.Value(0), []);
+  const labelsExtraHeight = props.labelsExtraHeight || 0;
 
   const animationDuration = props.animationDuration || 800;
   const onDataChangeAnimationDuration =
@@ -1356,6 +1360,8 @@ export const LineChart = (props: propTypes) => {
     type: rulesType,
     dashWidth: dashWidth,
     dashGap: dashGap,
+    labelText: '',
+    labelTextStyle: null,
   };
 
   const showReferenceLine1 = props.showReferenceLine1 || false;
@@ -1372,6 +1378,12 @@ export const LineChart = (props: propTypes) => {
         type: props.referenceLine1Config.type || rulesType,
         dashWidth: props.referenceLine1Config.dashWidth || dashWidth,
         dashGap: props.referenceLine1Config.dashGap || dashGap,
+        labelText:
+          props.referenceLine1Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          props.referenceLine1Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
       }
     : defaultReferenceConfig;
 
@@ -1389,6 +1401,12 @@ export const LineChart = (props: propTypes) => {
         type: props.referenceLine2Config.type || rulesType,
         dashWidth: props.referenceLine2Config.dashWidth || dashWidth,
         dashGap: props.referenceLine2Config.dashGap || dashGap,
+        labelText:
+          props.referenceLine2Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          props.referenceLine2Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
       }
     : defaultReferenceConfig;
 
@@ -1406,6 +1424,12 @@ export const LineChart = (props: propTypes) => {
         type: props.referenceLine3Config.type || rulesType,
         dashWidth: props.referenceLine3Config.dashWidth || dashWidth,
         dashGap: props.referenceLine3Config.dashGap || dashGap,
+        labelText:
+          props.referenceLine3Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          props.referenceLine3Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
       }
     : defaultReferenceConfig;
 
@@ -1450,7 +1474,7 @@ export const LineChart = (props: propTypes) => {
             position: 'absolute',
             bottom: 30,
             zIndex: 10,
-            width: spacing,
+            width: spacing + labelsExtraHeight,
             left:
               index === 0 && initialSpacing < 10
                 ? initialSpacing + spacing * index - spacing / 2 + 8
@@ -1645,46 +1669,61 @@ export const LineChart = (props: propTypes) => {
                       }}
                     />
                   )}
-                  {index === 0 && showReferenceLine1 ? (
+                  {index === noOfSections && showReferenceLine1 ? (
                     <View
                       style={{
                         position: 'absolute',
                         bottom:
-                          (referenceLine1Position * containerHeight) /
-                            maxValue +
-                          stepHeight / 2 -
-                          referenceLine1Config.thickness / 2,
-                        transform: [{translateY: containerHeight}],
+                          (referenceLine1Position * containerHeight) / maxValue,
                       }}>
                       <Rule config={referenceLine1Config} />
+                      {referenceLine1Config.labelText ? (
+                        <Text
+                          style={[
+                            {position: 'absolute'},
+                            referenceLine1Config.labelTextStyle,
+                          ]}>
+                          {referenceLine1Config.labelText}
+                        </Text>
+                      ) : null}
                     </View>
                   ) : null}
-                  {index === 0 && showReferenceLine2 ? (
+                  {index === noOfSections && showReferenceLine2 ? (
                     <View
                       style={{
                         position: 'absolute',
                         bottom:
-                          (referenceLine2Position * containerHeight) /
-                            maxValue +
-                          stepHeight / 2 -
-                          referenceLine2Config.thickness / 2,
-                        transform: [{translateY: containerHeight}],
+                          (referenceLine2Position * containerHeight) / maxValue,
                       }}>
                       <Rule config={referenceLine2Config} />
+                      {referenceLine2Config.labelText ? (
+                        <Text
+                          style={[
+                            {position: 'absolute'},
+                            referenceLine2Config.labelTextStyle,
+                          ]}>
+                          {referenceLine2Config.labelText}
+                        </Text>
+                      ) : null}
                     </View>
                   ) : null}
-                  {index === 0 && showReferenceLine3 ? (
+                  {index === noOfSections && showReferenceLine3 ? (
                     <View
                       style={{
                         position: 'absolute',
                         bottom:
-                          (referenceLine3Position * containerHeight) /
-                            maxValue +
-                          stepHeight / 2 -
-                          referenceLine3Config.thickness / 2,
-                        transform: [{translateY: containerHeight}],
+                          (referenceLine3Position * containerHeight) / maxValue,
                       }}>
                       <Rule config={referenceLine3Config} />
+                      {referenceLine3Config.labelText ? (
+                        <Text
+                          style={[
+                            {position: 'absolute'},
+                            referenceLine3Config.labelTextStyle,
+                          ]}>
+                          {referenceLine3Config.labelText}
+                        </Text>
+                      ) : null}
                     </View>
                   ) : null}
                   {showXAxisIndices && index !== noOfSections ? (
@@ -2191,7 +2230,7 @@ export const LineChart = (props: propTypes) => {
         style={{
           position: 'absolute',
           height: containerHeight + 10 + horizSectionsBelow.length * stepHeight,
-          bottom: 60,
+          bottom: 60 + labelsExtraHeight,
           width: totalWidth,
           zIndex: 20,
         }}>
@@ -2543,7 +2582,12 @@ export const LineChart = (props: propTypes) => {
     <View
       style={[
         styles.container,
-        {height: containerHeight + horizSectionsBelow.length * stepHeight},
+        {
+          height:
+            containerHeight +
+            horizSectionsBelow.length * stepHeight +
+            labelsExtraHeight,
+        },
         yAxisSide === 'right' && {marginLeft: yAxisLabelWidth + yAxisThickness},
       ]}>
       {props.hideAxesAndRules !== true && renderHorizSections()}
@@ -2553,9 +2597,13 @@ export const LineChart = (props: propTypes) => {
         contentContainerStyle={[
           {
             height:
-              containerHeight + 130 + horizSectionsBelow.length * stepHeight,
+              containerHeight +
+              130 +
+              horizSectionsBelow.length * stepHeight +
+              labelsExtraHeight,
             width: totalWidth - 20,
-            paddingBottom: horizSectionsBelow.length * stepHeight,
+            paddingBottom:
+              horizSectionsBelow.length * stepHeight + labelsExtraHeight,
             // backgroundColor: 'yellow'
           },
           !props.width && {width: totalWidth - 20},
