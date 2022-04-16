@@ -129,7 +129,7 @@ const RenderBars = (props: Props) => {
               spacing / 2,
             left: -6,
             position: 'absolute',
-            bottom: rotateLabel ? -40 : -25,
+            bottom: (rotateLabel ? -40 : -25) - barMarginBottom,
           },
           rotateLabel
             ? props.horizontal
@@ -183,7 +183,7 @@ const RenderBars = (props: Props) => {
               spacing / 2,
             position: 'absolute',
             left: -4,
-            bottom: rotateLabel ? -40 : -25,
+            bottom: (rotateLabel ? -40 : -25) - barMarginBottom,
             opacity: appearingOpacity,
           },
           value < 0 && {transform: [{rotate: '180deg'}]},
