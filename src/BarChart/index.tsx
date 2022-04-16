@@ -1214,7 +1214,7 @@ export const BarChart = (props: PropTypes) => {
           {
             // backgroundColor: 'yellow',
             height:
-              containerHeight + 130 + horizSectionsBelow.length * stepHeight,
+              containerHeight + 130 + horizSectionsBelow.length * stepHeight + labelsExtraHeight,
             paddingLeft: initialSpacing,
             paddingBottom:
               horizSectionsBelow.length * stepHeight + labelsExtraHeight,
