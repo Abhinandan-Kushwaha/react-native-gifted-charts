@@ -743,6 +743,9 @@ export const BarChart = (props: PropTypes) => {
                       <Text
                         style={[
                           {position: 'absolute'},
+                          yAxisSide === 'right' && {
+                            transform: [{rotateY: '180deg'}],
+                          },
                           referenceLine1Config.labelTextStyle,
                         ]}>
                         {referenceLine1Config.labelText}
@@ -762,6 +765,9 @@ export const BarChart = (props: PropTypes) => {
                       <Text
                         style={[
                           {position: 'absolute'},
+                          yAxisSide === 'right' && {
+                            transform: [{rotateY: '180deg'}],
+                          },
                           referenceLine2Config.labelTextStyle,
                         ]}>
                         {referenceLine2Config.labelText}
@@ -781,6 +787,9 @@ export const BarChart = (props: PropTypes) => {
                       <Text
                         style={[
                           {position: 'absolute'},
+                          yAxisSide === 'right' && {
+                            transform: [{rotateY: '180deg'}],
+                          },
                           referenceLine3Config.labelTextStyle,
                         ]}>
                         {referenceLine3Config.labelText}
@@ -1214,7 +1223,10 @@ export const BarChart = (props: PropTypes) => {
           {
             // backgroundColor: 'yellow',
             height:
-              containerHeight + 130 + horizSectionsBelow.length * stepHeight + labelsExtraHeight,
+              containerHeight +
+              130 +
+              horizSectionsBelow.length * stepHeight +
+              labelsExtraHeight,
             paddingLeft: initialSpacing,
             paddingBottom:
               horizSectionsBelow.length * stepHeight + labelsExtraHeight,
