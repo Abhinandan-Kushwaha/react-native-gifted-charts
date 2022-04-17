@@ -12,6 +12,7 @@
 5. Prepare a doc for Bar chart combined with Line chart having a separate data for the Line chart
 6. Prepare a doc for Line chart with smoothly scrolling data pointer and strip (along with pointerShiftX)
 7. Prepare a doc for Bar chart with barMarginBottom
+8. Prepare a doc for reference lines
 
 ## Architecture Enhancement
 
