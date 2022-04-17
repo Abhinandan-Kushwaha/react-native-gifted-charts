@@ -5,6 +5,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {MyPattern} from './src/pattern';
 import {BarChart, LineChart, PieChart} from './src';
 import {Path, Pattern} from 'react-native-svg';
+import {SvgPie} from './src/SvgPie';
 
 const App = () => {
   const [toggle, setToggle] = useState(true);
@@ -551,11 +552,11 @@ const App = () => {
     );
   };
 
-  const styleObject = {
-    marginLeft: -95,
-    paddingLeft: 120,
-    transform: [{rotate: '90deg'}],
-  };
+  // const styleObject = {
+  //   marginLeft: -95,
+  //   paddingLeft: 120,
+  //   transform: [{rotate: '90deg'}],
+  // };
   const ddtt = [
     {
       value: 10,
@@ -682,7 +683,7 @@ const App = () => {
     {value: 0.85, label: '15'},
   ];
   const lineData = [
-    {value: 8,pointerShiftX:10,pointerShiftY:-10},
+    {value: 8, pointerShiftX: 10, pointerShiftY: -10},
     {value: 10},
     {value: 12},
     {value: 8},
@@ -734,21 +735,85 @@ const App = () => {
   //   {value: 85, dataPointText: '85'},
   // ];
 
+  const styleObject = {
+    marginLeft: -95,
+    paddingLeft: 110,
+    transform: [{rotate: '90deg'}],
+    // backgroundColor: 'red',
+  };
+
   const lineData1 = [
-    {value: 20,pointerShiftX:10},
-    {value: 40},
-    {value: 48, onPress:(item)=>Alert.alert(item.value+'')},
-    {value: 50},
-    {value: 56},
-    {value: 70},
-    {value: 90},
-    {value: 95},
-    {value: 70},
-    {value: 90},
-    {value: 95},
+    {
+      value: 10000,
+      barMarginBottom: 20,
+      label: 'hello world',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 40000,
+      label: 'hello world',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 48000,
+      onPress: item => Alert.alert(item.value + ''),
+      label: 'hello world',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 50000,
+      label: 'hello world',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 56000,
+      barMarginBottom: 40,
+      label: 'hello world',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 70000,
+      label: 'hello world',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 90000,
+      label: 'hello world',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 95000,
+      label: 'hello world',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 70000,
+      label: 'hello world',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 90000,
+      label: 'hello world',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
+    {
+      value: 95000,
+      label: 'hello world',
+      labelTextStyle: styleObject,
+      labelWidth: 130,
+    },
   ];
   const lineData2 = [
-    {value: 0},
     {value: 5},
     {value: 8},
     {value: 18},
@@ -817,36 +882,99 @@ const App = () => {
       style={{
         // flex: 1,
         paddingVertical: 100,
-        backgroundColor: 'black',
+        paddingLeft:20,
+        // backgroundColor: 'black',
       }}>
-         
       {/* <MyPattern/> */}
-      <LineChart
-        data={lineData1}
-        areaChart
+      {/* <PieChart
+        data={lineData2.reverse()}
+        // initialAngle={Math.PI}
+        showText
+        showValuesAsLabels
+      /> */}
+      <SvgPie
+        // backgroundColor='black'
+        donut
+        // isThreeD
+        // shiftInnerCenterX={20}
+        semiCircle
+        shadow
+        radius={150}
+        // shadow
+        // innerCircleBorderWidth={4}
+        showText
+        showValuesAsLabels
+        textSize={10}
+        fontWeight='bold'
+        // font='monospace'
+        // labelsPosition="inward"
+        data={[{value: 500}, {value: 20}, {value: 40}, {value: 80}, {value: 30}]}
+      />
+      {/* <PieChart donut innerCircleBorderWidth={3} innerCircleBorderColor='lightgray' shiftInnerCenterX={15} shadow data={[{value:50},{value:20},{value:40},{value:80},{value:30}]} /> */}
+      {/* <BarChart
+        data={lineData2}
+        showText
+        showValuesAsLabels
+        // horizontalRulesStyle={{zIndex:100}}
+        // backgroundColor='black'
+        // color='white'
+        // dataPointsColor1='red'
+        // rotateLabel
+        labelsExtraHeight={100}
+        // areaChart
+        // barMarginBottom={10}
         // isAnimated
-        curved
-        dataPointsShape='rectangular'
+        // isThreeD
+        // showGradient
+        cappedBars
+        capColor={'red'}
+        // curved
+        // dataPointsShape="rectangular"
+        // cappedBars
         // yAxisSide='right'
         // pressEnabled
         // showStripOnPress
         // pointerConfig={{pointerStripColor: 'blue'}}
-        initialSpacing={0}
-        hideRules
+        // initialSpacing={0}
+        // hideRules
         // scrollToEnd
         // horizontalRulesStyle={{zIndex:1}}
         // backgroundColor='rgba(255,0,0,0.8)'
         // yAxisLabelContainerStyle={{zIndex:100000,elevation:1,textAlign:'left'}}
         // yAxisTextStyle={{fontWeight:'bold',marginRight:-110,zIndex:10000,textAlign:'left'}}
         // spacing={30}
-      />
+      /> */}
       {/* <BarChart
         data={ldt}
-        maxValue={80}
-        stepValue={20}
-        noOfSections={4}
-        minValue={-60}
-        noOfSectionsBelowXAxis={3}
+        areaChart
+        // maxValue={80}
+        // stepValue={20}
+        // noOfSections={4}
+        // minValue={-60}
+        frontColor={'yellow'}
+        yAxisThickness={5}
+        width={260}
+        yAxisSide='right'
+        yAxisTextStyle={{left:40}}
+        // yAxisLabelContainerStyle={{zIndex:20,elevation:10}}
+        // noOfSectionsBelowXAxis={3}
+        showReferenceLine1
+        referenceLine1Position={40}
+        referenceLine1Config={{
+          labelText: 'hello',
+          labelTextStyle: {left:100,top:-10},
+          type: 'solid'
+        }}
+        showReferenceLine2
+        referenceLine2Position={60}
+        referenceLine2Config={{
+          color:'red',
+          labelText: 'hello',
+          labelTextStyle: {left:100,top:-10},
+          type: 'solid'
+        }}
+        // width={190}
+        // hideRules
       /> */}
       {/* <LineChart
             areaChart
@@ -891,7 +1019,7 @@ const App = () => {
       </View> */}
       {/* <PieChart data={[]} isThreeD shadow donut/> */}
 
-      <LineChart
+      {/* <LineChart
         data={lineData}
         initialSpacing={0}
         spacing={12}
@@ -904,7 +1032,7 @@ const App = () => {
         hideRules
         xAxisColor="white"
         yAxisColor="white"
-        yAxisTextStyle={{color:'white'}}
+        yAxisTextStyle={{color: 'white'}}
         height={250}
         pointerConfig={{
           color: 'white',
@@ -913,12 +1041,14 @@ const App = () => {
           pointerLabelComponent: item => {
             return (
               <View>
-                <Text style={{color:'yellow',fontWeight:'bold'}}>{item.value}</Text>
+                <Text style={{color: 'yellow', fontWeight: 'bold'}}>
+                  {item.value}
+                </Text>
               </View>
             );
           },
         }}
-      />
+      /> */}
 
       {/* <LineChart
         curved={true}
