@@ -1681,6 +1681,9 @@ export const LineChart = (props: propTypes) => {
                         <Text
                           style={[
                             {position: 'absolute'},
+                            yAxisSide === 'right' && {
+                              transform: [{rotateY: '180deg'}],
+                            },
                             referenceLine1Config.labelTextStyle,
                           ]}>
                           {referenceLine1Config.labelText}
@@ -1700,6 +1703,9 @@ export const LineChart = (props: propTypes) => {
                         <Text
                           style={[
                             {position: 'absolute'},
+                            yAxisSide === 'right' && {
+                              transform: [{rotateY: '180deg'}],
+                            },
                             referenceLine2Config.labelTextStyle,
                           ]}>
                           {referenceLine2Config.labelText}
@@ -1719,6 +1725,9 @@ export const LineChart = (props: propTypes) => {
                         <Text
                           style={[
                             {position: 'absolute'},
+                            yAxisSide === 'right' && {
+                              transform: [{rotateY: '180deg'}],
+                            },
                             referenceLine3Config.labelTextStyle,
                           ]}>
                           {referenceLine3Config.labelText}
