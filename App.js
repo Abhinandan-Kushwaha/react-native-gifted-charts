@@ -5,7 +5,6 @@ import {View, Text, StyleSheet} from 'react-native';
 import {MyPattern} from './src/pattern';
 import {BarChart, LineChart, PieChart} from './src';
 import {Path, Pattern} from 'react-native-svg';
-import {SvgPie} from './src/SvgPie';
 
 const App = () => {
   const [toggle, setToggle] = useState(true);
@@ -876,15 +875,43 @@ const App = () => {
     {value: 60},
     {value: -34},
   ];
+  const pieData = [
+    {value: 54, color: '#177AD5', text: '54%'},
+    {value: 40, color: '#79D2DE', text: '30%'},
+    {value: 20, color: '#ED6665', text: '26%'},
+  ];
+  const pieData2 = [
+    {value: 70, color: '#177AD5'},
+    {value: 30, color: 'lightgray'},
+  ];
 
   return (
     <View
       style={{
         // flex: 1,
         paddingVertical: 100,
-        paddingLeft:20,
+        paddingLeft: 20,
         // backgroundColor: 'black',
       }}>
+      {/* <PieChart
+            showText
+            textColor="black"
+            radius={150}
+            textSize={20}
+            showTextBackground
+            textBackgroundRadius={26}
+            data={pieData}
+            /> */}
+      <PieChart
+        donut
+        innerRadius={80}
+        data={pieData2}
+        isThreeD
+        shadow
+        centerLabelComponent={() => {
+          return <Text style={{fontSize: 30}}>70%</Text>;
+        }}
+      />
       {/* <MyPattern/> */}
       {/* <PieChart
         data={lineData2.reverse()}
@@ -892,23 +919,49 @@ const App = () => {
         showText
         showValuesAsLabels
       /> */}
-      <SvgPie
-        // backgroundColor='black'
-        donut
+      <PieChart
+        // backgroundColor='green'
+        // donut
+        // innerCircleBorderWidth={4}
+        // innerCircleBorderColor='gray'
+        // strokeColor='gray'
+        // strokeWidth={2}
         // isThreeD
         // shiftInnerCenterX={20}
-        semiCircle
-        shadow
-        radius={150}
+        // semiCircle
         // shadow
-        // innerCircleBorderWidth={4}
+        // shadowColor='gray'
+        // radius={150}
         showText
         showValuesAsLabels
-        textSize={10}
-        fontWeight='bold'
+        // showTextBackground
+        // textSize={10}
+        // fontWeight='bold'
+        // tiltAngle={'30deg'}
         // font='monospace'
-        // labelsPosition="inward"
-        data={[{value: 500}, {value: 20}, {value: 40}, {value: 80}, {value: 30}]}
+        labelsPosition="onBorder"
+        data={[
+          {value: 50},
+          {
+            value: 20,
+            // shiftX: 30, shiftY: 4
+          },
+          {value: 40},
+          {value: 80, 
+            // shiftX: -30, shiftY: 4
+          },
+          {value: 30, 
+            // shiftY: -30, shiftX: -30
+          },
+        ]}
+        innerCircleColor="lightgreen"
+        // centerLabelComponent={()=>{
+        //   return(
+        //     <View>
+        //       <Text>100%</Text>
+        //     </View>
+        //   )
+        // }}
       />
       {/* <PieChart donut innerCircleBorderWidth={3} innerCircleBorderColor='lightgray' shiftInnerCenterX={15} shadow data={[{value:50},{value:20},{value:40},{value:80},{value:30}]} /> */}
       {/* <BarChart

@@ -29,16 +29,13 @@ The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts
 
 ---
 
+## Version 1.2.x 🎉
+Version 1.2.0 onwards we are dependent only on `react-native-svg` and `react-native-linear-gradient`. Earlier, Pie and Donut charts were rendered using `react-native-canvas`, but now they are also rendered using <b>svg</b>. We are no longer using `react-native-canvas` neither `react-native-webview`!
+
 ## Installation
 
 ```sh
 npm install react-native-gifted-charts react-native-linear-gradient react-native-svg
-```
-
-For Pie chart and Donut chart, these additional packages should be installed-
-
-```sh
-npm i react-native-canvas react-native-webview
 ```
 
 For iOS-

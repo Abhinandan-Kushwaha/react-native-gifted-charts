@@ -6,6 +6,7 @@
 | radius               | number         | Radius of the Pie chart                                                                                   | 120             |
 | initialAngle         | number         | Starting angle in radians (illustrated below this table)                                                  | 0               |
 | isThreeD             | Boolean        | If set to true, it rotates and translates the chart to give it a 3D effect                                | false           |
+| tiltAngle            | Angle in deg   | The angle by which the chart should be tilted                                                             | '55deg' for 3D charts, otherwise 0 |
 | shadow               | Boolean        | Shadow to the Pie chart, when set to true, it enhances the 3D effect                                      | false           |
 | shadowColor          | ColorValue     | Color of the shadow                                                                                       | lightgray       |
 | shadowWidth          | number         | Width of the shadow                                                                                       | radius\*4/3     |
@@ -24,11 +25,22 @@
 | showValuesAsLabels   | Boolean        | When set to true, the values of the Pie sections are displayed as labels                                  | false           |
 | centerLabelComponent | Function       | Component to be rendered at the center of the Pie chart                                                   | \_              |
 | semiCircle           | Boolean        | When set to true, renders the Pie Chart in a semi-circle. donut semiCircle charts look like a speed-meter | false           |
+| labelsPosition       | string         | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid'              | 'outward' for donut and semicircle charts, otherwise 'mid' |
 
 #### initialAngle
 
 The default value is 0. The angles are distributed differently from the usual coordinate system. It is illustrated below-
 <img src='../../demos/pie.png' alt='' height=400 width=400/>
+
+#### labelsPosition
+
+labels can be positioned 'onBorder', 'outward', 'mid' or 'inward'. Here's a demonstration for each of them-
+<img src='../../demos/onBorder.png' alt='' height=400 width=400/>
+<img src='../../demos/outward.png' alt='' height=400 width=400/>
+<img src='../../demos/mid.png' alt='' height=400 width=400/>
+<img src='../../demos/inward.png' alt='' height=400 width=400/>
+
+The default value for labelsPosition is 'mid'. In case of donut and semicircle charts the default value becomes 'outward'
 
 ### Item description
 
@@ -48,6 +60,7 @@ The default value is 0. The angles are distributed differently from the usual co
 | font                 | string     | Font family of the text - 'Arial', 'Cursive', 'Comic Sans MS' etc      |
 | textBackgroundColor  | ColorValue | Background color for the label text                                    |
 | textBackgroundRadius | number     | Radius for the background of the text label                            |
+| labelPosition       | string     | Tells where inside the Pie sections should the labels be shown- 'outward', 'inward' or 'mid' |
 
 ### Donut chart related props
 
