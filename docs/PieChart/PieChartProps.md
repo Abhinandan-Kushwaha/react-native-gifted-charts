@@ -35,13 +35,29 @@ The default value is 0. The angles are distributed differently from the usual co
 #### labelsPosition
 
 labels can be positioned 'onBorder', 'outward', 'mid' or 'inward'. Here's a demonstration for each of them-
-<img src='../../demos/onBorder.png' alt='' height=400 width=400/>
-<img src='../../demos/outward.png' alt='' height=400 width=400/>
-<img src='../../demos/mid.png' alt='' height=400 width=400/>
-<img src='../../demos/inward.png' alt='' height=400 width=400/>
+<br/>
+<br/>
+<img src='../../demos/onBorder.png' alt='' height=300 width=300/>
+<br/>
+<i>onBorder</i>
+<br/><br/>
+<img src='../../demos/outward.png' alt='' height=300 width=300/>
+<br/>
+<i>outward</i>
+<br/><br/>
+<img src='../../demos/mid.png' alt='' height=300 width=300/>
+<br/>
+<i>mid</i>
+<br/><br/>
+<img src='../../demos/inward.png' alt='' height=300 width=300/>
+<br/>
+<i>inward</i>
+<br/><br/>
 
 The default value for labelsPosition is 'mid'. In case of donut and semicircle charts the default value becomes 'outward'
 
+ ---
+ 
 ### Item description
 
 | Prop                 | Type       | Description                                                            |
