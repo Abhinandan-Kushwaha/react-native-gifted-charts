@@ -1,6 +1,6 @@
 import React from 'react';
 import {ColorValue, View} from 'react-native';
-import Svg, {Path, Circle, Text as SvgText, FontStyle, Line} from 'react-native-svg';
+import Svg, {Path, Circle, Text as SvgText, FontStyle} from 'react-native-svg';
 
 type propTypes = {
   radius?: number;
@@ -226,7 +226,6 @@ export const PieChart = (props: propTypes) => {
 
         {showText &&
           data.map((item, index) => {
-            console.log('index', index);
 
             let mx = cx * (1 + Math.sin(2 * pi * mData[index] + initialAngle));
             let my = cy * (1 - Math.cos(2 * pi * mData[index] + initialAngle));
@@ -259,7 +258,7 @@ export const PieChart = (props: propTypes) => {
             // console.log('ay', ay);
             return (
               <>
-                <Line x1={mx} x2={cx} y1={my} y2={cy} stroke="black" />
+                {/* <Line x1={mx} x2={cx} y1={my} y2={cy} stroke="black" /> */}
                 {showTextBackground && (
                   <Circle
                     cx={x}
