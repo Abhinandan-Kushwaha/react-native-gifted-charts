@@ -76,7 +76,7 @@ The default value for labelsPosition is 'mid'. In case of donut and semicircle c
 | font                 | string     | Font family of the text - 'Arial', 'Cursive', 'Comic Sans MS' etc      |
 | textBackgroundColor  | ColorValue | Background color for the label text                                    |
 | textBackgroundRadius | number     | Radius for the background of the text label                            |
-| labelPosition       | string     | Tells where inside the Pie sections should the labels be shown- 'outward', 'inward' or 'mid' |
+| labelPosition       | string     | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid' |
 
 ### Donut chart related props
 
