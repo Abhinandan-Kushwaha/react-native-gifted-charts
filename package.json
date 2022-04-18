@@ -40,7 +40,6 @@
     "babel-jest": "^27.0.6",
     "eslint": "^7.31.0",
     "jest": "^27.0.6",
-    "@types/react-native-canvas": "^0.1.7",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-test-renderer": "17.0.1"
   },
