@@ -653,7 +653,7 @@ export const BarChart = (props: PropTypes) => {
                 styles.horizBar,
                 {
                   width: horizontal
-                    ? props.width || totalWidth
+                    ? props.width || Math.min(300, totalWidth)
                     : props.width || totalWidth + 11,
                 },
                 yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
@@ -668,7 +668,13 @@ export const BarChart = (props: PropTypes) => {
                   },
                   horizontal &&
                     !yAxisAtTop && {
-                      transform: [{translateX: totalWidth + yAxisThickness}],
+                      transform: [
+                        {
+                          translateX:
+                            (props.width || Math.min(300, totalWidth)) +
+                            yAxisThickness,
+                        },
+                      ],
                     },
                   {
                     height:
@@ -676,7 +682,8 @@ export const BarChart = (props: PropTypes) => {
                     width: yAxisLabelWidth,
                   },
                   yAxisLabelContainerStyle,
-                ]}/>
+                ]}
+              />
               <View
                 style={[
                   index === noOfSections
@@ -697,7 +704,7 @@ export const BarChart = (props: PropTypes) => {
                       thickness: rulesThickness,
                       color: rulesColor,
                       width: horizontal
-                        ? props.width || totalWidth
+                        ? props.width || Math.min(300, totalWidth)
                         : (props.width || totalWidth) + 11,
                       dashWidth: dashWidth,
                       dashGap: dashGap,
@@ -744,6 +751,17 @@ export const BarChart = (props: PropTypes) => {
                         {rotateY: '180deg'},
                       ],
                     },
+                    horizontal &&
+                      !yAxisAtTop && {
+                        transform: [
+                          {
+                            translateX:
+                              (props.width || Math.min(300, totalWidth)) +
+                              yAxisThickness +
+                              yAxisLabelWidth,
+                          },
+                        ],
+                      },
                     yAxisLabelContainerStyle,
                   ]}>
                   <Text
@@ -796,7 +814,8 @@ export const BarChart = (props: PropTypes) => {
                     width: yAxisLabelWidth,
                   },
                   index === 0 && {marginTop: -stepHeight / 2},
-                ]}/>
+                ]}
+              />
               <View
                 style={[styles.leftPart, {backgroundColor: backgroundColor}]}>
                 {hideRules ? null : (
@@ -1291,8 +1310,8 @@ export const BarChart = (props: PropTypes) => {
             labelsExtraHeight,
         },
         yAxisSide === 'right' && {marginLeft: yAxisLabelWidth + yAxisThickness},
-        props.width && {width: props.width},
-        horizontal && {transform: [{rotate: '90deg'}, {translateY: -15}]},
+        props.width && !horizontal && {width: props.width},
+        horizontal && {transform: [{rotate: '90deg'}, {translateY: 15}]},
       ]}>
       {props.hideAxesAndRules !== true && renderHorizSections()}
       <ScrollView
@@ -1310,7 +1329,7 @@ export const BarChart = (props: PropTypes) => {
             bottom: stepHeight * -0.5 - 60 + xAxisThickness,
           },
           props.width && {width: props.width - 11},
-          horizontal && {width: totalWidth},
+          horizontal && {width: props.width || Math.min(300, totalWidth)},
         ]}
         scrollEnabled={!disableScroll}
         contentContainerStyle={[
