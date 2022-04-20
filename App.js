@@ -825,17 +825,40 @@ const App = () => {
   const stackData = [
     {
       stacks: [
-        {value: 10, color: 'orange'},
-        {value: 20, color: '#4ABFF4', marginBottom: 2},
+        {
+          value: 10,
+          color: 'orange',
+          innerBarComponent: () => (
+            <Text style={{transform: [{rotate: '-90deg'}, {translateX: 10}]}}>
+              10
+            </Text>
+          ),
+        },
+        {
+          value: 20,
+          color: '#4ABFF4',
+          marginBottom: 2,
+          innerBarComponent: () => <Text>20</Text>,
+        },
       ],
       spacing: 15,
       label: 'Jan',
     },
     {
       stacks: [
-        {value: 10, color: '#4ABFF4'},
-        {value: 11, color: 'orange', marginBottom: 2},
-        {value: 15, color: '#28B2B3', marginBottom: 2},
+        {value: 10, color: '#4ABFF4', innerBarComponent: () => <Text>10</Text>},
+        {
+          value: 11,
+          color: 'orange',
+          marginBottom: 2,
+          innerBarComponent: () => <Text>11</Text>,
+        },
+        {
+          value: 15,
+          color: '#28B2B3',
+          marginBottom: 2,
+          innerBarComponent: () => <Text>15</Text>,
+        },
       ],
       label: 'Mar',
     },
@@ -902,7 +925,7 @@ const App = () => {
             textBackgroundRadius={26}
             data={pieData}
             /> */}
-      <PieChart
+      {/* <PieChart
         donut
         innerRadius={80}
         data={pieData2}
@@ -911,7 +934,7 @@ const App = () => {
         centerLabelComponent={() => {
           return <Text style={{fontSize: 30}}>70%</Text>;
         }}
-      />
+      /> */}
       {/* <MyPattern/> */}
       {/* <PieChart
         data={lineData2.reverse()}
@@ -919,7 +942,7 @@ const App = () => {
         showText
         showValuesAsLabels
       /> */}
-      <PieChart
+      {/* <PieChart
         // backgroundColor='green'
         // donut
         // innerCircleBorderWidth={4}
@@ -962,7 +985,7 @@ const App = () => {
         //     </View>
         //   )
         // }}
-      />
+      /> */}
       {/* <PieChart donut innerCircleBorderWidth={3} innerCircleBorderColor='lightgray' shiftInnerCenterX={15} shadow data={[{value:50},{value:20},{value:40},{value:80},{value:30}]} /> */}
       {/* <BarChart
         data={lineData2}
@@ -1190,15 +1213,20 @@ const App = () => {
         endOpacity={0.3}
         /> */}
 
-      {/* <BarChart
-        width={340}
+      <BarChart
+        width={200}
+        // height={300}
         rotateLabel
-        barWidth={12}
+        barWidth={32}
         spacing={40}
         noOfSections={4}
         barBorderRadius={6}
+        data={[dtt[0],dtt[1],dtt[2]]}
+        // initialSpacing={90}
         stackData={stackData}
-      /> */}
+        horizontal
+        // yAxisAtTop
+      />
 
       {/* <BarChart
       // isAnimated={true}
