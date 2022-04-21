@@ -247,6 +247,8 @@ type propTypes = {
   textShiftX?: number;
   textShiftY?: number;
   yAxisLabelTexts?: Array<string>;
+  xAxisLabelTexts?: Array<string>;
+  xAxisLabelTextStyle?: any;
   width?: number;
   yAxisLabelPrefix?: String;
   yAxisLabelSuffix?: String;
@@ -254,6 +256,7 @@ type propTypes = {
   scrollAnimation?: Boolean;
   noOfSectionsBelowXAxis?: number;
   labelsExtraHeight?: number;
+  adjustToWidth?: Boolean;
 };
 type referenceConfigType = {
   thickness: number;
@@ -422,7 +425,15 @@ export const LineChart = (props: propTypes) => {
     props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
   const thickness = props.thickness || 2;
 
-  const spacing = props.spacing === 0 ? 0 : props.spacing || 60;
+  const adjustToWidth = props.adjustToWidth || false;
+
+  const spacing =
+    props.spacing === 0
+      ? 0
+      : props.spacing ||
+        (adjustToWidth
+          ? ((props.width || 200) - initialSpacing) / data.length
+          : 60);
 
   const xAxisThickness = props.xAxisThickness || 1;
   const dataPointsHeight1 =
@@ -2941,14 +2952,20 @@ export const LineChart = (props: propTypes) => {
               {isAnimated
                 ? renderAnimatedLabel(
                     index,
-                    item.label,
-                    item.labelTextStyle,
+                    item.label ||
+                      (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
+                        ? props.xAxisLabelTexts[index]
+                        : ''),
+                    item.labelTextStyle || props.xAxisLabelTextStyle,
                     item.labelComponent,
                   )
                 : renderLabel(
                     index,
-                    item.label,
-                    item.labelTextStyle,
+                    item.label ||
+                      (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
+                        ? props.xAxisLabelTexts[index]
+                        : ''),
+                    item.labelTextStyle || props.xAxisLabelTextStyle,
                     item.labelComponent,
                   )}
               {/* {renderLabel(index, item.label, item.labelTextStyle)} */}

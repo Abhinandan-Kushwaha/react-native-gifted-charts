@@ -11,6 +11,7 @@ type Props = {
   topLabelComponent?: Component;
   topLabelContainerStyle?: Style;
   opacity?: number;
+  label: String;
   labelTextStyle?: any;
   disablePress?: boolean;
 
@@ -66,6 +67,8 @@ const RenderStackBars = (props: Props) => {
     spacing,
     rotateLabel,
     xAxisThickness,
+    label,
+    labelTextStyle,
   } = props;
   const disablePress = props.disablePress || false;
   const renderLabel = (label: String, labelTextStyle: any) => {
@@ -246,7 +249,7 @@ const RenderStackBars = (props: Props) => {
         />
       )}
       {static2DSimple(item)}
-      {renderLabel(item.label || '', item.labelTextStyle)}
+      {renderLabel(label || '', labelTextStyle)}
     </View>
   );
 };
