@@ -16,6 +16,7 @@
 | stepValue                     | number         | Value of 1 step/section in the Y axis                                                              | 20                  |
 | stepHeight                    | number         | Height of 1 step/section in the Y axis                                                             | 20                  |
 | spacing                       | number         | Distance between 2 consecutive bars in the Bar chart                                               | 20                  |
+| adjustToWidth                 | Boolean        | When set to true, it auto computes the spacing value to fit the Line chart in the available width  | false               |
 | backgroundColor               | ColorValue     | Background color of the Bar chart                                                                  | \_                  |
 | disableScroll                 | Boolean        | To disable horizontal scroll                                                                       | false               |
 | showScrollIndicator           | Boolean        | To show horizontal scroll indicator                                                                | false               |
@@ -142,6 +143,8 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | yAxisIndicesColor      | ColorValue          | Color of the pointers on the X axis                                                | black                  |
 | yAxisIndicesColor      | Boolean             | To hide axes, rules, labels altogether                                             | false                  |
 | yAxisLabelTexts        | Array<string>       | Array of label texts to be displayed along y axis                                  | null                   |
+| xAxisLabelTexts        | Array<string>       | Array of label texts to be displayed below x axis                                  | null                   |
+| xAxisLabelTextStyle    | object              | Style of label texts to be displayed below x axis                                  | null                   |
 | rotateLabel            | Boolean             | To rotate the X axis labels (by 60deg)                                             | false                  |
 | hideOrigin             | Boolean             | To hide the y Axis label at origin (i.e. 0)                                        | false                  |
 

@@ -154,6 +154,8 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | yAxisIndicesColor      | ColorValue          | Color of the pointers on the X axis                                                | black                  |
 | yAxisIndicesColor      | Boolean             | To hide axes, rules, labels altogether                                             | false                  |
 | yAxisLabelTexts        | Array<string>       | Array of label texts to be displayed along y axis                                  | null                   |
+| xAxisLabelTexts        | Array<string>       | Array of label texts to be displayed below x axis                                  | null                   |
+| xAxisLabelTextStyle    | object              | Style of label texts to be displayed below x axis                                  | null                   |
 | rotateLabel            | Boolean             | To rotate the X axis labels (by 60deg)                                             | false                  |
 | hideOrigin             | Boolean             | To hide the y Axis label at origin (i.e. 0)                                        | false                  |
 | labelWidth             | number              | Width of the Label text appearing below the bar (under the X axis)                 | barWidth               |

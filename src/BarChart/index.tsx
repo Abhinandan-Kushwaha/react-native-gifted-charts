@@ -119,6 +119,8 @@ type PropTypes = {
   hideOrigin?: Boolean;
   labelWidth?: number;
   yAxisLabelTexts?: Array<string>;
+  xAxisLabelTexts?: Array<string>;
+  xAxisLabelTextStyle?: any;
   yAxisLabelPrefix?: String;
   yAxisLabelSuffix?: String;
   autoShiftLabels?: Boolean;
@@ -1385,6 +1387,15 @@ export const BarChart = (props: PropTypes) => {
                     barBorderRadius={props.barBorderRadius}
                     barBackgroundPattern={props.barBackgroundPattern}
                     patternId={props.patternId}
+                    label={
+                      item.label ||
+                      (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
+                        ? props.xAxisLabelTexts[index]
+                        : '')
+                    }
+                    labelTextStyle={
+                      item.labelTextStyle || props.xAxisLabelTextStyle
+                    }
                   />
                 );
               })
@@ -1436,6 +1447,15 @@ export const BarChart = (props: PropTypes) => {
                   barBackgroundPattern={props.barBackgroundPattern}
                   patternId={props.patternId}
                   barMarginBottom={props.barMarginBottom}
+                  label={
+                    item.label ||
+                    (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
+                      ? props.xAxisLabelTexts[index]
+                      : '')
+                  }
+                  labelTextStyle={
+                    item.labelTextStyle || props.xAxisLabelTextStyle
+                  }
                 />
               ))}
         </Fragment>

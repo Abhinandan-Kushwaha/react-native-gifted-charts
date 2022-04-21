@@ -25,6 +25,7 @@ type Props = {
 
   item: itemType;
   index: number;
+  label: String;
   containerHeight?: number;
   maxValue: number;
   spacing?: number;
@@ -108,6 +109,8 @@ const RenderBars = (props: Props) => {
     opacity,
     animationDuration,
     autoShiftLabels,
+    label,
+    labelTextStyle,
   } = props;
 
   const barMarginBottom =
@@ -527,8 +530,8 @@ const RenderBars = (props: Props) => {
         />
       )}
       {isAnimated
-        ? renderAnimatedLabel(item.label || '', item.labelTextStyle, item.value)
-        : renderLabel(item.label || '', item.labelTextStyle, item.value)}
+        ? renderAnimatedLabel(label, labelTextStyle, item.value)
+        : renderLabel(label, labelTextStyle, item.value)}
     </TouchableOpacity>
   );
 };
