@@ -14,6 +14,8 @@
 7. Prepare a doc for Bar chart with barMarginBottom
 8. Prepare a doc for reference lines
 9. Prepare a doc for labelsPosition in Pie and Donut charts
+8. Prepare a doc for adjustToWidth in Line and Area charts
+9. Prepare a doc for xAxisLabelTexts and xAxisLabelTextStyle in Bar, Line And Area Charts
 
 ## Architecture Enhancement
 
