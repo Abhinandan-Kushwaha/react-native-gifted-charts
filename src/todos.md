@@ -19,6 +19,5 @@
 
 ## Architecture Enhancement
 
-1. Get rid of canvas (currently being used only for Pie charts)
-2. Make it compliant with React js
-3. Write tests
+1. Make it compliant with React js
+2. Write tests
