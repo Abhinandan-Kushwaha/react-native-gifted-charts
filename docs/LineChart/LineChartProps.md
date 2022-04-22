@@ -273,23 +273,28 @@ The pointerConfig object has following fields-
 
 ```js
 type Pointer = {
-  height?: number;
-  width?: number;
-  radius?: number;
-  color?: ColorValue;
-  pointerComponent?: Function;
-  showPointerStrip?: boolean;
-  pointerStripWidth?: number;
-  pointerStripHeight?: number;
-  pointerStripColor?: ColorValue;
-  pointerStripUptoDataPoint?: boolean;
-  pointerLabelComponent?: Function;
-  shiftPointerLabelX?: number;
-  shiftPointerLabelY?: number;
-  pointerLabelWidth?: number;
-  pointerVanishDelay?: number;
+  height?: number; // default: 0
+  width?: number; // default: 0
+  radius?: number; // default: 5
+  color?: ColorValue; // default: 'red'
+  pointerComponent?: Function; // default: null
+  showPointerStrip?: boolean; // default: true
+  pointerStripWidth?: number; // default: containerHeight
+  pointerStripHeight?: number; // default: 1
+  pointerStripColor?: ColorValue; // default: 'black'
+  pointerStripUptoDataPoint?: boolean; // default: false
+  pointerLabelComponent?: Function; // default: null
+  shiftPointerLabelX?: number; // default: 0
+  shiftPointerLabelY?: number; // default: 0
+  pointerLabelWidth?: number; // default: 40
+  pointerVanishDelay?: number; // default: 150
+  activatePointersOnLongPress?: boolean; // default: false
+  activatePointersDelay?: number; // default: 150
 };
 ```
+
+**Note** If you are using the `pointerConfig` prop, the scroll will be disabled automatically. This is because, it's difficult to achive both scrolling line and scrolling pointer simultaneously. So if you want to retain the scroll behaviour even after passing the `pointerConfig` prop, then set the property `activatePointersOnLongPress` to true inside the pointerConfig object. This will make the pointers visible only after long press. So, before the long press, user can can scroll the line. Once long pressed, scolling will be disabled until the release of the long press.
+
 
 The above properties can be understood with this labelled diagram-
   

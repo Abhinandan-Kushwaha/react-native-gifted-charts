@@ -657,6 +657,19 @@ const App = () => {
     {value: -16, label: 'Wed'},
     {value: 40, label: 'Thu'},
   ];
+  const barData2 = [
+    {
+      value: 25,
+      label: 'Mon',
+    },
+    {value: 20, label: 'Tue'},
+    {value: -13, label: 'Wed'},
+    {value: 30, label: 'Thu'},
+    {value: -6, label: 'Wed'},
+    {value: 30, label: 'Thu'},
+    {value: -6, label: 'Wed'},
+    {value: 30, label: 'Thu'},
+  ];
 
   const sdata = [
     {
@@ -1213,18 +1226,27 @@ const App = () => {
         endOpacity={0.3}
         /> */}
 
-      <BarChart
-        width={200}
+      <LineChart
+        // width={200}
         // height={300}
-        rotateLabel
-        barWidth={32}
-        spacing={40}
-        noOfSections={4}
-        barBorderRadius={6}
-        data={[dtt[0],dtt[1],dtt[2]]}
+        pointerConfig={{}}
+        // isAnimated
+        // rotateLabel
+        // barWidth={32}
+        // spacing={25}
+        // noOfSections={4}
+        // barBorderRadius={6}
+        // data={lineData1}
+        // data2={lineData2}
+        data={barData}
+        data2={barData2}
+        hideDataPoints
+        color2='red'
+        // curved
         // initialSpacing={90}
-        stackData={stackData}
-        horizontal
+        // stackData={stackData}
+        // horizontal
+        // adjustToWidth
         // yAxisAtTop
       />
 

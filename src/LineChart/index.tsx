@@ -335,6 +335,8 @@ type Pointer = {
   shiftPointerLabelY?: number;
   pointerLabelWidth?: number;
   pointerVanishDelay?: number;
+  activatePointersOnLongPress?: boolean;
+  activatePointersDelay?: number;
 };
 
 export const LineChart = (props: propTypes) => {
@@ -345,6 +347,8 @@ export const LineChart = (props: propTypes) => {
     pointerShiftX: 0,
     pointerShiftY: 0,
   });
+  const [responderStartTime, setResponderStartTime] = useState(0);
+  const [responderActive, setResponderActive] = useState(false);
   const [points, setPoints] = useState('');
   const [points2, setPoints2] = useState('');
   const [points3, setPoints3] = useState('');
@@ -1279,7 +1283,9 @@ export const LineChart = (props: propTypes) => {
     shiftPointerLabelX: 0,
     shiftPointerLabelY: 0,
     pointerLabelWidth: 40,
-    pointerVanishDelay: 200,
+    pointerVanishDelay: 150,
+    activatePointersOnLongPress: false,
+    activatePointersDelay: 150,
   };
   const pointerConfig = props.pointerConfig || null;
   const pointerHeight =
@@ -1343,8 +1349,23 @@ export const LineChart = (props: propTypes) => {
     pointerConfig && pointerConfig.pointerVanishDelay
       ? props.pointerConfig.pointerVanishDelay
       : defaultPointerConfig.pointerVanishDelay;
-
-  const disableScroll = props.disableScroll || pointerConfig || false;
+  const activatePointersOnLongPress =
+    pointerConfig && pointerConfig.activatePointersOnLongPress
+      ? props.pointerConfig.activatePointersOnLongPress
+      : defaultPointerConfig.activatePointersOnLongPress;
+  const activatePointersDelay =
+    pointerConfig && pointerConfig.activatePointersDelay
+      ? props.pointerConfig.activatePointersDelay
+      : defaultPointerConfig.activatePointersDelay;
+  const disableScroll =
+    props.disableScroll ||
+    (pointerConfig
+      ? activatePointersOnLongPress
+        ? responderActive
+          ? true
+          : false
+        : true
+      : false);
   const showScrollIndicator = props.showScrollIndicator || false;
   const hideOrigin = props.hideOrigin || false;
 
@@ -2312,6 +2333,152 @@ export const LineChart = (props: propTypes) => {
     );
   };
 
+  const lineSvgComponent = (
+    points: any,
+    currentLineThickness: number | undefined,
+    color: string,
+    fillPoints: any,
+    startFillColor: string,
+    endFillColor: string,
+    startOpacity: number,
+    endOpacity: number,
+    strokeDashArray: Array<number> | undefined | null,
+  ) => {
+    return (
+      <Svg>
+        {strokeDashArray &&
+        strokeDashArray.length === 2 &&
+        typeof strokeDashArray[0] === 'number' &&
+        typeof strokeDashArray[1] === 'number' ? (
+          <Path
+            d={points}
+            fill="none"
+            stroke={color}
+            strokeWidth={currentLineThickness || thickness}
+            strokeDasharray={strokeDashArray}
+          />
+        ) : (
+          <Path
+            d={points}
+            fill="none"
+            stroke={color}
+            strokeWidth={currentLineThickness || thickness}
+          />
+        )}
+
+        {/***********************      For Area Chart        ************/}
+
+        {areaChart && (
+          <LinearGradient
+            id="Gradient"
+            x1="0"
+            y1="0"
+            x2={gradientDirection === 'horizontal' ? '1' : '0'}
+            y2={gradientDirection === 'vertical' ? '1' : '0'}>
+            <Stop
+              offset="0"
+              stopColor={startFillColor}
+              stopOpacity={startOpacity.toString()}
+            />
+            <Stop
+              offset="1"
+              stopColor={endFillColor}
+              stopOpacity={endOpacity.toString()}
+            />
+          </LinearGradient>
+        )}
+        {areaChart && (
+          <Path
+            d={fillPoints}
+            fill="url(#Gradient)"
+            stroke={'transparent'}
+            strokeWidth={currentLineThickness || thickness}
+          />
+        )}
+
+        {/******************************************************************/}
+
+        {renderSpecificVerticalLines(data)}
+        {renderSpecificVerticalLines(data2)}
+        {renderSpecificVerticalLines(data3)}
+        {renderSpecificVerticalLines(data4)}
+        {renderSpecificVerticalLines(data5)}
+
+        {/***  !!! Here it's done thrice intentionally, trying to make it to only 1 breaks things !!!  ***/}
+        {!hideDataPoints1
+          ? renderDataPoints(
+              data,
+              dataPointsShape1,
+              dataPointsWidth1,
+              dataPointsHeight1,
+              dataPointsColor1,
+              dataPointsRadius1,
+              textColor1,
+              textFontSize1,
+              startIndex1,
+              endIndex1,
+            )
+          : null}
+        {!hideDataPoints2
+          ? renderDataPoints(
+              data2,
+              dataPointsShape2,
+              dataPointsWidth2,
+              dataPointsHeight2,
+              dataPointsColor2,
+              dataPointsRadius2,
+              textColor2,
+              textFontSize2,
+              startIndex2,
+              endIndex2,
+            )
+          : null}
+        {!hideDataPoints3
+          ? renderDataPoints(
+              data3,
+              dataPointsShape3,
+              dataPointsWidth3,
+              dataPointsHeight3,
+              dataPointsColor3,
+              dataPointsRadius3,
+              textColor3,
+              textFontSize3,
+              startIndex3,
+              endIndex3,
+            )
+          : null}
+        {!hideDataPoints4
+          ? renderDataPoints(
+              data4,
+              dataPointsShape4,
+              dataPointsWidth4,
+              dataPointsHeight4,
+              dataPointsColor4,
+              dataPointsRadius4,
+              textColor4,
+              textFontSize4,
+              startIndex4,
+              endIndex4,
+            )
+          : null}
+        {!hideDataPoints5
+          ? renderDataPoints(
+              data5,
+              dataPointsShape5,
+              dataPointsWidth5,
+              dataPointsHeight5,
+              dataPointsColor5,
+              dataPointsRadius5,
+              textColor5,
+              textFontSize5,
+              startIndex5,
+              endIndex5,
+            )
+          : null}
+      </Svg>
+    );
+  };
+
   const renderLine = (
     points: any,
     currentLineThickness: number | undefined,
@@ -2329,6 +2496,10 @@ export const LineChart = (props: propTypes) => {
         onMoveShouldSetResponder={evt => (pointerConfig ? true : false)}
         onResponderGrant={evt => {
           if (!pointerConfig) return;
+          setResponderStartTime(evt.timeStamp);
+          if (activatePointersOnLongPress) {
+            return;
+          }
           let x = evt.nativeEvent.locationX;
           let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
@@ -2338,7 +2509,7 @@ export const LineChart = (props: propTypes) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            3;
+            2;
           setPointerX(z);
           let item = data[factor];
           let y =
@@ -2351,6 +2522,14 @@ export const LineChart = (props: propTypes) => {
         }}
         onResponderMove={evt => {
           if (!pointerConfig) return;
+          if (
+            activatePointersOnLongPress &&
+            evt.timeStamp - responderStartTime < activatePointersDelay
+          ) {
+            return;
+          } else {
+            setResponderActive(true);
+          }
           let x = evt.nativeEvent.locationX;
           let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
@@ -2360,7 +2539,7 @@ export const LineChart = (props: propTypes) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            3;
+            2;
           setPointerX(z);
           let item = data[factor];
           let y =
@@ -2372,6 +2551,8 @@ export const LineChart = (props: propTypes) => {
           setPointerItem(item);
         }}
         onResponderRelease={evt => {
+          setResponderStartTime(0);
+          setResponderActive(false);
           setTimeout(() => setPointerX(0), pointerVanishDelay);
         }}
         style={{
@@ -2381,137 +2562,17 @@ export const LineChart = (props: propTypes) => {
           width: totalWidth,
           zIndex: 20,
         }}>
-        <Svg>
-          {strokeDashArray &&
-          strokeDashArray.length === 2 &&
-          typeof strokeDashArray[0] === 'number' &&
-          typeof strokeDashArray[1] === 'number' ? (
-            <Path
-              d={points}
-              fill="none"
-              stroke={color}
-              strokeWidth={currentLineThickness || thickness}
-              strokeDasharray={strokeDashArray}
-            />
-          ) : (
-            <Path
-              d={points}
-              fill="none"
-              stroke={color}
-              strokeWidth={currentLineThickness || thickness}
-            />
-          )}
-
-          {/***********************      For Area Chart        ************/}
-
-          {areaChart && (
-            <LinearGradient
-              id="Gradient"
-              x1="0"
-              y1="0"
-              x2={gradientDirection === 'horizontal' ? '1' : '0'}
-              y2={gradientDirection === 'vertical' ? '1' : '0'}>
-              <Stop
-                offset="0"
-                stopColor={startFillColor}
-                stopOpacity={startOpacity.toString()}
-              />
-              <Stop
-                offset="1"
-                stopColor={endFillColor}
-                stopOpacity={endOpacity.toString()}
-              />
-            </LinearGradient>
-          )}
-          {areaChart && (
-            <Path
-              d={fillPoints}
-              fill="url(#Gradient)"
-              stroke={'transparent'}
-              strokeWidth={currentLineThickness || thickness}
-            />
-          )}
-
-          {/******************************************************************/}
-
-          {renderSpecificVerticalLines(data)}
-          {renderSpecificVerticalLines(data2)}
-          {renderSpecificVerticalLines(data3)}
-          {renderSpecificVerticalLines(data4)}
-          {renderSpecificVerticalLines(data5)}
-
-          {/***  !!! Here it's done thrice intentionally, trying to make it to only 1 breaks things !!!  ***/}
-          {!hideDataPoints1
-            ? renderDataPoints(
-                data,
-                dataPointsShape1,
-                dataPointsWidth1,
-                dataPointsHeight1,
-                dataPointsColor1,
-                dataPointsRadius1,
-                textColor1,
-                textFontSize1,
-                startIndex1,
-                endIndex1,
-              )
-            : null}
-          {!hideDataPoints2
-            ? renderDataPoints(
-                data2,
-                dataPointsShape2,
-                dataPointsWidth2,
-                dataPointsHeight2,
-                dataPointsColor2,
-                dataPointsRadius2,
-                textColor2,
-                textFontSize2,
-                startIndex2,
-                endIndex2,
-              )
-            : null}
-          {!hideDataPoints3
-            ? renderDataPoints(
-                data3,
-                dataPointsShape3,
-                dataPointsWidth3,
-                dataPointsHeight3,
-                dataPointsColor3,
-                dataPointsRadius3,
-                textColor3,
-                textFontSize3,
-                startIndex3,
-                endIndex3,
-              )
-            : null}
-          {!hideDataPoints4
-            ? renderDataPoints(
-                data4,
-                dataPointsShape4,
-                dataPointsWidth4,
-                dataPointsHeight4,
-                dataPointsColor4,
-                dataPointsRadius4,
-                textColor4,
-                textFontSize4,
-                startIndex4,
-                endIndex4,
-              )
-            : null}
-          {!hideDataPoints5
-            ? renderDataPoints(
-                data5,
-                dataPointsShape5,
-                dataPointsWidth5,
-                dataPointsHeight5,
-                dataPointsColor5,
-                dataPointsRadius5,
-                textColor5,
-                textFontSize5,
-                startIndex5,
-                endIndex5,
-              )
-            : null}
-        </Svg>
+        {lineSvgComponent(
+          points,
+          currentLineThickness,
+          color,
+          fillPoints,
+          startFillColor,
+          endFillColor,
+          startOpacity,
+          endOpacity,
+          strokeDashArray,
+        )}
         {pointerX ? renderPointer() : null}
       </View>
     );
@@ -2536,6 +2597,10 @@ export const LineChart = (props: propTypes) => {
         onMoveShouldSetResponder={evt => (pointerConfig ? true : false)}
         onResponderGrant={evt => {
           if (!pointerConfig) return;
+          setResponderStartTime(evt.timeStamp);
+          if (activatePointersOnLongPress) {
+            return;
+          }
           let x = evt.nativeEvent.locationX;
           let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
@@ -2545,7 +2610,7 @@ export const LineChart = (props: propTypes) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            3;
+            2;
           setPointerX(z);
           let item = data[factor];
           let y =
@@ -2558,6 +2623,14 @@ export const LineChart = (props: propTypes) => {
         }}
         onResponderMove={evt => {
           if (!pointerConfig) return;
+          if (
+            activatePointersOnLongPress &&
+            evt.timeStamp - responderStartTime < activatePointersDelay
+          ) {
+            return;
+          } else {
+            setResponderActive(true);
+          }
           let x = evt.nativeEvent.locationX;
           let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
@@ -2567,7 +2640,7 @@ export const LineChart = (props: propTypes) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            3;
+            2;
           setPointerX(z);
           let item = data[factor];
           let y =
@@ -2579,6 +2652,8 @@ export const LineChart = (props: propTypes) => {
           setPointerItem(item);
         }}
         onResponderRelease={evt => {
+          setResponderStartTime(0);
+          setResponderActive(false);
           setTimeout(() => setPointerX(0), pointerVanishDelay);
         }}
         style={{
@@ -2589,137 +2664,17 @@ export const LineChart = (props: propTypes) => {
           zIndex: -1,
           // backgroundColor: 'wheat',
         }}>
-        <Svg>
-          {strokeDashArray &&
-          strokeDashArray.length === 2 &&
-          typeof strokeDashArray[0] === 'number' &&
-          typeof strokeDashArray[1] === 'number' ? (
-            <Path
-              d={points}
-              fill="none"
-              stroke={color}
-              strokeWidth={currentLineThickness || thickness}
-              strokeDasharray={strokeDashArray}
-            />
-          ) : (
-            <Path
-              d={points}
-              fill="none"
-              stroke={color}
-              strokeWidth={currentLineThickness || thickness}
-            />
-          )}
-
-          {/***********************      For Area Chart        ************/}
-
-          {areaChart && (
-            <LinearGradient
-              id="Gradient"
-              x1="0"
-              y1="0"
-              x2={gradientDirection === 'horizontal' ? '1' : '0'}
-              y2={gradientDirection === 'vertical' ? '1' : '0'}>
-              <Stop
-                offset="0"
-                stopColor={startFillColor}
-                stopOpacity={startOpacity.toString()}
-              />
-              <Stop
-                offset="1"
-                stopColor={endFillColor}
-                stopOpacity={endOpacity.toString()}
-              />
-            </LinearGradient>
-          )}
-          {areaChart && (
-            <Path
-              d={fillPoints}
-              fill="url(#Gradient)"
-              stroke={'transparent'}
-              strokeWidth={currentLineThickness || thickness}
-            />
-          )}
-
-          {/******************************************************************/}
-
-          {renderSpecificVerticalLines(data)}
-          {renderSpecificVerticalLines(data2)}
-          {renderSpecificVerticalLines(data3)}
-          {renderSpecificVerticalLines(data4)}
-          {renderSpecificVerticalLines(data5)}
-
-          {/***  !!! Here it's done thrice intentionally, trying to make it to only 1 breaks things !!!  ***/}
-          {!hideDataPoints1
-            ? renderDataPoints(
-                data,
-                dataPointsShape1,
-                dataPointsWidth1,
-                dataPointsHeight1,
-                dataPointsColor1,
-                dataPointsRadius1,
-                textColor1,
-                textFontSize1,
-                startIndex1,
-                endIndex1,
-              )
-            : null}
-          {!hideDataPoints2
-            ? renderDataPoints(
-                data2,
-                dataPointsShape2,
-                dataPointsWidth2,
-                dataPointsHeight2,
-                dataPointsColor2,
-                dataPointsRadius2,
-                textColor2,
-                textFontSize2,
-                startIndex2,
-                endIndex2,
-              )
-            : null}
-          {!hideDataPoints3
-            ? renderDataPoints(
-                data3,
-                dataPointsShape3,
-                dataPointsWidth3,
-                dataPointsHeight3,
-                dataPointsColor3,
-                dataPointsRadius3,
-                textColor3,
-                textFontSize3,
-                startIndex3,
-                endIndex3,
-              )
-            : null}
-          {!hideDataPoints4
-            ? renderDataPoints(
-                data4,
-                dataPointsShape4,
-                dataPointsWidth4,
-                dataPointsHeight4,
-                dataPointsColor4,
-                dataPointsRadius4,
-                textColor4,
-                textFontSize4,
-                startIndex4,
-                endIndex4,
-              )
-            : null}
-          {!hideDataPoints5
-            ? renderDataPoints(
-                data5,
-                dataPointsShape5,
-                dataPointsWidth5,
-                dataPointsHeight5,
-                dataPointsColor5,
-                dataPointsRadius5,
-                textColor5,
-                textFontSize5,
-                startIndex5,
-                endIndex5,
-              )
-            : null}
-        </Svg>
+        {lineSvgComponent(
+          points,
+          currentLineThickness,
+          color,
+          fillPoints,
+          startFillColor,
+          endFillColor,
+          startOpacity,
+          endOpacity,
+          strokeDashArray,
+        )}
         {pointerX ? renderPointer() : null}
       </Animated.View>
     );
