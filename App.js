@@ -670,6 +670,19 @@ const App = () => {
     {value: -6, label: 'Wed'},
     {value: 30, label: 'Thu'},
   ];
+  const barData3 = [
+    {
+      value: 15,
+      label: 'Mon',
+    },
+    {value: 10, label: 'Tue'},
+    {value: -3, label: 'Wed'},
+    {value: 20, label: 'Thu'},
+    {value: -6, label: 'Wed'},
+    {value: 20, label: 'Thu'},
+    {value: -6, label: 'Wed'},
+    {value: 20, label: 'Thu'},
+  ];
 
   const sdata = [
     {
@@ -1229,7 +1242,13 @@ const App = () => {
       <LineChart
         // width={200}
         // height={300}
-        pointerConfig={{}}
+        pointerConfig={{
+          activatePointersOnLongPress: true,
+          pointerColor: 'green',
+          pointer3Color: 'red',
+          pointer2Color: 'orange',
+          hidePointer2: true,
+        }}
         // isAnimated
         // rotateLabel
         // barWidth={32}
@@ -1240,9 +1259,12 @@ const App = () => {
         // data2={lineData2}
         data={barData}
         data2={barData2}
+        data3={barData3}
         hideDataPoints
-        color2='red'
-        // curved
+        color2="red"
+        color3="green"
+        thickness3={3}
+        curved
         // initialSpacing={90}
         // stackData={stackData}
         // horizontal
