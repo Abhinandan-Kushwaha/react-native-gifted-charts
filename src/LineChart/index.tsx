@@ -323,7 +323,12 @@ type Pointer = {
   height?: number;
   width?: number;
   radius?: number;
-  color?: ColorValue;
+  pointerColor?: ColorValue;
+  pointer1Color?: ColorValue;
+  pointer2Color?: ColorValue;
+  pointer3Color?: ColorValue;
+  pointer4Color?: ColorValue;
+  pointer5Color?: ColorValue;
   pointerComponent?: Function;
   showPointerStrip?: boolean;
   pointerStripWidth?: number;
@@ -337,6 +342,11 @@ type Pointer = {
   pointerVanishDelay?: number;
   activatePointersOnLongPress?: boolean;
   activatePointersDelay?: number;
+  hidePointer1?: boolean;
+  hidePointer2?: boolean;
+  hidePointer3?: boolean;
+  hidePointer4?: boolean;
+  hidePointer5?: boolean;
 };
 
 export const LineChart = (props: propTypes) => {
@@ -344,6 +354,26 @@ export const LineChart = (props: propTypes) => {
   const [pointerX, setPointerX] = useState(0);
   const [pointerY, setPointerY] = useState(0);
   const [pointerItem, setPointerItem] = useState({
+    pointerShiftX: 0,
+    pointerShiftY: 0,
+  });
+  const [pointerY2, setPointerY2] = useState(0);
+  const [pointerItem2, setPointerItem2] = useState({
+    pointerShiftX: 0,
+    pointerShiftY: 0,
+  });
+  const [pointerY3, setPointerY3] = useState(0);
+  const [pointerItem3, setPointerItem3] = useState({
+    pointerShiftX: 0,
+    pointerShiftY: 0,
+  });
+  const [pointerY4, setPointerY4] = useState(0);
+  const [pointerItem4, setPointerItem4] = useState({
+    pointerShiftX: 0,
+    pointerShiftY: 0,
+  });
+  const [pointerY5, setPointerY5] = useState(0);
+  const [pointerItem5, setPointerItem5] = useState({
     pointerShiftX: 0,
     pointerShiftY: 0,
   });
@@ -1171,11 +1201,16 @@ export const LineChart = (props: propTypes) => {
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
     props.noOfSectionsBelowXAxis || -minValue / stepValue;
-  const thickness1 = props.thickness1 === 0 ? 0 : props.thickness || 1;
-  const thickness2 = props.thickness2 === 0 ? 0 : props.thickness || 1;
-  const thickness3 = props.thickness3 === 0 ? 0 : props.thickness || 1;
-  const thickness4 = props.thickness4 === 0 ? 0 : props.thickness || 1;
-  const thickness5 = props.thickness5 === 0 ? 0 : props.thickness || 1;
+  const thickness1 =
+    props.thickness1 === 0 ? 0 : props.thickness1 || props.thickness || 1;
+  const thickness2 =
+    props.thickness2 === 0 ? 0 : props.thickness2 || props.thickness || 1;
+  const thickness3 =
+    props.thickness3 === 0 ? 0 : props.thickness3 || props.thickness || 1;
+  const thickness4 =
+    props.thickness4 === 0 ? 0 : props.thickness4 || props.thickness || 1;
+  const thickness5 =
+    props.thickness5 === 0 ? 0 : props.thickness5 || props.thickness || 1;
 
   const strokeDashArray1 = props.strokeDashArray1 || props.strokeDashArray;
   const strokeDashArray2 = props.strokeDashArray2 || props.strokeDashArray;
@@ -1272,7 +1307,7 @@ export const LineChart = (props: propTypes) => {
     height: 0,
     width: 0,
     radius: 5,
-    color: 'red',
+    pointerColor: 'red',
     pointerComponent: null,
     showPointerStrip: true,
     pointerStripHeight: containerHeight,
@@ -1286,77 +1321,102 @@ export const LineChart = (props: propTypes) => {
     pointerVanishDelay: 150,
     activatePointersOnLongPress: false,
     activatePointersDelay: 150,
+    hidePointer1: false,
+    hidePointer2: false,
+    hidePointer3: false,
+    hidePointer4: false,
+    hidePointer5: false,
   };
   const pointerConfig = props.pointerConfig || null;
   const pointerHeight =
     pointerConfig && pointerConfig.height
-      ? props.pointerConfig.height
+      ? pointerConfig.height
       : defaultPointerConfig.height;
   const pointerWidth =
     pointerConfig && pointerConfig.width
-      ? props.pointerConfig.width
+      ? pointerConfig.width
       : defaultPointerConfig.width;
   const pointerRadius =
     pointerConfig && pointerConfig.radius
-      ? props.pointerConfig.radius
+      ? pointerConfig.radius
       : defaultPointerConfig.radius;
   const pointerColor =
-    pointerConfig && pointerConfig.color
-      ? props.pointerConfig.color
-      : defaultPointerConfig.color;
+    pointerConfig && pointerConfig.pointerColor
+      ? pointerConfig.pointerColor
+      : defaultPointerConfig.pointerColor;
   const pointerComponent =
     pointerConfig && pointerConfig.pointerComponent
-      ? props.pointerConfig.pointerComponent
+      ? pointerConfig.pointerComponent
       : defaultPointerConfig.pointerComponent;
 
   const showPointerStrip =
     pointerConfig && pointerConfig.showPointerStrip
-      ? props.pointerConfig.showPointerStrip
+      ? pointerConfig.showPointerStrip
       : defaultPointerConfig.showPointerStrip;
   const pointerStripHeight =
     pointerConfig && pointerConfig.pointerStripHeight
-      ? props.pointerConfig.pointerStripHeight
+      ? pointerConfig.pointerStripHeight
       : defaultPointerConfig.pointerStripHeight;
   const pointerStripWidth =
     pointerConfig && pointerConfig.pointerStripWidth
-      ? props.pointerConfig.pointerStripWidth
+      ? pointerConfig.pointerStripWidth
       : defaultPointerConfig.pointerStripWidth;
   const pointerStripColor =
     pointerConfig && pointerConfig.pointerStripColor
-      ? props.pointerConfig.pointerStripColor
+      ? pointerConfig.pointerStripColor
       : defaultPointerConfig.pointerStripColor;
   const pointerStripUptoDataPoint =
     pointerConfig && pointerConfig.pointerStripUptoDataPoint
-      ? props.pointerConfig.pointerStripUptoDataPoint
+      ? pointerConfig.pointerStripUptoDataPoint
       : defaultPointerConfig.pointerStripUptoDataPoint;
   const pointerLabelComponent =
     pointerConfig && pointerConfig.pointerLabelComponent
-      ? props.pointerConfig.pointerLabelComponent
+      ? pointerConfig.pointerLabelComponent
       : defaultPointerConfig.pointerLabelComponent;
   const shiftPointerLabelX =
     pointerConfig && pointerConfig.shiftPointerLabelX
-      ? props.pointerConfig.shiftPointerLabelX
+      ? pointerConfig.shiftPointerLabelX
       : defaultPointerConfig.shiftPointerLabelX;
   const shiftPointerLabelY =
     pointerConfig && pointerConfig.shiftPointerLabelY
-      ? props.pointerConfig.shiftPointerLabelY
+      ? pointerConfig.shiftPointerLabelY
       : defaultPointerConfig.shiftPointerLabelY;
   const pointerLabelWidth =
     pointerConfig && pointerConfig.pointerLabelWidth
-      ? props.pointerConfig.pointerLabelWidth
+      ? pointerConfig.pointerLabelWidth
       : defaultPointerConfig.pointerLabelWidth;
   const pointerVanishDelay =
     pointerConfig && pointerConfig.pointerVanishDelay
-      ? props.pointerConfig.pointerVanishDelay
+      ? pointerConfig.pointerVanishDelay
       : defaultPointerConfig.pointerVanishDelay;
   const activatePointersOnLongPress =
     pointerConfig && pointerConfig.activatePointersOnLongPress
-      ? props.pointerConfig.activatePointersOnLongPress
+      ? pointerConfig.activatePointersOnLongPress
       : defaultPointerConfig.activatePointersOnLongPress;
   const activatePointersDelay =
     pointerConfig && pointerConfig.activatePointersDelay
-      ? props.pointerConfig.activatePointersDelay
+      ? pointerConfig.activatePointersDelay
       : defaultPointerConfig.activatePointersDelay;
+  const hidePointer1 =
+    pointerConfig && pointerConfig.hidePointer1
+      ? pointerConfig.hidePointer1
+      : defaultPointerConfig.hidePointer1;
+  const hidePointer2 =
+    pointerConfig && pointerConfig.hidePointer2
+      ? pointerConfig.hidePointer2
+      : defaultPointerConfig.hidePointer2;
+  const hidePointer3 =
+    pointerConfig && pointerConfig.hidePointer3
+      ? pointerConfig.hidePointer3
+      : defaultPointerConfig.hidePointer3;
+  const hidePointer4 =
+    pointerConfig && pointerConfig.hidePointer4
+      ? pointerConfig.hidePointer4
+      : defaultPointerConfig.hidePointer4;
+  const hidePointer5 =
+    pointerConfig && pointerConfig.hidePointer5
+      ? pointerConfig.hidePointer5
+      : defaultPointerConfig.hidePointer5;
   const disableScroll =
     props.disableScroll ||
     (pointerConfig
@@ -2268,13 +2328,47 @@ export const LineChart = (props: propTypes) => {
     });
   };
 
-  const renderPointer = () => {
+  const renderPointer = (lineNumber: number) => {
+    if (lineNumber === 1 && hidePointer1) return;
+    if (lineNumber === 2 && hidePointer2) return;
+    if (lineNumber === 3 && hidePointer3) return;
+    if (lineNumber === 4 && hidePointer4) return;
+    if (lineNumber === 5 && hidePointer5) return;
+    let pointerItemLocal, pointerYLocal, pointerColorLocal;
+    switch (lineNumber) {
+      case 1:
+        pointerItemLocal = pointerItem;
+        pointerYLocal = pointerY;
+        pointerColorLocal = pointerConfig.pointer1Color || pointerColor;
+        break;
+      case 2:
+        pointerItemLocal = pointerItem2;
+        pointerYLocal = pointerY2;
+        pointerColorLocal = pointerConfig.pointer2Color || pointerColor;
+        break;
+      case 3:
+        pointerItemLocal = pointerItem3;
+        pointerYLocal = pointerY3;
+        pointerColorLocal = pointerConfig.pointer3Color || pointerColor;
+        break;
+      case 4:
+        pointerItemLocal = pointerItem4;
+        pointerYLocal = pointerY4;
+        pointerColorLocal = pointerConfig.pointer4Color || pointerColor;
+        break;
+      case 5:
+        pointerItemLocal = pointerItem5;
+        pointerYLocal = pointerY5;
+        pointerColorLocal = pointerConfig.pointer5Color || pointerColor;
+        break;
+    }
+
     return (
       <View
         style={{
           position: 'absolute',
-          left: pointerX + (pointerItem.pointerShiftX || 0),
-          top: pointerY,
+          left: pointerX + (pointerItemLocal.pointerShiftX || 0),
+          top: pointerYLocal,
         }}>
         {pointerComponent ? (
           pointerComponent()
@@ -2283,8 +2377,8 @@ export const LineChart = (props: propTypes) => {
             style={{
               height: pointerHeight || pointerRadius * 2,
               width: pointerWidth || pointerRadius * 2,
-              marginTop: pointerItem.pointerShiftY || 0,
-              backgroundColor: pointerColor,
+              marginTop: pointerItemLocal.pointerShiftY || 0,
+              backgroundColor: pointerColorLocal,
               borderRadius: pointerRadius || 0,
             }}
           />
@@ -2296,9 +2390,9 @@ export const LineChart = (props: propTypes) => {
               left: pointerRadius || pointerWidth / 2,
               top: pointerStripUptoDataPoint
                 ? pointerRadius || pointerStripHeight / 2
-                : -pointerY + 8,
+                : -pointerYLocal + 8,
               height: pointerStripUptoDataPoint
-                ? containerHeight - pointerY - 10
+                ? containerHeight - pointerYLocal - 10
                 : pointerStripHeight,
               width: pointerStripWidth,
               backgroundColor: pointerStripColor,
@@ -2318,7 +2412,7 @@ export const LineChart = (props: propTypes) => {
               top:
                 (pointerStripUptoDataPoint
                   ? pointerRadius || pointerStripHeight / 2
-                  : -pointerY + 8) -
+                  : -pointerYLocal + 8) -
                 pointerLabelWidth / 2 +
                 shiftPointerLabelY,
               marginTop: pointerStripUptoDataPoint
@@ -2326,7 +2420,7 @@ export const LineChart = (props: propTypes) => {
                 : containerHeight - pointerStripHeight,
               width: pointerLabelWidth,
             }}>
-            {pointerLabelComponent(pointerItem)}
+            {pointerLabelComponent(pointerItemLocal)}
           </View>
         )}
       </View>
@@ -2480,6 +2574,7 @@ export const LineChart = (props: propTypes) => {
   };
 
   const renderLine = (
+    lineNumber: number,
     points: any,
     currentLineThickness: number | undefined,
     color: string,
@@ -2511,14 +2606,64 @@ export const LineChart = (props: propTypes) => {
             (pointerRadius || pointerWidth / 2) -
             2;
           setPointerX(z);
-          let item = data[factor];
-          let y =
+          let item, y;
+          setPointerX(z);
+          item = data[factor];
+          y =
             containerHeight -
             (item.value * containerHeight) / maxValue -
             (pointerRadius || pointerHeight / 2) +
             10;
           setPointerY(y);
           setPointerItem(item);
+          if (data2 && data2.length) {
+            item = data2[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY2(y);
+              setPointerItem2(item);
+            }
+          }
+          if (data3 && data3.length) {
+            item = data3[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY3(y);
+              setPointerItem3(item);
+            }
+          }
+          if (data4 && data4.length) {
+            item = data4[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY4(y);
+              setPointerItem4(item);
+            }
+          }
+          if (data5 && data5.length) {
+            item = data5[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY5(y);
+              setPointerItem5(item);
+            }
+          }
         }}
         onResponderMove={evt => {
           if (!pointerConfig) return;
@@ -2540,15 +2685,64 @@ export const LineChart = (props: propTypes) => {
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
             2;
+          let item, y;
           setPointerX(z);
-          let item = data[factor];
-          let y =
+          item = data[factor];
+          y =
             containerHeight -
             (item.value * containerHeight) / maxValue -
             (pointerRadius || pointerHeight / 2) +
             10;
           setPointerY(y);
           setPointerItem(item);
+          if (data2 && data2.length) {
+            item = data2[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY2(y);
+              setPointerItem2(item);
+            }
+          }
+          if (data3 && data3.length) {
+            item = data3[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY3(y);
+              setPointerItem3(item);
+            }
+          }
+          if (data4 && data4.length) {
+            item = data4[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY4(y);
+              setPointerItem4(item);
+            }
+          }
+          if (data5 && data5.length) {
+            item = data5[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY5(y);
+              setPointerItem5(item);
+            }
+          }
         }}
         onResponderRelease={evt => {
           setResponderStartTime(0);
@@ -2573,12 +2767,13 @@ export const LineChart = (props: propTypes) => {
           endOpacity,
           strokeDashArray,
         )}
-        {pointerX ? renderPointer() : null}
+        {pointerX ? renderPointer(lineNumber) : null}
       </View>
     );
   };
 
   const renderAnimatedLine = (
+    lineNumber: number,
     points: any,
     animatedWidth: any,
     currentLineThickness: number | undefined,
@@ -2612,14 +2807,64 @@ export const LineChart = (props: propTypes) => {
             (pointerRadius || pointerWidth / 2) -
             2;
           setPointerX(z);
-          let item = data[factor];
-          let y =
+          let item, y;
+          setPointerX(z);
+          item = data[factor];
+          y =
             containerHeight -
             (item.value * containerHeight) / maxValue -
             (pointerRadius || pointerHeight / 2) +
             10;
           setPointerY(y);
           setPointerItem(item);
+          if (data2 && data2.length) {
+            item = data2[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY2(y);
+              setPointerItem2(item);
+            }
+          }
+          if (data3 && data3.length) {
+            item = data3[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY3(y);
+              setPointerItem3(item);
+            }
+          }
+          if (data4 && data4.length) {
+            item = data4[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY4(y);
+              setPointerItem4(item);
+            }
+          }
+          if (data5 && data5.length) {
+            item = data5[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY5(y);
+              setPointerItem5(item);
+            }
+          }
         }}
         onResponderMove={evt => {
           if (!pointerConfig) return;
@@ -2641,15 +2886,64 @@ export const LineChart = (props: propTypes) => {
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
             2;
+          let item, y;
           setPointerX(z);
-          let item = data[factor];
-          let y =
+          item = data[factor];
+          y =
             containerHeight -
             (item.value * containerHeight) / maxValue -
             (pointerRadius || pointerHeight / 2) +
             10;
           setPointerY(y);
           setPointerItem(item);
+          if (data2 && data2.length) {
+            item = data2[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY2(y);
+              setPointerItem2(item);
+            }
+          }
+          if (data3 && data3.length) {
+            item = data3[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY3(y);
+              setPointerItem3(item);
+            }
+          }
+          if (data4 && data4.length) {
+            item = data4[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY4(y);
+              setPointerItem4(item);
+            }
+          }
+          if (data5 && data5.length) {
+            item = data5[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setPointerY5(y);
+              setPointerItem5(item);
+            }
+          }
         }}
         onResponderRelease={evt => {
           setResponderStartTime(0);
@@ -2675,7 +2969,7 @@ export const LineChart = (props: propTypes) => {
           endOpacity,
           strokeDashArray,
         )}
-        {pointerX ? renderPointer() : null}
+        {pointerX ? renderPointer(lineNumber) : null}
       </Animated.View>
     );
   };
@@ -2774,6 +3068,7 @@ export const LineChart = (props: propTypes) => {
 
         {isAnimated
           ? renderAnimatedLine(
+              1,
               points,
               animatedWidth,
               thickness1,
@@ -2786,6 +3081,7 @@ export const LineChart = (props: propTypes) => {
               strokeDashArray1,
             )
           : renderLine(
+              1,
               points,
               thickness1,
               color1,
@@ -2799,6 +3095,7 @@ export const LineChart = (props: propTypes) => {
         {points2
           ? isAnimated
             ? renderAnimatedLine(
+                2,
                 points2,
                 animatedWidth2,
                 thickness2,
@@ -2811,6 +3108,7 @@ export const LineChart = (props: propTypes) => {
                 strokeDashArray2,
               )
             : renderLine(
+                2,
                 points2,
                 thickness2,
                 color2,
@@ -2825,6 +3123,7 @@ export const LineChart = (props: propTypes) => {
         {points3
           ? isAnimated
             ? renderAnimatedLine(
+                3,
                 points3,
                 animatedWidth3,
                 thickness3,
@@ -2837,6 +3136,7 @@ export const LineChart = (props: propTypes) => {
                 strokeDashArray3,
               )
             : renderLine(
+                3,
                 points3,
                 thickness3,
                 color3,
@@ -2851,6 +3151,7 @@ export const LineChart = (props: propTypes) => {
         {points4
           ? isAnimated
             ? renderAnimatedLine(
+                4,
                 points4,
                 animatedWidth4,
                 thickness4,
@@ -2863,6 +3164,7 @@ export const LineChart = (props: propTypes) => {
                 strokeDashArray4,
               )
             : renderLine(
+                4,
                 points4,
                 thickness4,
                 color4,
@@ -2877,6 +3179,7 @@ export const LineChart = (props: propTypes) => {
         {points5
           ? isAnimated
             ? renderAnimatedLine(
+                5,
                 points5,
                 animatedWidth5,
                 thickness5,
@@ -2889,6 +3192,7 @@ export const LineChart = (props: propTypes) => {
                 strokeDashArray5,
               )
             : renderLine(
+                5,
                 points5,
                 thickness5,
                 color5,
