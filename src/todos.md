@@ -1,6 +1,6 @@
 ## Feature requests
 
-1. OnPress function on Pie Chart https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/111
+None at the moment!
 
 ## To-dos in documentation-
 
