@@ -63,6 +63,7 @@ type Props = {
   barBackgroundPattern?: Function;
   patternId?: String;
   barMarginBottom?: number;
+  onPress?: Function;
 };
 type itemType = {
   value?: number;
@@ -319,7 +320,13 @@ const RenderBars = (props: Props) => {
     <TouchableOpacity
       disabled={item.disablePress || props.disablePress}
       activeOpacity={props.activeOpacity || 0.2}
-      onPress={item.onPress}
+      onPress={() => {
+        item.onPress
+          ? item.onPress()
+          : props.onPress
+          ? props.onPress(item, index)
+          : null;
+      }}
       style={[
         {
           // overflow: 'visible',
