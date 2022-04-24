@@ -6,6 +6,10 @@
 | radius               | number         | Radius of the Pie chart                                                                                   | 120             |
 | initialAngle         | number         | Starting angle in radians (illustrated below this table)                                                  | 0               |
 | isThreeD             | Boolean        | If set to true, it rotates and translates the chart to give it a 3D effect                                | false           |
+| showGradient         | Boolean        | Prop to enable radial gradient for the Pie sections                                                       | false           |
+| gradientCenterColor  | ColorValue     | Gradient color at the center of the Pie chart                                                             | 'white'         |
+| onPress              | Function       | Callback function called on press of Pie sections (takes item and index as parameter)                     | null            |
+| onLabelPress         | Function       | Callback function called on press of a Label (takes item and index as parameter)                          | onPress OR null |
 | tiltAngle            | Angle in deg   | The angle by which the chart should be tilted                                                             | '55deg' for 3D charts, otherwise 0 |
 | shadow               | Boolean        | Shadow to the Pie chart, when set to true, it enhances the 3D effect                                      | false           |
 | shadowColor          | ColorValue     | Color of the shadow                                                                                       | lightgray       |
@@ -76,7 +80,10 @@ The default value for labelsPosition is 'mid'. In case of donut and semicircle c
 | font                 | string     | Font family of the text - 'Arial', 'Cursive', 'Comic Sans MS' etc      |
 | textBackgroundColor  | ColorValue | Background color for the label text                                    |
 | textBackgroundRadius | number     | Radius for the background of the text label                            |
-| labelPosition       | string     | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid' |
+| labelPosition        | string     | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid' |
+| onPress              | Function   | Callback function called on press of Pie sections (takes item and index as parameter)                    |
+| onLabelPress         | Function   | Callback function called on press of a Label (takes item and index as parameter)                         |
+
 
 ### Donut chart related props
 

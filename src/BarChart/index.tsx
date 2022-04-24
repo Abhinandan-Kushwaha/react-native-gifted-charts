@@ -845,7 +845,9 @@ export const BarChart = (props: PropTypes) => {
           props.hideAxesAndRules !== true &&
             !hideYAxisText &&
             horizSectionsBelow.map((sectionItems, index) => {
-              let label = getLabel(sectionItems.value);
+              let label = getLabel(
+                horizSectionsBelow[horizSectionsBelow.length - 1 - index].value,
+              );
               return (
                 <View
                   key={index}

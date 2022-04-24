@@ -1,6 +1,14 @@
 import React from 'react';
 import {ColorValue, View} from 'react-native';
-import Svg, {Path, Circle, Text as SvgText, FontStyle} from 'react-native-svg';
+import Svg, {
+  Path,
+  Circle,
+  Text as SvgText,
+  FontStyle,
+  Defs,
+  RadialGradient,
+  Stop,
+} from 'react-native-svg';
 
 type propTypes = {
   radius?: number;
@@ -36,12 +44,17 @@ type propTypes = {
   tiltAngle?: string;
   initialAngle?: number;
   labelsPosition?: 'onBorder' | 'outward' | 'inward' | 'mid';
+  showGradient?: boolean;
+  gradientCenterColor?: string;
+  onPress?: Function;
+  onLabelPress?: Function;
 };
 type itemType = {
   value: number;
   shiftX?: number;
   shiftY?: number;
   color?: string;
+  gradientCenterColor?: string;
   text?: string;
   textColor?: string;
   textSize?: number;
@@ -53,6 +66,8 @@ type itemType = {
   shiftTextX?: number;
   shiftTextY?: number;
   labelPosition?: 'onBorder' | 'outward' | 'inward' | 'mid';
+  onPress?: Function;
+  onLabelPress?: Function;
 };
 
 export const PieChart = (props: propTypes) => {
@@ -102,6 +117,8 @@ export const PieChart = (props: propTypes) => {
   const showTextBackground = props.showTextBackground || false;
   const textBackgroundColor = props.textBackgroundColor || 'white';
   const showValuesAsLabels = props.showValuesAsLabels || false;
+  const showGradient = props.showGradient || false;
+  const gradientCenterColor = props.gradientCenterColor || 'white';
 
   const colors = [
     'cyan',
@@ -186,6 +203,32 @@ export const PieChart = (props: propTypes) => {
         }`}
         height={radius * 2 + strokeWidth}
         width={radius * 2 + strokeWidth}>
+        <Defs>
+          {data.map((item, index) => {
+            return (
+              <RadialGradient
+                id={'grad' + index}
+                cx="50%"
+                cy="50%"
+                rx="50%"
+                ry="50%"
+                fx="50%"
+                fy="50%"
+                gradientUnits="userSpaceOnUse">
+                <Stop
+                  offset="0%"
+                  stopColor={item.gradientCenterColor || gradientCenterColor}
+                  stopOpacity="1"
+                />
+                <Stop
+                  offset="100%"
+                  stopColor={item.color || colors[index % 9]}
+                  stopOpacity="1"
+                />
+              </RadialGradient>
+            );
+          })}
+        </Defs>
         {data.map((item, index) => {
           console.log('index', index);
           let nextItem;
@@ -219,14 +262,24 @@ export const PieChart = (props: propTypes) => {
               }`}
               stroke={strokeColor}
               strokeWidth={strokeWidth}
-              fill={item.color || colors[index % 9]}
+              fill={
+                showGradient
+                  ? `url(#grad${index})`
+                  : item.color || colors[index % 9]
+              }
+              onPress={() => {
+                item.onPress
+                  ? item.onPress
+                  : props.onPress
+                  ? props.onPress(item, index)
+                  : null;
+              }}
             />
           );
         })}
 
         {showText &&
           data.map((item, index) => {
-
             let mx = cx * (1 + Math.sin(2 * pi * mData[index] + initialAngle));
             let my = cy * (1 - Math.cos(2 * pi * mData[index] + initialAngle));
 
@@ -270,6 +323,17 @@ export const PieChart = (props: propTypes) => {
                       textSize
                     }
                     fill={item.textBackgroundColor || textBackgroundColor}
+                    onPress={() => {
+                      item.onLabelPress
+                        ? item.onLabelPress()
+                        : props.onLabelPress
+                        ? props.onLabelPress(item, index)
+                        : item.onPress
+                        ? item.onPress()
+                        : props.onPress
+                        ? props.onPress(item, index)
+                        : null;
+                    }}
                   />
                 )}
                 <SvgText
@@ -283,7 +347,18 @@ export const PieChart = (props: propTypes) => {
                     (item.shiftTextX || 0) -
                     (item.textSize || textSize) / 1.8
                   }
-                  y={y + (item.shiftTextY || 0)}>
+                  y={y + (item.shiftTextY || 0)}
+                  onPress={() => {
+                    item.onLabelPress
+                      ? item.onLabelPress()
+                      : props.onLabelPress
+                      ? props.onLabelPress(item, index)
+                      : item.onPress
+                      ? item.onPress()
+                      : props.onPress
+                      ? props.onPress(item, index)
+                      : null;
+                  }}>
                   {item.text || (showValuesAsLabels ? item.value + '' : '')}
                 </SvgText>
               </>

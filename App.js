@@ -925,9 +925,9 @@ const App = () => {
     {value: -34},
   ];
   const pieData = [
-    {value: 54, color: '#177AD5', text: '54%'},
-    {value: 40, color: '#79D2DE', text: '30%'},
-    {value: 20, color: '#ED6665', text: '26%'},
+    {value: 54, color: '#177AD5'},
+    {value: 40, color: '#79D2DE'},
+    {value: 20, color: '#ED6665'},
   ];
   const pieData2 = [
     {value: 70, color: '#177AD5'},
@@ -942,6 +942,24 @@ const App = () => {
         paddingLeft: 20,
         // backgroundColor: 'black',
       }}>
+        <PieChart
+        data={pieData}
+        radius={150}
+        donut
+        showText
+        showValuesAsLabels
+        showTextBackground
+        textBackgroundColor='#333'
+        textBackgroundRadius={22}
+        textColor='white'
+        textSize={16}
+        fontWeight='bold'
+        strokeWidth={10}
+        strokeColor='#333'
+        innerCircleBorderWidth={10}
+        innerCircleBorderColor='#333'
+        showGradient
+        />
       {/* <PieChart
             showText
             textColor="black"
