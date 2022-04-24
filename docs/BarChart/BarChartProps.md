@@ -9,6 +9,7 @@
 | data                | Array of items | An item object represents a bar in the bar chart. It is described in the next table.      | \_                  |
 | width               | number         | Width of the Bar chart                                                                    | width of the parent |
 | height              | number         | Height of the Bar chart (excluding the bottom label)                                      | 200                 |
+| onPress             | Function       | Callback function called on press of a Bar (takes item and index as parameter)            | null                |
 | maxValue            | number         | Maximum value shown in the Y axis                                                         | 200                 |
 | minValue | number | Minimum negative value shown in the Y axis (to be used only if the data set has negative values too) | \_ |
 | noOfSections        | number         | Number of sections in the Y axis                                                          | 10                  |

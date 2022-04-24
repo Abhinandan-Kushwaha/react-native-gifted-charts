@@ -230,7 +230,7 @@ export const PieChart = (props: propTypes) => {
           })}
         </Defs>
         {data.map((item, index) => {
-          console.log('index', index);
+          // console.log('index', index);
           let nextItem;
           if (index === pData.length - 1) nextItem = pData[0];
           else nextItem = pData[index + 1];

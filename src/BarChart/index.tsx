@@ -130,6 +130,7 @@ type PropTypes = {
   barBackgroundPattern?: Function;
   patternId?: String;
   barMarginBottom?: number;
+  onPress?: Function;
 };
 type lineConfigType = {
   initialSpacing?: number;
@@ -1458,6 +1459,7 @@ export const BarChart = (props: PropTypes) => {
                   labelTextStyle={
                     item.labelTextStyle || props.xAxisLabelTextStyle
                   }
+                  onPress={props.onPress}
                 />
               ))}
         </Fragment>
