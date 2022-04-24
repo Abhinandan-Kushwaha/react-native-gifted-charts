@@ -276,7 +276,12 @@ type Pointer = {
   height?: number; // default: 0
   width?: number; // default: 0
   radius?: number; // default: 5
-  color?: ColorValue; // default: 'red'
+  pointerColor?: ColorValue; // default: 'red
+  pointer1Color?: ColorValue; // default: 'red
+  pointer2Color?: ColorValue; // default: 'red
+  pointer3Color?: ColorValue; // default: 'red
+  pointer4Color?: ColorValue; // default: 'red
+  pointer5Color?: ColorValue; // default: 'red
   pointerComponent?: Function; // default: null
   showPointerStrip?: boolean; // default: true
   pointerStripWidth?: number; // default: containerHeight
@@ -290,6 +295,11 @@ type Pointer = {
   pointerVanishDelay?: number; // default: 150
   activatePointersOnLongPress?: boolean; // default: false
   activatePointersDelay?: number; // default: 150
+  hidePointer1?: boolean; // default: false
+  hidePointer2?: boolean; // default: false
+  hidePointer3?: boolean; // default: false
+  hidePointer4?: boolean; // default: false
+  hidePointer5?: boolean; // default: false
 };
 ```
 
