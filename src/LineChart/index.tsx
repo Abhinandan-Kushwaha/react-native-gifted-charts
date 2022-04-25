@@ -44,6 +44,11 @@ type propTypes = {
   data3?: Array<itemType>;
   data4?: Array<itemType>;
   data5?: Array<itemType>;
+  zIndex1?: number;
+  zIndex2?: number;
+  zIndex3?: number;
+  zIndex4?: number;
+  zIndex5?: number;
   thickness?: number;
   thickness1?: number;
   thickness2?: number;
@@ -1215,6 +1220,12 @@ export const LineChart = (props: propTypes) => {
     props.thickness4 === 0 ? 0 : props.thickness4 || props.thickness || 1;
   const thickness5 =
     props.thickness5 === 0 ? 0 : props.thickness5 || props.thickness || 1;
+
+  const zIndex1 = props.zIndex1 || 0;
+  const zIndex2 = props.zIndex2 || 0;
+  const zIndex3 = props.zIndex3 || 0;
+  const zIndex4 = props.zIndex4 || 0;
+  const zIndex5 = props.zIndex5 || 0;
 
   const strokeDashArray1 = props.strokeDashArray1 || props.strokeDashArray;
   const strokeDashArray2 = props.strokeDashArray2 || props.strokeDashArray;
@@ -2645,7 +2656,7 @@ export const LineChart = (props: propTypes) => {
   };
 
   const renderLine = (
-    lineNumber: number,
+    zIndex: number,
     points: any,
     currentLineThickness: number | undefined,
     color: string,
@@ -2825,7 +2836,7 @@ export const LineChart = (props: propTypes) => {
           height: containerHeight + 10 + horizSectionsBelow.length * stepHeight,
           bottom: 60 + labelsExtraHeight,
           width: totalWidth,
-          zIndex: 20,
+          zIndex: zIndex,
         }}>
         {lineSvgComponent(
           points,
@@ -2843,7 +2854,7 @@ export const LineChart = (props: propTypes) => {
   };
 
   const renderAnimatedLine = (
-    lineNumber: number,
+    zIndex: number,
     points: any,
     animatedWidth: any,
     currentLineThickness: number | undefined,
@@ -3025,7 +3036,7 @@ export const LineChart = (props: propTypes) => {
           height: containerHeight + 10 + horizSectionsBelow.length * stepHeight,
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
-          zIndex: -1,
+          zIndex: zIndex,
           // backgroundColor: 'wheat',
         }}>
         {lineSvgComponent(
@@ -3137,7 +3148,7 @@ export const LineChart = (props: propTypes) => {
 
         {isAnimated
           ? renderAnimatedLine(
-              1,
+              zIndex1,
               points,
               animatedWidth,
               thickness1,
@@ -3150,7 +3161,7 @@ export const LineChart = (props: propTypes) => {
               strokeDashArray1,
             )
           : renderLine(
-              1,
+              zIndex1,
               points,
               thickness1,
               color1,
@@ -3164,7 +3175,7 @@ export const LineChart = (props: propTypes) => {
         {points2
           ? isAnimated
             ? renderAnimatedLine(
-                2,
+                zIndex2,
                 points2,
                 animatedWidth2,
                 thickness2,
@@ -3177,7 +3188,7 @@ export const LineChart = (props: propTypes) => {
                 strokeDashArray2,
               )
             : renderLine(
-                2,
+                zIndex2,
                 points2,
                 thickness2,
                 color2,
@@ -3192,7 +3203,7 @@ export const LineChart = (props: propTypes) => {
         {points3
           ? isAnimated
             ? renderAnimatedLine(
-                3,
+                zIndex3,
                 points3,
                 animatedWidth3,
                 thickness3,
@@ -3205,7 +3216,7 @@ export const LineChart = (props: propTypes) => {
                 strokeDashArray3,
               )
             : renderLine(
-                3,
+                zIndex3,
                 points3,
                 thickness3,
                 color3,
@@ -3220,7 +3231,7 @@ export const LineChart = (props: propTypes) => {
         {points4
           ? isAnimated
             ? renderAnimatedLine(
-                4,
+                zIndex4,
                 points4,
                 animatedWidth4,
                 thickness4,
@@ -3233,7 +3244,7 @@ export const LineChart = (props: propTypes) => {
                 strokeDashArray4,
               )
             : renderLine(
-                4,
+                zIndex4,
                 points4,
                 thickness4,
                 color4,
@@ -3248,7 +3259,7 @@ export const LineChart = (props: propTypes) => {
         {points5
           ? isAnimated
             ? renderAnimatedLine(
-                5,
+                zIndex5,
                 points5,
                 animatedWidth5,
                 thickness5,
@@ -3261,7 +3272,7 @@ export const LineChart = (props: propTypes) => {
                 strokeDashArray5,
               )
             : renderLine(
-                5,
+                zIndex5,
                 points5,
                 thickness5,
                 color5,
