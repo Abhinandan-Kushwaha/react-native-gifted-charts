@@ -183,6 +183,11 @@ type referenceConfigType = {
 | thickness3 | number     | Thickness of the lines joining the third set of data points  | thickness (from props) |
 | thickness4 | number     | Thickness of the lines joining the fourth set of data points  | thickness (from props) |
 | thickness5 | number     | Thickness of the lines joining the fifth set of data points  | thickness (from props) |
+| zIndex1    | number     | zIndex of the lines joining the first set of data points     | 0                      |
+| zIndex2    | number     | zIndex of the lines joining the second set of data points    | 0                      |
+| zIndex3    | number     | zIndex of the lines joining the third set of data points     | 0                      |
+| zIndex4    | number     | zIndex of the lines joining the fourth set of data points    | 0                      |
+| zIndex5    | number     | zIndex of the lines joining the fifth set of data points     | 0                      |
 | strokeDashArray | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of the lines. Used to render dashed/dotted line chart | undefined |
 | strokeDashArray1 | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line1. Used to render dashed/dotted line chart | undefined OR strokeDashArray |
 | strokeDashArray2 | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line2. Used to render dashed/dotted line chart | undefined OR strokeDashArray |
