@@ -22,6 +22,7 @@ import Svg, {
   Circle,
   Rect,
   Text as CanvasText,
+  Line,
 } from 'react-native-svg';
 import {svgPath, bezierCommand} from '../utils';
 import Rule from '../Components/lineSvg';
@@ -347,6 +348,7 @@ type Pointer = {
   hidePointer3?: boolean;
   hidePointer4?: boolean;
   hidePointer5?: boolean;
+  strokeDashArray?: Array<number>;
 };
 
 export const LineChart = (props: propTypes) => {
@@ -2399,24 +2401,77 @@ export const LineChart = (props: propTypes) => {
             }}
           />
         )}
+      </View>
+    );
+  };
+
+  const renderStripAndLabel = () => {
+    let pointerItemLocal, pointerYLocal;
+
+    pointerItemLocal = [pointerItem];
+    let arr = [pointerY];
+    if (pointerY2 !== 0) {
+      arr.push(pointerY2);
+      pointerItemLocal.push(pointerItem2);
+    }
+    if (pointerY3 !== 0) {
+      arr.push(pointerY3);
+      pointerItemLocal.push(pointerItem3);
+    }
+    if (pointerY4 !== 0) {
+      arr.push(pointerY4);
+      pointerItemLocal.push(pointerItem4);
+    }
+    if (pointerY5 !== 0) {
+      arr.push(pointerY5);
+      pointerItemLocal.push(pointerItem5);
+    }
+    pointerYLocal = Math.min(...arr);
+
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          left: pointerX + (pointerItemLocal[0].pointerShiftX || 0),
+          top: pointerYLocal,
+        }}>
         {showPointerStrip && (
           <View
             style={{
               position: 'absolute',
-              left: pointerRadius || pointerWidth / 2,
+              left: (pointerRadius || pointerWidth) - pointerStripWidth / 4,
               top: pointerStripUptoDataPoint
                 ? pointerRadius || pointerStripHeight / 2
                 : -pointerYLocal + 8,
-              height: pointerStripUptoDataPoint
-                ? containerHeight - pointerYLocal - 10
-                : pointerStripHeight,
               width: pointerStripWidth,
-              backgroundColor: pointerStripColor,
+              height: pointerStripUptoDataPoint
+                ? containerHeight - pointerYLocal + 5 - xAxisThickness
+                : pointerStripHeight,
               marginTop: pointerStripUptoDataPoint
                 ? 0
                 : containerHeight - pointerStripHeight,
-            }}
-          />
+            }}>
+            <Svg>
+              <Line
+                stroke={pointerStripColor}
+                strokeWidth={pointerStripWidth}
+                strokeDasharray={
+                  pointerConfig.strokeDashArray
+                    ? pointerConfig.strokeDashArray
+                    : ''
+                }
+                x1={0}
+                y1={0}
+                x2={0}
+                // strokeLinecap="round"
+                y2={
+                  pointerStripUptoDataPoint
+                    ? containerHeight - pointerYLocal + 5 - xAxisThickness
+                    : pointerStripHeight
+                }
+              />
+            </Svg>
+          </View>
         )}
 
         {pointerLabelComponent && (
@@ -2783,7 +2838,6 @@ export const LineChart = (props: propTypes) => {
           endOpacity,
           strokeDashArray,
         )}
-        {pointerX ? renderPointer(lineNumber) : null}
       </View>
     );
   };
@@ -2985,7 +3039,6 @@ export const LineChart = (props: propTypes) => {
           endOpacity,
           strokeDashArray,
         )}
-        {pointerX ? renderPointer(lineNumber) : null}
       </Animated.View>
     );
   };
@@ -3220,6 +3273,24 @@ export const LineChart = (props: propTypes) => {
                 strokeDashArray5,
               )
           : null}
+        {pointerX ? (
+          <View
+            style={{
+              position: 'absolute',
+              height:
+                containerHeight + 10 + horizSectionsBelow.length * stepHeight,
+              bottom: 60 + labelsExtraHeight,
+              width: totalWidth,
+              zIndex: 20,
+            }}>
+            {renderPointer(1)}
+            {points2 ? renderPointer(2) : null}
+            {points3 ? renderPointer(3) : null}
+            {points4 ? renderPointer(4) : null}
+            {points5 ? renderPointer(5) : null}
+            {renderStripAndLabel()}
+          </View>
+        ) : null}
         {data.map((item: itemType, index: number) => {
           // console.log('item', item)
           return (

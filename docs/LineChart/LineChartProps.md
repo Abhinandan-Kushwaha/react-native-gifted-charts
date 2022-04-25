@@ -300,6 +300,7 @@ type Pointer = {
   hidePointer3?: boolean; // default: false
   hidePointer4?: boolean; // default: false
   hidePointer5?: boolean; // default: false
+  strokeDashArray?: Array<number>;
 };
 ```
 
@@ -310,6 +311,12 @@ The above properties can be understood with this labelled diagram-
 
 **Note** If you are using the `pointerConfig` prop, the scroll will be disabled automatically. This is because, it's difficult to achive both scrolling line and scrolling pointer simultaneously. So if you want to retain the scroll behaviour even after passing the `pointerConfig` prop, then set the property `activatePointersOnLongPress` to true inside the pointerConfig object. This will make the pointers visible only after long press. So, before the long press, user can can scroll the line. Once long pressed, scrolling will be disabled until the release of the long press.
   The duration after which a press event will be considered as long press can be controlled using the `activatePointersDelay` property inside the pointerConfig object. The default value of activatePointersDelay is 150.
+
+The <b>strokeDashArray</b> property lets us render a dashed/dotted strip along the pointer.
+
+#### pointerLabelComponent
+
+<b>pointerLabelComponent</b> is a function that returns the component to be rendered as a Label. It takes a single parameter - an array of items. So, if there are multiple data arrays, the parameter <b>items</b> will have the data item corresponding to each data array.
 
 
 ### onPress and strip related props
