@@ -933,6 +933,24 @@ const App = () => {
     {value: 70, color: '#177AD5'},
     {value: 30, color: 'lightgray'},
   ];
+  const onBarPressed = (item, index) => {
+    console.log(item);
+    console.log(index);
+  };
+  const barDatas = [
+    {value: 0.7, label: '1'},
+    {value: 0.8, label: '2'},
+    {value: 0.6, label: '3'},
+    {value: 0.4, label: '4'},
+    {value: 0.9, label: '5'},
+    {value: 0.7, label: '6'},
+  ];
+
+  const [myData, setMyData] = useState([]);
+
+  useEffect(() => {
+    setTimeout(() => setMyData(barDatas), 500);
+  }, []);
 
   return (
     <View
@@ -942,24 +960,44 @@ const App = () => {
         paddingLeft: 20,
         // backgroundColor: 'black',
       }}>
-        <PieChart
+      <LineChart
+        areaChart
+        showFractionalValues
+        showYAxisIndices
+        showXAxisIndices
+        hideRules
+        noOfSections={5}
+        adjustToWidth
+        data={myData}
+        showGradient
+        frontColor={'#1B6BB0'}
+        gradientColor={'#FFEEFE'}
+        backgroundColor={'#FECF9E'}
+        onPress={onBarPressed}
+        // isAnimated
+        // animateOnDataChange
+        startOpacity={0}
+
+      />
+      {/* <BarChart
         data={pieData}
         radius={150}
         donut
         showText
         showValuesAsLabels
         showTextBackground
-        textBackgroundColor='#333'
+        textBackgroundColor="#333"
         textBackgroundRadius={22}
-        textColor='white'
+        textColor="white"
         textSize={16}
-        fontWeight='bold'
+        fontWeight="bold"
         strokeWidth={10}
-        strokeColor='#333'
+        strokeColor="#333"
         innerCircleBorderWidth={10}
-        innerCircleBorderColor='#333'
+        innerCircleBorderColor="#333"
         showGradient
-        />
+        onPress={(item, index) => Alert.alert(item.value.toString())}
+      /> */}
       {/* <PieChart
             showText
             textColor="black"
@@ -1257,7 +1295,7 @@ const App = () => {
         endOpacity={0.3}
         /> */}
 
-      <LineChart
+      {/* <LineChart
         // width={200}
         // height={300}
         pointerConfig={{
@@ -1288,7 +1326,7 @@ const App = () => {
         // horizontal
         // adjustToWidth
         // yAxisAtTop
-      />
+      /> */}
 
       {/* <BarChart
       // isAnimated={true}

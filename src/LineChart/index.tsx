@@ -819,7 +819,7 @@ export const LineChart = (props: propTypes) => {
           ppp4 = '',
           ppp5 = '';
 
-        if (!animateOnDataChange) {
+        if (data.length && !animateOnDataChange) {
           ppp =
             'L' +
             (initialSpacing - dataPointsWidth1 / 2) +
@@ -1007,35 +1007,37 @@ export const LineChart = (props: propTypes) => {
 
       // console.log('xx---->>>', xx)
       if (areaChart) {
-        xx =
-          'M ' +
-          (initialSpacing - dataPointsWidth1 / 2) +
-          ',' +
-          (containerHeight + 10 - xAxisThickness) +
-          ' ' +
-          'L ' +
-          (initialSpacing - dataPointsWidth1 / 2) +
-          ',' +
-          (containerHeight +
-            10 -
-            (data[0].value * containerHeight) / maxValue) +
-          ' ' +
-          xx +
-          ' ' +
-          'L ' +
-          (initialSpacing -
-            dataPointsWidth1 / 2 +
-            spacing * (data.length - 1)) +
-          ',' +
-          (containerHeight + 10 - xAxisThickness) +
-          ' ' +
-          'L ' +
-          (initialSpacing - dataPointsWidth1 / 2) +
-          ',' +
-          (containerHeight + 10 - xAxisThickness) +
-          ' ';
-        setFillPoints(xx);
-        // console.log('xx later ---->>>', xx)
+        if (data.length) {
+          xx =
+            'M ' +
+            (initialSpacing - dataPointsWidth1 / 2) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ' +
+            'L ' +
+            (initialSpacing - dataPointsWidth1 / 2) +
+            ',' +
+            (containerHeight +
+              10 -
+              (data[0].value * containerHeight) / maxValue) +
+            ' ' +
+            xx +
+            ' ' +
+            'L ' +
+            (initialSpacing -
+              dataPointsWidth1 / 2 +
+              spacing * (data.length - 1)) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ' +
+            'L ' +
+            (initialSpacing - dataPointsWidth1 / 2) +
+            ',' +
+            (containerHeight + 10 - xAxisThickness) +
+            ' ';
+          setFillPoints(xx);
+          // console.log('xx later ---->>>', xx)
+        }
 
         if (data2.length) {
           xx2 =
@@ -1240,32 +1242,44 @@ export const LineChart = (props: propTypes) => {
   const startFillColor1 =
     props.startFillColor1 || props.startFillColor || 'gray';
   const endFillColor1 = props.endFillColor1 || props.endFillColor || 'white';
-  const startOpacity1 = props.startOpacity1 || props.startOpacity || 1;
-  const endOpacity1 = props.endOpacity1 || props.endOpacity || 1;
+  const startOpacity = props.startOpacity === 0 ? 0 : props.startOpacity || 1;
+  const endOpacity = props.endOpacity === 0 ? 0 : props.endOpacity || 1;
+  const startOpacity1 =
+    props.startOpacity1 === 0 ? 0 : props.startOpacity1 || startOpacity;
+  const endOpacity1 =
+    props.endOpacity1 === 0 ? 0 : props.endOpacity1 || endOpacity;
 
   const startFillColor2 =
     props.startFillColor2 || props.startFillColor || 'gray';
   const endFillColor2 = props.endFillColor2 || props.endFillColor || 'white';
-  const startOpacity2 = props.startOpacity2 || props.startOpacity || 1;
-  const endOpacity2 = props.endOpacity2 || props.endOpacity || 1;
+  const startOpacity2 =
+    props.startOpacity2 === 0 ? 0 : props.startOpacity2 || startOpacity;
+  const endOpacity2 =
+    props.endOpacity2 === 0 ? 0 : props.endOpacity2 || endOpacity;
 
   const startFillColor3 =
     props.startFillColor3 || props.startFillColor || 'gray';
   const endFillColor3 = props.endFillColor3 || props.endFillColor || 'white';
-  const startOpacity3 = props.startOpacity3 || props.startOpacity || 1;
-  const endOpacity3 = props.endOpacity3 || props.endOpacity || 1;
+  const startOpacity3 =
+    props.startOpacity3 === 0 ? 0 : props.startOpacity3 || startOpacity;
+  const endOpacity3 =
+    props.endOpacity3 === 0 ? 0 : props.endOpacity3 || endOpacity;
 
   const startFillColor4 =
     props.startFillColor4 || props.startFillColor || 'gray';
   const endFillColor4 = props.endFillColor4 || props.endFillColor || 'white';
-  const startOpacity4 = props.startOpacity4 || props.startOpacity || 1;
-  const endOpacity4 = props.endOpacity4 || props.endOpacity || 1;
+  const startOpacity4 =
+    props.startOpacity4 === 0 ? 0 : props.startOpacity4 || startOpacity;
+  const endOpacity4 =
+    props.endOpacity4 === 0 ? 0 : props.endOpacity4 || endOpacity;
 
   const startFillColor5 =
     props.startFillColor5 || props.startFillColor || 'gray';
   const endFillColor5 = props.endFillColor5 || props.endFillColor || 'white';
-  const startOpacity5 = props.startOpacity5 || props.startOpacity || 1;
-  const endOpacity5 = props.endOpacity5 || props.endOpacity || 1;
+  const startOpacity5 =
+    props.startOpacity5 === 0 ? 0 : props.startOpacity5 || startOpacity;
+  const endOpacity5 =
+    props.endOpacity5 === 0 ? 0 : props.endOpacity5 || endOpacity;
 
   const rulesThickness =
     props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
