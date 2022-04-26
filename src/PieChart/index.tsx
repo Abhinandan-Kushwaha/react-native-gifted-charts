@@ -164,7 +164,10 @@ export const PieChart = (props: propTypes) => {
   let cx = radius,
     cy = radius;
 
-  let total = data.map(item => item.value).reduce((v, a) => v + a);
+  let total =
+    data && data.length
+      ? data.map(item => item.value).reduce((v, a) => v + a)
+      : 0;
   let acc = 0;
   let pData = data.map(item => {
     acc += item.value / total;
