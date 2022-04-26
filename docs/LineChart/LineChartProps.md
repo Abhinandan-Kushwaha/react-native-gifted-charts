@@ -296,7 +296,9 @@ type Pointer = {
   pointerLabelComponent?: Function; // default: null
   shiftPointerLabelX?: number; // default: 0
   shiftPointerLabelY?: number; // default: 0
-  pointerLabelWidth?: number; // default: 40
+  pointerLabelWidth?: number; // default: 20
+  pointerLabelHeight?: number; // default: 20
+  autoAdjustPointerLabelPosition?: boolean; // default: true
   pointerVanishDelay?: number; // default: 150
   activatePointersOnLongPress?: boolean; // default: false
   activatePointersDelay?: number; // default: 150
