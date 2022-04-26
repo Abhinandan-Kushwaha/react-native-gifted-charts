@@ -1,6 +1,6 @@
-## Feature requests
+## Features
 
-None at the moment!
+1. Fix the issue- When `activatePointersOnLongPress` is set to true, sometimes, the pointerLabel doesn't vanish after releasing the scroll. It gets stuck.
 
 ## To-dos in documentation-
 
