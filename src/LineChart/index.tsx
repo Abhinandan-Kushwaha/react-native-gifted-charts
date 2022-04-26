@@ -13,6 +13,7 @@ import {
   Easing,
   Text,
   ColorValue,
+  Dimensions,
 } from 'react-native';
 import {styles} from './styles';
 import Svg, {
@@ -342,9 +343,11 @@ type Pointer = {
   pointerStripColor?: ColorValue;
   pointerStripUptoDataPoint?: boolean;
   pointerLabelComponent?: Function;
+  autoAdjustPointerLabelPosition?: boolean;
   shiftPointerLabelX?: number;
   shiftPointerLabelY?: number;
   pointerLabelWidth?: number;
+  pointerLabelHeight?: number;
   pointerVanishDelay?: number;
   activatePointersOnLongPress?: boolean;
   activatePointersDelay?: number;
@@ -476,7 +479,8 @@ export const LineChart = (props: propTypes) => {
           ? ((props.width || 200) - initialSpacing) / data.length
           : 60);
 
-  const xAxisThickness = props.xAxisThickness || 1;
+  const xAxisThickness =
+    props.xAxisThickness === 0 ? 0 : props.xAxisThickness || 1;
   const dataPointsHeight1 =
     props.dataPointsHeight1 || props.dataPointsHeight || 2;
   const dataPointsWidth1 = props.dataPointsWidth1 || props.dataPointsWidth || 2;
@@ -1319,7 +1323,8 @@ export const LineChart = (props: propTypes) => {
   const xAxisIndicesColor = props.xAxisIndicesColor || 'black';
   const yAxisIndicesColor = props.yAxisIndicesColor || 'black';
 
-  const yAxisThickness = props.yAxisThickness || 1;
+  const yAxisThickness =
+    props.yAxisThickness === 0 ? 0 : props.yAxisThickness || 1;
   const yAxisColor = props.yAxisColor || 'black';
   const yAxisTextStyle = props.yAxisTextStyle;
   const yAxisLabelContainerStyle = props.yAxisLabelContainerStyle;
@@ -1344,7 +1349,9 @@ export const LineChart = (props: propTypes) => {
     pointerLabelComponent: null,
     shiftPointerLabelX: 0,
     shiftPointerLabelY: 0,
-    pointerLabelWidth: 40,
+    pointerLabelWidth: 20,
+    pointerLabelHeight: 20,
+    autoAdjustPointerLabelPosition: true,
     pointerVanishDelay: 150,
     activatePointersOnLongPress: false,
     activatePointersDelay: 150,
@@ -1412,6 +1419,14 @@ export const LineChart = (props: propTypes) => {
     pointerConfig && pointerConfig.pointerLabelWidth
       ? pointerConfig.pointerLabelWidth
       : defaultPointerConfig.pointerLabelWidth;
+  const pointerLabelHeight =
+    pointerConfig && pointerConfig.pointerLabelHeight
+      ? pointerConfig.pointerLabelHeight
+      : defaultPointerConfig.pointerLabelHeight;
+  const autoAdjustPointerLabelPosition =
+    pointerConfig && pointerConfig.autoAdjustPointerLabelPosition
+      ? pointerConfig.autoAdjustPointerLabelPosition
+      : defaultPointerConfig.autoAdjustPointerLabelPosition;
   const pointerVanishDelay =
     pointerConfig && pointerConfig.pointerVanishDelay
       ? pointerConfig.pointerVanishDelay
@@ -2487,21 +2502,39 @@ export const LineChart = (props: propTypes) => {
 
         {pointerLabelComponent && (
           <View
-            style={{
-              position: 'absolute',
-              left:
-                (pointerRadius || pointerWidth / 2) - 10 + shiftPointerLabelX,
-              top:
-                (pointerStripUptoDataPoint
-                  ? pointerRadius || pointerStripHeight / 2
-                  : -pointerYLocal + 8) -
-                pointerLabelWidth / 2 +
-                shiftPointerLabelY,
-              marginTop: pointerStripUptoDataPoint
-                ? 0
-                : containerHeight - pointerStripHeight,
-              width: pointerLabelWidth,
-            }}>
+            style={[
+              {
+                position: 'absolute',
+                left: autoAdjustPointerLabelPosition
+                  ? pointerX < pointerLabelWidth / 2
+                    ? 7
+                    : !activatePointersOnLongPress &&
+                      pointerX >
+                        (props.width ||
+                          Dimensions.get('window').width -
+                            yAxisLabelWidth -
+                            15) -
+                          pointerLabelWidth / 2
+                    ? -pointerLabelWidth - 4
+                    : pointerLabelWidth / -2 + 5
+                  : (pointerRadius || pointerWidth / 2) -
+                    10 +
+                    shiftPointerLabelX,
+                top: autoAdjustPointerLabelPosition
+                  ? pointerLabelHeight - pointerYLocal > 10
+                    ? 10
+                    : -pointerLabelHeight
+                  : (pointerStripUptoDataPoint
+                      ? pointerRadius || pointerStripHeight / 2
+                      : -pointerYLocal + 8) -
+                    pointerLabelWidth / 2 +
+                    shiftPointerLabelY,
+                marginTop: pointerStripUptoDataPoint
+                  ? 0
+                  : containerHeight - pointerStripHeight,
+                width: pointerLabelWidth,
+              },
+            ]}>
             {pointerLabelComponent(pointerItemLocal)}
           </View>
         )}
@@ -2678,6 +2711,11 @@ export const LineChart = (props: propTypes) => {
             return;
           }
           let x = evt.nativeEvent.locationX;
+          if (
+            !activatePointersOnLongPress &&
+            x > (props.width || Dimensions.get('window').width)
+          )
+            return;
           let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
           factor = Math.min(factor, data.length - 1);
@@ -2758,6 +2796,11 @@ export const LineChart = (props: propTypes) => {
             setResponderActive(true);
           }
           let x = evt.nativeEvent.locationX;
+          if (
+            !activatePointersOnLongPress &&
+            x > (props.width || Dimensions.get('window').width)
+          )
+            return;
           let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
           factor = Math.min(factor, data.length - 1);
@@ -2878,6 +2921,11 @@ export const LineChart = (props: propTypes) => {
             return;
           }
           let x = evt.nativeEvent.locationX;
+          if (
+            !activatePointersOnLongPress &&
+            x > (props.width || Dimensions.get('window').width)
+          )
+            return;
           let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
           factor = Math.min(factor, data.length - 1);
@@ -2958,6 +3006,11 @@ export const LineChart = (props: propTypes) => {
             setResponderActive(true);
           }
           let x = evt.nativeEvent.locationX;
+          if (
+            !activatePointersOnLongPress &&
+            x > (props.width || Dimensions.get('window').width)
+          )
+            return;
           let factor = (x - initialSpacing) / spacing;
           factor = Math.round(factor);
           factor = Math.min(factor, data.length - 1);
