@@ -128,6 +128,7 @@ type propTypes = {
   xAxisIndicesColor?: ColorValue;
   yAxisIndicesColor?: ColorValue;
   yAxisSide?: string;
+  yAxisOffset?: number;
 
   startIndex?: number;
   startIndex1?: number;
@@ -402,11 +403,62 @@ export const LineChart = (props: propTypes) => {
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
-  let data = useMemo(() => props.data || [], [props.data]);
-  const data2 = useMemo(() => props.data2 || [], [props.data2]);
-  const data3 = useMemo(() => props.data3 || [], [props.data3]);
-  const data4 = useMemo(() => props.data4 || [], [props.data4]);
-  const data5 = useMemo(() => props.data5 || [], [props.data5]);
+  let data = useMemo(() => {
+    if (!props.data) {
+      return [];
+    }
+    if (props.yAxisOffset) {
+      return props.data.map(item => {
+        item.value = item.value - props.yAxisOffset;
+        return item;
+      });
+    }
+  }, [props.yAxisOffset, props.data]);
+  const data2 = useMemo(() => {
+    if (!props.data2) {
+      return [];
+    }
+    if (props.yAxisOffset) {
+      return props.data2.map(item => {
+        item.value = item.value - props.yAxisOffset;
+        return item;
+      });
+    }
+  }, [props.yAxisOffset, props.data2]);
+  const data3 = useMemo(() => {
+    if (!props.data3) {
+      return [];
+    }
+    if (props.yAxisOffset) {
+      return props.data3.map(item => {
+        item.value = item.value - props.yAxisOffset;
+        return item;
+      });
+    }
+  }, [props.yAxisOffset, props.data3]);
+  const data4 = useMemo(() => {
+    if (!props.data4) {
+      return [];
+    }
+    if (props.yAxisOffset) {
+      return props.data4.map(item => {
+        item.value = item.value - props.yAxisOffset;
+        return item;
+      });
+    }
+  }, [props.yAxisOffset, props.data4]);
+  const data5 = useMemo(() => {
+    if (!props.data5) {
+      return [];
+    }
+    if (props.yAxisOffset) {
+      return props.data5.map(item => {
+        item.value = item.value - props.yAxisOffset;
+        return item;
+      });
+    }
+  }, [props.yAxisOffset, props.data5]);
+
   const scrollToEnd = props.scrollToEnd || false;
   const scrollAnimation = props.scrollAnimation === false ? false : true;
 
@@ -422,7 +474,9 @@ export const LineChart = (props: propTypes) => {
   const onDataChangeAnimationDuration =
     props.onDataChangeAnimationDuration || 400;
   const animateTogether = props.animateTogether || false;
-  const animateOnDataChange = props.animateOnDataChange || false;
+  const animateOnDataChange = props.yAxisOffset
+    ? false
+    : props.animateOnDataChange || false;
 
   const yAxisLabelPrefix = props.yAxisLabelPrefix || '';
   const yAxisLabelSuffix = props.yAxisLabelSuffix || '';
@@ -1711,15 +1765,20 @@ export const LineChart = (props: propTypes) => {
     let label = '';
     if (showFractionalValues) {
       if (val) {
-        label = val;
+        label = props.yAxisOffset
+          ? (Number(val) + props.yAxisOffset).toString()
+          : val;
       } else {
-        label = '0';
+        label = props.yAxisOffset ? props.yAxisOffset.toString() : '0';
       }
     } else {
       if (val) {
         label = val.toString().split('.')[0];
+        if (props.yAxisOffset) {
+          label = (Number(label) + props.yAxisOffset).toString();
+        }
       } else {
-        label = '0';
+        label = props.yAxisOffset ? props.yAxisOffset.toString() : '0';
       }
     }
 

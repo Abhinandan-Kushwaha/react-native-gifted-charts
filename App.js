@@ -966,15 +966,24 @@ const App = () => {
     {value: 45},
     {value: 18},
   ];
+  const [drata, setDrata] = useState([
+    {value: 120},
+    {value: 130},
+    {value: 120},
+    {value: 160},
+    {value: 190},
+  ]);
 
   return (
     <View
       style={{
         paddingVertical: 100,
         paddingLeft: 20,
-        backgroundColor: '#1C1C1C',
+        // backgroundColor: '#1C1C1C',
       }}>
-      <LineChart
+      {/* <PieChart data={llData}/> */}
+      <LineChart data={drata} yAxisOffset={100} />
+      {/* <LineChart
         areaChart
         curved
         data={llData}
@@ -1005,9 +1014,6 @@ const App = () => {
           strokeDashArray: [2, 5],
           pointerColor: 'lightgray',
           radius: 4,
-          autoAdjustPointerLabelPosition: true,
-          // pointerLabelComponent: items => {
-          //   return <Text style={{color:'white'}}>{items[0].value}</Text>},
           pointerLabelWidth: 100,
           pointerLabelHeight: 120,
           pointerLabelComponent: items => {
@@ -1029,7 +1035,7 @@ const App = () => {
             );
           },
         }}
-      />
+      /> */}
 
       {/* <BarChart
         data={pieData}
