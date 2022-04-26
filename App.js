@@ -953,12 +953,16 @@ const App = () => {
     {value: 40},
     {value: 18},
     {value: 38},
+    {value: 18},
+    {value: 38},
   ];
   const llData2 = [
     {value: 50},
     {value: 10},
     {value: 45},
     {value: 30},
+    {value: 45},
+    {value: 18},
     {value: 45},
     {value: 18},
   ];
@@ -988,7 +992,7 @@ const App = () => {
         initialSpacing={0}
         noOfSections={4}
         yAxisColor="white"
-        yAxisThickness={0.001}
+        yAxisThickness={0}
         rulesType="solid"
         rulesColor="gray"
         yAxisTextStyle={{color: 'gray'}}
@@ -1001,7 +1005,11 @@ const App = () => {
           strokeDashArray: [2, 5],
           pointerColor: 'lightgray',
           radius: 4,
+          autoAdjustPointerLabelPosition: true,
+          // pointerLabelComponent: items => {
+          //   return <Text style={{color:'white'}}>{items[0].value}</Text>},
           pointerLabelWidth: 100,
+          pointerLabelHeight: 120,
           pointerLabelComponent: items => {
             return (
               <View
@@ -1009,9 +1017,6 @@ const App = () => {
                   height: 120,
                   width: 100,
                   backgroundColor: '#282C3E',
-                  position: 'absolute',
-                  left: -40,
-                  top: -90,
                   borderRadius: 4,
                   justifyContent:'center',
                   paddingLeft:16,
