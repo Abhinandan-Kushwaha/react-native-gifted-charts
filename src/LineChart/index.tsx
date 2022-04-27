@@ -413,6 +413,7 @@ export const LineChart = (props: propTypes) => {
         return item;
       });
     }
+    return props.data;
   }, [props.yAxisOffset, props.data]);
   const data2 = useMemo(() => {
     if (!props.data2) {
@@ -424,6 +425,7 @@ export const LineChart = (props: propTypes) => {
         return item;
       });
     }
+    return props.data2;
   }, [props.yAxisOffset, props.data2]);
   const data3 = useMemo(() => {
     if (!props.data3) {
@@ -435,6 +437,7 @@ export const LineChart = (props: propTypes) => {
         return item;
       });
     }
+    return props.data3;
   }, [props.yAxisOffset, props.data3]);
   const data4 = useMemo(() => {
     if (!props.data4) {
@@ -446,6 +449,7 @@ export const LineChart = (props: propTypes) => {
         return item;
       });
     }
+    return props.data4;
   }, [props.yAxisOffset, props.data4]);
   const data5 = useMemo(() => {
     if (!props.data5) {
@@ -457,6 +461,7 @@ export const LineChart = (props: propTypes) => {
         return item;
       });
     }
+    return props.data5;
   }, [props.yAxisOffset, props.data5]);
 
   const scrollToEnd = props.scrollToEnd || false;
