@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import {BarChart} from '../../src/BarChart';
 
-const BarWithGradient = () => {
+const BarThreeD = () => {
   const barData = [
     {
       value: 230,
@@ -58,4 +58,4 @@ const BarWithGradient = () => {
   );
 };
 
-export default BarWithGradient;
+export default BarThreeD;

@@ -1,0 +1,1131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders #D pie chart correctly 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "height": 390.99999999999994,
+          "overflow": "hidden",
+          "width": 340,
+        },
+        Object {
+          "transform": Array [
+            Object {
+              "rotateX": "55deg",
+            },
+          ],
+        },
+      ]
+    }
+  >
+    <RNSVGSvgView
+      align="xMidYMid"
+      bbHeight={340}
+      bbWidth={340}
+      focusable={false}
+      height={340}
+      meetOrSlice={0}
+      minX={0}
+      minY={0}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderWidth": 0,
+          },
+          Object {
+            "flex": 0,
+            "height": 340,
+            "width": 340,
+          },
+        ]
+      }
+      vbHeight={340}
+      vbWidth={340}
+      width={340}
+    >
+      <RNSVGGroup>
+        <RNSVGDefs>
+          <RNSVGRadialGradient
+            cx="50%"
+            cy="50%"
+            fx="50%"
+            fy="50%"
+            gradient={
+              Array [
+                0,
+                -1,
+                1,
+                -15238443,
+              ]
+            }
+            gradientTransform={null}
+            gradientUnits={1}
+            name="grad0"
+            rx="50%"
+            ry="50%"
+          />
+          <RNSVGRadialGradient
+            cx="50%"
+            cy="50%"
+            fx="50%"
+            fy="50%"
+            gradient={
+              Array [
+                0,
+                -1,
+                1,
+                -8793378,
+              ]
+            }
+            gradientTransform={null}
+            gradientUnits={1}
+            name="grad1"
+            rx="50%"
+            ry="50%"
+          />
+          <RNSVGRadialGradient
+            cx="50%"
+            cy="50%"
+            fx="50%"
+            fy="50%"
+            gradient={
+              Array [
+                0,
+                -1,
+                1,
+                -1218971,
+              ]
+            }
+            gradientTransform={null}
+            gradientUnits={1}
+            name="grad2"
+            rx="50%"
+            ry="50%"
+          />
+        </RNSVGDefs>
+        <RNSVGPath
+          d="M 170 170 L 170 0 A 170 170 0 0 1 197.98108034772477 337.6814215784628 L 170 170"
+          fill={4279728853}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+              "stroke",
+              "strokeWidth",
+            ]
+          }
+          responsible={true}
+          stroke={0}
+          strokeWidth={0}
+        />
+        <RNSVGPath
+          d="M 170 170 L 197.98108034772477 337.6814215784628 A 170 170 0 0 1 18.31677943487292 93.239329087149 L 170 170"
+          fill={4286173918}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+              "stroke",
+              "strokeWidth",
+            ]
+          }
+          responsible={true}
+          stroke={0}
+          strokeWidth={0}
+        />
+        <RNSVGPath
+          d="M 170 170 L 18.31677943487292 93.239329087149 A 170 170 0 0 1 169.9999999999998 0 L 170 170"
+          fill={4293748325}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+              "stroke",
+              "strokeWidth",
+            ]
+          }
+          responsible={true}
+          stroke={0}
+          strokeWidth={0}
+        />
+        <RNSVGCircle
+          cx={297.0645228583504}
+          cy={154.47113345227763}
+          fill={4294967295}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          r={26}
+          responsible={true}
+        />
+        <RNSVGText
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 20,
+              "fontStyle": "normal",
+            }
+          }
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          responsible={true}
+          rotate={Array []}
+          x={
+            Array [
+              285.95341174723933,
+            ]
+          }
+          y={
+            Array [
+              159.47113345227763,
+            ]
+          }
+        >
+          <RNSVGTSpan
+            content="54"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+        <RNSVGCircle
+          cx={67.26494902822532}
+          cy={240.50999471478502}
+          fill={4294967295}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          r={26}
+          responsible={true}
+        />
+        <RNSVGText
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 20,
+              "fontStyle": "normal",
+            }
+          }
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          responsible={true}
+          rotate={Array []}
+          x={
+            Array [
+              56.1538379171142,
+            ]
+          }
+          y={
+            Array [
+              245.50999471478502,
+            ]
+          }
+        >
+          <RNSVGTSpan
+            content="40"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+        <RNSVGCircle
+          cx={103.23170346654555}
+          cy={56.380275373113314}
+          fill={4294967295}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          r={26}
+          responsible={true}
+        />
+        <RNSVGText
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 20,
+              "fontStyle": "normal",
+            }
+          }
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          responsible={true}
+          rotate={Array []}
+          x={
+            Array [
+              92.12059235543444,
+            ]
+          }
+          y={
+            Array [
+              61.380275373113314,
+            ]
+          }
+        >
+          <RNSVGTSpan
+            content="20"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+      </RNSVGGroup>
+    </RNSVGSvgView>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "white",
+            "borderColor": "lightgray",
+            "borderRadius": 68,
+            "borderWidth": 6,
+            "height": 136,
+            "justifyContent": "center",
+            "left": 92,
+            "position": "absolute",
+            "top": 78.49999999999997,
+            "width": 136,
+            "zIndex": 100,
+          },
+          Object {
+            "borderLeftWidth": 12,
+            "borderTopWidth": 30,
+          },
+          false,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginTop": 0,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "lightgray",
+          "borderRadius": 170,
+          "height": 340,
+          "position": "absolute",
+          "top": 34,
+          "width": 340,
+          "zIndex": -1,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`renders progress pie chart correctly 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "height": 240,
+          "overflow": "hidden",
+          "width": 240,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSVGSvgView
+      align="xMidYMid"
+      bbHeight={240}
+      bbWidth={240}
+      focusable={false}
+      height={240}
+      meetOrSlice={0}
+      minX={0}
+      minY={0}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderWidth": 0,
+          },
+          Object {
+            "flex": 0,
+            "height": 240,
+            "width": 240,
+          },
+        ]
+      }
+      vbHeight={240}
+      vbWidth={240}
+      width={240}
+    >
+      <RNSVGGroup>
+        <RNSVGDefs>
+          <RNSVGRadialGradient
+            cx="50%"
+            cy="50%"
+            fx="50%"
+            fy="50%"
+            gradient={
+              Array [
+                0,
+                -1,
+                1,
+                -15238443,
+              ]
+            }
+            gradientTransform={null}
+            gradientUnits={1}
+            name="grad0"
+            rx="50%"
+            ry="50%"
+          />
+          <RNSVGRadialGradient
+            cx="50%"
+            cy="50%"
+            fx="50%"
+            fy="50%"
+            gradient={
+              Array [
+                0,
+                -1,
+                1,
+                -2894893,
+              ]
+            }
+            gradientTransform={null}
+            gradientUnits={1}
+            name="grad1"
+            rx="50%"
+            ry="50%"
+          />
+        </RNSVGDefs>
+        <RNSVGPath
+          d="M 120 120 L 120 0 A 120 120 0 1 1 5.873218044581576 157.0820393249937 L 120 120"
+          fill={4279728853}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+              "stroke",
+              "strokeWidth",
+            ]
+          }
+          responsible={true}
+          stroke={0}
+          strokeWidth={0}
+        />
+        <RNSVGPath
+          d="M 120 120 L 5.873218044581576 157.0820393249937 A 120 120 0 0 1 119.99999999999997 0 L 120 120"
+          fill={4292072403}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+              "stroke",
+              "strokeWidth",
+            ]
+          }
+          responsible={true}
+          stroke={0}
+          strokeWidth={0}
+        />
+      </RNSVGGroup>
+    </RNSVGSvgView>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "white",
+            "borderColor": "lightgray",
+            "borderRadius": 80,
+            "borderWidth": 0,
+            "height": 160,
+            "justifyContent": "center",
+            "left": 40,
+            "position": "absolute",
+            "top": 40,
+            "width": 160,
+            "zIndex": 100,
+          },
+          undefined,
+          false,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginTop": 0,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "fontSize": 30,
+            }
+          }
+        >
+          70%
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders simple pie chart correctly 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "height": 240,
+          "overflow": "hidden",
+          "width": 240,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSVGSvgView
+      align="xMidYMid"
+      bbHeight={240}
+      bbWidth={240}
+      focusable={false}
+      height={240}
+      meetOrSlice={0}
+      minX={0}
+      minY={0}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderWidth": 0,
+          },
+          Object {
+            "flex": 0,
+            "height": 240,
+            "width": 240,
+          },
+        ]
+      }
+      vbHeight={240}
+      vbWidth={240}
+      width={240}
+    >
+      <RNSVGGroup>
+        <RNSVGDefs>
+          <RNSVGRadialGradient
+            cx="50%"
+            cy="50%"
+            fx="50%"
+            fy="50%"
+            gradient={
+              Array [
+                0,
+                -1,
+                1,
+                -15238443,
+              ]
+            }
+            gradientTransform={null}
+            gradientUnits={1}
+            name="grad0"
+            rx="50%"
+            ry="50%"
+          />
+          <RNSVGRadialGradient
+            cx="50%"
+            cy="50%"
+            fx="50%"
+            fy="50%"
+            gradient={
+              Array [
+                0,
+                -1,
+                1,
+                -8793378,
+              ]
+            }
+            gradientTransform={null}
+            gradientUnits={1}
+            name="grad1"
+            rx="50%"
+            ry="50%"
+          />
+          <RNSVGRadialGradient
+            cx="50%"
+            cy="50%"
+            fx="50%"
+            fy="50%"
+            gradient={
+              Array [
+                0,
+                -1,
+                1,
+                -1218971,
+              ]
+            }
+            gradientTransform={null}
+            gradientUnits={1}
+            name="grad2"
+            rx="50%"
+            ry="50%"
+          />
+        </RNSVGDefs>
+        <RNSVGPath
+          d="M 120 120 L 120 0 A 120 120 0 0 1 126.85065730353217 239.80429247113625 L 120 120"
+          fill={4279728853}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+              "stroke",
+              "strokeWidth",
+            ]
+          }
+          responsible={true}
+          stroke={0}
+          strokeWidth={0}
+        />
+        <RNSVGPath
+          d="M 120 120 L 126.85065730353217 239.80429247113625 A 120 120 0 0 1 0.44019229647703995 109.73099898253919 L 120 120"
+          fill={4286173918}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+              "stroke",
+              "strokeWidth",
+            ]
+          }
+          responsible={true}
+          stroke={0}
+          strokeWidth={0}
+        />
+        <RNSVGPath
+          d="M 120 120 L 0.44019229647703995 109.73099898253919 A 120 120 0 0 1 119.99999999999997 0 L 120 120"
+          fill={4293748325}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+              "stroke",
+              "strokeWidth",
+            ]
+          }
+          responsible={true}
+          stroke={0}
+          strokeWidth={0}
+        />
+        <RNSVGCircle
+          cx={209.96329735453702}
+          cy={113.42995542856733}
+          fill={4294967295}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          r={22}
+          responsible={true}
+        />
+        <RNSVGText
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 16,
+              "fontStyle": "normal",
+            }
+          }
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          responsible={true}
+          rotate={Array []}
+          x={
+            Array [
+              201.07440846564813,
+            ]
+          }
+          y={
+            Array [
+              117.42995542856733,
+            ]
+          }
+        >
+          <RNSVGTSpan
+            content="54%"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+        <RNSVGCircle
+          cx={55.45813757169329}
+          cy={178.72438117897644}
+          fill={4294967295}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          r={22}
+          responsible={true}
+        />
+        <RNSVGText
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 16,
+              "fontStyle": "normal",
+            }
+          }
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          responsible={true}
+          rotate={Array []}
+          x={
+            Array [
+              46.5692486828044,
+            ]
+          }
+          y={
+            Array [
+              182.72438117897644,
+            ]
+          }
+        >
+          <RNSVGTSpan
+            content="30%"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+        <RNSVGCircle
+          cx={59.14425897533826}
+          cy={49.69329759112355}
+          fill={4294967295}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          r={22}
+          responsible={true}
+        />
+        <RNSVGText
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 16,
+              "fontStyle": "normal",
+            }
+          }
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          responsible={true}
+          rotate={Array []}
+          x={
+            Array [
+              50.255370086449375,
+            ]
+          }
+          y={
+            Array [
+              53.69329759112355,
+            ]
+          }
+        >
+          <RNSVGTSpan
+            content="26%"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+      </RNSVGGroup>
+    </RNSVGSvgView>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "white",
+            "borderColor": "lightgray",
+            "borderRadius": 70,
+            "borderWidth": 0,
+            "height": 140,
+            "justifyContent": "center",
+            "left": 50,
+            "position": "absolute",
+            "top": 50,
+            "width": 140,
+            "zIndex": 100,
+          },
+          undefined,
+          false,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginTop": 0,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
+
+exports[`renders split pie chart correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+        "height": 240,
+        "overflow": "hidden",
+        "width": 240,
+      },
+      undefined,
+    ]
+  }
+>
+  <RNSVGSvgView
+    align="xMidYMid"
+    bbHeight={240}
+    bbWidth={240}
+    focusable={false}
+    height={240}
+    meetOrSlice={0}
+    minX={-10}
+    minY={-18}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "borderWidth": 0,
+        },
+        Object {
+          "flex": 0,
+          "height": 240,
+          "width": 240,
+        },
+      ]
+    }
+    vbHeight={258}
+    vbWidth={250}
+    width={240}
+  >
+    <RNSVGGroup>
+      <RNSVGDefs>
+        <RNSVGRadialGradient
+          cx="50%"
+          cy="50%"
+          fx="50%"
+          fy="50%"
+          gradient={
+            Array [
+              0,
+              -1,
+              1,
+              -15238443,
+            ]
+          }
+          gradientTransform={null}
+          gradientUnits={1}
+          name="grad0"
+          rx="50%"
+          ry="50%"
+        />
+        <RNSVGRadialGradient
+          cx="50%"
+          cy="50%"
+          fx="50%"
+          fy="50%"
+          gradient={
+            Array [
+              0,
+              -1,
+              1,
+              -8793378,
+            ]
+          }
+          gradientTransform={null}
+          gradientUnits={1}
+          name="grad1"
+          rx="50%"
+          ry="50%"
+        />
+        <RNSVGRadialGradient
+          cx="50%"
+          cy="50%"
+          fx="50%"
+          fy="50%"
+          gradient={
+            Array [
+              0,
+              -1,
+              1,
+              -1218971,
+            ]
+          }
+          gradientTransform={null}
+          gradientUnits={1}
+          name="grad2"
+          rx="50%"
+          ry="50%"
+        />
+      </RNSVGDefs>
+      <RNSVGPath
+        d="M 120 120 L 120 0 A 120 120 0 0 1 139.75135083368806 238.36335640832667 L 120 120"
+        fill={4279728853}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        propList={
+          Array [
+            "fill",
+            "stroke",
+            "strokeWidth",
+          ]
+        }
+        responsible={true}
+        stroke={0}
+        strokeWidth={0}
+      />
+      <RNSVGPath
+        d="M 120 120 L 139.75135083368806 238.36335640832667 A 120 120 0 0 1 12.92949136579265 65.81599700269341 L 120 120"
+        fill={4286173918}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        propList={
+          Array [
+            "fill",
+            "stroke",
+            "strokeWidth",
+          ]
+        }
+        responsible={true}
+        stroke={0}
+        strokeWidth={0}
+      />
+      <RNSVGPath
+        d="M 110 102 L 2.92949136579265 47.81599700269341 A 120 120 0 0 1 109.99999999999987 -18 L 110 102"
+        fill={4293748325}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        propList={
+          Array [
+            "fill",
+            "stroke",
+            "strokeWidth",
+          ]
+        }
+        responsible={true}
+        stroke={0}
+        strokeWidth={0}
+      />
+    </RNSVGGroup>
+  </RNSVGSvgView>
+</View>
+`;

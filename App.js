@@ -2,9 +2,21 @@ import React, {useEffect, useState} from 'react';
 import {ScrollView, TouchableOpacity} from 'react-native';
 import {Alert} from 'react-native';
 import {View, Text, StyleSheet} from 'react-native';
-import {MyPattern} from './src/pattern';
 import {BarChart, LineChart, PieChart} from './src';
 import {Path, Pattern} from 'react-native-svg';
+import BarWithGradient from './examples/BarChart/BarWithGradient';
+import CappedBars from './examples/BarChart/CappedBars';
+import RoundStackBar from './examples/BarChart/RoundStackBar';
+import SimpleBarAnimated from './examples/BarChart/SimpleBarAnimated';
+import SimpleBlueBars from './examples/BarChart/SimpleBlueBars';
+import AnimatedArea from './examples/LineChart/AnimatedArea';
+import AreaTwo from './examples/LineChart/AreaTwo';
+import LineChartTwo from './examples/LineChart/LineChartTwo';
+import SimpleBlueLine from './examples/LineChart/SimpleBlueLine';
+import ProgressPie from './examples/PieChart/ProgressPie';
+import SimplePie from './examples/PieChart/SimplePie';
+import SplitPie from './examples/PieChart/SplitPie';
+import ThreeDPie from './examples/PieChart/ThreeDPie';
 
 const App = () => {
   const [toggle, setToggle] = useState(true);
@@ -982,7 +994,21 @@ const App = () => {
         // backgroundColor: '#1C1C1C',
       }}>
       {/* <PieChart data={llData}/> */}
-      <LineChart data={drata} yAxisOffset={100} />
+      {/* <BarThreeD/> */}
+      {/* <BarWithGradient /> */}
+      {/* <CappedBars /> */}
+      {/* <RoundStackBar /> */}
+      {/* <SimpleBarAnimated /> */}
+      {/* <SimpleBlueBars /> */}
+      {/* <AnimatedArea /> */}
+      {/* <AreaTwo /> */}
+      {/* <LineChartTwo /> */}
+      {/* <SimpleBlueLine /> */}
+      {/* <ProgressPie /> */}
+      {/* <SimplePie /> */}
+      {/* <SplitPie /> */}
+      {/* <ThreeDPie /> */}
+      <LineChart data={drata} yAxisOffset={120} />
       {/* <LineChart
         areaChart
         curved

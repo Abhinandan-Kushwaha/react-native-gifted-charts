@@ -1,0 +1,7312 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders 2 area chart correctly 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 40,
+          "marginRight": 40,
+          "width": "100%",
+        },
+        Object {
+          "height": 250,
+        },
+        false,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 12.5,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "flex-end",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "black",
+                "height": 1,
+                "width": "100%",
+              },
+              Object {
+                "backgroundColor": "black",
+                "height": 1,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        100
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 25,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        90
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        80
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 75,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        70
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        60
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 125,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        50
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        40
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 175,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        30
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        20
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 225,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        10
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 12.5,
+            "position": "absolute",
+            "top": 250,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            Object {
+              "marginBottom": -12.5,
+            },
+          ]
+        }
+      >
+        0
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 25,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 75,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 125,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 175,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 225,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 12.5,
+            "position": "absolute",
+            "top": 250,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <RCTScrollView
+      contentContainerStyle={
+        Array [
+          Object {
+            "height": 380,
+            "paddingBottom": 0,
+            "width": 332,
+          },
+          Object {
+            "width": 332,
+          },
+        ]
+      }
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      scrollEnabled={true}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Array [
+          Object {
+            "bottom": -72.5,
+            "marginLeft": 36,
+            "paddingRight": 100,
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": -1,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 43,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 87,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 131,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 175,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 219,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 263,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 307,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          onMoveShouldSetResponder={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "bottom": 60,
+              "height": 260,
+              "position": "absolute",
+              "width": 352,
+              "zIndex": 0,
+            }
+          }
+        >
+          <RNSVGSvgView
+            bbHeight="100%"
+            bbWidth="100%"
+            focusable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": "100%",
+                  "width": "100%",
+                },
+              ]
+            }
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M -1,260 C 7.799999999999999,255 25.400000000000002,239 43,235 C 60.6,231 69.39999999999999,264 87,240 C 104.60000000000001,216 113.39999999999999,139 131,115 C 148.6,91 157.4,130 175,120 C 192.6,110 201.4,74 219,65 C 236.6,56 245.4,85 263,75 C 280.6,65 298.2,27 307,15"
+                fill={null}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={4287090411}
+                strokeWidth={1}
+              />
+              <RNSVGLinearGradient
+                gradient={
+                  Array [
+                    0,
+                    -863514901,
+                    1,
+                    1308622847,
+                  ]
+                }
+                gradientTransform={null}
+                gradientUnits={0}
+                name="Gradient"
+                x1="0"
+                x2="0"
+                y1="0"
+                y2="1"
+              />
+              <RNSVGPath
+                d="M -1,259 L -1,260 M -1,260 C 7.799999999999999,255 25.400000000000002,239 43,235 C 60.6,231 69.39999999999999,264 87,240 C 104.60000000000001,216 113.39999999999999,139 131,115 C 148.6,91 157.4,130 175,120 C 192.6,110 201.4,74 219,65 C 236.6,56 245.4,85 263,75 C 280.6,65 298.2,27 307,15 L 307,259 L -1,259 "
+                fill={
+                  Array [
+                    1,
+                    "Gradient",
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={0}
+                strokeWidth={1}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+        <View
+          onMoveShouldSetResponder={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "bottom": 60,
+              "height": 260,
+              "position": "absolute",
+              "width": 352,
+              "zIndex": 0,
+            }
+          }
+        >
+          <RNSVGSvgView
+            bbHeight="100%"
+            bbWidth="100%"
+            focusable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": "100%",
+                  "width": "100%",
+                },
+              ]
+            }
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M -1,260 C 7.799999999999999,250 25.4,219 43,210 C 60.6,201 69.4,225 87,215 C 104.6,205 113.4,169 131,160 C 148.6,151 157.4,180 175,170 C 192.6,160 201.4,119 219,110 C 236.6,101 245.4,137.5 263,125 C 280.6,112.5 298.2,63 307,47.5"
+                fill={null}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={4294944000}
+                strokeWidth={1}
+              />
+              <RNSVGLinearGradient
+                gradient={
+                  Array [
+                    0,
+                    -855661312,
+                    1,
+                    1308622847,
+                  ]
+                }
+                gradientTransform={null}
+                gradientUnits={0}
+                name="Gradient"
+                x1="0"
+                x2="0"
+                y1="0"
+                y2="1"
+              />
+              <RNSVGPath
+                d="M -1,259 L -1,260 M -1,260 C 7.799999999999999,250 25.4,219 43,210 C 60.6,201 69.4,225 87,215 C 104.6,205 113.4,169 131,160 C 148.6,151 157.4,180 175,170 C 192.6,160 201.4,119 219,110 C 236.6,101 245.4,137.5 263,125 C 280.6,112.5 298.2,63 307,47.5 L 307,259 L -1,259 "
+                fill={
+                  Array [
+                    1,
+                    "Gradient",
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={0}
+                strokeWidth={1}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": -14,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 22,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 66,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 110,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 154,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 198,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 242,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 286,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;
+
+exports[`renders 2 line chart correctly 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 40,
+          "marginRight": 40,
+          "width": "100%",
+        },
+        Object {
+          "height": 250,
+        },
+        false,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "line",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 363,
+              },
+            ]
+          }
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+                propList={
+                  Array [
+                    "strokeDasharray",
+                  ]
+                }
+                strokeDasharray={
+                  Array [
+                    "4",
+                    "8",
+                  ]
+                }
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 367,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 12.5,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "flex-end",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "black",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "black",
+                "height": 1,
+                "width": "100%",
+              },
+              Object {
+                "backgroundColor": "black",
+                "height": 1,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        100
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 25,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        90
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        80
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 75,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        70
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        60
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 125,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        50
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        40
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 175,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        30
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        20
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 225,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            false,
+          ]
+        }
+      >
+        10
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 12.5,
+            "position": "absolute",
+            "top": 250,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            undefined,
+            false,
+            Object {
+              "marginBottom": -12.5,
+            },
+          ]
+        }
+      >
+        0
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 25,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 75,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 125,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 175,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 225,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 12.5,
+            "position": "absolute",
+            "top": 250,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <RCTScrollView
+      contentContainerStyle={
+        Array [
+          Object {
+            "height": 380,
+            "paddingBottom": 0,
+            "width": 332,
+          },
+          Object {
+            "width": 332,
+          },
+        ]
+      }
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      scrollEnabled={true}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Array [
+          Object {
+            "bottom": -72.5,
+            "marginLeft": 36,
+            "paddingRight": 100,
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": -3,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 41,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 85,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 129,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 173,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 217,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 261,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "lightgray",
+              "bottom": 60,
+              "height": 264,
+              "left": 305,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          onMoveShouldSetResponder={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "bottom": 60,
+              "height": 260,
+              "position": "absolute",
+              "width": 352,
+              "zIndex": 0,
+            }
+          }
+        >
+          <RNSVGSvgView
+            bbHeight="100%"
+            bbWidth="100%"
+            focusable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": "100%",
+                  "width": "100%",
+                },
+              ]
+            }
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d=""
+                fill={null}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={4287090411}
+                strokeWidth={1}
+              />
+              <RNSVGCircle
+                cx={-3}
+                cy={260}
+                fill={4278190335}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4278222848}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    -11,
+                  ]
+                }
+                y={
+                  Array [
+                    255,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="0"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={41}
+                cy={235}
+                fill={4278190335}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4278222848}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    33,
+                  ]
+                }
+                y={
+                  Array [
+                    230,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="10"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={85}
+                cy={240}
+                fill={4278190335}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4278222848}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    77,
+                  ]
+                }
+                y={
+                  Array [
+                    235,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="8"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={129}
+                cy={115}
+                fill={4278190335}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4278222848}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    121,
+                  ]
+                }
+                y={
+                  Array [
+                    110,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="58"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={173}
+                cy={120}
+                fill={4278190335}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4278222848}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    165,
+                  ]
+                }
+                y={
+                  Array [
+                    115,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="56"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={217}
+                cy={65}
+                fill={4278190335}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4278222848}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    209,
+                  ]
+                }
+                y={
+                  Array [
+                    60,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="78"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={261}
+                cy={75}
+                fill={4278190335}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4278222848}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    253,
+                  ]
+                }
+                y={
+                  Array [
+                    70,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="74"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={305}
+                cy={15}
+                fill={4278190335}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4278222848}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    297,
+                  ]
+                }
+                y={
+                  Array [
+                    10,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="98"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={-3}
+                cy={260}
+                fill={4294901760}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4286611584}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    -11,
+                  ]
+                }
+                y={
+                  Array [
+                    255,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="0"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={41}
+                cy={210}
+                fill={4294901760}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4286611584}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    33,
+                  ]
+                }
+                y={
+                  Array [
+                    205,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="20"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={85}
+                cy={215}
+                fill={4294901760}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4286611584}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    77,
+                  ]
+                }
+                y={
+                  Array [
+                    210,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="18"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={129}
+                cy={160}
+                fill={4294901760}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4286611584}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    121,
+                  ]
+                }
+                y={
+                  Array [
+                    155,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="40"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={173}
+                cy={170}
+                fill={4294901760}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4286611584}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    165,
+                  ]
+                }
+                y={
+                  Array [
+                    165,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="36"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={217}
+                cy={110}
+                fill={4294901760}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4286611584}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    209,
+                  ]
+                }
+                y={
+                  Array [
+                    105,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="60"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={261}
+                cy={125}
+                fill={4294901760}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4286611584}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    253,
+                  ]
+                }
+                y={
+                  Array [
+                    120,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="54"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+              <RNSVGCircle
+                cx={305}
+                cy={47.5}
+                fill={4294901760}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                r={3}
+                responsible={true}
+              />
+              <RNSVGText
+                content={null}
+                dx={Array []}
+                dy={Array []}
+                fill={4286611584}
+                font={
+                  Object {
+                    "fontSize": 13,
+                  }
+                }
+                propList={
+                  Array [
+                    "fill",
+                  ]
+                }
+                rotate={Array []}
+                x={
+                  Array [
+                    297,
+                  ]
+                }
+                y={
+                  Array [
+                    42.5,
+                  ]
+                }
+              >
+                <RNSVGTSpan
+                  content="85"
+                  dx={Array []}
+                  dy={Array []}
+                  font={Object {}}
+                  rotate={Array []}
+                  x={Array []}
+                  y={Array []}
+                />
+              </RNSVGText>
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": -14,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 22,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 66,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 110,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 154,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 198,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 242,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 286,
+                  "position": "absolute",
+                  "width": 44,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;
+
+exports[`renders animated area chart correctly 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 40,
+          "marginRight": 40,
+          "width": "100%",
+        },
+        Object {
+          "height": 200,
+        },
+        false,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 10,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "flex-end",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "black",
+                "height": 1,
+                "width": "100%",
+              },
+              Object {
+                "backgroundColor": "#0BA5A4",
+                "height": 1,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <RCTScrollView
+      contentContainerStyle={
+        Array [
+          Object {
+            "height": 330,
+            "paddingBottom": 0,
+            "width": 220,
+          },
+          Object {
+            "width": 220,
+          },
+        ]
+      }
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      scrollEnabled={true}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Array [
+          Object {
+            "bottom": -70,
+            "marginLeft": 36,
+            "paddingRight": 100,
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": -1,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 29,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 59,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 89,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 119,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 149,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 179,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 209,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          collapsable={false}
+          onMoveShouldSetResponder={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "bottom": 60,
+              "height": 210,
+              "position": "absolute",
+              "width": 0,
+              "zIndex": 0,
+            }
+          }
+        >
+          <RNSVGSvgView
+            bbHeight="100%"
+            bbWidth="100%"
+            focusable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": "100%",
+                  "width": "100%",
+                },
+              ]
+            }
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d=""
+                fill={null}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={4278953380}
+                strokeWidth={5}
+              />
+              <RNSVGLinearGradient
+                gradient={
+                  Array [
+                    0,
+                    -16013916,
+                    1,
+                    1308622847,
+                  ]
+                }
+                gradientTransform={null}
+                gradientUnits={0}
+                name="Gradient"
+                x1="0"
+                x2="0"
+                y1="0"
+                y2="1"
+              />
+              <RNSVGPath
+                d=""
+                fill={
+                  Array [
+                    1,
+                    "Gradient",
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={0}
+                strokeWidth={5}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+        <View>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "bottom": 30,
+                "height": 20,
+                "left": -7,
+                "opacity": 0,
+                "position": "absolute",
+                "width": 30,
+                "zIndex": 10,
+              }
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "bottom": 30,
+                "height": 20,
+                "left": 15,
+                "opacity": 0,
+                "position": "absolute",
+                "width": 30,
+                "zIndex": 10,
+              }
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "bottom": 30,
+                "height": 20,
+                "left": 45,
+                "opacity": 0,
+                "position": "absolute",
+                "width": 30,
+                "zIndex": 10,
+              }
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "bottom": 30,
+                "height": 20,
+                "left": 75,
+                "opacity": 0,
+                "position": "absolute",
+                "width": 30,
+                "zIndex": 10,
+              }
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "bottom": 30,
+                "height": 20,
+                "left": 105,
+                "opacity": 0,
+                "position": "absolute",
+                "width": 30,
+                "zIndex": 10,
+              }
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "bottom": 30,
+                "height": 20,
+                "left": 135,
+                "opacity": 0,
+                "position": "absolute",
+                "width": 30,
+                "zIndex": 10,
+              }
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "bottom": 30,
+                "height": 20,
+                "left": 165,
+                "opacity": 0,
+                "position": "absolute",
+                "width": 30,
+                "zIndex": 10,
+              }
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            collapsable={false}
+            style={
+              Object {
+                "bottom": 30,
+                "height": 20,
+                "left": 195,
+                "opacity": 0,
+                "position": "absolute",
+                "width": 30,
+                "zIndex": 10,
+              }
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;
+
+exports[`renders blue line chart correctly 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 40,
+          "marginRight": 40,
+          "width": "100%",
+        },
+        Object {
+          "height": 200,
+        },
+        false,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 255,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 10,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "flex-end",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "black",
+                "height": 1,
+                "width": "100%",
+              },
+              Object {
+                "backgroundColor": "#0BA5A4",
+                "height": 1,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <RCTScrollView
+      contentContainerStyle={
+        Array [
+          Object {
+            "height": 330,
+            "paddingBottom": 0,
+            "width": 220,
+          },
+          Object {
+            "width": 220,
+          },
+        ]
+      }
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      scrollEnabled={true}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Array [
+          Object {
+            "bottom": -70,
+            "marginLeft": 36,
+            "paddingRight": 100,
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": -1,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 29,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 59,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 89,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 119,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 149,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 179,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 214,
+              "left": 209,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          onMoveShouldSetResponder={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "bottom": 60,
+              "height": 210,
+              "position": "absolute",
+              "width": 240,
+              "zIndex": 0,
+            }
+          }
+        >
+          <RNSVGSvgView
+            bbHeight="100%"
+            bbWidth="100%"
+            focusable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": "100%",
+                  "width": "100%",
+                },
+              ]
+            }
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M-1 210 L29 165.55555555555554 L59 170 L89 121.11111111111111 L119 130 L149 76.66666666666666 L179 90 L209 21.111111111111114 "
+                fill={null}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={4278953380}
+                strokeWidth={5}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": -7,
+                  "position": "absolute",
+                  "width": 30,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 15,
+                  "position": "absolute",
+                  "width": 30,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 45,
+                  "position": "absolute",
+                  "width": 30,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 75,
+                  "position": "absolute",
+                  "width": 30,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 105,
+                  "position": "absolute",
+                  "width": 30,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 135,
+                  "position": "absolute",
+                  "width": 30,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 165,
+                  "position": "absolute",
+                  "width": 30,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 195,
+                  "position": "absolute",
+                  "width": 30,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;
