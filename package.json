@@ -41,7 +41,8 @@
     "eslint": "^7.31.0",
     "jest": "^27.0.6",
     "metro-react-native-babel-preset": "^0.66.2",
-    "react-test-renderer": "17.0.1"
+    "react-test-renderer": "17.0.1",
+    "ts-jest": "^27.1.4"
   },
   "peerDependencies": {
     "react": "*",
@@ -57,8 +58,5 @@
     "donut",
     "area",
     "line"
-  ],
-  "jest": {
-    "preset": "react-native"
-  }
+  ]
 }

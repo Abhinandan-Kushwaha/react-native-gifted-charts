@@ -2,7 +2,7 @@ import {BarChart} from '../../src/BarChart';
 import React from 'react';
 import {View} from 'react-native';
 
-const SimpleBarAnimation = () => {
+const SimpleBarAnimated = () => {
   const barData = [
     {value: 230, label: 'Jan', frontColor: '#4ABFF4'},
     {value: 180, label: 'Feb', frontColor: '#79C3DB'},
@@ -24,4 +24,4 @@ const SimpleBarAnimation = () => {
   );
 };
 
-export default SimpleBarAnimation;
+export default SimpleBarAnimated;

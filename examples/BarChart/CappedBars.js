@@ -15,7 +15,7 @@ const CappedBars = () => {
         data={data}
         barWidth={35}
         cappedBars
-        capColor={'rgba(78, 0, 142)'}
+        capColor={'rgb(78, 0, 142)'}
         capThickness={4}
         showGradient
         gradientColor={'rgba(200, 100, 244,0.8)'}
