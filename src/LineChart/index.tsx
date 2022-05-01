@@ -2850,6 +2850,7 @@ export const LineChart = (props: propTypes) => {
           }
         }}
         onResponderMove={evt => {
+          // console.log('onResponderMove++++++++++',evt);
           if (!pointerConfig) return;
           if (
             activatePointersOnLongPress &&
@@ -2933,11 +2934,24 @@ export const LineChart = (props: propTypes) => {
             }
           }
         }}
-        onResponderRelease={evt => {
+        // onResponderReject={evt => {
+        //   console.log('evt...reject.......',evt);
+        // }}
+        onResponderEnd={evt => {
+          // console.log('evt...end.......',evt);
           setResponderStartTime(0);
           setResponderActive(false);
           setTimeout(() => setPointerX(0), pointerVanishDelay);
         }}
+        onResponderTerminationRequest={(evt) => false}
+        // onResponderTerminate={evt => {
+        //   console.log('evt...terminate.......',evt);
+        // }}
+        // onResponderRelease={evt => {
+        //   setResponderStartTime(0);
+        //   setResponderActive(false);
+        //   setTimeout(() => setPointerX(0), pointerVanishDelay);
+        // }}
         style={{
           position: 'absolute',
           height: containerHeight + 10 + horizSectionsBelow.length * stepHeight,
@@ -3143,11 +3157,24 @@ export const LineChart = (props: propTypes) => {
             }
           }
         }}
-        onResponderRelease={evt => {
+        // onResponderReject={evt => {
+        //   console.log('evt...reject.......',evt);
+        // }}
+        onResponderEnd={evt => {
+          // console.log('evt...end.......',evt);
           setResponderStartTime(0);
           setResponderActive(false);
           setTimeout(() => setPointerX(0), pointerVanishDelay);
         }}
+        onResponderTerminationRequest={(evt) => false}
+        // onResponderTerminate={evt => {
+        //   console.log('evt...terminate.......',evt);
+        // }}
+        // onResponderRelease={evt => {
+        //   setResponderStartTime(0);
+        //   setResponderActive(false);
+        //   setTimeout(() => setPointerX(0), pointerVanishDelay);
+        // }}
         style={{
           position: 'absolute',
           height: containerHeight + 10 + horizSectionsBelow.length * stepHeight,

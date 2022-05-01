@@ -1911,9 +1911,10 @@ exports[`renders 2 area chart correctly 1`] = `
         />
         <View
           onMoveShouldSetResponder={[Function]}
+          onResponderEnd={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
-          onResponderRelease={[Function]}
+          onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
             Object {
@@ -1997,9 +1998,10 @@ exports[`renders 2 area chart correctly 1`] = `
         </View>
         <View
           onMoveShouldSetResponder={[Function]}
+          onResponderEnd={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
-          onResponderRelease={[Function]}
+          onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
             Object {
@@ -4222,9 +4224,10 @@ exports[`renders 2 line chart correctly 1`] = `
         />
         <View
           onMoveShouldSetResponder={[Function]}
+          onResponderEnd={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
-          onResponderRelease={[Function]}
+          onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
             Object {
@@ -6054,9 +6057,10 @@ exports[`renders animated area chart correctly 1`] = `
         <View
           collapsable={false}
           onMoveShouldSetResponder={[Function]}
+          onResponderEnd={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
-          onResponderRelease={[Function]}
+          onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
             Object {
@@ -7032,9 +7036,10 @@ exports[`renders blue line chart correctly 1`] = `
         />
         <View
           onMoveShouldSetResponder={[Function]}
+          onResponderEnd={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
-          onResponderRelease={[Function]}
+          onResponderTerminationRequest={[Function]}
           onStartShouldSetResponder={[Function]}
           style={
             Object {
