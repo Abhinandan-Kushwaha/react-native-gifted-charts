@@ -983,15 +983,18 @@ const App = () => {
     {value: 130},
     {value: 120},
     {value: 160},
-    {value: 190},
+    {value: 140},
+    {value: 120},
+    {value: 160},
+    {value: 140},
   ]);
 
   return (
-    <View
+    <ScrollView
       style={{
         paddingVertical: 100,
         paddingLeft: 20,
-        // backgroundColor: '#1C1C1C',
+        backgroundColor: '#1C1C1C',
       }}>
       {/* <PieChart data={llData}/> */}
       {/* <BarThreeD/> */}
@@ -1008,8 +1011,18 @@ const App = () => {
       {/* <SimplePie /> */}
       {/* <SplitPie /> */}
       {/* <ThreeDPie /> */}
-      <LineChart data={drata} yAxisOffset={120} />
       {/* <LineChart
+        data={drata}
+        spacing={40}
+        pointerConfig={{activatePointersOnLongPress: true,
+          pointerStripUptoDataPoint: true,
+          pointerLabelWidth: 80,
+          pointerLabelComponent: ()=> <Text>Hello</Text>
+        }}
+        yAxisOffset={100}
+        maxValue={120}
+      /> */}
+      <LineChart
         areaChart
         curved
         data={llData}
@@ -1061,7 +1074,7 @@ const App = () => {
             );
           },
         }}
-      /> */}
+      />
 
       {/* <BarChart
         data={pieData}
@@ -1723,7 +1736,7 @@ const App = () => {
         style={{marginTop: 100, alignSelf: 'center'}}>
         <Text>Line Chart</Text>
       </TouchableOpacity> */}
-    </View>
+    </ScrollView>
   );
 };
 
