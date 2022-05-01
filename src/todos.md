@@ -19,4 +19,4 @@
 ## Architecture Enhancement
 
 1. Make it compliant with React js
-2. Write tests
+2. Write Snapshot tests for more example charts (snapshot tests for some charts are already written)
