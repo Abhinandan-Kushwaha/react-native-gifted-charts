@@ -1483,8 +1483,8 @@ export const LineChart = (props: propTypes) => {
       ? pointerConfig.pointerLabelHeight
       : defaultPointerConfig.pointerLabelHeight;
   const autoAdjustPointerLabelPosition =
-    pointerConfig && pointerConfig.autoAdjustPointerLabelPosition
-      ? pointerConfig.autoAdjustPointerLabelPosition
+    pointerConfig && pointerConfig.autoAdjustPointerLabelPosition === false
+      ? false
       : defaultPointerConfig.autoAdjustPointerLabelPosition;
   const pointerVanishDelay =
     pointerConfig && pointerConfig.pointerVanishDelay
