@@ -1,6 +1,6 @@
 ## Features
 
-1. Fix the issue- When `activatePointersOnLongPress` is set to true, sometimes, the pointerLabel doesn't vanish after releasing the scroll. It gets stuck.
+1. Fix the issue with pointers in Line/Area charts on Android https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/177
 
 ## To-dos in documentation-
 
