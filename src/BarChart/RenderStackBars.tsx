@@ -38,6 +38,7 @@ type Props = {
   xAxisThickness: number;
   barBackgroundPattern?: Function;
   patternId?: String;
+  xAxisTextNumberOfLines: number;
 };
 type itemType = {
   value?: number;
@@ -69,6 +70,7 @@ const RenderStackBars = (props: Props) => {
     xAxisThickness,
     label,
     labelTextStyle,
+    xAxisTextNumberOfLines,
   } = props;
   const disablePress = props.disablePress || false;
   const renderLabel = (label: String, labelTextStyle: any) => {
@@ -92,7 +94,7 @@ const RenderStackBars = (props: Props) => {
         {item.labelComponent ? (
           item.labelComponent()
         ) : (
-          <Text style={[labelTextStyle]} numberOfLines={1}>
+          <Text style={[labelTextStyle]} numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}
           </Text>
         )}

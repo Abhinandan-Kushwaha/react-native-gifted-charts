@@ -47,6 +47,8 @@ type PropTypes = {
   yAxisLabelContainerStyle?: any;
   horizontalRulesStyle?: any;
   yAxisTextStyle?: any;
+  yAxisTextNumberOfLines?: number;
+  xAxisTextNumberOfLines?: number;
   yAxisLabelWidth?: number;
   hideYAxisText?: Boolean;
   yAxisSide?: string;
@@ -372,6 +374,8 @@ export const BarChart = (props: PropTypes) => {
       : props.yAxisThickness || 1;
   const yAxisColor = props.yAxisColor || 'black';
   const yAxisTextStyle = props.yAxisTextStyle;
+  const yAxisTextNumberOfLines = props.yAxisTextNumberOfLines || 1;
+  const xAxisTextNumberOfLines = props.xAxisTextNumberOfLines || 1;
   const yAxisLabelContainerStyle = props.yAxisLabelContainerStyle;
   const horizontalRulesStyle = props.horizontalRulesStyle;
   const showFractionalValues = props.showFractionalValues || false;
@@ -768,7 +772,7 @@ export const BarChart = (props: PropTypes) => {
                     yAxisLabelContainerStyle,
                   ]}>
                   <Text
-                    numberOfLines={1}
+                    numberOfLines={yAxisTextNumberOfLines}
                     ellipsizeMode={'clip'}
                     style={[
                       yAxisTextStyle,
@@ -875,7 +879,7 @@ export const BarChart = (props: PropTypes) => {
                     yAxisLabelContainerStyle,
                   ]}>
                   <Text
-                    numberOfLines={1}
+                    numberOfLines={yAxisTextNumberOfLines}
                     ellipsizeMode={'clip'}
                     style={[
                       yAxisTextStyle,
@@ -1399,6 +1403,7 @@ export const BarChart = (props: PropTypes) => {
                     labelTextStyle={
                       item.labelTextStyle || props.xAxisLabelTextStyle
                     }
+                    xAxisTextNumberOfLines={xAxisTextNumberOfLines}
                   />
                 );
               })
@@ -1460,6 +1465,7 @@ export const BarChart = (props: PropTypes) => {
                     item.labelTextStyle || props.xAxisLabelTextStyle
                   }
                   onPress={props.onPress}
+                  xAxisTextNumberOfLines={xAxisTextNumberOfLines}
                 />
               ))}
         </Fragment>

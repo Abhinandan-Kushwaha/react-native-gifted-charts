@@ -118,6 +118,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | yAxisThickness         | number              | Y axis thickness                                                                   | 1                      |
 | yAxisLabelWidth        | number              | Width of the Y axis Label container                                                | 35                     |
 | yAxisTextStyle         | object              | Style object for the Y axis text style                                             | \_                     |
+| yAxisTextNumberOfLines | number              | Number of lines for y axis label text                                              | 1                      |
 | yAxisLabelContainerStyle | object            | Style object for the Y axis label container                                        | \_                     |
 | horizontalRulesStyle     | object            | Style object for the horizontal rules container                                    | \_                     |
 | showFractionalValues   | Boolean             | Allow fractional values for the Y axis label                                       | false                  |
@@ -160,6 +161,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | rotateLabel            | Boolean             | To rotate the X axis labels (by 60deg)                                             | false                  |
 | hideOrigin             | Boolean             | To hide the y Axis label at origin (i.e. 0)                                        | false                  |
 | labelWidth             | number              | Width of the Label text appearing below the bar (under the X axis)                 | barWidth               |
+| xAxisTextNumberOfLines | number              | Number of lines for x axis label text                                              | 1                      |
 | labelsExtraHeight | number | used to display large labels on X-axis (often rotated to show vertically) | 0 |
 
 **Note** If you are setting yAxisSide to 'right', make sure to specify the width of the chart, using the `width` prop
