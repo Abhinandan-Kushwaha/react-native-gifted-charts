@@ -64,6 +64,7 @@ type Props = {
   patternId?: String;
   barMarginBottom?: number;
   onPress?: Function;
+  xAxisTextNumberOfLines: number;
 };
 type itemType = {
   value?: number;
@@ -112,6 +113,7 @@ const RenderBars = (props: Props) => {
     autoShiftLabels,
     label,
     labelTextStyle,
+    xAxisTextNumberOfLines,
   } = props;
 
   const barMarginBottom =
@@ -161,7 +163,7 @@ const RenderBars = (props: Props) => {
         ) : (
           <Text
             style={labelTextStyle || {textAlign: 'center'}}
-            numberOfLines={1}>
+            numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}
           </Text>
         )}
@@ -204,7 +206,7 @@ const RenderBars = (props: Props) => {
         ) : (
           <Text
             style={labelTextStyle || {textAlign: 'center'}}
-            numberOfLines={1}>
+            numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}
           </Text>
         )}

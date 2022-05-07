@@ -154,6 +154,8 @@ type propTypes = {
   yAxisLabelContainerStyle?: any;
   horizontalRulesStyle?: any;
   yAxisTextStyle?: any;
+  yAxisTextNumberOfLines?: number;
+  xAxisTextNumberOfLines?: number;
   showFractionalValues?: Boolean;
   roundToDigits?: number;
   yAxisLabelWidth?: number;
@@ -1386,6 +1388,8 @@ export const LineChart = (props: propTypes) => {
     props.yAxisThickness === 0 ? 0 : props.yAxisThickness || 1;
   const yAxisColor = props.yAxisColor || 'black';
   const yAxisTextStyle = props.yAxisTextStyle;
+  const yAxisTextNumberOfLines = props.yAxisTextNumberOfLines || 1;
+  const xAxisTextNumberOfLines = props.xAxisTextNumberOfLines || 1;
   const yAxisLabelContainerStyle = props.yAxisLabelContainerStyle;
   const horizontalRulesStyle = props.horizontalRulesStyle;
   const showFractionalValues = props.showFractionalValues || false;
@@ -1681,7 +1685,7 @@ export const LineChart = (props: propTypes) => {
         ) : (
           <Text
             style={labelTextStyle || {textAlign: 'center'}}
-            numberOfLines={1}>
+            numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}
           </Text>
         )}
@@ -1719,7 +1723,7 @@ export const LineChart = (props: propTypes) => {
         ) : (
           <Text
             style={labelTextStyle || {textAlign: 'center'}}
-            numberOfLines={1}>
+            numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}
           </Text>
         )}
@@ -1899,7 +1903,7 @@ export const LineChart = (props: propTypes) => {
                     yAxisLabelContainerStyle,
                   ]}>
                   <Text
-                    numberOfLines={1}
+                    numberOfLines={yAxisTextNumberOfLines}
                     ellipsizeMode={'clip'}
                     style={[
                       yAxisTextStyle,
@@ -2001,7 +2005,7 @@ export const LineChart = (props: propTypes) => {
                     yAxisLabelContainerStyle,
                   ]}>
                   <Text
-                    numberOfLines={1}
+                    numberOfLines={yAxisTextNumberOfLines}
                     ellipsizeMode={'clip'}
                     style={[
                       yAxisTextStyle,

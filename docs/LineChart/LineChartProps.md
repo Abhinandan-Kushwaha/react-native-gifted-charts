@@ -99,6 +99,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | yAxisThickness         | number              | Y axis thickness                                                                   | 1                      |
 | yAxisLabelWidth        | number              | Width of the Y axis Label container                                                | 35                     |
 | yAxisTextStyle         | object              | Style object for the Y axis text style                                             | \_                     |
+| yAxisTextNumberOfLines | number              | Number of lines for y axis label text                                              | 1                      |
 | yAxisLabelContainerStyle | object            | Style object for the Y axis label container                                        | \_                     |
 | yAxisOffset            | number              | Starting value on Y Axis                                                           | 0                      |
 | horizontalRulesStyle     | object            | Style object for the horizontal rules container                                    | \_                     |
@@ -146,6 +147,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | yAxisLabelTexts        | Array<string>       | Array of label texts to be displayed along y axis                                  | null                   |
 | xAxisLabelTexts        | Array<string>       | Array of label texts to be displayed below x axis                                  | null                   |
 | xAxisLabelTextStyle    | object              | Style of label texts to be displayed below x axis                                  | null                   |
+| xAxisTextNumberOfLines | number              | Number of lines for x axis label text                                              | 1                      |
 | rotateLabel            | Boolean             | To rotate the X axis labels (by 60deg)                                             | false                  |
 | hideOrigin             | Boolean             | To hide the y Axis label at origin (i.e. 0)                                        | false                  |
 
