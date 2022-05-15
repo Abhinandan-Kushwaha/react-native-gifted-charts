@@ -943,7 +943,7 @@ const App = () => {
   ];
   const pieData2 = [
     {value: 70, color: '#177AD5'},
-    {value: 30, color: 'lightgray'},
+    // {value: 30, color: 'lightgray'},
   ];
   const onBarPressed = (item, index) => {
     console.log(item);
@@ -1045,12 +1045,12 @@ const App = () => {
   ];
 
   return (
-    <ScrollView
-      style={{
-        paddingVertical: 100,
-        paddingLeft: 20,
-        backgroundColor: '#1C1C1C',
-      }}>
+  <View
+    style={{
+      paddingVertical: 100,
+      paddingLeft: 20,
+      backgroundColor: '#1C1C1C',
+    }}>
       {/* <PieChart data={llData}/> */}
       {/* <BarThreeD/> */}
       {/* <BarWithGradient /> */}
@@ -1092,13 +1092,18 @@ const App = () => {
         endOpacity={0.2}
         initialSpacing={0}
         noOfSections={6}
+        stepHeight={50}
+        height={300}
         maxValue={600}
         yAxisColor="white"
         yAxisThickness={0}
         rulesType="solid"
         rulesColor="gray"
         yAxisTextStyle={{color: 'gray'}}
-        yAxisSide='right'
+        yAxisLabelPrefix='hello'
+        yAxisTextNumberOfLines={2}
+        // yAxisLabelWidth={40}
+        // yAxisSide='right'
         xAxisColor="lightgray"
         pointerConfig={{
           pointerStripHeight: 160,
@@ -1108,7 +1113,7 @@ const App = () => {
           radius: 6,
           pointerLabelWidth: 100,
           pointerLabelHeight: 90,
-          activatePointersOnLongPress: true,
+          // activatePointersOnLongPress: true,
           autoAdjustPointerLabelPosition: false,
           pointerLabelComponent: items => {
             return (
@@ -1164,14 +1169,20 @@ const App = () => {
             data={pieData}
             /> */}
       {/* <PieChart
-        donut
-        innerRadius={80}
+        // donut
+        // innerRadius={80}
         data={pieData2}
-        isThreeD
-        shadow
-        centerLabelComponent={() => {
-          return <Text style={{fontSize: 30}}>70%</Text>;
-        }}
+        showText
+        semiCircle
+        // showTextBackground
+        // textBackgroundColor='white'
+        // textBackgroundRadius={20}
+        showValuesAsLabels={true}
+        // isThreeD
+        // shadow
+        // centerLabelComponent={() => {
+        //   return <Text style={{fontSize: 30}}>70%</Text>;
+        // }}
       /> */}
       {/* <MyPattern/> */}
       {/* <PieChart
@@ -1795,7 +1806,7 @@ const App = () => {
         style={{marginTop: 100, alignSelf: 'center'}}>
         <Text>Line Chart</Text>
       </TouchableOpacity> */}
-    </ScrollView>
+    </View>
   );
 };
 

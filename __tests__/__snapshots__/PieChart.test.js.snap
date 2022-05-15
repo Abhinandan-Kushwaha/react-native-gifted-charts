@@ -409,6 +409,187 @@ exports[`renders #D pie chart correctly 1`] = `
 </View>
 `;
 
+exports[`renders pie chart correctly for Single data 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "height": 240,
+          "overflow": "hidden",
+          "width": 240,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RNSVGSvgView
+      align="xMidYMid"
+      bbHeight={240}
+      bbWidth={240}
+      focusable={false}
+      height={240}
+      meetOrSlice={0}
+      minX={0}
+      minY={0}
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "borderWidth": 0,
+          },
+          Object {
+            "flex": 0,
+            "height": 240,
+            "width": 240,
+          },
+        ]
+      }
+      vbHeight={240}
+      vbWidth={240}
+      width={240}
+    >
+      <RNSVGGroup>
+        <RNSVGDefs>
+          <RNSVGRadialGradient
+            cx="50%"
+            cy="50%"
+            fx="50%"
+            fy="50%"
+            gradient={
+              Array [
+                0,
+                -1,
+                1,
+                -15238443,
+              ]
+            }
+            gradientTransform={null}
+            gradientUnits={1}
+            name="grad0"
+            rx="50%"
+            ry="50%"
+          />
+        </RNSVGDefs>
+        <RNSVGCircle
+          cx={120}
+          cy={120}
+          fill={4279728853}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          r={120}
+          responsible={true}
+        />
+        <RNSVGCircle
+          cx={120.00000000000003}
+          cy={32}
+          fill={4294967295}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          r={22}
+          responsible={true}
+        />
+        <RNSVGText
+          content={null}
+          dx={Array []}
+          dy={Array []}
+          fill={4278190080}
+          font={
+            Object {
+              "fontSize": 16,
+              "fontStyle": "normal",
+            }
+          }
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          responsible={true}
+          rotate={Array []}
+          x={
+            Array [
+              111.11111111111114,
+            ]
+          }
+          y={
+            Array [
+              36,
+            ]
+          }
+        >
+          <RNSVGTSpan
+            content="54%"
+            dx={Array []}
+            dy={Array []}
+            font={Object {}}
+            rotate={Array []}
+            x={Array []}
+            y={Array []}
+          />
+        </RNSVGText>
+      </RNSVGGroup>
+    </RNSVGSvgView>
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "alignSelf": "center",
+            "backgroundColor": "white",
+            "borderColor": "lightgray",
+            "borderRadius": 70,
+            "borderWidth": 0,
+            "height": 140,
+            "justifyContent": "center",
+            "left": 50,
+            "position": "absolute",
+            "top": 50,
+            "width": 140,
+            "zIndex": 100,
+          },
+          undefined,
+          false,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "marginTop": 0,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
+
 exports[`renders progress pie chart correctly 1`] = `
 <View>
   <View
