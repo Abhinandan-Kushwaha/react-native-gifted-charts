@@ -210,6 +210,7 @@ export const PieChart = (props: propTypes) => {
           {data.map((item, index) => {
             return (
               <RadialGradient
+                key={index + ''}
                 id={'grad' + index}
                 cx="50%"
                 cy="50%"
@@ -232,54 +233,75 @@ export const PieChart = (props: propTypes) => {
             );
           })}
         </Defs>
-        {data.map((item, index) => {
-          // console.log('index', index);
-          let nextItem;
-          if (index === pData.length - 1) nextItem = pData[0];
-          else nextItem = pData[index + 1];
-          let sx =
-            cx * (1 + Math.sin(2 * pi * pData[index] + initialAngle)) +
-            (item.shiftX || 0);
-          let sy =
-            cy * (1 - Math.cos(2 * pi * pData[index] + initialAngle)) +
-            (item.shiftY || 0);
-          let ax =
-            cx * (1 + Math.sin(2 * pi * nextItem + initialAngle)) +
-            (item.shiftX || 0);
-          let ay =
-            cy * (1 - Math.cos(2 * pi * nextItem + initialAngle)) +
-            (item.shiftY || 0);
-
-          // console.log('sx', sx);
-          // console.log('sy', sy);
-          // console.log('ax', ax);
-          // console.log('ay', ay);
-          return (
-            <Path
-              d={`M ${cx + (item.shiftX || 0)} ${
-                cy + (item.shiftY || 0)
-              } L ${sx} ${sy} A ${radius} ${radius} 0 ${
-                semiCircle ? 0 : data[index].value > total / 2 ? 1 : 0
-              } 1 ${ax} ${ay} L ${cx + (item.shiftX || 0)} ${
-                cy + (item.shiftY || 0)
-              }`}
-              stroke={strokeColor}
-              strokeWidth={strokeWidth}
+        {data.length === 1 ? (
+          <>
+            <Circle
+              cx={cx}
+              cy={cy}
+              r={radius}
               fill={
-                showGradient
-                  ? `url(#grad${index})`
-                  : item.color || colors[index % 9]
+                showGradient ? `url(#grad${0})` : data[0].color || colors[0 % 9]
               }
               onPress={() => {
-                item.onPress
-                  ? item.onPress
+                data[0].onPress
+                  ? data[0].onPress
                   : props.onPress
-                  ? props.onPress(item, index)
+                  ? props.onPress(data[0], 0)
                   : null;
               }}
             />
-          );
-        })}
+          </>
+        ) : (
+          data.map((item, index) => {
+            // console.log('index', index);
+            let nextItem;
+            if (index === pData.length - 1) nextItem = pData[0];
+            else nextItem = pData[index + 1];
+            let sx =
+              cx * (1 + Math.sin(2 * pi * pData[index] + initialAngle)) +
+              (item.shiftX || 0);
+            let sy =
+              cy * (1 - Math.cos(2 * pi * pData[index] + initialAngle)) +
+              (item.shiftY || 0);
+            let ax =
+              cx * (1 + Math.sin(2 * pi * nextItem + initialAngle)) +
+              (item.shiftX || 0);
+            let ay =
+              cy * (1 - Math.cos(2 * pi * nextItem + initialAngle)) +
+              (item.shiftY || 0);
+
+            // console.log('sx', sx);
+            // console.log('sy', sy);
+            // console.log('ax', ax);
+            // console.log('ay', ay);
+            return (
+              <Path
+                key={index + 'a'}
+                d={`M ${cx + (item.shiftX || 0)} ${
+                  cy + (item.shiftY || 0)
+                } L ${sx} ${sy} A ${radius} ${radius} 0 ${
+                  semiCircle ? 0 : data[index].value > total / 2 ? 1 : 0
+                } 1 ${ax} ${ay} L ${cx + (item.shiftX || 0)} ${
+                  cy + (item.shiftY || 0)
+                }`}
+                stroke={strokeColor}
+                strokeWidth={strokeWidth}
+                fill={
+                  showGradient
+                    ? `url(#grad${index})`
+                    : item.color || colors[index % 9]
+                }
+                onPress={() => {
+                  item.onPress
+                    ? item.onPress
+                    : props.onPress
+                    ? props.onPress(item, index)
+                    : null;
+                }}
+              />
+            );
+          })
+        )}
 
         {showText &&
           data.map((item, index) => {
@@ -308,6 +330,21 @@ export const PieChart = (props: propTypes) => {
             x += item.shiftX || 0;
             y += item.shiftY || 0;
 
+            if (data.length === 1) {
+              if (donut) {
+                y =
+                  (radius -
+                    innerRadius +
+                    (item.textBackgroundRadius ||
+                      props.textBackgroundRadius ||
+                      item.textSize ||
+                      textSize)) /
+                  2;
+              } else {
+                y = cy;
+              }
+            }
+
             // console.log('sx', sx);
             // console.log('sy', sy);
             // console.log('ax', ax);
@@ -317,6 +354,7 @@ export const PieChart = (props: propTypes) => {
                 {/* <Line x1={mx} x2={cx} y1={my} y2={cy} stroke="black" /> */}
                 {showTextBackground && (
                   <Circle
+                    key={index + 'b'}
                     cx={x}
                     cy={y - (item.textSize || textSize) / 4}
                     r={
@@ -340,7 +378,7 @@ export const PieChart = (props: propTypes) => {
                   />
                 )}
                 <SvgText
-                  fill={item.textColor || textColor || colors[(index + 1) % 9]}
+                  fill={item.textColor || textColor || colors[(index + 2) % 9]}
                   fontSize={item.textSize || textSize}
                   fontFamily={item.font || props.font}
                   fontWeight={item.fontWeight || props.fontWeight}

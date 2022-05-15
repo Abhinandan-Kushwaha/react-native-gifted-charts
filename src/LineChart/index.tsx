@@ -3432,7 +3432,7 @@ export const LineChart = (props: propTypes) => {
                 strokeDashArray5,
               )
           : null}
-        {pointerX ? (
+        {pointerX > 0 ? (
           <View
             style={{
               position: 'absolute',
