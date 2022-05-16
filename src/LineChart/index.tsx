@@ -2522,6 +2522,43 @@ export const LineChart = (props: propTypes) => {
     }
     pointerYLocal = Math.min(...arr);
 
+    let left = 0,
+      top = 0;
+    if (autoAdjustPointerLabelPosition) {
+      if (pointerX < pointerLabelWidth / 2) {
+        left = 7;
+      } else {
+        if (
+          !activatePointersOnLongPress &&
+          pointerX >
+            (props.width ||
+              Dimensions.get('window').width - yAxisLabelWidth - 15) -
+              pointerLabelWidth / 2
+        ) {
+          left = -pointerLabelWidth - 4;
+        } else {
+          left = -pointerLabelWidth / 2 + 5;
+        }
+      }
+    } else {
+      left = (pointerRadius || pointerWidth / 2) - 10 + shiftPointerLabelX;
+    }
+
+    if (autoAdjustPointerLabelPosition) {
+      if (pointerLabelHeight - pointerYLocal > 10) {
+        top = 10;
+      } else {
+        top = -pointerLabelHeight;
+      }
+    } else {
+      top =
+        (pointerStripUptoDataPoint
+          ? pointerRadius || pointerStripHeight / 2
+          : -pointerYLocal + 8) -
+        pointerLabelWidth / 2 +
+        shiftPointerLabelY;
+    }
+
     return (
       <View
         style={{
@@ -2573,30 +2610,8 @@ export const LineChart = (props: propTypes) => {
             style={[
               {
                 position: 'absolute',
-                left: autoAdjustPointerLabelPosition
-                  ? pointerX < pointerLabelWidth / 2
-                    ? 7
-                    : !activatePointersOnLongPress &&
-                      pointerX >
-                        (props.width ||
-                          Dimensions.get('window').width -
-                            yAxisLabelWidth -
-                            15) -
-                          pointerLabelWidth / 2
-                    ? -pointerLabelWidth - 4
-                    : pointerLabelWidth / -2 + 5
-                  : (pointerRadius || pointerWidth / 2) -
-                    10 +
-                    shiftPointerLabelX,
-                top: autoAdjustPointerLabelPosition
-                  ? pointerLabelHeight - pointerYLocal > 10
-                    ? 10
-                    : -pointerLabelHeight
-                  : (pointerStripUptoDataPoint
-                      ? pointerRadius || pointerStripHeight / 2
-                      : -pointerYLocal + 8) -
-                    pointerLabelWidth / 2 +
-                    shiftPointerLabelY,
+                left: left,
+                top: top,
                 marginTop: pointerStripUptoDataPoint
                   ? 0
                   : containerHeight - pointerStripHeight,
@@ -2795,7 +2810,6 @@ export const LineChart = (props: propTypes) => {
             2;
           setPointerX(z);
           let item, y;
-          setPointerX(z);
           item = data[factor];
           y =
             containerHeight -
@@ -2947,7 +2961,7 @@ export const LineChart = (props: propTypes) => {
           setResponderActive(false);
           setTimeout(() => setPointerX(0), pointerVanishDelay);
         }}
-        onResponderTerminationRequest={(evt) => false}
+        onResponderTerminationRequest={evt => false}
         // onResponderTerminate={evt => {
         //   console.log('evt...terminate.......',evt);
         // }}
@@ -3019,7 +3033,6 @@ export const LineChart = (props: propTypes) => {
             2;
           setPointerX(z);
           let item, y;
-          setPointerX(z);
           item = data[factor];
           y =
             containerHeight -
@@ -3170,7 +3183,7 @@ export const LineChart = (props: propTypes) => {
           setResponderActive(false);
           setTimeout(() => setPointerX(0), pointerVanishDelay);
         }}
-        onResponderTerminationRequest={(evt) => false}
+        onResponderTerminationRequest={evt => false}
         // onResponderTerminate={evt => {
         //   console.log('evt...terminate.......',evt);
         // }}

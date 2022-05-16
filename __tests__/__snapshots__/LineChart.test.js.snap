@@ -5384,6 +5384,8300 @@ exports[`renders 2 line chart correctly 1`] = `
 </View>
 `;
 
+exports[`renders CaloriesBurnt Area chart correctly 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 40,
+          "marginRight": 40,
+          "width": "100%",
+        },
+        Object {
+          "height": 200,
+        },
+        false,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 423,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={419}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 419,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 419,
+              },
+            ]
+          }
+          width={419}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h419"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 423,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={419}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 419,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 419,
+              },
+            ]
+          }
+          width={419}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h419"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 423,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={419}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 419,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 419,
+              },
+            ]
+          }
+          width={419}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h419"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 423,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={419}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 419,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 419,
+              },
+            ]
+          }
+          width={419}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h419"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 423,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "flex-end",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "black",
+                "height": 1,
+                "width": "100%",
+              },
+              Object {
+                "backgroundColor": "lightgray",
+                "height": 1,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        80%
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        60%
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        40%
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        20%
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={1}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            Object {
+              "marginBottom": -25,
+            },
+          ]
+        }
+      >
+        0%
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <RCTScrollView
+      contentContainerStyle={
+        Array [
+          Object {
+            "height": 330,
+            "paddingBottom": 0,
+            "width": 388,
+          },
+          Object {
+            "width": 388,
+          },
+        ]
+      }
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      scrollEnabled={false}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Array [
+          Object {
+            "bottom": -85,
+            "marginLeft": 35,
+            "paddingRight": 100,
+            "position": "absolute",
+          },
+          undefined,
+        ]
+      }
+    >
+      <View>
+        <View
+          onMoveShouldSetResponder={[Function]}
+          onResponderEnd={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "bottom": 60,
+              "height": 210,
+              "position": "absolute",
+              "width": 408,
+              "zIndex": 0,
+            }
+          }
+        >
+          <RNSVGSvgView
+            bbHeight="100%"
+            bbWidth="100%"
+            focusable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": "100%",
+                  "width": "100%",
+                },
+              ]
+            }
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M -1,35 C 12.600000000000001,52 39.8,110 67,120 C 94.2,130 107.8,87.00000000000001 135,85 C 162.2,83 175.8,94 203,110 C 230.2,126 243.8,164 271,165 C 298.2,166 325.4,125 339,115"
+                fill={null}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={4287256270}
+                strokeWidth={1}
+              />
+              <RNSVGLinearGradient
+                gradient={
+                  Array [
+                    0,
+                    -427141426,
+                    1,
+                    864704206,
+                  ]
+                }
+                gradientTransform={null}
+                gradientUnits={0}
+                name="Gradient"
+                x1="0"
+                x2="0"
+                y1="0"
+                y2="1"
+              />
+              <RNSVGPath
+                d="M -1,209 L -1,35 M -1,35 C 12.600000000000001,52 39.8,110 67,120 C 94.2,130 107.8,87.00000000000001 135,85 C 162.2,83 175.8,94 203,110 C 230.2,126 243.8,164 271,165 C 298.2,166 325.4,125 339,115 L 339,209 L -1,209 "
+                fill={
+                  Array [
+                    1,
+                    "Gradient",
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={0}
+                strokeWidth={1}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+        <View
+          onMoveShouldSetResponder={[Function]}
+          onResponderEnd={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "bottom": 60,
+              "height": 210,
+              "position": "absolute",
+              "width": 408,
+              "zIndex": 0,
+            }
+          }
+        >
+          <RNSVGSvgView
+            bbHeight="100%"
+            bbWidth="100%"
+            focusable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": "100%",
+                  "width": "100%",
+                },
+              ]
+            }
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M -1,85 C 12.600000000000001,105 39.8,182.5 67,185 C 94.2,187.5 107.8,107.50000000000001 135,97.5 C 162.2,87.5 175.8,135 203,135 C 230.2,135 243.8,91.5 271,97.5 C 298.2,103.5 325.4,151.5 339,165"
+                fill={null}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={4283870414}
+                strokeWidth={1}
+              />
+              <RNSVGLinearGradient
+                gradient={
+                  Array [
+                    0,
+                    -430527282,
+                    1,
+                    861318350,
+                  ]
+                }
+                gradientTransform={null}
+                gradientUnits={0}
+                name="Gradient"
+                x1="0"
+                x2="0"
+                y1="0"
+                y2="1"
+              />
+              <RNSVGPath
+                d="M -1,209 L -1,85 M -1,85 C 12.600000000000001,105 39.8,182.5 67,185 C 94.2,187.5 107.8,107.50000000000001 135,97.5 C 162.2,87.5 175.8,135 203,135 C 230.2,135 243.8,91.5 271,97.5 C 298.2,103.5 325.4,151.5 339,165 L 339,209 L -1,209 "
+                fill={
+                  Array [
+                    1,
+                    "Gradient",
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={0}
+                strokeWidth={1}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": -26,
+                  "position": "absolute",
+                  "width": 68,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 34,
+                  "position": "absolute",
+                  "width": 68,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 102,
+                  "position": "absolute",
+                  "width": 68,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 170,
+                  "position": "absolute",
+                  "width": 68,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 238,
+                  "position": "absolute",
+                  "width": 68,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 306,
+                  "position": "absolute",
+                  "width": 68,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;
+
+exports[`renders ChartWithAdjustingPointer correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#1C1C1C",
+      "paddingLeft": 20,
+      "paddingVertical": 100,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 40,
+          "marginRight": 40,
+          "width": "100%",
+        },
+        Object {
+          "height": 300,
+        },
+        false,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "flex-end",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "black",
+                "height": 1,
+                "width": "100%",
+              },
+              Object {
+                "backgroundColor": "lightgray",
+                "height": 1,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello600
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello500
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello400
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello300
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello200
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 250,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello100
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 300,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            Object {
+              "marginBottom": -25,
+            },
+          ]
+        }
+      >
+        hello0
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 250,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 300,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <RCTScrollView
+      contentContainerStyle={
+        Array [
+          Object {
+            "height": 430,
+            "paddingBottom": 0,
+            "width": 330,
+          },
+          false,
+        ]
+      }
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      scrollEnabled={false}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Array [
+          Object {
+            "bottom": -85,
+            "marginLeft": 35,
+            "paddingRight": 100,
+            "position": "absolute",
+          },
+          Object {
+            "width": 310,
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          onMoveShouldSetResponder={[Function]}
+          onResponderEnd={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "bottom": 60,
+              "height": 310,
+              "position": "absolute",
+              "width": 350,
+              "zIndex": 0,
+            }
+          }
+        >
+          <RNSVGSvgView
+            bbHeight="100%"
+            bbWidth="100%"
+            focusable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": "100%",
+                  "width": "100%",
+                },
+              ]
+            }
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d="M-1 230 L9 220 L19 215 L29 220 L39 240 L49 237.5 L59 230 L69 210 L79 200 L89 190 L99 170 L109 180 L119 140 L129 117.5 L139 170 L149 115 L159 125 L169 167.5 L179 162.5 L189 160 L199 170 L209 162.5 L219 180 L229 182.5 L239 215 L249 200 L259 207.5 L269 195 L279 205 L289 210 L299 190 L309 185 L319 170 L329 185 L339 205 "
+                fill={null}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={4278255491}
+                strokeWidth={2}
+              />
+              <RNSVGLinearGradient
+                gradient={
+                  Array [
+                    0,
+                    -434869935,
+                    1,
+                    856970577,
+                  ]
+                }
+                gradientTransform={null}
+                gradientUnits={0}
+                name="Gradient"
+                x1="0"
+                x2="0"
+                y1="0"
+                y2="1"
+              />
+              <RNSVGPath
+                d="M-1 309 L-1 230 L9 220 L19 215 L29 220 L39 240 L49 237.5 L59 230 L69 210 L79 200 L89 190 L99 170 L109 180 L119 140 L129 117.5 L139 170 L149 115 L159 125 L169 167.5 L179 162.5 L189 160 L199 170 L209 162.5 L219 180 L229 182.5 L239 215 L249 200 L259 207.5 L269 195 L279 205 L289 210 L299 190 L309 185 L319 170 L329 185 L339 205 L339 309L-1 309 "
+                fill={
+                  Array [
+                    1,
+                    "Gradient",
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={0}
+                strokeWidth={2}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 3,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 5,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 15,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 25,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 35,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 45,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 55,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 65,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 75,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 85,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "lightgray",
+                  "width": 60,
+                }
+              }
+            >
+              10 Apr
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 95,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 105,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 115,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 125,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 135,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 145,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 155,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 165,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 175,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 185,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "lightgray",
+                  "width": 60,
+                }
+              }
+            >
+              20 Apr
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 195,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 205,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 215,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 225,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 235,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 245,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 255,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 265,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 275,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 285,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "lightgray",
+                  "width": 60,
+                }
+              }
+            >
+              30 Apr
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 295,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 305,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 315,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 325,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 335,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;
+
+exports[`renders ChartWithPointer correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#1C1C1C",
+      "paddingLeft": 20,
+      "paddingVertical": 100,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 40,
+          "marginRight": 40,
+          "width": "100%",
+        },
+        Object {
+          "height": 300,
+        },
+        false,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "flex-end",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "black",
+                "height": 1,
+                "width": "100%",
+              },
+              Object {
+                "backgroundColor": "lightgray",
+                "height": 1,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello600
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello500
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello400
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello300
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello200
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 250,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello100
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 300,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            Object {
+              "marginBottom": -25,
+            },
+          ]
+        }
+      >
+        hello0
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 250,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 300,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <RCTScrollView
+      contentContainerStyle={
+        Array [
+          Object {
+            "height": 430,
+            "paddingBottom": 0,
+            "width": 330,
+          },
+          false,
+        ]
+      }
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      scrollEnabled={false}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Array [
+          Object {
+            "bottom": -85,
+            "marginLeft": 35,
+            "paddingRight": 100,
+            "position": "absolute",
+          },
+          Object {
+            "width": 310,
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          onMoveShouldSetResponder={[Function]}
+          onResponderEnd={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "bottom": 60,
+              "height": 310,
+              "position": "absolute",
+              "width": 350,
+              "zIndex": 0,
+            }
+          }
+        >
+          <RNSVGSvgView
+            bbHeight="100%"
+            bbWidth="100%"
+            focusable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": "100%",
+                  "width": "100%",
+                },
+              ]
+            }
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d=""
+                fill={null}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={4278255491}
+                strokeWidth={2}
+              />
+              <RNSVGLinearGradient
+                gradient={
+                  Array [
+                    0,
+                    -434869935,
+                    1,
+                    856970577,
+                  ]
+                }
+                gradientTransform={null}
+                gradientUnits={0}
+                name="Gradient"
+                x1="0"
+                x2="0"
+                y1="0"
+                y2="1"
+              />
+              <RNSVGPath
+                d=""
+                fill={
+                  Array [
+                    1,
+                    "Gradient",
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={0}
+                strokeWidth={2}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 3,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 5,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 15,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 25,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 35,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 45,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 55,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 65,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 75,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 85,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "lightgray",
+                  "width": 60,
+                }
+              }
+            >
+              10 Apr
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 95,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 105,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 115,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 125,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 135,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 145,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 155,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 165,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 175,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 185,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "lightgray",
+                  "width": 60,
+                }
+              }
+            >
+              20 Apr
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 195,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 205,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 215,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 225,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 235,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 245,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 255,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 265,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 275,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 285,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "lightgray",
+                  "width": 60,
+                }
+              }
+            >
+              30 Apr
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 295,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 305,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 315,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 325,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 335,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;
+
+exports[`renders ScrollingChartWithPointer correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#1C1C1C",
+      "paddingLeft": 20,
+      "paddingVertical": 100,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 40,
+          "marginRight": 40,
+          "width": "100%",
+        },
+        Object {
+          "height": 300,
+        },
+        false,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 50,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "gray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
+              },
+              Object {
+                "flex": 0,
+                "height": 1,
+                "width": 311,
+              },
+            ]
+          }
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4286611584}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 315,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 25,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "flex-end",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "white",
+              "borderLeftWidth": 0,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "black",
+                "height": 1,
+                "width": "100%",
+              },
+              Object {
+                "backgroundColor": "lightgray",
+                "height": 1,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello600
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello500
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello400
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello300
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello200
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 250,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            false,
+          ]
+        }
+      >
+        hello100
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 300,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <Text
+        ellipsizeMode="clip"
+        numberOfLines={2}
+        style={
+          Array [
+            Object {
+              "color": "gray",
+            },
+            false,
+            Object {
+              "marginBottom": -25,
+            },
+          ]
+        }
+      >
+        hello0
+      </Text>
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 0,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 50,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 100,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 150,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 200,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 50,
+            "position": "absolute",
+            "top": 250,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "alignItems": "center",
+            "justifyContent": "center",
+          },
+          Object {
+            "height": 25,
+            "position": "absolute",
+            "top": 300,
+            "width": 35,
+            "zIndex": 1,
+          },
+          false,
+        ]
+      }
+    />
+    <RCTScrollView
+      contentContainerStyle={
+        Array [
+          Object {
+            "height": 430,
+            "paddingBottom": 0,
+            "width": 330,
+          },
+          false,
+        ]
+      }
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      scrollEnabled={false}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Array [
+          Object {
+            "bottom": -85,
+            "marginLeft": 35,
+            "paddingRight": 100,
+            "position": "absolute",
+          },
+          Object {
+            "width": 310,
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          onMoveShouldSetResponder={[Function]}
+          onResponderEnd={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "bottom": 60,
+              "height": 310,
+              "position": "absolute",
+              "width": 350,
+              "zIndex": 0,
+            }
+          }
+        >
+          <RNSVGSvgView
+            bbHeight="100%"
+            bbWidth="100%"
+            focusable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": "100%",
+                  "width": "100%",
+                },
+              ]
+            }
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d=""
+                fill={null}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={4278255491}
+                strokeWidth={2}
+              />
+              <RNSVGLinearGradient
+                gradient={
+                  Array [
+                    0,
+                    -434869935,
+                    1,
+                    856970577,
+                  ]
+                }
+                gradientTransform={null}
+                gradientUnits={0}
+                name="Gradient"
+                x1="0"
+                x2="0"
+                y1="0"
+                y2="1"
+              />
+              <RNSVGPath
+                d=""
+                fill={
+                  Array [
+                    1,
+                    "Gradient",
+                  ]
+                }
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={0}
+                strokeWidth={2}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 3,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 5,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 15,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 25,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 35,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 45,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 55,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 65,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 75,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 85,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "lightgray",
+                  "width": 60,
+                }
+              }
+            >
+              10 Apr
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 95,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 105,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 115,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 125,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 135,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 145,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 155,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 165,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 175,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 185,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "lightgray",
+                  "width": 60,
+                }
+              }
+            >
+              20 Apr
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 195,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 205,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 215,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 225,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 235,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 245,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 255,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 265,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 275,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 285,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "color": "lightgray",
+                  "width": 60,
+                }
+              }
+            >
+              30 Apr
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 295,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 305,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 315,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 325,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 335,
+                  "position": "absolute",
+                  "width": 10,
+                  "zIndex": 10,
+                },
+                Object {
+                  "transform": Array [
+                    Object {
+                      "rotate": "60deg",
+                    },
+                  ],
+                },
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;
+
 exports[`renders animated area chart correctly 1`] = `
 <View>
   <View
