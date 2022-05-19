@@ -328,6 +328,13 @@ The <b>strokeDashArray</b> property lets us render a dashed/dotted strip along t
 
 <b>pointerLabelComponent</b> is a function that returns the component to be rendered as a Label. It takes a single parameter - an array of items. So, if there are multiple data arrays, the parameter <b>items</b> will have the data item corresponding to each data array.
 
+#### getPointerProps
+
+<b>getPointerProps</b> prop can be used to get the current pointer's index, x and y coordinate values. It is a callback function that accepts a single parameter which is an object. This object has following properties-
+1. pointerIndex
+2. pointerX
+3. pointerY
+
 
 ### onPress and strip related props
 
