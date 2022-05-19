@@ -267,6 +267,7 @@ type propTypes = {
   noOfSectionsBelowXAxis?: number;
   labelsExtraHeight?: number;
   adjustToWidth?: Boolean;
+  getPointerProps?: Function;
 };
 type referenceConfigType = {
   thickness: number;
@@ -364,6 +365,7 @@ type Pointer = {
 
 export const LineChart = (props: propTypes) => {
   const scrollRef = useRef();
+  const [pointerIndex, setPointerIndex] = useState(-1);
   const [pointerX, setPointerX] = useState(0);
   const [pointerY, setPointerY] = useState(0);
   const [pointerItem, setPointerItem] = useState({
@@ -1425,6 +1427,7 @@ export const LineChart = (props: propTypes) => {
     hidePointer5: false,
   };
   const pointerConfig = props.pointerConfig || null;
+  const getPointerProps = props.getPointerProps || null;
   const pointerHeight =
     pointerConfig && pointerConfig.height
       ? pointerConfig.height
@@ -2814,6 +2817,7 @@ export const LineChart = (props: propTypes) => {
             (pointerRadius || pointerWidth / 2) -
             2;
           setPointerX(z);
+          setPointerIndex(factor);
           let item, y;
           item = data[factor];
           y =
@@ -2900,6 +2904,7 @@ export const LineChart = (props: propTypes) => {
             2;
           let item, y;
           setPointerX(z);
+          setPointerIndex(factor);
           item = data[factor];
           y =
             containerHeight -
@@ -2963,6 +2968,7 @@ export const LineChart = (props: propTypes) => {
         onResponderEnd={evt => {
           // console.log('evt...end.......',evt);
           setResponderStartTime(0);
+          setPointerIndex(-1);
           setResponderActive(false);
           setTimeout(() => setPointerX(0), pointerVanishDelay);
         }}
@@ -3037,6 +3043,7 @@ export const LineChart = (props: propTypes) => {
             (pointerRadius || pointerWidth / 2) -
             2;
           setPointerX(z);
+          setPointerIndex(factor);
           let item, y;
           item = data[factor];
           y =
@@ -3122,6 +3129,7 @@ export const LineChart = (props: propTypes) => {
             2;
           let item, y;
           setPointerX(z);
+          setPointerIndex(factor);
           item = data[factor];
           y =
             containerHeight -
@@ -3185,6 +3193,7 @@ export const LineChart = (props: propTypes) => {
         onResponderEnd={evt => {
           // console.log('evt...end.......',evt);
           setResponderStartTime(0);
+          setPointerIndex(-1);
           setResponderActive(false);
           setTimeout(() => setPointerX(0), pointerVanishDelay);
         }}
@@ -3496,6 +3505,9 @@ export const LineChart = (props: propTypes) => {
           );
         })}
       </ScrollView>
+      {pointerConfig &&
+        getPointerProps &&
+        getPointerProps({pointerIndex, pointerX, pointerY})}
     </View>
   );
 };
