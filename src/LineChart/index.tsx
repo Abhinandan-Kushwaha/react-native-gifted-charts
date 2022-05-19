@@ -2536,6 +2536,11 @@ export const LineChart = (props: propTypes) => {
               pointerLabelWidth / 2
         ) {
           left = -pointerLabelWidth - 4;
+        } else if (
+          activatePointersOnLongPress &&
+          pointerX > totalWidth - yAxisLabelWidth - pointerLabelWidth / 2
+        ) {
+          left = -pointerLabelWidth - 4;
         } else {
           left = -pointerLabelWidth / 2 + 5;
         }
