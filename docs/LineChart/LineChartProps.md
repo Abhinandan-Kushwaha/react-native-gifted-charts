@@ -336,6 +336,11 @@ The <b>strokeDashArray</b> property lets us render a dashed/dotted strip along t
 3. pointerY
 
 
+When the chart is pressed, it returns the index of the data point pressed.<br/>
+When the chart is scrolled after pressing, it returns the index of the data point currently focused.<br/>
+When the chart is released, it returns the index -1.<br/>
+
+
 ### onPress and strip related props
 
 Line or Area charts can be made interactive by allowing users to press on the chart and highlight that particular data point. For example-
