@@ -297,6 +297,7 @@ type Pointer = {
   pointerStripColor?: ColorValue; // default: 'black'
   pointerStripUptoDataPoint?: boolean; // default: false
   pointerLabelComponent?: Function; // default: null
+  stripOverPointer?: boolean; // default: false
   shiftPointerLabelX?: number; // default: 0
   shiftPointerLabelY?: number; // default: 0
   pointerLabelWidth?: number; // default: 20
