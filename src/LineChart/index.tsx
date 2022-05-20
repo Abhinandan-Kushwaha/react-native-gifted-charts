@@ -347,6 +347,7 @@ type Pointer = {
   pointerStripColor?: ColorValue;
   pointerStripUptoDataPoint?: boolean;
   pointerLabelComponent?: Function;
+  stripOverPointer?: boolean;
   autoAdjustPointerLabelPosition?: boolean;
   shiftPointerLabelX?: number;
   shiftPointerLabelY?: number;
@@ -1412,6 +1413,7 @@ export const LineChart = (props: propTypes) => {
     pointerStripColor: 'black',
     pointerStripUptoDataPoint: false,
     pointerLabelComponent: null,
+    stripOverPointer: false,
     shiftPointerLabelX: 0,
     shiftPointerLabelY: 0,
     pointerLabelWidth: 20,
@@ -1473,6 +1475,10 @@ export const LineChart = (props: propTypes) => {
     pointerConfig && pointerConfig.pointerLabelComponent
       ? pointerConfig.pointerLabelComponent
       : defaultPointerConfig.pointerLabelComponent;
+  const stripOverPointer =
+    pointerConfig && pointerConfig.stripOverPointer
+      ? pointerConfig.stripOverPointer
+      : defaultPointerConfig.stripOverPointer;
   const shiftPointerLabelX =
     pointerConfig && pointerConfig.shiftPointerLabelX
       ? pointerConfig.shiftPointerLabelX
@@ -3469,12 +3475,13 @@ export const LineChart = (props: propTypes) => {
               width: totalWidth,
               zIndex: 20,
             }}>
+            {!stripOverPointer && renderStripAndLabel()}
             {renderPointer(1)}
             {points2 ? renderPointer(2) : null}
             {points3 ? renderPointer(3) : null}
             {points4 ? renderPointer(4) : null}
             {points5 ? renderPointer(5) : null}
-            {renderStripAndLabel()}
+            {stripOverPointer && renderStripAndLabel()}
           </View>
         ) : null}
         {data.map((item: itemType, index: number) => {
