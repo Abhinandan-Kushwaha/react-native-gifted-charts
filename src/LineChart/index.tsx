@@ -1452,8 +1452,8 @@ export const LineChart = (props: propTypes) => {
       : defaultPointerConfig.pointerComponent;
 
   const showPointerStrip =
-    pointerConfig && pointerConfig.showPointerStrip
-      ? pointerConfig.showPointerStrip
+    pointerConfig && pointerConfig.showPointerStrip === false
+      ? false
       : defaultPointerConfig.showPointerStrip;
   const pointerStripHeight =
     pointerConfig && pointerConfig.pointerStripHeight
@@ -1779,9 +1779,12 @@ export const LineChart = (props: propTypes) => {
   //     )
   // }
 
-  const getLabel = val => {
+  const getLabel = (val, index) => {
     let label = '';
-    if (showFractionalValues) {
+    if (
+      showFractionalValues ||
+      (props.yAxisLabelTexts && props.yAxisLabelTexts[index] !== undefined)
+    ) {
       if (val) {
         label = props.yAxisOffset
           ? (Number(val) + props.yAxisOffset).toString()
@@ -1882,7 +1885,7 @@ export const LineChart = (props: propTypes) => {
           props.hideAxesAndRules !== true &&
             !hideYAxisText &&
             horizSections.map((sectionItems, index) => {
-              let label = getLabel(sectionItems.value);
+              let label = getLabel(sectionItems.value, index);
               if (hideOrigin && index === horizSections.length - 1) {
                 label = '';
               }
@@ -1987,6 +1990,7 @@ export const LineChart = (props: propTypes) => {
             horizSectionsBelow.map((sectionItems, index) => {
               let label = getLabel(
                 horizSectionsBelow[horizSectionsBelow.length - 1 - index].value,
+                index,
               );
               return (
                 <View
@@ -2041,7 +2045,7 @@ export const LineChart = (props: propTypes) => {
           props.hideAxesAndRules !== true &&
             !hideYAxisText &&
             horizSections.map((sectionItems, index) => {
-              let label = getLabel(sectionItems.value);
+              let label = getLabel(sectionItems.value, index);
               if (hideOrigin && index === horizSections.length - 1) {
                 label = '';
               }
