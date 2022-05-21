@@ -630,9 +630,12 @@ export const BarChart = (props: PropTypes) => {
     outputRange: [0, totalWidth],
   });
 
-  const getLabel = val => {
+  const getLabel = (val, index) => {
     let label = '';
-    if (showFractionalValues) {
+    if (
+      showFractionalValues ||
+      (props.yAxisLabelTexts && props.yAxisLabelTexts[index] !== undefined)
+    ) {
       if (val) {
         label = val;
       } else {
@@ -731,7 +734,7 @@ export const BarChart = (props: PropTypes) => {
           props.hideAxesAndRules !== true &&
             !hideYAxisText &&
             horizSections.map((sectionItems, index) => {
-              let label = getLabel(sectionItems.value);
+              let label = getLabel(sectionItems.value, index);
               if (hideOrigin && index === horizSections.length - 1) {
                 label = '';
               }
@@ -852,6 +855,7 @@ export const BarChart = (props: PropTypes) => {
             horizSectionsBelow.map((sectionItems, index) => {
               let label = getLabel(
                 horizSectionsBelow[horizSectionsBelow.length - 1 - index].value,
+                index,
               );
               return (
                 <View
@@ -906,7 +910,7 @@ export const BarChart = (props: PropTypes) => {
           props.hideAxesAndRules !== true &&
             !hideYAxisText &&
             horizSections.map((sectionItems, index) => {
-              let label = getLabel(sectionItems.value);
+              let label = getLabel(sectionItems.value, index);
               if (hideOrigin && index === horizSections.length - 1) {
                 label = '';
               }
