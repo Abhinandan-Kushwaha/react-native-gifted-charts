@@ -29,6 +29,7 @@ type Props = {
   containerHeight?: number;
   maxValue: number;
   spacing?: number;
+  propSpacing?: number;
   data?: any;
   barWidth?: number;
   sideWidth?: number;
@@ -104,6 +105,7 @@ const RenderBars = (props: Props) => {
     containerHeight,
     maxValue,
     spacing,
+    propSpacing,
     side,
     data,
     // oldValue,
@@ -333,6 +335,13 @@ const RenderBars = (props: Props) => {
       : (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)) -
     barMarginBottom;
 
+  let leftSpacing = initialSpacing;
+  for (let i = 0; i < index; i++) {
+    leftSpacing +=
+      (data[i].spacing === 0 ? 0 : data[i].spacing || propSpacing) +
+      (data[i].barWidth || props.barWidth || 30);
+  }
+
   return (
     <>
       <TouchableOpacity
@@ -558,8 +567,7 @@ const RenderBars = (props: Props) => {
           style={{
             position: 'absolute',
             bottom: barHeight + 60,
-            left:
-              (item.barWidth || props.barWidth || 30) * index + initialSpacing,
+            left: leftSpacing,
             zIndex: 1000,
           }}>
           {renderTooltip(item, index)}

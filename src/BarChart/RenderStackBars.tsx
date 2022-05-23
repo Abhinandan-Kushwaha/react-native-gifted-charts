@@ -20,6 +20,7 @@ type Props = {
   containerHeight?: number;
   maxValue: number;
   spacing?: number;
+  propSpacing?: number;
   data?: any;
   barWidth?: number;
 
@@ -44,12 +45,14 @@ type Props = {
   selectedIndex: number;
   setSelectedIndex: Function;
   activeOpacity: number;
+  stackData: Array<itemType>;
 };
 type itemType = {
   value?: number;
   onPress?: any;
   label?: String;
   barWidth?: number;
+  spacing?: number;
   labelTextStyle?: any;
   topLabelComponent?: Function;
   topLabelContainerStyle?: any;
@@ -72,6 +75,7 @@ const RenderStackBars = (props: Props) => {
     containerHeight,
     maxValue,
     spacing,
+    propSpacing,
     rotateLabel,
     xAxisThickness,
     label,
@@ -82,7 +86,14 @@ const RenderStackBars = (props: Props) => {
     selectedIndex,
     setSelectedIndex,
     activeOpacity,
+    stackData,
   } = props;
+  let leftSpacing = initialSpacing;
+  for (let i = 0; i < index; i++) {
+    leftSpacing +=
+      (stackData[i].spacing === 0 ? 0 : stackData[i].spacing || propSpacing) +
+      (stackData[i].stacks[0].barWidth || props.barWidth || 30);
+  }
   const disablePress = props.disablePress || false;
   const renderLabel = (label: String, labelTextStyle: any) => {
     return (
@@ -139,7 +150,7 @@ const RenderStackBars = (props: Props) => {
           activeOpacity={activeOpacity}
           onPress={() => {
             setSelectedIndex(index);
-            if(item.onPress){
+            if (item.onPress) {
               item.onPress();
             }
           }}
@@ -279,8 +290,7 @@ const RenderStackBars = (props: Props) => {
           style={{
             position: 'absolute',
             bottom: totalHeight + 60,
-            left:
-              (item.barWidth || props.barWidth || 30) * index + initialSpacing,
+            left: leftSpacing,
             zIndex: 1000,
           }}>
           {renderTooltip(item, index)}

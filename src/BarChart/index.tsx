@@ -264,7 +264,7 @@ export const BarChart = (props: PropTypes) => {
   const horizSections = [{value: '0'}];
   const horizSectionsBelow = [];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
-  const spacing = props.spacing === 0 ? 0 : props.spacing ? props.spacing : 20;
+  const spacing = props.spacing === 0 ? 0 : props.spacing || 20;
   const labelWidth = props.labelWidth || 0;
   const scrollToEnd = props.scrollToEnd || false;
   const scrollAnimation = props.scrollAnimation === false ? false : true;
@@ -1382,11 +1382,13 @@ export const BarChart = (props: PropTypes) => {
                 return (
                   <RenderStackBars
                     key={index}
+                    stackData={props.stackData}
                     item={item}
                     index={index}
                     containerHeight={containerHeight}
                     maxValue={maxValue}
                     spacing={item.spacing === 0 ? 0 : item.spacing || spacing}
+                    propSpacing={spacing}
                     xAxisThickness={xAxisThickness}
                     barWidth={props.barWidth}
                     opacity={opacity}
@@ -1431,6 +1433,7 @@ export const BarChart = (props: PropTypes) => {
                   containerHeight={containerHeight}
                   maxValue={maxValue}
                   spacing={item.spacing === 0 ? 0 : item.spacing || spacing}
+                  propSpacing={spacing}
                   side={side}
                   data={data}
                   barWidth={props.barWidth}
