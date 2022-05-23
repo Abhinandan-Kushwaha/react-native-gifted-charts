@@ -584,6 +584,7 @@ exports[`renders 3D bar chart correctly 1`] = `
       horizontal={true}
       keyExtractor={[Function]}
       onContentSizeChange={[Function]}
+      onTouchStart={[Function]}
       scrollEnabled={true}
       showsHorizontalScrollIndicator={false}
       style={
@@ -2696,6 +2697,7 @@ exports[`renders alternate blue and gray bar chart correctly 1`] = `
       horizontal={true}
       keyExtractor={[Function]}
       onContentSizeChange={[Function]}
+      onTouchStart={[Function]}
       scrollEnabled={true}
       showsHorizontalScrollIndicator={false}
       style={
@@ -5128,6 +5130,7 @@ exports[`renders capped bar chart correctly 1`] = `
       horizontal={true}
       keyExtractor={[Function]}
       onContentSizeChange={[Function]}
+      onTouchStart={[Function]}
       scrollEnabled={true}
       showsHorizontalScrollIndicator={false}
       style={
@@ -6227,6 +6230,7 @@ exports[`renders gradient bar chart correctly 1`] = `
       horizontal={true}
       keyExtractor={[Function]}
       onContentSizeChange={[Function]}
+      onTouchStart={[Function]}
       scrollEnabled={true}
       showsHorizontalScrollIndicator={false}
       style={
@@ -7640,6 +7644,7 @@ exports[`renders rounded stack bar chart correctly 1`] = `
       horizontal={true}
       keyExtractor={[Function]}
       onContentSizeChange={[Function]}
+      onTouchStart={[Function]}
       scrollEnabled={true}
       showsHorizontalScrollIndicator={false}
       style={
@@ -7670,21 +7675,34 @@ exports[`renders rounded stack bar chart correctly 1`] = `
           }
         >
           <View
+            accessibilityState={
+              Object {
+                "disabled": false,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
-                  "height": "100%",
-                  "position": "absolute",
-                  "width": 12,
-                },
-                false,
-              ]
+              Object {
+                "height": "100%",
+                "opacity": 1,
+                "position": "absolute",
+                "width": 12,
+              }
             }
           >
             <View
               accessibilityState={
                 Object {
-                  "disabled": false,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -7712,7 +7730,7 @@ exports[`renders rounded stack bar chart correctly 1`] = `
             <View
               accessibilityState={
                 Object {
-                  "disabled": false,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -7781,21 +7799,34 @@ exports[`renders rounded stack bar chart correctly 1`] = `
           }
         >
           <View
+            accessibilityState={
+              Object {
+                "disabled": false,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
-                  "height": "100%",
-                  "position": "absolute",
-                  "width": 12,
-                },
-                false,
-              ]
+              Object {
+                "height": "100%",
+                "opacity": 1,
+                "position": "absolute",
+                "width": 12,
+              }
             }
           >
             <View
               accessibilityState={
                 Object {
-                  "disabled": false,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -7823,7 +7854,7 @@ exports[`renders rounded stack bar chart correctly 1`] = `
             <View
               accessibilityState={
                 Object {
-                  "disabled": false,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -7851,7 +7882,7 @@ exports[`renders rounded stack bar chart correctly 1`] = `
             <View
               accessibilityState={
                 Object {
-                  "disabled": false,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -7920,21 +7951,34 @@ exports[`renders rounded stack bar chart correctly 1`] = `
           }
         >
           <View
+            accessibilityState={
+              Object {
+                "disabled": false,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
-                  "height": "100%",
-                  "position": "absolute",
-                  "width": 12,
-                },
-                false,
-              ]
+              Object {
+                "height": "100%",
+                "opacity": 1,
+                "position": "absolute",
+                "width": 12,
+              }
             }
           >
             <View
               accessibilityState={
                 Object {
-                  "disabled": false,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -7962,7 +8006,7 @@ exports[`renders rounded stack bar chart correctly 1`] = `
             <View
               accessibilityState={
                 Object {
-                  "disabled": false,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -8031,21 +8075,34 @@ exports[`renders rounded stack bar chart correctly 1`] = `
           }
         >
           <View
+            accessibilityState={
+              Object {
+                "disabled": false,
+              }
+            }
+            accessible={true}
+            collapsable={false}
+            focusable={true}
+            onClick={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
-                  "height": "100%",
-                  "position": "absolute",
-                  "width": 12,
-                },
-                false,
-              ]
+              Object {
+                "height": "100%",
+                "opacity": 1,
+                "position": "absolute",
+                "width": 12,
+              }
             }
           >
             <View
               accessibilityState={
                 Object {
-                  "disabled": false,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -8073,7 +8130,7 @@ exports[`renders rounded stack bar chart correctly 1`] = `
             <View
               accessibilityState={
                 Object {
-                  "disabled": false,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -8101,7 +8158,7 @@ exports[`renders rounded stack bar chart correctly 1`] = `
             <View
               accessibilityState={
                 Object {
-                  "disabled": false,
+                  "disabled": true,
                 }
               }
               accessible={true}
@@ -8991,6 +9048,7 @@ exports[`renders simple animated bar chart correctly 1`] = `
       horizontal={true}
       keyExtractor={[Function]}
       onContentSizeChange={[Function]}
+      onTouchStart={[Function]}
       scrollEnabled={true}
       showsHorizontalScrollIndicator={false}
       style={

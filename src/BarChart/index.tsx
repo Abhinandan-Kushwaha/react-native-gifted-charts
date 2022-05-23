@@ -133,6 +133,7 @@ type PropTypes = {
   patternId?: String;
   barMarginBottom?: number;
   onPress?: Function;
+  renderTooltip?: Function;
 };
 type lineConfigType = {
   initialSpacing?: number;
@@ -192,6 +193,7 @@ type itemType = {
 export const BarChart = (props: PropTypes) => {
   const scrollRef = useRef();
   const [points, setPoints] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const showLine = props.showLine || false;
   const initialSpacing =
     props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
@@ -1329,6 +1331,11 @@ export const BarChart = (props: PropTypes) => {
       {props.hideAxesAndRules !== true && renderHorizSections()}
       <ScrollView
         ref={scrollRef}
+        onTouchStart={evt => {
+          if (props.renderTooltip) {
+            setSelectedIndex(-1);
+          }
+        }}
         onContentSizeChange={() => {
           if (scrollRef.current && scrollToEnd) {
             scrollRef.current.scrollToEnd({animated: scrollAnimation});
@@ -1383,7 +1390,7 @@ export const BarChart = (props: PropTypes) => {
                     xAxisThickness={xAxisThickness}
                     barWidth={props.barWidth}
                     opacity={opacity}
-                    disablePress={props.disablePress}
+                    disablePress={item.disablePress || props.disablePress}
                     rotateLabel={rotateLabel}
                     showVerticalLines={showVerticalLines}
                     verticalLinesThickness={verticalLinesThickness}
@@ -1408,6 +1415,11 @@ export const BarChart = (props: PropTypes) => {
                       item.labelTextStyle || props.xAxisLabelTextStyle
                     }
                     xAxisTextNumberOfLines={xAxisTextNumberOfLines}
+                    renderTooltip={props.renderTooltip}
+                    initialSpacing={initialSpacing}
+                    selectedIndex={selectedIndex}
+                    setSelectedIndex={setSelectedIndex}
+                    activeOpacity={props.activeOpacity || 0.2}
                   />
                 );
               })
@@ -1470,6 +1482,10 @@ export const BarChart = (props: PropTypes) => {
                   }
                   onPress={props.onPress}
                   xAxisTextNumberOfLines={xAxisTextNumberOfLines}
+                  renderTooltip={props.renderTooltip}
+                  initialSpacing={initialSpacing}
+                  selectedIndex={selectedIndex}
+                  setSelectedIndex={setSelectedIndex}
                 />
               ))}
         </Fragment>

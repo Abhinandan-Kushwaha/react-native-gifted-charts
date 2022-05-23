@@ -65,6 +65,10 @@ type Props = {
   barMarginBottom?: number;
   onPress?: Function;
   xAxisTextNumberOfLines: number;
+  renderTooltip: Function;
+  initialSpacing: number;
+  selectedIndex: number;
+  setSelectedIndex: Function;
 };
 type itemType = {
   value?: number;
@@ -114,6 +118,10 @@ const RenderBars = (props: Props) => {
     label,
     labelTextStyle,
     xAxisTextNumberOfLines,
+    renderTooltip,
+    initialSpacing,
+    selectedIndex,
+    setSelectedIndex,
   } = props;
 
   const barMarginBottom =
@@ -318,139 +326,172 @@ const RenderBars = (props: Props) => {
     );
   };
 
+  const barHeight =
+    (item.value >= 0 && (!isThreeD || isAnimated) && item.topLabelComponent
+      ? (item.topLabelComponentHeight || 30) +
+        (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)
+      : (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)) -
+    barMarginBottom;
+
   return (
-    <TouchableOpacity
-      disabled={item.disablePress || props.disablePress}
-      activeOpacity={props.activeOpacity || 0.2}
-      onPress={() => {
-        item.onPress
-          ? item.onPress()
-          : props.onPress
-          ? props.onPress(item, index)
-          : null;
-      }}
-      style={[
-        {
-          // overflow: 'visible',
-          marginBottom: 60 + barMarginBottom,
-          width: item.barWidth || props.barWidth || 30,
-          height:
-            (item.value >= 0 &&
-            (!isThreeD || isAnimated) &&
-            item.topLabelComponent
-              ? (item.topLabelComponentHeight || 30) +
-                (Math.abs(item.value) * (containerHeight || 200)) /
-                  (maxValue || 200)
-              : (Math.abs(item.value) * (containerHeight || 200)) /
-                (maxValue || 200)) - barMarginBottom,
-          marginRight: spacing,
-        },
-        item.value < 0 && {
-          transform: [
-            {
-              translateY:
-                (Math.abs(item.value) * (containerHeight || 200)) /
-                (maxValue || 200),
-            },
-            {rotateZ: '180deg'},
-          ],
-        },
-        // !isThreeD && !item.showGradient && !props.showGradient &&
-        // { backgroundColor: item.frontColor || props.frontColor || 'black' },
-        side !== 'right' && {zIndex: data.length - index},
-      ]}>
-      {props.showVerticalLines && (
-        <View
-          style={{
-            zIndex: props.verticalLinesZIndex,
-            position: 'absolute',
-            height: (containerHeight || 200) + 15,
-            width: props.verticalLinesThickness,
-            bottom: 0,
-            left: (item.barWidth || props.barWidth || 30) / 2,
-            backgroundColor: props.verticalLinesColor,
-          }}
-        />
-      )}
-      {props.showXAxisIndices && (
-        <View
-          style={{
-            zIndex: 2,
-            position: 'absolute',
-            height: props.xAxisIndicesHeight,
-            width: props.xAxisIndicesWidth,
-            bottom: 0,
-            left: (item.barWidth || props.barWidth || 30) / 2,
-            backgroundColor: props.xAxisIndicesColor,
-          }}
-        />
-      )}
-      {isThreeD ? (
-        isAnimated ? (
-          <AnimatedBar
-            barBackgroundPattern={
-              item.barBackgroundPattern || props.barBackgroundPattern
-            }
-            patternId={item.patternId || props.patternId}
-            topLabelContainerStyle={item.topLabelContainerStyle}
-            width={item.barWidth || props.barWidth || 30}
-            sideWidth={
-              item.sideWidth ||
-              props.sideWidth ||
-              (item.barWidth || props.barWidth || 30) / 2
-            }
-            side={side || 'left'}
-            frontColor={item.frontColor || props.frontColor || ''}
-            sideColor={item.sideColor || props.sideColor || ''}
-            topColor={item.topColor || props.topColor || ''}
-            showGradient={item.showGradient || props.showGradient || false}
-            gradientColor={item.gradientColor || props.gradientColor}
-            topLabelComponent={item.topLabelComponent}
-            opacity={opacity || 1}
-            animationDuration={animationDuration || 800}
-            height={
-              (Math.abs(item.value) * (containerHeight || 200)) /
-                (maxValue || 200) -
-              barMarginBottom
-            }
-            intactTopLabel={props.intactTopLabel}
-            horizontal={props.horizontal}
+    <>
+      <TouchableOpacity
+        disabled={item.disablePress || props.disablePress}
+        activeOpacity={props.activeOpacity || 0.2}
+        onPress={() => {
+          if (renderTooltip) {
+            setSelectedIndex(index);
+          }
+          item.onPress
+            ? item.onPress()
+            : props.onPress
+            ? props.onPress(item, index)
+            : null;
+        }}
+        style={[
+          {
+            // overflow: 'visible',
+            marginBottom: 60 + barMarginBottom,
+            width: item.barWidth || props.barWidth || 30,
+            height: barHeight,
+            marginRight: spacing,
+          },
+          item.value < 0 && {
+            transform: [
+              {
+                translateY:
+                  (Math.abs(item.value) * (containerHeight || 200)) /
+                  (maxValue || 200),
+              },
+              {rotateZ: '180deg'},
+            ],
+          },
+          // !isThreeD && !item.showGradient && !props.showGradient &&
+          // { backgroundColor: item.frontColor || props.frontColor || 'black' },
+          side !== 'right' && {zIndex: data.length - index},
+        ]}>
+        {props.showVerticalLines && (
+          <View
+            style={{
+              zIndex: props.verticalLinesZIndex,
+              position: 'absolute',
+              height: (containerHeight || 200) + 15,
+              width: props.verticalLinesThickness,
+              bottom: 0,
+              left: (item.barWidth || props.barWidth || 30) / 2,
+              backgroundColor: props.verticalLinesColor,
+            }}
           />
-        ) : (
-          <ThreeDBar
-            barBackgroundPattern={
-              item.barBackgroundPattern || props.barBackgroundPattern
-            }
-            patternId={item.patternId || props.patternId}
-            style={{}}
-            color={''}
-            topLabelContainerStyle={item.topLabelContainerStyle}
-            width={item.barWidth || props.barWidth || 30}
-            sideWidth={
-              item.sideWidth ||
-              props.sideWidth ||
-              (item.barWidth || props.barWidth || 30) / 2
-            }
-            side={side || 'left'}
-            frontColor={item.frontColor || props.frontColor || ''}
-            sideColor={item.sideColor || props.sideColor || ''}
-            topColor={item.topColor || props.topColor || ''}
-            showGradient={item.showGradient || props.showGradient || false}
-            gradientColor={item.gradientColor || props.gradientColor}
-            topLabelComponent={item.topLabelComponent || Function}
-            opacity={opacity || 1}
-            horizontal={props.horizontal}
-            intactTopLabel={props.intactTopLabel}
-            height={
-              (Math.abs(item.value) * (containerHeight || 200)) /
-                (maxValue || 200) -
-              barMarginBottom
-            }
-            value={item.value}
+        )}
+        {props.showXAxisIndices && (
+          <View
+            style={{
+              zIndex: 2,
+              position: 'absolute',
+              height: props.xAxisIndicesHeight,
+              width: props.xAxisIndicesWidth,
+              bottom: 0,
+              left: (item.barWidth || props.barWidth || 30) / 2,
+              backgroundColor: props.xAxisIndicesColor,
+            }}
           />
-        )
-      ) : item.showGradient || props.showGradient ? (
-        isAnimated ? (
+        )}
+        {isThreeD ? (
+          isAnimated ? (
+            <AnimatedBar
+              barBackgroundPattern={
+                item.barBackgroundPattern || props.barBackgroundPattern
+              }
+              patternId={item.patternId || props.patternId}
+              topLabelContainerStyle={item.topLabelContainerStyle}
+              width={item.barWidth || props.barWidth || 30}
+              sideWidth={
+                item.sideWidth ||
+                props.sideWidth ||
+                (item.barWidth || props.barWidth || 30) / 2
+              }
+              side={side || 'left'}
+              frontColor={item.frontColor || props.frontColor || ''}
+              sideColor={item.sideColor || props.sideColor || ''}
+              topColor={item.topColor || props.topColor || ''}
+              showGradient={item.showGradient || props.showGradient || false}
+              gradientColor={item.gradientColor || props.gradientColor}
+              topLabelComponent={item.topLabelComponent}
+              opacity={opacity || 1}
+              animationDuration={animationDuration || 800}
+              height={
+                (Math.abs(item.value) * (containerHeight || 200)) /
+                  (maxValue || 200) -
+                barMarginBottom
+              }
+              intactTopLabel={props.intactTopLabel}
+              horizontal={props.horizontal}
+            />
+          ) : (
+            <ThreeDBar
+              barBackgroundPattern={
+                item.barBackgroundPattern || props.barBackgroundPattern
+              }
+              patternId={item.patternId || props.patternId}
+              style={{}}
+              color={''}
+              topLabelContainerStyle={item.topLabelContainerStyle}
+              width={item.barWidth || props.barWidth || 30}
+              sideWidth={
+                item.sideWidth ||
+                props.sideWidth ||
+                (item.barWidth || props.barWidth || 30) / 2
+              }
+              side={side || 'left'}
+              frontColor={item.frontColor || props.frontColor || ''}
+              sideColor={item.sideColor || props.sideColor || ''}
+              topColor={item.topColor || props.topColor || ''}
+              showGradient={item.showGradient || props.showGradient || false}
+              gradientColor={item.gradientColor || props.gradientColor}
+              topLabelComponent={item.topLabelComponent || Function}
+              opacity={opacity || 1}
+              horizontal={props.horizontal}
+              intactTopLabel={props.intactTopLabel}
+              height={
+                (Math.abs(item.value) * (containerHeight || 200)) /
+                  (maxValue || 200) -
+                barMarginBottom
+              }
+              value={item.value}
+            />
+          )
+        ) : item.showGradient || props.showGradient ? (
+          isAnimated ? (
+            <Animated2DWithGradient
+              barBackgroundPattern={props.barBackgroundPattern}
+              patternId={props.patternId}
+              barWidth={props.barWidth}
+              item={item}
+              opacity={opacity}
+              animationDuration={animationDuration || 800}
+              roundedBottom={props.roundedBottom || false}
+              roundedTop={props.roundedTop || false}
+              gradientColor={props.gradientColor}
+              frontColor={props.frontColor || 'black'}
+              containerHeight={containerHeight}
+              maxValue={maxValue}
+              height={
+                (Math.abs(item.value) * (containerHeight || 200)) /
+                (maxValue || 200)
+              }
+              barMarginBottom={barMarginBottom}
+              cappedBars={props.cappedBars}
+              capThickness={props.capThickness}
+              capColor={props.capColor}
+              capRadius={props.capRadius}
+              horizontal={props.horizontal}
+              intactTopLabel={props.intactTopLabel}
+              barBorderRadius={props.barBorderRadius || 0}
+            />
+          ) : (
+            static2DWithGradient(item)
+          )
+        ) : isAnimated ? (
           <Animated2DWithGradient
             barBackgroundPattern={props.barBackgroundPattern}
             patternId={props.patternId}
@@ -461,6 +502,7 @@ const RenderBars = (props: Props) => {
             roundedBottom={props.roundedBottom || false}
             roundedTop={props.roundedTop || false}
             gradientColor={props.gradientColor}
+            noGradient
             frontColor={props.frontColor || 'black'}
             containerHeight={containerHeight}
             maxValue={maxValue}
@@ -478,70 +520,52 @@ const RenderBars = (props: Props) => {
             barBorderRadius={props.barBorderRadius || 0}
           />
         ) : (
-          static2DWithGradient(item)
-        )
-      ) : isAnimated ? (
-        <Animated2DWithGradient
-          barBackgroundPattern={props.barBackgroundPattern}
-          patternId={props.patternId}
-          barWidth={props.barWidth}
-          item={item}
-          opacity={opacity}
-          animationDuration={animationDuration || 800}
-          roundedBottom={props.roundedBottom || false}
-          roundedTop={props.roundedTop || false}
-          gradientColor={props.gradientColor}
-          noGradient
-          frontColor={props.frontColor || 'black'}
-          containerHeight={containerHeight}
-          maxValue={maxValue}
-          height={
-            (Math.abs(item.value) * (containerHeight || 200)) /
-            (maxValue || 200)
-          }
-          barMarginBottom={barMarginBottom}
-          cappedBars={props.cappedBars}
-          capThickness={props.capThickness}
-          capColor={props.capColor}
-          capRadius={props.capRadius}
-          horizontal={props.horizontal}
-          intactTopLabel={props.intactTopLabel}
-          barBorderRadius={props.barBorderRadius || 0}
-        />
-      ) : (
-        <Animated2DWithGradient
-          barBackgroundPattern={props.barBackgroundPattern}
-          patternId={props.patternId}
-          barWidth={props.barWidth}
-          item={item}
-          opacity={opacity}
-          animationDuration={animationDuration || 800}
-          roundedBottom={props.roundedBottom || false}
-          roundedTop={props.roundedTop || false}
-          gradientColor={props.gradientColor}
-          noGradient
-          noAnimation
-          frontColor={props.frontColor || 'black'}
-          containerHeight={containerHeight}
-          maxValue={maxValue}
-          height={
-            (Math.abs(item.value) * (containerHeight || 200)) /
-            (maxValue || 200)
-          }
-          barMarginBottom={barMarginBottom}
-          cappedBars={props.cappedBars}
-          capThickness={props.capThickness}
-          capColor={props.capColor}
-          capRadius={props.capRadius}
-          horizontal={props.horizontal}
-          intactTopLabel={props.intactTopLabel}
-          barBorderRadius={props.barBorderRadius || 0}
-        />
+          <Animated2DWithGradient
+            barBackgroundPattern={props.barBackgroundPattern}
+            patternId={props.patternId}
+            barWidth={props.barWidth}
+            item={item}
+            opacity={opacity}
+            animationDuration={animationDuration || 800}
+            roundedBottom={props.roundedBottom || false}
+            roundedTop={props.roundedTop || false}
+            gradientColor={props.gradientColor}
+            noGradient
+            noAnimation
+            frontColor={props.frontColor || 'black'}
+            containerHeight={containerHeight}
+            maxValue={maxValue}
+            height={
+              (Math.abs(item.value) * (containerHeight || 200)) /
+              (maxValue || 200)
+            }
+            barMarginBottom={barMarginBottom}
+            cappedBars={props.cappedBars}
+            capThickness={props.capThickness}
+            capColor={props.capColor}
+            capRadius={props.capRadius}
+            horizontal={props.horizontal}
+            intactTopLabel={props.intactTopLabel}
+            barBorderRadius={props.barBorderRadius || 0}
+          />
+        )}
+        {isAnimated
+          ? renderAnimatedLabel(label, labelTextStyle, item.value)
+          : renderLabel(label, labelTextStyle, item.value)}
+      </TouchableOpacity>
+      {renderTooltip && selectedIndex === index && (
+        <View
+          style={{
+            position: 'absolute',
+            bottom: barHeight + 60,
+            left:
+              (item.barWidth || props.barWidth || 30) * index + initialSpacing,
+            zIndex: 1000,
+          }}>
+          {renderTooltip(item, index)}
+        </View>
       )}
-      {isAnimated
-        ? renderAnimatedLabel(label, labelTextStyle, item.value)
-        : renderLabel(label, labelTextStyle, item.value)}
-    </TouchableOpacity>
+    </>
   );
 };
 
