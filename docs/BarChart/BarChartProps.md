@@ -27,6 +27,7 @@
 | scrollToEnd | Boolean | When set to true, the chart automatically scrolls to the rightmost bar | false |
 | scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost bar | true |
 | initialSpacing         | number     | distance of the first bar from the Y axis                                      | 40 |
+| renderTooltip          | Function   | tooltip component appearing above the bar when it is pressed, takes item and index as parameters | null |
 
 ---
 
