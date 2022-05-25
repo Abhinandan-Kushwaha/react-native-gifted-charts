@@ -25,10 +25,6 @@ type Props = {
   barWidth?: number;
 
   rotateLabel?: Boolean;
-  showVerticalLines: Boolean;
-  verticalLinesThickness: number;
-  verticalLinesColor: ColorValue;
-  verticalLinesZIndex: number;
   showXAxisIndices: Boolean;
   xAxisIndicesHeight: number;
   xAxisIndicesWidth: number;
@@ -256,7 +252,7 @@ const RenderStackBars = (props: Props) => {
             marginRight: spacing,
           },
         ]}>
-        {props.showVerticalLines && (
+        {/* {props.showVerticalLines && (
           <View
             style={{
               zIndex: props.verticalLinesZIndex,
@@ -268,7 +264,7 @@ const RenderStackBars = (props: Props) => {
               backgroundColor: props.verticalLinesColor,
             }}
           />
-        )}
+        )} */}
         {props.showXAxisIndices && (
           <View
             style={{

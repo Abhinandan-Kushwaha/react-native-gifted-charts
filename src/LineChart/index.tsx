@@ -110,6 +110,8 @@ type propTypes = {
   verticalLinesThickness?: number;
   verticalLinesColor?: ColorValue;
   verticalLinesZIndex?: number;
+  noOfVerticalLines?: number;
+  verticalLinesSpacing?: number;
   hideAxesAndRules?: Boolean;
   areaChart?: Boolean;
 
@@ -1377,6 +1379,12 @@ export const LineChart = (props: propTypes) => {
   const hideRules = props.hideRules || false;
   const showVerticalLines = props.showVerticalLines || false;
   const verticalLinesUptoDataPoint = props.verticalLinesUptoDataPoint || false;
+  let verticalLinesAr = [];
+  props.noOfVerticalLines
+    ? (verticalLinesAr = [...Array(props.noOfVerticalLines).keys()])
+    : (verticalLinesAr = [...Array(data.length).keys()]);
+
+  const verticalLinesSpacing = props.verticalLinesSpacing || 0;
 
   const showYAxisIndices = props.showYAxisIndices || false;
   const showXAxisIndices = props.showXAxisIndices || false;
@@ -3290,7 +3298,7 @@ export const LineChart = (props: propTypes) => {
           props.width && {width: props.width + 10},
         ]}>
         {showVerticalLines &&
-          data.map((item: itemType, index: number) => {
+          verticalLinesAr.map((item: itemType, index: number) => {
             return (
               <View
                 key={index}
@@ -3299,13 +3307,17 @@ export const LineChart = (props: propTypes) => {
                   zIndex: verticalLinesZIndex || -1,
                   marginBottom: xAxisThickness,
                   height: verticalLinesUptoDataPoint
-                    ? (item.value * containerHeight) / maxValue - xAxisThickness
+                    ? index < data.length
+                      ? (data[index].value * containerHeight) / maxValue -
+                        xAxisThickness
+                      : 0
                     : containerHeight + 15 - xAxisThickness,
                   width: verticalLinesThickness,
                   backgroundColor: verticalLinesColor,
                   bottom: 60,
-                  left:
-                    index * spacing + (initialSpacing - dataPointsWidth1 / 2),
+                  left: verticalLinesSpacing
+                    ? verticalLinesSpacing * (index + 1)
+                    : index * spacing + (initialSpacing - dataPointsWidth1 / 2),
                 }}
               />
             );
