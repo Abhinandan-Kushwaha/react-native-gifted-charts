@@ -15,6 +15,7 @@
 9. Prepare a doc for labelsPosition in Pie and Donut charts
 8. Prepare a doc for adjustToWidth in Line and Area charts
 9. Prepare a doc for xAxisLabelTexts and xAxisLabelTextStyle in Bar, Line And Area Charts
+10. Prepare a doc for vertical lines to explain noOfVerticalLines and verticalLinesSpacing props.
 
 ## Architecture Enhancement
 
