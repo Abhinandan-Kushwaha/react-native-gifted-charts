@@ -84,6 +84,8 @@ type PropTypes = {
   verticalLinesThickness?: number;
   verticalLinesColor?: ColorValue;
   verticalLinesZIndex?: number;
+  noOfVerticalLines?: number;
+  verticalLinesSpacing?: number;
 
   showYAxisIndices?: Boolean;
   showXAxisIndices?: Boolean;
@@ -348,6 +350,13 @@ export const BarChart = (props: PropTypes) => {
     props.verticalLinesThickness === 0 ? 0 : props.verticalLinesThickness || 1;
   const verticalLinesColor = props.verticalLinesColor || 'lightgray';
   const verticalLinesZIndex = props.verticalLinesZIndex || -1;
+  let verticalLinesAr = [];
+  props.noOfVerticalLines
+    ? (verticalLinesAr = [...Array(props.noOfVerticalLines).keys()])
+    : (verticalLinesAr = [
+        ...Array(props.stackData ? props.stackData.length : data.length).keys(),
+      ]);
+  const verticalLinesSpacing = props.verticalLinesSpacing || 0;
 
   const showYAxisIndices = props.showYAxisIndices || false;
   const showXAxisIndices = props.showXAxisIndices || false;
@@ -1372,6 +1381,76 @@ export const BarChart = (props: PropTypes) => {
         // data={props.stackData || data}
         keyExtractor={(item, index) => index.toString()}>
         <Fragment>
+          {showVerticalLines &&
+            verticalLinesAr.map((item: itemType, index: number) => {
+              let totalSpacing = initialSpacing;
+              if (verticalLinesSpacing) {
+                totalSpacing = verticalLinesSpacing * (index + 1);
+              } else {
+                if (props.stackData) {
+                  totalSpacing +=
+                    (props.stackData[0].barWidth || props.barWidth || 30) / 2;
+                } else {
+                  totalSpacing +=
+                    (props.data[0].barWidth || props.barWidth || 30) / 2;
+                }
+                for (let i = 0; i < index; i++) {
+                  let actualSpacing = spacing;
+                  if (props.stackData) {
+                    if (i >= props.stackData.length - 1) {
+                      actualSpacing += (props.barWidth || 30) / 2;
+                    } else {
+                      if (
+                        props.stackData[i].spacing ||
+                        props.stackData[i].spacing === 0
+                      ) {
+                        actualSpacing = props.stackData[i].spacing;
+                      }
+                      if (props.stackData[i + 1].barWidth) {
+                        actualSpacing += props.stackData[i + 1].barWidth;
+                      } else {
+                        actualSpacing += props.barWidth || 30;
+                      }
+                    }
+                  } else {
+                    if (i >= props.data.length - 1) {
+                      actualSpacing += (props.barWidth || 30) / 2;
+                    } else {
+                      if (
+                        props.data[i].spacing ||
+                        props.data[i].spacing === 0
+                      ) {
+                        console.log('here for index ' + index + ' and i ' + i);
+                        actualSpacing = props.data[i].spacing;
+                      }
+                      if (props.data[i + 1].barWidth) {
+                        actualSpacing += props.data[i + 1].barWidth;
+                      } else {
+                        actualSpacing += props.barWidth || 30;
+                      }
+                    }
+                  }
+                  console.log('i = ' + i + ' actualSpacing ' + actualSpacing);
+                  totalSpacing += actualSpacing;
+                }
+              }
+
+              return (
+                <View
+                  key={index}
+                  style={{
+                    position: 'absolute',
+                    zIndex: verticalLinesZIndex || -1,
+                    marginBottom: xAxisThickness,
+                    height: containerHeight + 15 - xAxisThickness,
+                    width: verticalLinesThickness,
+                    backgroundColor: verticalLinesColor,
+                    bottom: 60,
+                    left: totalSpacing,
+                  }}
+                />
+              );
+            })}
           {showLine
             ? lineConfig.isAnimated
               ? renderAnimatedLine()
@@ -1394,10 +1473,6 @@ export const BarChart = (props: PropTypes) => {
                     opacity={opacity}
                     disablePress={item.disablePress || props.disablePress}
                     rotateLabel={rotateLabel}
-                    showVerticalLines={showVerticalLines}
-                    verticalLinesThickness={verticalLinesThickness}
-                    verticalLinesColor={verticalLinesColor}
-                    verticalLinesZIndex={verticalLinesZIndex}
                     showXAxisIndices={showXAxisIndices}
                     xAxisIndicesHeight={xAxisIndicesHeight}
                     xAxisIndicesWidth={xAxisIndicesWidth}
@@ -1459,10 +1534,6 @@ export const BarChart = (props: PropTypes) => {
                   capThickness={props.capThickness}
                   capColor={props.capColor}
                   capRadius={props.capRadius}
-                  showVerticalLines={showVerticalLines}
-                  verticalLinesThickness={verticalLinesThickness}
-                  verticalLinesColor={verticalLinesColor}
-                  verticalLinesZIndex={verticalLinesZIndex}
                   showXAxisIndices={showXAxisIndices}
                   xAxisIndicesHeight={xAxisIndicesHeight}
                   xAxisIndicesWidth={xAxisIndicesWidth}

@@ -49,10 +49,6 @@ type Props = {
   capThickness?: number;
   capColor?: ColorValue;
   capRadius?: number;
-  showVerticalLines: Boolean;
-  verticalLinesThickness: number;
-  verticalLinesColor: ColorValue;
-  verticalLinesZIndex: number;
   showXAxisIndices: Boolean;
   xAxisIndicesHeight: number;
   xAxisIndicesWidth: number;
@@ -379,7 +375,7 @@ const RenderBars = (props: Props) => {
           // { backgroundColor: item.frontColor || props.frontColor || 'black' },
           side !== 'right' && {zIndex: data.length - index},
         ]}>
-        {props.showVerticalLines && (
+        {/* {props.showVerticalLines && (
           <View
             style={{
               zIndex: props.verticalLinesZIndex,
@@ -391,7 +387,7 @@ const RenderBars = (props: Props) => {
               backgroundColor: props.verticalLinesColor,
             }}
           />
-        )}
+        )} */}
         {props.showXAxisIndices && (
           <View
             style={{

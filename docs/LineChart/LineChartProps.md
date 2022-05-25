@@ -135,6 +135,8 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | verticalLinesColor     | ColorValue          | Color of the vertical lines                                                        | lightgray              |
 | verticallinesThickness | number              | Thickness of the vertical lines                                                    | 1                      |
 | verticalLinesZIndex    | number              | Z index of the vertical lines                                                      | -1                     |
+| noOfVerticalLines      | number              | Number of vertical lines displayed                                                 | data.length            |
+| verticalLinesSpacing   | number              | Distance between consecutive vertical lines                                        | spacing                |
 | showXAxisIndices       | Boolean             | To show the pointers on the X axis                                                 | false                  |
 | xAxisIndicesHeight     | number              | Height of the pointers on the X axis                                               | 2                      |
 | xAxisIndicesWidth      | number              | Width of the pointers on the X axis                                                | 4                      |
