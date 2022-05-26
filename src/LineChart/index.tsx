@@ -108,6 +108,7 @@ type propTypes = {
   showVerticalLines?: Boolean;
   verticalLinesUptoDataPoint?: Boolean;
   verticalLinesThickness?: number;
+  verticalLinesHeight?: number;
   verticalLinesColor?: ColorValue;
   verticalLinesZIndex?: number;
   noOfVerticalLines?: number;
@@ -1369,6 +1370,7 @@ export const LineChart = (props: propTypes) => {
   const rulesColor = props.rulesColor || 'lightgray';
   const verticalLinesThickness =
     props.verticalLinesThickness === 0 ? 0 : props.verticalLinesThickness || 1;
+  const verticalLinesHeight = props.verticalLinesHeight;
   const verticalLinesColor = props.verticalLinesColor || 'lightgray';
   const verticalLinesZIndex = props.verticalLinesZIndex || -1;
 
@@ -3310,11 +3312,12 @@ export const LineChart = (props: propTypes) => {
                     ? index < data.length
                       ? (data[index].value * containerHeight) / maxValue -
                         xAxisThickness
-                      : 0
-                    : containerHeight + 15 - xAxisThickness,
+                      : verticalLinesHeight || 0
+                    : verticalLinesHeight ||
+                      containerHeight + 15 - xAxisThickness,
                   width: verticalLinesThickness,
                   backgroundColor: verticalLinesColor,
-                  bottom: 60,
+                  bottom: 60 + labelsExtraHeight,
                   left: verticalLinesSpacing
                     ? verticalLinesSpacing * (index + 1)
                     : index * spacing + (initialSpacing - dataPointsWidth1 / 2),

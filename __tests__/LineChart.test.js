@@ -12,6 +12,7 @@ import ChartWithPointer from '../examples/LineChart/ChartWithPointer';
 import ChartWithAdjustingPointer from '../examples/LineChart/ChartWithAdjustingPointer';
 import ScrollingChartWithPointer from '../examples/LineChart/ScrollingChartWithPointer';
 import CaloriesBurnt from '../examples/LineChart/CaloriesBurnt';
+import SimpleBlueLineWithGivenNumberOfVerticalLines from '../examples/LineChart/SimpleBlueLineWithGivenNumberOfVerticalLines';
 
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
@@ -53,5 +54,12 @@ it('renders ScrollingChartWithPointer correctly', () => {
 
 it('renders CaloriesBurnt Area chart correctly', () => {
   const tree = renderer.create(<CaloriesBurnt />).toJSON();
+  expect(tree).toMatchSnapshot();
+});
+
+it('renders blue line chart with given number of vertical lines correctly', () => {
+  const tree = renderer
+    .create(<SimpleBlueLineWithGivenNumberOfVerticalLines />)
+    .toJSON();
   expect(tree).toMatchSnapshot();
 });

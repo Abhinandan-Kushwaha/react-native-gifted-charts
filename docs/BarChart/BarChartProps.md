@@ -146,6 +146,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | showVerticalLines      | Boolean             | To show vertical lines                                                             | false                  |
 | verticalLinesColor     | ColorValue          | Color of the vertical lines                                                        | lightgray              |
 | verticallinesThickness | number              | Thickness of the vertical lines                                                    | 1                      |
+| verticalLinesHeight    | number              | Height of the vertical lines                                                       | chart height           |
 | verticalLinesZIndex    | number              | Z index of the vertical lines                                                      | -1                     |
 | noOfVerticalLines      | number              | Number of vertical lines displayed                                                 | data.length            |
 | verticalLinesSpacing   | number              | Distance between consecutive vertical lines                                        | spacing                |
