@@ -15609,3 +15609,1011 @@ exports[`renders blue line chart correctly 1`] = `
   </View>
 </View>
 `;
+
+exports[`renders blue line chart with given number of vertical lines correctly 1`] = `
+<View>
+  <View
+    style={
+      Array [
+        Object {
+          "marginBottom": 40,
+          "marginRight": 40,
+          "width": "100%",
+        },
+        Object {
+          "height": 200,
+        },
+        false,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 20,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "center",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      />
+    </View>
+    <View
+      style={
+        Array [
+          Object {
+            "flexDirection": "row",
+          },
+          Object {
+            "width": 280,
+          },
+          false,
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "justifyContent": "center",
+            },
+            Object {
+              "height": 10,
+              "width": 35,
+            },
+            undefined,
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "justifyContent": "flex-end",
+              "width": "100%",
+            },
+            Object {
+              "backgroundColor": "transparent",
+              "borderColor": "#0BA5A4",
+              "borderLeftWidth": 1,
+            },
+          ]
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "black",
+                "height": 1,
+                "width": "100%",
+              },
+              Object {
+                "backgroundColor": "#0BA5A4",
+                "height": 1,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <RCTScrollView
+      contentContainerStyle={
+        Array [
+          Object {
+            "height": 330,
+            "paddingBottom": 0,
+            "width": 180,
+          },
+          false,
+        ]
+      }
+      horizontal={true}
+      onContentSizeChange={[Function]}
+      scrollEnabled={true}
+      showsHorizontalScrollIndicator={false}
+      style={
+        Array [
+          Object {
+            "bottom": -70,
+            "marginLeft": 36,
+            "paddingRight": 100,
+            "position": "absolute",
+          },
+          Object {
+            "width": 275,
+          },
+        ]
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": -1,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": 24,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": 49,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": 74,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": 99,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": 124,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": 149,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": 174,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": 199,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": 224,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": 249,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "backgroundColor": "rgba(14,164,164,0.5)",
+              "bottom": 60,
+              "height": 210,
+              "left": 274,
+              "marginBottom": 1,
+              "position": "absolute",
+              "width": 1,
+              "zIndex": -1,
+            }
+          }
+        />
+        <View
+          onMoveShouldSetResponder={[Function]}
+          onResponderEnd={[Function]}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Object {
+              "bottom": 60,
+              "height": 210,
+              "position": "absolute",
+              "width": 200,
+              "zIndex": 0,
+            }
+          }
+        >
+          <RNSVGSvgView
+            bbHeight="100%"
+            bbWidth="100%"
+            focusable={false}
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "transparent",
+                  "borderWidth": 0,
+                },
+                Object {
+                  "flex": 0,
+                  "height": "100%",
+                  "width": "100%",
+                },
+              ]
+            }
+          >
+            <RNSVGGroup>
+              <RNSVGPath
+                d=""
+                fill={null}
+                propList={
+                  Array [
+                    "fill",
+                    "stroke",
+                    "strokeWidth",
+                  ]
+                }
+                stroke={4278953380}
+                strokeWidth={5}
+              />
+            </RNSVGGroup>
+          </RNSVGSvgView>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": -4.5,
+                  "position": "absolute",
+                  "width": 25,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 12.5,
+                  "position": "absolute",
+                  "width": 25,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 37.5,
+                  "position": "absolute",
+                  "width": 25,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 62.5,
+                  "position": "absolute",
+                  "width": 25,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 87.5,
+                  "position": "absolute",
+                  "width": 25,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 112.5,
+                  "position": "absolute",
+                  "width": 25,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 137.5,
+                  "position": "absolute",
+                  "width": 25,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+        <View>
+          <View
+            style={
+              Array [
+                Object {
+                  "bottom": 30,
+                  "justifyContent": "center",
+                  "left": 162.5,
+                  "position": "absolute",
+                  "width": 25,
+                  "zIndex": 10,
+                },
+                false,
+              ]
+            }
+          >
+            <Text
+              numberOfLines={1}
+              style={
+                Object {
+                  "textAlign": "center",
+                }
+              }
+            >
+              
+            </Text>
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;

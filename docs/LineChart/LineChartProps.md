@@ -134,6 +134,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | verticalLinesUptoDataPoint | Boolean         | To set the height of the vertical lines upto the corresponding data point          | false                  |
 | verticalLinesColor     | ColorValue          | Color of the vertical lines                                                        | lightgray              |
 | verticallinesThickness | number              | Thickness of the vertical lines                                                    | 1                      |
+| verticalLinesHeight    | number              | Height of the vertical lines                                                       | chart height           |
 | verticalLinesZIndex    | number              | Z index of the vertical lines                                                      | -1                     |
 | noOfVerticalLines      | number              | Number of vertical lines displayed                                                 | data.length            |
 | verticalLinesSpacing   | number              | Distance between consecutive vertical lines                                        | spacing                |

@@ -82,6 +82,7 @@ type PropTypes = {
   referenceLine3Position?: number;
   showVerticalLines?: Boolean;
   verticalLinesThickness?: number;
+  verticalLinesHeight?: number;
   verticalLinesColor?: ColorValue;
   verticalLinesZIndex?: number;
   noOfVerticalLines?: number;
@@ -348,6 +349,7 @@ export const BarChart = (props: PropTypes) => {
   const rulesColor = props.rulesColor || 'lightgray';
   const verticalLinesThickness =
     props.verticalLinesThickness === 0 ? 0 : props.verticalLinesThickness || 1;
+  const verticalLinesHeight = props.verticalLinesHeight;
   const verticalLinesColor = props.verticalLinesColor || 'lightgray';
   const verticalLinesZIndex = props.verticalLinesZIndex || -1;
   let verticalLinesAr = [];
@@ -1442,10 +1444,12 @@ export const BarChart = (props: PropTypes) => {
                     position: 'absolute',
                     zIndex: verticalLinesZIndex || -1,
                     marginBottom: xAxisThickness,
-                    height: containerHeight + 15 - xAxisThickness,
+                    height:
+                      verticalLinesHeight ||
+                      containerHeight + 15 - xAxisThickness,
                     width: verticalLinesThickness,
                     backgroundColor: verticalLinesColor,
-                    bottom: 60,
+                    bottom: 60 + labelsExtraHeight,
                     left: totalSpacing,
                   }}
                 />
