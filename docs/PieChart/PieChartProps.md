@@ -9,6 +9,9 @@
 | showGradient         | Boolean        | Prop to enable radial gradient for the Pie sections                                                       | false           |
 | gradientCenterColor  | ColorValue     | Gradient color at the center of the Pie chart                                                             | 'white'         |
 | onPress              | Function       | Callback function called on press of Pie sections (takes item and index as parameter)                     | null            |
+| focusOnPress         | Boolean        | When set to true, the pressed section of the Pie chart will have a bigger radius, hence appear focused    | false           |
+| toggleFocusOnPress   | Boolean        | When set to true, if the user presses an already focused pie section, it will be unfocused                | true            |
+| extraRadiusForFocused | number        | Extra radius for the focused Pie section                                                                  | radius/10       |
 | onLabelPress         | Function       | Callback function called on press of a Label (takes item and index as parameter)                          | onPress OR null |
 | tiltAngle            | Angle in deg   | The angle by which the chart should be tilted                                                             | '55deg' for 3D charts, otherwise 0 |
 | shadow               | Boolean        | Shadow to the Pie chart, when set to true, it enhances the 3D effect                                      | false           |
