@@ -73,6 +73,9 @@ type itemType = {
   labelPosition?: 'onBorder' | 'outward' | 'inward' | 'mid';
   onPress?: Function;
   onLabelPress?: Function;
+  strokeWidth?: number;
+  strokeColor?: string;
+  peripheral?: boolean;
 };
 
 export const PieChartMain = (props: propTypes) => {
@@ -266,44 +269,81 @@ export const PieChartMain = (props: propTypes) => {
               cy * (1 - Math.cos(2 * pi * nextItem + initialAngle)) +
               (item.shiftY || 0);
 
-            // console.log('sx', sx);
-            // console.log('sy', sy);
-            // console.log('ax', ax);
-            // console.log('ay', ay);
             return (
-              <Path
-                key={index + 'a'}
-                d={`M ${cx + (item.shiftX || 0)} ${
-                  cy + (item.shiftY || 0)
-                } L ${sx} ${sy} A ${radius} ${radius} 0 ${
-                  semiCircle ? 0 : data[index].value > total / 2 ? 1 : 0
-                } 1 ${ax} ${ay} L ${cx + (item.shiftX || 0)} ${
-                  cy + (item.shiftY || 0)
-                }`}
-                stroke={strokeColor}
-                strokeWidth={strokeWidth}
-                fill={
-                  showGradient
-                    ? `url(#grad${index})`
-                    : item.color || colors[index % 9]
-                }
-                onPress={() => {
-                  if (item.onPress) {
-                    item.onPress();
-                  } else if (props.onPress) {
-                    props.onPress(item, index);
+              <>
+                {/*********************      Pie sections background with colors excluding the borders       *********/}
+                <Path
+                  key={index + 'a'}
+                  d={`M ${cx + (item.shiftX || 0)} ${
+                    cy + (item.shiftY || 0)
+                  } L ${sx} ${sy} A ${radius} ${radius} 0 ${
+                    semiCircle ? 0 : data[index].value > total / 2 ? 1 : 0
+                  } 1 ${ax} ${ay} L ${cx + (item.shiftX || 0)} ${
+                    cy + (item.shiftY || 0)
+                  }`}
+                  stroke={'transparent'}
+                  strokeWidth={0}
+                  fill={
+                    props.selectedIndex === index || item.peripheral
+                      ? 'transparent'
+                      : showGradient
+                      ? `url(#grad${index})`
+                      : item.color || colors[index % 9]
                   }
-                  if (props.focusOnPress) {
-                    if (props.selectedIndex === index) {
-                      if (toggleFocusOnPress) {
-                        props.setSelectedIndex(-1);
-                      }
-                    } else {
-                      props.setSelectedIndex(index);
+                  onPress={() => {
+                    if (item.onPress) {
+                      item.onPress();
+                    } else if (props.onPress) {
+                      props.onPress(item, index);
                     }
+                    if (props.focusOnPress) {
+                      if (props.selectedIndex === index) {
+                        if (toggleFocusOnPress) {
+                          props.setSelectedIndex(-1);
+                        }
+                      } else {
+                        props.setSelectedIndex(index);
+                      }
+                    }
+                  }}
+                />
+
+                {/*********************      Pie sections borders (made separately as they can have separate strokeWidths)      *********/}
+                <Path
+                  key={index + 'line1'}
+                  d={`M ${cx + (item.shiftX || 0)} ${
+                    cy + (item.shiftY || 0)
+                  } L ${sx} ${sy}`}
+                  stroke={item.strokeColor || strokeColor}
+                  strokeWidth={
+                    item.strokeWidth === 0 ? 0 : item.strokeWidth || strokeWidth
                   }
-                }}
-              />
+                />
+                <Path
+                  key={index + 'arc'}
+                  d={`M ${sx} ${sy} A ${radius} ${radius} 0 ${
+                    semiCircle ? 0 : data[index].value > total / 2 ? 1 : 0
+                  } 1 ${ax} ${ay}`}
+                  stroke={item.strokeColor || strokeColor}
+                  strokeWidth={
+                    props.focusOnPress && props.selectedIndex === index
+                      ? 0
+                      : item.strokeWidth === 0
+                      ? 0
+                      : item.strokeWidth || strokeWidth
+                  }
+                />
+                <Path
+                  key={index + 'line2'}
+                  d={`M ${ax} ${ay} L ${cx + (item.shiftX || 0)} ${
+                    cy + (item.shiftY || 0)
+                  }`}
+                  stroke={item.strokeColor || strokeColor}
+                  strokeWidth={
+                    item.strokeWidth === 0 ? 0 : item.strokeWidth || strokeWidth
+                  }
+                />
+              </>
             );
           })
         )}

@@ -86,6 +86,9 @@ The default value for labelsPosition is 'mid'. In case of donut and semicircle c
 | labelPosition        | string     | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid' |
 | onPress              | Function   | Callback function called on press of Pie sections (takes item and index as parameter)                    |
 | onLabelPress         | Function   | Callback function called on press of a Label (takes item and index as parameter)                         |
+| strokeWidth          | number         | Stroke (line) width for the Pie chart and its section                                                |
+| strokeColor          | ColorValue     | Stroke (line) color                                                                                  |
+
 
 
 ### Donut chart related props
