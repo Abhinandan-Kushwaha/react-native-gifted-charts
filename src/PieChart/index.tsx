@@ -67,6 +67,8 @@ type itemType = {
   labelPosition?: 'onBorder' | 'outward' | 'inward' | 'mid';
   onPress?: Function;
   onLabelPress?: Function;
+  strokeWidth?: number;
+  strokeColor?: string;
 };
 
 export const PieChart = (props: propTypes) => {
@@ -113,15 +115,22 @@ export const PieChart = (props: propTypes) => {
                 value: props.data[selectedIndex].value,
                 color:
                   props.data[selectedIndex].color || colors[selectedIndex % 9],
+                strokeColor: props.data[selectedIndex].strokeColor || null,
+                strokeWidth: props.data[selectedIndex].strokeWidth || null,
+                gradientCenterColor:
+                  props.data[selectedIndex].gradientCenterColor || null,
               },
               {
                 value: total - props.data[selectedIndex].value,
-                color: 'transparent',
+                peripheral: true,
+                strokeWidth: 0,
               },
             ]}
             key="pie"
             radius={radius + extraRadiusForFocused}
             initialAngle={startAngle}
+            showText={false}
+            innerRadius={props.innerRadius || radius / 2.5}
           />
         </View>
         <View style={{position: 'absolute'}}>
