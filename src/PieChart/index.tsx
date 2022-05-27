@@ -76,32 +76,29 @@ export const PieChart = (props: propTypes) => {
   const extraRadiusForFocused = props.extraRadiusForFocused || radius / 10;
   const pi = props.semiCircle ? Math.PI / 2 : Math.PI;
   const [selectedIndex, setSelectedIndex] = useState(-1);
-
-  if (props.data.length <= 1 || !props.focusOnPress || selectedIndex === -1) {
-    return (
-      <PieChartMain
-        {...props}
-        key="pie"
-        setSelectedIndex={setSelectedIndex}
-        selectedIndex={selectedIndex}
-      />
-    );
-  } else {
-    let startAngle = props.initialAngle || (props.semiCircle ? -pi : 0);
-    // let startColor;
-    let total = 0;
-    props.data.forEach(item => {
-      total += item.value;
-    });
-    if (selectedIndex !== 0) {
-      let start = 0;
-      for (let i = 0; i < selectedIndex; i++) {
-        start += props.data[i].value;
-      }
-      startAngle += (2 * pi * start) / total;
+  let startAngle = props.initialAngle || (props.semiCircle ? -pi : 0);
+  let total = 0;
+  props.data.forEach(item => {
+    total += item.value;
+  });
+  if (selectedIndex !== 0) {
+    let start = 0;
+    for (let i = 0; i < selectedIndex; i++) {
+      start += props.data[i].value;
     }
-    return (
-      <View>
+    startAngle += (2 * pi * start) / total;
+  }
+  return (
+    <View
+      style={{
+        height: (radius + extraRadiusForFocused) * 2,
+        width: (radius + extraRadiusForFocused) * 2,
+      }}>
+      {!(
+        props.data.length <= 1 ||
+        !props.focusOnPress ||
+        selectedIndex === -1
+      ) && (
         <View
           style={{
             position: 'absolute',
@@ -126,22 +123,20 @@ export const PieChart = (props: propTypes) => {
                 strokeWidth: 0,
               },
             ]}
-            key="pie"
             radius={radius + extraRadiusForFocused}
             initialAngle={startAngle}
             showText={false}
             innerRadius={props.innerRadius || radius / 2.5}
           />
         </View>
-        <View style={{position: 'absolute'}}>
-          <PieChartMain
-            {...props}
-            key="pie"
-            selectedIndex={selectedIndex}
-            setSelectedIndex={setSelectedIndex}
-          />
-        </View>
+      )}
+      <View style={{position: 'absolute'}}>
+        <PieChartMain
+          {...props}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
+        />
       </View>
-    );
-  }
+    </View>
+  );
 };
