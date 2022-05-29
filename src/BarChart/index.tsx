@@ -44,6 +44,7 @@ type PropTypes = {
   xAxisColor?: ColorValue;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
+  xAxisType?: String;
   yAxisLabelContainerStyle?: any;
   horizontalRulesStyle?: any;
   yAxisTextStyle?: any;
@@ -103,6 +104,7 @@ type PropTypes = {
 
   disableScroll?: Boolean;
   showScrollIndicator?: Boolean;
+  indicatorColor?: 'black' | 'default' | 'white';
   roundedTop?: Boolean;
   roundedBottom?: Boolean;
   disablePress?: boolean;
@@ -402,6 +404,7 @@ export const BarChart = (props: PropTypes) => {
   const hideOrigin = props.hideOrigin || false;
 
   const rulesType = props.rulesType || 'line';
+  const xAxisType = props.xAxisType || 'solid';
   const dashWidth = props.dashWidth === 0 ? 0 : props.dashWidth || 4;
   const dashGap = props.dashGap === 0 ? 0 : props.dashGap || 8;
 
@@ -715,11 +718,17 @@ export const BarChart = (props: PropTypes) => {
                   {backgroundColor: backgroundColor},
                 ]}>
                 {index === noOfSections ? (
-                  <View
-                    style={[
-                      styles.lastLine,
-                      {height: xAxisThickness, backgroundColor: xAxisColor},
-                    ]}
+                  <Rule
+                    config={{
+                      thickness: xAxisThickness,
+                      color: xAxisColor,
+                      width: horizontal
+                        ? props.width || Math.min(300, totalWidth)
+                        : (props.width || totalWidth) + 11,
+                      dashWidth: dashWidth,
+                      dashGap: dashGap,
+                      type: xAxisType,
+                    }}
                   />
                 ) : hideRules ? null : (
                   <Rule
@@ -1379,6 +1388,7 @@ export const BarChart = (props: PropTypes) => {
           !props.width && {width: totalWidth},
         ]}
         showsHorizontalScrollIndicator={showScrollIndicator}
+        indicatorStyle={props.indicatorColor}
         horizontal
         // data={props.stackData || data}
         keyExtractor={(item, index) => index.toString()}>

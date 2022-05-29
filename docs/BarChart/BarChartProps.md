@@ -20,6 +20,7 @@
 | backgroundColor     | ColorValue     | Background color of the Bar chart                                                         | \_                  |
 | disableScroll       | Boolean        | To disable horizontal scroll                                                              | false               |
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                       | false               |
+| indicatorColor      | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')           | default             |
 | showLine            | Boolean        | To show a Line chart over the Bar chart with the same data                                | false               |
 | lineData            | Array of items | The data object for the line chart (use only when showLine is true)                       | data                |
 | lineConfig          | lineConfigType | Properties of the Line chart shown over the Bar chart (lineConfigType) is described below | defaultLineConfig   |
@@ -117,6 +118,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | xAxisThickness         | number              | X axis thickness                                                                   | 1                      |
 | yAxisColor             | ColorValue          | Y axis color                                                                       | black                  |
 | yAxisThickness         | number              | Y axis thickness                                                                   | 1                      |
+| xAxisType              | String              | solid or dotted/dashed                                                             | solid                  |
 | yAxisLabelWidth        | number              | Width of the Y axis Label container                                                | 35                     |
 | yAxisTextStyle         | object              | Style object for the Y axis text style                                             | \_                     |
 | yAxisTextNumberOfLines | number              | Number of lines for y axis label text                                              | 1                      |

@@ -71,6 +71,7 @@ type propTypes = {
   animateTogether?: boolean;
   xAxisThickness?: number;
   xAxisColor?: ColorValue;
+  xAxisType?: String;
   hideRules?: Boolean;
   rulesColor?: ColorValue;
   rulesThickness?: number;
@@ -119,6 +120,7 @@ type propTypes = {
   disableScroll?: Boolean;
   pointerConfig?: Pointer;
   showScrollIndicator?: Boolean;
+  indicatorColor?: 'black' | 'default' | 'white';
 
   //Indices
 
@@ -1554,6 +1556,7 @@ export const LineChart = (props: propTypes) => {
   const hideOrigin = props.hideOrigin || false;
 
   const rulesType = props.rulesType || 'line';
+  const xAxisType = props.xAxisType || 'solid';
   const dashWidth = props.dashWidth === 0 ? 0 : props.dashWidth || 4;
   const dashGap = props.dashGap === 0 ? 0 : props.dashGap || 8;
 
@@ -1855,11 +1858,15 @@ export const LineChart = (props: propTypes) => {
                     },
                   ]}>
                   {index === noOfSections ? (
-                    <View
-                      style={[
-                        styles.lastLine,
-                        {height: xAxisThickness, backgroundColor: xAxisColor},
-                      ]}
+                    <Rule
+                      config={{
+                        thickness: xAxisThickness,
+                        color: xAxisColor,
+                        width: (props.width || totalWidth) + 11,
+                        dashWidth: dashWidth,
+                        dashGap: dashGap,
+                        type: xAxisType,
+                      }}
                     />
                   ) : hideRules ? null : (
                     <Rule
@@ -3287,6 +3294,7 @@ export const LineChart = (props: propTypes) => {
           }
         }}
         showsHorizontalScrollIndicator={showScrollIndicator}
+        indicatorStyle={props.indicatorColor}
         style={[
           {
             marginLeft:
