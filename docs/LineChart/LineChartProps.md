@@ -20,6 +20,7 @@
 | backgroundColor               | ColorValue     | Background color of the Bar chart                                                                  | \_                  |
 | disableScroll                 | Boolean        | To disable horizontal scroll                                                                       | false               |
 | showScrollIndicator           | Boolean        | To show horizontal scroll indicator                                                                | false               |
+| indicatorColor                | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                    | default             |
 | isAnimated                    | Boolean        | To show animated Line or Area Chart. Animation occurs when the chart load for the first time       | false               |
 | animateOnDataChange           | Boolean        | To show animation on change in data. A smooth transition takes place between the iold and new line | false               |
 | onDataChangeAnimationDuration | number         | Duration (milliseconds) in which the transition animation takes place on a change in data          | 400                 |
@@ -95,6 +96,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | ---------------------- | ------------------- | ---------------------------------------------------------------------------------- | ---------------------- |
 | xAxisColor             | ColorValue          | X axis color                                                                       | black                  |
 | xAxisThickness         | number              | X axis thickness                                                                   | 1                      |
+| xAxisType              | String              | solid or dotted/dashed                                                             | solid                  |
 | yAxisColor             | ColorValue          | Y axis color                                                                       | black                  |
 | yAxisThickness         | number              | Y axis thickness                                                                   | 1                      |
 | yAxisLabelWidth        | number              | Width of the Y axis Label container                                                | 35                     |
