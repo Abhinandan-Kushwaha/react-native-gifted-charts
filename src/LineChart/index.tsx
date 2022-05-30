@@ -371,6 +371,7 @@ type Pointer = {
 
 export const LineChart = (props: propTypes) => {
   const scrollRef = useRef();
+  const [scrollX, setScrollX] = useState(0);
   const [pointerIndex, setPointerIndex] = useState(-1);
   const [pointerX, setPointerX] = useState(0);
   const [pointerY, setPointerY] = useState(0);
@@ -2557,6 +2558,11 @@ export const LineChart = (props: propTypes) => {
     if (autoAdjustPointerLabelPosition) {
       if (pointerX < pointerLabelWidth / 2) {
         left = 7;
+      } else if (
+        activatePointersOnLongPress &&
+        pointerX - scrollX < pointerLabelWidth / 2 - 10
+      ) {
+        left = 7;
       } else {
         if (
           !activatePointersOnLongPress &&
@@ -2568,7 +2574,10 @@ export const LineChart = (props: propTypes) => {
           left = -pointerLabelWidth - 4;
         } else if (
           activatePointersOnLongPress &&
-          pointerX > totalWidth - yAxisLabelWidth - pointerLabelWidth / 2
+          pointerX - scrollX >
+            (props.width + 10 ||
+              Dimensions.get('window').width - yAxisLabelWidth - 15) -
+              pointerLabelWidth / 2
         ) {
           left = -pointerLabelWidth - 4;
         } else {
@@ -3291,6 +3300,15 @@ export const LineChart = (props: propTypes) => {
         onContentSizeChange={() => {
           if (scrollRef.current && scrollToEnd) {
             scrollRef.current.scrollToEnd({animated: scrollAnimation});
+          }
+        }}
+        onScroll={ev => {
+          if (
+            pointerConfig &&
+            pointerConfig.activatePointersOnLongPress &&
+            pointerConfig.autoAdjustPointerLabelPosition
+          ) {
+            setScrollX(ev.nativeEvent.contentOffset.x);
           }
         }}
         showsHorizontalScrollIndicator={showScrollIndicator}
