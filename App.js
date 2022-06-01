@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, TouchableOpacity} from 'react-native';
+import {Dimensions, ScrollView, TouchableOpacity} from 'react-native';
 import {Alert} from 'react-native';
 import {View, Text, StyleSheet} from 'react-native';
 import {BarChart, LineChart, PieChart} from './src';
@@ -9,14 +9,21 @@ import CappedBars from './examples/BarChart/CappedBars';
 import RoundStackBar from './examples/BarChart/RoundStackBar';
 import SimpleBarAnimated from './examples/BarChart/SimpleBarAnimated';
 import SimpleBlueBars from './examples/BarChart/SimpleBlueBars';
+import SimpleBlueBarsVerticalLines from './examples/BarChart/SimpleBlueBarsVerticalLines';
+import BarChartWithGivenNumberOfVerticalLines from './examples/BarChart/BarChartWithGivenNumberOfVerticalLines';
 import AnimatedArea from './examples/LineChart/AnimatedArea';
 import AreaTwo from './examples/LineChart/AreaTwo';
 import LineChartTwo from './examples/LineChart/LineChartTwo';
 import SimpleBlueLine from './examples/LineChart/SimpleBlueLine';
+import SimpleBlueLineWithGivenNumberOfVerticalLines from './examples/LineChart/SimpleBlueLineWithGivenNumberOfVerticalLines';
 import ProgressPie from './examples/PieChart/ProgressPie';
 import SimplePie from './examples/PieChart/SimplePie';
+import PieChartFocusOnPress from './examples/PieChart/PieChartFocusOnPress';
 import SplitPie from './examples/PieChart/SplitPie';
 import ThreeDPie from './examples/PieChart/ThreeDPie';
+import CaloriesBurnt from './examples/LineChart/CaloriesBurnt';
+import ScrollingChartWithPointer from './examples/LineChart/ScrollingChartWithPointer';
+import AreaGraphCard from './AreaGraphCard';
 
 const App = () => {
   const [toggle, setToggle] = useState(true);
@@ -65,7 +72,7 @@ const App = () => {
   const lcomp = val => {
     return (
       <View style={{width: 70, marginLeft: 7}}>
-        <Text style={{color: 'white', fontWeight: 'bold'}}>{val}</Text>
+        <Text style={{color: 'black', fontWeight: 'bold'}}>{val}</Text>
       </View>
     );
   };
@@ -657,17 +664,12 @@ const App = () => {
   ]);
 
   const barData = [
-    {
-      value: 15,
-      label: 'Mon',
-    },
+    {value: 15, label: 'Mon'},
     {value: 30, label: 'Tue'},
     {value: -23, label: 'Wed'},
     {value: 40, label: 'Thu'},
-    {value: -16, label: 'Wed'},
-    {value: 40, label: 'Thu'},
-    {value: -16, label: 'Wed'},
-    {value: 40, label: 'Thu'},
+    {value: -16, label: 'Fri'},
+    {value: 40, label: 'Sat'},
   ];
   const barData2 = [
     {
@@ -685,15 +687,12 @@ const App = () => {
   const barData3 = [
     {
       value: 15,
-      label: 'Mon',
+      label: 'Monday Morning',
     },
-    {value: 10, label: 'Tue'},
-    {value: -3, label: 'Wed'},
-    {value: 20, label: 'Thu'},
-    {value: -6, label: 'Wed'},
-    {value: 20, label: 'Thu'},
-    {value: -6, label: 'Wed'},
-    {value: 20, label: 'Thu'},
+    {value: 10, label: 'Tuesday Morning'},
+    {value: 20, label: 'Thuday Morning'},
+    {value: 20, label: 'Friday Morning'},
+    {value: 20, label: 'Saturday Morning'},
   ];
 
   const sdata = [
@@ -722,32 +721,32 @@ const App = () => {
   const lineData = [
     {value: 8, pointerShiftX: 10, pointerShiftY: -10},
     {value: 10},
-    {value: 12},
-    {value: 8},
+    {value: 6},
+    {value: 18},
     {value: 11},
-    {value: 13},
+    {value: 0},
     {value: 19},
     {value: 18},
-    {value: 22},
-    {value: 20},
-    {value: 28},
-    {value: 32},
-    {value: 36},
-    {value: 40},
-    {value: 38},
-    {value: 40},
-    {value: 42},
-    {value: 46},
-    {value: 44},
-    {value: 40},
-    {value: 36},
-    {value: 32},
-    {value: 38},
-    {value: 36},
-    {value: 32},
-    {value: 28},
-    {value: 22},
-    {value: 20},
+    {value: 10},
+    // {value: 20},
+    // {value: 28},
+    // {value: 32},
+    // {value: 36},
+    // {value: 40},
+    // {value: 38},
+    // {value: 40},
+    // {value: 42},
+    // {value: 46},
+    // {value: 44},
+    // {value: 40},
+    // {value: 36},
+    // {value: 32},
+    // {value: 38},
+    // {value: 36},
+    // {value: 32},
+    // {value: 28},
+    // {value: 22},
+    // {value: 20},
   ];
 
   // const lineData = [
@@ -773,10 +772,9 @@ const App = () => {
   // ];
 
   const styleObject = {
-    marginLeft: -95,
+    marginLeft: -130,
     paddingLeft: 110,
-    transform: [{rotate: '90deg'}],
-    // backgroundColor: 'red',
+    marginTop: -55,
   };
 
   const lineData1 = [
@@ -860,6 +858,8 @@ const App = () => {
     {value: 52},
   ];
 
+  const stackPressed = index => {};
+
   const stackData = [
     {
       stacks: [
@@ -912,7 +912,7 @@ const App = () => {
       stacks: [
         {value: 7, color: '#4ABFF4'},
         {value: 11, color: 'orange', marginBottom: 2},
-        {value: 10, color: '#28B2B3', marginBottom: 2},
+        // {value: 10, color: '#28B2B3', marginBottom: 2},
       ],
       label: 'Mar',
     },
@@ -958,14 +958,21 @@ const App = () => {
     {value: 0.7, label: '6'},
   ];
 
+  // const llData = [
+  //   {value: 70},
+  //   {value: 36},
+  //   {value: 50},
+  //   {value: 40},
+  //   {value: 18},
+  //   {value: 38},
+  // ];
+
   const llData = [
     {value: 70},
-    {value: 36},
+    {value: 36, barMarginBottom: 30},
     {value: 50},
-    {value: 40},
-    {value: 18},
-    {value: 38},
-    {value: 18},
+    {value: 40, barMarginBottom: 0},
+    {value: 18, barMarginBottom: 0},
     {value: 38},
   ];
   const llData2 = [
@@ -1044,13 +1051,425 @@ const App = () => {
     {value: 210, date: '5 May 2022'},
   ];
 
+  // const props = {
+  //   areaMaxValue : 42095,
+  //   backgroundColor: "#1c1c1c",
+  //   color: "#439dae",
+  //   color2: "#5674af",
+  //   graphType: "Yearly",
+  //   maxValue: 100,
+  //   noOfSections: 5,
+  //   stepValue: 8419,
+  //   toolTipText: [{},{},{}],
+  //   yAxisData: ['0%', '20%', '40%', '60%', '80%', '100%'],
+  //   yAxisStyle: "#292929",
+
+  // }
+
+  const props = {
+    data: [
+      {
+        value: 0,
+      },
+      {
+        value: 0,
+      },
+      {
+        value: 0,
+      },
+      {
+        value: 0,
+      },
+      {
+        value: 2.543008714282514,
+      },
+      {
+        value: 24.470271636182705,
+      },
+    ],
+    data2: [
+      {
+        value: 24.53946688785736,
+      },
+      {
+        value: 100,
+      },
+      {
+        value: 7.160509848729807,
+      },
+      {
+        value: 0,
+      },
+      {
+        value: 0,
+      },
+      {
+        value: 0,
+      },
+    ],
+    maxValue: 100,
+    areaMaxValue: 42095.805412999995,
+    noOfSections: 5,
+    stepValue: 8419.1610826,
+    color: '#439DAE',
+    color2: '#5674AF',
+    graphType: 'Yearly',
+    backgroundColor: '#1C1C1C',
+    yAxisStyle: '#292929',
+    yAxisData: ['0%', '20%', '40%', '60%', '80%', '100%'],
+    tooltipText: [
+      {
+        value: '2022',
+      },
+      {
+        value: '2021',
+      },
+      {
+        value: 'undefined - undefined',
+      },
+    ],
+  };
+  // const styleObject = {
+  //   marginLeft: -95,
+  //   paddingLeft: 120,
+  //   transform: [{rotate: '90deg'}],
+  // };
+
+  const showCharts = [
+    {
+      value: 13,
+      label: 'hello world here',
+      labelWidth: 120,
+      labelTextStyle: styleObject,
+    },
+    {
+      value: 9,
+      label: 'hello world here',
+      labelWidth: 120,
+      labelTextStyle: styleObject,
+    },
+    {
+      value: 3,
+      label: 'hello world here',
+      labelWidth: 120,
+      labelTextStyle: styleObject,
+    },
+    {
+      value: 2,
+      label: 'hello world here',
+      labelWidth: 120,
+      labelTextStyle: styleObject,
+    },
+    {
+      value: 2,
+      label: 'hello world here',
+      labelWidth: 120,
+      labelTextStyle: styleObject,
+    },
+    {
+      value: 1,
+      label: 'hello world here',
+      labelWidth: 120,
+      labelTextStyle: styleObject,
+    },
+    {
+      value: 1,
+      label: 'hello world here',
+      labelWidth: 120,
+      labelTextStyle: styleObject,
+    },
+  ];
+
+  //   const pieData = [
+  //     {value: 54, color: '#177AD5'},
+  //     {value: 40, color: '#79D2DE'},
+  //     {value: 20, color: '#ED6665'}
+  // ];
+
+  const bbcData = [
+    {value: 250, label: 'M'},
+    {value: 500, label: 'T', frontColor: '#177AD5'},
+    {value: 745, label: 'W', frontColor: '#177AD5'},
+    {value: 320, label: 'T'},
+    {value: 600, label: 'F', frontColor: '#177AD5'},
+    {value: 256, label: 'S'},
+    {value: 300, label: 'S'},
+  ];
+
+  const data1 = [
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 2.5871326324555546, labelComponent: () => lcomp(10)},
+    {value: 4.678033743362773, labelComponent: () => lcomp(10)},
+    {value: 20.216823250031982, labelComponent: () => lcomp(10)},
+  ];
+
+  const data2 = [
+    {value: 16.844381361558508, labelComponent: () => lcomp(10)},
+    {value: 8.120871495056477, labelComponent: () => lcomp(10)},
+    {value: 100, labelComponent: () => lcomp(10)},
+    {value: 1.7351068411690478, labelComponent: () => lcomp(10)},
+    {value: 7.804353947946355, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+    {value: 0, labelComponent: () => lcomp(10)},
+  ];
+
   return (
-  <View
-    style={{
-      paddingVertical: 100,
-      paddingLeft: 20,
-      backgroundColor: '#1C1C1C',
-    }}>
+    <View
+      style={{
+        paddingVertical: 100,
+        marginLeft: -70,
+        // paddingLeft: -10,
+        // backgroundColor: '#1C1C1C',
+      }}>
+      <View style={{transform: [{rotateZ: '30deg'}, {skewX: '35deg'}]}}>
+        <BarChart
+          width={560}
+          side={'right'}
+          data={lineData}
+          isThreeD
+          sideWidth={40}
+          hideAxesAndRules
+          // frontColor={'rgb(200,50,50)'}
+          // topColor={'rgba(250,50,50,0.8)'}
+          // sideColor={'rgb(220,50,50)'}
+          frontColor={'rgba(100,90,100,1)'}
+          topColor={'rgba(100,150,100,0.8)'}
+          sideColor={'rgba(100,120,100,1)'}
+        />
+      </View>
+      <View
+        style={{
+          transform: [{rotateZ: '30deg'}, {skewX: '35deg'}, {translateY: -100}],
+        }}>
+        <BarChart
+          hideAxesAndRules
+          width={560}
+          height={140}
+          data={lineData}
+          isThreeD
+          sideWidth={40}
+          side={'right'}
+          // frontColor={'rgba(100,100,200,1)'}
+          // topColor={'rgba(100,100,250,0.8)'}
+          // sideColor={'rgba(100,100,220,1)'}
+          frontColor={'rgba(100,160,100,1)'}
+          topColor={'rgba(100,210,100,0.8)'}
+          sideColor={'rgba(100,180,100,1)'}
+        />
+      </View>
+      <View
+        style={{
+          transform: [{rotateZ: '30deg'}, {skewX: '35deg'}, {translateY: -180}],
+        }}>
+        <BarChart
+          height={120}
+          hideAxesAndRules
+          width={560}
+          data={lineData}
+          isThreeD
+          sideWidth={40}
+          side={'right'}
+          frontColor={'rgba(100,220,100,1)'}
+          topColor={'rgba(100,255,100,0.8)'}
+          sideColor={'rgba(100,240,100,1)'}
+        />
+      </View>
+      {/* <ScrollView style={{overflow:'visible'}}>
+        <View style={{marginTop: 40, marginLeft: 80}}>
+          {[1, 1, 1, 1, 1].map((items, index) => {
+            return (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  transform: [{rotateZ: '40deg'}, {skewX: '-45deg'}],
+                  marginLeft: -50 * index,
+                }}>
+                {lineData.map(litems => {
+                  return (
+                    <View
+                      style={{
+                        width: 30,
+                        height: 30,
+                        backgroundColor: 'green',
+                        marginHorizontal: 2,
+                        marginVertical: -3,
+                        overflow: 'visible',
+                      }}>
+                      <View
+                        style={{
+                          position: 'absolute',
+                          zIndex:1,
+                          bottom: 0,
+                          transform: [
+                            {rotate: '-180deg'},
+                            {rotateZ: '-30deg'},
+                            {skewX: '45deg'},
+                            {translateX: 60},
+                            {translateY: 15},
+                          ],
+                          width: 30,
+                          height: Math.random()>0.8 ? litems.value * 5 : 0,
+                          backgroundColor: 'rgba(100,100,200,0.9)',
+                        }}
+                      />
+                    </View>
+                  );
+                })}
+              </View>
+            );
+          })}
+        </View>
+      </ScrollView> */}
+      {/* <AreaGraphCard
+        data={data1}
+        data2={data2}
+        araeMaxValue={82755}
+        // backgroundColor={'#1c1c1c'}
+        color={'#5674af'}
+        color2={'#439dae'}
+        graphType="Yearly"
+        maxValue={100}
+        noOfSections={5}
+        stepValue={16551}
+        tooltipText={[{}, {}, {}]}
+        yAxisData={['0%', '20%', '40%', '60%', '80%', '100%']}
+        yAxisStyle={'#292929'}
+      /> */}
+      {/* <BarChart
+        barWidth={22}
+        noOfSections={3}
+        barBorderRadius={4}
+        frontColor="lightgray"
+        data={bbcData}
+        yAxisThickness={0}
+        xAxisThickness={0}
+        hideRules
+        showReferenceLine1
+        referenceLine1Position={420}
+        referenceLine1Config={{
+          color: 'gray',
+          dashWidth: 2,
+          dashGap: 3,
+        }}
+      /> */}
+      {/* <BarChart
+        showScrollIndicator
+        data={barData}
+        width={280}
+        xAxisColor="red"
+        xAxisType={'dashed'}
+      /> */}
+      {/* <LineChart
+      showVerticalLines
+      width={280}
+      noOfVerticalLines={8}
+      verticalLinesSpacing={40}
+      verticalLinesUptoDataPoint
+      data={pieData}
+      showGradient /> */}
+      {/* <BarChart
+        horizontal
+        barWidth={22}
+        noOfSections={3}
+        barBorderRadius={4}
+        labelsExtraHeight={120}
+        data={showCharts}
+        yAxisThickness={0}
+        xAxisThickness={0}
+        yAxisTextStyle={{color: 'black'}}
+        yAxisAtTop={false}
+        width={320}
+      /> */}
+      {/* <ScrollingChartWithPointer /> */}
+      {/* <SimpleBlueBarsVerticalLines /> */}
+      {/* <BarChartWithGivenNumberOfVerticalLines /> */}
+      {/* <LineChart
+        horizontalRulesStyle={{width: Dimensions.get('window').width * 0.775}}
+        thickness={0}
+        startFillColor1={props.color}
+        hideDataPoints={true}
+        startFillColor2={props.color2}
+        dataPointsColor1={props.color}
+        dataPointsColor2={props.color2}
+        color1={'black'}
+        color2={'black'}
+        adjustToWidth={true}
+        maxValue={props.maxValue}
+        noOfSections={props.noOfSections}
+        yAxisLabelTexts={props.yAxisData}
+        areaChart
+        stepValue={props.stepValue}
+        rulesThickness={1}
+        yAxisTextStyle={{color: 'grey', fontSize: 10}}
+        data={props.data}
+        verticalLineColor={'white'}
+        data2={props.data2}
+        curved
+        endFillColor1={props.color}
+        endFillColor2={props.color2}
+        startOpacity1={0.6}
+        endOpacity1={0.1}
+        startOpacity2={0.6}
+        scrollAnimation={false}
+        endOpacity2={0.1}
+        spacing={props.graphType === 'Monthly' ? 43 : 58}
+        xAxisThickness={1}
+        backgroundColor={props.backgroundColor}
+        rulesColor={props.yAxisStyle}
+        rulesType="solid"
+        initialSpacing={15}
+        yAxisColor={'black'}
+        xAxisColor={props.yAxisStyle}
+        dataPointsHeight={20}
+        showScrollIndicator={true}
+        dataPointsWidth={20}
+        hideRules={props.rulesVisible}
+        width={Dimensions.get('window').width * 0.75}
+        getPointerProps= {(pointerProps)=>{
+          console.log(pointerProps);
+        }}
+        pointerConfig={{
+          pointerStripUptoDataPoint: true,
+          // activatePointersOnLongPress: true,
+          activatePointersDelay: 10,
+          pointerStripColor: 'lightgray',
+          autoAdjustPointerLabelPosition: true,
+          pointerStripWidth: 2,
+          strokeDashArray: [2, 5],
+          pointerColor: 'lightgray',
+          radius: 2,
+          pointerLabelHeight: 115,
+          pointerLabelWidth: 120,
+          pointerLabelComponent: items => {
+            // console.log('items :', items);
+            return props.graphType === 'Yearly' ? (
+              <View style={{backgroundColor:'white',justifyContent:'center',width:120,padding:10}}>
+                <Text>{props.tooltipText[0].value}</Text>
+                <Text>{'Sample tooltip title'}</Text>
+                <Text>{props.tooltipText[1].value}</Text>
+                <Text>{'Sample tooltip text'}</Text>
+              </View>
+            ) : (
+              <>
+                <Text>{props.tooltipText[2].value}</Text>
+                <Text>{'Looks cool'}</Text>
+              </>
+            );
+          },
+        }}
+      /> */}
       {/* <PieChart data={llData}/> */}
       {/* <BarThreeD/> */}
       {/* <BarWithGradient /> */}
@@ -1062,8 +1481,10 @@ const App = () => {
       {/* <AreaTwo /> */}
       {/* <LineChartTwo /> */}
       {/* <SimpleBlueLine /> */}
+      {/* <SimpleBlueLineWithGivenNumberOfVerticalLines /> */}
       {/* <ProgressPie /> */}
       {/* <SimplePie /> */}
+      {/* <PieChartFocusOnPress /> */}
       {/* <SplitPie /> */}
       {/* <ThreeDPie /> */}
       {/* <LineChart
@@ -1077,7 +1498,109 @@ const App = () => {
         yAxisOffset={100}
         maxValue={120}
       /> */}
-      <LineChart
+      {/* <LineChart
+        horizontalRulesStyle={{width: Dimensions.get('window').width * 0.775}}
+        thickness={2}
+        startFillColor1={'red'}
+        hideDataPoints={true}
+        startFillColor2={'green'}
+        dataPointsColor1={'red'}
+        dataPointsColor2={'green'}
+        color1={'black'}
+        color2={'black'}
+        adjustToWidth={true}
+        maxValue={200}
+        noOfSections={6}
+        // yAxisLabelTexts={['']}
+        areaChart
+        stepValue={40}
+        rulesThickness={2}
+        yAxisTextStyle={{color: 'grey'}}
+        data={[{value:100},{value:80},{value:120},{value:60}]}
+        verticalLineColor={'white'}
+        data={[{value:70},{value:90},{value:100},{value:80}]}
+        curved
+        endFillColor1={'red'}
+        endFillColor2={'green'}
+        startOpacity1={0.6}
+        endOpacity1={0.1}
+        startOpacity2={0.6}
+        scrollAnimation={false}
+        endOpacity2={0.1}
+        spacing={43}
+        xAxisThickness={1}
+        // backgroundColor={props.backgroundColor}
+        // rulesColor={props.yAxisStyle}
+        rulesType="solid"
+        // initialSpacing={scales(15)}
+        yAxisColor={'black'}
+        // xAxisColor={props.yAxisStyle}
+        // dataPointsHeight={scales(20)}
+        showScrollIndicator={true}
+        // dataPointsWidth={scales(20)}
+        // hideRules={props.rulesVisible}
+        // width={deviceDimensions.width * 0.75}
+        pointerConfig={{
+          pointerStripUptoDataPoint: true,
+          activatePointersOnLongPress: true,
+          activatePointersDelay: 10,
+          pointerStripColor: 'lightgray',
+          autoAdjustPointerLabelPosition: true,
+          pointerStripWidth: 2,
+          strokeDashArray: [2, 5],
+          pointerColor: 'lightgray',
+          radius: 2,
+          pointerLabelHeight: 100,
+          // pointerLabelWidth: scales(100),
+          pointerLabelComponent: items => {
+            console.log('items :', items);
+            return props.graphType === 'Yearly' ? (
+              <Text style={[styles.pointerYearText, {paddingTop: spacing(12)}]}>
+                {props.tooltipText[1].value}
+                {getCommaString(
+                  ((items[1]?.value / 100) * props.areaMaxValue).toFixed(2),
+                )}
+              </Text>
+            ) : (
+              <Text style={[styles.pointerYearText, {paddingTop: spacing(12)}]}>
+                {props.tooltipText[2].value}
+                {getCommaString(
+                  ((items[0]?.value / 100) * props.areaMaxValue).toFixed(2),
+                )}
+              </Text>
+            );
+          },
+        }}
+      /> */}
+      {/* <CaloriesBurnt /> */}
+
+      {/* <LineChart
+        noOfSections={4}
+        yAxisLabelTexts={[
+          '0',
+          '246.122.825 VND',
+          '492.245.650 VND',
+          '738.368.475 VND',
+          '984.491.300 VND',
+        ]}
+        yAxisTextNumberOfLines={2}
+        yAxisTextStyle={{textAlign:'right',width:88}}
+        yAxisLabelWidth={100}
+        data={llData}
+        pointerConfig={{
+          showPointerStrip: true,
+          pointerStripUptoDataPoint: true,
+          pointerLabelComponent: (items)=>{
+            return(
+              <View style={{height:30,width:50,borderRadius:10,backgroundColor:'green'}}>
+                <Text>{items[0].value}</Text>
+              </View>
+            )
+          }
+        }}
+      /> */}
+
+      {/* <LineChart
         areaChart
         data={ptData}
         rotateLabel
@@ -1107,10 +1630,16 @@ const App = () => {
         xAxisColor="lightgray"
         pointerConfig={{
           pointerStripHeight: 160,
-          pointerStripColor: 'lightgray',
+          pointerStripColor: 'red',
           pointerStripWidth: 2,
-          pointerColor: 'lightgray',
-          radius: 6,
+          stripOverPointer: true,
+          pointerComponent: ()=>{
+            return(
+              <View style={{height:14,width:14,borderRadius:7,backgroundColor:'yellow',zIndex:300}}/>
+            )
+          },
+          // pointerColor: 'lightgray',
+          // radius: 6,
           pointerLabelWidth: 100,
           pointerLabelHeight: 90,
           // activatePointersOnLongPress: true,
@@ -1122,8 +1651,8 @@ const App = () => {
                   height: 90,
                   width: 100,
                   justifyContent: 'center',
-                  marginTop: -30,
-                  marginLeft: -40,
+                  // marginTop: -30,
+                  // marginLeft: -40,
                 }}>
                 <Text style={{color: 'white', fontSize: 14, marginBottom:6,textAlign:'center'}}>
                   {items[0].date}
@@ -1138,7 +1667,7 @@ const App = () => {
             );
           },
         }}
-      />
+      /> */}
 
       {/* <BarChart
         data={pieData}
@@ -1157,17 +1686,36 @@ const App = () => {
         innerCircleBorderWidth={10}
         innerCircleBorderColor="#333"
         showGradient
-        onPress={(item, index) => Alert.alert(item.value.toString())}
+        // onPress={(item, index) => Alert.alert(item.value.toString())}
+        renderTooltip={(item,index)=>{
+          return(
+            <View style={{height:40,width:100,borderRadius:10,backgroundColor:'green'}}>
+              <Text>{item.value}</Text>
+            </View>
+          )
+        }}
       /> */}
-      {/* <PieChart
-            showText
-            textColor="black"
-            radius={150}
-            textSize={20}
-            showTextBackground
-            textBackgroundRadius={26}
-            data={pieData}
-            /> */}
+      {/* <LineChart
+        showText
+        showVerticalLines
+        // noOfVerticalLines={8}
+        // verticalLinesSpacing={30}
+        // verticalLinesUptoDataPoint
+        initialSpacing={40}
+        spacing={40}
+        width={280}
+        noOfSections={4}
+        textColor="black"
+        rulesType={'solid'}
+        radius={150}
+        textSize={20}
+        showTextBackground
+        textBackgroundRadius={26}
+        data={barData3}
+        labelsExtraHeight={40}
+        xAxisTextNumberOfLines={2}
+        xAxisLabelTextStyle={{width:100,marginBottom:-10}}
+      /> */}
       {/* <PieChart
         // donut
         // innerRadius={80}
@@ -1185,12 +1733,38 @@ const App = () => {
         // }}
       /> */}
       {/* <MyPattern/> */}
+      {/* <View style={{position:'absolute',top:40,left:40}}>
+        <PieChart
+          data={[{value:18,color:'orange'},{value:179-18,color:'white'}]}
+          initialAngle={2*Math.PI*13/179}
+          // donut
+          radius={110}
+          donut
+          // initialAngle={Math.PI}
+          showText
+          showValuesAsLabels
+          onPress={(item)=>Alert.alert(item.value+'')}
+        />
+      </View> */}
+      {/* <View style={{position:'absolute',top:50,left:50}}> */}
       {/* <PieChart
-        data={lineData2.reverse()}
+        data={lineData2}
+        donut
+        // semiCircle
+        radius={100}
+        // donut
+        // innerRadius={60}
+        // labelsPosition={'outward'}
         // initialAngle={Math.PI}
+        // focusOnPress
+        // shadow
+        // isThreeD
+        // toggleFocusOnPress={true}
         showText
         showValuesAsLabels
+        onPress={(item)=>Alert.alert(item.value+'')}
       /> */}
+      {/* </View> */}
       {/* <PieChart
         // backgroundColor='green'
         // donut
@@ -1342,7 +1916,41 @@ const App = () => {
           color="#0BA5A4"
         />
       </View> */}
-      {/* <PieChart data={[]} isThreeD shadow donut/> */}
+      {/* <PieChart
+        data={llData}
+        textColor="black"
+        radius={150}
+        donut
+        textSize={15}
+        strokeWidth={2}
+        strokeColor="black"
+        innerCircleBorderWidth={2}
+        innerCircleBorderColor="black"
+        // showText
+        focusOnPress
+        showValuesAsLabels
+        showGradient
+        showTextBackground
+        textBackgroundRadius={16}
+      /> */}
+
+      {/* <PieChart
+        data={pieData}
+        textColor="black"
+        radius={100}
+        donut
+        textSize={15}
+        strokeWidth={2}
+        strokeColor="black"
+        innerCircleBorderWidth={2}
+        innerCircleBorderColor="black"
+        showText
+        focusOnPress
+        showValuesAsLabels
+        showGradient
+        showTextBackground
+        textBackgroundRadius={16}
+      /> */}
 
       {/* <LineChart
         data={lineData}
@@ -1461,6 +2069,29 @@ const App = () => {
         startOpacity={0.8}
         endOpacity={0.3}
         /> */}
+      {/* <BarChart
+        width={340}
+        // rotateLabel
+        showVerticalLines
+        noOfVerticalLines={7}
+        verticalLinesSpacing={40}
+        noOfSections={4}
+        stackData={stackData}
+        renderTooltip={(item, index) => {
+          return (
+            <View
+              style={{
+                paddingHorizontal: 10,
+                borderRadius: 10,
+                backgroundColor: 'pink',
+              }}>
+              {item.stacks.map(stackItem => {
+                return <Text>{stackItem.value}</Text>;
+              })}
+            </View>
+          );
+        }}
+      /> */}
 
       {/* <LineChart
         // width={200}
