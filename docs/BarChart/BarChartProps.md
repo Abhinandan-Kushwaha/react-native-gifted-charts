@@ -11,7 +11,8 @@
 | height              | number         | Height of the Bar chart (excluding the bottom label)                                      | 200                 |
 | onPress             | Function       | Callback function called on press of a Bar (takes item and index as parameter)            | null                |
 | maxValue            | number         | Maximum value shown in the Y axis                                                         | 200                 |
-| minValue | number | Minimum negative value shown in the Y axis (to be used only if the data set has negative values too) | \_ |
+| yAxisOffset         | number         | Starting (minimum) value in the Y axis (value at the origin)                              | 0                   |
+| minValue            | number         | Minimum negative value shown in the Y axis (to be used only if the data set has negative values too) | \_ |
 | noOfSections        | number         | Number of sections in the Y axis                                                          | 10                  |
 | noOfSectionsBelowXAxis | number | Number of sections in the Y axis below X axis (in case the data set has negative values too) | 0 |
 | stepValue           | number         | Value of 1 step/section in the Y axis                                                     | 20                  |
@@ -114,6 +115,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 
 | Prop                   | Type                | Description                                                                        | Default value          |
 | ---------------------- | ------------------- | ---------------------------------------------------------------------------------- | ---------------------- |
+| xAxisLength            | number              | X axis length                                                                      | width of the chart     |
 | xAxisColor             | ColorValue          | X axis color                                                                       | black                  |
 | xAxisThickness         | number              | X axis thickness                                                                   | 1                      |
 | yAxisColor             | ColorValue          | Y axis color                                                                       | black                  |
@@ -130,6 +132,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | yAxisLabelSuffix       | String              | The String appended to the y axis label text                                       | ''                     |
 | hideYAxisText          | Boolean             | To hide Y axis label text                                                          | false                  |
 | yAxisSide | String | Tells which side of the chart, should the y axis be present, defaults to 'left' | 'left' |
+| rulesLength            | number              | Length of the horizontal rules                                                     | width of the chart     |
 | rulesColor             | ColorValue          | Color of the horizontal rules                                                      | lightgray              |
 | rulesThickness         | number              | Thickness of the horizontal rules                                                  | 1                      |
 | hideRules              | Boolean             | To hide the horizontal rules                                                       | false                  |
