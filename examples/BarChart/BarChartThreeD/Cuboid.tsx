@@ -16,6 +16,7 @@ const Cuboid = props => {
     columnLabelConfig = {},
     rowLabel,
     rowLabelConfig = {},
+    opacity,
   } = props;
 
   const cos = size * Math.cos(angle);
@@ -74,6 +75,7 @@ const Cuboid = props => {
       <Path
         d={`M${dx} ${dy} L${hx} ${hy} L${gx} ${gy} L${cx} ${cy} L${dx} ${dy}`}
         fill={frontColor}
+        opacity={opacity || 1}
         // stroke="black"
         // strokeWidth={1}
       />
@@ -81,6 +83,7 @@ const Cuboid = props => {
       <Path
         d={`M${cx} ${cy} L${gx} ${gy} L${fx} ${fy} L${bx} ${by} L${cx} ${cy}`}
         fill={sideColor}
+        opacity={opacity || 1}
         // stroke="black"
         // strokeWidth={1}
       />
@@ -88,6 +91,7 @@ const Cuboid = props => {
       <Path
         d={`M${hx} ${hy} L${ex} ${ey} L${fx} ${fy} L${gx} ${gy} L${hx} ${hy}`}
         fill={topColor}
+        opacity={opacity || 1}
         // stroke="black"
         // strokeWidth={1}
       />

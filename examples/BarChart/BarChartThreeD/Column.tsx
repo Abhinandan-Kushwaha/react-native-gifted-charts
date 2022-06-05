@@ -14,14 +14,22 @@ const Column = props => {
     frontColor,
     sideColor,
     showBase = true,
-    baseHeight = 3,
+    baseHeight = 2,
     baseTopColor,
     baseFrontColor,
     baseSideColor,
-    rowLabel,
+    labelConfig,
+    rowLabels,
+    rowLabelConfig,
     columnLabel,
+    columnLabelConfig,
     showValuesAsLabels,
     showNonZeroLabels,
+    rainbow,
+    columnColor,
+    baseOpacity,
+    q1,
+    q3,
   } = props;
   const sinFactor = Math.PI / angle / 2 - 1;
   const getNextX = (x, n) => {
@@ -31,6 +39,8 @@ const Column = props => {
   const getNextY = (y, n) => {
     return y + n * (size * Math.cos(angle * sinFactor) + gap);
   };
+
+  // console.log('columnColor...........',columnColor)
 
   return (
     <G>
@@ -44,13 +54,14 @@ const Column = props => {
               height={baseHeight}
               size={size}
               angle={angle}
+              opacity={baseOpacity || (rainbow ? 0.5 : 1)}
               topColor={item.baseTopColor || baseTopColor || '#ddd'}
               frontColor={item.baseFrontColor || baseFrontColor || '#999'}
               sideColor={item.baseSideColor || baseSideColor || '#aaaaaa'}
               columnLabel={index === data.length - 1 ? columnLabel : ''}
-              rowLabel={rowLabel}
-              rowLabelConfig={{color: 'yellow', fontSize: 13}}
-              columnLabelConfig={{color: 'white', fontSize: 13}}
+              rowLabel={rowLabels ? rowLabels[index] : ''}
+              rowLabelConfig={rowLabelConfig}
+              columnLabelConfig={columnLabelConfig}
               label={
                 item.label ||
                 (showValuesAsLabels
@@ -61,9 +72,11 @@ const Column = props => {
                     : item.value || ''
                   : '')
               }
+              labelConfig={labelConfig}
             />
           );
         }
+        if(!item.value) return null;
         return (
           <Cuboid
             key={index + 'k'}
@@ -72,13 +85,46 @@ const Column = props => {
             height={item.value + baseHeight}
             size={size}
             angle={angle}
-            topColor={item.topColor || topColor || 'rgb(150,200,150)'}
-            frontColor={item.frontColor || frontColor || 'lightgreen'}
-            sideColor={item.sideColor || sideColor || 'green'}
+            // topColor={item.topColor || topColor || 'rgb(150,200,150)'}
+            // frontColor={item.frontColor || frontColor || 'lightgreen'}
+            // sideColor={item.sideColor || sideColor || 'green'}
+            topColor={
+              rainbow
+                ? item.topColor ||
+                  topColor ||
+                  (item.value < q1
+                    ? columnColor.top.dark
+                    : item.value < q3
+                    ? columnColor.top.medium
+                    : columnColor.top.light)
+                : item.topColor || topColor
+            }
+            frontColor={
+              rainbow
+                ? item.frontColor ||
+                  frontColor ||
+                  (item.value < q1
+                    ? columnColor.front.dark
+                    : item.value < q3
+                    ? columnColor.front.medium
+                    : columnColor.front.light)
+                : item.frontColor || frontColor
+            }
+            sideColor={
+              rainbow
+                ? item.sideColor ||
+                  sideColor ||
+                  (item.value < q1
+                    ? columnColor.side.dark
+                    : item.value < q3
+                    ? columnColor.side.medium
+                    : columnColor.side.light)
+                : item.sideColor || sideColor
+            }
             columnLabel={index === data.length - 1 ? columnLabel : ''}
-            rowLabel={rowLabel}
-            rowLabelConfig={{color: 'yellow', fontSize: 13}}
-            columnLabelConfig={{color: 'white', fontSize: 13}}
+            rowLabel={rowLabels ? rowLabels[index] : ''}
+            rowLabelConfig={rowLabelConfig}
+            columnLabelConfig={columnLabelConfig}
             label={
               item.label ||
               (showValuesAsLabels
@@ -89,6 +135,7 @@ const Column = props => {
                   : item.value || ''
                 : '')
             }
+            labelConfig={labelConfig}
           />
         );
       })}
