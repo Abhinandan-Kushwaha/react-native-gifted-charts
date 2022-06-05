@@ -40,6 +40,7 @@ type PropTypes = {
   // animationEasing?: any;
   opacity?: number;
   isThreeD?: Boolean;
+  xAxisLength?: number;
   xAxisThickness?: number;
   xAxisColor?: ColorValue;
   yAxisThickness?: number;
@@ -53,6 +54,7 @@ type PropTypes = {
   yAxisLabelWidth?: number;
   hideYAxisText?: Boolean;
   yAxisSide?: string;
+  yAxisOffset?: number;
   initialSpacing?: number;
   barWidth?: number;
   sideWidth?: number;
@@ -67,6 +69,7 @@ type PropTypes = {
 
   hideAxesAndRules?: Boolean;
   hideRules?: Boolean;
+  rulesLength?: number;
   rulesColor?: ColorValue;
   rulesThickness?: number;
   rulesType?: String;
@@ -202,7 +205,18 @@ export const BarChart = (props: PropTypes) => {
   const showLine = props.showLine || false;
   const initialSpacing =
     props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
-  const data = useMemo(() => props.data || [], [props.data]);
+  const data = useMemo(() => {
+    if (!props.data) {
+      return [];
+    }
+    if (props.yAxisOffset) {
+      return props.data.map(item => {
+        item.value = item.value - props.yAxisOffset;
+        return item;
+      });
+    }
+    return props.data;
+  }, [props.yAxisOffset, props.data]);
   const lineData = props.lineData || data;
   const defaultLineConfig = {
     initialSpacing: initialSpacing,
@@ -348,6 +362,7 @@ export const BarChart = (props: PropTypes) => {
   const showVerticalLines = props.showVerticalLines || false;
   const rulesThickness =
     props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
+  const rulesLength = props.rulesLength;
   const rulesColor = props.rulesColor || 'lightgray';
   const verticalLinesThickness =
     props.verticalLinesThickness === 0 ? 0 : props.verticalLinesThickness || 1;
@@ -379,6 +394,7 @@ export const BarChart = (props: PropTypes) => {
     props.xAxisThickness === 0
       ? props.xAxisThickness
       : props.xAxisThickness || 1;
+  const xAxisLength = props.xAxisLength;
   const xAxisColor = props.xAxisColor || 'black';
 
   const hideRules = props.hideRules || false;
@@ -653,15 +669,20 @@ export const BarChart = (props: PropTypes) => {
       (props.yAxisLabelTexts && props.yAxisLabelTexts[index] !== undefined)
     ) {
       if (val) {
-        label = val;
+        label = props.yAxisOffset
+          ? (Number(val) + props.yAxisOffset).toString()
+          : val;
       } else {
-        label = '0';
+        label = props.yAxisOffset ? props.yAxisOffset.toString() : '0';
       }
     } else {
       if (val) {
         label = val.toString().split('.')[0];
+        if (props.yAxisOffset) {
+          label = (Number(label) + props.yAxisOffset).toString();
+        }
       } else {
-        label = '0';
+        label = props.yAxisOffset ? props.yAxisOffset.toString() : '0';
       }
     }
 
@@ -722,9 +743,11 @@ export const BarChart = (props: PropTypes) => {
                     config={{
                       thickness: xAxisThickness,
                       color: xAxisColor,
-                      width: horizontal
-                        ? props.width || Math.min(300, totalWidth)
-                        : (props.width || totalWidth) + 11,
+                      width:
+                        xAxisLength ||
+                        (horizontal
+                          ? props.width || Math.min(300, totalWidth)
+                          : (props.width || totalWidth) + 11),
                       dashWidth: dashWidth,
                       dashGap: dashGap,
                       type: xAxisType,
@@ -735,9 +758,11 @@ export const BarChart = (props: PropTypes) => {
                     config={{
                       thickness: rulesThickness,
                       color: rulesColor,
-                      width: horizontal
-                        ? props.width || Math.min(300, totalWidth)
-                        : (props.width || totalWidth) + 11,
+                      width:
+                        rulesLength ||
+                        (horizontal
+                          ? props.width || Math.min(300, totalWidth)
+                          : (props.width || totalWidth) + 11),
                       dashWidth: dashWidth,
                       dashGap: dashGap,
                       type: rulesType,
@@ -855,9 +880,11 @@ export const BarChart = (props: PropTypes) => {
                     config={{
                       thickness: rulesThickness,
                       color: rulesColor,
-                      width: horizontal
-                        ? props.width || totalWidth
-                        : (props.width || totalWidth) + 11,
+                      width:
+                        rulesLength ||
+                        (horizontal
+                          ? props.width || totalWidth
+                          : (props.width || totalWidth) + 11),
                       dashWidth: dashWidth,
                       dashGap: dashGap,
                       type: rulesType,

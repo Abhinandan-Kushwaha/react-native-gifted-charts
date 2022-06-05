@@ -69,10 +69,12 @@ type propTypes = {
   onDataChangeAnimationDuration?: number;
   animationEasing?: any;
   animateTogether?: boolean;
+  xAxisLength?: number;
   xAxisThickness?: number;
   xAxisColor?: ColorValue;
   xAxisType?: String;
   hideRules?: Boolean;
+  rulesLength?: number;
   rulesColor?: ColorValue;
   rulesThickness?: number;
   pressEnabled?: Boolean;
@@ -549,6 +551,7 @@ export const LineChart = (props: propTypes) => {
           ? ((props.width || 200) - initialSpacing) / data.length
           : 60);
 
+  const xAxisLength = props.xAxisLength;
   const xAxisThickness =
     props.xAxisThickness === 0 ? 0 : props.xAxisThickness || 1;
   const dataPointsHeight1 =
@@ -1370,6 +1373,7 @@ export const LineChart = (props: propTypes) => {
 
   const rulesThickness =
     props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
+  const rulesLength = props.rulesLength;
   const rulesColor = props.rulesColor || 'lightgray';
   const verticalLinesThickness =
     props.verticalLinesThickness === 0 ? 0 : props.verticalLinesThickness || 1;
@@ -1863,7 +1867,7 @@ export const LineChart = (props: propTypes) => {
                       config={{
                         thickness: xAxisThickness,
                         color: xAxisColor,
-                        width: (props.width || totalWidth) + 11,
+                        width: xAxisLength || (props.width || totalWidth) + 11,
                         dashWidth: dashWidth,
                         dashGap: dashGap,
                         type: xAxisType,
@@ -1874,7 +1878,7 @@ export const LineChart = (props: propTypes) => {
                       config={{
                         thickness: rulesThickness,
                         color: rulesColor,
-                        width: (props.width || totalWidth) + 11,
+                        width: rulesLength || (props.width || totalWidth) + 11,
                         dashWidth: dashWidth,
                         dashGap: dashGap,
                         type: rulesType,
@@ -1987,7 +1991,7 @@ export const LineChart = (props: propTypes) => {
                     config={{
                       thickness: rulesThickness,
                       color: rulesColor,
-                      width: (props.width || totalWidth) + 11,
+                      width: rulesLength || (props.width || totalWidth) + 11,
                       dashWidth: dashWidth,
                       dashGap: dashGap,
                       type: rulesType,
