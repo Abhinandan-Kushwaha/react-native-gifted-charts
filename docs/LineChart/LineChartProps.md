@@ -94,6 +94,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 
 | Prop                   | Type                | Description                                                                        | Default value          |
 | ---------------------- | ------------------- | ---------------------------------------------------------------------------------- | ---------------------- |
+| xAxisLength            | number              | X axis length                                                                      | width of the chart     |
 | xAxisColor             | ColorValue          | X axis color                                                                       | black                  |
 | xAxisThickness         | number              | X axis thickness                                                                   | 1                      |
 | xAxisType              | String              | solid or dotted/dashed                                                             | solid                  |
@@ -111,6 +112,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | yAxisLabelSuffix       | String              | The String appended to the y axis label text                                       | ''                     |
 | hideYAxisText          | Boolean             | To hide Y axis label text                                                          | false                  |
 | yAxisSide | String | Tells which side of the chart, should the y axis be present, defaults to 'left' | 'left' |
+| rulesLength            | number              | Length of the horizontal rules                                                     | width of the chart     |
 | rulesColor             | ColorValue          | Color of the horizontal rules                                                      | lightgray              |
 | rulesThickness         | number              | Thickness of the horizontal rules                                                  | 1                      |
 | hideRules              | Boolean             | To hide the horizontal rules                                                       | false                  |
