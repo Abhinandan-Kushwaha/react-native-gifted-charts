@@ -79,7 +79,16 @@ type itemType = {
 };
 
 export const PieChartMain = (props: propTypes) => {
-  const {data, isThreeD} = props;
+  const {isThreeD} = props;
+  const propData = props.data;
+  const data = [];
+  if (propData) {
+    for (let i = 0; i < propData.length; i++) {
+      if (propData[i].value !== 0) {
+        data.push(propData[i]);
+      }
+    }
+  }
   const radius = props.radius || 120;
   const canvasWidth = radius * 2;
   const canvasHeight = isThreeD ? radius * 2.3 : radius * 2;
