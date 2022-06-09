@@ -3360,7 +3360,7 @@ export const LineChart = (props: propTypes) => {
           data.map((item: itemType, index: number) => {
             return (
               <View
-                key={index}
+                key={index + '' + item.value}
                 style={{
                   position: 'absolute',
                   height: yAxisIndicesHeight,
