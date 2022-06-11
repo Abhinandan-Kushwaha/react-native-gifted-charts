@@ -4,9 +4,9 @@ Some Line / Area charts have different colors for their positive and negative pa
 
 <img src='https://user-images.githubusercontent.com/13629606/172202911-920aefa7-1a78-4e5e-91d5-d3670e00fe45.png' alt=''/>
 
-To render such charts, we can use the <LineChartBicolor> component. Curved lines are not yet supported in such charts. Also, we can only render a single data set (multiple lines not yet supported). However, props like `areaChart`, `isAnimated` etc are supported.
+To render such charts, we can use the `<LineChartBicolor>` component. Curved lines are not yet supported in such charts. Also, we can only render a single data set (multiple lines not yet supported). However, props like `areaChart`, `isAnimated` etc are supported.
 
-This chart supports most of the props from the <LineChart> component. (excluding those which might request for unsupported features, like - `curved`, `data2`, `data3`, `color2`, `color3` etc).
+This chart supports most of the props from the `<LineChart>` component. (excluding those which might request for unsupported features, like - `curved`, `data2`, `data3`, `color2`, `color3` etc).
 
 The props like-
 
