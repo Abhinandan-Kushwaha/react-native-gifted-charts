@@ -37,27 +37,9 @@ type propTypes = {
   spacing?: number;
   initialSpacing?: number;
   data?: Array<itemType>;
-  data2?: Array<itemType>;
-  data3?: Array<itemType>;
-  data4?: Array<itemType>;
-  data5?: Array<itemType>;
-  zIndex1?: number;
-  zIndex2?: number;
-  zIndex3?: number;
-  zIndex4?: number;
-  zIndex5?: number;
+  zIndex?: number;
   thickness?: number;
-  thickness1?: number;
-  thickness2?: number;
-  thickness3?: number;
-  thickness4?: number;
-  thickness5?: number;
   strokeDashArray?: Array<number>;
-  strokeDashArray1?: Array<number>;
-  strokeDashArray2?: Array<number>;
-  strokeDashArray3?: Array<number>;
-  strokeDashArray4?: Array<number>;
-  strokeDashArray5?: Array<number>;
   rotateLabel?: Boolean;
   isAnimated?: Boolean;
   animationDuration?: number;
@@ -115,7 +97,6 @@ type propTypes = {
   areaChart?: Boolean;
 
   disableScroll?: Boolean;
-  pointerConfig?: Pointer;
   showScrollIndicator?: Boolean;
   indicatorColor?: 'black' | 'default' | 'white';
 
@@ -133,24 +114,10 @@ type propTypes = {
   yAxisOffset?: number;
 
   startIndex?: number;
-  startIndex1?: number;
-  startIndex2?: number;
-  startIndex3?: number;
-  startIndex4?: number;
-  startIndex5?: number;
   endIndex?: number;
-  endIndex1?: number;
-  endIndex2?: number;
-  endIndex3?: number;
-  endIndex4?: number;
-  endIndex5?: number;
 
   color?: string;
-  color1?: string;
-  color2?: string;
-  color3?: string;
-  color4?: string;
-  color5?: string;
+  colorNegative?: string;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
   yAxisLabelContainerStyle?: any;
@@ -175,36 +142,6 @@ type propTypes = {
   dataPointsRadius?: number;
   dataPointsColor?: string;
   dataPointsShape?: string;
-  hideDataPoints1?: Boolean;
-  dataPointsHeight1?: number;
-  dataPointsWidth1?: number;
-  dataPointsRadius1?: number;
-  dataPointsColor1?: string;
-  dataPointsShape1?: string;
-  hideDataPoints2?: Boolean;
-  dataPointsHeight2?: number;
-  dataPointsWidth2?: number;
-  dataPointsRadius2?: number;
-  dataPointsColor2?: string;
-  dataPointsShape2?: string;
-  hideDataPoints3?: Boolean;
-  dataPointsHeight3?: number;
-  dataPointsWidth3?: number;
-  dataPointsRadius3?: number;
-  dataPointsColor3?: string;
-  dataPointsShape3?: string;
-  hideDataPoints4?: Boolean;
-  dataPointsHeight4?: number;
-  dataPointsWidth4?: number;
-  dataPointsRadius4?: number;
-  dataPointsColor4?: string;
-  dataPointsShape4?: string;
-  hideDataPoints5?: Boolean;
-  dataPointsHeight5?: number;
-  dataPointsWidth5?: number;
-  dataPointsRadius5?: number;
-  dataPointsColor5?: string;
-  dataPointsShape5?: string;
   customDataPoint?: Function;
 
   focusedDataPointShape?: String;
@@ -219,42 +156,16 @@ type propTypes = {
 
   startFillColor?: string;
   endFillColor?: string;
+  startFillColorNegative?: string;
+  endFillColorNegative?: string;
   startOpacity?: number;
   endOpacity?: number;
-  startFillColor1?: string;
-  endFillColor1?: string;
-  startOpacity1?: number;
-  endOpacity1?: number;
-  startFillColor2?: string;
-  endFillColor2?: string;
-  startOpacity2?: number;
-  endOpacity2?: number;
-  startFillColor3?: string;
-  endFillColor3?: string;
-  startOpacity3?: number;
-  endOpacity3?: number;
-  startFillColor4?: string;
-  endFillColor4?: string;
-  startOpacity4?: number;
-  endOpacity4?: number;
-  startFillColor5?: string;
-  endFillColor5?: string;
-  startOpacity5?: number;
-  endOpacity5?: number;
+  startOpacityNegative?: number;
+  endOpacityNegative?: number;
   gradientDirection?: string;
 
   textFontSize?: number;
   textColor?: string;
-  textFontSize1?: number;
-  textColor1?: string;
-  textFontSize2?: number;
-  textColor2?: string;
-  textFontSize3?: number;
-  textColor3?: string;
-  textFontSize4?: number;
-  textColor4?: string;
-  textFontSize5?: number;
-  textColor5?: string;
   hideOrigin?: Boolean;
   textShiftX?: number;
   textShiftY?: number;
@@ -334,10 +245,9 @@ type sectionType = {
 
 export const LineChartBicolor = (props: propTypes) => {
   const scrollRef = useRef();
-  const [points, setPoints] = useState('');
+  const [toggle, setToggle] = useState(false);
   const [pointsArray, setPointsArray] = useState([]);
   const [fillPointsArray, setFillPointsArray] = useState([]);
-  const [fillPoints, setFillPoints] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const containerHeight = props.height || 200;
   const noOfSections = props.noOfSections || 10;
@@ -353,64 +263,12 @@ export const LineChartBicolor = (props: propTypes) => {
     }
     return props.data;
   }, [props.yAxisOffset, props.data]);
-  const data2 = useMemo(() => {
-    if (!props.data2) {
-      return [];
-    }
-    if (props.yAxisOffset) {
-      return props.data2.map(item => {
-        item.value = item.value - props.yAxisOffset;
-        return item;
-      });
-    }
-    return props.data2;
-  }, [props.yAxisOffset, props.data2]);
-  const data3 = useMemo(() => {
-    if (!props.data3) {
-      return [];
-    }
-    if (props.yAxisOffset) {
-      return props.data3.map(item => {
-        item.value = item.value - props.yAxisOffset;
-        return item;
-      });
-    }
-    return props.data3;
-  }, [props.yAxisOffset, props.data3]);
-  const data4 = useMemo(() => {
-    if (!props.data4) {
-      return [];
-    }
-    if (props.yAxisOffset) {
-      return props.data4.map(item => {
-        item.value = item.value - props.yAxisOffset;
-        return item;
-      });
-    }
-    return props.data4;
-  }, [props.yAxisOffset, props.data4]);
-  const data5 = useMemo(() => {
-    if (!props.data5) {
-      return [];
-    }
-    if (props.yAxisOffset) {
-      return props.data5.map(item => {
-        item.value = item.value - props.yAxisOffset;
-        return item;
-      });
-    }
-    return props.data5;
-  }, [props.yAxisOffset, props.data5]);
 
   const scrollToEnd = props.scrollToEnd || false;
   const scrollAnimation = props.scrollAnimation === false ? false : true;
 
   const opacValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
-  const widthValue2 = useMemo(() => new Animated.Value(0), []);
-  const widthValue3 = useMemo(() => new Animated.Value(0), []);
-  const widthValue4 = useMemo(() => new Animated.Value(0), []);
-  const widthValue5 = useMemo(() => new Animated.Value(0), []);
   const labelsExtraHeight = props.labelsExtraHeight || 0;
 
   const animationDuration = props.animationDuration || 800;
@@ -420,33 +278,14 @@ export const LineChartBicolor = (props: propTypes) => {
   const yAxisLabelSuffix = props.yAxisLabelSuffix || '';
   const yAxisSide = props.yAxisSide || 'left';
 
-  const startIndex1 =
-    props.startIndex1 === 0 ? 0 : props.startIndex1 || props.startIndex || 0;
+  const startIndex1 = props.startIndex || 0;
 
   let endIndex1;
-  if (props.endIndex1 === undefined || props.endIndex1 === null) {
-    if (props.endIndex === undefined || props.endIndex === null) {
-      endIndex1 = data.length - 1;
-    } else {
-      endIndex1 = props.endIndex;
-    }
+  if (props.endIndex === undefined || props.endIndex === null) {
+    endIndex1 = data.length - 1;
   } else {
-    endIndex1 = props.endIndex1;
+    endIndex1 = props.endIndex;
   }
-
-  const startIndex2 = props.startIndex2 || 0;
-  const endIndex2 =
-    props.endIndex2 === 0 ? 0 : props.endIndex2 || data2.length - 1;
-
-  const startIndex3 = props.startIndex3 || 0;
-  const endIndex3 =
-    props.endIndex3 === 0 ? 0 : props.endIndex3 || data3.length - 1;
-  const startIndex4 = props.startIndex4 || 0;
-  const endIndex4 =
-    props.endIndex4 === 0 ? 0 : props.endIndex4 || data4.length - 1;
-  const startIndex5 = props.startIndex5 || 0;
-  const endIndex5 =
-    props.endIndex5 === 0 ? 0 : props.endIndex5 || data5.length - 1;
 
   if (!initialData) {
     initialData = [...data];
@@ -469,55 +308,11 @@ export const LineChartBicolor = (props: propTypes) => {
   const xAxisLength = props.xAxisLength;
   const xAxisThickness =
     props.xAxisThickness === 0 ? 0 : props.xAxisThickness || 1;
-  const dataPointsHeight1 =
-    props.dataPointsHeight1 || props.dataPointsHeight || 2;
-  const dataPointsWidth1 = props.dataPointsWidth1 || props.dataPointsWidth || 2;
-  const dataPointsRadius1 =
-    props.dataPointsRadius1 || props.dataPointsRadius || 3;
-  const dataPointsColor1 =
-    props.dataPointsColor1 || props.dataPointsColor || 'black';
-  const dataPointsShape1 =
-    props.dataPointsShape1 || props.dataPointsShape || 'circular';
-
-  const dataPointsHeight2 =
-    props.dataPointsHeight2 || props.dataPointsHeight || 2;
-  const dataPointsWidth2 = props.dataPointsWidth2 || props.dataPointsWidth || 2;
-  const dataPointsRadius2 =
-    props.dataPointsRadius2 || props.dataPointsRadius || 3;
-  const dataPointsColor2 =
-    props.dataPointsColor2 || props.dataPointsColor || 'blue';
-  const dataPointsShape2 =
-    props.dataPointsShape2 || props.dataPointsShape || 'circular';
-
-  const dataPointsHeight3 =
-    props.dataPointsHeight3 || props.dataPointsHeight || 2;
-  const dataPointsWidth3 = props.dataPointsWidth3 || props.dataPointsWidth || 2;
-  const dataPointsRadius3 =
-    props.dataPointsRadius3 || props.dataPointsRadius || 3;
-  const dataPointsColor3 =
-    props.dataPointsColor3 || props.dataPointsColor || 'red';
-  const dataPointsShape3 =
-    props.dataPointsShape3 || props.dataPointsShape || 'circular';
-
-  const dataPointsHeight4 =
-    props.dataPointsHeight4 || props.dataPointsHeight || 2;
-  const dataPointsWidth4 = props.dataPointsWidth4 || props.dataPointsWidth || 2;
-  const dataPointsRadius4 =
-    props.dataPointsRadius4 || props.dataPointsRadius || 3;
-  const dataPointsColor4 =
-    props.dataPointsColor4 || props.dataPointsColor || 'red';
-  const dataPointsShape4 =
-    props.dataPointsShape4 || props.dataPointsShape || 'circular';
-
-  const dataPointsHeight5 =
-    props.dataPointsHeight5 || props.dataPointsHeight || 2;
-  const dataPointsWidth5 = props.dataPointsWidth5 || props.dataPointsWidth || 2;
-  const dataPointsRadius5 =
-    props.dataPointsRadius5 || props.dataPointsRadius || 3;
-  const dataPointsColor5 =
-    props.dataPointsColor5 || props.dataPointsColor || 'red';
-  const dataPointsShape5 =
-    props.dataPointsShape5 || props.dataPointsShape || 'circular';
+  const dataPointsHeight1 = props.dataPointsHeight || 2;
+  const dataPointsWidth1 = props.dataPointsWidth || 2;
+  const dataPointsRadius1 = props.dataPointsRadius || 3;
+  const dataPointsColor1 = props.dataPointsColor || 'black';
+  const dataPointsShape1 = props.dataPointsShape || 'circular';
 
   const labelsAppear = useCallback(() => {
     opacValue.setValue(0);
@@ -544,57 +339,9 @@ export const LineChartBicolor = (props: propTypes) => {
     }).start();
   }, [animationDuration, widthValue]);
 
-  const decreaseWidth2 = useCallback(() => {
-    widthValue2.setValue(0);
-    Animated.timing(widthValue2, {
-      toValue: 1,
-      duration: animationDuration,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
-  }, [animationDuration, widthValue2]);
-
-  const decreaseWidth3 = useCallback(() => {
-    widthValue3.setValue(0);
-    Animated.timing(widthValue3, {
-      toValue: 1,
-      duration: animationDuration,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
-  }, [animationDuration, widthValue3]);
-
-  const decreaseWidth4 = useCallback(() => {
-    widthValue4.setValue(0);
-    Animated.timing(widthValue4, {
-      toValue: 1,
-      duration: animationDuration,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
-  }, [animationDuration, widthValue4]);
-
-  const decreaseWidth5 = useCallback(() => {
-    widthValue5.setValue(0);
-    Animated.timing(widthValue5, {
-      toValue: 1,
-      duration: animationDuration,
-      easing: Easing.linear,
-      useNativeDriver: false,
-    }).start();
-  }, [animationDuration, widthValue5]);
-
   const areaChart = props.areaChart || false;
-  const textFontSize1 = props.textFontSize1 || props.textFontSize || 10;
-  const textFontSize2 = props.textFontSize2 || props.textFontSize || 10;
-  const textFontSize3 = props.textFontSize3 || props.textFontSize || 10;
-  const textFontSize4 = props.textFontSize4 || props.textFontSize || 10;
-  const textFontSize5 = props.textFontSize5 || props.textFontSize || 10;
-  const textColor1 = props.textColor1 || props.textColor || 'gray';
-  const textColor2 = props.textColor2 || props.textColor || 'gray';
-  const textColor3 = props.textColor3 || props.textColor || 'gray';
-  const textColor4 = props.textColor4 || props.textColor || 'gray';
-  const textColor5 = props.textColor5 || props.textColor || 'gray';
+  const textFontSize1 = props.textFontSize || 10;
+  const textColor1 = props.textColor || 'gray';
   const xAxisColor = props.xAxisColor || 'black';
 
   let totalWidth = initialSpacing;
@@ -633,165 +380,114 @@ export const LineChartBicolor = (props: propTypes) => {
   const minValue = props.minValue || minItem;
 
   useEffect(() => {
-    // console.log('comes here............')
     decreaseWidth();
     labelsAppear();
-    setTimeout(
-      () => {
-        decreaseWidth2();
-      },
-      animateTogether ? 0 : animationDuration,
-    );
-    setTimeout(
-      () => {
-        decreaseWidth3();
-      },
-      animateTogether ? 0 : animationDuration * 2,
-    );
-    setTimeout(
-      () => {
-        decreaseWidth4();
-      },
-      animateTogether ? 0 : animationDuration * 3,
-    );
-    setTimeout(
-      () => {
-        decreaseWidth5();
-      },
-      animateTogether ? 0 : animationDuration * 4,
-    );
-  }, [
-    animateTogether,
-    animationDuration,
-    decreaseWidth,
-    decreaseWidth2,
-    decreaseWidth3,
-    decreaseWidth4,
-    decreaseWidth5,
-    labelsAppear,
-  ]);
+  }, [animateTogether, animationDuration, decreaseWidth, labelsAppear]);
 
   useEffect(() => {
     let ppArray = [];
-    let pp = '',
-      y;
-    for (let i = 0; i < data.length; i++) {
-      let x;
-      if (i === 0) {
+    let yAtxAxis = containerHeight + 10 - xAxisThickness / 2;
+    let pp =
+        'M' +
+        (initialSpacing - dataPointsWidth1 / 2) +
+        ' ' +
+        (yAtxAxis - (data[0].value * containerHeight) / maxValue),
+      pv,
+      nv;
+    for (let i = 0; i < data.length - 1; i++) {
+      pv = data[i].value;
+      nv = data[i + 1].value;
+
+      if (pv < 0 && nv < 0) {
         pp +=
           'L' +
-          (initialSpacing - dataPointsWidth1 / 2) +
+          (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
           ' ' +
-          (containerHeight +
-            10 -
-            (data[0].value * containerHeight) / maxValue) +
-          ' ' +
+          (yAtxAxis - (data[i].value * containerHeight) / maxValue) +
+          ' ';
+      } else if (pv < 0 && nv > 0) {
+        pp +=
           'L' +
-          (initialSpacing - dataPointsWidth1 / 2 + spacing) +
+          (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
           ' ' +
-          (containerHeight +
-            10 -
-            (data[1].value * containerHeight) / maxValue) +
-          '';
+          (yAtxAxis - (data[i].value * containerHeight) / maxValue) +
+          ' ';
+        let prevX = initialSpacing - dataPointsWidth1 / 2 + spacing * i;
+        let prevY = yAtxAxis - (data[i].value * containerHeight) / maxValue;
+        let nextX = initialSpacing - dataPointsWidth1 / 2 + spacing * (i + 1);
+        let nextY = yAtxAxis - (data[i + 1].value * containerHeight) / maxValue;
+        let slope = (nextY - prevY) / (nextX - prevX);
+        let x = (yAtxAxis - prevY) / slope + prevX;
+        pp += 'L' + (x - thickness / 2) + ' ' + yAtxAxis + ' ';
+
         let pointsOb = {
           points: pp.startsWith('L') ? pp.replace('L', 'M') : pp,
-          color: data[0].value > 0 ? 'green' : 'red',
+          color: 'red',
         };
         ppArray.push(pointsOb);
-        setPoints(pp.startsWith('L') ? pp.replace('L', 'M') : pp);
         setPointsArray([...ppArray]);
+        pp = 'M' + x + ' ' + yAtxAxis + ' L' + nextX + ' ' + nextY + ' ';
+        pointsOb = {
+          points: pp,
+          color: 'green',
+        };
+        ppArray.push(pointsOb);
+      } else if (pv > 0 && nv < 0) {
+        pp +=
+          'L' +
+          (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
+          ' ' +
+          (yAtxAxis - (data[i].value * containerHeight) / maxValue) +
+          ' ';
+        let prevX = initialSpacing - dataPointsWidth1 / 2 + spacing * i;
+        let prevY = yAtxAxis - (data[i].value * containerHeight) / maxValue;
+        let nextX = initialSpacing - dataPointsWidth1 / 2 + spacing * (i + 1);
+        let nextY = yAtxAxis - (data[i + 1].value * containerHeight) / maxValue;
+        let slope = (nextY - prevY) / (nextX - prevX);
+
+        let x = (yAtxAxis - prevY) / slope + prevX;
+        pp += 'L' + (x - thickness / 2) + ' ' + yAtxAxis + ' ';
+
+        let pointsOb = {
+          points: pp.startsWith('L') ? pp.replace('L', 'M') : pp,
+          color: 'green',
+        };
+        ppArray.push(pointsOb);
+        //   setPoints(pp);
+        setPointsArray([...ppArray]);
+        pp = 'M' + x + ' ' + yAtxAxis + ' L' + nextX + ' ' + nextY + ' ';
+        pointsOb = {
+          points: pp,
+          color: 'red',
+        };
+        ppArray.push(pointsOb);
       } else {
-        if (data[i].value < 0 && data[i - 1].value > 0) {
-          y = containerHeight + 10;
-          let prevX =
-            i === 0
-              ? initialSpacing - dataPointsWidth1 / 2
-              : initialSpacing - dataPointsWidth1 / 2 + spacing * (i - 1);
-          let prevY =
-            i === 0
-              ? containerHeight + 10
-              : containerHeight +
-                10 -
-                (data[i - 1].value * containerHeight) / maxValue;
-          let nextX = initialSpacing - dataPointsWidth1 / 2 + spacing * i;
-          let nextY =
-            containerHeight + 10 - (data[i].value * containerHeight) / maxValue;
-          let slope = (nextY - prevY) / (nextX - prevX);
-          console.log('prevX---->', prevX);
-          console.log('prevY---->', prevY);
-          console.log('nextX---->', nextX);
-          console.log('nextY---->', nextY);
-          console.log('slope---->', slope);
-          console.log('..........|||||||||||||||||||.........');
-          x = (y - prevY) / slope + prevX;
-          pp += 'L' + x + ' ' + y + ' ';
-
-          let pointsOb = {
-            points: pp.startsWith('L') ? pp.replace('L', 'M') : pp,
-            color: data[i].value < 0 && data[i - 1].value > 0 ? 'green' : 'red',
-          };
-          ppArray.push(pointsOb);
-          //   setPoints(pp);
-          setPointsArray([...ppArray]);
-          pp = 'M' + x + ' ' + y + ' L' + nextX + ' ' + nextY + ' ';
-          pointsOb = {
-            points: pp,
-            color: 'red',
-          };
-          ppArray.push(pointsOb);
-          if (i !== data.length - 1 && data[i + 1].value > 0) {
-            prevX = nextX;
-            prevY = nextY;
-            nextX = initialSpacing - dataPointsWidth1 / 2 + spacing * (i + 1);
-            nextY =
-              containerHeight +
-              10 -
-              (data[i + 1].value * containerHeight) / maxValue;
-            slope = (nextY - prevY) / (nextX - prevX);
-            let newX = (y - prevY) / slope + prevX;
-            pp = 'M' + prevX + ' ' + prevY + ' L' + newX + ' ' + y;
-
-            let pointsOb = {
-              points: pp,
-              color: 'red',
-            };
-            ppArray.push(pointsOb);
-            //   setPoints(pp);
-            setPointsArray([...ppArray]);
-
-            pp = 'M' + newX + ' ' + y + ' ';
-          }
-        }
-        // else if(data[i] < 0 && data[i + 1].value > 0){
-        //     pp +=
-        //     'L' +
-        //     (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
-        //     ' ' +
-        //     (containerHeight +
-        //       10 -
-        //       (data[i].value * containerHeight) / maxValue) +
-        //     ' ';
-        // }
-        else if (!(data[i].value < 0 && data[i + 1].value > 0)) {
-          pp +=
-            'L' +
-            (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
-            ' ' +
-            (containerHeight +
-              10 -
-              (data[i].value * containerHeight) / maxValue) +
-            ' ';
-        }
+        pp +=
+          'L' +
+          (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
+          ' ' +
+          (yAtxAxis - (data[i].value * containerHeight) / maxValue) +
+          ' ';
       }
     }
+    let i = data.length - 1;
+    pv = data[i - 1].value;
+    nv = data[i].value;
+    if ((pv > 0 && nv > 0) || (pv < 0 && nv < 0)) {
+      pp +=
+        'L' +
+        (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
+        ' ' +
+        (yAtxAxis - (data[i].value * containerHeight) / maxValue) +
+        ' ';
+    }
     let pointsOb = {
-      points: pp,
-      color: data[data.length - 1].value > 0 ? 'green' : 'red',
+      points: pp.startsWith('L') ? pp.replace('L', 'M') : pp,
+      color: nv > 0 ? 'green' : 'red',
     };
     ppArray.push(pointsOb);
-    // setPoints(pp);
+    //   setPoints(pp);
     setPointsArray([...ppArray]);
-    // setTimeout(()=>setPoints(pp),800)
 
     /***************************          For Area Charts          *************************/
 
@@ -801,23 +497,63 @@ export const LineChartBicolor = (props: propTypes) => {
       startY,
       endY,
       color = 'green',
-      localArray = [];
+      localArray = [],
+      broken = false;
+
+    pp = 'M' + (initialSpacing - dataPointsWidth1 / 2) + ' ' + yAtxAxis;
+    for (i = 0; i < data.length - 1; i++) {
+      pv = data[i].value;
+      nv = data[i + 1].value;
+      pp +=
+        'L' +
+        (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
+        ' ' +
+        (yAtxAxis - (data[i].value * containerHeight) / maxValue) +
+        ' ';
+      if ((pv > 0 && nv < 0) || (pv < 0 && nv > 0)) {
+        let prevX = initialSpacing - dataPointsWidth1 / 2 + spacing * i;
+        let prevY = yAtxAxis - (data[i].value * containerHeight) / maxValue;
+        let nextX = initialSpacing - dataPointsWidth1 / 2 + spacing * (i + 1);
+        let nextY = yAtxAxis - (data[i + 1].value * containerHeight) / maxValue;
+        let slope = (nextY - prevY) / (nextX - prevX);
+
+        let x = (yAtxAxis - prevY) / slope + prevX;
+        pp += 'L' + (x - thickness / 2) + ' ' + yAtxAxis + ' ';
+        broken = true;
+        break;
+      }
+    }
+    if (!broken) {
+      i = data.length - 1;
+      pp +=
+        'L' +
+        (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
+        ' ' +
+        (yAtxAxis - (data[i].value * containerHeight) / maxValue) +
+        ' L' +
+        (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
+        ' ' +
+        (yAtxAxis - xAxisThickness / 2);
+    }
+    localArray.push({points: pp, color: data[0].value > 0 ? 'green' : 'red'});
+
+    let xs = [];
+    data.forEach((item, index) => {
+      let x = initialSpacing - dataPointsWidth1 / 2 + spacing * index;
+      xs.push(x + '');
+    });
+
     pointsArray.forEach((item, index) => {
-      console.log('item...', item);
       let splitArray = item.points
         .split(' ')
         .filter(spItem => spItem && spItem !== ' ');
 
-      if (splitArray[1] === y + '') {
-        console.log(
-          'found startIndex at index' +
-            index +
-            ' and the value of x here is ' +
-            splitArray[0],
-        );
+      if (
+        splitArray[1] === yAtxAxis + '' &&
+        !xs.includes(splitArray[0].replace('M', '').replace('L', ''))
+      ) {
         startIndex = index;
         startX = splitArray[0].replace('M', '').replace('L', '');
-        console.log('splitArray------>>', splitArray);
         if (splitArray.length > 3) {
           startY = splitArray[1].replace('M', '').replace('L', '');
           endY = splitArray[3].replace('M', '').replace('L', '');
@@ -828,13 +564,12 @@ export const LineChartBicolor = (props: propTypes) => {
           }
         }
       }
-      if (splitArray[splitArray.length - 1] === y + '') {
-        console.log(
-          'found endIndex at index' +
-            index +
-            ' and the value of x here is ' +
-            splitArray[splitArray.length - 2],
-        );
+      if (
+        splitArray[splitArray.length - 1] === yAtxAxis + '' &&
+        !xs.includes(
+          splitArray[splitArray.length - 2].replace('M', '').replace('L', ''),
+        )
+      ) {
         endIndex = index;
       }
       if (startX) {
@@ -844,70 +579,59 @@ export const LineChartBicolor = (props: propTypes) => {
             filPts += pointsArray[j].points.replaceAll('M', 'L');
           }
         }
-        filPts += 'L ' + startX + ' ' + y;
-        // console.log('filPts --- for index ' + index + ' = ' + filPts);
+        filPts += 'L ' + startX + ' ' + yAtxAxis;
         localArray.push({points: filPts.replace('L', 'M'), color});
       }
     });
+    if (broken) {
+      pp =
+        'M' +
+        (initialSpacing - dataPointsWidth1 / 2 + spacing * (data.length - 1)) +
+        ' ' +
+        yAtxAxis;
+      for (let i = data.length - 1; i > 0; i--) {
+        pv = data[i].value;
+        nv = data[i - 1].value;
+        pp +=
+          'L' +
+          (initialSpacing - dataPointsWidth1 / 2 + spacing * i) +
+          ' ' +
+          (yAtxAxis - (data[i].value * containerHeight) / maxValue) +
+          ' ';
+        if ((pv > 0 && nv < 0) || (pv < 0 && nv > 0)) {
+          let prevX = initialSpacing - dataPointsWidth1 / 2 + spacing * i;
+          let prevY = yAtxAxis - (data[i].value * containerHeight) / maxValue;
+          let nextX = initialSpacing - dataPointsWidth1 / 2 + spacing * (i - 1);
+          let nextY =
+            yAtxAxis - (data[i - 1].value * containerHeight) / maxValue;
+          let slope = (nextY - prevY) / (nextX - prevX);
+
+          let x = (yAtxAxis - prevY) / slope + prevX;
+          pp += 'L' + x + ' ' + yAtxAxis + ' ';
+          broken = true;
+          break;
+        }
+      }
+
+      localArray.push({
+        points: pp,
+        color: data[data.length - 1].value > 0 ? 'green' : 'red',
+      });
+    }
+
     setFillPointsArray([...localArray]);
-
-    //   if (areaChart) {
-    //     let ppp = '';
-
-    //     if (data.length && !animateOnDataChange) {
-    //       ppp =
-    //         'L' +
-    //         (initialSpacing - dataPointsWidth1 / 2) +
-    //         ' ' +
-    //         (containerHeight + 10 - xAxisThickness) +
-    //         ' ';
-    //       ppp += pp;
-    //       ppp +=
-    //         'L' +
-    //         (initialSpacing -
-    //           dataPointsWidth1 / 2 +
-    //           spacing * (data.length - 1)) +
-    //         ' ' +
-    //         (containerHeight + 10 - xAxisThickness);
-    //       ppp +=
-    //         'L' +
-    //         (initialSpacing - dataPointsWidth1 / 2) +
-    //         ' ' +
-    //         (containerHeight + 10 - xAxisThickness) +
-    //         ' ';
-    //       setFillPoints(ppp.replace('L', 'M'));
-    //     }
-    //   }
-    /*************************************************************************************/
+    setToggle(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     areaChart,
     containerHeight,
-    points,
     data,
-    data2,
-    data3,
-    data4,
-    data5,
     dataPointsWidth1,
-    dataPointsWidth2,
-    dataPointsWidth3,
-    dataPointsWidth4,
-    dataPointsWidth5,
     initialSpacing,
-    maxValue,
-    props.curved,
     spacing,
     xAxisThickness,
-    startIndex1,
-    endIndex1,
-    startIndex2,
-    endIndex2,
-    startIndex3,
-    endIndex3,
-    startIndex4,
-    endIndex4,
-    startIndex5,
-    endIndex5,
+    toggle,
+    maxValue,
   ]);
 
   const horizSections = [{value: '0'}];
@@ -916,89 +640,28 @@ export const LineChartBicolor = (props: propTypes) => {
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
     props.noOfSectionsBelowXAxis || -minValue / stepValue;
-  const thickness1 =
-    props.thickness1 === 0 ? 0 : props.thickness1 || props.thickness || 1;
-  const thickness2 =
-    props.thickness2 === 0 ? 0 : props.thickness2 || props.thickness || 1;
-  const thickness3 =
-    props.thickness3 === 0 ? 0 : props.thickness3 || props.thickness || 1;
-  const thickness4 =
-    props.thickness4 === 0 ? 0 : props.thickness4 || props.thickness || 1;
-  const thickness5 =
-    props.thickness5 === 0 ? 0 : props.thickness5 || props.thickness || 1;
+  const thickness1 = props.thickness || 1;
+  const zIndex = props.zIndex || 0;
 
-  const zIndex1 = props.zIndex1 || 0;
-  const zIndex2 = props.zIndex2 || 0;
-  const zIndex3 = props.zIndex3 || 0;
-  const zIndex4 = props.zIndex4 || 0;
-  const zIndex5 = props.zIndex5 || 0;
-
-  const strokeDashArray1 = props.strokeDashArray1 || props.strokeDashArray;
-  const strokeDashArray2 = props.strokeDashArray2 || props.strokeDashArray;
-  const strokeDashArray3 = props.strokeDashArray3 || props.strokeDashArray;
-  const strokeDashArray4 = props.strokeDashArray4 || props.strokeDashArray;
-  const strokeDashArray5 = props.strokeDashArray5 || props.strokeDashArray;
+  const strokeDashArray1 = props.strokeDashArray;
 
   const rotateLabel = props.rotateLabel || false;
   const isAnimated = props.isAnimated || false;
-  const hideDataPoints1 =
-    props.hideDataPoints || props.hideDataPoints1 || false;
-  const hideDataPoints2 =
-    props.hideDataPoints || props.hideDataPoints2 || false;
-  const hideDataPoints3 =
-    props.hideDataPoints || props.hideDataPoints3 || false;
-  const hideDataPoints4 =
-    props.hideDataPoints || props.hideDataPoints4 || false;
-  const hideDataPoints5 =
-    props.hideDataPoints || props.hideDataPoints5 || false;
+  const hideDataPoints1 = props.hideDataPoints || false;
 
-  const color1 = props.color1 || props.color || 'black';
-  const color2 = props.color2 || props.color || 'black';
-  const color3 = props.color3 || props.color || 'black';
-  const color4 = props.color4 || props.color || 'black';
-  const color5 = props.color5 || props.color || 'black';
+  const color = props.color || 'green';
+  const colorNegative = props.colorNegative || 'red';
 
-  const startFillColor1 =
-    props.startFillColor1 || props.startFillColor || 'gray';
-  const endFillColor1 = props.endFillColor1 || props.endFillColor || 'white';
+  const startFillColor = props.startFillColor || 'lightgreen';
+  const endFillColor = props.endFillColor || 'white';
   const startOpacity = props.startOpacity === 0 ? 0 : props.startOpacity || 1;
   const endOpacity = props.endOpacity === 0 ? 0 : props.endOpacity || 1;
-  const startOpacity1 =
-    props.startOpacity1 === 0 ? 0 : props.startOpacity1 || startOpacity;
-  const endOpacity1 =
-    props.endOpacity1 === 0 ? 0 : props.endOpacity1 || endOpacity;
-
-  const startFillColor2 =
-    props.startFillColor2 || props.startFillColor || 'gray';
-  const endFillColor2 = props.endFillColor2 || props.endFillColor || 'white';
-  const startOpacity2 =
-    props.startOpacity2 === 0 ? 0 : props.startOpacity2 || startOpacity;
-  const endOpacity2 =
-    props.endOpacity2 === 0 ? 0 : props.endOpacity2 || endOpacity;
-
-  const startFillColor3 =
-    props.startFillColor3 || props.startFillColor || 'gray';
-  const endFillColor3 = props.endFillColor3 || props.endFillColor || 'white';
-  const startOpacity3 =
-    props.startOpacity3 === 0 ? 0 : props.startOpacity3 || startOpacity;
-  const endOpacity3 =
-    props.endOpacity3 === 0 ? 0 : props.endOpacity3 || endOpacity;
-
-  const startFillColor4 =
-    props.startFillColor4 || props.startFillColor || 'gray';
-  const endFillColor4 = props.endFillColor4 || props.endFillColor || 'white';
-  const startOpacity4 =
-    props.startOpacity4 === 0 ? 0 : props.startOpacity4 || startOpacity;
-  const endOpacity4 =
-    props.endOpacity4 === 0 ? 0 : props.endOpacity4 || endOpacity;
-
-  const startFillColor5 =
-    props.startFillColor5 || props.startFillColor || 'gray';
-  const endFillColor5 = props.endFillColor5 || props.endFillColor || 'white';
-  const startOpacity5 =
-    props.startOpacity5 === 0 ? 0 : props.startOpacity5 || startOpacity;
-  const endOpacity5 =
-    props.endOpacity5 === 0 ? 0 : props.endOpacity5 || endOpacity;
+  const startFillColorNegative = props.startFillColorNegative || 'pink';
+  const endFillColorNegative = props.endFillColorNegative || 'white';
+  const startOpacityNegative =
+    props.startOpacityNegative === 0 ? 0 : props.startOpacityNegative || 1;
+  const endOpacityNegative =
+    props.endOpacityNegative === 0 ? 0 : props.endOpacityNegative || 1;
 
   const rulesThickness =
     props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
@@ -1062,8 +725,8 @@ export const LineChartBicolor = (props: propTypes) => {
   const showTextOnPress = props.showTextOnPress || false;
   const stripHeight = props.stripHeight;
   const stripWidth = props.stripWidth === 0 ? 0 : props.stripWidth || 2;
-  const stripColor = props.stripColor || color1;
-  const stripOpacity = props.stripOpacity || (startOpacity1 + endOpacity1) / 2;
+  const stripColor = props.stripColor || color;
+  const stripOpacity = props.stripOpacity || (startOpacity + endOpacity) / 2;
   const unFocusOnPressOut = props.unFocusOnPressOut === false ? false : true;
   const delayBeforeUnFocus =
     props.delayBeforeUnFocus === 0 ? 0 : props.delayBeforeUnFocus || 300;
@@ -1148,7 +811,6 @@ export const LineChartBicolor = (props: propTypes) => {
       }
     : defaultReferenceConfig;
 
-  // console.log('data', data);
   horizSections.pop();
   for (let i = 0; i <= noOfSections; i++) {
     let value = maxValue - stepValue * i;
@@ -1217,7 +879,6 @@ export const LineChartBicolor = (props: propTypes) => {
     labelTextStyle: any,
     labelComponent: Function,
   ) => {
-    // console.log('label', label);
     return (
       <Animated.View
         style={[
@@ -1250,26 +911,6 @@ export const LineChartBicolor = (props: propTypes) => {
   };
 
   const animatedWidth = widthValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, totalWidth],
-  });
-
-  const animatedWidth2 = widthValue2.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, totalWidth],
-  });
-
-  const animatedWidth3 = widthValue3.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, totalWidth],
-  });
-
-  const animatedWidth4 = widthValue4.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, totalWidth],
-  });
-
-  const animatedWidth5 = widthValue5.interpolate({
     inputRange: [0, 1],
     outputRange: [0, totalWidth],
   });
@@ -1956,7 +1597,6 @@ export const LineChartBicolor = (props: propTypes) => {
     pointsArray: any,
     currentLineThickness: number | undefined,
     color: string,
-    fillPoints: any,
     startFillColor: string,
     endFillColor: string,
     startOpacity: number,
@@ -1965,23 +1605,25 @@ export const LineChartBicolor = (props: propTypes) => {
   ) => {
     return (
       <Svg>
-        {false
+        {strokeDashArray &&
+        strokeDashArray.length === 2 &&
+        typeof strokeDashArray[0] === 'number' &&
+        typeof strokeDashArray[1] === 'number'
           ? pointsArray.map(points => (
               <Path
-                d={points}
+                d={points.points}
                 fill="none"
-                stroke={color}
+                stroke={points.color === 'green' ? color : colorNegative}
                 strokeWidth={currentLineThickness || thickness}
                 strokeDasharray={strokeDashArray}
               />
             ))
           : pointsArray.map(points => {
-              //   console.log('points...', points);
               return (
                 <Path
                   d={points.points}
                   fill="none"
-                  stroke={points.color}
+                  stroke={points.color === 'green' ? color : colorNegative}
                   strokeWidth={currentLineThickness || thickness}
                 />
               );
@@ -1990,31 +1632,53 @@ export const LineChartBicolor = (props: propTypes) => {
         {/***********************      For Area Chart        ************/}
 
         {areaChart && (
-          <LinearGradient
-            id="Gradient"
-            x1="0"
-            y1="0"
-            x2={gradientDirection === 'horizontal' ? '1' : '0'}
-            y2={gradientDirection === 'vertical' ? '1' : '0'}>
-            <Stop
-              offset="0"
-              stopColor={startFillColor}
-              stopOpacity={startOpacity.toString()}
-            />
-            <Stop
-              offset="1"
-              stopColor={endFillColor}
-              stopOpacity={endOpacity.toString()}
-            />
-          </LinearGradient>
+          <>
+            <LinearGradient
+              id="Gradient"
+              x1="0"
+              y1="0"
+              x2={gradientDirection === 'horizontal' ? '1' : '0'}
+              y2={gradientDirection === 'vertical' ? '1' : '0'}>
+              <Stop
+                offset="0"
+                stopColor={startFillColor}
+                stopOpacity={startOpacity.toString()}
+              />
+              <Stop
+                offset="1"
+                stopColor={endFillColor}
+                stopOpacity={endOpacity.toString()}
+              />
+            </LinearGradient>
+            <LinearGradient
+              id="GradientNegative"
+              x1="0"
+              y1="0"
+              x2={gradientDirection === 'horizontal' ? '1' : '0'}
+              y2={gradientDirection === 'vertical' ? '1' : '0'}>
+              <Stop
+                offset="1"
+                stopColor={startFillColorNegative}
+                stopOpacity={startOpacityNegative.toString()}
+              />
+              <Stop
+                offset="0"
+                stopColor={endFillColorNegative}
+                stopOpacity={endOpacityNegative.toString()}
+              />
+            </LinearGradient>
+          </>
         )}
         {areaChart
           ? fillPointsArray.map(item => {
-              console.log('item---for fill.......', item);
               return (
                 <Path
                   d={item.points}
-                  fill={item.color}
+                  fill={
+                    item.color === 'green'
+                      ? 'url(#Gradient)'
+                      : 'url(#GradientNegative)'
+                  }
                   stroke={'transparent'}
                   strokeWidth={currentLineThickness || thickness}
                 />
@@ -2025,10 +1689,6 @@ export const LineChartBicolor = (props: propTypes) => {
         {/******************************************************************/}
 
         {renderSpecificVerticalLines(data)}
-        {renderSpecificVerticalLines(data2)}
-        {renderSpecificVerticalLines(data3)}
-        {renderSpecificVerticalLines(data4)}
-        {renderSpecificVerticalLines(data5)}
 
         {/***  !!! Here it's done thrice intentionally, trying to make it to only 1 breaks things !!!  ***/}
         {!hideDataPoints1
@@ -2045,62 +1705,6 @@ export const LineChartBicolor = (props: propTypes) => {
               endIndex1,
             )
           : null}
-        {!hideDataPoints2
-          ? renderDataPoints(
-              data2,
-              dataPointsShape2,
-              dataPointsWidth2,
-              dataPointsHeight2,
-              dataPointsColor2,
-              dataPointsRadius2,
-              textColor2,
-              textFontSize2,
-              startIndex2,
-              endIndex2,
-            )
-          : null}
-        {!hideDataPoints3
-          ? renderDataPoints(
-              data3,
-              dataPointsShape3,
-              dataPointsWidth3,
-              dataPointsHeight3,
-              dataPointsColor3,
-              dataPointsRadius3,
-              textColor3,
-              textFontSize3,
-              startIndex3,
-              endIndex3,
-            )
-          : null}
-        {!hideDataPoints4
-          ? renderDataPoints(
-              data4,
-              dataPointsShape4,
-              dataPointsWidth4,
-              dataPointsHeight4,
-              dataPointsColor4,
-              dataPointsRadius4,
-              textColor4,
-              textFontSize4,
-              startIndex4,
-              endIndex4,
-            )
-          : null}
-        {!hideDataPoints5
-          ? renderDataPoints(
-              data5,
-              dataPointsShape5,
-              dataPointsWidth5,
-              dataPointsHeight5,
-              dataPointsColor5,
-              dataPointsRadius5,
-              textColor5,
-              textFontSize5,
-              startIndex5,
-              endIndex5,
-            )
-          : null}
       </Svg>
     );
   };
@@ -2110,14 +1714,12 @@ export const LineChartBicolor = (props: propTypes) => {
     pointsArray: any,
     currentLineThickness: number | undefined,
     color: string,
-    fillPoints: any,
     startFillColor: string,
     endFillColor: string,
     startOpacity: number,
     endOpacity: number,
     strokeDashArray: Array<number> | undefined | null,
   ) => {
-    console.log('pointsArray.....', pointsArray);
     return (
       <View
         style={{
@@ -2132,7 +1734,6 @@ export const LineChartBicolor = (props: propTypes) => {
               pointsArray,
               currentLineThickness,
               color,
-              fillPoints,
               startFillColor,
               endFillColor,
               startOpacity,
@@ -2150,14 +1751,12 @@ export const LineChartBicolor = (props: propTypes) => {
     animatedWidth: any,
     currentLineThickness: number | undefined,
     color: string,
-    fillPoints: any,
     startFillColor: string,
     endFillColor: string,
     startOpacity: number,
     endOpacity: number,
     strokeDashArray: Array<number> | undefined | null,
   ) => {
-    // console.log('animatedWidth is-------->', animatedWidth);
     return (
       <Animated.View
         style={{
@@ -2172,7 +1771,6 @@ export const LineChartBicolor = (props: propTypes) => {
           points,
           currentLineThickness,
           color,
-          fillPoints,
           startFillColor,
           endFillColor,
           startOpacity,
@@ -2283,32 +1881,29 @@ export const LineChartBicolor = (props: propTypes) => {
 
         {isAnimated
           ? renderAnimatedLine(
-              zIndex1,
+              zIndex,
               pointsArray,
               animatedWidth,
               thickness1,
-              color1,
-              fillPoints,
-              startFillColor1,
-              endFillColor1,
-              startOpacity1,
-              endOpacity1,
+              color,
+              startFillColor,
+              endFillColor,
+              startOpacity,
+              endOpacity,
               strokeDashArray1,
             )
           : renderLine(
-              zIndex1,
+              zIndex,
               pointsArray,
               thickness1,
-              color1,
-              fillPoints,
-              startFillColor1,
-              endFillColor1,
-              startOpacity1,
-              endOpacity1,
+              color,
+              startFillColor,
+              endFillColor,
+              startOpacity,
+              endOpacity,
               strokeDashArray1,
             )}
         {data.map((item: itemType, index: number) => {
-          // console.log('item', item)
           return (
             <View key={index}>
               {isAnimated
