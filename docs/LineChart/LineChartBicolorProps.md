@@ -1,6 +1,6 @@
 ## LineChartBicolor
 
-Some Line / Area charts have different colors for their positive and negative parts. For example, this chart is colored green above the X axis and red below -
+Some Line / Area charts have different colors for their positive and negative parts. For example, this chart is colored green above the X axis and red below.
 
 <img src='https://user-images.githubusercontent.com/13629606/172202911-920aefa7-1a78-4e5e-91d5-d3670e00fe45.png' alt=''/>
 
