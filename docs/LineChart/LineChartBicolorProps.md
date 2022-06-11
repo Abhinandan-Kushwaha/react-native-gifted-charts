@@ -18,7 +18,7 @@ The props like-
 
 represent the properties of the chart portion lying above the X axis.
 
-The respective properties of the chart portion lying below the X axis are obtained by using the suffix `Negative` to the prop names -
+The respective properties of the chart portion lying below the X axis are obtained by appending the suffix `Negative` to the prop names. Hence the prop name for the portion below the X axis become -
 
 
 1. colorNegative
