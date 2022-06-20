@@ -19,7 +19,7 @@
 | stepHeight          | number         | Height of 1 step/section in the Y axis                                                    | 20                  |
 | spacing             | number         | Distance between 2 consecutive bars in the Bar chart                                      | 20                  |
 | backgroundColor     | ColorValue     | Background color of the Bar chart                                                         | \_                  |
-| disableScroll       | B        | To disable horizontal scroll                                                              | false               |
+| disableScroll       | Boolean        | To disable horizontal scroll                                                              | false               |
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                       | false               |
 | indicatorColor      | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')           | default             |
 | showLine            | Boolean        | To show a Line chart over the Bar chart with the same data                                | false               |
