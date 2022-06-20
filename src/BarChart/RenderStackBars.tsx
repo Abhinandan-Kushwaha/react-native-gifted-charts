@@ -186,7 +186,7 @@ const RenderStackBars = (props: Props) => {
                       (Math.abs(stackItem.value) * (containerHeight || 200)) /
                         (maxValue || 200) -
                       (stackItem.marginBottom || 0),
-                    backgroundColor: stackItem.color || props.color || 'black',
+                    backgroundColor: stackItem.color || item.color || props.color || 'black',
                     borderRadius:
                       stackItem.borderRadius || props.barBorderRadius || 0,
                   },
