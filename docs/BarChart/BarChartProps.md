@@ -19,7 +19,7 @@
 | stepHeight          | number         | Height of 1 step/section in the Y axis                                                    | 20                  |
 | spacing             | number         | Distance between 2 consecutive bars in the Bar chart                                      | 20                  |
 | backgroundColor     | ColorValue     | Background color of the Bar chart                                                         | \_                  |
-| disableScroll       | Boolean        | To disable horizontal scroll                                                              | false               |
+| disableScroll       | B        | To disable horizontal scroll                                                              | false               |
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                       | false               |
 | indicatorColor      | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')           | default             |
 | showLine            | Boolean        | To show a Line chart over the Bar chart with the same data                                | false               |
@@ -299,6 +299,8 @@ The value corresponding to the stacks key is an array of objects, each object re
 | --------- | --------------------- | -------------------------------------------------------------------------------------------- | ------------- |
 | stackData | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table | false         |
 
+**Note** The `frontColor` prop is replaced by `color` prop in Stacked Bar charts.
+
 ### Stack Array description
 
 | Key            | Value type                                                | Description                                                                  |
@@ -324,6 +326,8 @@ A single stack item can be depicted as-
 | borderTopRightRadius    | number     | borderTopRightRadius for a stack section                |
 | borderBottomLeftRadius  | number     | borderBottomLeftRadius for a stack section              |
 | borderBottomRightRadius | number     | borderBottomRightRadius for a stack section             |
+| showGradient            | Boolean    | Prop to enable linear gradient for the bar color, defaults to false |
+| gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
 
 ```
 

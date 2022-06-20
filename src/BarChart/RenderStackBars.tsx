@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, Text, ColorValue} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {Style} from 'util';
 
@@ -41,6 +42,8 @@ type Props = {
   selectedIndex: number;
   setSelectedIndex: Function;
   activeOpacity: number;
+  showGradient?: Boolean;
+  gradientColor?: any;
   stackData: Array<itemType>;
 };
 type itemType = {
@@ -53,6 +56,9 @@ type itemType = {
   topLabelComponent?: Function;
   topLabelContainerStyle?: any;
   disablePress?: any;
+  color?: ColorValue;
+  showGradient?: Boolean;
+  gradientColor?: any;
   capThickness?: number;
   capColor?: ColorValue;
   capRadius?: number;
@@ -60,6 +66,7 @@ type itemType = {
   borderRadius?: number;
   stacks?: Array<any>;
   barBackgroundPattern?: Function;
+  barBorderRadius?: Number;
   patternId?: String;
 };
 const RenderStackBars = (props: Props) => {
@@ -179,7 +186,7 @@ const RenderStackBars = (props: Props) => {
                       (Math.abs(stackItem.value) * (containerHeight || 200)) /
                         (maxValue || 200) -
                       (stackItem.marginBottom || 0),
-                    backgroundColor: stackItem.color || 'black',
+                    backgroundColor: stackItem.color || props.color || 'black',
                     borderRadius:
                       stackItem.borderRadius || props.barBorderRadius || 0,
                   },
@@ -193,6 +200,33 @@ const RenderStackBars = (props: Props) => {
                         stackItem.borderBottomRightRadius || 0,
                     },
                 ]}>
+                {stackItem.showGradient ||
+                item.showGradient ||
+                props.showGradient ? (
+                  <LinearGradient
+                    style={[
+                      {
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        borderRadius:
+                          stackItem.barBorderRadius ||
+                          item.barBorderRadius ||
+                          props.barBorderRadius ||
+                          0,
+                      },
+                    ]}
+                    start={{x: 0, y: 0}}
+                    end={{x: 0, y: 1}}
+                    colors={[
+                      stackItem.gradientColor ||
+                        item.gradientColor ||
+                        props.gradientColor ||
+                        'white',
+                      stackItem.color || item.color || props.color || 'black',
+                    ]}
+                  />
+                ) : null}
                 {stackItem.innerBarComponent && stackItem.innerBarComponent()}
               </TouchableOpacity>
             );

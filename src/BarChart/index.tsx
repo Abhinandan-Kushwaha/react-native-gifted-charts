@@ -113,6 +113,7 @@ type PropTypes = {
   disablePress?: boolean;
 
   frontColor?: ColorValue;
+  color?: ColorValue;
   sideColor?: ColorValue;
   topColor?: ColorValue;
   gradientColor?: ColorValue;
@@ -1521,6 +1522,9 @@ export const BarChart = (props: PropTypes) => {
                     horizontal={horizontal}
                     intactTopLabel={intactTopLabel}
                     barBorderRadius={props.barBorderRadius}
+                    color={props.color}
+                    showGradient={props.showGradient}
+                    gradientColor={props.gradientColor}
                     barBackgroundPattern={props.barBackgroundPattern}
                     patternId={props.patternId}
                     label={
