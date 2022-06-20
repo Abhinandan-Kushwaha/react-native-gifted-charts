@@ -299,6 +299,8 @@ The value corresponding to the stacks key is an array of objects, each object re
 | --------- | --------------------- | -------------------------------------------------------------------------------------------- | ------------- |
 | stackData | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table | false         |
 
+**Note** The `frontColor` prop is replaced by `color` prop in Stacked Bar charts.
+
 ### Stack Array description
 
 | Key            | Value type                                                | Description                                                                  |
@@ -324,6 +326,8 @@ A single stack item can be depicted as-
 | borderTopRightRadius    | number     | borderTopRightRadius for a stack section                |
 | borderBottomLeftRadius  | number     | borderBottomLeftRadius for a stack section              |
 | borderBottomRightRadius | number     | borderBottomRightRadius for a stack section             |
+| showGradient            | Boolean    | Prop to enable linear gradient for the bar color, defaults to false |
+| gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
 
 ```
 
