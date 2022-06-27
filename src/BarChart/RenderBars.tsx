@@ -11,6 +11,7 @@ type Props = {
   style?: any;
   width?: number;
   height?: number;
+  minHeight?: number;
   color?: ColorValue;
   showGradient?: Boolean;
   gradientColor?: any;
@@ -63,6 +64,7 @@ type Props = {
   onPress?: Function;
   xAxisTextNumberOfLines: number;
   renderTooltip: Function;
+  leftShiftForLastIndexTooltip: number;
   initialSpacing: number;
   selectedIndex: number;
   setSelectedIndex: Function;
@@ -100,6 +102,7 @@ const RenderBars = (props: Props) => {
     index,
     containerHeight,
     maxValue,
+    minHeight,
     spacing,
     propSpacing,
     side,
@@ -117,6 +120,7 @@ const RenderBars = (props: Props) => {
     labelTextStyle,
     xAxisTextNumberOfLines,
     renderTooltip,
+    leftShiftForLastIndexTooltip,
     initialSpacing,
     selectedIndex,
     setSelectedIndex,
@@ -324,12 +328,14 @@ const RenderBars = (props: Props) => {
     );
   };
 
-  const barHeight =
+  const barHeight = Math.max(
+    minHeight,
     (item.value >= 0 && (!isThreeD || isAnimated) && item.topLabelComponent
       ? (item.topLabelComponentHeight || 30) +
         (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)
       : (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)) -
-    barMarginBottom;
+      barMarginBottom,
+  );
 
   let leftSpacing = initialSpacing;
   for (let i = 0; i < index; i++) {
@@ -424,11 +430,12 @@ const RenderBars = (props: Props) => {
               topLabelComponent={item.topLabelComponent}
               opacity={opacity || 1}
               animationDuration={animationDuration || 800}
-              height={
+              height={Math.max(
+                minHeight,
                 (Math.abs(item.value) * (containerHeight || 200)) /
                   (maxValue || 200) -
-                barMarginBottom
-              }
+                  barMarginBottom,
+              )}
               intactTopLabel={props.intactTopLabel}
               horizontal={props.horizontal}
             />
@@ -457,11 +464,12 @@ const RenderBars = (props: Props) => {
               opacity={opacity || 1}
               horizontal={props.horizontal}
               intactTopLabel={props.intactTopLabel}
-              height={
+              height={Math.max(
+                minHeight,
                 (Math.abs(item.value) * (containerHeight || 200)) /
                   (maxValue || 200) -
-                barMarginBottom
-              }
+                  barMarginBottom,
+              )}
               value={item.value}
             />
           )
@@ -480,10 +488,12 @@ const RenderBars = (props: Props) => {
               frontColor={props.frontColor || 'black'}
               containerHeight={containerHeight}
               maxValue={maxValue}
-              height={
+              height={Math.max(
+                minHeight,
                 (Math.abs(item.value) * (containerHeight || 200)) /
-                (maxValue || 200)
-              }
+                  (maxValue || 200),
+              )}
+              minHeight={minHeight}
               barMarginBottom={barMarginBottom}
               cappedBars={props.cappedBars}
               capThickness={props.capThickness}
@@ -511,10 +521,12 @@ const RenderBars = (props: Props) => {
             frontColor={props.frontColor || 'black'}
             containerHeight={containerHeight}
             maxValue={maxValue}
-            height={
+            height={Math.max(
+              minHeight,
               (Math.abs(item.value) * (containerHeight || 200)) /
-              (maxValue || 200)
-            }
+                (maxValue || 200),
+            )}
+            minHeight={minHeight}
             barMarginBottom={barMarginBottom}
             cappedBars={props.cappedBars}
             capThickness={props.capThickness}
@@ -540,10 +552,12 @@ const RenderBars = (props: Props) => {
             frontColor={props.frontColor || 'black'}
             containerHeight={containerHeight}
             maxValue={maxValue}
-            height={
+            height={Math.max(
+              minHeight,
               (Math.abs(item.value) * (containerHeight || 200)) /
-              (maxValue || 200)
-            }
+                (maxValue || 200),
+            )}
+            minHeight={minHeight}
             barMarginBottom={barMarginBottom}
             cappedBars={props.cappedBars}
             capThickness={props.capThickness}
@@ -563,7 +577,10 @@ const RenderBars = (props: Props) => {
           style={{
             position: 'absolute',
             bottom: barHeight + 60,
-            left: leftSpacing,
+            left:
+              index === data.length - 1
+                ? leftSpacing - leftShiftForLastIndexTooltip
+                : leftSpacing,
             zIndex: 1000,
           }}>
           {renderTooltip(item, index)}

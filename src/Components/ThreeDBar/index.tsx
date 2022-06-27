@@ -95,7 +95,7 @@ const ThreeDBar = (props: PropTypes) => {
             <View
               style={{
                 width: width,
-                height: (3 * width) / 4,
+                height: width * 0.4,
                 // left: width / -8,
                 backgroundColor: topColor,
                 opacity: opacity,

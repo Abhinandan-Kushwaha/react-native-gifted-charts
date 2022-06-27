@@ -30,6 +30,7 @@
 | scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost bar | true |
 | initialSpacing         | number     | distance of the first bar from the Y axis                                      | 40 |
 | renderTooltip          | Function   | tooltip component appearing above the bar when it is pressed, takes item and index as parameters | null |
+| leftShiftForLastIndexTooltip | number | The distance by which the tooltip component of the last bar should shift towards left | 0 |
 
 ---
 
@@ -211,7 +212,8 @@ type referenceConfigType = {
 | barBorderRadius | number     | Border radius of the bar                                                   | 0                        |
 | barMarginBottom | number     | margin at the bottom of the bar (above X axis)                             | 0  |
 | barBackgroundPattern | Component | A svg component containing the background pattern for bars             | \_ |
-| patternId | String | ID of the pattern component                                                          | \_ | 
+| patternId       | String     | ID of the pattern component                                                | \_ |
+| minHeight       | number     | Minimum height of the Bars                                                 | 0  |
 
 ---
 
