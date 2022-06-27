@@ -24,6 +24,7 @@ type Props = {
   propSpacing?: number;
   data?: any;
   barWidth?: number;
+  onPress?: Function;
 
   rotateLabel?: Boolean;
   showXAxisIndices: Boolean;
@@ -38,6 +39,7 @@ type Props = {
   patternId?: String;
   xAxisTextNumberOfLines: number;
   renderTooltip: Function;
+  leftShiftForLastIndexTooltip: number;
   initialSpacing: number;
   selectedIndex: number;
   setSelectedIndex: Function;
@@ -85,11 +87,13 @@ const RenderStackBars = (props: Props) => {
     labelTextStyle,
     xAxisTextNumberOfLines,
     renderTooltip,
+    leftShiftForLastIndexTooltip,
     initialSpacing,
     selectedIndex,
     setSelectedIndex,
     activeOpacity,
     stackData,
+    data,
   } = props;
   let leftSpacing = initialSpacing;
   for (let i = 0; i < index; i++) {
@@ -144,7 +148,7 @@ const RenderStackBars = (props: Props) => {
     0,
   );
 
-  const static2DSimple = (item: itemType) => {
+  const static2DSimple = (item: itemType, index: number) => {
     const cotainsNegative = item.stacks.some(item => item.value < 0);
     return (
       <>
@@ -155,6 +159,8 @@ const RenderStackBars = (props: Props) => {
             setSelectedIndex(index);
             if (item.onPress) {
               item.onPress();
+            } else if (props.onPress) {
+              props.onPress(item, index);
             }
           }}
           style={[
@@ -186,7 +192,8 @@ const RenderStackBars = (props: Props) => {
                       (Math.abs(stackItem.value) * (containerHeight || 200)) /
                         (maxValue || 200) -
                       (stackItem.marginBottom || 0),
-                    backgroundColor: stackItem.color || item.color || props.color || 'black',
+                    backgroundColor:
+                      stackItem.color || item.color || props.color || 'black',
                     borderRadius:
                       stackItem.borderRadius || props.barBorderRadius || 0,
                   },
@@ -312,7 +319,7 @@ const RenderStackBars = (props: Props) => {
             }}
           />
         )}
-        {static2DSimple(item)}
+        {static2DSimple(item, index)}
         {renderLabel(label || '', labelTextStyle)}
       </View>
       {renderTooltip && selectedIndex === index && (
@@ -320,7 +327,10 @@ const RenderStackBars = (props: Props) => {
           style={{
             position: 'absolute',
             bottom: totalHeight + 60,
-            left: leftSpacing,
+            left:
+              index === data.length - 1
+                ? leftSpacing - leftShiftForLastIndexTooltip
+                : leftSpacing,
             zIndex: 1000,
           }}>
           {renderTooltip(item, index)}

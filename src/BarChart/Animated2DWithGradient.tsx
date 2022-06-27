@@ -17,6 +17,7 @@ if (Platform.OS === 'android') {
 type propTypes = {
   item: itemType;
   height: number;
+  minHeight: number;
   opacity?: number;
   animationDuration: number;
   roundedTop: Boolean;
@@ -119,8 +120,11 @@ const Animated2DWithGradient = (props: propTypes) => {
             width: '100%',
             height:
               (noAnimation
-                ? (Math.abs(item.value) * (containerHeight || 200)) /
-                  (maxValue || 200)
+                ? Math.max(
+                    props.minHeight,
+                    (Math.abs(item.value) * (containerHeight || 200)) /
+                      (maxValue || 200),
+                  )
                 : height) - (barMarginBottom || 0),
           }}>
           <View
@@ -128,8 +132,11 @@ const Animated2DWithGradient = (props: propTypes) => {
               width: '100%',
               height:
                 (noAnimation
-                  ? (Math.abs(item.value) * (containerHeight || 200)) /
-                    (maxValue || 200)
+                  ? Math.max(
+                      props.minHeight,
+                      (Math.abs(item.value) * (containerHeight || 200)) /
+                        (maxValue || 200),
+                    )
                   : height) - (barMarginBottom || 0),
             }}>
             {noGradient ? (

@@ -24,6 +24,7 @@ import Svg, {Circle, Path, Rect, Text as CanvasText} from 'react-native-svg';
 type PropTypes = {
   width?: number;
   height?: number;
+  minHeight?: number;
   noOfSections?: number;
   noOfSectionsBelowXAxis?: number;
   maxValue?: number;
@@ -143,6 +144,7 @@ type PropTypes = {
   barMarginBottom?: number;
   onPress?: Function;
   renderTooltip?: Function;
+  leftShiftForLastIndexTooltip?: number;
 };
 type lineConfigType = {
   initialSpacing?: number;
@@ -1506,6 +1508,7 @@ export const BarChart = (props: PropTypes) => {
                     stackData={props.stackData}
                     item={item}
                     index={index}
+                    data={data}
                     containerHeight={containerHeight}
                     maxValue={maxValue}
                     spacing={item.spacing === 0 ? 0 : item.spacing || spacing}
@@ -1536,8 +1539,12 @@ export const BarChart = (props: PropTypes) => {
                     labelTextStyle={
                       item.labelTextStyle || props.xAxisLabelTextStyle
                     }
+                    onPress={props.onPress}
                     xAxisTextNumberOfLines={xAxisTextNumberOfLines}
                     renderTooltip={props.renderTooltip}
+                    leftShiftForLastIndexTooltip={
+                      props.leftShiftForLastIndexTooltip || 0
+                    }
                     initialSpacing={initialSpacing}
                     selectedIndex={selectedIndex}
                     setSelectedIndex={setSelectedIndex}
@@ -1556,6 +1563,7 @@ export const BarChart = (props: PropTypes) => {
                   propSpacing={spacing}
                   side={side}
                   data={data}
+                  minHeight={props.minHeight || 0}
                   barWidth={props.barWidth}
                   sideWidth={props.sideWidth}
                   labelWidth={labelWidth}
@@ -1602,6 +1610,9 @@ export const BarChart = (props: PropTypes) => {
                   onPress={props.onPress}
                   xAxisTextNumberOfLines={xAxisTextNumberOfLines}
                   renderTooltip={props.renderTooltip}
+                  leftShiftForLastIndexTooltip={
+                    props.leftShiftForLastIndexTooltip || 0
+                  }
                   initialSpacing={initialSpacing}
                   selectedIndex={selectedIndex}
                   setSelectedIndex={setSelectedIndex}

@@ -145,7 +145,7 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
                 <View
                   style={{
                     width: width,
-                    height: (3 * width) / 4,
+                    height: width * 0.4,
                     // left: width / 2,
                     backgroundColor: topColor,
                     opacity: opacity,
