@@ -69,6 +69,7 @@ type Props = {
   initialSpacing: number;
   selectedIndex: number;
   setSelectedIndex: Function;
+  barStyle?: object;
 };
 type itemType = {
   value?: number;
@@ -97,6 +98,7 @@ type itemType = {
   patternId?: String;
   barMarginBottom?: number;
   leftShiftForTooltip?: number;
+  barStyle?: object;
 };
 const RenderBars = (props: Props) => {
   const {
@@ -109,6 +111,7 @@ const RenderBars = (props: Props) => {
     propSpacing,
     side,
     data,
+    barStyle,
     // oldValue,
 
     isThreeD,
@@ -419,6 +422,8 @@ const RenderBars = (props: Props) => {
               patternId={item.patternId || props.patternId}
               topLabelContainerStyle={item.topLabelContainerStyle}
               width={item.barWidth || props.barWidth || 30}
+              barStyle={barStyle}
+              item={item}
               sideWidth={
                 item.sideWidth ||
                 props.sideWidth ||
@@ -457,6 +462,8 @@ const RenderBars = (props: Props) => {
                 props.sideWidth ||
                 (item.barWidth || props.barWidth || 30) / 2
               }
+              barStyle={barStyle}
+              item={item}
               side={side || 'left'}
               frontColor={item.frontColor || props.frontColor || ''}
               sideColor={item.sideColor || props.sideColor || ''}
@@ -482,6 +489,7 @@ const RenderBars = (props: Props) => {
               barBackgroundPattern={props.barBackgroundPattern}
               patternId={props.patternId}
               barWidth={props.barWidth}
+              barStyle={barStyle}
               item={item}
               opacity={opacity}
               animationDuration={animationDuration || 800}
@@ -514,6 +522,7 @@ const RenderBars = (props: Props) => {
             barBackgroundPattern={props.barBackgroundPattern}
             patternId={props.patternId}
             barWidth={props.barWidth}
+            barStyle={barStyle}
             item={item}
             opacity={opacity}
             animationDuration={animationDuration || 800}
@@ -544,6 +553,7 @@ const RenderBars = (props: Props) => {
             barBackgroundPattern={props.barBackgroundPattern}
             patternId={props.patternId}
             barWidth={props.barWidth}
+            barStyle={barStyle}
             item={item}
             opacity={opacity}
             animationDuration={animationDuration || 800}

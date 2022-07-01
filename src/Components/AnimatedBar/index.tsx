@@ -40,6 +40,8 @@ type animatedBarPropTypes = {
   intactTopLabel: Boolean;
   barBackgroundPattern?: Function;
   patternId?: String;
+  barStyle?: object;
+  item: any;
 };
 
 const TriangleCorner = (props: trianglePropTypes) => {
@@ -105,8 +107,7 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
     setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
   };
 
-  const width = props.width;
-  const sideWidth = props.sideWidth;
+  const {item, width, sideWidth, barStyle} = props;
 
   const {barBackgroundPattern, patternId} = props;
 
@@ -193,7 +194,7 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
           ) : null}
 
           <View
-            style={{
+            style={[{
               width: width,
               height: height, //animatedHeight
               backgroundColor: frontColor,
@@ -201,7 +202,9 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
               borderTopWidth: StyleSheet.hairlineWidth,
               borderColor: 'white',
               opacity: opacity,
-            }}>
+            },
+            item.barStyle || barStyle
+            ]}>
             {showGradient && (
               <LinearGradient
                 style={{position: 'absolute', width: '100%', height: '100%'}}

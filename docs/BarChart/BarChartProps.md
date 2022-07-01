@@ -93,6 +93,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | sideColor              | ColorValue | Color of the side view of the bar, only for 3 D                                |
 | sideWidth              | number     | Width of the side view of the bar, only for 3 D                                |
 | topColor               | ColorValue | Color of the top view of the bar, only for 3 D                                 |
+| barStyle               | object     | style object for the Bars                                                      |
 | showGradient           | Boolean    | Prop to enable linear gradient for the bar color, defaults to false            |
 | gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
 | label                  | string     | Label text appearing below the bar (under the X axis)                          |
@@ -110,7 +111,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | spacing                | number     | Distance of the next Bar from the currennt Bar                                 |
 | barBackgroundPattern   | Component  | A svg component containing the background pattern for bars                     |
 | patternId              | String     | ID of the pattern component                                                    | 
-| leftShiftForTooltip    | number     | The distance by which the tooltip component should shift towards left         |
+| leftShiftForTooltip    | number     | The distance by which the tooltip component should shift towards left          |
 
 ---
 
@@ -200,6 +201,7 @@ type referenceConfigType = {
 | Prop            | Type       | Description                                                                | Default value            |
 | --------------- | ---------- | -------------------------------------------------------------------------- | ------------------------ |
 | barWidth        | number     | Width of the bar                                                           | 30                       |
+| barStyle        | object     | style object for the Bars                                                  | \_                       |
 | isThreeD        | Boolean    | Prop to render 3 dimensional bars                                          | false                    |
 | frontColor      | ColorValue | Color of the bar                                                           | black for 2D, red for 3D |
 | sideColor       | ColorValue | Color of the side view of the bar, only for 3 D                            | red                      |
