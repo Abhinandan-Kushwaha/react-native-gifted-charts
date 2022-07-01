@@ -144,6 +144,7 @@ type PropTypes = {
   barMarginBottom?: number;
   onPress?: Function;
   renderTooltip?: Function;
+  leftShiftForTooltip?: number;
   leftShiftForLastIndexTooltip?: number;
 };
 type lineConfigType = {
@@ -1542,6 +1543,7 @@ export const BarChart = (props: PropTypes) => {
                     onPress={props.onPress}
                     xAxisTextNumberOfLines={xAxisTextNumberOfLines}
                     renderTooltip={props.renderTooltip}
+                    leftShiftForTooltip={props.leftShiftForTooltip || 0}
                     leftShiftForLastIndexTooltip={
                       props.leftShiftForLastIndexTooltip || 0
                     }
@@ -1610,6 +1612,7 @@ export const BarChart = (props: PropTypes) => {
                   onPress={props.onPress}
                   xAxisTextNumberOfLines={xAxisTextNumberOfLines}
                   renderTooltip={props.renderTooltip}
+                  leftShiftForTooltip={props.leftShiftForTooltip || 0}
                   leftShiftForLastIndexTooltip={
                     props.leftShiftForLastIndexTooltip || 0
                   }

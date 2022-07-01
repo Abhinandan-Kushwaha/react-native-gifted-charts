@@ -39,6 +39,7 @@ type Props = {
   patternId?: String;
   xAxisTextNumberOfLines: number;
   renderTooltip: Function;
+  leftShiftForTooltip?: number;
   leftShiftForLastIndexTooltip: number;
   initialSpacing: number;
   selectedIndex: number;
@@ -70,6 +71,7 @@ type itemType = {
   barBackgroundPattern?: Function;
   barBorderRadius?: Number;
   patternId?: String;
+  leftShiftForTooltip?: number;
 };
 const RenderStackBars = (props: Props) => {
   const {
@@ -87,13 +89,13 @@ const RenderStackBars = (props: Props) => {
     labelTextStyle,
     xAxisTextNumberOfLines,
     renderTooltip,
+    leftShiftForTooltip,
     leftShiftForLastIndexTooltip,
     initialSpacing,
     selectedIndex,
     setSelectedIndex,
     activeOpacity,
     stackData,
-    data,
   } = props;
   let leftSpacing = initialSpacing;
   for (let i = 0; i < index; i++) {
@@ -328,9 +330,10 @@ const RenderStackBars = (props: Props) => {
             position: 'absolute',
             bottom: totalHeight + 60,
             left:
-              index === data.length - 1
+              index === stackData.length - 1
                 ? leftSpacing - leftShiftForLastIndexTooltip
-                : leftSpacing,
+                : leftSpacing -
+                  (item.leftShiftForTooltip ?? leftShiftForTooltip),
             zIndex: 1000,
           }}>
           {renderTooltip(item, index)}
