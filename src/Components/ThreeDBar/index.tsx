@@ -24,6 +24,8 @@ type PropTypes = {
   value: number;
   barBackgroundPattern?: Function;
   patternId?: String;
+  barStyle?: object;
+  item?: any;
 };
 
 type TriangleProps = {
@@ -60,8 +62,16 @@ const aStyles = StyleSheet.create({
 });
 
 const ThreeDBar = (props: PropTypes) => {
-  const {width, sideWidth, height, value, barBackgroundPattern, patternId} =
-    props;
+  const {
+    width,
+    sideWidth,
+    height,
+    value,
+    barBackgroundPattern,
+    patternId,
+    barStyle,
+    item,
+  } = props;
 
   const showGradient = props.showGradient || false;
   const gradientColor = props.gradientColor || 'white';
@@ -135,15 +145,18 @@ const ThreeDBar = (props: PropTypes) => {
           </View>
 
           <View
-            style={{
-              width: width,
-              height: height,
-              backgroundColor: frontColor,
-              borderLeftWidth: StyleSheet.hairlineWidth,
-              borderTopWidth: StyleSheet.hairlineWidth,
-              borderColor: 'white',
-              opacity: opacity,
-            }}>
+            style={[
+              {
+                width: width,
+                height: height,
+                backgroundColor: frontColor,
+                borderLeftWidth: StyleSheet.hairlineWidth,
+                borderTopWidth: StyleSheet.hairlineWidth,
+                borderColor: 'white',
+                opacity: opacity,
+              },
+              item.barStyle || barStyle,
+            ]}>
             {showGradient && (
               <LinearGradient
                 style={{position: 'absolute', width: '100%', height: '100%'}}

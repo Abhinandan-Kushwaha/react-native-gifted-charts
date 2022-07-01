@@ -39,6 +39,7 @@ type propTypes = {
   barBackgroundPattern?: Function;
   patternId?: String;
   barMarginBottom?: number;
+  barStyle?: object;
 };
 type itemType = {
   value?: number;
@@ -61,6 +62,7 @@ type itemType = {
   barBackgroundPattern?: Function;
   patternId?: String;
   barMarginBottom?: number;
+  barStyle?: object;
 };
 
 const Animated2DWithGradient = (props: propTypes) => {
@@ -68,6 +70,7 @@ const Animated2DWithGradient = (props: propTypes) => {
     barBackgroundPattern,
     patternId,
     barWidth,
+    barStyle,
     item,
     opacity,
     animationDuration,
@@ -128,17 +131,20 @@ const Animated2DWithGradient = (props: propTypes) => {
                 : height) - (barMarginBottom || 0),
           }}>
           <View
-            style={{
-              width: '100%',
-              height:
-                (noAnimation
-                  ? Math.max(
-                      props.minHeight,
-                      (Math.abs(item.value) * (containerHeight || 200)) /
-                        (maxValue || 200),
-                    )
-                  : height) - (barMarginBottom || 0),
-            }}>
+            style={[
+              {
+                width: '100%',
+                height:
+                  (noAnimation
+                    ? Math.max(
+                        props.minHeight,
+                        (Math.abs(item.value) * (containerHeight || 200)) /
+                          (maxValue || 200),
+                      )
+                    : height) - (barMarginBottom || 0),
+              },
+              item.barStyle || barStyle,
+            ]}>
             {noGradient ? (
               <View
                 style={[

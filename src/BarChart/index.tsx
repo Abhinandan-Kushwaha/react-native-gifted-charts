@@ -146,6 +146,7 @@ type PropTypes = {
   renderTooltip?: Function;
   leftShiftForTooltip?: number;
   leftShiftForLastIndexTooltip?: number;
+  barStyle?: object;
 };
 type lineConfigType = {
   initialSpacing?: number;
@@ -200,6 +201,7 @@ type itemType = {
   spacing?: number;
   barBackgroundPattern?: Function;
   patternId?: String;
+  barStyle?: object;
 };
 
 export const BarChart = (props: PropTypes) => {
@@ -1619,6 +1621,7 @@ export const BarChart = (props: PropTypes) => {
                   initialSpacing={initialSpacing}
                   selectedIndex={selectedIndex}
                   setSelectedIndex={setSelectedIndex}
+                  barStyle={props.barStyle}
                 />
               ))}
         </Fragment>
