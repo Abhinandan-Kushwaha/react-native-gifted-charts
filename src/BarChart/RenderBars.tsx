@@ -64,6 +64,7 @@ type Props = {
   onPress?: Function;
   xAxisTextNumberOfLines: number;
   renderTooltip: Function;
+  leftShiftForTooltip?: number;
   leftShiftForLastIndexTooltip: number;
   initialSpacing: number;
   selectedIndex: number;
@@ -95,6 +96,7 @@ type itemType = {
   barBackgroundPattern?: Function;
   patternId?: String;
   barMarginBottom?: number;
+  leftShiftForTooltip?: number;
 };
 const RenderBars = (props: Props) => {
   const {
@@ -120,6 +122,7 @@ const RenderBars = (props: Props) => {
     labelTextStyle,
     xAxisTextNumberOfLines,
     renderTooltip,
+    leftShiftForTooltip,
     leftShiftForLastIndexTooltip,
     initialSpacing,
     selectedIndex,
@@ -580,7 +583,8 @@ const RenderBars = (props: Props) => {
             left:
               index === data.length - 1
                 ? leftSpacing - leftShiftForLastIndexTooltip
-                : leftSpacing,
+                : leftSpacing -
+                  (item.leftShiftForTooltip ?? leftShiftForTooltip),
             zIndex: 1000,
           }}>
           {renderTooltip(item, index)}

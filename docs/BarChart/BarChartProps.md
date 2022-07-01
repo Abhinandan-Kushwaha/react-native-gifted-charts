@@ -30,6 +30,7 @@
 | scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost bar | true |
 | initialSpacing         | number     | distance of the first bar from the Y axis                                      | 40 |
 | renderTooltip          | Function   | tooltip component appearing above the bar when it is pressed, takes item and index as parameters | null |
+| leftShiftForTooltip    | number     | The distance by which the tooltip component should shift towards left                   | 0 |
 | leftShiftForLastIndexTooltip | number | The distance by which the tooltip component of the last bar should shift towards left | 0 |
 
 ---
@@ -109,6 +110,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | spacing                | number     | Distance of the next Bar from the currennt Bar                                 |
 | barBackgroundPattern   | Component  | A svg component containing the background pattern for bars                     |
 | patternId              | String     | ID of the pattern component                                                    | 
+| leftShiftForTooltip    | number     | The distance by which the tooltip component should shift towards left         |
 
 ---
 
