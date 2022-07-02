@@ -16,15 +16,11 @@ The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts
 8. Support for **_combined_** Bar and Line charts
 
 ---
-
-![alt text](/demos/altBars.svg)
-![alt text](/demos/barPairs.svg)
+<img src='/demos/bars.png' alt=''/>
+<img src='/demos/lineArea.png' alt=''/>
 <img src='/demos/scrollLine.gif' alt='' width=360/>
 <img src='/demos/animatedDataLine.gif' alt='' width=360/>
 <img src='/demos/movingBars.gif' alt='' width=300/>
-<img src='/demos/stacks.png' alt='' height=360 width=320/>
-![alt text](/demos/lineArea.png)
-<img src='/demos/cappedCombined.png' alt='' height=280 width=280/>
 <img src='/demos/pielabbelled.svg' alt='' height=280 width=270/>
 
 ---
