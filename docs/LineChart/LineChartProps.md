@@ -181,6 +181,7 @@ type referenceConfigType = {
 
 | Prop       | Type       | Description                                                  | Default value          |
 | ---------- | ---------- | ------------------------------------------------------------ | ---------------------- |
+| curved     | Boolean    | To show curved line joining the data points                  | false                  |
 | color      | ColorValue | Color of the lines joining the data points                   | black                  |
 | color1     | ColorValue | Color of the lines joining the first set of data points      | color (from props)     |
 | color2     | ColorValue | Color of the lines joining the second set of data points     | color (from props)     |
@@ -211,12 +212,62 @@ type referenceConfigType = {
 | startIndex4 | number     | Start index for data line 4 (used to display data lines having breaks) | 0              |
 | startIndex5 | number     | Start index for data line 5 (used to display data lines having breaks) | 0              |
 | endIndex | number     | End index for data line (used to display data lines having breaks) | data.length -1        |
-| endIndex1 | number     | End index for data line 1 (used to display data lines having breaks) | data.length -1     |
-| endIndex2 | number     | End index for data line 2 (used to display data lines having breaks) | data2.length -1    |
-| endIndex3 | number     | End index for data line 3 (used to display data lines having breaks) | data3.length -1    |
-| endIndex4 | number     | End index for data line 4 (used to display data lines having breaks) | data3.length -1    |
-| endIndex5 | number     | End index for data line 5 (used to display data lines having breaks) | data3.length -1    |
-| curved     | Boolean    | To show curved line joining the data points                  | false                  |
+| endIndex1    | number     | End index for data line 1 (used to display data lines having breaks) | data.length -1     |
+| endIndex2    | number     | End index for data line 2 (used to display data lines having breaks) | data2.length -1    |
+| endIndex3    | number     | End index for data line 3 (used to display data lines having breaks) | data3.length -1    |
+| endIndex4    | number     | End index for data line 4 (used to display data lines having breaks) | data3.length -1    |
+| endIndex5    | number     | End index for data line 5 (used to display data lines having breaks) | data3.length -1    |
+
+## The arrow
+
+Some Line charts have an arrow at the end of the line. Here's an example-
+
+<img src='../../demos/lineArrow.png' alt='' height=400 width=500/>
+
+To display the arrrow at the end of the line, just pass the <b>showArrows</b> or <b>showArrow{n}</b> prop.
+The properties of the arrow can controlled with the <b>arrowConfig</b> prop.
+### Understanding the arrow-
+
+<img src='../../demos/arrowProps.png' alt='' height=400 width=500/>
+
+| showArrows   | boolean    | To show an arrow at the end of each data line                        | false              |
+| arrowConfig  | arrowType  | Object describing the properties of the arrows like length, width, strokeWidth, strokeColor, fillColor | defaultArrowConfig |
+| showArrow1   | boolean    | To show an arrow at the end of the first data line                   | false              |
+| arrowConfig1 | arrowType  | Object describing the properties of the first arrow                  | defaultArrowConfig |
+| showArrow2   | boolean    | To show an arrow at the end of the second data line                  | false              |
+| arrowConfig2 | arrowType  | Object describing the properties of the second arrow                 | defaultArrowConfig |
+| showArrow3   | boolean    | To show an arrow at the end of the third data line                   | false              |
+| arrowConfig3 | arrowType  | Object describing the properties of the third arrow                  | defaultArrowConfig |
+| showArrow4   | boolean    | To show an arrow at the end of the fourth data line                  | false              |
+| arrowConfig4 | arrowType  | Object describing the properties of the fourth arrow                 | defaultArrowConfig |
+| showArrow5   | boolean    | To show an arrow at the end of the fifth data line                   | false              |
+| arrowConfig5 | arrowType  | Object describing the properties of the fifth arrow                  | defaultArrowConfig |
+
+The <b>arrowConfig</b> has the properties allowed by the <b>arrowType</b>-
+
+```js
+type arrowType = {
+  length?: number;
+  width?: number;
+  strokeWidth?: number;
+  strokeColor?: string;
+  fillColor?: string;
+  showArrowBase?: boolean;
+};
+```
+
+The default values of these properties are-
+
+```js
+defaultArrowConfig = {
+  length: 10,
+  width: 10,
+  strokeWidth: thickness1,
+  strokeColor: color1,
+  fillColor: 'none',
+  showArrowBase: true,
+  };
+```
 
 ---
 

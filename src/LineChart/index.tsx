@@ -275,6 +275,26 @@ type propTypes = {
   labelsExtraHeight?: number;
   adjustToWidth?: Boolean;
   getPointerProps?: Function;
+  showArrows?: boolean;
+  arrowConfig?: arrowType;
+  showArrow1?: boolean;
+  arrowConfig1?: arrowType;
+  showArrow2?: boolean;
+  arrowConfig2?: arrowType;
+  showArrow3?: boolean;
+  arrowConfig3?: arrowType;
+  showArrow4?: boolean;
+  arrowConfig4?: arrowType;
+  showArrow5?: boolean;
+  arrowConfig5?: arrowType;
+};
+type arrowType = {
+  length?: number;
+  width?: number;
+  strokeWidth?: number;
+  strokeColor?: string;
+  fillColor?: string;
+  showArrowBase?: boolean;
 };
 type referenceConfigType = {
   thickness: number;
@@ -374,6 +394,11 @@ type Pointer = {
 export const LineChart = (props: propTypes) => {
   const scrollRef = useRef();
   const [scrollX, setScrollX] = useState(0);
+  const [arrow1Points, setArrow1Points] = useState('');
+  const [arrow2Points, setArrow2Points] = useState('');
+  const [arrow3Points, setArrow3Points] = useState('');
+  const [arrow4Points, setArrow4Points] = useState('');
+  const [arrow5Points, setArrow5Points] = useState('');
   const [pointerIndex, setPointerIndex] = useState(-1);
   const [pointerX, setPointerX] = useState(0);
   const [pointerY, setPointerY] = useState(0);
@@ -830,6 +855,270 @@ export const LineChart = (props: propTypes) => {
     labelsAppear,
   ]);
 
+  const thickness1 =
+    props.thickness1 === 0 ? 0 : props.thickness1 || props.thickness || 1;
+  const thickness2 =
+    props.thickness2 === 0 ? 0 : props.thickness2 || props.thickness || 1;
+  const thickness3 =
+    props.thickness3 === 0 ? 0 : props.thickness3 || props.thickness || 1;
+  const thickness4 =
+    props.thickness4 === 0 ? 0 : props.thickness4 || props.thickness || 1;
+  const thickness5 =
+    props.thickness5 === 0 ? 0 : props.thickness5 || props.thickness || 1;
+
+  const zIndex1 = props.zIndex1 || 0;
+  const zIndex2 = props.zIndex2 || 0;
+  const zIndex3 = props.zIndex3 || 0;
+  const zIndex4 = props.zIndex4 || 0;
+  const zIndex5 = props.zIndex5 || 0;
+
+  const strokeDashArray1 = props.strokeDashArray1 || props.strokeDashArray;
+  const strokeDashArray2 = props.strokeDashArray2 || props.strokeDashArray;
+  const strokeDashArray3 = props.strokeDashArray3 || props.strokeDashArray;
+  const strokeDashArray4 = props.strokeDashArray4 || props.strokeDashArray;
+  const strokeDashArray5 = props.strokeDashArray5 || props.strokeDashArray;
+
+  const rotateLabel = props.rotateLabel || false;
+  const isAnimated = props.isAnimated || false;
+  const hideDataPoints1 =
+    props.hideDataPoints || props.hideDataPoints1 || false;
+  const hideDataPoints2 =
+    props.hideDataPoints || props.hideDataPoints2 || false;
+  const hideDataPoints3 =
+    props.hideDataPoints || props.hideDataPoints3 || false;
+  const hideDataPoints4 =
+    props.hideDataPoints || props.hideDataPoints4 || false;
+  const hideDataPoints5 =
+    props.hideDataPoints || props.hideDataPoints5 || false;
+
+  const color1 = props.color1 || props.color || 'black';
+  const color2 = props.color2 || props.color || 'black';
+  const color3 = props.color3 || props.color || 'black';
+  const color4 = props.color4 || props.color || 'black';
+  const color5 = props.color5 || props.color || 'black';
+
+  const startFillColor1 =
+    props.startFillColor1 || props.startFillColor || 'gray';
+  const endFillColor1 = props.endFillColor1 || props.endFillColor || 'white';
+  const startOpacity = props.startOpacity === 0 ? 0 : props.startOpacity || 1;
+  const endOpacity = props.endOpacity === 0 ? 0 : props.endOpacity || 1;
+  const startOpacity1 =
+    props.startOpacity1 === 0 ? 0 : props.startOpacity1 || startOpacity;
+  const endOpacity1 =
+    props.endOpacity1 === 0 ? 0 : props.endOpacity1 || endOpacity;
+
+  const startFillColor2 =
+    props.startFillColor2 || props.startFillColor || 'gray';
+  const endFillColor2 = props.endFillColor2 || props.endFillColor || 'white';
+  const startOpacity2 =
+    props.startOpacity2 === 0 ? 0 : props.startOpacity2 || startOpacity;
+  const endOpacity2 =
+    props.endOpacity2 === 0 ? 0 : props.endOpacity2 || endOpacity;
+
+  const startFillColor3 =
+    props.startFillColor3 || props.startFillColor || 'gray';
+  const endFillColor3 = props.endFillColor3 || props.endFillColor || 'white';
+  const startOpacity3 =
+    props.startOpacity3 === 0 ? 0 : props.startOpacity3 || startOpacity;
+  const endOpacity3 =
+    props.endOpacity3 === 0 ? 0 : props.endOpacity3 || endOpacity;
+
+  const startFillColor4 =
+    props.startFillColor4 || props.startFillColor || 'gray';
+  const endFillColor4 = props.endFillColor4 || props.endFillColor || 'white';
+  const startOpacity4 =
+    props.startOpacity4 === 0 ? 0 : props.startOpacity4 || startOpacity;
+  const endOpacity4 =
+    props.endOpacity4 === 0 ? 0 : props.endOpacity4 || endOpacity;
+
+  const startFillColor5 =
+    props.startFillColor5 || props.startFillColor || 'gray';
+  const endFillColor5 = props.endFillColor5 || props.endFillColor || 'white';
+  const startOpacity5 =
+    props.startOpacity5 === 0 ? 0 : props.startOpacity5 || startOpacity;
+  const endOpacity5 =
+    props.endOpacity5 === 0 ? 0 : props.endOpacity5 || endOpacity;
+
+  const defaultArrowConfig = {
+    length: 10,
+    width: 10,
+    strokeWidth: thickness1,
+    strokeColor: color1,
+    fillColor: 'none',
+    showArrowBase: true,
+  };
+
+  const arrowLength1 =
+    props.arrowConfig1?.length ??
+    props.arrowConfig?.length ??
+    defaultArrowConfig.length;
+  const arrowWidth1 =
+    props.arrowConfig1?.width ??
+    props.arrowConfig?.width ??
+    defaultArrowConfig.width;
+  const arrowStrokeWidth1 =
+    props.arrowConfig1?.strokeWidth ??
+    props.arrowConfig?.strokeWidth ??
+    defaultArrowConfig.strokeWidth;
+  const arrowStrokeColor1 =
+    props.arrowConfig1?.strokeColor ??
+    props.arrowConfig?.strokeColor ??
+    defaultArrowConfig.strokeColor;
+  const arrowFillColor1 =
+    props.arrowConfig1?.fillColor ??
+    props.arrowConfig?.fillColor ??
+    defaultArrowConfig.fillColor;
+  const showArrowBase1 =
+    props.arrowConfig1?.showArrowBase ??
+    props.arrowConfig?.showArrowBase ??
+    defaultArrowConfig.showArrowBase;
+
+  const arrowLength2 =
+    props.arrowConfig2?.length ??
+    props.arrowConfig?.length ??
+    defaultArrowConfig.length;
+  const arrowWidth2 =
+    props.arrowConfig2?.width ??
+    props.arrowConfig?.width ??
+    defaultArrowConfig.width;
+  const arrowStrokeWidth2 =
+    props.arrowConfig2?.strokeWidth ??
+    props.arrowConfig?.strokeWidth ??
+    defaultArrowConfig.strokeWidth;
+  const arrowStrokeColor2 =
+    props.arrowConfig2?.strokeColor ??
+    props.arrowConfig?.strokeColor ??
+    defaultArrowConfig.strokeColor;
+  const arrowFillColor2 =
+    props.arrowConfig2?.fillColor ??
+    props.arrowConfig?.fillColor ??
+    defaultArrowConfig.fillColor;
+  const showArrowBase2 =
+    props.arrowConfig2?.showArrowBase ??
+    props.arrowConfig?.showArrowBase ??
+    defaultArrowConfig.showArrowBase;
+
+  const arrowLength3 =
+    props.arrowConfig3?.length ??
+    props.arrowConfig?.length ??
+    defaultArrowConfig.length;
+  const arrowWidth3 =
+    props.arrowConfig3?.width ??
+    props.arrowConfig?.width ??
+    defaultArrowConfig.width;
+  const arrowStrokeWidth3 =
+    props.arrowConfig3?.strokeWidth ??
+    props.arrowConfig?.strokeWidth ??
+    defaultArrowConfig.strokeWidth;
+  const arrowStrokeColor3 =
+    props.arrowConfig3?.strokeColor ??
+    props.arrowConfig?.strokeColor ??
+    defaultArrowConfig.strokeColor;
+  const arrowFillColor3 =
+    props.arrowConfig3?.fillColor ??
+    props.arrowConfig?.fillColor ??
+    defaultArrowConfig.fillColor;
+  const showArrowBase3 =
+    props.arrowConfig3?.showArrowBase ??
+    props.arrowConfig?.showArrowBase ??
+    defaultArrowConfig.showArrowBase;
+
+  const arrowLength4 =
+    props.arrowConfig4?.length ??
+    props.arrowConfig?.length ??
+    defaultArrowConfig.length;
+  const arrowWidth4 =
+    props.arrowConfig4?.width ??
+    props.arrowConfig?.width ??
+    defaultArrowConfig.width;
+  const arrowStrokeWidth4 =
+    props.arrowConfig4?.strokeWidth ??
+    props.arrowConfig?.strokeWidth ??
+    defaultArrowConfig.strokeWidth;
+  const arrowStrokeColor4 =
+    props.arrowConfig4?.strokeColor ??
+    props.arrowConfig?.strokeColor ??
+    defaultArrowConfig.strokeColor;
+  const arrowFillColor4 =
+    props.arrowConfig4?.fillColor ??
+    props.arrowConfig?.fillColor ??
+    defaultArrowConfig.fillColor;
+  const showArrowBase4 =
+    props.arrowConfig4?.showArrowBase ??
+    props.arrowConfig?.showArrowBase ??
+    defaultArrowConfig.showArrowBase;
+
+  const arrowLength5 =
+    props.arrowConfig5?.length ??
+    props.arrowConfig?.length ??
+    defaultArrowConfig.length;
+  const arrowWidth5 =
+    props.arrowConfig5?.width ??
+    props.arrowConfig?.width ??
+    defaultArrowConfig.width;
+  const arrowStrokeWidth5 =
+    props.arrowConfig5?.strokeWidth ??
+    props.arrowConfig?.strokeWidth ??
+    defaultArrowConfig.strokeWidth;
+  const arrowStrokeColor5 =
+    props.arrowConfig5?.strokeColor ??
+    props.arrowConfig?.strokeColor ??
+    defaultArrowConfig.strokeColor;
+  const arrowFillColor5 =
+    props.arrowConfig5?.fillColor ??
+    props.arrowConfig?.fillColor ??
+    defaultArrowConfig.fillColor;
+  const showArrowBase5 =
+    props.arrowConfig5?.showArrowBase ??
+    props.arrowConfig?.showArrowBase ??
+    defaultArrowConfig.showArrowBase;
+
+  const getArrowPoints = (
+    arrowTipX,
+    arrowTipY,
+    x1,
+    y1,
+    arrowLength,
+    arrowWidth,
+    showArrowBase,
+  ) => {
+    let dataLineSlope = (arrowTipY - y1) / (arrowTipX - x1);
+    let d = arrowLength;
+    let d2 = arrowWidth / 2;
+    let interSectionX =
+      arrowTipX - Math.sqrt((d * d) / (dataLineSlope * dataLineSlope + 1));
+    let interSectionY = arrowTipY - dataLineSlope * (arrowTipX - interSectionX);
+
+    let arrowBasex1, arrowBaseY1, arrowBaseX2, arrowBaseY2;
+    if (dataLineSlope === 0) {
+      arrowBasex1 = interSectionX;
+      arrowBaseY1 = interSectionY - d2;
+      arrowBaseX2 = interSectionX;
+      arrowBaseY2 = interSectionY + d2;
+    } else {
+      let arrowBaseSlope = -1 / dataLineSlope;
+      arrowBasex1 =
+        interSectionX -
+        Math.sqrt((d2 * d2) / (arrowBaseSlope * arrowBaseSlope + 1));
+      arrowBaseY1 =
+        interSectionY - arrowBaseSlope * (interSectionX - arrowBasex1);
+
+      arrowBaseX2 =
+        interSectionX +
+        Math.sqrt((d2 * d2) / (arrowBaseSlope * arrowBaseSlope + 1));
+      arrowBaseY2 =
+        interSectionY + arrowBaseSlope * (interSectionX - arrowBasex1);
+    }
+    let arrowPoints = ` M${interSectionX} ${interSectionY}`;
+    arrowPoints += ` ${showArrowBase ? 'L' : 'M'}${arrowBasex1} ${arrowBaseY1}`;
+    arrowPoints += ` L${arrowTipX} ${arrowTipY}`;
+    arrowPoints += ` M${interSectionX} ${interSectionY}`;
+    arrowPoints += ` ${showArrowBase ? 'L' : 'M'}${arrowBaseX2} ${arrowBaseY2}`;
+    arrowPoints += ` L${arrowTipX} ${arrowTipY}`;
+
+    return arrowPoints;
+  };
+
   useEffect(() => {
     let pp = '',
       pp2 = '',
@@ -847,7 +1136,7 @@ export const LineChart = (props: propTypes) => {
               10 -
               (data[i].value * containerHeight) / maxValue) +
             ' ';
-          setPoints(pp.replace('L', 'M'));
+          // setPoints(pp.replace('L', 'M'));
         }
         if (data2.length && i >= startIndex2 && i <= endIndex2) {
           pp2 +=
@@ -894,6 +1183,108 @@ export const LineChart = (props: propTypes) => {
       setPoints3(pp3.replace('L', 'M'));
       setPoints4(pp4.replace('L', 'M'));
       setPoints5(pp5.replace('L', 'M'));
+
+      setPoints(pp.replace('L', 'M'));
+
+      if (data.length > 1 && (props.showArrow1 || props.showArrows)) {
+        let ppArray = pp.trim().split(' ');
+        let arrowTipY = parseInt(ppArray[ppArray.length - 1]);
+        let arrowTipX = parseInt(ppArray[ppArray.length - 2].replace('L', ''));
+        let y1 = parseInt(ppArray[ppArray.length - 3]);
+        let x1 = parseInt(ppArray[ppArray.length - 4].replace('L', ''));
+
+        let arrowPoints = getArrowPoints(
+          arrowTipX,
+          arrowTipY,
+          x1,
+          y1,
+          arrowLength1,
+          arrowWidth1,
+          showArrowBase1,
+        );
+
+        setArrow1Points(arrowPoints);
+      }
+
+      if (data2.length > 1 && (props.showArrow2 || props.showArrows)) {
+        let ppArray = pp2.trim().split(' ');
+        let arrowTipY = parseInt(ppArray[ppArray.length - 1]);
+        let arrowTipX = parseInt(ppArray[ppArray.length - 2].replace('L', ''));
+        let y1 = parseInt(ppArray[ppArray.length - 3]);
+        let x1 = parseInt(ppArray[ppArray.length - 4].replace('L', ''));
+
+        let arrowPoints = getArrowPoints(
+          arrowTipX,
+          arrowTipY,
+          x1,
+          y1,
+          arrowLength2,
+          arrowWidth2,
+          showArrowBase2,
+        );
+
+        setArrow2Points(arrowPoints);
+      }
+
+      if (data3.length > 1 && (props.showArrow3 || props.showArrows)) {
+        let ppArray = pp3.trim().split(' ');
+        let arrowTipY = parseInt(ppArray[ppArray.length - 1]);
+        let arrowTipX = parseInt(ppArray[ppArray.length - 2].replace('L', ''));
+        let y1 = parseInt(ppArray[ppArray.length - 3]);
+        let x1 = parseInt(ppArray[ppArray.length - 4].replace('L', ''));
+
+        let arrowPoints = getArrowPoints(
+          arrowTipX,
+          arrowTipY,
+          x1,
+          y1,
+          arrowLength3,
+          arrowWidth3,
+          showArrowBase3,
+        );
+
+        setArrow3Points(arrowPoints);
+      }
+
+      if (data4.length > 1 && (props.showArrow4 || props.showArrows)) {
+        let ppArray = pp4.trim().split(' ');
+        let arrowTipY = parseInt(ppArray[ppArray.length - 1]);
+        let arrowTipX = parseInt(ppArray[ppArray.length - 2].replace('L', ''));
+        let y1 = parseInt(ppArray[ppArray.length - 3]);
+        let x1 = parseInt(ppArray[ppArray.length - 4].replace('L', ''));
+
+        let arrowPoints = getArrowPoints(
+          arrowTipX,
+          arrowTipY,
+          x1,
+          y1,
+          arrowLength4,
+          arrowWidth4,
+          showArrowBase4,
+        );
+
+        setArrow4Points(arrowPoints);
+      }
+
+      if (data5.length > 1 && (props.showArrow5 || props.showArrows)) {
+        let ppArray = pp5.trim().split(' ');
+        let arrowTipY = parseInt(ppArray[ppArray.length - 1]);
+        let arrowTipX = parseInt(ppArray[ppArray.length - 2].replace('L', ''));
+        let y1 = parseInt(ppArray[ppArray.length - 3]);
+        let x1 = parseInt(ppArray[ppArray.length - 4].replace('L', ''));
+
+        let arrowPoints = getArrowPoints(
+          arrowTipX,
+          arrowTipY,
+          x1,
+          y1,
+          arrowLength5,
+          arrowWidth5,
+          showArrowBase5,
+        );
+
+        setArrow5Points(arrowPoints);
+      }
 
       /***************************          For Area Charts          *************************/
       if (areaChart) {
@@ -1075,17 +1466,114 @@ export const LineChart = (props: propTypes) => {
           ]);
         }
       }
+
       let xx = svgPath(p1Array, bezierCommand);
       let xx2 = svgPath(p2Array, bezierCommand);
       let xx3 = svgPath(p3Array, bezierCommand);
       let xx4 = svgPath(p4Array, bezierCommand);
       let xx5 = svgPath(p5Array, bezierCommand);
       // console.log('xx', xx);
+
       setPoints(xx);
       setPoints2(xx2);
       setPoints3(xx3);
       setPoints4(xx4);
       setPoints5(xx5);
+
+      if (data.length > 1 && (props.showArrow1 || props.showArrows)) {
+        let arrowTipY = p1Array[p1Array.length - 1][1];
+        let arrowTipX = p1Array[p1Array.length - 1][0];
+        let y1 = p1Array[p1Array.length - 2][1];
+        let x1 = p1Array[p1Array.length - 2][0];
+
+        let arrowPoints = getArrowPoints(
+          arrowTipX,
+          arrowTipY,
+          x1,
+          y1,
+          arrowLength1,
+          arrowWidth1,
+          showArrowBase1,
+        );
+
+        setArrow1Points(arrowPoints);
+      }
+
+      if (data2.length > 1 && (props.showArrow2 || props.showArrows)) {
+        let arrowTipY = p2Array[p2Array.length - 1][1];
+        let arrowTipX = p2Array[p2Array.length - 1][0];
+        let y1 = p2Array[p2Array.length - 2][1];
+        let x1 = p2Array[p2Array.length - 2][0];
+
+        let arrowPoints = getArrowPoints(
+          arrowTipX,
+          arrowTipY,
+          x1,
+          y1,
+          arrowLength2,
+          arrowWidth2,
+          showArrowBase2,
+        );
+
+        setArrow2Points(arrowPoints);
+      }
+
+      if (data3.length > 1 && (props.showArrow3 || props.showArrows)) {
+        let arrowTipY = p3Array[p3Array.length - 1][1];
+        let arrowTipX = p3Array[p3Array.length - 1][0];
+        let y1 = p3Array[p3Array.length - 2][1];
+        let x1 = p3Array[p3Array.length - 2][0];
+
+        let arrowPoints = getArrowPoints(
+          arrowTipX,
+          arrowTipY,
+          x1,
+          y1,
+          arrowLength3,
+          arrowWidth3,
+          showArrowBase3,
+        );
+
+        setArrow2Points(arrowPoints);
+      }
+
+      if (data4.length > 1 && (props.showArrow4 || props.showArrows)) {
+        let arrowTipY = p4Array[p4Array.length - 1][1];
+        let arrowTipX = p4Array[p4Array.length - 1][0];
+        let y1 = p4Array[p4Array.length - 2][1];
+        let x1 = p4Array[p4Array.length - 2][0];
+
+        let arrowPoints = getArrowPoints(
+          arrowTipX,
+          arrowTipY,
+          x1,
+          y1,
+          arrowLength4,
+          arrowWidth4,
+          showArrowBase4,
+        );
+
+        setArrow2Points(arrowPoints);
+      }
+
+      if (data5.length > 1 && (props.showArrow5 || props.showArrows)) {
+        let arrowTipY = p5Array[p5Array.length - 1][1];
+        let arrowTipX = p5Array[p5Array.length - 1][0];
+        let y1 = p5Array[p5Array.length - 2][1];
+        let x1 = p5Array[p5Array.length - 2][0];
+
+        let arrowPoints = getArrowPoints(
+          arrowTipX,
+          arrowTipY,
+          x1,
+          y1,
+          arrowLength5,
+          arrowWidth5,
+          showArrowBase5,
+        );
+
+        setArrow2Points(arrowPoints);
+      }
 
       /***************************          For Area Charts          *************************/
 
@@ -1279,6 +1767,27 @@ export const LineChart = (props: propTypes) => {
     endIndex4,
     startIndex5,
     endIndex5,
+    arrowLength1,
+    arrowWidth1,
+    showArrowBase1,
+    props.showArrow1,
+    props.showArrows,
+    props.showArrow2,
+    props.showArrow3,
+    props.showArrow4,
+    props.showArrow5,
+    arrowLength2,
+    arrowWidth2,
+    showArrowBase2,
+    arrowLength3,
+    arrowWidth3,
+    showArrowBase3,
+    arrowLength4,
+    arrowWidth4,
+    showArrowBase4,
+    arrowLength5,
+    arrowWidth5,
+    showArrowBase5,
   ]);
 
   const horizSections = [{value: '0'}];
@@ -1287,90 +1796,6 @@ export const LineChart = (props: propTypes) => {
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
     props.noOfSectionsBelowXAxis || -minValue / stepValue;
-  const thickness1 =
-    props.thickness1 === 0 ? 0 : props.thickness1 || props.thickness || 1;
-  const thickness2 =
-    props.thickness2 === 0 ? 0 : props.thickness2 || props.thickness || 1;
-  const thickness3 =
-    props.thickness3 === 0 ? 0 : props.thickness3 || props.thickness || 1;
-  const thickness4 =
-    props.thickness4 === 0 ? 0 : props.thickness4 || props.thickness || 1;
-  const thickness5 =
-    props.thickness5 === 0 ? 0 : props.thickness5 || props.thickness || 1;
-
-  const zIndex1 = props.zIndex1 || 0;
-  const zIndex2 = props.zIndex2 || 0;
-  const zIndex3 = props.zIndex3 || 0;
-  const zIndex4 = props.zIndex4 || 0;
-  const zIndex5 = props.zIndex5 || 0;
-
-  const strokeDashArray1 = props.strokeDashArray1 || props.strokeDashArray;
-  const strokeDashArray2 = props.strokeDashArray2 || props.strokeDashArray;
-  const strokeDashArray3 = props.strokeDashArray3 || props.strokeDashArray;
-  const strokeDashArray4 = props.strokeDashArray4 || props.strokeDashArray;
-  const strokeDashArray5 = props.strokeDashArray5 || props.strokeDashArray;
-
-  const rotateLabel = props.rotateLabel || false;
-  const isAnimated = props.isAnimated || false;
-  const hideDataPoints1 =
-    props.hideDataPoints || props.hideDataPoints1 || false;
-  const hideDataPoints2 =
-    props.hideDataPoints || props.hideDataPoints2 || false;
-  const hideDataPoints3 =
-    props.hideDataPoints || props.hideDataPoints3 || false;
-  const hideDataPoints4 =
-    props.hideDataPoints || props.hideDataPoints4 || false;
-  const hideDataPoints5 =
-    props.hideDataPoints || props.hideDataPoints5 || false;
-
-  const color1 = props.color1 || props.color || 'black';
-  const color2 = props.color2 || props.color || 'black';
-  const color3 = props.color3 || props.color || 'black';
-  const color4 = props.color4 || props.color || 'black';
-  const color5 = props.color5 || props.color || 'black';
-
-  const startFillColor1 =
-    props.startFillColor1 || props.startFillColor || 'gray';
-  const endFillColor1 = props.endFillColor1 || props.endFillColor || 'white';
-  const startOpacity = props.startOpacity === 0 ? 0 : props.startOpacity || 1;
-  const endOpacity = props.endOpacity === 0 ? 0 : props.endOpacity || 1;
-  const startOpacity1 =
-    props.startOpacity1 === 0 ? 0 : props.startOpacity1 || startOpacity;
-  const endOpacity1 =
-    props.endOpacity1 === 0 ? 0 : props.endOpacity1 || endOpacity;
-
-  const startFillColor2 =
-    props.startFillColor2 || props.startFillColor || 'gray';
-  const endFillColor2 = props.endFillColor2 || props.endFillColor || 'white';
-  const startOpacity2 =
-    props.startOpacity2 === 0 ? 0 : props.startOpacity2 || startOpacity;
-  const endOpacity2 =
-    props.endOpacity2 === 0 ? 0 : props.endOpacity2 || endOpacity;
-
-  const startFillColor3 =
-    props.startFillColor3 || props.startFillColor || 'gray';
-  const endFillColor3 = props.endFillColor3 || props.endFillColor || 'white';
-  const startOpacity3 =
-    props.startOpacity3 === 0 ? 0 : props.startOpacity3 || startOpacity;
-  const endOpacity3 =
-    props.endOpacity3 === 0 ? 0 : props.endOpacity3 || endOpacity;
-
-  const startFillColor4 =
-    props.startFillColor4 || props.startFillColor || 'gray';
-  const endFillColor4 = props.endFillColor4 || props.endFillColor || 'white';
-  const startOpacity4 =
-    props.startOpacity4 === 0 ? 0 : props.startOpacity4 || startOpacity;
-  const endOpacity4 =
-    props.endOpacity4 === 0 ? 0 : props.endOpacity4 || endOpacity;
-
-  const startFillColor5 =
-    props.startFillColor5 || props.startFillColor || 'gray';
-  const endFillColor5 = props.endFillColor5 || props.endFillColor || 'white';
-  const startOpacity5 =
-    props.startOpacity5 === 0 ? 0 : props.startOpacity5 || startOpacity;
-  const endOpacity5 =
-    props.endOpacity5 === 0 ? 0 : props.endOpacity5 || endOpacity;
-
   const rulesThickness =
     props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
   const rulesLength = props.rulesLength;
@@ -2683,6 +3108,11 @@ export const LineChart = (props: propTypes) => {
     startOpacity: number,
     endOpacity: number,
     strokeDashArray: Array<number> | undefined | null,
+    showArrow: boolean,
+    arrowPoints,
+    arrowStrokeWidth,
+    arrowStrokeColor,
+    arrowFillColor,
   ) => {
     return (
       <Svg>
@@ -2815,6 +3245,14 @@ export const LineChart = (props: propTypes) => {
               endIndex5,
             )
           : null}
+        {showArrow && (
+          <Path
+            d={arrowPoints}
+            fill={arrowFillColor}
+            stroke={arrowStrokeColor}
+            strokeWidth={arrowStrokeWidth}
+          />
+        )}
       </Svg>
     );
   };
@@ -2830,6 +3268,11 @@ export const LineChart = (props: propTypes) => {
     startOpacity: number,
     endOpacity: number,
     strokeDashArray: Array<number> | undefined | null,
+    showArrow,
+    arrowPoints,
+    arrowStrokeWidth,
+    arrowStrokeColor,
+    arrowFillColor,
   ) => {
     return (
       <View
@@ -3038,6 +3481,11 @@ export const LineChart = (props: propTypes) => {
           startOpacity,
           endOpacity,
           strokeDashArray,
+          showArrow,
+          arrowPoints,
+          arrowStrokeWidth,
+          arrowStrokeColor,
+          arrowFillColor,
         )}
       </View>
     );
@@ -3055,6 +3503,11 @@ export const LineChart = (props: propTypes) => {
     startOpacity: number,
     endOpacity: number,
     strokeDashArray: Array<number> | undefined | null,
+    showArrow,
+    arrowPoints,
+    arrowStrokeWidth,
+    arrowStrokeColor,
+    arrowFillColor,
   ) => {
     // console.log('animatedWidth is-------->', animatedWidth);
     return (
@@ -3264,6 +3717,11 @@ export const LineChart = (props: propTypes) => {
           startOpacity,
           endOpacity,
           strokeDashArray,
+          showArrow,
+          arrowPoints,
+          arrowStrokeWidth,
+          arrowStrokeColor,
+          arrowFillColor,
         )}
       </Animated.View>
     );
@@ -3389,6 +3847,11 @@ export const LineChart = (props: propTypes) => {
               startOpacity1,
               endOpacity1,
               strokeDashArray1,
+              props.showArrow1 || props.showArrows,
+              arrow1Points,
+              arrowStrokeWidth1,
+              arrowStrokeColor1,
+              arrowFillColor1,
             )
           : renderLine(
               zIndex1,
@@ -3401,6 +3864,11 @@ export const LineChart = (props: propTypes) => {
               startOpacity1,
               endOpacity1,
               strokeDashArray1,
+              props.showArrow1 || props.showArrows,
+              arrow1Points,
+              arrowStrokeWidth1,
+              arrowStrokeColor1,
+              arrowFillColor1,
             )}
         {points2
           ? isAnimated
@@ -3416,6 +3884,11 @@ export const LineChart = (props: propTypes) => {
                 startOpacity2,
                 endOpacity2,
                 strokeDashArray2,
+                props.showArrow2 || props.showArrows,
+                arrow2Points,
+                arrowStrokeWidth2,
+                arrowStrokeColor2,
+                arrowFillColor2,
               )
             : renderLine(
                 zIndex2,
@@ -3428,6 +3901,11 @@ export const LineChart = (props: propTypes) => {
                 startOpacity2,
                 endOpacity2,
                 strokeDashArray2,
+                props.showArrow2 || props.showArrows,
+                arrow2Points,
+                arrowStrokeWidth2,
+                arrowStrokeColor2,
+                arrowFillColor2,
               )
           : null}
         {points3
@@ -3444,6 +3922,11 @@ export const LineChart = (props: propTypes) => {
                 startOpacity3,
                 endOpacity3,
                 strokeDashArray3,
+                props.showArrow3 || props.showArrows,
+                arrow3Points,
+                arrowStrokeWidth3,
+                arrowStrokeColor3,
+                arrowFillColor3,
               )
             : renderLine(
                 zIndex3,
@@ -3456,6 +3939,11 @@ export const LineChart = (props: propTypes) => {
                 startOpacity3,
                 endOpacity3,
                 strokeDashArray3,
+                props.showArrow3 || props.showArrows,
+                arrow3Points,
+                arrowStrokeWidth3,
+                arrowStrokeColor3,
+                arrowFillColor3,
               )
           : null}
         {points4
@@ -3472,6 +3960,11 @@ export const LineChart = (props: propTypes) => {
                 startOpacity4,
                 endOpacity4,
                 strokeDashArray4,
+                props.showArrow4 || props.showArrows,
+                arrow4Points,
+                arrowStrokeWidth4,
+                arrowStrokeColor4,
+                arrowFillColor4,
               )
             : renderLine(
                 zIndex4,
@@ -3484,6 +3977,11 @@ export const LineChart = (props: propTypes) => {
                 startOpacity4,
                 endOpacity4,
                 strokeDashArray4,
+                props.showArrow4 || props.showArrows,
+                arrow4Points,
+                arrowStrokeWidth4,
+                arrowStrokeColor4,
+                arrowFillColor4,
               )
           : null}
         {points5
@@ -3500,6 +3998,11 @@ export const LineChart = (props: propTypes) => {
                 startOpacity5,
                 endOpacity5,
                 strokeDashArray5,
+                props.showArrow5 || props.showArrows,
+                arrow5Points,
+                arrowStrokeWidth5,
+                arrowStrokeColor5,
+                arrowFillColor5,
               )
             : renderLine(
                 zIndex5,
@@ -3512,6 +4015,11 @@ export const LineChart = (props: propTypes) => {
                 startOpacity5,
                 endOpacity5,
                 strokeDashArray5,
+                props.showArrow5 || props.showArrows,
+                arrow5Points,
+                arrowStrokeWidth5,
+                arrowStrokeColor5,
+                arrowFillColor5,
               )
           : null}
         {pointerX > 0 ? (

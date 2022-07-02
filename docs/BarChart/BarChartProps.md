@@ -33,6 +33,78 @@
 | leftShiftForTooltip    | number     | The distance by which the tooltip component should shift towards left                   | 0 |
 | leftShiftForLastIndexTooltip | number | The distance by which the tooltip component of the last bar should shift towards left | 0 |
 
+#### lineConfig
+
+The <b>lineConfig</b> prop describes the properties of the line chart that is displayed when we set the <b>showLine</b> prop to true. The properties allowed by the lineConfig prop are-
+
+```js
+type lineConfigType = {
+  initialSpacing?: number;
+  curved?: Boolean;
+  isAnimated?: Boolean;
+  delay?: number;
+  thickness?: number;
+  color?: ColorValue | String | any;
+  hideDataPoints?: Boolean;
+  dataPointsShape?: String;
+  dataPointsWidth?: number;
+  dataPointsHeight?: number;
+  dataPointsColor?: ColorValue | String | any;
+  dataPointsRadius?: number;
+  textColor?: ColorValue | String | any;
+  textFontSize?: number;
+  textShiftX?: number;
+  textShiftY?: number;
+  shiftY?: number;
+  startIndex?: number;
+  endIndex?: number;
+  showArrow?: boolean;
+  arrowConfig?: arrowType;
+};
+type arrowType = {
+  length?: number;
+  width?: number;
+  strokeWidth?: number;
+  strokeColor?: string;
+  fillColor?: string;
+  showArrowBase?: boolean;
+};
+```
+
+The default value of the lineConfig object is -
+
+```js
+defaultLineConfig = {
+    initialSpacing: initialSpacing,
+    curved: false,
+    isAnimated: false,
+    thickness: 1,
+    color: 'black',
+    hideDataPoints: false,
+    dataPointsShape: 'circular',
+    dataPointsWidth: 2,
+    dataPointsHeight: 2,
+    dataPointsColor: 'black',
+    dataPointsRadius: 3,
+    textColor: 'gray',
+    textFontSize: 10,
+    textShiftX: 0,
+    textShiftY: 0,
+    shiftY: 0,
+    delay: 0,
+    startIndex: 0,
+    endIndex: lineData.length - 1,
+    showArrow: false,
+    arrowConfig: {
+      length: 10,
+      width: 10,
+      strokeWidth: 1,
+      strokeColor: 'black',
+      fillColor: 'none',
+      showArrowBase: true,
+    },
+  };
+```
 ---
 
 **Alert!**\
