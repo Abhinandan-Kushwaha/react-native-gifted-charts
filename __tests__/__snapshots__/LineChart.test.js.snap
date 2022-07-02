@@ -1121,21 +1121,55 @@ exports[`renders 2 area chart correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "black",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "black",
+                "flex": 0,
                 "height": 1,
+                "width": 363,
               },
             ]
           }
-        />
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278190080}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -1782,6 +1816,7 @@ exports[`renders 2 area chart correctly 1`] = `
       }
       horizontal={true}
       onContentSizeChange={[Function]}
+      onScroll={[Function]}
       scrollEnabled={true}
       showsHorizontalScrollIndicator={false}
       style={
@@ -3434,21 +3469,55 @@ exports[`renders 2 line chart correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={363}
+          config={
+            Object {
+              "color": "black",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 363,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "black",
+                "flex": 0,
                 "height": 1,
+                "width": 363,
               },
             ]
           }
-        />
+          width={363}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278190080}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h363"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -4095,6 +4164,7 @@ exports[`renders 2 line chart correctly 1`] = `
       }
       horizontal={true}
       onContentSizeChange={[Function]}
+      onScroll={[Function]}
       scrollEnabled={true}
       showsHorizontalScrollIndicator={false}
       style={
@@ -5825,21 +5895,55 @@ exports[`renders CaloriesBurnt Area chart correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={419}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 419,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "lightgray",
+                "flex": 0,
                 "height": 1,
+                "width": 419,
               },
             ]
           }
-        />
+          width={419}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h419"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -6154,6 +6258,7 @@ exports[`renders CaloriesBurnt Area chart correctly 1`] = `
       }
       horizontal={true}
       onContentSizeChange={[Function]}
+      onScroll={[Function]}
       scrollEnabled={false}
       showsHorizontalScrollIndicator={false}
       style={
@@ -7156,21 +7261,55 @@ exports[`renders ChartWithAdjustingPointer correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "lightgray",
+                "flex": 0,
                 "height": 1,
+                "width": 311,
               },
             ]
           }
-        />
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -7601,6 +7740,7 @@ exports[`renders ChartWithAdjustingPointer correctly 1`] = `
       }
       horizontal={true}
       onContentSizeChange={[Function]}
+      onScroll={[Function]}
       scrollEnabled={false}
       showsHorizontalScrollIndicator={false}
       style={
@@ -9543,21 +9683,55 @@ exports[`renders ChartWithPointer correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "lightgray",
+                "flex": 0,
                 "height": 1,
+                "width": 311,
               },
             ]
           }
-        />
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -9988,6 +10162,7 @@ exports[`renders ChartWithPointer correctly 1`] = `
       }
       horizontal={true}
       onContentSizeChange={[Function]}
+      onScroll={[Function]}
       scrollEnabled={false}
       showsHorizontalScrollIndicator={false}
       style={
@@ -11930,21 +12105,55 @@ exports[`renders ScrollingChartWithPointer correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "lightgray",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "lightgray",
+                "flex": 0,
                 "height": 1,
+                "width": 311,
               },
             ]
           }
-        />
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4292072403}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -12375,6 +12584,7 @@ exports[`renders ScrollingChartWithPointer correctly 1`] = `
       }
       horizontal={true}
       onContentSizeChange={[Function]}
+      onScroll={[Function]}
       scrollEnabled={false}
       showsHorizontalScrollIndicator={false}
       style={
@@ -14189,21 +14399,55 @@ exports[`renders animated area chart correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={251}
+          config={
+            Object {
+              "color": "#0BA5A4",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 251,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "#0BA5A4",
+                "flex": 0,
                 "height": 1,
+                "width": 251,
               },
             ]
           }
-        />
+          width={251}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278953380}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h251"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <RCTScrollView
@@ -14221,6 +14465,7 @@ exports[`renders animated area chart correctly 1`] = `
       }
       horizontal={true}
       onContentSizeChange={[Function]}
+      onScroll={[Function]}
       scrollEnabled={true}
       showsHorizontalScrollIndicator={false}
       style={
@@ -15169,21 +15414,55 @@ exports[`renders blue line chart correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={251}
+          config={
+            Object {
+              "color": "#0BA5A4",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 251,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "#0BA5A4",
+                "flex": 0,
                 "height": 1,
+                "width": 251,
               },
             ]
           }
-        />
+          width={251}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278953380}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h251"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <RCTScrollView
@@ -15201,6 +15480,7 @@ exports[`renders blue line chart correctly 1`] = `
       }
       horizontal={true}
       onContentSizeChange={[Function]}
+      onScroll={[Function]}
       scrollEnabled={true}
       showsHorizontalScrollIndicator={false}
       style={
@@ -16121,21 +16401,55 @@ exports[`renders blue line chart with given number of vertical lines correctly 1
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={276}
+          config={
+            Object {
+              "color": "#0BA5A4",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 276,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "#0BA5A4",
+                "flex": 0,
                 "height": 1,
+                "width": 276,
               },
             ]
           }
-        />
+          width={276}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278953380}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h276"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <RCTScrollView
@@ -16151,6 +16465,7 @@ exports[`renders blue line chart with given number of vertical lines correctly 1
       }
       horizontal={true}
       onContentSizeChange={[Function]}
+      onScroll={[Function]}
       scrollEnabled={true}
       showsHorizontalScrollIndicator={false}
       style={

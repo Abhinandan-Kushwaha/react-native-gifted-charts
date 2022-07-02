@@ -258,21 +258,55 @@ exports[`renders 3D bar chart correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={331}
+          config={
+            Object {
+              "color": "black",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 331,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "black",
+                "flex": 0,
                 "height": 1,
+                "width": 331,
               },
             ]
           }
-        />
+          width={331}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278190080}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h331"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -698,7 +732,7 @@ exports[`renders 3D bar chart correctly 1`] = `
                   style={
                     Object {
                       "backgroundColor": "#92e6f6",
-                      "height": 30,
+                      "height": 16,
                       "opacity": 1,
                       "width": 40,
                     }
@@ -828,15 +862,18 @@ exports[`renders 3D bar chart correctly 1`] = `
               </View>
               <View
                 style={
-                  Object {
-                    "backgroundColor": "#4ABFF4",
-                    "borderColor": "white",
-                    "borderLeftWidth": 0.5,
-                    "borderTopWidth": 0.5,
-                    "height": 115,
-                    "opacity": 1,
-                    "width": 40,
-                  }
+                  Array [
+                    Object {
+                      "backgroundColor": "#4ABFF4",
+                      "borderColor": "white",
+                      "borderLeftWidth": 0.5,
+                      "borderTopWidth": 0.5,
+                      "height": 115,
+                      "opacity": 1,
+                      "width": 40,
+                    },
+                    undefined,
+                  ]
                 }
               />
             </View>
@@ -984,7 +1021,7 @@ exports[`renders 3D bar chart correctly 1`] = `
                   style={
                     Object {
                       "backgroundColor": "#9FD4E5",
-                      "height": 30,
+                      "height": 16,
                       "opacity": 1,
                       "width": 40,
                     }
@@ -1114,15 +1151,18 @@ exports[`renders 3D bar chart correctly 1`] = `
               </View>
               <View
                 style={
-                  Object {
-                    "backgroundColor": "#79C3DB",
-                    "borderColor": "white",
-                    "borderLeftWidth": 0.5,
-                    "borderTopWidth": 0.5,
-                    "height": 90,
-                    "opacity": 1,
-                    "width": 40,
-                  }
+                  Array [
+                    Object {
+                      "backgroundColor": "#79C3DB",
+                      "borderColor": "white",
+                      "borderLeftWidth": 0.5,
+                      "borderTopWidth": 0.5,
+                      "height": 90,
+                      "opacity": 1,
+                      "width": 40,
+                    },
+                    undefined,
+                  ]
                 }
               />
             </View>
@@ -1270,7 +1310,7 @@ exports[`renders 3D bar chart correctly 1`] = `
                   style={
                     Object {
                       "backgroundColor": "#66C9C9",
-                      "height": 30,
+                      "height": 16,
                       "opacity": 1,
                       "width": 40,
                     }
@@ -1400,15 +1440,18 @@ exports[`renders 3D bar chart correctly 1`] = `
               </View>
               <View
                 style={
-                  Object {
-                    "backgroundColor": "#28B2B3",
-                    "borderColor": "white",
-                    "borderLeftWidth": 0.5,
-                    "borderTopWidth": 0.5,
-                    "height": 97.5,
-                    "opacity": 1,
-                    "width": 40,
-                  }
+                  Array [
+                    Object {
+                      "backgroundColor": "#28B2B3",
+                      "borderColor": "white",
+                      "borderLeftWidth": 0.5,
+                      "borderTopWidth": 0.5,
+                      "height": 97.5,
+                      "opacity": 1,
+                      "width": 40,
+                    },
+                    undefined,
+                  ]
                 }
               />
             </View>
@@ -1556,7 +1599,7 @@ exports[`renders 3D bar chart correctly 1`] = `
                   style={
                     Object {
                       "backgroundColor": "#7DE7CE",
-                      "height": 30,
+                      "height": 16,
                       "opacity": 1,
                       "width": 40,
                     }
@@ -1686,15 +1729,18 @@ exports[`renders 3D bar chart correctly 1`] = `
               </View>
               <View
                 style={
-                  Object {
-                    "backgroundColor": "#4ADDBA",
-                    "borderColor": "white",
-                    "borderLeftWidth": 0.5,
-                    "borderTopWidth": 0.5,
-                    "height": 125,
-                    "opacity": 1,
-                    "width": 40,
-                  }
+                  Array [
+                    Object {
+                      "backgroundColor": "#4ADDBA",
+                      "borderColor": "white",
+                      "borderLeftWidth": 0.5,
+                      "borderTopWidth": 0.5,
+                      "height": 125,
+                      "opacity": 1,
+                      "width": 40,
+                    },
+                    undefined,
+                  ]
                 }
               />
             </View>
@@ -1842,7 +1888,7 @@ exports[`renders 3D bar chart correctly 1`] = `
                   style={
                     Object {
                       "backgroundColor": "#B0EAEB",
-                      "height": 30,
+                      "height": 16,
                       "opacity": 1,
                       "width": 40,
                     }
@@ -1972,15 +2018,18 @@ exports[`renders 3D bar chart correctly 1`] = `
               </View>
               <View
                 style={
-                  Object {
-                    "backgroundColor": "#91E3E3",
-                    "borderColor": "white",
-                    "borderLeftWidth": 0.5,
-                    "borderTopWidth": 0.5,
-                    "height": 160,
-                    "opacity": 1,
-                    "width": 40,
-                  }
+                  Array [
+                    Object {
+                      "backgroundColor": "#91E3E3",
+                      "borderColor": "white",
+                      "borderLeftWidth": 0.5,
+                      "borderTopWidth": 0.5,
+                      "height": 160,
+                      "opacity": 1,
+                      "width": 40,
+                    },
+                    undefined,
+                  ]
                 }
               />
             </View>
@@ -3084,21 +3133,55 @@ exports[`renders a simple bar chart with given number of vertical lines correctl
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={311}
+          config={
+            Object {
+              "color": "black",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 311,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "black",
+                "flex": 0,
                 "height": 1,
+                "width": 311,
               },
             ]
           }
-        />
+          width={311}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278190080}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h311"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -3906,10 +3989,13 @@ exports[`renders a simple bar chart with given number of vertical lines correctl
           >
             <View
               style={
-                Object {
-                  "height": 60,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 60,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -3989,10 +4075,13 @@ exports[`renders a simple bar chart with given number of vertical lines correctl
           >
             <View
               style={
-                Object {
-                  "height": 160,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 160,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -4072,10 +4161,13 @@ exports[`renders a simple bar chart with given number of vertical lines correctl
           >
             <View
               style={
-                Object {
-                  "height": 40,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 40,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -4155,10 +4247,13 @@ exports[`renders a simple bar chart with given number of vertical lines correctl
           >
             <View
               style={
-                Object {
-                  "height": 120,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 120,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -4603,21 +4698,48 @@ exports[`renders a simple bar chart with vertical lines correctly 1`] = `
           ]
         }
       >
-        <View
-          style={
-            Array [
-              Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
-              },
-              Object {
-                "backgroundColor": "black",
-                "height": 0,
-              },
-            ]
+        <RNSVGSvgView
+          bbHeight={0}
+          bbWidth={325}
+          config={
+            Object {
+              "color": "black",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 0,
+              "type": "solid",
+              "width": 325,
+            }
           }
-        />
+          focusable={false}
+          height={0}
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            }
+          }
+          width={325}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278190080}
+              strokeWidth={0}
+            >
+              <RNSVGPath
+                d="M0 0h325"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -5019,10 +5141,13 @@ exports[`renders a simple bar chart with vertical lines correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 66.66666666666667,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 66.66666666666667,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -5102,10 +5227,13 @@ exports[`renders a simple bar chart with vertical lines correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 133.33333333333334,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 133.33333333333334,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -5185,10 +5313,13 @@ exports[`renders a simple bar chart with vertical lines correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 198.66666666666666,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 198.66666666666666,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -5268,10 +5399,13 @@ exports[`renders a simple bar chart with vertical lines correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 85.33333333333333,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 85.33333333333333,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -5351,10 +5485,13 @@ exports[`renders a simple bar chart with vertical lines correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 160,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 160,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -5434,10 +5571,13 @@ exports[`renders a simple bar chart with vertical lines correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 68.26666666666667,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 68.26666666666667,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -5517,10 +5657,13 @@ exports[`renders a simple bar chart with vertical lines correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 80,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 80,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -5965,21 +6108,48 @@ exports[`renders alternate blue and gray bar chart correctly 1`] = `
           ]
         }
       >
-        <View
-          style={
-            Array [
-              Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
-              },
-              Object {
-                "backgroundColor": "black",
-                "height": 0,
-              },
-            ]
+        <RNSVGSvgView
+          bbHeight={0}
+          bbWidth={325}
+          config={
+            Object {
+              "color": "black",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 0,
+              "type": "solid",
+              "width": 325,
+            }
           }
-        />
+          focusable={false}
+          height={0}
+          style={
+            Object {
+              "backgroundColor": "transparent",
+              "borderWidth": 0,
+            }
+          }
+          width={325}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278190080}
+              strokeWidth={0}
+            >
+              <RNSVGPath
+                d="M0 0h325"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -6283,10 +6453,13 @@ exports[`renders alternate blue and gray bar chart correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 66.66666666666667,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 66.66666666666667,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -6366,10 +6539,13 @@ exports[`renders alternate blue and gray bar chart correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 133.33333333333334,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 133.33333333333334,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -6449,10 +6625,13 @@ exports[`renders alternate blue and gray bar chart correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 198.66666666666666,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 198.66666666666666,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -6532,10 +6711,13 @@ exports[`renders alternate blue and gray bar chart correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 85.33333333333333,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 85.33333333333333,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -6615,10 +6797,13 @@ exports[`renders alternate blue and gray bar chart correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 160,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 160,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -6698,10 +6883,13 @@ exports[`renders alternate blue and gray bar chart correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 68.26666666666667,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 68.26666666666667,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -6781,10 +6969,13 @@ exports[`renders alternate blue and gray bar chart correctly 1`] = `
           >
             <View
               style={
-                Object {
-                  "height": 80,
-                  "width": "100%",
-                }
+                Array [
+                  Object {
+                    "height": 80,
+                    "width": "100%",
+                  },
+                  undefined,
+                ]
               }
             >
               <View
@@ -7992,21 +8183,55 @@ exports[`renders capped bar chart correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={251}
+          config={
+            Object {
+              "color": "black",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 251,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "black",
+                "flex": 0,
                 "height": 1,
+                "width": 251,
               },
             ]
           }
-        />
+          width={251}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278190080}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h251"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -9382,21 +9607,55 @@ exports[`renders gradient bar chart correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={331}
+          config={
+            Object {
+              "color": "black",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 331,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "black",
+                "flex": 0,
                 "height": 1,
+                "width": 331,
               },
             ]
           }
-        />
+          width={331}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278190080}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h331"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -10856,21 +11115,55 @@ exports[`renders rounded stack bar chart correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={351}
+          config={
+            Object {
+              "color": "black",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 351,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "black",
+                "flex": 0,
                 "height": 1,
+                "width": 351,
               },
             ]
           }
-        />
+          width={351}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278190080}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h351"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
@@ -12258,21 +12551,55 @@ exports[`renders simple animated bar chart correctly 1`] = `
           ]
         }
       >
-        <View
+        <RNSVGSvgView
+          bbHeight={1}
+          bbWidth={281}
+          config={
+            Object {
+              "color": "black",
+              "dashGap": 8,
+              "dashWidth": 4,
+              "thickness": 1,
+              "type": "solid",
+              "width": 281,
+            }
+          }
+          focusable={false}
+          height={1}
           style={
             Array [
               Object {
-                "backgroundColor": "black",
-                "height": 1,
-                "width": "100%",
+                "backgroundColor": "transparent",
+                "borderWidth": 0,
               },
               Object {
-                "backgroundColor": "black",
+                "flex": 0,
                 "height": 1,
+                "width": 281,
               },
             ]
           }
-        />
+          width={281}
+        >
+          <RNSVGGroup>
+            <RNSVGGroup
+              fill={4292072403}
+              propList={
+                Array [
+                  "fill",
+                  "stroke",
+                  "strokeWidth",
+                ]
+              }
+              stroke={4278190080}
+              strokeWidth={1}
+            >
+              <RNSVGPath
+                d="M0 0.5h281"
+              />
+            </RNSVGGroup>
+          </RNSVGGroup>
+        </RNSVGSvgView>
       </View>
     </View>
     <View
