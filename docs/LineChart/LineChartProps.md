@@ -222,13 +222,13 @@ type referenceConfigType = {
 
 Some Line charts have an arrow at the end of the line. Here's an example-
 
-<img src='../../demos/lineArrow.png' alt='' height=400 width=500/>
+<img src='../../demos/lineArrow.png' alt='' height=360 width=500/>
 
-To display the arrrow at the end of the line, just pass the <b>showArrows</b> or <b>showArrow{n}</b> prop.
-The properties of the arrow can controlled with the <b>arrowConfig</b> prop.
+To display the arrrow at the end of the line, just pass the `showArrows` or `showArrow{n}` prop.
+The properties of the arrow can controlled with the `arrowConfig` prop.
 ### Understanding the arrow-
 
-<img src='../../demos/arrowProps.png' alt='' height=400 width=500/>
+<img src='../../demos/arrowProps.png' alt='' height=340 width=480/>
 
 | showArrows   | boolean    | To show an arrow at the end of each data line                        | false              |
 | arrowConfig  | arrowType  | Object describing the properties of the arrows like length, width, strokeWidth, strokeColor, fillColor | defaultArrowConfig |
@@ -243,7 +243,7 @@ The properties of the arrow can controlled with the <b>arrowConfig</b> prop.
 | showArrow5   | boolean    | To show an arrow at the end of the fifth data line                   | false              |
 | arrowConfig5 | arrowType  | Object describing the properties of the fifth arrow                  | defaultArrowConfig |
 
-The <b>arrowConfig</b> has the properties allowed by the <b>arrowType</b>-
+The `arrowConfig` has the properties allowed by the `arrowType`-
 
 ```js
 type arrowType = {
@@ -381,15 +381,15 @@ The above properties can be understood with this labelled diagram-
 **Note** If you are using the `pointerConfig` prop, the scroll will be disabled automatically. This is because, it's difficult to achive both scrolling line and scrolling pointer simultaneously. So if you want to retain the scroll behaviour even after passing the `pointerConfig` prop, then set the property `activatePointersOnLongPress` to true inside the pointerConfig object. This will make the pointers visible only after long press. So, before the long press, user can can scroll the line. Once long pressed, scrolling will be disabled until the release of the long press.
   The duration after which a press event will be considered as long press can be controlled using the `activatePointersDelay` property inside the pointerConfig object. The default value of activatePointersDelay is 150.
 
-The <b>strokeDashArray</b> property lets us render a dashed/dotted strip along the pointer.
+The `strokeDashArray` property lets us render a dashed/dotted strip along the pointer.
 
 #### pointerLabelComponent
 
-<b>pointerLabelComponent</b> is a function that returns the component to be rendered as a Label. It takes a single parameter - an array of items. So, if there are multiple data arrays, the parameter <b>items</b> will have the data item corresponding to each data array.
+`pointerLabelComponent` is a function that returns the component to be rendered as a Label. It takes a single parameter - an array of items. So, if there are multiple data arrays, the parameter `items` will have the data item corresponding to each data array.
 
 #### getPointerProps
 
-<b>getPointerProps</b> prop can be used to get the current pointer's index, x and y coordinate values. It is a callback function that accepts a single parameter which is an object. This object has following properties-
+`getPointerProps` prop can be used to get the current pointer's index, x and y coordinate values. It is a callback function that accepts a single parameter which is an object. This object has following properties-
 1. pointerIndex
 2. pointerX
 3. pointerY
