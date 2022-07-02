@@ -222,7 +222,7 @@ type referenceConfigType = {
 
 Some Line charts have an arrow at the end of the line. Here's an example-
 
-<img src='../../demos/lineArrow.png' alt='' height=360 width=500/>
+<img src='../../demos/lineArrow.png' alt='' height=350 width=500/>
 
 To display the arrrow at the end of the line, just pass the `showArrows` or `showArrow{n}` prop.
 The properties of the arrow can controlled with the `arrowConfig` prop.
