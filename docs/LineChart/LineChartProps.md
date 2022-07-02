@@ -228,7 +228,7 @@ To display the arrrow at the end of the line, just pass the `showArrows` or `sho
 The properties of the arrow can controlled with the `arrowConfig` prop.
 ### Understanding the arrow-
 
-<img src='../../demos/arrowProps.png' alt='' height=340 width=480/>
+<img src='../../demos/arrowProps.png' alt='' height=340 width=500/>
 
 | showArrows   | boolean    | To show an arrow at the end of each data line                        | false              |
 | arrowConfig  | arrowType  | Object describing the properties of the arrows like length, width, strokeWidth, strokeColor, fillColor | defaultArrowConfig |
