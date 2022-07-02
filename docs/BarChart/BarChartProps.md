@@ -35,7 +35,7 @@
 
 #### lineConfig
 
-The <b>lineConfig</b> prop describes the properties of the line chart that is displayed when we set the <b>showLine</b> prop to true. The properties allowed by the lineConfig prop are-
+The `lineConfig` prop describes the properties of the line chart that is displayed when we set the `showLine` prop to true. The properties allowed by the lineConfig prop are-
 
 ```js
 type lineConfigType = {
