@@ -168,6 +168,16 @@ type lineConfigType = {
   shiftY?: number;
   startIndex?: number;
   endIndex?: number;
+  showArrow?: boolean;
+  arrowConfig?: arrowType;
+};
+type arrowType = {
+  length?: number;
+  width?: number;
+  strokeWidth?: number;
+  strokeColor?: string;
+  fillColor?: string;
+  showArrowBase?: boolean;
 };
 type referenceConfigType = {
   thickness: number;
@@ -207,6 +217,7 @@ type itemType = {
 export const BarChart = (props: PropTypes) => {
   const scrollRef = useRef();
   const [points, setPoints] = useState('');
+  const [arrowPoints, setArrowPoints] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const showLine = props.showLine || false;
   const initialSpacing =
@@ -244,6 +255,15 @@ export const BarChart = (props: PropTypes) => {
     delay: 0,
     startIndex: 0,
     endIndex: lineData.length - 1,
+    showArrow: false,
+    arrowConfig: {
+      length: 10,
+      width: 10,
+      strokeWidth: 1,
+      strokeColor: 'black',
+      fillColor: 'none',
+      showArrowBase: true,
+    },
   };
   const lineConfig = props.lineConfig
     ? {
@@ -282,6 +302,32 @@ export const BarChart = (props: PropTypes) => {
           props.lineConfig.endIndex === 0
             ? 0
             : props.lineConfig.endIndex || defaultLineConfig.endIndex,
+
+        showArrow: props.lineConfig.showArrow ?? defaultLineConfig.showArrow,
+        arrowConfig: {
+          length:
+            props.lineConfig.arrowConfig?.length ??
+            defaultLineConfig.arrowConfig.length,
+          width:
+            props.lineConfig.arrowConfig?.width ??
+            defaultLineConfig.arrowConfig.width,
+
+          strokeWidth:
+            props.lineConfig.arrowConfig?.strokeWidth ??
+            defaultLineConfig.arrowConfig.strokeWidth,
+
+          strokeColor:
+            props.lineConfig.arrowConfig?.strokeColor ??
+            defaultLineConfig.arrowConfig.strokeColor,
+
+          fillColor:
+            props.lineConfig.arrowConfig?.fillColor ??
+            defaultLineConfig.arrowConfig.fillColor,
+
+          showArrowBase:
+            props.lineConfig.arrowConfig?.showArrowBase ??
+            defaultLineConfig.arrowConfig.showArrowBase,
+        },
       }
     : defaultLineConfig;
   const containerHeight = props.height || 200;
@@ -465,6 +511,52 @@ export const BarChart = (props: PropTypes) => {
   }, [animationDuration, widthValue]);
   // console.log('olddata', oldData);
 
+  const getArrowPoints = (
+    arrowTipX,
+    arrowTipY,
+    x1,
+    y1,
+    arrowLength,
+    arrowWidth,
+    showArrowBase,
+  ) => {
+    let dataLineSlope = (arrowTipY - y1) / (arrowTipX - x1);
+    let d = arrowLength;
+    let d2 = arrowWidth / 2;
+    let interSectionX =
+      arrowTipX - Math.sqrt((d * d) / (dataLineSlope * dataLineSlope + 1));
+    let interSectionY = arrowTipY - dataLineSlope * (arrowTipX - interSectionX);
+
+    let arrowBasex1, arrowBaseY1, arrowBaseX2, arrowBaseY2;
+    if (dataLineSlope === 0) {
+      arrowBasex1 = interSectionX;
+      arrowBaseY1 = interSectionY - d2;
+      arrowBaseX2 = interSectionX;
+      arrowBaseY2 = interSectionY + d2;
+    } else {
+      let arrowBaseSlope = -1 / dataLineSlope;
+      arrowBasex1 =
+        interSectionX -
+        Math.sqrt((d2 * d2) / (arrowBaseSlope * arrowBaseSlope + 1));
+      arrowBaseY1 =
+        interSectionY - arrowBaseSlope * (interSectionX - arrowBasex1);
+
+      arrowBaseX2 =
+        interSectionX +
+        Math.sqrt((d2 * d2) / (arrowBaseSlope * arrowBaseSlope + 1));
+      arrowBaseY2 =
+        interSectionY + arrowBaseSlope * (interSectionX - arrowBasex1);
+    }
+    let arrowPoints = ` M${interSectionX} ${interSectionY}`;
+    arrowPoints += ` ${showArrowBase ? 'L' : 'M'}${arrowBasex1} ${arrowBaseY1}`;
+    arrowPoints += ` L${arrowTipX} ${arrowTipY}`;
+    arrowPoints += ` M${interSectionX} ${interSectionY}`;
+    arrowPoints += ` ${showArrowBase ? 'L' : 'M'}${arrowBaseX2} ${arrowBaseY2}`;
+    arrowPoints += ` L${arrowTipX} ${arrowTipY}`;
+
+    return arrowPoints;
+  };
+
   useEffect(() => {
     if (showLine) {
       let pp = '';
@@ -488,6 +580,27 @@ export const BarChart = (props: PropTypes) => {
             ' ';
         }
         setPoints(pp.replace('L', 'M'));
+        if (lineData.length > 1 && lineConfig.showArrow) {
+          let ppArray = pp.trim().split(' ');
+          let arrowTipY = parseInt(ppArray[ppArray.length - 1]);
+          let arrowTipX = parseInt(
+            ppArray[ppArray.length - 2].replace('L', ''),
+          );
+          let y1 = parseInt(ppArray[ppArray.length - 3]);
+          let x1 = parseInt(ppArray[ppArray.length - 4].replace('L', ''));
+
+          let arrowPoints = getArrowPoints(
+            arrowTipX,
+            arrowTipY,
+            x1,
+            y1,
+            lineConfig.arrowConfig.length,
+            lineConfig.arrowConfig.width,
+            lineConfig.arrowConfig.showArrowBase,
+          );
+
+          setArrowPoints(arrowPoints);
+        }
       } else {
         let p1Array = [];
         for (let i = 0; i < lineData.length; i++) {
@@ -532,11 +645,14 @@ export const BarChart = (props: PropTypes) => {
     lineConfig.startIndex,
     lineConfig.endIndex,
     maxValue,
-    // moveBar,
     props.barWidth,
     showLine,
     spacing,
     yAxisLabelWidth,
+    lineConfig.showArrow,
+    lineConfig.arrowConfig.length,
+    lineConfig.arrowConfig.width,
+    lineConfig.arrowConfig.showArrowBase,
   ]);
 
   const defaultReferenceConfig = {
@@ -1334,6 +1450,14 @@ export const BarChart = (props: PropTypes) => {
           {!lineConfig.hideDataPoints
             ? renderDataPoints()
             : renderSpecificDataPoints(data)}
+          {lineConfig.showArrow && (
+            <Path
+              d={arrowPoints}
+              fill={lineConfig.arrowConfig.fillColor}
+              stroke={lineConfig.arrowConfig.strokeColor}
+              strokeWidth={lineConfig.arrowConfig.strokeWidth}
+            />
+          )}
         </Svg>
       </Animated.View>
     );
@@ -1362,6 +1486,14 @@ export const BarChart = (props: PropTypes) => {
           {!lineConfig.hideDataPoints
             ? renderDataPoints()
             : renderSpecificDataPoints(data)}
+          {lineConfig.showArrow && (
+            <Path
+              d={arrowPoints}
+              fill={lineConfig.arrowConfig.fillColor}
+              stroke={lineConfig.arrowConfig.strokeColor}
+              strokeWidth={lineConfig.arrowConfig.strokeWidth}
+            />
+          )}
         </Svg>
       </View>
     );
