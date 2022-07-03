@@ -18,6 +18,7 @@ The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts
 ---
 <img src='/demos/bars.png' alt=''/>
 <img src='/demos/lineArea.png' alt=''/>
+<img src='/demos/blues.png' alt=''/>
 <table>
   <tr>
     <td><img src='/demos/scrollLine.gif' alt='' width=320 height=280/></td>
