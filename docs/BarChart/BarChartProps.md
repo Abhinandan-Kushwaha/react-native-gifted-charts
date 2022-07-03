@@ -25,6 +25,7 @@
 | showLine            | Boolean        | To show a Line chart over the Bar chart with the same data                                | false               |
 | lineData            | Array of items | The data object for the line chart (use only when showLine is true)                       | data                |
 | lineConfig          | lineConfigType | Properties of the Line chart shown over the Bar chart (lineConfigType) is described below | defaultLineConfig   |
+| lineBehindBars      | boolean        | When set to true, the line chart will appear behind the Bars in case of overlap           | false               |
 | autoShiftLabels | Boolean | When set to true, automatically shifts the X axis labels for negative values | false |
 | scrollToEnd | Boolean | When set to true, the chart automatically scrolls to the rightmost bar | false |
 | scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost bar | true |

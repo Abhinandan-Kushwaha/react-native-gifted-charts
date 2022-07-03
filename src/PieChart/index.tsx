@@ -45,6 +45,7 @@ type propTypes = {
   toggleFocusOnPress?: Boolean;
   selectedIndex?: number;
   setSelectedIndex?: Function;
+  sectionAutoFocus?: boolean;
   onLabelPress?: Function;
   extraRadiusForFocused?: number;
 };
@@ -69,13 +70,16 @@ type itemType = {
   onLabelPress?: Function;
   strokeWidth?: number;
   strokeColor?: string;
+  focused?: boolean;
 };
 
 export const PieChart = (props: propTypes) => {
   const radius = props.radius || 120;
   const extraRadiusForFocused = props.extraRadiusForFocused || radius / 10;
   const pi = props.semiCircle ? Math.PI / 2 : Math.PI;
-  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedIndex, setSelectedIndex] = useState(
+    props.data.findIndex(item => item.focused === true),
+  );
   let startAngle = props.initialAngle || (props.semiCircle ? -pi : 0);
   let total = 0;
   props.data.forEach(item => {
@@ -96,7 +100,7 @@ export const PieChart = (props: propTypes) => {
       }}>
       {!(
         props.data.length <= 1 ||
-        !props.focusOnPress ||
+        !(props.focusOnPress || props.sectionAutoFocus) ||
         selectedIndex === -1
       ) && (
         <View

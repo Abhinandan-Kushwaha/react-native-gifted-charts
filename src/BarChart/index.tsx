@@ -62,6 +62,7 @@ type PropTypes = {
   showLine?: Boolean;
   lineData?: any;
   lineConfig?: lineConfigType;
+  lineBehindBars?: boolean;
 
   cappedBars?: Boolean;
   capThickness?: number;
@@ -235,6 +236,7 @@ export const BarChart = (props: PropTypes) => {
     return props.data;
   }, [props.yAxisOffset, props.data]);
   const lineData = props.lineData || data;
+  const lineBehindBars = props.lineBehindBars || false;
   const defaultLineConfig = {
     initialSpacing: initialSpacing,
     curved: false,
@@ -1434,7 +1436,7 @@ export const BarChart = (props: PropTypes) => {
           height: containerHeight + 10,
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
-          zIndex: -1,
+          zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'wheat',
         }}>
         <Svg>
@@ -1471,7 +1473,7 @@ export const BarChart = (props: PropTypes) => {
           height: containerHeight + 10,
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: totalWidth,
-          zIndex: -1,
+          zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'rgba(200,150,150,0.1)'
         }}>
         <Svg>
