@@ -278,6 +278,7 @@ The arrow base can be understood with the pic below-
 <img src='../../demos/arrowBase.png' alt='' height=200 width=300/>
 
 The default value of `showArrowBase` is true. To fill the arrow with `fillColor`, it is mandatory to have `showArrowBase` true. The arrow can't be filled if it's baseless.
+  
 ---
 
 ### Data points related props
