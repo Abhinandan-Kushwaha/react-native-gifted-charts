@@ -15,7 +15,11 @@ The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts
 7. Detailed [documentation](https://gifted-charts.web.app/) with examples
 8. Support for **_combined_** Bar and Line charts
 
----
+**Alert:**
+
+This library doesn't support web apps yet. Use this library if you are planning mobile first.</br>
+However, we are planning to add support for web which will be available soon.
+
 <img src='/demos/bars.png' alt=''/>
 <img src='/demos/lineArea.png' alt=''/>
 <img src='/demos/blues.png' alt=''/>
