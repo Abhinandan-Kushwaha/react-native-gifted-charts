@@ -105,6 +105,7 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [BarChart - Value and section line don't match](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35) | [Comment by the owner](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35#issuecomment-972673281)                                                  |
 | Setting `height`, `maxValue`, `stepValue`, `stepHeight`, or `noOfSections` breaks the chart                                  | Please make sure that<br/> `maxValue = noOfSections * stepValue;` <br/>is followed. [See this](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/71) |
+| Charts with datasets having negative values (4th quadrant) break https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/261 | Not yest solved |
 
 ## To-dos
 
