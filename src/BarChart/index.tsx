@@ -13,10 +13,12 @@ import {
   Text,
   ColorValue,
   ScrollView,
+  StyleProp,
+  TextStyle,
 } from 'react-native';
 import {styles} from './styles';
 import RenderBars from './RenderBars';
-import RenderStackBars from './RenderStackBars';
+import RenderStackBars, {itemType as StackItemType} from './RenderStackBars';
 import Rule from '../Components/lineSvg';
 import {bezierCommand, svgPath} from '../utils';
 import Svg, {Circle, Path, Rect, Text as CanvasText} from 'react-native-svg';
@@ -33,7 +35,13 @@ type PropTypes = {
   stepValue?: number;
   spacing?: number;
   data?: any;
-  stackData?: any;
+  stackData?: Array<{
+    stacks: Array<StackItemType>;
+    label?: string;
+    labelTextStyle?: StyleProp<TextStyle>;
+    barWidth?: number;
+    spacing?: number;
+  }>;
   side?: String;
   rotateLabel?: Boolean;
   isAnimated?: Boolean;
