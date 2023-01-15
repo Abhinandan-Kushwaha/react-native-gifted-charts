@@ -142,7 +142,9 @@ export const PieChartMain = (props: propTypes) => {
   let minShiftX = 0,
     maxShiftX = 0,
     minShiftY = 0,
-    maxShiftY = 0;
+    maxShiftY = 0,
+    total = 0;
+    
   data.forEach((item: any) => {
     total += item.value;
     if (item.shiftX || item.shiftY) {
@@ -172,7 +174,7 @@ export const PieChartMain = (props: propTypes) => {
   let cx = radius,
     cy = radius;
 
-  let total =
+  total =
     data && data.length
       ? data.map(item => item.value).reduce((v, a) => v + a)
       : 0;
