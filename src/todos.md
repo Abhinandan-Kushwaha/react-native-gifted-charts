@@ -2,6 +2,7 @@
 
 1. Fix the issue with pointers in Line/Area charts on Android https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/177
 2. Issue with eslint - tsc https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/222
+3. Add trailing 0s to yAxis labels in case of rounding- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/300
 
 ## To-dos in documentation-
 
