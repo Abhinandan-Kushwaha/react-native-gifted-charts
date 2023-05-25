@@ -464,7 +464,7 @@ export const BarChart = (props: PropTypes) => {
   const yAxisLabelContainerStyle = props.yAxisLabelContainerStyle;
   const horizontalRulesStyle = props.horizontalRulesStyle;
   const showFractionalValues = props.showFractionalValues || false;
-  const yAxisLabelWidth = props.yAxisLabelWidth || 35;
+  const yAxisLabelWidth = props.yAxisLabelWidth ?? 35;
   const hideYAxisText = props.hideYAxisText || false;
 
   const backgroundColor = props.backgroundColor || 'transparent';
