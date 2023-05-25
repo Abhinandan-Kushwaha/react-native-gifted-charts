@@ -302,7 +302,7 @@ export const LineChartBicolor = (props: propTypes) => {
       ? 0
       : props.spacing ||
         (adjustToWidth
-          ? ((props.width || 200) - initialSpacing) / data.length
+          ? ((props.width || 200) - initialSpacing) / (data.length - 1)
           : 60);
 
   const xAxisLength = props.xAxisLength;
