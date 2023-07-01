@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {View, TouchableOpacity, Text, ColorValue} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  Text,
+  ColorValue,
+  GestureResponderEvent,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {Style} from 'util';
@@ -49,7 +55,7 @@ type Props = {
   gradientColor?: any;
   stackData: Array<itemType>;
 };
-type itemType = {
+export type itemType = {
   value?: number;
   onPress?: any;
   label?: String;
@@ -67,7 +73,20 @@ type itemType = {
   capRadius?: number;
   labelComponent?: Function;
   borderRadius?: number;
-  stacks?: Array<any>;
+  stacks?: Array<{
+    value: number;
+    color?: ColorValue;
+    onPress?: (event: GestureResponderEvent) => void;
+    marginBottom?: number;
+    barBorderRadius?: number;
+    borderTopLeftRadius?: number;
+    borderTopRightRadius?: number;
+    borderBottomLeftRadius?: number;
+    borderBottomRightRadius?: number;
+    showGradient?: boolean;
+    gradientColor?: ColorValue;
+    barWidth?: number;
+  }>;
   barBackgroundPattern?: Function;
   barBorderRadius?: Number;
   patternId?: String;

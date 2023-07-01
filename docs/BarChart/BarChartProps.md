@@ -387,6 +387,8 @@ The value corresponding to the stacks key is an array of objects, each object re
 | stacks array   | Array of stack items                                      | A stack is made of 1 or more objects of the type described in the next table |
 | label          | string                                                    | Label text appearing below the stack (under the X axis)                      |
 | labelTextStyle | Style object for the label text appearing below the stack |
+| barWidth       | number                                                    |
+| spacing        | number                                                    |
 
 A single stack item can be depicted as-
 
@@ -406,7 +408,8 @@ A single stack item can be depicted as-
 | borderBottomLeftRadius  | number     | borderBottomLeftRadius for a stack section              |
 | borderBottomRightRadius | number     | borderBottomRightRadius for a stack section             |
 | showGradient            | Boolean    | Prop to enable linear gradient for the bar color, defaults to false |
-| gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
+| gradientColor           | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
+| barWidth                | number     | Width of the bar                                        |
 
 ```
 
