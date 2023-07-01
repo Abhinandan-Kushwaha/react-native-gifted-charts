@@ -573,7 +573,7 @@ export const LineChart = (props: propTypes) => {
       ? 0
       : props.spacing ||
         (adjustToWidth
-          ? ((props.width || 200) - initialSpacing) / data.length
+          ? ((props.width || 200) - initialSpacing) / (data.length - 1)
           : 60);
 
   const xAxisLength = props.xAxisLength;
@@ -1838,7 +1838,7 @@ export const LineChart = (props: propTypes) => {
   const yAxisLabelContainerStyle = props.yAxisLabelContainerStyle;
   const horizontalRulesStyle = props.horizontalRulesStyle;
   const showFractionalValues = props.showFractionalValues || false;
-  const yAxisLabelWidth = props.yAxisLabelWidth || 35;
+  const yAxisLabelWidth = props.yAxisLabelWidth ?? 35;
   const hideYAxisText = props.hideYAxisText || false;
 
   const backgroundColor = props.backgroundColor || 'transparent';
