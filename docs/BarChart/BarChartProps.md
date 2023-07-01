@@ -9,8 +9,10 @@
 | data                | Array of items | An item object represents a bar in the bar chart. It is described in the next table.      | \_                  |
 | width               | number         | Width of the Bar chart                                                                    | width of the parent |
 | height              | number         | Height of the Bar chart (excluding the bottom label)                                      | 200                 |
+| onPress             | Function       | Callback function called on press of a Bar (takes item and index as parameter)            | null                |
 | maxValue            | number         | Maximum value shown in the Y axis                                                         | 200                 |
-| minValue | number | Minimum negative value shown in the Y axis (to be used only if the data set has negative values too) | \_ |
+| yAxisOffset         | number         | Starting (minimum) value in the Y axis (value at the origin)                              | 0                   |
+| minValue            | number         | Minimum negative value shown in the Y axis (to be used only if the data set has negative values too) | \_ |
 | noOfSections        | number         | Number of sections in the Y axis                                                          | 10                  |
 | noOfSectionsBelowXAxis | number | Number of sections in the Y axis below X axis (in case the data set has negative values too) | 0 |
 | stepValue           | number         | Value of 1 step/section in the Y axis                                                     | 20                  |
@@ -19,10 +21,91 @@
 | backgroundColor     | ColorValue     | Background color of the Bar chart                                                         | \_                  |
 | disableScroll       | Boolean        | To disable horizontal scroll                                                              | false               |
 | showScrollIndicator | Boolean        | To show horizontal scroll indicator                                                       | false               |
+| indicatorColor      | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')           | default             |
 | showLine            | Boolean        | To show a Line chart over the Bar chart with the same data                                | false               |
+| lineData            | Array of items | The data object for the line chart (use only when showLine is true)                       | data                |
 | lineConfig          | lineConfigType | Properties of the Line chart shown over the Bar chart (lineConfigType) is described below | defaultLineConfig   |
+| lineBehindBars      | boolean        | When set to true, the line chart will appear behind the Bars in case of overlap           | false               |
 | autoShiftLabels | Boolean | When set to true, automatically shifts the X axis labels for negative values | false |
+| scrollToEnd | Boolean | When set to true, the chart automatically scrolls to the rightmost bar | false |
+| scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost bar | true |
+| initialSpacing         | number     | distance of the first bar from the Y axis                                      | 40 |
+| renderTooltip          | Function   | tooltip component appearing above the bar when it is pressed, takes item and index as parameters | null |
+| leftShiftForTooltip    | number     | The distance by which the tooltip component should shift towards left                   | 0 |
+| leftShiftForLastIndexTooltip | number | The distance by which the tooltip component of the last bar should shift towards left | 0 |
 
+#### lineConfig
+
+The `lineConfig` prop describes the properties of the line chart that is displayed when we set the `showLine` prop to true. The properties allowed by the lineConfig prop are-
+
+```js
+type lineConfigType = {
+  initialSpacing?: number;
+  curved?: Boolean;
+  isAnimated?: Boolean;
+  delay?: number;
+  thickness?: number;
+  color?: ColorValue | String | any;
+  hideDataPoints?: Boolean;
+  dataPointsShape?: String;
+  dataPointsWidth?: number;
+  dataPointsHeight?: number;
+  dataPointsColor?: ColorValue | String | any;
+  dataPointsRadius?: number;
+  textColor?: ColorValue | String | any;
+  textFontSize?: number;
+  textShiftX?: number;
+  textShiftY?: number;
+  shiftY?: number;
+  startIndex?: number;
+  endIndex?: number;
+  showArrow?: boolean;
+  arrowConfig?: arrowType;
+};
+type arrowType = {
+  length?: number;
+  width?: number;
+  strokeWidth?: number;
+  strokeColor?: string;
+  fillColor?: string;
+  showArrowBase?: boolean;
+};
+```
+
+The default value of the lineConfig object is -
+
+```js
+defaultLineConfig = {
+    initialSpacing: initialSpacing,
+    curved: false,
+    isAnimated: false,
+    thickness: 1,
+    color: 'black',
+    hideDataPoints: false,
+    dataPointsShape: 'circular',
+    dataPointsWidth: 2,
+    dataPointsHeight: 2,
+    dataPointsColor: 'black',
+    dataPointsRadius: 3,
+    textColor: 'gray',
+    textFontSize: 10,
+    textShiftX: 0,
+    textShiftY: 0,
+    shiftY: 0,
+    delay: 0,
+    startIndex: 0,
+    endIndex: lineData.length - 1,
+    showArrow: false,
+    arrowConfig: {
+      length: 10,
+      width: 10,
+      strokeWidth: 1,
+      strokeColor: 'black',
+      fillColor: 'none',
+      showArrowBase: true,
+    },
+  };
+```
 ---
 
 **Alert!**\
@@ -49,6 +132,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 
 | Property         | Type       | Description                                                       | Default value |
 | ---------------- | ---------- | ----------------------------------------------------------------- | ------------- |
+| initialSpacing   | number     | distance of the first data point from the Y axis                  | initialSpacing for the Bar Chart |
 | curved           | Boolean    | To show curved line joining the data points                       | false         |
 | isAnimated       | Boolean    | To show animates Line Chart                                       | false         |
 | delay            | number     | Delay (in milliseconds) before starting the animation of the line | 0             |
@@ -65,6 +149,8 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | textShiftX       | number     | To shift the dataPointText text horizontally                      | 0             |
 | textShiftY       | number     | To shift the dataPointText text vertically                        | 0             |
 | shiftY           | number     | To shift the Lift the Line chart up or down by the given quantity | 0             |
+| startIndex       | number     | Start index for data line (used to display data lines having breaks) | 0                |
+| endIndex         | number     | End index for data line (used to display data lines having breaks) | lineData.length -1 |
 
 ---
 
@@ -80,9 +166,9 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | sideColor              | ColorValue | Color of the side view of the bar, only for 3 D                                |
 | sideWidth              | number     | Width of the side view of the bar, only for 3 D                                |
 | topColor               | ColorValue | Color of the top view of the bar, only for 3 D                                 |
+| barStyle               | object     | style object for the Bars                                                      |
 | showGradient           | Boolean    | Prop to enable linear gradient for the bar color, defaults to false            |
 | gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
-| initialSpacing         | number     | distance of the first bar from the Y axis                                      |
 | label                  | string     | Label text appearing below the bar (under the X axis)                          |
 | labelWidth             | number     | Width of the Label text appearing below the bar (under the X axis)             |
 | labelTextStyle         | object     | Style object for the label text appearing below the bar                        |
@@ -94,7 +180,11 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | capColor               | ColorValue | Color of the bar cap                                                           |
 | capRadius              | number     | Border radius of the bar cap                                                   |
 | barBorderRadius        | number     | Border radius of the bar                                                       |
+| barMarginBottom        | number     | margin at the bottom of the bar (above X axis)                                 |
 | spacing                | number     | Distance of the next Bar from the currennt Bar                                 |
+| barBackgroundPattern   | Component  | A svg component containing the background pattern for bars                     |
+| patternId              | String     | ID of the pattern component                                                    | 
+| leftShiftForTooltip    | number     | The distance by which the tooltip component should shift towards left          |
 
 ---
 
@@ -102,17 +192,24 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 
 | Prop                   | Type                | Description                                                                        | Default value          |
 | ---------------------- | ------------------- | ---------------------------------------------------------------------------------- | ---------------------- |
+| xAxisLength            | number              | X axis length                                                                      | width of the chart     |
 | xAxisColor             | ColorValue          | X axis color                                                                       | black                  |
 | xAxisThickness         | number              | X axis thickness                                                                   | 1                      |
 | yAxisColor             | ColorValue          | Y axis color                                                                       | black                  |
 | yAxisThickness         | number              | Y axis thickness                                                                   | 1                      |
+| xAxisType              | String              | solid or dotted/dashed                                                             | solid                  |
 | yAxisLabelWidth        | number              | Width of the Y axis Label container                                                | 35                     |
 | yAxisTextStyle         | object              | Style object for the Y axis text style                                             | \_                     |
+| yAxisTextNumberOfLines | number              | Number of lines for y axis label text                                              | 1                      |
+| yAxisLabelContainerStyle | object            | Style object for the Y axis label container                                        | \_                     |
+| horizontalRulesStyle     | object            | Style object for the horizontal rules container                                    | \_                     |
 | showFractionalValues   | Boolean             | Allow fractional values for the Y axis label                                       | false                  |
 | roundToDigits          | number              | Rounds the y axis values to given number of digits after decimal point             | 1                      |
 | yAxisLabelPrefix       | String              | The String prepended to the y axis label text (for example- '$')                   | ''                     |
 | yAxisLabelSuffix       | String              | The String appended to the y axis label text                                       | ''                     |
 | hideYAxisText          | Boolean             | To hide Y axis label text                                                          | false                  |
+| yAxisSide | String | Tells which side of the chart, should the y axis be present, defaults to 'left' | 'left' |
+| rulesLength            | number              | Length of the horizontal rules                                                     | width of the chart     |
 | rulesColor             | ColorValue          | Color of the horizontal rules                                                      | lightgray              |
 | rulesThickness         | number              | Thickness of the horizontal rules                                                  | 1                      |
 | hideRules              | Boolean             | To hide the horizontal rules                                                       | false                  |
@@ -131,7 +228,10 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | showVerticalLines      | Boolean             | To show vertical lines                                                             | false                  |
 | verticalLinesColor     | ColorValue          | Color of the vertical lines                                                        | lightgray              |
 | verticallinesThickness | number              | Thickness of the vertical lines                                                    | 1                      |
+| verticalLinesHeight    | number              | Height of the vertical lines                                                       | chart height           |
 | verticalLinesZIndex    | number              | Z index of the vertical lines                                                      | -1                     |
+| noOfVerticalLines      | number              | Number of vertical lines displayed                                                 | data.length            |
+| verticalLinesSpacing   | number              | Distance between consecutive vertical lines                                        | spacing                |
 | showXAxisIndices       | Boolean             | To show the pointers on the X axis                                                 | false                  |
 | xAxisIndicesHeight     | number              | Height of the pointers on the X axis                                               | 2                      |
 | xAxisIndicesWidth      | number              | Width of the pointers on the X axis                                                | 4                      |
@@ -142,9 +242,15 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | yAxisIndicesColor      | ColorValue          | Color of the pointers on the X axis                                                | black                  |
 | yAxisIndicesColor      | Boolean             | To hide axes, rules, labels altogether                                             | false                  |
 | yAxisLabelTexts        | Array<string>       | Array of label texts to be displayed along y axis                                  | null                   |
+| xAxisLabelTexts        | Array<string>       | Array of label texts to be displayed below x axis                                  | null                   |
+| xAxisLabelTextStyle    | object              | Style of label texts to be displayed below x axis                                  | null                   |
 | rotateLabel            | Boolean             | To rotate the X axis labels (by 60deg)                                             | false                  |
 | hideOrigin             | Boolean             | To hide the y Axis label at origin (i.e. 0)                                        | false                  |
 | labelWidth             | number              | Width of the Label text appearing below the bar (under the X axis)                 | barWidth               |
+| xAxisTextNumberOfLines | number              | Number of lines for x axis label text                                              | 1                      |
+| labelsExtraHeight | number | used to display large labels on X-axis (often rotated to show vertically) | 0 |
+
+**Note** If you are setting yAxisSide to 'right', make sure to specify the width of the chart, using the `width` prop
 
 ReferenceConfigType has following properties-
 
@@ -156,6 +262,8 @@ type referenceConfigType = {
   type: String,
   dashWidth: number,
   dashGap: number,
+  labelText: String,
+  labelTextStyle: object,
 };
 ```
 
@@ -166,6 +274,7 @@ type referenceConfigType = {
 | Prop            | Type       | Description                                                                | Default value            |
 | --------------- | ---------- | -------------------------------------------------------------------------- | ------------------------ |
 | barWidth        | number     | Width of the bar                                                           | 30                       |
+| barStyle        | object     | style object for the Bars                                                  | \_                       |
 | isThreeD        | Boolean    | Prop to render 3 dimensional bars                                          | false                    |
 | frontColor      | ColorValue | Color of the bar                                                           | black for 2D, red for 3D |
 | sideColor       | ColorValue | Color of the side view of the bar, only for 3 D                            | red                      |
@@ -178,6 +287,10 @@ type referenceConfigType = {
 | activeOpacity   | number     | activeOpacity on pressing the bar                                          | 0.2                      |
 | disablePress    | Boolean    | Prop to disable the bar press action                                       | false                    |
 | barBorderRadius | number     | Border radius of the bar                                                   | 0                        |
+| barMarginBottom | number     | margin at the bottom of the bar (above X axis)                             | 0  |
+| barBackgroundPattern | Component | A svg component containing the background pattern for bars             | \_ |
+| patternId       | String     | ID of the pattern component                                                | \_ |
+| minHeight       | number     | Minimum height of the Bars                                                 | 0  |
 
 ---
 
@@ -265,6 +378,8 @@ The value corresponding to the stacks key is an array of objects, each object re
 | --------- | --------------------- | -------------------------------------------------------------------------------------------- | ------------- |
 | stackData | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table | false         |
 
+**Note** The `frontColor` prop is replaced by `color` prop in Stacked Bar charts.
+
 ### Stack Array description
 
 | Key            | Value type                                                | Description                                                                  |
@@ -290,6 +405,8 @@ A single stack item can be depicted as-
 | borderTopRightRadius    | number     | borderTopRightRadius for a stack section                |
 | borderBottomLeftRadius  | number     | borderBottomLeftRadius for a stack section              |
 | borderBottomRightRadius | number     | borderBottomRightRadius for a stack section             |
+| showGradient            | Boolean    | Prop to enable linear gradient for the bar color, defaults to false |
+| gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
 
 ```
 

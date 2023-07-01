@@ -1,6 +1,6 @@
 # react-native-gifted-charts [![Rate on Openbase](https://badges.openbase.com/js/rating/react-native-gifted-charts.svg)](https://openbase.com/js/react-native-gifted-charts?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
-The most complete library for Bar, Line, Area, Pie, and Donut charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
+The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
 
 ### Yet another chart library? Why?
 
@@ -15,30 +15,35 @@ The most complete library for Bar, Line, Area, Pie, and Donut charts in React Na
 7. Detailed [documentation](https://gifted-charts.web.app/) with examples
 8. Support for **_combined_** Bar and Line charts
 
+**Alert:**
+
+This library doesn't support web apps yet. Use this library if you are planning mobile first.</br>
+However, we are planning to add support for web which will be available soon.
+
+<img src='/demos/bars.png' alt=''/>
+<img src='/demos/lineArea.png' alt=''/>
+<img src='/demos/blues.png' alt=''/>
+<table>
+  <tr>
+    <td><img src='/demos/scrollLine.gif' alt='' width=320 height=280/></td>
+    <td><img src='/demos/animatedDataLine.gif' alt='' width=320 height=260/></td>
+  </tr>
+  
+  <tr>
+    <td><img src='/demos/movingBars.gif' alt='' width=270 height=300/></td>
+    <td><img src='/demos/pielabbelled.svg' alt='' height=280 width=270/></td>
+  </tr>
+</table>
+
 ---
 
-![alt text](/demos/altBars.svg)
-![alt text](/demos/barPairs.svg)
-<img src='/demos/animatedDataLine.gif' alt='' width=300/>
-<img src='/demos/pielabbelled.svg' alt='' height=280 width=270/>
-<img src='/demos/movingBars.gif' alt='' width=300/>
-<img src='/demos/lineLabelled.png' alt='' height=370 width=360/>
-![alt text](/demos/lineArea.png)
-<img src='/demos/cappedCombined.png' alt='' height=280 width=280/>
-<img src='/demos/line.gif' alt='' height=300 width=290/>
-
----
+## Version 1.2.x 🎉
+Version 1.2.0 onwards we are dependent only on `react-native-svg` and `react-native-linear-gradient`. Earlier, Pie and Donut charts were rendered using `react-native-canvas`, but now they are also rendered using <b>svg</b>. We are no longer using `react-native-canvas` neither `react-native-webview`!
 
 ## Installation
 
 ```sh
 npm install react-native-gifted-charts react-native-linear-gradient react-native-svg
-```
-
-For Pie chart and Donut chart, these additional packages should be installed-
-
-```sh
-npm i react-native-canvas react-native-webview
 ```
 
 For iOS-
@@ -99,8 +104,12 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 | Issue                                                                                                                        | Solution                                                                                                                                                                    |
 | ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [BarChart - Value and section line don't match](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35) | [Comment by the owner](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35#issuecomment-972673281)                                                  |
-| **Invariant Violation: requireNativeComponent: "RNCWebView" was not found in the UIManager.**                                | install `react-native-webview`                                                                                                                                              |
 | Setting `height`, `maxValue`, `stepValue`, `stepHeight`, or `noOfSections` breaks the chart                                  | Please make sure that<br/> `maxValue = noOfSections * stepValue;` <br/>is followed. [See this](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/71) |
+| Charts with datasets having negative values (4th quadrant) break https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/261 | Not yest solved |
+
+## To-dos
+
+[To do list](./src/todos.md)
 
 ## License
 

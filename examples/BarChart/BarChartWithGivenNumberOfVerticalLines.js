@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import {BarChart} from '../../src/BarChart';
 
-const CappedBars = () => {
+const BarChartWithGivenNumberOfVerticalLines = () => {
   const data = [
     {value: 15, label: 'Jan'},
     {value: 40, label: 'Feb'},
@@ -13,16 +13,14 @@ const CappedBars = () => {
     <View>
       <BarChart
         data={data}
-        barWidth={35}
-        cappedBars
-        capColor={'rgb(78, 0, 142)'}
-        capThickness={4}
-        showGradient
-        gradientColor={'rgba(200, 100, 244,0.8)'}
-        frontColor={'rgba(219, 182, 249,0.2)'}
+        width={300}
+        showVerticalLines
+        noOfVerticalLines={7}
+        verticalLinesSpacing={40}
+        rulesType="solid"
       />
     </View>
   );
 };
 
-export default CappedBars;
+export default BarChartWithGivenNumberOfVerticalLines;

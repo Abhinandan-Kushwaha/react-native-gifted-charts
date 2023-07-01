@@ -7,6 +7,7 @@ import {
   UIManager,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Svg, {Defs, Rect} from 'react-native-svg';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -16,6 +17,7 @@ if (Platform.OS === 'android') {
 type propTypes = {
   item: itemType;
   height: number;
+  minHeight: number;
   opacity?: number;
   animationDuration: number;
   roundedTop: Boolean;
@@ -32,6 +34,12 @@ type propTypes = {
   horizontal: Boolean;
   intactTopLabel: Boolean;
   barBorderRadius?: number;
+  containerHeight?: number;
+  maxValue?: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
+  barMarginBottom?: number;
+  barStyle?: object;
 };
 type itemType = {
   value?: number;
@@ -51,15 +59,31 @@ type itemType = {
   capColor?: ColorValue;
   capRadius?: number;
   barBorderRadius?: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
+  barMarginBottom?: number;
+  barStyle?: object;
 };
 
 const Animated2DWithGradient = (props: propTypes) => {
-  const {item, opacity, animationDuration, noGradient, noAnimation} = props;
+  const {
+    barBackgroundPattern,
+    patternId,
+    barWidth,
+    barStyle,
+    item,
+    opacity,
+    animationDuration,
+    noGradient,
+    noAnimation,
+    containerHeight,
+    maxValue,
+    barMarginBottom,
+  } = props;
   const [height, setHeight] = useState(noAnimation ? props.height : 2);
   const [initialRender, setInitialRender] = useState(
     noAnimation ? false : true,
   );
-  // console.log('comes to animated2DWithGradient', item);
 
   useEffect(() => {
     if (!noAnimation) {
@@ -97,9 +121,30 @@ const Animated2DWithGradient = (props: propTypes) => {
             position: 'absolute',
             bottom: 0,
             width: '100%',
-            height: height,
+            height:
+              (noAnimation
+                ? Math.max(
+                    props.minHeight,
+                    (Math.abs(item.value) * (containerHeight || 200)) /
+                      (maxValue || 200),
+                  )
+                : height) - (barMarginBottom || 0),
           }}>
-          <View style={{width: '100%', height: height}}>
+          <View
+            style={[
+              {
+                width: '100%',
+                height:
+                  (noAnimation
+                    ? Math.max(
+                        props.minHeight,
+                        (Math.abs(item.value) * (containerHeight || 200)) /
+                          (maxValue || 200),
+                      )
+                    : height) - (barMarginBottom || 0),
+              },
+              item.barStyle || barStyle,
+            ]}>
             {noGradient ? (
               <View
                 style={[
@@ -113,8 +158,10 @@ const Animated2DWithGradient = (props: propTypes) => {
                       props.barBorderRadius || item.barBorderRadius || 0,
                   },
                   props.roundedBottom && {
-                    borderBottomLeftRadius: (item.barWidth || 30) / 2,
-                    borderBottomRightRadius: (item.barWidth || 30) / 2,
+                    borderBottomLeftRadius:
+                      (item.barWidth || barWidth || 30) / 2,
+                    borderBottomRightRadius:
+                      (item.barWidth || barWidth || 30) / 2,
                   },
                   props.cappedBars && {
                     borderTopLeftRadius:
@@ -127,8 +174,8 @@ const Animated2DWithGradient = (props: propTypes) => {
                         : item.capRadius || props.capRadius || 0,
                   },
                   props.roundedTop && {
-                    borderTopLeftRadius: (item.barWidth || 30) / 2,
-                    borderTopRightRadius: (item.barWidth || 30) / 2,
+                    borderTopLeftRadius: (item.barWidth || barWidth || 30) / 2,
+                    borderTopRightRadius: (item.barWidth || barWidth || 30) / 2,
                   },
                 ]}>
                 {props.cappedBars && (
@@ -139,7 +186,7 @@ const Animated2DWithGradient = (props: propTypes) => {
                       height:
                         item.capThickness === 0
                           ? 0
-                          : item.capThickness || props.capThickness || 0,
+                          : item.capThickness || props.capThickness || 6,
                       backgroundColor:
                         item.capColor || props.capColor || 'black',
                       borderTopLeftRadius:
@@ -165,8 +212,10 @@ const Animated2DWithGradient = (props: propTypes) => {
                       props.barBorderRadius || item.barBorderRadius || 0,
                   },
                   props.roundedBottom && {
-                    borderBottomLeftRadius: (item.barWidth || 30) / 2,
-                    borderBottomRightRadius: (item.barWidth || 30) / 2,
+                    borderBottomLeftRadius:
+                      (item.barWidth || barWidth || 30) / 2,
+                    borderBottomRightRadius:
+                      (item.barWidth || barWidth || 30) / 2,
                   },
                   props.cappedBars && {
                     borderTopLeftRadius:
@@ -179,8 +228,8 @@ const Animated2DWithGradient = (props: propTypes) => {
                         : item.capRadius || props.capRadius || 0,
                   },
                   props.roundedTop && {
-                    borderTopLeftRadius: (item.barWidth || 30) / 2,
-                    borderTopRightRadius: (item.barWidth || 30) / 2,
+                    borderTopLeftRadius: (item.barWidth || barWidth || 30) / 2,
+                    borderTopRightRadius: (item.barWidth || barWidth || 30) / 2,
                   },
                 ]}
                 start={{x: 0, y: 0}}
@@ -192,12 +241,12 @@ const Animated2DWithGradient = (props: propTypes) => {
                 {props.cappedBars && (
                   <View
                     style={{
-                      // position: 'absolute',
-                      // width: '100%',
+                      position: 'absolute',
+                      width: '100%',
                       height:
                         item.capThickness === 0
                           ? 0
-                          : item.capThickness || props.capThickness || 0,
+                          : item.capThickness || props.capThickness || 6,
                       backgroundColor:
                         item.capColor || props.capColor || 'black',
                       borderTopLeftRadius:
@@ -213,23 +262,46 @@ const Animated2DWithGradient = (props: propTypes) => {
                 )}
               </LinearGradient>
             )}
+            {(item.barBackgroundPattern || barBackgroundPattern) && (
+              <Svg>
+                <Defs>
+                  {item.barBackgroundPattern
+                    ? item.barBackgroundPattern()
+                    : barBackgroundPattern()}
+                </Defs>
+                <Rect
+                  stroke="transparent"
+                  x="1"
+                  y="1"
+                  width={item.barWidth || props.barWidth || 30}
+                  height={
+                    noAnimation
+                      ? (Math.abs(item.value) * (containerHeight || 200)) /
+                        (maxValue || 200)
+                      : height
+                  }
+                  fill={`url(#${item.patternId || patternId})`}
+                />
+              </Svg>
+            )}
           </View>
           {item.topLabelComponent && (
             <View
               style={[
                 {
                   position: 'absolute',
-                  top: (item.barWidth || 30) * -1,
-                  height: item.barWidth || 30,
-                  width: item.barWidth || 30,
+                  top: (item.barWidth || barWidth || 30) * -1,
+                  height: item.barWidth || barWidth || 30,
+                  width: item.barWidth || barWidth || 30,
                   justifyContent:
-                    (props.horizontal && !props.intactTopLabel) || item.value < 0
+                    (props.horizontal && !props.intactTopLabel) ||
+                    item.value < 0
                       ? 'center'
                       : 'flex-end',
                   alignItems: 'center',
                   opacity: opacity,
                 },
-                item.value < 0 && {transform:[{rotate:'180deg'}]},
+                item.value < 0 && {transform: [{rotate: '180deg'}]},
                 props.horizontal &&
                   !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
                 item.topLabelContainerStyle,

@@ -8,6 +8,7 @@ import {
   UIManager,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Svg, {Defs, Rect} from 'react-native-svg';
 import {styles} from './styles';
 
 if (Platform.OS === 'android') {
@@ -37,6 +38,10 @@ type animatedBarPropTypes = {
   side: String;
   horizontal: Boolean;
   intactTopLabel: Boolean;
+  barBackgroundPattern?: Function;
+  patternId?: String;
+  barStyle?: object;
+  item: any;
 };
 
 const TriangleCorner = (props: trianglePropTypes) => {
@@ -102,8 +107,9 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
     setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
   };
 
-  const width = props.width;
-  const sideWidth = props.sideWidth;
+  const {item, width, sideWidth, barStyle} = props;
+
+  const {barBackgroundPattern, patternId} = props;
 
   const showGradient = props.showGradient || false;
   const gradientColor = props.gradientColor || 'white';
@@ -140,7 +146,7 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
                 <View
                   style={{
                     width: width,
-                    height: (3 * width) / 4,
+                    height: width * 0.4,
                     // left: width / 2,
                     backgroundColor: topColor,
                     opacity: opacity,
@@ -188,7 +194,7 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
           ) : null}
 
           <View
-            style={{
+            style={[{
               width: width,
               height: height, //animatedHeight
               backgroundColor: frontColor,
@@ -196,7 +202,9 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
               borderTopWidth: StyleSheet.hairlineWidth,
               borderColor: 'white',
               opacity: opacity,
-            }}>
+            },
+            item.barStyle || barStyle
+            ]}>
             {showGradient && (
               <LinearGradient
                 style={{position: 'absolute', width: '100%', height: '100%'}}
@@ -204,6 +212,19 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
                 end={{x: 1, y: 1}}
                 colors={[gradientColor, frontColor]}
               />
+            )}
+            {barBackgroundPattern && (
+              <Svg>
+                <Defs>{barBackgroundPattern()}</Defs>
+                <Rect
+                  stroke="transparent"
+                  x="1"
+                  y="1"
+                  width={width || 30}
+                  height={height}
+                  fill={`url(#${patternId})`}
+                />
+              </Svg>
             )}
           </View>
 

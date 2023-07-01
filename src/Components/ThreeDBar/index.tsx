@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, ColorValue} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import Svg, {Defs, Rect} from 'react-native-svg';
 import {styles} from './styles';
 
 type PropTypes = {
@@ -21,6 +22,10 @@ type PropTypes = {
   horizontal: Boolean;
   intactTopLabel: Boolean;
   value: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
+  barStyle?: object;
+  item?: any;
 };
 
 type TriangleProps = {
@@ -57,10 +62,16 @@ const aStyles = StyleSheet.create({
 });
 
 const ThreeDBar = (props: PropTypes) => {
-  const width = props.width;
-  const sideWidth = props.sideWidth;
-  const height = props.height;
-  const value = props.value;
+  const {
+    width,
+    sideWidth,
+    height,
+    value,
+    barBackgroundPattern,
+    patternId,
+    barStyle,
+    item,
+  } = props;
 
   const showGradient = props.showGradient || false;
   const gradientColor = props.gradientColor || 'white';
@@ -94,7 +105,7 @@ const ThreeDBar = (props: PropTypes) => {
             <View
               style={{
                 width: width,
-                height: (3 * width) / 4,
+                height: width * 0.4,
                 // left: width / -8,
                 backgroundColor: topColor,
                 opacity: opacity,
@@ -134,15 +145,18 @@ const ThreeDBar = (props: PropTypes) => {
           </View>
 
           <View
-            style={{
-              width: width,
-              height: height,
-              backgroundColor: frontColor,
-              borderLeftWidth: StyleSheet.hairlineWidth,
-              borderTopWidth: StyleSheet.hairlineWidth,
-              borderColor: 'white',
-              opacity: opacity,
-            }}>
+            style={[
+              {
+                width: width,
+                height: height,
+                backgroundColor: frontColor,
+                borderLeftWidth: StyleSheet.hairlineWidth,
+                borderTopWidth: StyleSheet.hairlineWidth,
+                borderColor: 'white',
+                opacity: opacity,
+              },
+              item.barStyle || barStyle,
+            ]}>
             {showGradient && (
               <LinearGradient
                 style={{position: 'absolute', width: '100%', height: '100%'}}
@@ -150,6 +164,19 @@ const ThreeDBar = (props: PropTypes) => {
                 end={{x: 1, y: 1}}
                 colors={[gradientColor, frontColor]}
               />
+            )}
+            {barBackgroundPattern && (
+              <Svg>
+                <Defs>{barBackgroundPattern()}</Defs>
+                <Rect
+                  stroke="transparent"
+                  x="1"
+                  y="1"
+                  width={width || 30}
+                  height={height}
+                  fill={`url(#${patternId})`}
+                />
+              </Svg>
             )}
           </View>
         </View>
@@ -168,7 +195,7 @@ const ThreeDBar = (props: PropTypes) => {
               justifyContent: 'flex-end',
               alignItems: 'center',
             },
-            value < 0 && {transform:[{rotate:'180deg'}]},
+            value < 0 && {transform: [{rotate: '180deg'}]},
             props.horizontal &&
               !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
             props.side === 'right'

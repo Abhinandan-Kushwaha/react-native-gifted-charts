@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useMemo,
   useState,
+  useRef,
 } from 'react';
 import {
   View,
@@ -23,6 +24,7 @@ import Svg, {Circle, Path, Rect, Text as CanvasText} from 'react-native-svg';
 type PropTypes = {
   width?: number;
   height?: number;
+  minHeight?: number;
   noOfSections?: number;
   noOfSectionsBelowXAxis?: number;
   maxValue?: number;
@@ -39,18 +41,28 @@ type PropTypes = {
   // animationEasing?: any;
   opacity?: number;
   isThreeD?: Boolean;
+  xAxisLength?: number;
   xAxisThickness?: number;
   xAxisColor?: ColorValue;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
+  xAxisType?: String;
+  yAxisLabelContainerStyle?: any;
+  horizontalRulesStyle?: any;
   yAxisTextStyle?: any;
+  yAxisTextNumberOfLines?: number;
+  xAxisTextNumberOfLines?: number;
   yAxisLabelWidth?: number;
   hideYAxisText?: Boolean;
+  yAxisSide?: string;
+  yAxisOffset?: number;
   initialSpacing?: number;
   barWidth?: number;
   sideWidth?: number;
   showLine?: Boolean;
+  lineData?: any;
   lineConfig?: lineConfigType;
+  lineBehindBars?: boolean;
 
   cappedBars?: Boolean;
   capThickness?: number;
@@ -59,6 +71,7 @@ type PropTypes = {
 
   hideAxesAndRules?: Boolean;
   hideRules?: Boolean;
+  rulesLength?: number;
   rulesColor?: ColorValue;
   rulesThickness?: number;
   rulesType?: String;
@@ -75,8 +88,11 @@ type PropTypes = {
   referenceLine3Position?: number;
   showVerticalLines?: Boolean;
   verticalLinesThickness?: number;
+  verticalLinesHeight?: number;
   verticalLinesColor?: ColorValue;
   verticalLinesZIndex?: number;
+  noOfVerticalLines?: number;
+  verticalLinesSpacing?: number;
 
   showYAxisIndices?: Boolean;
   showXAxisIndices?: Boolean;
@@ -93,11 +109,13 @@ type PropTypes = {
 
   disableScroll?: Boolean;
   showScrollIndicator?: Boolean;
+  indicatorColor?: 'black' | 'default' | 'white';
   roundedTop?: Boolean;
   roundedBottom?: Boolean;
   disablePress?: boolean;
 
   frontColor?: ColorValue;
+  color?: ColorValue;
   sideColor?: ColorValue;
   topColor?: ColorValue;
   gradientColor?: ColorValue;
@@ -114,11 +132,25 @@ type PropTypes = {
   hideOrigin?: Boolean;
   labelWidth?: number;
   yAxisLabelTexts?: Array<string>;
+  xAxisLabelTexts?: Array<string>;
+  xAxisLabelTextStyle?: any;
   yAxisLabelPrefix?: String;
   yAxisLabelSuffix?: String;
   autoShiftLabels?: Boolean;
+  scrollToEnd?: Boolean;
+  scrollAnimation?: Boolean;
+  labelsExtraHeight?: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
+  barMarginBottom?: number;
+  onPress?: Function;
+  renderTooltip?: Function;
+  leftShiftForTooltip?: number;
+  leftShiftForLastIndexTooltip?: number;
+  barStyle?: object;
 };
 type lineConfigType = {
+  initialSpacing?: number;
   curved?: Boolean;
   isAnimated?: Boolean;
   delay?: number;
@@ -135,6 +167,18 @@ type lineConfigType = {
   textShiftX?: number;
   textShiftY?: number;
   shiftY?: number;
+  startIndex?: number;
+  endIndex?: number;
+  showArrow?: boolean;
+  arrowConfig?: arrowType;
+};
+type arrowType = {
+  length?: number;
+  width?: number;
+  strokeWidth?: number;
+  strokeColor?: string;
+  fillColor?: string;
+  showArrowBase?: boolean;
 };
 type referenceConfigType = {
   thickness: number;
@@ -143,6 +187,8 @@ type referenceConfigType = {
   type: String;
   dashWidth: number;
   dashGap: number;
+  labelText: String;
+  labelTextStyle: any;
 };
 type sectionType = {
   value: string;
@@ -164,12 +210,35 @@ type itemType = {
   disablePress?: any;
   labelComponent?: View;
   spacing?: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
+  barStyle?: object;
 };
 
 export const BarChart = (props: PropTypes) => {
+  const scrollRef = useRef();
   const [points, setPoints] = useState('');
+  const [arrowPoints, setArrowPoints] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   const showLine = props.showLine || false;
+  const initialSpacing =
+    props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
+  const data = useMemo(() => {
+    if (!props.data) {
+      return [];
+    }
+    if (props.yAxisOffset) {
+      return props.data.map(item => {
+        item.value = item.value - props.yAxisOffset;
+        return item;
+      });
+    }
+    return props.data;
+  }, [props.yAxisOffset, props.data]);
+  const lineData = props.lineData || data;
+  const lineBehindBars = props.lineBehindBars || false;
   const defaultLineConfig = {
+    initialSpacing: initialSpacing,
     curved: false,
     isAnimated: false,
     thickness: 1,
@@ -186,9 +255,25 @@ export const BarChart = (props: PropTypes) => {
     textShiftY: 0,
     shiftY: 0,
     delay: 0,
+    startIndex: 0,
+    endIndex: lineData.length - 1,
+    showArrow: false,
+    arrowConfig: {
+      length: 10,
+      width: 10,
+      strokeWidth: 1,
+      strokeColor: 'black',
+      fillColor: 'none',
+      showArrowBase: true,
+    },
   };
   const lineConfig = props.lineConfig
     ? {
+        initialSpacing:
+          props.lineConfig.initialSpacing === 0
+            ? 0
+            : props.lineConfig.initialSpacing ||
+              defaultLineConfig.initialSpacing,
         curved: props.lineConfig.curved || defaultLineConfig.curved,
         isAnimated: props.lineConfig.isAnimated || defaultLineConfig.isAnimated,
         thickness: props.lineConfig.thickness || defaultLineConfig.thickness,
@@ -214,6 +299,37 @@ export const BarChart = (props: PropTypes) => {
         textShiftY: props.lineConfig.textShiftY || defaultLineConfig.textShiftY,
         shiftY: props.lineConfig.shiftY || defaultLineConfig.shiftY,
         delay: props.lineConfig.delay || defaultLineConfig.delay,
+        startIndex: props.lineConfig.startIndex || defaultLineConfig.startIndex,
+        endIndex:
+          props.lineConfig.endIndex === 0
+            ? 0
+            : props.lineConfig.endIndex || defaultLineConfig.endIndex,
+
+        showArrow: props.lineConfig.showArrow ?? defaultLineConfig.showArrow,
+        arrowConfig: {
+          length:
+            props.lineConfig.arrowConfig?.length ??
+            defaultLineConfig.arrowConfig.length,
+          width:
+            props.lineConfig.arrowConfig?.width ??
+            defaultLineConfig.arrowConfig.width,
+
+          strokeWidth:
+            props.lineConfig.arrowConfig?.strokeWidth ??
+            defaultLineConfig.arrowConfig.strokeWidth,
+
+          strokeColor:
+            props.lineConfig.arrowConfig?.strokeColor ??
+            defaultLineConfig.arrowConfig.strokeColor,
+
+          fillColor:
+            props.lineConfig.arrowConfig?.fillColor ??
+            defaultLineConfig.arrowConfig.fillColor,
+
+          showArrowBase:
+            props.lineConfig.arrowConfig?.showArrowBase ??
+            defaultLineConfig.arrowConfig.showArrowBase,
+        },
       }
     : defaultLineConfig;
   const containerHeight = props.height || 200;
@@ -221,12 +337,15 @@ export const BarChart = (props: PropTypes) => {
   const horizSections = [{value: '0'}];
   const horizSectionsBelow = [];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
-  const data = useMemo(() => props.data || [], [props.data]);
-  const spacing = props.spacing === 0 ? 0 : props.spacing ? props.spacing : 20;
+  const spacing = props.spacing === 0 ? 0 : props.spacing || 20;
   const labelWidth = props.labelWidth || 0;
+  const scrollToEnd = props.scrollToEnd || false;
+  const scrollAnimation = props.scrollAnimation === false ? false : true;
+  const labelsExtraHeight = props.labelsExtraHeight || 0;
 
   let totalWidth = spacing;
-  let maxItem = 0, minItem = 0;
+  let maxItem = 0,
+    minItem = 0;
   if (props.stackData) {
     props.stackData.forEach(stackItem => {
       // console.log('stackItem', stackItem);
@@ -238,6 +357,9 @@ export const BarChart = (props: PropTypes) => {
       if (stackSum > maxItem) {
         maxItem = stackSum;
       }
+      if (stackSum < minItem) {
+        minItem = stackSum;
+      }
       totalWidth +=
         (stackItem.stacks[0].barWidth || props.barWidth || 30) + spacing;
       // console.log('totalWidth for stack===', totalWidth);
@@ -247,7 +369,7 @@ export const BarChart = (props: PropTypes) => {
       if (item.value > maxItem) {
         maxItem = item.value;
       }
-      if(item.value < minItem){
+      if (item.value < minItem) {
         minItem = item.value;
       }
       totalWidth +=
@@ -261,10 +383,16 @@ export const BarChart = (props: PropTypes) => {
     maxItem = maxItem + (10 - (maxItem % 10));
     maxItem /= 10 * (props.roundToDigits || 1);
     maxItem = parseFloat(maxItem.toFixed(props.roundToDigits || 1));
+    if (minItem !== 0) {
+      minItem *= 10 * (props.roundToDigits || 1);
+      minItem = minItem - (10 + (minItem % 10));
+      minItem /= 10 * (props.roundToDigits || 1);
+      minItem = parseFloat(minItem.toFixed(props.roundToDigits || 1));
+    }
   } else {
     maxItem = maxItem + (10 - (maxItem % 10));
-    if(minItem!==0){
-      minItem = minItem - (10 + (minItem % 10))
+    if (minItem !== 0) {
+      minItem = minItem - (10 + (minItem % 10));
     }
   }
 
@@ -272,11 +400,10 @@ export const BarChart = (props: PropTypes) => {
   const minValue = props.minValue || minItem;
 
   const stepValue = props.stepValue || maxValue / noOfSections;
-  const noOfSectionsBelowXAxis = props.noOfSectionsBelowXAxis || (-minValue / stepValue);
+  const noOfSectionsBelowXAxis =
+    props.noOfSectionsBelowXAxis || -minValue / stepValue;
   const disableScroll = props.disableScroll || false;
   const showScrollIndicator = props.showScrollIndicator || false;
-  const initialSpacing =
-    props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
   // const oldData = props.oldData || [];
   const side = props.side || '';
   const rotateLabel = props.rotateLabel || false;
@@ -289,11 +416,20 @@ export const BarChart = (props: PropTypes) => {
   const showVerticalLines = props.showVerticalLines || false;
   const rulesThickness =
     props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
+  const rulesLength = props.rulesLength;
   const rulesColor = props.rulesColor || 'lightgray';
   const verticalLinesThickness =
     props.verticalLinesThickness === 0 ? 0 : props.verticalLinesThickness || 1;
+  const verticalLinesHeight = props.verticalLinesHeight;
   const verticalLinesColor = props.verticalLinesColor || 'lightgray';
   const verticalLinesZIndex = props.verticalLinesZIndex || -1;
+  let verticalLinesAr = [];
+  props.noOfVerticalLines
+    ? (verticalLinesAr = [...Array(props.noOfVerticalLines).keys()])
+    : (verticalLinesAr = [
+        ...Array(props.stackData ? props.stackData.length : data.length).keys(),
+      ]);
+  const verticalLinesSpacing = props.verticalLinesSpacing || 0;
 
   const showYAxisIndices = props.showYAxisIndices || false;
   const showXAxisIndices = props.showXAxisIndices || false;
@@ -306,11 +442,13 @@ export const BarChart = (props: PropTypes) => {
 
   const yAxisLabelPrefix = props.yAxisLabelPrefix || '';
   const yAxisLabelSuffix = props.yAxisLabelSuffix || '';
+  const yAxisSide = props.yAxisSide || 'left';
 
   const xAxisThickness =
     props.xAxisThickness === 0
       ? props.xAxisThickness
       : props.xAxisThickness || 1;
+  const xAxisLength = props.xAxisLength;
   const xAxisColor = props.xAxisColor || 'black';
 
   const hideRules = props.hideRules || false;
@@ -321,6 +459,10 @@ export const BarChart = (props: PropTypes) => {
       : props.yAxisThickness || 1;
   const yAxisColor = props.yAxisColor || 'black';
   const yAxisTextStyle = props.yAxisTextStyle;
+  const yAxisTextNumberOfLines = props.yAxisTextNumberOfLines || 1;
+  const xAxisTextNumberOfLines = props.xAxisTextNumberOfLines || 1;
+  const yAxisLabelContainerStyle = props.yAxisLabelContainerStyle;
+  const horizontalRulesStyle = props.horizontalRulesStyle;
   const showFractionalValues = props.showFractionalValues || false;
   const yAxisLabelWidth = props.yAxisLabelWidth || 35;
   const hideYAxisText = props.hideYAxisText || false;
@@ -332,6 +474,7 @@ export const BarChart = (props: PropTypes) => {
   const hideOrigin = props.hideOrigin || false;
 
   const rulesType = props.rulesType || 'line';
+  const xAxisType = props.xAxisType || 'solid';
   const dashWidth = props.dashWidth === 0 ? 0 : props.dashWidth || 4;
   const dashGap = props.dashGap === 0 ? 0 : props.dashGap || 8;
 
@@ -370,43 +513,112 @@ export const BarChart = (props: PropTypes) => {
   }, [animationDuration, widthValue]);
   // console.log('olddata', oldData);
 
+  const getArrowPoints = (
+    arrowTipX,
+    arrowTipY,
+    x1,
+    y1,
+    arrowLength,
+    arrowWidth,
+    showArrowBase,
+  ) => {
+    let dataLineSlope = (arrowTipY - y1) / (arrowTipX - x1);
+    let d = arrowLength;
+    let d2 = arrowWidth / 2;
+    let interSectionX =
+      arrowTipX - Math.sqrt((d * d) / (dataLineSlope * dataLineSlope + 1));
+    let interSectionY = arrowTipY - dataLineSlope * (arrowTipX - interSectionX);
+
+    let arrowBasex1, arrowBaseY1, arrowBaseX2, arrowBaseY2;
+    if (dataLineSlope === 0) {
+      arrowBasex1 = interSectionX;
+      arrowBaseY1 = interSectionY - d2;
+      arrowBaseX2 = interSectionX;
+      arrowBaseY2 = interSectionY + d2;
+    } else {
+      let arrowBaseSlope = -1 / dataLineSlope;
+      arrowBasex1 =
+        interSectionX -
+        Math.sqrt((d2 * d2) / (arrowBaseSlope * arrowBaseSlope + 1));
+      arrowBaseY1 =
+        interSectionY - arrowBaseSlope * (interSectionX - arrowBasex1);
+
+      arrowBaseX2 =
+        interSectionX +
+        Math.sqrt((d2 * d2) / (arrowBaseSlope * arrowBaseSlope + 1));
+      arrowBaseY2 =
+        interSectionY + arrowBaseSlope * (interSectionX - arrowBasex1);
+    }
+    let arrowPoints = ` M${interSectionX} ${interSectionY}`;
+    arrowPoints += ` ${showArrowBase ? 'L' : 'M'}${arrowBasex1} ${arrowBaseY1}`;
+    arrowPoints += ` L${arrowTipX} ${arrowTipY}`;
+    arrowPoints += ` M${interSectionX} ${interSectionY}`;
+    arrowPoints += ` ${showArrowBase ? 'L' : 'M'}${arrowBaseX2} ${arrowBaseY2}`;
+    arrowPoints += ` L${arrowTipX} ${arrowTipY}`;
+
+    return arrowPoints;
+  };
+
   useEffect(() => {
     if (showLine) {
       let pp = '';
       if (!lineConfig.curved) {
-        for (let i = 0; i < data.length; i++) {
+        for (let i = 0; i < lineData.length; i++) {
+          if (i < lineConfig.startIndex || i > lineConfig.endIndex) continue;
           const currentBarWidth =
             (data && data[i] && data[i].barWidth) || props.barWidth || 30;
           pp +=
             'L' +
             (yAxisLabelWidth +
+              lineConfig.initialSpacing +
               6 -
               (initialSpacing - currentBarWidth / 2) -
               lineConfig.dataPointsWidth / 2 +
               (currentBarWidth + spacing) * i) +
             ' ' +
             (containerHeight -
-              lineConfig.shiftY +
-              10 -
-              (data[i].value * containerHeight) / maxValue) +
+              lineConfig.shiftY -
+              (lineData[i].value * containerHeight) / maxValue) +
             ' ';
         }
         setPoints(pp.replace('L', 'M'));
+        if (lineData.length > 1 && lineConfig.showArrow) {
+          let ppArray = pp.trim().split(' ');
+          let arrowTipY = parseInt(ppArray[ppArray.length - 1]);
+          let arrowTipX = parseInt(
+            ppArray[ppArray.length - 2].replace('L', ''),
+          );
+          let y1 = parseInt(ppArray[ppArray.length - 3]);
+          let x1 = parseInt(ppArray[ppArray.length - 4].replace('L', ''));
+
+          let arrowPoints = getArrowPoints(
+            arrowTipX,
+            arrowTipY,
+            x1,
+            y1,
+            lineConfig.arrowConfig.length,
+            lineConfig.arrowConfig.width,
+            lineConfig.arrowConfig.showArrowBase,
+          );
+
+          setArrowPoints(arrowPoints);
+        }
       } else {
         let p1Array = [];
-        for (let i = 0; i < data.length; i++) {
+        for (let i = 0; i < lineData.length; i++) {
+          if (i < lineConfig.startIndex || i > lineConfig.endIndex) continue;
           const currentBarWidth =
             (data && data[i] && data[i].barWidth) || props.barWidth || 30;
           p1Array.push([
             yAxisLabelWidth +
+              lineConfig.initialSpacing +
               6 -
               (initialSpacing - currentBarWidth / 2) -
               lineConfig.dataPointsWidth / 2 +
               (currentBarWidth + spacing) * i,
             containerHeight -
-              lineConfig.shiftY +
-              10 -
-              (data[i].value * containerHeight) / maxValue,
+              lineConfig.shiftY -
+              (lineData[i].value * containerHeight) / maxValue,
           ]);
           let xx = svgPath(p1Array, bezierCommand);
           setPoints(xx);
@@ -422,20 +634,27 @@ export const BarChart = (props: PropTypes) => {
     animationDuration,
     containerHeight,
     data,
+    lineData,
     decreaseWidth,
     initialSpacing,
     labelsAppear,
+    lineConfig.initialSpacing,
     lineConfig.curved,
     lineConfig.dataPointsWidth,
     lineConfig.shiftY,
     lineConfig.isAnimated,
     lineConfig.delay,
+    lineConfig.startIndex,
+    lineConfig.endIndex,
     maxValue,
-    // moveBar,
     props.barWidth,
     showLine,
     spacing,
     yAxisLabelWidth,
+    lineConfig.showArrow,
+    lineConfig.arrowConfig.length,
+    lineConfig.arrowConfig.width,
+    lineConfig.arrowConfig.showArrowBase,
   ]);
 
   const defaultReferenceConfig = {
@@ -447,6 +666,8 @@ export const BarChart = (props: PropTypes) => {
     type: rulesType,
     dashWidth: dashWidth,
     dashGap: dashGap,
+    labelText: '',
+    labelTextStyle: null,
   };
 
   const showReferenceLine1 = props.showReferenceLine1 || false;
@@ -465,6 +686,12 @@ export const BarChart = (props: PropTypes) => {
         type: props.referenceLine1Config.type || rulesType,
         dashWidth: props.referenceLine1Config.dashWidth || dashWidth,
         dashGap: props.referenceLine1Config.dashGap || dashGap,
+        labelText:
+          props.referenceLine1Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          props.referenceLine1Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
       }
     : defaultReferenceConfig;
 
@@ -484,6 +711,12 @@ export const BarChart = (props: PropTypes) => {
         type: props.referenceLine2Config.type || rulesType,
         dashWidth: props.referenceLine2Config.dashWidth || dashWidth,
         dashGap: props.referenceLine2Config.dashGap || dashGap,
+        labelText:
+          props.referenceLine2Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          props.referenceLine2Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
       }
     : defaultReferenceConfig;
 
@@ -503,6 +736,12 @@ export const BarChart = (props: PropTypes) => {
         type: props.referenceLine3Config.type || rulesType,
         dashWidth: props.referenceLine3Config.dashWidth || dashWidth,
         dashGap: props.referenceLine3Config.dashGap || dashGap,
+        labelText:
+          props.referenceLine3Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          props.referenceLine3Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
       }
     : defaultReferenceConfig;
 
@@ -518,7 +757,7 @@ export const BarChart = (props: PropTypes) => {
         : value.toString(),
     });
   }
-  if(noOfSectionsBelowXAxis){
+  if (noOfSectionsBelowXAxis) {
     for (let i = 1; i <= noOfSectionsBelowXAxis; i++) {
       let value = stepValue * -i;
       if (props.showFractionalValues || props.roundToDigits) {
@@ -526,9 +765,10 @@ export const BarChart = (props: PropTypes) => {
       }
       horizSectionsBelow.push({
         value: props.yAxisLabelTexts
-        ? props.yAxisLabelTexts[noOfSectionsBelowXAxis - i] ?? value.toString()
-        : value.toString(),
-      })
+          ? props.yAxisLabelTexts[noOfSectionsBelowXAxis - i] ??
+            value.toString()
+          : value.toString(),
+      });
     }
   }
 
@@ -546,19 +786,27 @@ export const BarChart = (props: PropTypes) => {
     outputRange: [0, totalWidth],
   });
 
-  const getLabel = val => {
+  const getLabel = (val, index) => {
     let label = '';
-    if (showFractionalValues) {
+    if (
+      showFractionalValues ||
+      (props.yAxisLabelTexts && props.yAxisLabelTexts[index] !== undefined)
+    ) {
       if (val) {
-        label = val;
+        label = props.yAxisOffset
+          ? (Number(val) + props.yAxisOffset).toString()
+          : val;
       } else {
-        label = '0';
+        label = props.yAxisOffset ? props.yAxisOffset.toString() : '0';
       }
     } else {
       if (val) {
         label = val.toString().split('.')[0];
+        if (props.yAxisOffset) {
+          label = (Number(label) + props.yAxisOffset).toString();
+        }
       } else {
-        label = '0';
+        label = props.yAxisOffset ? props.yAxisOffset.toString() : '0';
       }
     }
 
@@ -569,10 +817,6 @@ export const BarChart = (props: PropTypes) => {
     return (
       <>
         {horizSections.map((sectionItems, index) => {
-          let label = getLabel(sectionItems.value);
-          if (hideOrigin && index === horizSections.length - 1) {
-            label = '';
-          }
           return (
             <View
               key={index}
@@ -580,9 +824,11 @@ export const BarChart = (props: PropTypes) => {
                 styles.horizBar,
                 {
                   width: horizontal
-                    ? props.width || totalWidth
+                    ? props.width || Math.min(300, totalWidth)
                     : props.width || totalWidth + 11,
                 },
+                yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
+                horizontalRulesStyle,
               ]}>
               <View
                 style={[
@@ -593,32 +839,22 @@ export const BarChart = (props: PropTypes) => {
                   },
                   horizontal &&
                     !yAxisAtTop && {
-                      transform: [{translateX: totalWidth + yAxisThickness}],
+                      transform: [
+                        {
+                          translateX:
+                            (props.width || Math.min(300, totalWidth)) +
+                            yAxisThickness,
+                        },
+                      ],
                     },
                   {
                     height:
                       index === noOfSections ? stepHeight / 2 : stepHeight,
                     width: yAxisLabelWidth,
                   },
-                ]}>
-                {!hideYAxisText ? (
-                  <Text
-                    numberOfLines={1}
-                    ellipsizeMode={'clip'}
-                    style={[
-                      yAxisTextStyle,
-                      index === noOfSections && {marginBottom: stepHeight / -2},
-                      horizontal && {
-                        transform: [
-                          {rotate: '270deg'},
-                          {translateY: yAxisAtTop ? 0 : 50},
-                        ],
-                      },
-                    ]}>
-                    {label}
-                  </Text>
-                ) : null}
-              </View>
+                  yAxisLabelContainerStyle,
+                ]}
+              />
               <View
                 style={[
                   index === noOfSections
@@ -627,93 +863,109 @@ export const BarChart = (props: PropTypes) => {
                   {backgroundColor: backgroundColor},
                 ]}>
                 {index === noOfSections ? (
-                  <View
-                    style={[
-                      styles.lastLine,
-                      {height: xAxisThickness, backgroundColor: xAxisColor},
-                    ]}
+                  <Rule
+                    config={{
+                      thickness: xAxisThickness,
+                      color: xAxisColor,
+                      width:
+                        xAxisLength ||
+                        (horizontal
+                          ? props.width || Math.min(300, totalWidth)
+                          : (props.width || totalWidth) + 11),
+                      dashWidth: dashWidth,
+                      dashGap: dashGap,
+                      type: xAxisType,
+                    }}
                   />
                 ) : hideRules ? null : (
                   <Rule
                     config={{
                       thickness: rulesThickness,
                       color: rulesColor,
-                      width: horizontal
-                        ? props.width || totalWidth
-                        : (props.width || totalWidth) + 11,
+                      width:
+                        rulesLength ||
+                        (horizontal
+                          ? props.width || Math.min(300, totalWidth)
+                          : (props.width || totalWidth) + 11),
                       dashWidth: dashWidth,
                       dashGap: dashGap,
                       type: rulesType,
                     }}
                   />
                 )}
-                {index === 0 && showReferenceLine1 ? (
-                  <View
-                    style={{
-                      position: 'absolute',
-                      bottom:
-                        (referenceLine1Position * containerHeight) / maxValue +
-                        stepHeight / 2 -
-                        referenceLine1Config.thickness / 2,
-                      transform: [{translateY: containerHeight}],
-                    }}>
-                    <Rule config={referenceLine1Config} />
-                  </View>
-                ) : null}
-                {index === 0 && showReferenceLine2 ? (
-                  <View
-                    style={{
-                      position: 'absolute',
-                      bottom:
-                        (referenceLine2Position * containerHeight) / maxValue +
-                        stepHeight / 2 -
-                        referenceLine2Config.thickness / 2,
-                      transform: [{translateY: containerHeight}],
-                    }}>
-                    <Rule config={referenceLine2Config} />
-                  </View>
-                ) : null}
-                {index === 0 && showReferenceLine3 ? (
-                  <View
-                    style={{
-                      position: 'absolute',
-                      bottom:
-                        (referenceLine3Position * containerHeight) / maxValue +
-                        stepHeight / 2 -
-                        referenceLine3Config.thickness / 2,
-                      transform: [{translateY: containerHeight}],
-                    }}>
-                    <Rule config={referenceLine3Config} />
-                  </View>
-                ) : null}
-                {showYAxisIndices && index !== noOfSections ? (
-                  <View
-                    style={[
-                      {
-                        position: 'absolute',
-                        height: yAxisIndicesHeight,
-                        width: yAxisIndicesWidth,
-                        left: yAxisIndicesWidth / -2,
-                        backgroundColor: yAxisIndicesColor,
-                      },
-                      horizontal &&
-                        !yAxisAtTop && {
-                          transform: [
-                            {translateX: totalWidth + yAxisThickness},
-                          ],
-                        },
-                    ]}
-                  />
-                ) : null}
               </View>
             </View>
           );
         })}
+
+        {
+          /***********************************************************************************************/
+          /**************************      Render the y axis labels separately      **********************/
+          /***********************************************************************************************/
+          props.hideAxesAndRules !== true &&
+            !hideYAxisText &&
+            horizSections.map((sectionItems, index) => {
+              let label = getLabel(sectionItems.value, index);
+              if (hideOrigin && index === horizSections.length - 1) {
+                label = '';
+              }
+              return (
+                <View
+                  key={index}
+                  style={[
+                    styles.horizBar,
+                    styles.leftLabel,
+                    {
+                      position: 'absolute',
+                      zIndex: 1,
+                      top: stepHeight * index,
+                      width: yAxisLabelWidth,
+                      height:
+                        index === noOfSections ? stepHeight / 2 : stepHeight,
+                    },
+                    yAxisSide === 'right' && {
+                      transform: [
+                        {
+                          translateX:
+                            (props.width ? props.width : totalWidth) - 30,
+                        },
+                        {rotateY: '180deg'},
+                      ],
+                    },
+                    horizontal &&
+                      !yAxisAtTop && {
+                        transform: [
+                          {
+                            translateX:
+                              (props.width || Math.min(300, totalWidth)) +
+                              yAxisThickness +
+                              yAxisLabelWidth,
+                          },
+                        ],
+                      },
+                    yAxisLabelContainerStyle,
+                  ]}>
+                  <Text
+                    numberOfLines={yAxisTextNumberOfLines}
+                    ellipsizeMode={'clip'}
+                    style={[
+                      yAxisTextStyle,
+                      yAxisSide === 'right' && {
+                        transform: [{rotateY: '180deg'}],
+                      },
+                      index === noOfSections && {
+                        marginBottom: stepHeight / -2,
+                      },
+                    ]}>
+                    {label}
+                  </Text>
+                </View>
+              );
+            })
+          /***********************************************************************************************/
+          /***********************************************************************************************/
+        }
         {horizSectionsBelow.map((sectionItems, index) => {
-          let label = getLabel(sectionItems.value);
-          if (hideOrigin && index === horizSections.length - 1) {
-            label = '';
-          }
           return (
             <View
               key={index}
@@ -724,7 +976,8 @@ export const BarChart = (props: PropTypes) => {
                     ? props.width || totalWidth
                     : props.width || totalWidth + 11,
                 },
-                index===0&&{marginTop:stepHeight/2}
+                yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
+                index === 0 && {marginTop: stepHeight / 2},
               ]}>
               <View
                 style={[
@@ -738,42 +991,24 @@ export const BarChart = (props: PropTypes) => {
                       transform: [{translateX: totalWidth + yAxisThickness}],
                     },
                   {
-                    height: index===0?stepHeight*1.5:stepHeight,
+                    height: index === 0 ? stepHeight * 1.5 : stepHeight,
                     width: yAxisLabelWidth,
                   },
-                  index===0&&{marginTop:-stepHeight/2}
-                ]}>
-                {!hideYAxisText ? (
-                  <Text
-                    numberOfLines={1}
-                    ellipsizeMode={'clip'}
-                    style={[
-                      yAxisTextStyle,
-                      index === 0 && {marginBottom: stepHeight / -2},
-                      horizontal && {
-                        transform: [
-                          {rotate: '270deg'},
-                          {translateY: yAxisAtTop ? 0 : 50},
-                        ],
-                      },
-                    ]}>
-                    {label}
-                  </Text>
-                ) : null}
-              </View>
+                  index === 0 && {marginTop: -stepHeight / 2},
+                ]}
+              />
               <View
-                style={[
-                   styles.leftPart,
-                   {backgroundColor: backgroundColor},
-                ]}>
+                style={[styles.leftPart, {backgroundColor: backgroundColor}]}>
                 {hideRules ? null : (
                   <Rule
                     config={{
                       thickness: rulesThickness,
                       color: rulesColor,
-                      width: horizontal
-                        ? props.width || totalWidth
-                        : (props.width || totalWidth) + 11,
+                      width:
+                        rulesLength ||
+                        (horizontal
+                          ? props.width || totalWidth
+                          : (props.width || totalWidth) + 11),
                       dashWidth: dashWidth,
                       dashGap: dashGap,
                       type: rulesType,
@@ -782,8 +1017,184 @@ export const BarChart = (props: PropTypes) => {
                 )}
               </View>
             </View>
-          )
+          );
         })}
+        {
+          /***********************************************************************************************/
+          /*************************      Render the y axis labels below origin      *********************/
+          /***********************************************************************************************/
+          props.hideAxesAndRules !== true &&
+            !hideYAxisText &&
+            horizSectionsBelow.map((sectionItems, index) => {
+              let label = getLabel(
+                horizSectionsBelow[horizSectionsBelow.length - 1 - index].value,
+                index,
+              );
+              return (
+                <View
+                  key={index}
+                  style={[
+                    styles.horizBar,
+                    styles.leftLabel,
+                    {
+                      position: 'absolute',
+                      zIndex: 1,
+                      bottom: stepHeight * (index - 1),
+                      width: yAxisLabelWidth,
+                      height:
+                        index === noOfSections ? stepHeight / 2 : stepHeight,
+                    },
+                    yAxisSide === 'right' && {
+                      transform: [
+                        {
+                          translateX:
+                            (props.width ? props.width : totalWidth) - 30,
+                        },
+                        {rotateY: '180deg'},
+                      ],
+                    },
+                    yAxisLabelContainerStyle,
+                  ]}>
+                  <Text
+                    numberOfLines={yAxisTextNumberOfLines}
+                    ellipsizeMode={'clip'}
+                    style={[
+                      yAxisTextStyle,
+                      yAxisSide === 'right' && {
+                        transform: [{rotateY: '180deg'}],
+                      },
+                      index === noOfSections && {
+                        marginBottom: stepHeight / -2,
+                      },
+                    ]}>
+                    {label}
+                  </Text>
+                </View>
+              );
+            })
+          /***********************************************************************************************/
+          /***********************************************************************************************/
+        }
+
+        {
+          /***********************************************************************************************/
+          /*************************      Render the reference lines separately      *********************/
+          /***********************************************************************************************/
+          props.hideAxesAndRules !== true &&
+            !hideYAxisText &&
+            horizSections.map((sectionItems, index) => {
+              let label = getLabel(sectionItems.value, index);
+              if (hideOrigin && index === horizSections.length - 1) {
+                label = '';
+              }
+              return (
+                <View
+                  key={index}
+                  style={[
+                    styles.horizBar,
+                    styles.leftLabel,
+                    {
+                      position: 'absolute',
+                      zIndex: 1,
+                      top: stepHeight * index,
+                      width: yAxisLabelWidth,
+                      height:
+                        index === noOfSections ? stepHeight / 2 : stepHeight,
+                    },
+                    yAxisSide === 'right' && {
+                      transform: [
+                        {
+                          translateX:
+                            (props.width ? props.width : totalWidth) - 30,
+                        },
+                        {rotateY: '180deg'},
+                      ],
+                    },
+                  ]}>
+                  {index === noOfSections && showReferenceLine1 ? (
+                    <View
+                      style={{
+                        position: 'absolute',
+                        bottom:
+                          (referenceLine1Position * containerHeight) / maxValue,
+                        left:
+                          yAxisSide === 'right'
+                            ? yAxisLabelWidth + yAxisThickness
+                            : yAxisLabelWidth + yAxisThickness - 5,
+                      }}>
+                      <Rule config={referenceLine1Config} />
+                      {referenceLine1Config.labelText ? (
+                        <Text
+                          style={[
+                            {position: 'absolute'},
+                            yAxisSide === 'right' && {
+                              transform: [{rotateY: '180deg'}],
+                            },
+                            referenceLine1Config.labelTextStyle,
+                          ]}>
+                          {referenceLine1Config.labelText}
+                        </Text>
+                      ) : null}
+                    </View>
+                  ) : null}
+                  {index === noOfSections && showReferenceLine2 ? (
+                    <View
+                      style={{
+                        position: 'absolute',
+                        bottom:
+                          (referenceLine2Position * containerHeight) / maxValue,
+                        left:
+                          yAxisSide === 'right'
+                            ? yAxisLabelWidth + yAxisThickness
+                            : yAxisLabelWidth + yAxisThickness - 5,
+                      }}>
+                      <Rule config={referenceLine2Config} />
+                      {referenceLine2Config.labelText ? (
+                        <Text
+                          style={[
+                            {position: 'absolute'},
+                            yAxisSide === 'right' && {
+                              transform: [{rotateY: '180deg'}],
+                            },
+                            referenceLine2Config.labelTextStyle,
+                          ]}>
+                          {referenceLine2Config.labelText}
+                        </Text>
+                      ) : null}
+                    </View>
+                  ) : null}
+                  {index === noOfSections && showReferenceLine3 ? (
+                    <View
+                      style={{
+                        position: 'absolute',
+                        bottom:
+                          (referenceLine3Position * containerHeight) / maxValue,
+                        left:
+                          yAxisSide === 'right'
+                            ? yAxisLabelWidth + yAxisThickness
+                            : yAxisLabelWidth + yAxisThickness - 5,
+                      }}>
+                      <Rule config={referenceLine3Config} />
+                      {referenceLine3Config.labelText ? (
+                        <Text
+                          style={[
+                            {position: 'absolute'},
+                            yAxisSide === 'right' && {
+                              transform: [{rotateY: '180deg'}],
+                            },
+                            referenceLine3Config.labelTextStyle,
+                          ]}>
+                          {referenceLine3Config.labelText}
+                        </Text>
+                      ) : null}
+                    </View>
+                  ) : null}
+                </View>
+              );
+            })
+          /***********************************************************************************************/
+          /***********************************************************************************************/
+        }
       </>
     );
   };
@@ -821,7 +1232,10 @@ export const BarChart = (props: PropTypes) => {
   };
 
   const renderDataPoints = () => {
-    return data.map((item: any, index: number) => {
+    return lineData.map((item: any, index: number) => {
+      if (index < lineConfig.startIndex || index > lineConfig.endIndex) {
+        return null;
+      }
       // console.log('comes in');
       const currentBarWidth = item.barWidth || props.barWidth || 30;
       if (lineConfig.dataPointsShape === 'rectangular') {
@@ -830,6 +1244,7 @@ export const BarChart = (props: PropTypes) => {
             <Rect
               x={
                 yAxisLabelWidth +
+                lineConfig.initialSpacing +
                 6 -
                 (initialSpacing - currentBarWidth / 2) -
                 lineConfig.dataPointsWidth +
@@ -838,8 +1253,7 @@ export const BarChart = (props: PropTypes) => {
               y={
                 containerHeight -
                 lineConfig.shiftY -
-                lineConfig.dataPointsHeight / 2 +
-                10 -
+                lineConfig.dataPointsHeight / 2 -
                 (item.value * containerHeight) / maxValue
               }
               width={lineConfig.dataPointsWidth}
@@ -852,6 +1266,7 @@ export const BarChart = (props: PropTypes) => {
                 fontSize={item.textFontSize || lineConfig.textFontSize}
                 x={
                   yAxisLabelWidth +
+                  lineConfig.initialSpacing +
                   6 -
                   (initialSpacing - currentBarWidth / 2) -
                   lineConfig.dataPointsWidth +
@@ -861,8 +1276,7 @@ export const BarChart = (props: PropTypes) => {
                 y={
                   containerHeight -
                   lineConfig.shiftY -
-                  lineConfig.dataPointsHeight / 2 +
-                  10 -
+                  lineConfig.dataPointsHeight / 2 -
                   (item.value * containerHeight) / maxValue +
                   (item.textShiftY || lineConfig.textShiftY || 0)
                 }>
@@ -877,6 +1291,7 @@ export const BarChart = (props: PropTypes) => {
           <Circle
             cx={
               yAxisLabelWidth +
+              lineConfig.initialSpacing +
               6 -
               (initialSpacing - currentBarWidth / 2) -
               lineConfig.dataPointsWidth / 2 +
@@ -884,8 +1299,7 @@ export const BarChart = (props: PropTypes) => {
             }
             cy={
               containerHeight -
-              lineConfig.shiftY +
-              10 -
+              lineConfig.shiftY -
               (item.value * containerHeight) / maxValue
             }
             r={lineConfig.dataPointsRadius}
@@ -897,6 +1311,7 @@ export const BarChart = (props: PropTypes) => {
               fontSize={item.textFontSize || lineConfig.textFontSize}
               x={
                 yAxisLabelWidth +
+                lineConfig.initialSpacing +
                 6 -
                 (initialSpacing - currentBarWidth / 2) -
                 lineConfig.dataPointsWidth +
@@ -906,8 +1321,7 @@ export const BarChart = (props: PropTypes) => {
               y={
                 containerHeight -
                 lineConfig.shiftY -
-                lineConfig.dataPointsHeight / 2 +
-                10 -
+                lineConfig.dataPointsHeight / 2 -
                 (item.value * containerHeight) / maxValue +
                 (item.textShiftY || lineConfig.textShiftY || 0)
               }>
@@ -1022,7 +1436,7 @@ export const BarChart = (props: PropTypes) => {
           height: containerHeight + 10,
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
-          zIndex: -1,
+          zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'wheat',
         }}>
         <Svg>
@@ -1038,6 +1452,14 @@ export const BarChart = (props: PropTypes) => {
           {!lineConfig.hideDataPoints
             ? renderDataPoints()
             : renderSpecificDataPoints(data)}
+          {lineConfig.showArrow && (
+            <Path
+              d={arrowPoints}
+              fill={lineConfig.arrowConfig.fillColor}
+              stroke={lineConfig.arrowConfig.strokeColor}
+              strokeWidth={lineConfig.arrowConfig.strokeWidth}
+            />
+          )}
         </Svg>
       </Animated.View>
     );
@@ -1051,7 +1473,7 @@ export const BarChart = (props: PropTypes) => {
           height: containerHeight + 10,
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: totalWidth,
-          zIndex: -1,
+          zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'rgba(200,150,150,0.1)'
         }}>
         <Svg>
@@ -1066,6 +1488,14 @@ export const BarChart = (props: PropTypes) => {
           {!lineConfig.hideDataPoints
             ? renderDataPoints()
             : renderSpecificDataPoints(data)}
+          {lineConfig.showArrow && (
+            <Path
+              d={arrowPoints}
+              fill={lineConfig.arrowConfig.fillColor}
+              stroke={lineConfig.arrowConfig.strokeColor}
+              strokeWidth={lineConfig.arrowConfig.strokeWidth}
+            />
+          )}
         </Svg>
       </View>
     );
@@ -1076,38 +1506,132 @@ export const BarChart = (props: PropTypes) => {
       style={[
         styles.container,
         {
-          height: containerHeight + horizSectionsBelow.length * stepHeight,
+          height:
+            containerHeight +
+            horizSectionsBelow.length * stepHeight +
+            labelsExtraHeight,
         },
-        props.width && {width: props.width},
-        horizontal && {transform: [{rotate: '90deg'}, {translateY: -15}]},
+        yAxisSide === 'right' && {marginLeft: yAxisLabelWidth + yAxisThickness},
+        props.width && !horizontal && {width: props.width},
+        horizontal && {transform: [{rotate: '90deg'}, {translateY: 15}]},
       ]}>
       {props.hideAxesAndRules !== true && renderHorizSections()}
       <ScrollView
+        ref={scrollRef}
+        onTouchStart={evt => {
+          if (props.renderTooltip) {
+            setSelectedIndex(-1);
+          }
+        }}
+        onContentSizeChange={() => {
+          if (scrollRef.current && scrollToEnd) {
+            scrollRef.current.scrollToEnd({animated: scrollAnimation});
+          }
+        }}
         style={[
           {
-            marginLeft: yAxisLabelWidth,
+            marginLeft:
+              yAxisSide === 'right' ? -yAxisLabelWidth + 10 : yAxisLabelWidth,
             position: 'absolute',
             bottom: stepHeight * -0.5 - 60 + xAxisThickness,
           },
           props.width && {width: props.width - 11},
-          horizontal && {width: totalWidth},
+          horizontal && {width: props.width || Math.min(300, totalWidth)},
         ]}
         scrollEnabled={!disableScroll}
         contentContainerStyle={[
           {
             // backgroundColor: 'yellow',
-            height: containerHeight + 130 + horizSectionsBelow.length * stepHeight,
+            height:
+              containerHeight +
+              130 +
+              horizSectionsBelow.length * stepHeight +
+              labelsExtraHeight,
             paddingLeft: initialSpacing,
-            paddingBottom:horizSectionsBelow.length * stepHeight,
+            paddingBottom:
+              horizSectionsBelow.length * stepHeight + labelsExtraHeight,
             alignItems: 'flex-end',
           },
           !props.width && {width: totalWidth},
         ]}
         showsHorizontalScrollIndicator={showScrollIndicator}
+        indicatorStyle={props.indicatorColor}
         horizontal
         // data={props.stackData || data}
         keyExtractor={(item, index) => index.toString()}>
         <Fragment>
+          {showVerticalLines &&
+            verticalLinesAr.map((item: itemType, index: number) => {
+              let totalSpacing = initialSpacing;
+              if (verticalLinesSpacing) {
+                totalSpacing = verticalLinesSpacing * (index + 1);
+              } else {
+                if (props.stackData) {
+                  totalSpacing +=
+                    (props.stackData[0].barWidth || props.barWidth || 30) / 2;
+                } else {
+                  totalSpacing +=
+                    (props.data[0].barWidth || props.barWidth || 30) / 2;
+                }
+                for (let i = 0; i < index; i++) {
+                  let actualSpacing = spacing;
+                  if (props.stackData) {
+                    if (i >= props.stackData.length - 1) {
+                      actualSpacing += (props.barWidth || 30) / 2;
+                    } else {
+                      if (
+                        props.stackData[i].spacing ||
+                        props.stackData[i].spacing === 0
+                      ) {
+                        actualSpacing = props.stackData[i].spacing;
+                      }
+                      if (props.stackData[i + 1].barWidth) {
+                        actualSpacing += props.stackData[i + 1].barWidth;
+                      } else {
+                        actualSpacing += props.barWidth || 30;
+                      }
+                    }
+                  } else {
+                    if (i >= props.data.length - 1) {
+                      actualSpacing += (props.barWidth || 30) / 2;
+                    } else {
+                      if (
+                        props.data[i].spacing ||
+                        props.data[i].spacing === 0
+                      ) {
+                        console.log('here for index ' + index + ' and i ' + i);
+                        actualSpacing = props.data[i].spacing;
+                      }
+                      if (props.data[i + 1].barWidth) {
+                        actualSpacing += props.data[i + 1].barWidth;
+                      } else {
+                        actualSpacing += props.barWidth || 30;
+                      }
+                    }
+                  }
+                  console.log('i = ' + i + ' actualSpacing ' + actualSpacing);
+                  totalSpacing += actualSpacing;
+                }
+              }
+
+              return (
+                <View
+                  key={index}
+                  style={{
+                    position: 'absolute',
+                    zIndex: verticalLinesZIndex || -1,
+                    marginBottom: xAxisThickness,
+                    height:
+                      verticalLinesHeight ||
+                      containerHeight + 15 - xAxisThickness,
+                    width: verticalLinesThickness,
+                    backgroundColor: verticalLinesColor,
+                    bottom: 60 + labelsExtraHeight,
+                    left: totalSpacing,
+                  }}
+                />
+              );
+            })}
           {showLine
             ? lineConfig.isAnimated
               ? renderAnimatedLine()
@@ -1118,19 +1642,19 @@ export const BarChart = (props: PropTypes) => {
                 return (
                   <RenderStackBars
                     key={index}
+                    stackData={props.stackData}
                     item={item}
                     index={index}
+                    data={data}
                     containerHeight={containerHeight}
                     maxValue={maxValue}
-                    spacing={spacing}
+                    spacing={item.spacing === 0 ? 0 : item.spacing || spacing}
+                    propSpacing={spacing}
+                    xAxisThickness={xAxisThickness}
                     barWidth={props.barWidth}
                     opacity={opacity}
-                    disablePress={props.disablePress}
+                    disablePress={item.disablePress || props.disablePress}
                     rotateLabel={rotateLabel}
-                    showVerticalLines={showVerticalLines}
-                    verticalLinesThickness={verticalLinesThickness}
-                    verticalLinesColor={verticalLinesColor}
-                    verticalLinesZIndex={verticalLinesZIndex}
                     showXAxisIndices={showXAxisIndices}
                     xAxisIndicesHeight={xAxisIndicesHeight}
                     xAxisIndicesWidth={xAxisIndicesWidth}
@@ -1138,6 +1662,31 @@ export const BarChart = (props: PropTypes) => {
                     horizontal={horizontal}
                     intactTopLabel={intactTopLabel}
                     barBorderRadius={props.barBorderRadius}
+                    color={props.color}
+                    showGradient={props.showGradient}
+                    gradientColor={props.gradientColor}
+                    barBackgroundPattern={props.barBackgroundPattern}
+                    patternId={props.patternId}
+                    label={
+                      item.label ||
+                      (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
+                        ? props.xAxisLabelTexts[index]
+                        : '')
+                    }
+                    labelTextStyle={
+                      item.labelTextStyle || props.xAxisLabelTextStyle
+                    }
+                    onPress={props.onPress}
+                    xAxisTextNumberOfLines={xAxisTextNumberOfLines}
+                    renderTooltip={props.renderTooltip}
+                    leftShiftForTooltip={props.leftShiftForTooltip || 0}
+                    leftShiftForLastIndexTooltip={
+                      props.leftShiftForLastIndexTooltip || 0
+                    }
+                    initialSpacing={initialSpacing}
+                    selectedIndex={selectedIndex}
+                    setSelectedIndex={setSelectedIndex}
+                    activeOpacity={props.activeOpacity || 0.2}
                   />
                 );
               })
@@ -1149,8 +1698,10 @@ export const BarChart = (props: PropTypes) => {
                   containerHeight={containerHeight}
                   maxValue={maxValue}
                   spacing={item.spacing === 0 ? 0 : item.spacing || spacing}
+                  propSpacing={spacing}
                   side={side}
                   data={data}
+                  minHeight={props.minHeight || 0}
                   barWidth={props.barWidth}
                   sideWidth={props.sideWidth}
                   labelWidth={labelWidth}
@@ -1174,10 +1725,6 @@ export const BarChart = (props: PropTypes) => {
                   capThickness={props.capThickness}
                   capColor={props.capColor}
                   capRadius={props.capRadius}
-                  showVerticalLines={showVerticalLines}
-                  verticalLinesThickness={verticalLinesThickness}
-                  verticalLinesColor={verticalLinesColor}
-                  verticalLinesZIndex={verticalLinesZIndex}
                   showXAxisIndices={showXAxisIndices}
                   xAxisIndicesHeight={xAxisIndicesHeight}
                   xAxisIndicesWidth={xAxisIndicesWidth}
@@ -1186,6 +1733,29 @@ export const BarChart = (props: PropTypes) => {
                   intactTopLabel={intactTopLabel}
                   barBorderRadius={props.barBorderRadius}
                   autoShiftLabels={autoShiftLabels}
+                  barBackgroundPattern={props.barBackgroundPattern}
+                  patternId={props.patternId}
+                  barMarginBottom={props.barMarginBottom}
+                  label={
+                    item.label ||
+                    (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
+                      ? props.xAxisLabelTexts[index]
+                      : '')
+                  }
+                  labelTextStyle={
+                    item.labelTextStyle || props.xAxisLabelTextStyle
+                  }
+                  onPress={props.onPress}
+                  xAxisTextNumberOfLines={xAxisTextNumberOfLines}
+                  renderTooltip={props.renderTooltip}
+                  leftShiftForTooltip={props.leftShiftForTooltip || 0}
+                  leftShiftForLastIndexTooltip={
+                    props.leftShiftForLastIndexTooltip || 0
+                  }
+                  initialSpacing={initialSpacing}
+                  selectedIndex={selectedIndex}
+                  setSelectedIndex={setSelectedIndex}
+                  barStyle={props.barStyle}
                 />
               ))}
         </Fragment>

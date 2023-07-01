@@ -1,8 +1,28 @@
 import React, {useEffect, useState} from 'react';
-import {TouchableOpacity} from 'react-native';
+import {Dimensions, ScrollView, TouchableOpacity} from 'react-native';
 import {Alert} from 'react-native';
 import {View, Text, StyleSheet} from 'react-native';
 import {BarChart, LineChart, PieChart} from './src';
+import {Path, Pattern} from 'react-native-svg';
+import BarWithGradient from './examples/BarChart/BarWithGradient';
+import CappedBars from './examples/BarChart/CappedBars';
+import RoundStackBar from './examples/BarChart/RoundStackBar';
+import SimpleBarAnimated from './examples/BarChart/SimpleBarAnimated';
+import SimpleBlueBars from './examples/BarChart/SimpleBlueBars';
+import SimpleBlueBarsVerticalLines from './examples/BarChart/SimpleBlueBarsVerticalLines';
+import BarChartWithGivenNumberOfVerticalLines from './examples/BarChart/BarChartWithGivenNumberOfVerticalLines';
+import AnimatedArea from './examples/LineChart/AnimatedArea';
+import AreaTwo from './examples/LineChart/AreaTwo';
+import LineChartTwo from './examples/LineChart/LineChartTwo';
+import SimpleBlueLine from './examples/LineChart/SimpleBlueLine';
+import SimpleBlueLineWithGivenNumberOfVerticalLines from './examples/LineChart/SimpleBlueLineWithGivenNumberOfVerticalLines';
+import ProgressPie from './examples/PieChart/ProgressPie';
+import SimplePie from './examples/PieChart/SimplePie';
+import PieChartFocusOnPress from './examples/PieChart/PieChartFocusOnPress';
+import SplitPie from './examples/PieChart/SplitPie';
+import ThreeDPie from './examples/PieChart/ThreeDPie';
+import CaloriesBurnt from './examples/LineChart/CaloriesBurnt';
+import ScrollingChartWithPointer from './examples/LineChart/ScrollingChartWithPointer';
 
 const App = () => {
   const [toggle, setToggle] = useState(true);
@@ -51,7 +71,7 @@ const App = () => {
   const lcomp = val => {
     return (
       <View style={{width: 70, marginLeft: 7}}>
-        <Text style={{color: 'white', fontWeight: 'bold'}}>{val}</Text>
+        <Text style={{color: 'black', fontWeight: 'bold'}}>{val}</Text>
       </View>
     );
   };
@@ -548,7 +568,13 @@ const App = () => {
       </View>
     );
   };
-  const barData = [
+
+  // const styleObject = {
+  //   marginLeft: -95,
+  //   paddingLeft: 120,
+  //   transform: [{rotate: '90deg'}],
+  // };
+  const ddtt = [
     {
       value: -15,
       label: 'Mon',
@@ -564,8 +590,10 @@ const App = () => {
   return (
     <View
       style={{
-        marginVertical: 100,
-        marginLeft: 6,
+        paddingVertical: 100,
+        marginLeft: -70,
+        // paddingLeft: -10,
+        // backgroundColor: '#1C1C1C',
       }}>
       {/* <BarChart backgroundColor={'green'} data={barData} /> */}
       <BarChart
@@ -595,6 +623,13 @@ const App = () => {
         innerCircleBorderColor={'gray'}
         // showTextBackground={true}
       />
+      {/* <TouchableOpacity
+        onPress={() => {
+          dtt[1].value += 20;
+          setDtt([...dtt]);
+        }}>
+        <Text>Press me</Text>
+      </TouchableOpacity> */}
       {/* <View
         style={{
           marginVertical: 100,

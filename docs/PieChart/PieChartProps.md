@@ -4,7 +4,17 @@
 | -------------------- | -------------- | --------------------------------------------------------------------------------------------------------- | --------------- |
 | data                 | Array of items | An item object represents a section in the Pie chart. Descibed in the next table                          | \_              |
 | radius               | number         | Radius of the Pie chart                                                                                   | 120             |
+| initialAngle         | number         | Starting angle in radians (illustrated below this table)                                                  | 0               |
 | isThreeD             | Boolean        | If set to true, it rotates and translates the chart to give it a 3D effect                                | false           |
+| showGradient         | Boolean        | Prop to enable radial gradient for the Pie sections                                                       | false           |
+| gradientCenterColor  | ColorValue     | Gradient color at the center of the Pie chart                                                             | 'white'         |
+| onPress              | Function       | Callback function called on press of Pie sections (takes item and index as parameter)                     | null            |
+| focusOnPress         | Boolean        | When set to true, the pressed section of the Pie chart will have a bigger radius, hence appear focused    | false           |
+| toggleFocusOnPress   | Boolean        | When set to true, if the user presses an already focused pie section, it will be unfocused                | true            |
+| extraRadiusForFocused | number        | Extra radius for the focused Pie section                                                                  | radius/10       |
+| sectionAutoFocus     | boolean        | In case you don't want focusOnPress but want a particular section to autofocus, this prop will be needed  | false           |
+| onLabelPress         | Function       | Callback function called on press of a Label (takes item and index as parameter)                          | onPress OR null |
+| tiltAngle            | Angle in deg   | The angle by which the chart should be tilted                                                             | '55deg' for 3D charts, otherwise 0 |
 | shadow               | Boolean        | Shadow to the Pie chart, when set to true, it enhances the 3D effect                                      | false           |
 | shadowColor          | ColorValue     | Color of the shadow                                                                                       | lightgray       |
 | shadowWidth          | number         | Width of the shadow                                                                                       | radius\*4/3     |
@@ -23,7 +33,39 @@
 | showValuesAsLabels   | Boolean        | When set to true, the values of the Pie sections are displayed as labels                                  | false           |
 | centerLabelComponent | Function       | Component to be rendered at the center of the Pie chart                                                   | \_              |
 | semiCircle           | Boolean        | When set to true, renders the Pie Chart in a semi-circle. donut semiCircle charts look like a speed-meter | false           |
+| labelsPosition       | string         | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid'              | 'outward' for donut and semicircle charts, otherwise 'mid' |
 
+#### initialAngle
+
+The default value is 0. The angles are distributed differently from the usual coordinate system. It is illustrated below-
+<img src='../../demos/pie.png' alt='' height=400 width=400/>
+
+#### labelsPosition
+
+labels can be positioned 'onBorder', 'outward', 'mid' or 'inward'. Here's a demonstration for each of them-
+<br/>
+<br/>
+<img src='../../demos/onBorder.png' alt='' height=300 width=300/>
+<br/>
+<i>onBorder</i>
+<br/><br/>
+<img src='../../demos/outward.png' alt='' height=300 width=300/>
+<br/>
+<i>outward</i>
+<br/><br/>
+<img src='../../demos/mid.png' alt='' height=300 width=300/>
+<br/>
+<i>mid</i>
+<br/><br/>
+<img src='../../demos/inward.png' alt='' height=300 width=300/>
+<br/>
+<i>inward</i>
+<br/><br/>
+
+The default value for labelsPosition is 'mid'. In case of donut and semicircle charts the default value becomes 'outward'
+
+ ---
+ 
 ### Item description
 
 | Prop                 | Type       | Description                                                            |
@@ -42,6 +84,14 @@
 | font                 | string     | Font family of the text - 'Arial', 'Cursive', 'Comic Sans MS' etc      |
 | textBackgroundColor  | ColorValue | Background color for the label text                                    |
 | textBackgroundRadius | number     | Radius for the background of the text label                            |
+| labelPosition        | string     | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid' |
+| onPress              | Function   | Callback function called on press of Pie sections (takes item and index as parameter)                    |
+| onLabelPress         | Function   | Callback function called on press of a Label (takes item and index as parameter)                         |
+| strokeWidth          | number     | Stroke (line) width for the Pie chart and its section                         |
+| strokeColor          | ColorValue | Stroke (line) color                                                           |
+| focused              | boolean    | When set to true, the section for that item is focused, sectionAutoFocus must be set true in order to use this property |
+
+
 
 ### Donut chart related props
 
