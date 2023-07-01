@@ -212,11 +212,11 @@ type referenceConfigType = {
 | startIndex4 | number     | Start index for data line 4 (used to display data lines having breaks) | 0              |
 | startIndex5 | number     | Start index for data line 5 (used to display data lines having breaks) | 0              |
 | endIndex | number     | End index for data line (used to display data lines having breaks) | data.length -1        |
-| endIndex1    | number     | End index for data line 1 (used to display data lines having breaks) | data.length -1     |
+| endIndex1    | number     | End index for data line 1 (used to display data lines having breaks) | data1.length -1     |
 | endIndex2    | number     | End index for data line 2 (used to display data lines having breaks) | data2.length -1    |
 | endIndex3    | number     | End index for data line 3 (used to display data lines having breaks) | data3.length -1    |
-| endIndex4    | number     | End index for data line 4 (used to display data lines having breaks) | data3.length -1    |
-| endIndex5    | number     | End index for data line 5 (used to display data lines having breaks) | data3.length -1    |
+| endIndex4    | number     | End index for data line 4 (used to display data lines having breaks) | data4.length -1    |
+| endIndex5    | number     | End index for data line 5 (used to display data lines having breaks) | data5.length -1    |
 
 ## The arrow
 
