@@ -13,6 +13,7 @@ const SimplePie = () => {
       <PieChart
         donut
         showText
+        textSize={12}
         textColor="black"
         innerRadius={70}
         showTextBackground
