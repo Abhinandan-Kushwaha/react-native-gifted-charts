@@ -25,7 +25,6 @@ import SimplePie from './examples/PieChart/SimplePie';
 import ProgressPie from './examples/PieChart/ProgressPie';
 import SplitPie from './examples/PieChart/SplitPie';
 import ThreeDPie from './examples/PieChart/ThreeDPie';
-import CaloriesBurnt from './examples/LineChart/CaloriesBurnt';
 import PieChartFocusOnPress from './examples/PieChart/PieChartFocusOnPress';
 
 const App = () => {
