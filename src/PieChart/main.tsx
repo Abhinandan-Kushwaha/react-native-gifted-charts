@@ -410,6 +410,7 @@ export const PieChartMain = (props: propTypes) => {
                   />
                 )}
                 <SvgText
+                  key={index + 'c'}
                   fill={item.textColor || textColor || colors[(index + 2) % 9]}
                   fontSize={item.textSize || textSize}
                   fontFamily={item.font || props.font}
