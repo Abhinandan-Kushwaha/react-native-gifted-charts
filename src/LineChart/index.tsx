@@ -26,7 +26,7 @@ import Svg, {
   Line,
 } from 'react-native-svg';
 import {svgPath, bezierCommand} from '../utils';
-import Rule from '../Components/lineSvg';
+import {renderHorizSections} from './renderHorizSections';
 
 let initialData = null;
 let animations = [];
@@ -40,6 +40,7 @@ type propTypes = {
   stepValue?: number;
   spacing?: number;
   initialSpacing?: number;
+  endSpacing?: number;
   data?: Array<itemType>;
   data2?: Array<itemType>;
   data3?: Array<itemType>;
@@ -101,12 +102,6 @@ type propTypes = {
   showReferenceLine3?: Boolean;
   referenceLine3Config?: referenceConfigType;
   referenceLine3Position?: number;
-  showReferenceLine4?: Boolean;
-  referenceLine4Config?: referenceConfigType;
-  referenceLine4Position?: number;
-  showReferenceLine5?: Boolean;
-  referenceLine5Config?: referenceConfigType;
-  referenceLine5Position?: number;
 
   showVerticalLines?: Boolean;
   verticalLinesUptoDataPoint?: Boolean;
@@ -562,19 +557,19 @@ export const LineChart = (props: propTypes) => {
     newFillPoints = '';
   let counter = 0;
 
-  const initialSpacing =
-    props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
-  const thickness = props.thickness || 2;
-
   const adjustToWidth = props.adjustToWidth || false;
 
+  const initialSpacing =
+    props.initialSpacing === 0 ? 0 : props.initialSpacing || 20;
+  const endSpacing = props.endSpacing ?? (adjustToWidth ? 0 : 20);
+
+  const thickness = props.thickness || 2;
+
   const spacing =
-    props.spacing === 0
-      ? 0
-      : props.spacing ||
-        (adjustToWidth
-          ? ((props.width || 200) - initialSpacing) / data.length
-          : 60);
+    props.spacing ??
+    (adjustToWidth
+      ? ((props.width || 200) - initialSpacing) / (data.length - 1)
+      : 50);
 
   const xAxisLength = props.xAxisLength;
   const xAxisThickness =
@@ -2004,7 +1999,7 @@ export const LineChart = (props: propTypes) => {
 
   const defaultReferenceConfig = {
     thickness: rulesThickness,
-    width: (props.width || totalWidth) + 11,
+    width: (props.width || totalWidth - spacing) + endSpacing,
     color: 'black',
     type: rulesType,
     dashWidth: dashWidth,
@@ -2022,7 +2017,9 @@ export const LineChart = (props: propTypes) => {
     ? {
         thickness: props.referenceLine1Config.thickness || rulesThickness,
         width:
-          (props.referenceLine1Config.width || props.width || totalWidth) + 11,
+          (props.referenceLine1Config.width ||
+            props.width ||
+            totalWidth - spacing) + endSpacing,
         color: props.referenceLine1Config.color || 'black',
         type: props.referenceLine1Config.type || rulesType,
         dashWidth: props.referenceLine1Config.dashWidth || dashWidth,
@@ -2045,7 +2042,9 @@ export const LineChart = (props: propTypes) => {
     ? {
         thickness: props.referenceLine2Config.thickness || rulesThickness,
         width:
-          (props.referenceLine2Config.width || props.width || totalWidth) + 11,
+          (props.referenceLine2Config.width ||
+            props.width ||
+            totalWidth - spacing) + endSpacing,
         color: props.referenceLine2Config.color || 'black',
         type: props.referenceLine2Config.type || rulesType,
         dashWidth: props.referenceLine2Config.dashWidth || dashWidth,
@@ -2068,7 +2067,9 @@ export const LineChart = (props: propTypes) => {
     ? {
         thickness: props.referenceLine3Config.thickness || rulesThickness,
         width:
-          (props.referenceLine3Config.width || props.width || totalWidth) + 11,
+          (props.referenceLine3Config.width ||
+            props.width ||
+            totalWidth - spacing) + endSpacing,
         color: props.referenceLine3Config.color || 'black',
         type: props.referenceLine3Config.type || rulesType,
         dashWidth: props.referenceLine3Config.dashWidth || dashWidth,
@@ -2221,392 +2222,6 @@ export const LineChart = (props: propTypes) => {
   //         </Animated.View>
   //     )
   // }
-
-  const getLabel = (val, index) => {
-    let label = '';
-    if (
-      showFractionalValues ||
-      (props.yAxisLabelTexts && props.yAxisLabelTexts[index] !== undefined)
-    ) {
-      if (val) {
-        label = props.yAxisOffset
-          ? (Number(val) + props.yAxisOffset).toString()
-          : val;
-      } else {
-        label = props.yAxisOffset ? props.yAxisOffset.toString() : '0';
-      }
-    } else {
-      if (val) {
-        label = val.toString().split('.')[0];
-        if (props.yAxisOffset) {
-          label = (Number(label) + props.yAxisOffset).toString();
-        }
-      } else {
-        label = props.yAxisOffset ? props.yAxisOffset.toString() : '0';
-      }
-    }
-
-    return yAxisLabelPrefix + label + yAxisLabelSuffix;
-  };
-
-  const renderHorizSections = () => {
-    return (
-      <>
-        {props.hideAxesAndRules !== true &&
-          horizSections.map((sectionItems, index) => {
-            return (
-              <View
-                key={index}
-                style={[
-                  styles.horizBar,
-                  {
-                    width: (props.width ? props.width : totalWidth) + 15,
-                  },
-                  yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
-                  horizontalRulesStyle,
-                ]}>
-                <View
-                  style={[
-                    styles.leftLabel,
-                    {
-                      height:
-                        index === noOfSections ? stepHeight / 2 : stepHeight,
-                      width: yAxisLabelWidth,
-                    },
-                    yAxisLabelContainerStyle,
-                  ]}
-                />
-                <View
-                  style={[
-                    index === noOfSections
-                      ? styles.lastLeftPart
-                      : styles.leftPart,
-                    {
-                      borderLeftWidth: yAxisThickness,
-                      borderColor: yAxisColor,
-                      backgroundColor: backgroundColor,
-                    },
-                  ]}>
-                  {index === noOfSections ? (
-                    <Rule
-                      config={{
-                        thickness: xAxisThickness,
-                        color: xAxisColor,
-                        width: xAxisLength || (props.width || totalWidth) + 11,
-                        dashWidth: dashWidth,
-                        dashGap: dashGap,
-                        type: xAxisType,
-                      }}
-                    />
-                  ) : hideRules ? null : (
-                    <Rule
-                      config={{
-                        thickness: rulesThickness,
-                        color: rulesColor,
-                        width: rulesLength || (props.width || totalWidth) + 11,
-                        dashWidth: dashWidth,
-                        dashGap: dashGap,
-                        type: rulesType,
-                      }}
-                    />
-                  )}
-                  {showXAxisIndices && index !== noOfSections ? (
-                    <View
-                      style={{
-                        height: xAxisIndicesHeight,
-                        width: xAxisIndicesWidth,
-                        left: xAxisIndicesWidth / -2,
-                        backgroundColor: xAxisIndicesColor,
-                      }}
-                    />
-                  ) : null}
-                </View>
-              </View>
-            );
-          })}
-
-        {
-          /***********************************************************************************************/
-          /**************************      Render the y axis labels separately      **********************/
-          /***********************************************************************************************/
-          props.hideAxesAndRules !== true &&
-            !hideYAxisText &&
-            horizSections.map((sectionItems, index) => {
-              let label = getLabel(sectionItems.value, index);
-              if (hideOrigin && index === horizSections.length - 1) {
-                label = '';
-              }
-              return (
-                <View
-                  key={index}
-                  style={[
-                    styles.horizBar,
-                    styles.leftLabel,
-                    {
-                      position: 'absolute',
-                      zIndex: 1,
-                      top: stepHeight * index,
-                      width: yAxisLabelWidth,
-                      height:
-                        index === noOfSections ? stepHeight / 2 : stepHeight,
-                    },
-                    yAxisSide === 'right' && {
-                      transform: [
-                        {
-                          translateX:
-                            (props.width ? props.width : totalWidth) - 15,
-                        },
-                        {rotateY: '180deg'},
-                      ],
-                    },
-                    yAxisLabelContainerStyle,
-                  ]}>
-                  <Text
-                    numberOfLines={yAxisTextNumberOfLines}
-                    ellipsizeMode={'clip'}
-                    style={[
-                      yAxisTextStyle,
-                      yAxisSide === 'right' && {
-                        transform: [{rotateY: '180deg'}],
-                      },
-                      index === noOfSections && {
-                        marginBottom: stepHeight / -2,
-                      },
-                    ]}>
-                    {label}
-                  </Text>
-                </View>
-              );
-            })
-          /***********************************************************************************************/
-          /***********************************************************************************************/
-        }
-
-        {horizSectionsBelow.map((sectionItems, index) => {
-          return (
-            <View
-              key={index}
-              style={[
-                styles.horizBar,
-                {
-                  width: (props.width ? props.width : totalWidth) + 15,
-                },
-                index === 0 && {marginTop: stepHeight / 2},
-                yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
-              ]}>
-              <View
-                style={[
-                  styles.leftLabel,
-                  {
-                    borderRightWidth: yAxisThickness,
-                    borderColor: yAxisColor,
-                    marginLeft: yAxisThickness,
-                  },
-                  {
-                    height: index === 0 ? stepHeight * 1.5 : stepHeight,
-                    width: yAxisLabelWidth,
-                  },
-                  index === 0 && {marginTop: -stepHeight / 2},
-                ]}
-              />
-              <View
-                style={[styles.leftPart, {backgroundColor: backgroundColor}]}>
-                {hideRules ? null : (
-                  <Rule
-                    config={{
-                      thickness: rulesThickness,
-                      color: rulesColor,
-                      width: rulesLength || (props.width || totalWidth) + 11,
-                      dashWidth: dashWidth,
-                      dashGap: dashGap,
-                      type: rulesType,
-                    }}
-                  />
-                )}
-              </View>
-            </View>
-          );
-        })}
-
-        {
-          /***********************************************************************************************/
-          /*************************      Render the y axis labels below origin      *********************/
-          /***********************************************************************************************/
-          props.hideAxesAndRules !== true &&
-            !hideYAxisText &&
-            horizSectionsBelow.map((sectionItems, index) => {
-              let label = getLabel(
-                horizSectionsBelow[horizSectionsBelow.length - 1 - index].value,
-                index,
-              );
-              return (
-                <View
-                  key={index}
-                  style={[
-                    styles.horizBar,
-                    styles.leftLabel,
-                    {
-                      position: 'absolute',
-                      zIndex: 1,
-                      bottom: stepHeight * (index - 1),
-                      width: yAxisLabelWidth,
-                      height:
-                        index === noOfSections ? stepHeight / 2 : stepHeight,
-                    },
-                    yAxisSide === 'right' && {
-                      transform: [
-                        {
-                          translateX:
-                            (props.width ? props.width : totalWidth) - 15,
-                        },
-                        {rotateY: '180deg'},
-                      ],
-                    },
-                    yAxisLabelContainerStyle,
-                  ]}>
-                  <Text
-                    numberOfLines={yAxisTextNumberOfLines}
-                    ellipsizeMode={'clip'}
-                    style={[
-                      yAxisTextStyle,
-                      yAxisSide === 'right' && {
-                        transform: [{rotateY: '180deg'}],
-                      },
-                      index === noOfSections && {
-                        marginBottom: stepHeight / -2,
-                      },
-                    ]}>
-                    {label}
-                  </Text>
-                </View>
-              );
-            })
-          /***********************************************************************************************/
-          /***********************************************************************************************/
-        }
-
-        {
-          /***********************************************************************************************/
-          /*************************      Render the reference lines separately      *********************/
-          /***********************************************************************************************/
-          props.hideAxesAndRules !== true &&
-            !hideYAxisText &&
-            horizSections.map((sectionItems, index) => {
-              let label = getLabel(sectionItems.value, index);
-              if (hideOrigin && index === horizSections.length - 1) {
-                label = '';
-              }
-              return (
-                <View
-                  key={index}
-                  style={[
-                    styles.horizBar,
-                    styles.leftLabel,
-                    {
-                      position: 'absolute',
-                      zIndex: 1,
-                      top: stepHeight * index,
-                      width: yAxisLabelWidth,
-                      height:
-                        index === noOfSections ? stepHeight / 2 : stepHeight,
-                    },
-                    yAxisSide === 'right' && {
-                      transform: [
-                        {
-                          translateX:
-                            (props.width ? props.width : totalWidth) - 15,
-                        },
-                        {rotateY: '180deg'},
-                      ],
-                    },
-                  ]}>
-                  {index === noOfSections && showReferenceLine1 ? (
-                    <View
-                      style={{
-                        position: 'absolute',
-                        bottom:
-                          (referenceLine1Position * containerHeight) / maxValue,
-                        left:
-                          yAxisSide === 'right'
-                            ? yAxisLabelWidth + yAxisThickness + 5
-                            : yAxisLabelWidth + yAxisThickness,
-                      }}>
-                      <Rule config={referenceLine1Config} />
-                      {referenceLine1Config.labelText ? (
-                        <Text
-                          style={[
-                            {position: 'absolute'},
-                            yAxisSide === 'right' && {
-                              transform: [{rotateY: '180deg'}],
-                            },
-                            referenceLine1Config.labelTextStyle,
-                          ]}>
-                          {referenceLine1Config.labelText}
-                        </Text>
-                      ) : null}
-                    </View>
-                  ) : null}
-                  {index === noOfSections && showReferenceLine2 ? (
-                    <View
-                      style={{
-                        position: 'absolute',
-                        bottom:
-                          (referenceLine2Position * containerHeight) / maxValue,
-                        left:
-                          yAxisSide === 'right'
-                            ? yAxisLabelWidth + yAxisThickness + 5
-                            : yAxisLabelWidth + yAxisThickness,
-                      }}>
-                      <Rule config={referenceLine2Config} />
-                      {referenceLine2Config.labelText ? (
-                        <Text
-                          style={[
-                            {position: 'absolute'},
-                            yAxisSide === 'right' && {
-                              transform: [{rotateY: '180deg'}],
-                            },
-                            referenceLine2Config.labelTextStyle,
-                          ]}>
-                          {referenceLine2Config.labelText}
-                        </Text>
-                      ) : null}
-                    </View>
-                  ) : null}
-                  {index === noOfSections && showReferenceLine3 ? (
-                    <View
-                      style={{
-                        position: 'absolute',
-                        bottom:
-                          (referenceLine3Position * containerHeight) / maxValue,
-                        left:
-                          yAxisSide === 'right'
-                            ? yAxisLabelWidth + yAxisThickness + 5
-                            : yAxisLabelWidth + yAxisThickness,
-                      }}>
-                      <Rule config={referenceLine3Config} />
-                      {referenceLine3Config.labelText ? (
-                        <Text
-                          style={[
-                            {position: 'absolute'},
-                            yAxisSide === 'right' && {
-                              transform: [{rotateY: '180deg'}],
-                            },
-                            referenceLine3Config.labelTextStyle,
-                          ]}>
-                          {referenceLine3Config.labelText}
-                        </Text>
-                      ) : null}
-                    </View>
-                  ) : null}
-                </View>
-              );
-            })
-          /***********************************************************************************************/
-          /***********************************************************************************************/
-        }
-      </>
-    );
-  };
 
   const onStripPress = (item, index) => {
     setSelectedIndex(index);
@@ -2782,7 +2397,11 @@ export const LineChart = (props: propTypes) => {
                       : dataPointsColor
                   }
                   onPress={() => {
-                    item.onPress ? item.onPress(item, index) : null;
+                    item.onPress
+                      ? item.onPress(item, index)
+                      : props.onPress
+                      ? props.onPress(item, index)
+                      : null;
                   }}
                 />
               )}
@@ -2806,7 +2425,11 @@ export const LineChart = (props: propTypes) => {
                       : dataPointsColor
                   }
                   onPress={() => {
-                    item.onPress ? item.onPress(item, index) : null;
+                    item.onPress
+                      ? item.onPress(item, index)
+                      : props.onPress
+                      ? props.onPress(item, index)
+                      : null;
                   }}
                 />
               )}
@@ -2873,6 +2496,7 @@ export const LineChart = (props: propTypes) => {
       if (item.showVerticalLine) {
         return (
           <Rect
+            key={index}
             x={
               initialSpacing -
               (item.verticalLineThickness || 1) / 2 -
@@ -3727,6 +3351,66 @@ export const LineChart = (props: propTypes) => {
     );
   };
 
+  const horizSectionProps = {
+    width: props.width,
+    horizSections,
+    horizSectionsBelow,
+    totalWidth,
+    endSpacing,
+    yAxisSide,
+    horizontalRulesStyle,
+    noOfSections,
+    stepHeight,
+    yAxisLabelWidth,
+    yAxisLabelContainerStyle,
+    yAxisThickness,
+    yAxisColor,
+    xAxisThickness,
+    xAxisColor,
+    xAxisLength,
+    xAxisType,
+    dashWidth,
+    dashGap,
+    backgroundColor,
+    hideRules,
+    rulesLength,
+    rulesType,
+    rulesThickness,
+    rulesColor,
+    spacing,
+    showXAxisIndices,
+    xAxisIndicesHeight,
+    xAxisIndicesWidth,
+    xAxisIndicesColor,
+
+    hideOrigin,
+    hideYAxisText,
+    showFractionalValues,
+    yAxisTextNumberOfLines,
+    yAxisLabelPrefix,
+    yAxisLabelSuffix,
+    yAxisTextStyle,
+
+    containerHeight,
+    maxValue,
+
+    showReferenceLine1,
+    referenceLine1Position,
+    referenceLine1Config,
+
+    showReferenceLine2,
+    referenceLine2Position,
+    referenceLine2Config,
+
+    showReferenceLine3,
+    referenceLine3Position,
+    referenceLine3Config,
+
+    yAxisLabelTexts: props.yAxisLabelTexts,
+    yAxisOffset: props.yAxisOffset,
+    hideAxesAndRules: props.hideAxesAndRules,
+  };
+
   return (
     <View
       style={[
@@ -3739,7 +3423,8 @@ export const LineChart = (props: propTypes) => {
         },
         yAxisSide === 'right' && {marginLeft: yAxisLabelWidth + yAxisThickness},
       ]}>
-      {props.hideAxesAndRules !== true && renderHorizSections()}
+      {props.hideAxesAndRules !== true &&
+        renderHorizSections(horizSectionProps)}
       {/* {sectionsOverlay()} */}
       <ScrollView
         horizontal
@@ -3750,7 +3435,7 @@ export const LineChart = (props: propTypes) => {
               130 +
               horizSectionsBelow.length * stepHeight +
               labelsExtraHeight,
-            width: totalWidth - 20,
+            width: totalWidth - spacing + endSpacing,
             paddingBottom:
               horizSectionsBelow.length * stepHeight + labelsExtraHeight,
             // backgroundColor: 'yellow'
@@ -3779,13 +3464,13 @@ export const LineChart = (props: propTypes) => {
           {
             marginLeft:
               yAxisSide === 'right'
-                ? -yAxisLabelWidth - yAxisThickness + 6
+                ? -yAxisLabelWidth - yAxisThickness
                 : yAxisLabelWidth + yAxisThickness,
             position: 'absolute',
             bottom: stepHeight * -0.5 - 60, //stepHeight * -0.5 + xAxisThickness,
             paddingRight: 100,
           },
-          props.width && {width: props.width + 10},
+          props.width && {width: props.width + endSpacing},
         ]}>
         {showVerticalLines &&
           verticalLinesAr.map((item: itemType, index: number) => {

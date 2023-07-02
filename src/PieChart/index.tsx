@@ -131,6 +131,8 @@ export const PieChart = (props: propTypes) => {
             initialAngle={startAngle}
             showText={false}
             innerRadius={props.innerRadius || radius / 2.5}
+            isBiggerPie
+            setSelectedIndex={setSelectedIndex}
           />
         </View>
       )}

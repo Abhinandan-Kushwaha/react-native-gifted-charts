@@ -53,6 +53,7 @@ type propTypes = {
   selectedIndex?: number;
   setSelectedIndex?: Function;
   onLabelPress?: Function;
+  isBiggerPie?: Boolean
 };
 type itemType = {
   value: number;
@@ -312,7 +313,7 @@ export const PieChartMain = (props: propTypes) => {
                     props.onPress(item, index);
                   }
                   if (props.focusOnPress) {
-                    if (props.selectedIndex === index) {
+                    if (props.selectedIndex === index || props.isBiggerPie) {
                       if (toggleFocusOnPress) {
                         props.setSelectedIndex(-1);
                       }

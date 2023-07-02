@@ -15,7 +15,7 @@
 | noOfSectionsBelowXAxis | number | Number of sections in the Y axis below X axis (in case the data set has negative values too) | 0 |
 | stepValue                     | number         | Value of 1 step/section in the Y axis                                                              | 20                  |
 | stepHeight                    | number         | Height of 1 step/section in the Y axis                                                             | 20                  |
-| spacing                       | number         | Distance between 2 consecutive bars in the Bar chart                                               | 20                  |
+| spacing                       | number         | Distance between 2 consecutive bars in the Bar chart                                               | 50                  |
 | adjustToWidth                 | Boolean        | When set to true, it auto computes the spacing value to fit the Line chart in the available width  | false               |
 | backgroundColor               | ColorValue     | Background color of the Bar chart                                                                  | \_                  |
 | disableScroll                 | Boolean        | To disable horizontal scroll                                                                       | false               |
@@ -26,7 +26,8 @@
 | onDataChangeAnimationDuration | number         | Duration (milliseconds) in which the transition animation takes place on a change in data          | 400                 |
 | scrollToEnd | Boolean | When set to true, the chart automatically scrolls to the rightmost data point | false |
 | scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true |
-| initialSpacing         | number     | distance of the first data point from the Y axis                                      | 40 |
+| initialSpacing         | number     | distance of the first data point from the Y axis                                      | 20 |
+| endSpacing             | number     | distance/padding left at the end of the line chart                                    | adjustWidth ? 0 : 20 |
 
 ---
 
@@ -128,12 +129,6 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | showReferenceLine3     | Boolean             | show third reference line                                                          | false                  |
 | referenceLine3Config   | referenceConfigType | properties of reference line like thickness, color etc (described below the table) | \_                     |
 | referenceLine3Position | number              | position of third reference line                                                   | containerHeight / 2    |
-| showReferenceLine4     | Boolean             | show fourth reference line                                                          | false                  |
-| referenceLine4Config   | referenceConfigType | properties of reference line like thickness, color etc (described below the table) | \_                     |
-| referenceLine4Position | number              | position of fourth reference line                                                   | containerHeight / 2    |
-| showReferenceLine5     | Boolean             | show fifth reference line                                                          | false                  |
-| referenceLine5Config   | referenceConfigType | properties of reference line like thickness, color etc (described below the table) | \_                     |
-| referenceLine5Position | number              | position of fifth reference line                                                   | containerHeight / 2    |
 | showVerticalLines      | Boolean             | To show vertical lines                                                             | false                  |
 | verticalLinesUptoDataPoint | Boolean         | To set the height of the vertical lines upto the corresponding data point          | false                  |
 | verticalLinesColor     | ColorValue          | Color of the vertical lines                                                        | lightgray              |
