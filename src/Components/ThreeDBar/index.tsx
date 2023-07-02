@@ -15,7 +15,7 @@ type PropTypes = {
   frontColor: ColorValue;
   sideColor: ColorValue;
   topColor: ColorValue;
-  topLabelComponent: Function;
+  topLabelComponent: any;
   topLabelContainerStyle: any;
   opacity: number;
   side: String;

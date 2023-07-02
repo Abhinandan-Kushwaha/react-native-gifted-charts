@@ -1617,7 +1617,6 @@ export const BarChart = (props: PropTypes) => {
                       }
                     }
                   }
-                  console.log('i = ' + i + ' actualSpacing ' + actualSpacing);
                   totalSpacing += actualSpacing;
                 }
               }

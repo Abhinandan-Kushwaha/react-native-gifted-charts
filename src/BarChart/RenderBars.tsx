@@ -470,7 +470,7 @@ const RenderBars = (props: Props) => {
               topColor={item.topColor || props.topColor || ''}
               showGradient={item.showGradient || props.showGradient || false}
               gradientColor={item.gradientColor || props.gradientColor}
-              topLabelComponent={item.topLabelComponent || Function}
+              topLabelComponent={item.topLabelComponent || null}
               opacity={opacity || 1}
               horizontal={props.horizontal}
               intactTopLabel={props.intactTopLabel}

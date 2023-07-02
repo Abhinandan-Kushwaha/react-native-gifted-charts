@@ -373,11 +373,10 @@ export const PieChartMain = (props: propTypes) => {
             // console.log('ax', ax);
             // console.log('ay', ay);
             return (
-              <>
+              <React.Fragment key={index}>
                 {/* <Line x1={mx} x2={cx} y1={my} y2={cy} stroke="black" /> */}
                 {showTextBackground && (
                   <Circle
-                    key={index + 'b'}
                     cx={x}
                     cy={y - (item.textSize || textSize) / 4}
                     r={
@@ -410,7 +409,6 @@ export const PieChartMain = (props: propTypes) => {
                   />
                 )}
                 <SvgText
-                  key={index + 'c'}
                   fill={item.textColor || textColor || colors[(index + 2) % 9]}
                   fontSize={item.textSize || textSize}
                   fontFamily={item.font || props.font}
@@ -444,7 +442,7 @@ export const PieChartMain = (props: propTypes) => {
                   }}>
                   {item.text || (showValuesAsLabels ? item.value + '' : '')}
                 </SvgText>
-              </>
+              </React.Fragment>
             );
           })}
       </Svg>
