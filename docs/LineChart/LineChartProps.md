@@ -24,6 +24,7 @@
 | isAnimated                    | Boolean        | To show animated Line or Area Chart. Animation occurs when the chart load for the first time       | false               |
 | animateOnDataChange           | Boolean        | To show animation on change in data. A smooth transition takes place between the iold and new line | false               |
 | onDataChangeAnimationDuration | number         | Duration (milliseconds) in which the transition animation takes place on a change in data          | 400                 |
+| onPress                       | Function       | The callback function that handles the press event. `item` and `index` are received as props       | \_                  |
 | scrollToEnd | Boolean | When set to true, the chart automatically scrolls to the rightmost data point | false |
 | scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true |
 | initialSpacing         | number     | distance of the first data point from the Y axis                                      | 20 |
@@ -53,7 +54,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | Key                            | Value type | Description                                                                                                                          |
 | ------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | value                          | number     | Value of the item representing representing its position                                                                             |
-| onPress                        | function   | Function called on pressing the bar                                                                                                  |
+| onPress                        | function   | Function called on pressing the data point                                                                                                  |
 | label                          | string     | Label text appearing under the X axis                                                                                                |
 | labelTextStyle                 | object     | Style object for the label text appearing under the X axis                                                                           |
 | labelComponent                 | Function   | custom label component appearing under the X axis                                                                                    |
@@ -405,25 +406,25 @@ When the chart is scrolled after pressing, it returns the index of the data poin
 When the chart is released, it returns the index -1.<br/>
 
 
-### onPress and strip related props
+### onFocus and strip related props
 
 Line or Area charts can be made interactive by allowing users to press on the chart and highlight that particular data point. For example-
 
   <img src='../../demos/focusPoint.gif' alt='' height=450 width=300/>
 
-To achieve this the `pressEnabled` props must be set to true. In addition, use below props like `focusedDataPointShape`, `focusedDataPointColor`, `focusedDataPointRadius` to focus the pressed data point. The prop `onPress` can be used to pass a function that will be called when the press event is triggered.
+To achieve this the `focusEnabled` props must be set to true. In addition, use below props like `focusedDataPointShape`, `focusedDataPointColor`, `focusedDataPointRadius` to focus the pressed data point. The prop `onFocus` can be used to pass a function that will be called when a data point is focused.
 
 | Prop                   | Type       | Description                                                                                                | Default value                             |
 | ---------------------- | ---------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| pressEnabled           | Boolean    | If set true, allows users to press on the chart (press event can be then handled using the `onPress` prop) | false                                     |
-| showDataPointOnPress   | Boolean    | If set true, it shows the data point corresponding to the pressed area of the chart                        | false                                     |
-| showStripOnPress       | Boolean    | If set true, it shows a vertical strip corresponding to the pressed area of the chart                      | false                                     |
-| showTextOnPress        | Boolean    | If set true, it shows the data point text corresponding to the pressed area of the chart                   | false                                     |
+| focusEnabled           | Boolean    | If set true, allows users to press on the chart and focuses the nearest data point (focus event can be then handled using the `onFocus` prop) | false  |
+| onFocus                | Function   | The callback function that handles the focus event. `item` and `index` are received as props               | \_                                        |
+| showDataPointOnFocus   | Boolean    | If set true, it shows the data point corresponding to the focused area of the chart                        | false                                     |
+| showStripOnFocus       | Boolean    | If set true, it shows a vertical strip corresponding to the focused area of the chart                      | false                                     |
+| showTextOnFocus        | Boolean    | If set true, it shows the data point text corresponding to the focused area of the chart                   | false                                     |
 | stripHeight            | number     | Height of the vertical strip that becomes visible on pressing the corresponding area of the chart          | height of the data point                  |
 | stripWidth             | number     | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart           | 2                                         |
-| stripColor             | ColorValue | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart           | color of the line                         |
+| stripColor             | ColorValue | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart           | 'orange'                                  |
 | stripOpacity           | number     | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart         | (startOpacity+endOpacity)/2               |
-| onPress                | Function   | The callback function that handles the press event. `item` and `index` are received as props               | \_                                        |
 | unFocusOnPressOut      | Boolean    | If set true, it unselects/unfocuses the focused/selected data point                                        | true                                      |
 | delayBeforeUnFocus     | number     | Delay (in milliseconds) between the release of the press and ghe unfocusing of the data point              | 300                                       |
 | focusedDataPointShape  | String     | Shape of the data points when focused due to press event                                                   | item.dataPointsShape OR dataPointsShape   |
@@ -433,16 +434,24 @@ To achieve this the `pressEnabled` props must be set to true. In addition, use b
 | focusedDataPointRadius | number     | Radius of the data points when focused due to press event                                                  | item.dataPointsRadius OR dataPointsRadius |
 | focusedCustomDataPoint | Function   | Custom data point when focused due to press event                                                          | item.customDataPoint OR customDataPoint   |
 
-#### Example of onPress :
+#### Example of onFocus :
 
 ```js
-onPress={(item, index) => {
+onFocus={(item, index) => {
     Alert.alert(item.value)
 }}
 ```
 
-Above code changes the pressed data point's color and radius. Since in this example, we are changing the data on the onPress event, the data must be a state variable.
+***Note*** Some props have been renamed in version `1.3.2`
+Here is the list of prop names changed in version `1.3.2`-
 
+| Prop name prior to version `1.3.2` | Prop name in and after `1.3.2`                                 |
+| ---------------------------------- | -------------------------------------------------------------- |
+| pressEnabled                       | focusEnabled                                                   |
+| onPress                            | onFocus (onPress also exists but has diffferent functionality) |
+| showDataPointOnPress               | showDataPointOnFocus                                           |
+| showStripOnPress                   | showStripOnFocus                                               |
+| showTextOnPress                    | showTextOnFocus                                                |
 ---
 
 ### Props for Area Chart
