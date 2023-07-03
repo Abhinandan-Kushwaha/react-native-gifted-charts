@@ -16,7 +16,7 @@
 8. Prepare a doc for xAxisLabelTexts and xAxisLabelTextStyle in Bar, Line And Area Charts
 9. Prepare a doc for vertical lines to explain noOfVerticalLines and verticalLinesSpacing props. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/205
 10. Prepare a doc for negative marginBottom instead of marginTop for x axis labels. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/190
-
+11. Add about endSpacing in docs
 
 ## Architecture Enhancement
 

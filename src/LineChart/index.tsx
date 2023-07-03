@@ -78,10 +78,11 @@ type propTypes = {
   rulesLength?: number;
   rulesColor?: ColorValue;
   rulesThickness?: number;
-  pressEnabled?: Boolean;
-  showDataPointOnPress?: Boolean;
-  showStripOnPress?: Boolean;
-  showTextOnPress?: Boolean;
+  focusEnabled?: Boolean;
+  onFocus?: Function;
+  showDataPointOnFocus?: Boolean;
+  showStripOnFocus?: Boolean;
+  showTextOnFocus?: Boolean;
   stripHeight?: number;
   stripWidth?: number;
   stripColor?: ColorValue | String | any;
@@ -1985,10 +1986,10 @@ export const LineChart = (props: propTypes) => {
   const dashWidth = props.dashWidth === 0 ? 0 : props.dashWidth || 4;
   const dashGap = props.dashGap === 0 ? 0 : props.dashGap || 8;
 
-  const pressEnabled = props.pressEnabled || false;
-  const showDataPointOnPress = props.showDataPointOnPress || false;
-  const showStripOnPress = props.showStripOnPress || false;
-  const showTextOnPress = props.showTextOnPress || false;
+  const focusEnabled = props.focusEnabled || false;
+  const showDataPointOnFocus = props.showDataPointOnFocus || false;
+  const showStripOnFocus = props.showStripOnFocus || false;
+  const showTextOnFocus = props.showTextOnFocus || false;
   const stripHeight = props.stripHeight;
   const stripWidth = props.stripWidth === 0 ? 0 : props.stripWidth || 2;
   const stripColor = props.stripColor || color1;
@@ -2225,8 +2226,8 @@ export const LineChart = (props: propTypes) => {
 
   const onStripPress = (item, index) => {
     setSelectedIndex(index);
-    if (props.onPress) {
-      props.onPress(item, index);
+    if (props.onFocus) {
+      props.onFocus(item, index);
     }
   };
 
@@ -2272,16 +2273,13 @@ export const LineChart = (props: propTypes) => {
           item.dataPointHeight ||
           dataPtsHeight;
         dataPointsColor =
-          item.focusedDataPointColor ||
-          props.focusedDataPointColor ||
-          item.dataPointColor ||
-          dataPtsColor;
+          item.focusedDataPointColor || props.focusedDataPointColor || 'orange';
         dataPointsRadius =
           item.focusedDataPointRadius ||
           props.focusedDataPointRadius ||
           item.dataPointRadius ||
           dataPtsRadius;
-        if (showTextOnPress) {
+        if (showTextOnFocus) {
           text = item.dataPointText;
         }
         customDataPoint =
@@ -2297,7 +2295,7 @@ export const LineChart = (props: propTypes) => {
         dataPointsHeight = item.dataPointHeight || dataPtsHeight;
         dataPointsColor = item.dataPointColor || dataPtsColor;
         dataPointsRadius = item.dataPointRadius || dataPtsRadius;
-        if (showTextOnPress) {
+        if (showTextOnFocus) {
           text = '';
         }
         customDataPoint = item.customDataPoint || props.customDataPoint;
@@ -2314,7 +2312,7 @@ export const LineChart = (props: propTypes) => {
 
       return (
         <Fragment key={index}>
-          {pressEnabled ? (
+          {focusEnabled ? (
             <>
               {unFocusOnPressOut ? (
                 <Rect
@@ -2341,7 +2339,7 @@ export const LineChart = (props: propTypes) => {
             </>
           ) : null}
           {item.showStrip ||
-          (pressEnabled && index === selectedIndex && showStripOnPress) ? (
+          (focusEnabled && index === selectedIndex && showStripOnFocus) ? (
             <Rect
               x={initialSpacing + (spacing * index - dataPointsWidth / 2)}
               y={
@@ -2390,7 +2388,7 @@ export const LineChart = (props: propTypes) => {
                   width={dataPointsWidth}
                   height={dataPointsHeight}
                   fill={
-                    showDataPointOnPress
+                    showDataPointOnFocus
                       ? index === selectedIndex
                         ? dataPointsColor
                         : 'none'
@@ -2418,7 +2416,7 @@ export const LineChart = (props: propTypes) => {
                   }
                   r={dataPointsRadius}
                   fill={
-                    showDataPointOnPress
+                    showDataPointOnFocus
                       ? index === selectedIndex
                         ? dataPointsColor
                         : 'none'
@@ -2436,7 +2434,7 @@ export const LineChart = (props: propTypes) => {
             </Fragment>
           )}
           {dataPointLabelComponent ? (
-            !showTextOnPress || index === selectedIndex ? (
+            !showTextOnFocus || index === selectedIndex ? (
               <View
                 style={[
                   styles.customDataPointContainer,
@@ -2465,7 +2463,7 @@ export const LineChart = (props: propTypes) => {
               </View>
             ) : null
           ) : text || item.dataPointText ? (
-            !showTextOnPress || index === selectedIndex ? (
+            !showTextOnFocus || index === selectedIndex ? (
               <CanvasText
                 fill={item.textColor || textColor}
                 fontSize={item.textFontSize || textFontSize}
@@ -2482,7 +2480,7 @@ export const LineChart = (props: propTypes) => {
                   (item.value * containerHeight) / maxValue +
                   (item.textShiftY || props.textShiftY || 0)
                 }>
-                {!showTextOnPress ? item.dataPointText : text}
+                {!showTextOnFocus ? item.dataPointText : text}
               </CanvasText>
             ) : null
           ) : null}
