@@ -83,8 +83,8 @@ defaultLineConfig = {
     color: 'black',
     hideDataPoints: false,
     dataPointsShape: 'circular',
-    dataPointsWidth: 2,
-    dataPointsHeight: 2,
+    dataPointsWidth: 4,
+    dataPointsHeight: 4,
     dataPointsColor: 'black',
     dataPointsRadius: 3,
     textColor: 'gray',
@@ -140,8 +140,8 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | color            | ColorValue | Color of the Line                                                 | 'black'       |
 | hideDataPoints   | Boolean    | To hide data points along the Line chart                          | false         |
 | dataPointsShape  | String     | Shape of the data points (_'rectangular'_ or _'circular'_)        | 'circular'    |
-| dataPointsWidth  | number     | Width of data points (when data points' shape is rectangular)     | 2             |
-| dataPointsHeight | number     | Height of data points (when data points' shape is rectangular)    | 2             |
+| dataPointsWidth  | number     | Width of data points (when data points' shape is rectangular)     | 4             |
+| dataPointsHeight | number     | Height of data points (when data points' shape is rectangular)    | 4             |
 | dataPointsColor  | ColorValue | Color of the data points                                          | 'black'       |
 | dataPointsRadius | number     | Radius of data points (when data points' shape is _circular_)     | 3             |
 | textColor        | ColorValue | Color of the dataPointText                                        | 'gray'        |
@@ -248,7 +248,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | hideOrigin             | Boolean             | To hide the y Axis label at origin (i.e. 0)                                        | false                  |
 | labelWidth             | number              | Width of the Label text appearing below the bar (under the X axis)                 | barWidth               |
 | xAxisTextNumberOfLines | number              | Number of lines for x axis label text                                              | 1                      |
-| labelsExtraHeight | number | used to display large labels on X-axis (often rotated to show vertically) | 0 |
+| labelsExtraHeight      | number              | used to display large labels on X-axis (often rotated to show vertically)          | 0                      |
 
 **Note** If you are setting yAxisSide to 'right', make sure to specify the width of the chart, using the `width` prop
 

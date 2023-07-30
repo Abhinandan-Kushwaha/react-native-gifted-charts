@@ -122,3 +122,87 @@ export const bezierCommand = (
   const [cpeX, cpeY] = controlPoint(point, a[i - 1], a[i + 1], true);
   return `C ${cpsX},${cpsY} ${cpeX},${cpeY} ${point[0]},${point[1]}`;
 };
+
+export enum chartTypes {
+  BAR,
+  LINE,
+  LINE_BI_COLOR,
+}
+
+export const getArrowPoints = (
+  arrowTipX,
+  arrowTipY,
+  x1,
+  y1,
+  arrowLength,
+  arrowWidth,
+  showArrowBase,
+) => {
+  let dataLineSlope = (arrowTipY - y1) / (arrowTipX - x1);
+  let d = arrowLength;
+  let d2 = arrowWidth / 2;
+  let interSectionX =
+    arrowTipX - Math.sqrt((d * d) / (dataLineSlope * dataLineSlope + 1));
+  let interSectionY = arrowTipY - dataLineSlope * (arrowTipX - interSectionX);
+
+  let arrowBasex1, arrowBaseY1, arrowBaseX2, arrowBaseY2;
+  if (dataLineSlope === 0) {
+    arrowBasex1 = interSectionX;
+    arrowBaseY1 = interSectionY - d2;
+    arrowBaseX2 = interSectionX;
+    arrowBaseY2 = interSectionY + d2;
+  } else {
+    let arrowBaseSlope = -1 / dataLineSlope;
+    arrowBasex1 =
+      interSectionX -
+      Math.sqrt((d2 * d2) / (arrowBaseSlope * arrowBaseSlope + 1));
+    arrowBaseY1 =
+      interSectionY - arrowBaseSlope * (interSectionX - arrowBasex1);
+
+    arrowBaseX2 =
+      interSectionX +
+      Math.sqrt((d2 * d2) / (arrowBaseSlope * arrowBaseSlope + 1));
+    arrowBaseY2 =
+      interSectionY + arrowBaseSlope * (interSectionX - arrowBasex1);
+  }
+  let arrowPoints = ` M${interSectionX} ${interSectionY}`;
+  arrowPoints += ` ${showArrowBase ? 'L' : 'M'}${arrowBasex1} ${arrowBaseY1}`;
+  arrowPoints += ` L${arrowTipX} ${arrowTipY}`;
+  arrowPoints += ` M${interSectionX} ${interSectionY}`;
+  arrowPoints += ` ${showArrowBase ? 'L' : 'M'}${arrowBaseX2} ${arrowBaseY2}`;
+  arrowPoints += ` L${arrowTipX} ${arrowTipY}`;
+
+  return arrowPoints;
+};
+
+export const getAxesAndRulesProps = props => {
+  return {
+    yAxisSide: props.yAxisSide,
+    yAxisLabelContainerStyle: props.yAxisLabelContainerStyle,
+    yAxisColor: props.yAxisColor,
+    xAxisColor: props.xAxisColor,
+    xAxisLength: props.xAxisLength,
+    xAxisType: props.xAxisType,
+    dashWidth: props.dashWidth,
+    dashGap: props.dashGap,
+    backgroundColor: props.backgroundColor,
+    hideRules: props.hideRules,
+    rulesLength: props.rulesLength,
+    rulesType: props.rulesType,
+    rulesThickness: props.rulesThickness,
+    rulesColor: props.rulesColor,
+    showYAxisIndices: props.showYAxisIndices,
+    yAxisIndicesHeight: props.yAxisIndicesHeight,
+    yAxisIndicesWidth: props.yAxisIndicesWidth,
+    yAxisIndicesColor: props.yAxisIndicesColor,
+    hideOrigin: props.hideOrigin,
+    hideYAxisText: props.hideYAxisText,
+    yAxisTextNumberOfLines: props.yAxisTextNumberOfLines,
+    yAxisLabelPrefix: props.yAxisLabelPrefix,
+    yAxisLabelSuffix: props.yAxisLabelSuffix,
+    yAxisTextStyle: props.yAxisTextStyle,
+  };
+};
+
+export const getExtendedContainerHeightWithPadding = (containerHeight, overflowTop) =>
+  containerHeight + (overflowTop ?? 0) + 10;

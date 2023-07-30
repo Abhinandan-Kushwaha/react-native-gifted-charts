@@ -42,7 +42,7 @@ type propTypes = {
   barStyle?: object;
 };
 type itemType = {
-  value?: number;
+  value: number;
   onPress?: any;
   frontColor?: ColorValue;
   sideColor?: ColorValue;
@@ -267,7 +267,7 @@ const Animated2DWithGradient = (props: propTypes) => {
                 <Defs>
                   {item.barBackgroundPattern
                     ? item.barBackgroundPattern()
-                    : barBackgroundPattern()}
+                    : barBackgroundPattern?.()}
                 </Defs>
                 <Rect
                   stroke="transparent"

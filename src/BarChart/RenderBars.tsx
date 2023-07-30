@@ -63,7 +63,7 @@ type Props = {
   barMarginBottom?: number;
   onPress?: Function;
   xAxisTextNumberOfLines: number;
-  renderTooltip: Function;
+  renderTooltip: Function | undefined;
   leftShiftForTooltip?: number;
   leftShiftForLastIndexTooltip: number;
   initialSpacing: number;
@@ -147,9 +147,8 @@ const RenderBars = (props: Props) => {
                 props.labelWidth ||
                 item.barWidth ||
                 props.barWidth ||
-                30) +
-              spacing / 2,
-            left: -6,
+                30) + spacing,
+            left: spacing / -2,
             position: 'absolute',
             bottom: (rotateLabel ? -40 : -25) - barMarginBottom,
           },
@@ -178,7 +177,7 @@ const RenderBars = (props: Props) => {
           item.labelComponent()
         ) : (
           <Text
-            style={labelTextStyle || {textAlign: 'center'}}
+            style={[{textAlign: 'center'}, labelTextStyle]}
             numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}
           </Text>
@@ -201,10 +200,9 @@ const RenderBars = (props: Props) => {
                 props.labelWidth ||
                 item.barWidth ||
                 props.barWidth ||
-                30) +
-              spacing / 2,
+                30) + spacing,
+            left: spacing / -2,
             position: 'absolute',
-            left: -4,
             bottom: (rotateLabel ? -40 : -25) - barMarginBottom,
             opacity: appearingOpacity,
           },
@@ -221,7 +219,7 @@ const RenderBars = (props: Props) => {
           item.labelComponent()
         ) : (
           <Text
-            style={labelTextStyle || {textAlign: 'center'}}
+            style={[{textAlign: 'center'}, labelTextStyle]}
             numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}
           </Text>
@@ -336,17 +334,14 @@ const RenderBars = (props: Props) => {
 
   const barHeight = Math.max(
     minHeight,
-    (item.value >= 0 && (!isThreeD || isAnimated) && item.topLabelComponent
-      ? (item.topLabelComponentHeight || 30) +
-        (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)
-      : (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200)) -
+    (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200) -
       barMarginBottom,
   );
 
   let leftSpacing = initialSpacing;
   for (let i = 0; i < index; i++) {
     leftSpacing +=
-      (data[i].spacing === 0 ? 0 : data[i].spacing || propSpacing) +
+      (data[i].spacing ?? propSpacing) +
       (data[i].barWidth || props.barWidth || 30);
   }
 

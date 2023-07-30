@@ -1,10 +1,11 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import Rule from '../Components/lineSvg';
-import {styles} from './styles';
+import Rule from '../lineSvg';
+import {styles} from '../../LineChart/styles';
 
 export const renderHorizSections = props => {
   const {
+    width,
     horizSections,
     horizSectionsBelow,
     totalWidth,
@@ -30,10 +31,10 @@ export const renderHorizSections = props => {
     rulesThickness,
     rulesColor,
     spacing,
-    showXAxisIndices,
-    xAxisIndicesHeight,
-    xAxisIndicesWidth,
-    xAxisIndicesColor,
+    showYAxisIndices,
+    yAxisIndicesHeight,
+    yAxisIndicesWidth,
+    yAxisIndicesColor,
 
     hideOrigin,
     hideYAxisText,
@@ -46,6 +47,19 @@ export const renderHorizSections = props => {
     containerHeight,
     maxValue,
 
+    referenceLinesConfig,
+
+    yAxisLabelTexts,
+    yAxisOffset,
+    hideAxesAndRules,
+
+    horizontal,
+    yAxisAtTop,
+  } = props;
+
+
+
+  let {
     showReferenceLine1,
     referenceLine1Position,
     referenceLine1Config,
@@ -57,11 +71,83 @@ export const renderHorizSections = props => {
     showReferenceLine3,
     referenceLine3Position,
     referenceLine3Config,
+  } = referenceLinesConfig;
 
-    yAxisLabelTexts,
-    yAxisOffset,
-    hideAxesAndRules,
-  } = props;
+  const defaultReferenceConfig = {
+    thickness: rulesThickness,
+    width: (width || totalWidth - spacing) + endSpacing,
+    color: 'black',
+    type: rulesType,
+    dashWidth: dashWidth,
+    dashGap: dashGap,
+    labelText: '',
+    labelTextStyle: null,
+  };
+
+   showReferenceLine1 = referenceLinesConfig.showReferenceLine1 || false;
+   referenceLine1Position =
+    referenceLinesConfig.referenceLine1Position ?? (referenceLinesConfig.referenceLine1Position || containerHeight / 2);
+   referenceLine1Config = referenceLinesConfig.referenceLine1Config
+    ? {
+        thickness: referenceLinesConfig.referenceLine1Config.thickness || defaultReferenceConfig.thickness,
+        width:
+          (referenceLinesConfig.referenceLine1Config.width ?? defaultReferenceConfig.width),
+        color: referenceLinesConfig.referenceLine1Config.color || defaultReferenceConfig.color,
+        type: referenceLinesConfig.referenceLine1Config.type || defaultReferenceConfig.type,
+        dashWidth: referenceLinesConfig.referenceLine1Config.dashWidth || defaultReferenceConfig.dashWidth,
+        dashGap: referenceLinesConfig.referenceLine1Config.dashGap || defaultReferenceConfig.dashGap,
+        labelText:
+          referenceLinesConfig.referenceLine1Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          referenceLinesConfig.referenceLine1Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
+      }
+    : defaultReferenceConfig;
+
+   showReferenceLine2 = referenceLinesConfig.showReferenceLine2 || false;
+   referenceLine2Position =
+    referenceLinesConfig.referenceLine2Position ?? (referenceLinesConfig.referenceLine2Position || (3 * containerHeight) / 2);
+   referenceLine2Config = referenceLinesConfig.referenceLine2Config
+    ? {
+        thickness: referenceLinesConfig.referenceLine2Config.thickness || defaultReferenceConfig.thickness,
+        width:
+          (referenceLinesConfig.referenceLine2Config.width ?? defaultReferenceConfig.width),
+        color: referenceLinesConfig.referenceLine2Config.color || defaultReferenceConfig.color,
+        type: referenceLinesConfig.referenceLine2Config.type || defaultReferenceConfig.type,
+        dashWidth: referenceLinesConfig.referenceLine2Config.dashWidth || defaultReferenceConfig.dashWidth,
+        dashGap: referenceLinesConfig.referenceLine2Config.dashGap || defaultReferenceConfig.dashGap,
+        labelText:
+          referenceLinesConfig.referenceLine2Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          referenceLinesConfig.referenceLine2Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
+      }
+    : defaultReferenceConfig;
+
+   showReferenceLine3 = referenceLinesConfig.showReferenceLine3 || false;
+   referenceLine3Position =
+    referenceLinesConfig.referenceLine3Position ?? (referenceLinesConfig.referenceLine3Position || containerHeight / 3);
+   referenceLine3Config = referenceLinesConfig.referenceLine3Config
+    ? {
+        thickness: referenceLinesConfig.referenceLine3Config.thickness || defaultReferenceConfig.thickness,
+        width:
+          (referenceLinesConfig.referenceLine3Config.width ?? defaultReferenceConfig.width),
+        color: referenceLinesConfig.referenceLine3Config.color || defaultReferenceConfig.color,
+        type: referenceLinesConfig.referenceLine3Config.type || defaultReferenceConfig.type,
+        dashWidth: referenceLinesConfig.referenceLine3Config.dashWidth || defaultReferenceConfig.dashWidth,
+        dashGap: referenceLinesConfig.referenceLine3Config.dashGap || defaultReferenceConfig.dashGap,
+        labelText:
+          referenceLinesConfig.referenceLine3Config.labelText ||
+          defaultReferenceConfig.labelText,
+        labelTextStyle:
+          referenceLinesConfig.referenceLine3Config.labelTextStyle ||
+          defaultReferenceConfig.labelTextStyle,
+      }
+    : defaultReferenceConfig;
+
+
 
   const getLabel = (val, index) => {
     let label = '';
@@ -99,7 +185,9 @@ export const renderHorizSections = props => {
                 {
                   width: (props.width ? props.width : totalWidth) + endSpacing,
                 },
-                yAxisSide === 'right' && {transform: [{rotateY: '180deg'}]},
+                ((horizontal && !yAxisAtTop)) && {
+                  transform: [{rotateY: '180deg'}],
+                },
                 horizontalRulesStyle,
               ]}>
               <View
@@ -108,7 +196,7 @@ export const renderHorizSections = props => {
                   {
                     height:
                       index === noOfSections ? stepHeight / 2 : stepHeight,
-                    width: yAxisLabelWidth,
+                    width: yAxisSide === 'right' ? 0 : yAxisLabelWidth,
                   },
                   yAxisLabelContainerStyle,
                 ]}
@@ -119,10 +207,10 @@ export const renderHorizSections = props => {
                     ? styles.lastLeftPart
                     : styles.leftPart,
                   {
-                    borderLeftWidth: yAxisThickness,
                     borderColor: yAxisColor,
                     backgroundColor: backgroundColor,
                   },
+                  yAxisSide === 'right' ? {borderRightWidth: yAxisThickness} : {borderLeftWidth: yAxisThickness}
                 ]}>
                 {index === noOfSections ? (
                   <Rule
@@ -151,13 +239,13 @@ export const renderHorizSections = props => {
                     }}
                   />
                 )}
-                {showXAxisIndices && index !== noOfSections ? (
+                {showYAxisIndices && index !== noOfSections ? (
                   <View
                     style={{
-                      height: xAxisIndicesHeight,
-                      width: xAxisIndicesWidth,
-                      left: xAxisIndicesWidth / -2,
-                      backgroundColor: xAxisIndicesColor,
+                      height: yAxisIndicesHeight,
+                      width: yAxisIndicesWidth,
+                      left: yAxisIndicesWidth / -2 + (yAxisSide === 'right' ? (width + yAxisLabelWidth/2 + yAxisIndicesWidth/4) : 0),
+                      backgroundColor: yAxisIndicesColor,
                     }}
                   />
                 ) : null}
@@ -191,7 +279,8 @@ export const renderHorizSections = props => {
                     height:
                       index === noOfSections ? stepHeight / 2 : stepHeight,
                   },
-                  yAxisSide === 'right' && {
+                  yAxisSide === 'right' && {left: width + yAxisLabelWidth/2},
+                  ((horizontal && !yAxisAtTop)) && {
                     transform: [
                       {
                         translateX:
@@ -209,7 +298,7 @@ export const renderHorizSections = props => {
                   ellipsizeMode={'clip'}
                   style={[
                     yAxisTextStyle,
-                    yAxisSide === 'right' && {
+                    ((horizontal && !yAxisAtTop)) && {
                       transform: [{rotateY: '180deg'}],
                     },
                     index === noOfSections && {
@@ -235,12 +324,6 @@ export const renderHorizSections = props => {
                 width: (props.width ? props.width : totalWidth) + 15,
               },
               index === 0 && {marginTop: stepHeight / 2},
-              yAxisSide === 'right' && {
-                transform: [
-                  {rotateY: '180deg'},
-                  {translateX: 14.5 - endSpacing},
-                ],
-              },
             ]}>
             <View
               style={[
@@ -252,7 +335,7 @@ export const renderHorizSections = props => {
                 },
                 {
                   height: index === 0 ? stepHeight * 1.5 : stepHeight,
-                  width: yAxisLabelWidth,
+                  width: yAxisSide === 'right' ? 0 : yAxisLabelWidth,
                 },
                 index === 0 && {marginTop: -stepHeight / 2},
               ]}
@@ -302,17 +385,7 @@ export const renderHorizSections = props => {
                     height:
                       index === noOfSections ? stepHeight / 2 : stepHeight,
                   },
-                  yAxisSide === 'right' && {
-                    transform: [
-                      {
-                        translateX:
-                          (props.width ? props.width : totalWidth) -
-                          30 +
-                          endSpacing,
-                      },
-                      {rotateY: '180deg'},
-                    ],
-                  },
+                  yAxisSide === 'right' && {left: width + yAxisLabelWidth},
                   yAxisLabelContainerStyle,
                 ]}>
                 <Text
@@ -320,9 +393,6 @@ export const renderHorizSections = props => {
                   ellipsizeMode={'clip'}
                   style={[
                     yAxisTextStyle,
-                    yAxisSide === 'right' && {
-                      transform: [{rotateY: '180deg'}],
-                    },
                     index === noOfSections && {
                       marginBottom: stepHeight / -2,
                     },
@@ -361,17 +431,6 @@ export const renderHorizSections = props => {
                     height:
                       index === noOfSections ? stepHeight / 2 : stepHeight,
                   },
-                  yAxisSide === 'right' && {
-                    transform: [
-                      {
-                        translateX:
-                          (props.width ? props.width : totalWidth) -
-                          30 +
-                          endSpacing,
-                      },
-                      {rotateY: '180deg'},
-                    ],
-                  },
                 ]}>
                 {index === noOfSections && showReferenceLine1 ? (
                   <View
@@ -379,19 +438,13 @@ export const renderHorizSections = props => {
                       position: 'absolute',
                       bottom:
                         (referenceLine1Position * containerHeight) / maxValue,
-                      left:
-                        yAxisSide === 'right'
-                          ? yAxisLabelWidth + yAxisThickness + 5
-                          : yAxisLabelWidth + yAxisThickness,
+                      left: yAxisSide==='right'? 0 : yAxisLabelWidth + yAxisThickness,
                     }}>
                     <Rule config={referenceLine1Config} />
                     {referenceLine1Config.labelText ? (
                       <Text
                         style={[
                           {position: 'absolute'},
-                          yAxisSide === 'right' && {
-                            transform: [{rotateY: '180deg'}],
-                          },
                           referenceLine1Config.labelTextStyle,
                         ]}>
                         {referenceLine1Config.labelText}
@@ -405,19 +458,13 @@ export const renderHorizSections = props => {
                       position: 'absolute',
                       bottom:
                         (referenceLine2Position * containerHeight) / maxValue,
-                      left:
-                        yAxisSide === 'right'
-                          ? yAxisLabelWidth + yAxisThickness + 5
-                          : yAxisLabelWidth + yAxisThickness,
+                      left: yAxisSide==='right'? 0 : yAxisLabelWidth + yAxisThickness,
                     }}>
                     <Rule config={referenceLine2Config} />
                     {referenceLine2Config.labelText ? (
                       <Text
                         style={[
                           {position: 'absolute'},
-                          yAxisSide === 'right' && {
-                            transform: [{rotateY: '180deg'}],
-                          },
                           referenceLine2Config.labelTextStyle,
                         ]}>
                         {referenceLine2Config.labelText}
@@ -431,19 +478,13 @@ export const renderHorizSections = props => {
                       position: 'absolute',
                       bottom:
                         (referenceLine3Position * containerHeight) / maxValue,
-                      left:
-                        yAxisSide === 'right'
-                          ? yAxisLabelWidth + yAxisThickness + 5
-                          : yAxisLabelWidth + yAxisThickness,
+                      left: yAxisSide==='right'? 0 : yAxisLabelWidth + yAxisThickness,
                     }}>
                     <Rule config={referenceLine3Config} />
                     {referenceLine3Config.labelText ? (
                       <Text
                         style={[
                           {position: 'absolute'},
-                          yAxisSide === 'right' && {
-                            transform: [{rotateY: '180deg'}],
-                          },
                           referenceLine3Config.labelTextStyle,
                         ]}>
                         {referenceLine3Config.labelText}

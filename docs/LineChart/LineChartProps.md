@@ -2,33 +2,34 @@
 
 ### Basic props
 
-| Prop                          | Type           | Description                                                                                        | Default value       |
-| ----------------------------- | -------------- | -------------------------------------------------------------------------------------------------- | ------------------- |
-| data                          | Array of items | An item object represents a point in the line chart. It is described in the next table.            | \_                  |
-| data2                         | Array of items | Second set of dataPoint for the second line                                                        | \_                  |
-| data3                         | Array of items | Third set of dataPoint for the third line                                                          | \_                  |
-| width                         | number         | Width of the Bar chart                                                                             | width of the parent |
-| height                        | number         | Height of the Bar chart (excluding the bottom label)                                               | 200                 |
-| maxValue                      | number         | Maximum value shown in the Y axis                                                                  | 200                 |
-| minValue | number | Minimum negative value shown in the Y axis (to be used only if the data set has negative values too) | \_ |
-| noOfSections                  | number         | Number of sections in the Y axis                                                                   | 10                  |
-| noOfSectionsBelowXAxis | number | Number of sections in the Y axis below X axis (in case the data set has negative values too) | 0 |
-| stepValue                     | number         | Value of 1 step/section in the Y axis                                                              | 20                  |
-| stepHeight                    | number         | Height of 1 step/section in the Y axis                                                             | 20                  |
-| spacing                       | number         | Distance between 2 consecutive bars in the Bar chart                                               | 50                  |
-| adjustToWidth                 | Boolean        | When set to true, it auto computes the spacing value to fit the Line chart in the available width  | false               |
-| backgroundColor               | ColorValue     | Background color of the Bar chart                                                                  | \_                  |
-| disableScroll                 | Boolean        | To disable horizontal scroll                                                                       | false               |
-| showScrollIndicator           | Boolean        | To show horizontal scroll indicator                                                                | false               |
-| indicatorColor                | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                    | default             |
-| isAnimated                    | Boolean        | To show animated Line or Area Chart. Animation occurs when the chart load for the first time       | false               |
-| animateOnDataChange           | Boolean        | To show animation on change in data. A smooth transition takes place between the iold and new line | false               |
-| onDataChangeAnimationDuration | number         | Duration (milliseconds) in which the transition animation takes place on a change in data          | 400                 |
-| onPress                       | Function       | The callback function that handles the press event. `item` and `index` are received as props       | \_                  |
-| scrollToEnd | Boolean | When set to true, the chart automatically scrolls to the rightmost data point | false |
-| scrollAnimation | Boolean | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true |
-| initialSpacing         | number     | distance of the first data point from the Y axis                                      | 20 |
-| endSpacing             | number     | distance/padding left at the end of the line chart                                    | adjustWidth ? 0 : 20 |
+| Prop                          | Type           | Description                                                                                                    | Default value        |
+| ----------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------- | -------------------- |
+| data                          | Array of items | An item object represents a point in the line chart. It is described in the next table.                        | \_                   |
+| data2                         | Array of items | Second set of dataPoint for the second line                                                                    | \_                   |
+| data3                         | Array of items | Third set of dataPoint for the third line                                                                      | \_                   |
+| width                         | number         | Width of the Bar chart                                                                                         | width of the parent  |
+| height                        | number         | Height of the Bar chart (excluding the bottom label)                                                           | 200                  |
+| overflowTop                   | number         | Extra space at the top of the chart to make room for dataPointText                                             | 0                    |
+| maxValue                      | number         | Maximum value shown in the Y axis                                                                              | 200                  |
+| minValue                      | number         | Minimum negative value shown in the Y axis (to be used only if the data set has negative values too)           | \_                   |
+| noOfSections                  | number         | Number of sections in the Y axis                                                                               | 10                   |
+| noOfSectionsBelowXAxis        | number         | Number of sections in the Y axis below X axis (in case the data set has negative values too)                   | 0                    |
+| stepValue                     | number         | Value of 1 step/section in the Y axis                                                                          | 20                   |
+| stepHeight                    | number         | Height of 1 step/section in the Y axis                                                                         | 20                   |
+| spacing                       | number         | Distance between 2 consecutive bars in the Bar chart                                                           | 50                   |
+| adjustToWidth                 | Boolean        | When set to true, it auto computes the spacing value to fit the Line chart in the available width              | false                |
+| backgroundColor               | ColorValue     | Background color of the Bar chart                                                                              | \_                   |
+| disableScroll                 | Boolean        | To disable horizontal scroll                                                                                   | false                |
+| showScrollIndicator           | Boolean        | To show horizontal scroll indicator                                                                            | false                |
+| indicatorColor                | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                | default              |
+| isAnimated                    | Boolean        | To show animated Line or Area Chart. Animation occurs when the chart load for the first time                   | false                |
+| animateOnDataChange           | Boolean        | To show animation on change in data. A smooth transition takes place between the iold and new line             | false                |
+| onDataChangeAnimationDuration | number         | Duration (milliseconds) in which the transition animation takes place on a change in data                      | 400                  |
+| onPress                       | Function       | The callback function that handles the press event. `item` and `index` are received as props                   | \_                   |
+| scrollToEnd                   | Boolean        | When set to true, the chart automatically scrolls to the rightmost data point                                  | false                |
+| scrollAnimation               | Boolean        | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true                 |
+| initialSpacing                | number         | distance of the first data point from the Y axis                                                               | 20                   |
+| endSpacing                    | number         | distance/padding left at the end of the line chart                                                             | adjustWidth ? 0 : 20 |
 
 ---
 
@@ -54,7 +55,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | Key                            | Value type | Description                                                                                                                          |
 | ------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | value                          | number     | Value of the item representing representing its position                                                                             |
-| onPress                        | function   | Function called on pressing the data point                                                                                                  |
+| onPress                        | function   | Function called on pressing the data point                                                                                           |
 | label                          | string     | Label text appearing under the X axis                                                                                                |
 | labelTextStyle                 | object     | Style object for the label text appearing under the X axis                                                                           |
 | labelComponent                 | Function   | custom label component appearing under the X axis                                                                                    |
@@ -282,39 +283,39 @@ The default value of `showArrowBase` is true. To fill the arrow with `fillColor`
 | Prop                   | Type       | Description                                                                           | Default value                             |
 | ---------------------- | ---------- | ------------------------------------------------------------------------------------- | ----------------------------------------- |
 | hideDataPoints         | Boolean    | To hide data points                                                                   | false                                     |
-| dataPointsHeight       | number     | Height of data points (when data points' shape is rectangular)                        | 2                                         |
-| dataPointsWidth        | number     | Width of data points (when data points' shape is rectangular)                         | 2                                         |
+| dataPointsHeight       | number     | Height of data points (when data points' shape is rectangular)                        | 4                                         |
+| dataPointsWidth        | number     | Width of data points (when data points' shape is rectangular)                         | 4                                         |
 | dataPointsRadius       | number     | Radius of data points (when data points' shape is circular)                           | 3                                         |
 | dataPointsColor        | ColorValue | Color of the data points                                                              | black                                     |
 | dataPointsShape        | string     | Shape of the data points (_'rectangular'_ or _'circular'_)                            | 'circular'                                |
 | hideDataPoints1        | Boolean    | To hide data points for the first set of data                                         | false                                     |
-| dataPointsHeight1      | number     | Height of data points for the first dataset (when data points' shape is rectangular)  | 2                                         |
-| dataPointsWidth1       | number     | Width of data points for the first dataset (when data points' shape is rectangular)   | 2                                         |
+| dataPointsHeight1      | number     | Height of data points for the first dataset (when data points' shape is rectangular)  | 4                                         |
+| dataPointsWidth1       | number     | Width of data points for the first dataset (when data points' shape is rectangular)   | 4                                         |
 | dataPointsRadius1      | number     | Radius of data points for the first dataset (when data points' shape is circular)     | 3                                         |
 | dataPointsColor1       | ColorValue | Color of data points for the first dataset                                            | black                                     |
 | dataPointsShape1       | string     | Shape of data points for the first dataset                                            | 'circular'                                |
 | hideDataPoints2        | Boolean    | To hide data points for the second set of data                                        | false                                     |
-| dataPointsHeight2      | number     | Height of data points for the second dataset (when data points' shape is rectangular) | 2                                         |
-| dataPointsWidth2       | number     | Width of data points for the second dataset (when data points' shape is rectangular)  | 2                                         |
+| dataPointsHeight2      | number     | Height of data points for the second dataset (when data points' shape is rectangular) | 4                                         |
+| dataPointsWidth2       | number     | Width of data points for the second dataset (when data points' shape is rectangular)  | 4                                         |
 | dataPointsRadius2      | number     | Radius of data points for the second dataset (when data points' shape is circular)    | 3                                         |
 | dataPointsColor2       | ColorValue | Color of data points for the second dataset                                           | blue                                      |
 | dataPointsShape2       | string     | Shape of data points for the second dataset (_'rectangular'_ or _'circular'_)         | 'circular'                                |
 | hideDataPoints3        | Boolean    | To hide data points for the third set of data                                         | false                                     |
-| dataPointsHeight3      | number     | Height of data points for the third dataset (when data points' shape is rectangular)  | 2                                         |
-| dataPointsWidth3       | number     | Width of data points for the third dataset (when data points' shape is rectangular)   | 2                                         |
+| dataPointsHeight3      | number     | Height of data points for the third dataset (when data points' shape is rectangular)  | 4                                         |
+| dataPointsWidth3       | number     | Width of data points for the third dataset (when data points' shape is rectangular)   | 4                                         |
 | dataPointsRadius3      | number     | Radius of data points for the third dataset (when data points' shape is circular)     | 3                                         |
 | dataPointsColor3       | ColorValue | Color of data points for the third dataset                                            | red                                       |
 | dataPointsShape3       | string     | Shape of data points for the third dataset (_'rectangular'_ or _'circular'_)          | 'circular'                                |
 | hideDataPoints4        | Boolean    | To hide data points for the fourth set of data                                         | false                                     |
-| dataPointsHeight4      | number     | Height of data points for the fourth dataset (when data points' shape is rectangular)  | 2                                         |
-| dataPointsWidth4       | number     | Width of data points for the fourth dataset (when data points' shape is rectangular)   | 2                                         |
-| dataPointsRadius4      | number     | Radius of data points for the fourth dataset (when data points' shape is circular)     | 4                                         |
+| dataPointsHeight4      | number     | Height of data points for the fourth dataset (when data points' shape is rectangular)  | 4                                         |
+| dataPointsWidth4       | number     | Width of data points for the fourth dataset (when data points' shape is rectangular)   | 4                                         |
+| dataPointsRadius4      | number     | Radius of data points for the fourth dataset (when data points' shape is circular)     | 3                                         |
 | dataPointsColor4       | ColorValue | Color of data points for the fourth dataset                                            | red                                       |
 | dataPointsShape4       | string     | Shape of data points for the fourth dataset (_'rectangular'_ or _'circular'_)          | 'circular'                                |
 | hideDataPoints5        | Boolean    | To hide data points for the fifth set of data                                         | false                                     |
-| dataPointsHeight5      | number     | Height of data points for the fifth dataset (when data points' shape is rectangular)  | 2                                         |
-| dataPointsWidth5       | number     | Width of data points for the fifth dataset (when data points' shape is rectangular)   | 2                                         |
-| dataPointsRadius5      | number     | Radius of data points for the fifth dataset (when data points' shape is circular)     | 5                                         |
+| dataPointsHeight5      | number     | Height of data points for the fifth dataset (when data points' shape is rectangular)  | 4                                         |
+| dataPointsWidth5       | number     | Width of data points for the fifth dataset (when data points' shape is rectangular)   | 4                                         |
+| dataPointsRadius5      | number     | Radius of data points for the fifth dataset (when data points' shape is circular)     | 3                                         |
 | dataPointsColor5       | ColorValue | Color of data points for the fifth dataset                                            | red                                       |
 | dataPointsShape5       | string     | Shape of data points for the fifth dataset (_'rectangular'_ or _'circular'_)          | 'circular'                                |
 | focusedDataPointShape  | String     | Shape of the data points when focused due to press event                              | item.dataPointsShape OR dataPointsShape   |

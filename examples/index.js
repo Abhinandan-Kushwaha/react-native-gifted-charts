@@ -26,6 +26,9 @@ import ProgressPie from './PieChart/ProgressPie';
 import SplitPie from './PieChart/SplitPie';
 import ThreeDPie from './PieChart/ThreeDPie';
 import PieChartFocusOnPress from './PieChart/PieChartFocusOnPress';
+import BarPairWithLine from './BarChart/BarPairWithLine';
+import AreaChartDynamicData from './LineChart/AreaChartDynamicData';
+import BiColorAreaChart from './LineChart/BiColorAreaChart';
 
 const Examples = () => {
   const [selectedFooterButton, setSelectedFooterButton] = useState(0);
@@ -62,6 +65,9 @@ const Examples = () => {
         <BarThreeD />
         <Separator />
 
+        <BarPairWithLine />
+        <Separator />
+
         <RoundStackBar />
         <Separator />
 
@@ -88,6 +94,12 @@ const Examples = () => {
         <Separator />
 
         <ChartWithPointer />
+        <Separator />
+
+        <AreaChartDynamicData />
+        <Separator />
+        
+        <BiColorAreaChart />
         <Separator />
 
         <CaloriesBurnt />

@@ -51,7 +51,7 @@ type propTypes = {
   focusOnPress?: Boolean;
   toggleFocusOnPress?: Boolean;
   selectedIndex?: number;
-  setSelectedIndex?: Function;
+  setSelectedIndex: Function;
   onLabelPress?: Function;
   isBiggerPie?: Boolean
 };
@@ -82,7 +82,7 @@ type itemType = {
 export const PieChartMain = (props: propTypes) => {
   const {isThreeD} = props;
   const propData = props.data;
-  const data = [];
+  const data: Array<itemType> = [];
   if (propData) {
     for (let i = 0; i < propData.length; i++) {
       if (propData[i].value !== 0) {

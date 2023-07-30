@@ -22,11 +22,11 @@ type Props = {
   labelTextStyle?: any;
   disablePress?: boolean;
 
-  item: itemType;
+  item: stackItemType;
   index: number;
   containerHeight?: number;
   maxValue: number;
-  spacing?: number;
+  spacing: number;
   propSpacing?: number;
   data?: any;
   barWidth?: number;
@@ -44,7 +44,7 @@ type Props = {
   barBackgroundPattern?: Function;
   patternId?: String;
   xAxisTextNumberOfLines: number;
-  renderTooltip: Function;
+  renderTooltip: Function | undefined;
   leftShiftForTooltip?: number;
   leftShiftForLastIndexTooltip: number;
   initialSpacing: number;
@@ -53,9 +53,9 @@ type Props = {
   activeOpacity: number;
   showGradient?: Boolean;
   gradientColor?: any;
-  stackData: Array<itemType>;
+  stackData: Array<stackItemType>;
 };
-export type itemType = {
+export type stackItemType = {
   value?: number;
   onPress?: any;
   label?: String;
@@ -73,7 +73,7 @@ export type itemType = {
   capRadius?: number;
   labelComponent?: Function;
   borderRadius?: number;
-  stacks?: Array<{
+  stacks: Array<{
     value: number;
     color?: ColorValue;
     onPress?: (event: GestureResponderEvent) => void;
@@ -86,9 +86,10 @@ export type itemType = {
     showGradient?: boolean;
     gradientColor?: ColorValue;
     barWidth?: number;
+    innerBarComponent?: Function;
   }>;
   barBackgroundPattern?: Function;
-  barBorderRadius?: Number;
+  barBorderRadius?: number;
   patternId?: String;
   leftShiftForTooltip?: number;
 };
@@ -119,8 +120,8 @@ const RenderStackBars = (props: Props) => {
   let leftSpacing = initialSpacing;
   for (let i = 0; i < index; i++) {
     leftSpacing +=
-      (stackData[i].spacing === 0 ? 0 : stackData[i].spacing || propSpacing) +
-      (stackData[i].stacks[0].barWidth || props.barWidth || 30);
+      (stackData[i].spacing ?? propSpacing ?? 0) +
+      (stackData[i].stacks[0].barWidth ?? props.barWidth ?? 30);
   }
   const disablePress = props.disablePress || false;
   const renderLabel = (label: String, labelTextStyle: any) => {
@@ -169,7 +170,7 @@ const RenderStackBars = (props: Props) => {
     0,
   );
 
-  const static2DSimple = (item: itemType, index: number) => {
+  const static2DSimple = (item: stackItemType, index: number) => {
     const cotainsNegative = item.stacks.some(item => item.value < 0);
     return (
       <>
@@ -216,10 +217,10 @@ const RenderStackBars = (props: Props) => {
                     backgroundColor:
                       stackItem.color || item.color || props.color || 'black',
                     borderRadius:
-                      stackItem.borderRadius || props.barBorderRadius || 0,
+                      stackItem.barBorderRadius || props.barBorderRadius || 0,
                   },
                   !props.barBorderRadius &&
-                    !stackItem.borderRadius && {
+                    !stackItem.barBorderRadius && {
                       borderTopLeftRadius: stackItem.borderTopLeftRadius || 0,
                       borderTopRightRadius: stackItem.borderTopRightRadius || 0,
                       borderBottomLeftRadius:
@@ -264,7 +265,7 @@ const RenderStackBars = (props: Props) => {
               <Defs>
                 {item.barBackgroundPattern
                   ? item.barBackgroundPattern()
-                  : barBackgroundPattern()}
+                  : barBackgroundPattern?.()}
               </Defs>
               <Rect
                 stroke="transparent"
@@ -352,7 +353,7 @@ const RenderStackBars = (props: Props) => {
               index === stackData.length - 1
                 ? leftSpacing - leftShiftForLastIndexTooltip
                 : leftSpacing -
-                  (item.leftShiftForTooltip ?? leftShiftForTooltip),
+                  (item.leftShiftForTooltip ?? leftShiftForTooltip ?? 0),
             zIndex: 1000,
           }}>
           {renderTooltip(item, index)}
