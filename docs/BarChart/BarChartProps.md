@@ -240,11 +240,11 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | yAxisIndicesHeight     | number              | Height of the pointers on the Y axis                                               | 2                      |
 | yAxisIndicesWidth      | number              | Width of the pointers on the Y axis                                                | 4                      |
 | yAxisIndicesColor      | ColorValue          | Color of the pointers on the X axis                                                | black                  |
-| yAxisIndicesColor      | Boolean             | To hide axes, rules, labels altogether                                             | false                  |
 | yAxisLabelTexts        | Array<string>       | Array of label texts to be displayed along y axis                                  | null                   |
 | xAxisLabelTexts        | Array<string>       | Array of label texts to be displayed below x axis                                  | null                   |
 | xAxisLabelTextStyle    | object              | Style of label texts to be displayed below x axis                                  | null                   |
 | rotateLabel            | Boolean             | To rotate the X axis labels (by 60deg)                                             | false                  |
+| hideAxesAndRules      | Boolean             | To hide axes, rules, labels altogether                                             | false                  |
 | hideOrigin             | Boolean             | To hide the y Axis label at origin (i.e. 0)                                        | false                  |
 | labelWidth             | number              | Width of the Label text appearing below the bar (under the X axis)                 | barWidth               |
 | xAxisTextNumberOfLines | number              | Number of lines for x axis label text                                              | 1                      |
