@@ -229,8 +229,7 @@ export const BarChart = (props: PropTypes) => {
   const [arrowPoints, setArrowPoints] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const showLine = props.showLine || false;
-  const initialSpacing =
-    props.initialSpacing === 0 ? 0 : props.initialSpacing || 40;
+  const initialSpacing = props.initialSpacing ?? 40;
   const data = useMemo(() => {
     if (!props.data) {
       return [];
@@ -278,10 +277,8 @@ export const BarChart = (props: PropTypes) => {
   const lineConfig = props.lineConfig
     ? {
         initialSpacing:
-          props.lineConfig.initialSpacing === 0
-            ? 0
-            : props.lineConfig.initialSpacing ||
-              defaultLineConfig.initialSpacing,
+          props.lineConfig.initialSpacing  ?? (props.lineConfig.initialSpacing ||
+              defaultLineConfig.initialSpacing),
         curved: props.lineConfig.curved || defaultLineConfig.curved,
         isAnimated: props.lineConfig.isAnimated || defaultLineConfig.isAnimated,
         thickness: props.lineConfig.thickness || defaultLineConfig.thickness,
@@ -423,7 +420,7 @@ export const BarChart = (props: PropTypes) => {
 
   const showVerticalLines = props.showVerticalLines || false;
   const rulesThickness =
-    props.rulesThickness === 0 ? 0 : props.rulesThickness || 1;
+    props.rulesThickness ?? 1;
   const rulesLength = props.rulesLength;
   const rulesColor = props.rulesColor || 'lightgray';
   const verticalLinesThickness =
@@ -452,19 +449,13 @@ export const BarChart = (props: PropTypes) => {
   const yAxisLabelSuffix = props.yAxisLabelSuffix || '';
   const yAxisSide = props.yAxisSide || 'left';
 
-  const xAxisThickness =
-    props.xAxisThickness === 0
-      ? props.xAxisThickness
-      : props.xAxisThickness || 1;
+  const xAxisThickness = props.xAxisThickness ??  1;
   const xAxisLength = props.xAxisLength;
   const xAxisColor = props.xAxisColor || 'black';
 
   const hideRules = props.hideRules || false;
 
-  const yAxisThickness =
-    props.yAxisThickness === 0
-      ? props.yAxisThickness
-      : props.yAxisThickness || 1;
+  const yAxisThickness = props.yAxisThickness ??  1;
   const yAxisColor = props.yAxisColor || 'black';
   const yAxisTextStyle = props.yAxisTextStyle;
   const yAxisTextNumberOfLines = props.yAxisTextNumberOfLines || 1;
@@ -472,7 +463,7 @@ export const BarChart = (props: PropTypes) => {
   const yAxisLabelContainerStyle = props.yAxisLabelContainerStyle;
   const horizontalRulesStyle = props.horizontalRulesStyle;
   const showFractionalValues = props.showFractionalValues || false;
-  const yAxisLabelWidth = props.yAxisLabelWidth || 35;
+  const yAxisLabelWidth = props.yAxisLabelWidth ?? 35;
   const hideYAxisText = props.hideYAxisText || false;
 
   const backgroundColor = props.backgroundColor || 'transparent';
@@ -483,8 +474,8 @@ export const BarChart = (props: PropTypes) => {
 
   const rulesType = props.rulesType || 'line';
   const xAxisType = props.xAxisType || 'solid';
-  const dashWidth = props.dashWidth === 0 ? 0 : props.dashWidth || 4;
-  const dashGap = props.dashGap === 0 ? 0 : props.dashGap || 8;
+  const dashWidth = props.dashWidth ?? 4;
+  const dashGap = props.dashGap ?? 8;
 
   const heightValue = useMemo(() => new Animated.Value(0), []);
   const opacValue = useMemo(() => new Animated.Value(0), []);
@@ -680,9 +671,7 @@ export const BarChart = (props: PropTypes) => {
 
   const showReferenceLine1 = props.showReferenceLine1 || false;
   const referenceLine1Position =
-    props.referenceLine1Position === 0
-      ? 0
-      : props.referenceLine1Position || containerHeight / 2;
+    props.referenceLine1Position ?? (props.referenceLine1Position || containerHeight / 2);
   const referenceLine1Config = props.referenceLine1Config
     ? {
         thickness: props.referenceLine1Config.thickness || rulesThickness,
@@ -705,9 +694,7 @@ export const BarChart = (props: PropTypes) => {
 
   const showReferenceLine2 = props.showReferenceLine2 || false;
   const referenceLine2Position =
-    props.referenceLine2Position === 0
-      ? 0
-      : props.referenceLine2Position || (3 * containerHeight) / 2;
+    props.referenceLine2Position ?? (props.referenceLine2Position || (3 * containerHeight) / 2);
   const referenceLine2Config = props.referenceLine2Config
     ? {
         thickness: props.referenceLine2Config.thickness || rulesThickness,
@@ -730,9 +717,7 @@ export const BarChart = (props: PropTypes) => {
 
   const showReferenceLine3 = props.showReferenceLine3 || false;
   const referenceLine3Position =
-    props.referenceLine3Position === 0
-      ? 0
-      : props.referenceLine3Position || containerHeight / 3;
+    props.referenceLine3Position ?? (props.referenceLine3Position || containerHeight / 3);
   const referenceLine3Config = props.referenceLine3Config
     ? {
         thickness: props.referenceLine3Config.thickness || rulesThickness,
@@ -1655,7 +1640,7 @@ export const BarChart = (props: PropTypes) => {
                     data={data}
                     containerHeight={containerHeight}
                     maxValue={maxValue}
-                    spacing={item.spacing === 0 ? 0 : item.spacing || spacing}
+                    spacing={item.spacing ?? spacing}
                     propSpacing={spacing}
                     xAxisThickness={xAxisThickness}
                     barWidth={props.barWidth}
@@ -1704,7 +1689,7 @@ export const BarChart = (props: PropTypes) => {
                   index={index}
                   containerHeight={containerHeight}
                   maxValue={maxValue}
-                  spacing={item.spacing === 0 ? 0 : item.spacing || spacing}
+                  spacing={item.spacing ?? spacing}
                   propSpacing={spacing}
                   side={side}
                   data={data}
