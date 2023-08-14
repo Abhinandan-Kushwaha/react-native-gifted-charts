@@ -3425,6 +3425,7 @@ export const LineChart = (props: propTypes) => {
         renderHorizSections(horizSectionProps)}
       {/* {sectionsOverlay()} */}
       <ScrollView
+        scrollEventThrottle={16}
         horizontal
         contentContainerStyle={[
           {
