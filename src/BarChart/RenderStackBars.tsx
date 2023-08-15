@@ -32,13 +32,13 @@ type Props = {
   barWidth?: number;
   onPress?: Function;
 
-  rotateLabel?: Boolean;
-  showXAxisIndices: Boolean;
+  rotateLabel?: boolean;
+  showXAxisIndices: boolean;
   xAxisIndicesHeight: number;
   xAxisIndicesWidth: number;
   xAxisIndicesColor: ColorValue;
-  horizontal: Boolean;
-  intactTopLabel: Boolean;
+  horizontal: boolean;
+  intactTopLabel: boolean;
   barBorderRadius?: number;
   xAxisThickness: number;
   barBackgroundPattern?: Function;
@@ -51,7 +51,7 @@ type Props = {
   selectedIndex: number;
   setSelectedIndex: Function;
   activeOpacity: number;
-  showGradient?: Boolean;
+  showGradient?: boolean;
   gradientColor?: any;
   stackData: Array<stackItemType>;
 };
@@ -66,7 +66,7 @@ export type stackItemType = {
   topLabelContainerStyle?: any;
   disablePress?: any;
   color?: ColorValue;
-  showGradient?: Boolean;
+  showGradient?: boolean;
   gradientColor?: any;
   capThickness?: number;
   capColor?: ColorValue;

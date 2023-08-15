@@ -5,7 +5,8 @@ import AnimatedBar from '../Components/AnimatedBar';
 import LinearGradient from 'react-native-linear-gradient';
 import Animated2DWithGradient from './Animated2DWithGradient';
 import {Style} from 'util';
-import Svg, {Defs, Rect} from 'react-native-svg';
+import Cap from '../Components/BarSpecificComponents/cap';
+import BarBackgroundPattern from '../Components/BarSpecificComponents/barBackgroundPattern';
 
 type Props = {
   style?: any;
@@ -13,7 +14,7 @@ type Props = {
   height?: number;
   minHeight?: number;
   color?: ColorValue;
-  showGradient?: Boolean;
+  showGradient?: boolean;
   gradientColor?: any;
   frontColor?: ColorValue;
   sideColor?: ColorValue;
@@ -36,28 +37,28 @@ type Props = {
   sideWidth?: number;
   labelWidth?: number;
 
-  isThreeD?: Boolean;
-  isAnimated?: Boolean;
-  rotateLabel?: Boolean;
+  isThreeD?: boolean;
+  isAnimated?: boolean;
+  rotateLabel?: boolean;
   animatedHeight?: any;
   appearingOpacity?: any;
   animationDuration?: number;
-  roundedTop?: Boolean;
-  roundedBottom?: Boolean;
-  disablePress?: Boolean;
+  roundedTop?: boolean;
+  roundedBottom?: boolean;
+  disablePress?: boolean;
   activeOpacity?: number;
-  cappedBars?: Boolean;
+  cappedBars?: boolean;
   capThickness?: number;
   capColor?: ColorValue;
   capRadius?: number;
-  showXAxisIndices: Boolean;
+  showXAxisIndices: boolean;
   xAxisIndicesHeight: number;
   xAxisIndicesWidth: number;
   xAxisIndicesColor: ColorValue;
-  horizontal: Boolean;
-  intactTopLabel: Boolean;
+  horizontal: boolean;
+  intactTopLabel: boolean;
   barBorderRadius?: number;
-  autoShiftLabels?: Boolean;
+  autoShiftLabels?: boolean;
   barBackgroundPattern?: Function;
   patternId?: String;
   barMarginBottom?: number;
@@ -77,7 +78,7 @@ type itemType = {
   frontColor?: ColorValue;
   sideColor?: ColorValue;
   topColor?: ColorValue;
-  showGradient?: Boolean;
+  showGradient?: boolean;
   gradientColor?: any;
   label?: String;
   barWidth?: number;
@@ -229,7 +230,6 @@ const RenderBars = (props: Props) => {
   };
 
   const static2DWithGradient = (item: itemType) => {
-    // console.log('comes to static2DWithGradient', item);
     return (
       <>
         <LinearGradient
@@ -267,44 +267,24 @@ const RenderBars = (props: Props) => {
             item.gradientColor || props.gradientColor || 'white',
             item.frontColor || props.frontColor || 'black',
           ]}>
-          {props.cappedBars && (
-            <View
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height:
-                  item.capThickness === 0
-                    ? 0
-                    : item.capThickness || props.capThickness || 6,
-                backgroundColor: item.capColor || props.capColor || 'gray',
-                borderTopLeftRadius:
-                  item.capRadius === 0
-                    ? 0
-                    : item.capRadius || props.capRadius || 0,
-                borderTopRightRadius:
-                  item.capRadius === 0
-                    ? 0
-                    : item.capRadius || props.capRadius || 0,
-              }}
+          {props.cappedBars && item.value ? (
+            <Cap
+              capThicknessFromItem={item.capThickness}
+              capThicknessFromProps={props.capThickness}
+              capColorFromItem={item.capColor}
+              capColorFromProps={props.capColor}
+              capRadiusFromItem={item.capRadius}
+              capRadiusFromProps={props.capRadius}
             />
-          )}
+          ) : null}
         </LinearGradient>
         {(item.barBackgroundPattern || props.barBackgroundPattern) && (
-          <Svg>
-            <Defs>
-              {item.barBackgroundPattern
-                ? item.barBackgroundPattern()
-                : props.barBackgroundPattern()}
-            </Defs>
-            <Rect
-              stroke="transparent"
-              x="1"
-              y="1"
-              width="100%"
-              height="100%"
-              fill={`url(#${item.patternId || props.patternId})`}
-            />
-          </Svg>
+          <BarBackgroundPattern
+            barBackgroundPatternFromItem={item.barBackgroundPattern}
+            barBackgroundPatternFromProps={props.barBackgroundPattern}
+            patternIdFromItem={item.patternId}
+            patternIdFromProps={props.patternId}
+          />
         )}
         {item.topLabelComponent && (
           <View
@@ -382,19 +362,6 @@ const RenderBars = (props: Props) => {
           // { backgroundColor: item.frontColor || props.frontColor || 'black' },
           side !== 'right' && {zIndex: data.length - index},
         ]}>
-        {/* {props.showVerticalLines && (
-          <View
-            style={{
-              zIndex: props.verticalLinesZIndex,
-              position: 'absolute',
-              height: (containerHeight || 200) + 15,
-              width: props.verticalLinesThickness,
-              bottom: 0,
-              left: (item.barWidth || props.barWidth || 30) / 2,
-              backgroundColor: props.verticalLinesColor,
-            }}
-          />
-        )} */}
         {props.showXAxisIndices && (
           <View
             style={{

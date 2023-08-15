@@ -5,34 +5,34 @@
 | data                 | Array of items | An item object represents a section in the Pie chart. Descibed in the next table                          | \_              |
 | radius               | number         | Radius of the Pie chart                                                                                   | 120             |
 | initialAngle         | number         | Starting angle in radians (illustrated below this table)                                                  | 0               |
-| isThreeD             | Boolean        | If set to true, it rotates and translates the chart to give it a 3D effect                                | false           |
-| showGradient         | Boolean        | Prop to enable radial gradient for the Pie sections                                                       | false           |
+| isThreeD             | boolean        | If set to true, it rotates and translates the chart to give it a 3D effect                                | false           |
+| showGradient         | boolean        | Prop to enable radial gradient for the Pie sections                                                       | false           |
 | gradientCenterColor  | ColorValue     | Gradient color at the center of the Pie chart                                                             | 'white'         |
 | onPress              | Function       | Callback function called on press of Pie sections (takes item and index as parameter)                     | null            |
-| focusOnPress         | Boolean        | When set to true, the pressed section of the Pie chart will have a bigger radius, hence appear focused    | false           |
-| toggleFocusOnPress   | Boolean        | When set to true, if the user presses an already focused pie section, it will be unfocused                | true            |
+| focusOnPress         | boolean        | When set to true, the pressed section of the Pie chart will have a bigger radius, hence appear focused    | false           |
+| toggleFocusOnPress   | boolean        | When set to true, if the user presses an already focused pie section, it will be unfocused                | true            |
 | extraRadiusForFocused | number        | Extra radius for the focused Pie section                                                                  | radius/10       |
 | sectionAutoFocus     | boolean        | In case you don't want focusOnPress but want a particular section to autofocus, this prop will be needed  | false           |
 | onLabelPress         | Function       | Callback function called on press of a Label (takes item and index as parameter)                          | onPress OR null |
 | tiltAngle            | Angle in deg   | The angle by which the chart should be tilted                                                             | '55deg' for 3D charts, otherwise 0 |
-| shadow               | Boolean        | Shadow to the Pie chart, when set to true, it enhances the 3D effect                                      | false           |
+| shadow               | boolean        | Shadow to the Pie chart, when set to true, it enhances the 3D effect                                      | false           |
 | shadowColor          | ColorValue     | Color of the shadow                                                                                       | lightgray       |
 | shadowWidth          | number         | Width of the shadow                                                                                       | radius\*4/3     |
 | strokeWidth          | number         | Stroke (line) width for the Pie chart and its section                                                     | 0               |
 | strokeColor          | ColorValue     | Stroke (line) color                                                                                       | gray            |
 | backgroundColor      | ColorValue     | Background color of the container that contains the Pie chart                                             | white           |
-| showText             | Boolean        | When set to true, displays text on the Pie sections                                                       | false           |
+| showText             | boolean        | When set to true, displays text on the Pie sections                                                       | false           |
 | textColor            | ColorValue     | Color of the label texts                                                                                  | random colors   |
 | textSize             | number         | Size of the label texts (max allowed: radius / 5)                                                         | 16              |
 | fontStyle            | string         | Style of the text - 'normal', 'italic' or 'oblique'                                                       | 'normal'        |
 | fontWeight           | string         | Weight of the text - 'bold', 'bolder', 'lighter', '100', '200' etc                                        | 'normal'        |
 | font                 | string         | Font family of the text - 'Arial', 'Cursive', 'Comic Sans MS' etc                                         | 'Comic Sans MS' |
-| showTextBackground   | Boolean        | When set to true, displays background for text on the Pie sections                                        | false           |
+| showTextBackground   | boolean        | When set to true, displays background for text on the Pie sections                                        | false           |
 | textBackgroundColor  | ColorValue     | Background color for the label texts                                                                      | white           |
 | textBackgroundRadius | number         | Radius for the background of the text labels                                                              | textSize        |
-| showValuesAsLabels   | Boolean        | When set to true, the values of the Pie sections are displayed as labels                                  | false           |
+| showValuesAsLabels   | boolean        | When set to true, the values of the Pie sections are displayed as labels                                  | false           |
 | centerLabelComponent | Function       | Component to be rendered at the center of the Pie chart                                                   | \_              |
-| semiCircle           | Boolean        | When set to true, renders the Pie Chart in a semi-circle. donut semiCircle charts look like a speed-meter | false           |
+| semiCircle           | boolean        | When set to true, renders the Pie Chart in a semi-circle. donut semiCircle charts look like a speed-meter | false           |
 | labelsPosition       | string         | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid'              | 'outward' for donut and semicircle charts, otherwise 'mid' |
 
 #### initialAngle
@@ -97,7 +97,7 @@ The default value for labelsPosition is 'mid'. In case of donut and semicircle c
 
 | Prop                   | Type       | Description                                                       | Default value                        |
 | ---------------------- | ---------- | ----------------------------------------------------------------- | ------------------------------------ |
-| donut                  | Boolean    | When set to true, renders a Donut chart (makes an inner ring)     | false                                |
+| donut                  | boolean    | When set to true, renders a Donut chart (makes an inner ring)     | false                                |
 | innerRadius            | number     | Radius of the inner ring                                          | radius/2                             |
 | innerCircleColor       | ColorValue | Color of the inner ring                                           | white                                |
 | innerCircleBorderWidth | number     | Stroke (border) width of the inner ring                           | props.innerCircleBorderColor ? 5 : 0 |

@@ -17,7 +17,21 @@ import Svg, {
   Text as CanvasText,
 } from 'react-native-svg';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
-import {chartTypes, getAxesAndRulesProps, getExtendedContainerHeightWithPadding} from '../utils';
+import {
+  getAxesAndRulesProps,
+  getExtendedContainerHeightWithPadding,
+} from '../utils';
+import {
+  AxesAndRulesDefaults,
+  LineDefaults,
+  chartTypes,
+  yAxisSides,
+} from '../utils/constants';
+import {
+  BarAndLineChartsWrapperTypes,
+  HorizSectionsType,
+  RuleType,
+} from '../utils/types';
 
 let initialData: Array<itemType> | null = null;
 
@@ -36,72 +50,73 @@ type propTypes = {
   zIndex?: number;
   thickness?: number;
   strokeDashArray?: Array<number>;
-  rotateLabel?: Boolean;
-  isAnimated?: Boolean;
+  rotateLabel?: boolean;
+  isAnimated?: boolean;
   animationDuration?: number;
   onDataChangeAnimationDuration?: number;
   animationEasing?: any;
-  animateTogether?: boolean;
   xAxisLength?: number;
   xAxisThickness?: number;
   xAxisColor?: ColorValue;
-  xAxisType?: String;
-  hideRules?: Boolean;
+  xAxisType?: RuleType;
+  hideRules?: boolean;
   rulesLength?: number;
   rulesColor?: ColorValue;
   rulesThickness?: number;
-  focusEnabled?: Boolean;
+  focusEnabled?: boolean;
   onFocus?: Function;
-  showDataPointOnFocus?: Boolean;
-  showStripOnFocus?: Boolean;
-  showTextOnFocus?: Boolean;
+  showDataPointOnFocus?: boolean;
+  showStripOnFocus?: boolean;
+  showTextOnFocus?: boolean;
   stripHeight?: number;
   stripWidth?: number;
   stripColor?: ColorValue | String | any;
   stripOpacity?: number;
   onPress?: Function;
-  unFocusOnPressOut?: Boolean;
+  unFocusOnPressOut?: boolean;
   delayBeforeUnFocus?: number;
 
-  rulesType?: String;
+  rulesType?: RuleType;
   dashWidth?: number;
   dashGap?: number;
-  showReferenceLine1?: Boolean;
+  showReferenceLine1?: boolean;
   referenceLine1Config?: referenceConfigType;
   referenceLine1Position?: number;
-  showReferenceLine2?: Boolean;
+  showReferenceLine2?: boolean;
   referenceLine2Config?: referenceConfigType;
   referenceLine2Position?: number;
-  showReferenceLine3?: Boolean;
+  showReferenceLine3?: boolean;
   referenceLine3Config?: referenceConfigType;
   referenceLine3Position?: number;
 
-  showVerticalLines?: Boolean;
-  verticalLinesUptoDataPoint?: Boolean;
+  showVerticalLines?: boolean;
+  verticalLinesUptoDataPoint?: boolean;
   verticalLinesThickness?: number;
   verticalLinesHeight?: number;
   verticalLinesColor?: ColorValue;
+  verticalLinesType?: string;
+  verticalLinesShift?: number;
   verticalLinesZIndex?: number;
   noOfVerticalLines?: number;
   verticalLinesSpacing?: number;
-  hideAxesAndRules?: Boolean;
-  areaChart?: Boolean;
+  hideAxesAndRules?: boolean;
+  areaChart?: boolean;
 
-  disableScroll?: Boolean;
+  disableScroll?: boolean;
   showScrollIndicator?: boolean;
   indicatorColor?: 'black' | 'default' | 'white';
 
   //Indices
 
-  showYAxisIndices?: Boolean;
-  showXAxisIndices?: Boolean;
+  showYAxisIndices?: boolean;
+  showXAxisIndices?: boolean;
   yAxisIndicesHeight?: number;
   xAxisIndicesHeight?: number;
   yAxisIndicesWidth?: number;
   xAxisIndicesWidth?: number;
   xAxisIndicesColor?: ColorValue;
   yAxisIndicesColor?: ColorValue;
-  yAxisSide?: string;
+  yAxisSide?: yAxisSides;
   yAxisOffset?: number;
 
   startIndex?: number;
@@ -116,18 +131,18 @@ type propTypes = {
   yAxisTextStyle?: any;
   yAxisTextNumberOfLines?: number;
   xAxisTextNumberOfLines?: number;
-  showFractionalValues?: Boolean;
+  showFractionalValues?: boolean;
   roundToDigits?: number;
   yAxisLabelWidth?: number;
-  hideYAxisText?: Boolean;
+  hideYAxisText?: boolean;
 
   backgroundColor?: ColorValue;
-  curved?: Boolean;
+  curved?: boolean;
   horizSections?: Array<sectionType>;
 
   //Data points
 
-  hideDataPoints?: Boolean;
+  hideDataPoints?: boolean;
   dataPointsHeight?: number;
   dataPointsWidth?: number;
   dataPointsRadius?: number;
@@ -157,7 +172,7 @@ type propTypes = {
 
   textFontSize?: number;
   textColor?: string;
-  hideOrigin?: Boolean;
+  hideOrigin?: boolean;
   textShiftX?: number;
   textShiftY?: number;
   yAxisLabelTexts?: Array<string>;
@@ -166,11 +181,11 @@ type propTypes = {
   width?: number;
   yAxisLabelPrefix?: String;
   yAxisLabelSuffix?: String;
-  scrollToEnd?: Boolean;
-  scrollAnimation?: Boolean;
+  scrollToEnd?: boolean;
+  scrollAnimation?: boolean;
   noOfSectionsBelowXAxis?: number;
   labelsExtraHeight?: number;
-  adjustToWidth?: Boolean;
+  adjustToWidth?: boolean;
   getPointerProps?: Function;
 };
 type referenceConfigType = {
@@ -194,7 +209,7 @@ type itemType = {
   textColor?: string;
   textFontSize?: number;
 
-  hideDataPoint?: Boolean;
+  hideDataPoint?: boolean;
   dataPointHeight?: number;
   dataPointWidth?: number;
   dataPointRadius?: number;
@@ -219,10 +234,10 @@ type itemType = {
   dataPointLabelWidth?: number;
   dataPointLabelShiftX?: number;
   dataPointLabelShiftY?: number;
-  showStrip?: Boolean;
+  showStrip?: boolean;
 
-  showVerticalLine?: Boolean;
-  verticalLineUptoDataPoint?: Boolean;
+  showVerticalLine?: boolean;
+  verticalLineUptoDataPoint?: boolean;
   verticalLineColor?: string;
   verticalLineThickness?: number;
   pointerShiftX?: number;
@@ -237,7 +252,7 @@ type sectionType = {
 type Points = {
   points: string;
   color: string;
-}
+};
 
 export const LineChartBicolor = (props: propTypes) => {
   const scrollRef = useRef();
@@ -245,8 +260,8 @@ export const LineChartBicolor = (props: propTypes) => {
   const [pointsArray, setPointsArray] = useState<Array<Points>>([]);
   const [fillPointsArray, setFillPointsArray] = useState<Array<Points>>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const containerHeight = (props.height || 200);
-  const noOfSections = props.noOfSections || 10;
+  const containerHeight = props.height || AxesAndRulesDefaults.containerHeight;
+  const noOfSections = props.noOfSections || AxesAndRulesDefaults.noOfSections;
   let data = useMemo(() => {
     if (!props.data) {
       return [];
@@ -260,16 +275,15 @@ export const LineChartBicolor = (props: propTypes) => {
     return props.data;
   }, [props.yAxisOffset, props.data]);
 
-  const scrollToEnd = props.scrollToEnd || false;
-  const scrollAnimation = props.scrollAnimation === false ? false : true;
+  const scrollToEnd = props.scrollToEnd ?? LineDefaults.scrollToEnd;
+  const scrollAnimation = props.scrollAnimation ?? LineDefaults.scrollAnimation;
 
   const opacValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
   const labelsExtraHeight = props.labelsExtraHeight || 0;
 
-  const animationDuration = props.animationDuration || 800;
-  const animateTogether = props.animateTogether || false;
-
+  const animationDuration =
+    props.animationDuration || LineDefaults.animationDuration;
 
   const startIndex1 = props.startIndex || 0;
 
@@ -286,24 +300,30 @@ export const LineChartBicolor = (props: propTypes) => {
 
   const adjustToWidth = props.adjustToWidth || false;
 
-  const initialSpacing =
-    props.initialSpacing === 0 ? 0 : props.initialSpacing || 20;
-  const endSpacing = props.endSpacing ?? (adjustToWidth ? 0 : 20);
-  const thickness = props.thickness || 2;
+  const initialSpacing = props.initialSpacing ?? LineDefaults.initialSpacing;
+  const endSpacing =
+    props.endSpacing ?? (adjustToWidth ? 0 : LineDefaults.endSpacing);
+  const thickness = props.thickness || LineDefaults.thickness;
 
   const spacing =
     props.spacing ??
     (adjustToWidth
-      ? ((props.width || 200) - initialSpacing) / data.length
-      : 50);
+      ? ((props.width || AxesAndRulesDefaults.width) - initialSpacing) /
+        data.length
+      : LineDefaults.spacing);
 
   const xAxisThickness =
-    props.xAxisThickness === 0 ? 0 : props.xAxisThickness || 1;
-  const dataPointsHeight1 = props.dataPointsHeight || 4;
-  const dataPointsWidth1 = props.dataPointsWidth || 4;
-  const dataPointsRadius1 = props.dataPointsRadius || 3;
-  const dataPointsColor1 = props.dataPointsColor || 'black';
-  const dataPointsShape1 = props.dataPointsShape || 'circular';
+    props.xAxisThickness ?? AxesAndRulesDefaults.xAxisThickness;
+  const dataPointsHeight1 =
+    props.dataPointsHeight ?? LineDefaults.dataPointsHeight;
+  const dataPointsWidth1 =
+    props.dataPointsWidth ?? LineDefaults.dataPointsWidth;
+  const dataPointsRadius1 =
+    props.dataPointsRadius ?? LineDefaults.dataPointsRadius;
+  const dataPointsColor1 =
+    props.dataPointsColor ?? LineDefaults.dataPointsColor;
+  const dataPointsShape1 =
+    props.dataPointsShape ?? LineDefaults.dataPointsShape;
 
   const labelsAppear = useCallback(() => {
     opacValue.setValue(0);
@@ -331,8 +351,8 @@ export const LineChartBicolor = (props: propTypes) => {
   }, [animationDuration, widthValue]);
 
   const areaChart = props.areaChart || false;
-  const textFontSize1 = props.textFontSize || 10;
-  const textColor1 = props.textColor || 'gray';
+  const textFontSize1 = props.textFontSize || LineDefaults.textFontSize;
+  const textColor1 = props.textColor || LineDefaults.textColor;
 
   let totalWidth = initialSpacing;
   let maxItem = 0,
@@ -372,9 +392,12 @@ export const LineChartBicolor = (props: propTypes) => {
   useEffect(() => {
     decreaseWidth();
     labelsAppear();
-  }, [animateTogether, animationDuration, decreaseWidth, labelsAppear]);
+  }, [animationDuration, decreaseWidth, labelsAppear]);
 
-  const extendedContainerHeight = getExtendedContainerHeightWithPadding(containerHeight,props.overflowTop);
+  const extendedContainerHeight = getExtendedContainerHeightWithPadding(
+    containerHeight,
+    props.overflowTop,
+  );
 
   let yAtxAxis = extendedContainerHeight - xAxisThickness / 2;
   const getX = index => initialSpacing + spacing * index;
@@ -444,7 +467,10 @@ export const LineChartBicolor = (props: propTypes) => {
     let i = data.length - 1;
     prevValuev = data[i - 1].value;
     nextValue = data[i].value;
-    if ((prevValuev > 0 && nextValue > 0) || (prevValuev < 0 && nextValue < 0)) {
+    if (
+      (prevValuev > 0 && nextValue > 0) ||
+      (prevValuev < 0 && nextValue < 0)
+    ) {
       pp += 'L' + getX(i) + ' ' + getY(i) + ' ';
     }
     let pointsOb = {
@@ -470,7 +496,10 @@ export const LineChartBicolor = (props: propTypes) => {
       prevValuev = data[i].value;
       nextValue = data[i + 1].value;
       pp += 'L' + getX(i) + ' ' + getY(i) + ' ';
-      if ((prevValuev > 0 && nextValue < 0) || (prevValuev < 0 && nextValue > 0)) {
+      if (
+        (prevValuev > 0 && nextValue < 0) ||
+        (prevValuev < 0 && nextValue > 0)
+      ) {
         let prevX = getX(i);
         let prevY = getY(i);
         let nextX = getX(i + 1);
@@ -503,7 +532,7 @@ export const LineChartBicolor = (props: propTypes) => {
       xs.push(x + '');
     });
 
-    pointsArray.forEach((item:any, index) => {
+    pointsArray.forEach((item: any, index) => {
       let splitArray = item.points
         .split(' ')
         .filter(spItem => spItem && spItem !== ' ');
@@ -549,7 +578,10 @@ export const LineChartBicolor = (props: propTypes) => {
         prevValuev = data[i].value;
         nextValue = data[i - 1].value;
         pp += 'L' + getX(i) + ' ' + getY(i) + ' ';
-        if ((prevValuev > 0 && nextValue < 0) || (prevValuev < 0 && nextValue > 0)) {
+        if (
+          (prevValuev > 0 && nextValue < 0) ||
+          (prevValuev < 0 && nextValue > 0)
+        ) {
           let prevX = getX(i);
           let prevY = getY(i);
           let nextX = getX(i - 1);
@@ -583,81 +615,77 @@ export const LineChartBicolor = (props: propTypes) => {
   ]);
 
   const horizSections = [{value: '0'}];
-  const horizSectionsBelow: Array<Object> = [];
+  const horizSectionsBelow: HorizSectionsType = [];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
     props.noOfSectionsBelowXAxis || -minValue / stepValue;
-  const thickness1 = props.thickness || 1;
+  const thickness1 = props.thickness || LineDefaults.thickness;
   const zIndex = props.zIndex || 0;
 
   const strokeDashArray1 = props.strokeDashArray;
 
-  const rotateLabel = props.rotateLabel || false;
-  const isAnimated = props.isAnimated || false;
-  const hideDataPoints1 = props.hideDataPoints || false;
+  const rotateLabel = props.rotateLabel ?? AxesAndRulesDefaults.rotateLabel;
+  const isAnimated = props.isAnimated ?? LineDefaults.isAnimated;
+  const hideDataPoints1 = props.hideDataPoints ?? LineDefaults.hideDataPoints;
 
   const color = props.color || 'green';
   const colorNegative = props.colorNegative || 'red';
 
   const startFillColor = props.startFillColor || 'lightgreen';
   const endFillColor = props.endFillColor || 'white';
-  const startOpacity = props.startOpacity === 0 ? 0 : props.startOpacity || 1;
-  const endOpacity = props.endOpacity === 0 ? 0 : props.endOpacity || 1;
+  const startOpacity = props.startOpacity ?? LineDefaults.startOpacity;
+  const endOpacity = props.endOpacity ?? LineDefaults.endOpacity;
   const startFillColorNegative = props.startFillColorNegative || 'pink';
   const endFillColorNegative = props.endFillColorNegative || 'white';
   const startOpacityNegative =
-    props.startOpacityNegative === 0 ? 0 : props.startOpacityNegative || 1;
+    props.startOpacityNegative ?? LineDefaults.startOpacity;
   const endOpacityNegative =
-    props.endOpacityNegative === 0 ? 0 : props.endOpacityNegative || 1;
-
-  const verticalLinesThickness =
-    props.verticalLinesThickness === 0 ? 0 : props.verticalLinesThickness || 1;
-  const verticalLinesHeight = props.verticalLinesHeight;
-  const verticalLinesColor = props.verticalLinesColor || 'lightgray';
-  const verticalLinesZIndex = props.verticalLinesZIndex || -1;
+    props.endOpacityNegative ?? LineDefaults.endOpacity;
 
   const gradientDirection = props.gradientDirection || 'vertical';
 
-  const showVerticalLines = props.showVerticalLines || false;
-  const verticalLinesUptoDataPoint = props.verticalLinesUptoDataPoint || false;
-  let verticalLinesAr: Array<number> = [];
-  props.noOfVerticalLines
-    ? (verticalLinesAr = [...Array(props.noOfVerticalLines).keys()])
-    : (verticalLinesAr = [...Array(data.length).keys()]);
+  const showXAxisIndices =
+    props.showXAxisIndices ?? AxesAndRulesDefaults.showXAxisIndices;
+  const xAxisIndicesHeight =
+    props.xAxisIndicesHeight ?? AxesAndRulesDefaults.xAxisIndicesHeight;
+  const xAxisIndicesWidth =
+    props.xAxisIndicesWidth ?? AxesAndRulesDefaults.xAxisIndicesWidth;
+  const xAxisIndicesColor =
+    props.xAxisIndicesColor ?? AxesAndRulesDefaults.xAxisIndicesColor;
 
-  const verticalLinesSpacing = props.verticalLinesSpacing || 0;
-
-  const showXAxisIndices = props.showXAxisIndices || false;
-  const xAxisIndicesHeight = props.xAxisIndicesHeight || 2;
-  const xAxisIndicesWidth = props.xAxisIndicesWidth || 4;
-  const xAxisIndicesColor = props.xAxisIndicesColor || 'black';
-
-  const yAxisThickness =
-    props.yAxisThickness === 0 ? 0 : props.yAxisThickness || 1;
-  const xAxisTextNumberOfLines = props.xAxisTextNumberOfLines || 1;
+  const xAxisTextNumberOfLines =
+    props.xAxisTextNumberOfLines ?? AxesAndRulesDefaults.xAxisTextNumberOfLines;
   const horizontalRulesStyle = props.horizontalRulesStyle;
-  const showFractionalValues = props.showFractionalValues || false;
-  const yAxisLabelWidth = props.yAxisLabelWidth || 35;
+  const showFractionalValues =
+    props.showFractionalValues ?? AxesAndRulesDefaults.showFractionalValues;
+  const yAxisLabelWidth =
+    props.yAxisLabelWidth ??
+    (props.hideYAxisText
+      ? AxesAndRulesDefaults.yAxisEmptyLabelWidth
+      : AxesAndRulesDefaults.yAxisLabelWidth);
 
   const horizontal = false;
   const yAxisAtTop = false;
 
-  const disableScroll = props.disableScroll;
-  const showScrollIndicator = props.showScrollIndicator || false;
+  const disableScroll = props.disableScroll ?? LineDefaults.disableScroll;
+  const showScrollIndicator =
+    props.showScrollIndicator || LineDefaults.showScrollIndicator;
 
-
-  const focusEnabled = props.focusEnabled || false;
-  const showDataPointOnFocus = props.showDataPointOnFocus || false;
-  const showStripOnFocus = props.showStripOnFocus || false;
-  const showTextOnFocus = props.showTextOnFocus || false;
+  const focusEnabled = props.focusEnabled ?? LineDefaults.focusEnabled;
+  const showDataPointOnFocus =
+    props.showDataPointOnFocus ?? LineDefaults.showDataPointOnFocus;
+  const showStripOnFocus =
+    props.showStripOnFocus ?? LineDefaults.showStripOnFocus;
+  const showTextOnFocus = props.showTextOnFocus ?? LineDefaults.showTextOnFocus;
   const stripHeight = props.stripHeight;
-  const stripWidth = props.stripWidth === 0 ? 0 : props.stripWidth || 2;
-  const stripColor = props.stripColor || color;
-  const stripOpacity = props.stripOpacity || (startOpacity + endOpacity) / 2;
-  const unFocusOnPressOut = props.unFocusOnPressOut === false ? false : true;
+  const stripWidth = props.stripWidth ?? LineDefaults.stripWidth;
+  const stripColor = props.stripColor ?? color;
+  const stripOpacity = props.stripOpacity ?? (startOpacity + endOpacity) / 2;
+  const unFocusOnPressOut =
+    props.unFocusOnPressOut ?? LineDefaults.unFocusOnPressOut;
   const delayBeforeUnFocus =
-    props.delayBeforeUnFocus === 0 ? 0 : props.delayBeforeUnFocus || 300;
+    props.delayBeforeUnFocus ?? LineDefaults.delayBeforeUnFocus;
 
   horizSections.pop();
   for (let i = 0; i <= noOfSections; i++) {
@@ -841,12 +869,9 @@ export const LineChartBicolor = (props: propTypes) => {
         dataPointLabelComponent = item.dataPointLabelComponent;
       }
 
-      const currentStripHeight =
-        item.stripHeight === 0 ? 0 : item.stripHeight || stripHeight;
-      const currentStripWidth =
-        item.stripWidth === 0 ? 0 : item.stripWidth || stripWidth;
-      const currentStripOpacity =
-        item.stripOpacity === 0 ? 0 : item.stripOpacity || stripOpacity;
+      const currentStripHeight = item.stripHeight ?? stripHeight;
+      const currentStripWidth = item.stripWidth ?? stripWidth;
+      const currentStripOpacity = item.stripOpacity ?? stripOpacity;
       const currentStripColor = item.stripColor || stripColor;
 
       return (
@@ -1192,7 +1217,8 @@ export const LineChartBicolor = (props: propTypes) => {
       <View
         style={{
           position: 'absolute',
-          height: extendedContainerHeight + horizSectionsBelow.length * stepHeight,
+          height:
+            extendedContainerHeight + horizSectionsBelow.length * stepHeight,
           bottom: 60 + labelsExtraHeight,
           width: totalWidth,
           zIndex: zIndex,
@@ -1229,7 +1255,8 @@ export const LineChartBicolor = (props: propTypes) => {
       <Animated.View
         style={{
           position: 'absolute',
-          height: extendedContainerHeight + horizSectionsBelow.length * stepHeight,
+          height:
+            extendedContainerHeight + horizSectionsBelow.length * stepHeight,
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
           zIndex: zIndex,
@@ -1306,20 +1333,20 @@ export const LineChartBicolor = (props: propTypes) => {
     );
   };
 
-  const barAndLineChartsWrapperProps = {
+  const barAndLineChartsWrapperProps: BarAndLineChartsWrapperTypes = {
     chartType: chartTypes.LINE_BI_COLOR,
     containerHeight,
     horizSectionsBelow,
     stepHeight,
     labelsExtraHeight,
     yAxisLabelWidth,
-    yAxisThickness,
     horizontal,
     scrollRef,
     yAxisAtTop,
     initialSpacing,
     data,
-    stackData: null, // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
+    stackData: undefined, // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
+    secondaryData: [],
     barWidth: 0, // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
     xAxisThickness,
     totalWidth,
@@ -1327,16 +1354,9 @@ export const LineChartBicolor = (props: propTypes) => {
     showScrollIndicator,
     scrollToEnd,
     scrollAnimation,
+    indicatorColor: props.indicatorColor,
     setSelectedIndex,
-    showVerticalLines,
-    verticalLinesAr,
-    verticalLinesSpacing,
     spacing,
-    verticalLinesZIndex,
-    verticalLinesHeight,
-    verticalLinesThickness,
-    verticalLinesColor,
-    verticalLinesUptoDataPoint,
     showLine: false,
     lineConfig: null,
     maxValue,
@@ -1356,19 +1376,8 @@ export const LineChartBicolor = (props: propTypes) => {
     noOfSections,
     showFractionalValues,
 
-    axesAndRulesProps: getAxesAndRulesProps(props),
+    axesAndRulesProps: getAxesAndRulesProps(props, stepValue),
 
-    referenceLinesConfig: {
-      showReferenceLine1: props.showReferenceLine1,
-      referenceLine1Position: props.referenceLine1Position,
-      referenceLine1Config: props.referenceLine1Config,
-      showReferenceLine2: props.showReferenceLine2,
-      referenceLine2Position: props.referenceLine2Position,
-      referenceLine2Config: props.referenceLine2Config,
-      showReferenceLine3: props.showReferenceLine3,
-      referenceLine3Position: props.referenceLine3Position,
-      referenceLine3Config: props.referenceLine3Config,
-    },
     yAxisLabelTexts: props.yAxisLabelTexts,
     yAxisOffset: props.yAxisOffset,
     hideAxesAndRules: props.hideAxesAndRules,

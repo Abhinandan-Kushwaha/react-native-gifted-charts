@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
+import Cap from '../Components/BarSpecificComponents/cap';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -20,19 +21,19 @@ type propTypes = {
   minHeight: number;
   opacity?: number;
   animationDuration: number;
-  roundedTop: Boolean;
-  roundedBottom: Boolean;
+  roundedTop: boolean;
+  roundedBottom: boolean;
   barWidth: number;
   gradientColor: ColorValue;
   frontColor: ColorValue;
-  noGradient?: Boolean;
-  noAnimation?: Boolean;
-  cappedBars?: Boolean;
+  noGradient?: boolean;
+  noAnimation?: boolean;
+  cappedBars?: boolean;
   capThickness?: number;
   capColor?: ColorValue;
   capRadius?: number;
-  horizontal: Boolean;
-  intactTopLabel: Boolean;
+  horizontal: boolean;
+  intactTopLabel: boolean;
   barBorderRadius?: number;
   containerHeight?: number;
   maxValue?: number;
@@ -47,7 +48,7 @@ type itemType = {
   frontColor?: ColorValue;
   sideColor?: ColorValue;
   topColor?: ColorValue;
-  showGradient?: Boolean;
+  showGradient?: boolean;
   gradientColor?: any;
   label?: String;
   barWidth?: number;
@@ -178,28 +179,16 @@ const Animated2DWithGradient = (props: propTypes) => {
                     borderTopRightRadius: (item.barWidth || barWidth || 30) / 2,
                   },
                 ]}>
-                {props.cappedBars && (
-                  <View
-                    style={{
-                      position: 'absolute',
-                      width: '100%',
-                      height:
-                        item.capThickness === 0
-                          ? 0
-                          : item.capThickness || props.capThickness || 6,
-                      backgroundColor:
-                        item.capColor || props.capColor || 'black',
-                      borderTopLeftRadius:
-                        item.capRadius === 0
-                          ? 0
-                          : item.capRadius || props.capRadius || 0,
-                      borderTopRightRadius:
-                        item.capRadius === 0
-                          ? 0
-                          : item.capRadius || props.capRadius || 0,
-                    }}
+                {props.cappedBars && item.value ? (
+                  <Cap
+                    capThicknessFromItem={item.capThickness}
+                    capThicknessFromProps={props.capThickness}
+                    capColorFromItem={item.capColor}
+                    capColorFromProps={props.capColor}
+                    capRadiusFromItem={item.capRadius}
+                    capRadiusFromProps={props.capRadius}
                   />
-                )}
+                ) : null}
               </View>
             ) : (
               <LinearGradient

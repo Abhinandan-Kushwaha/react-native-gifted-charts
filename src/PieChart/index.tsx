@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {View, ColorValue} from 'react-native';
-import {colors} from './colors';
 import {PieChartMain} from './main';
 import {FontStyle} from 'react-native-svg';
+import {pieColors} from '../utils/constants';
 
 type propTypes = {
   radius?: number;
-  isThreeD?: Boolean;
-  donut?: Boolean;
+  isThreeD?: boolean;
+  donut?: boolean;
   innerRadius?: number;
-  shadow?: Boolean;
+  shadow?: boolean;
   innerCircleColor?: ColorValue;
   innerCircleBorderWidth?: number;
   innerCircleBorderColor?: ColorValue;
@@ -21,18 +21,18 @@ type propTypes = {
   strokeColor?: string;
   backgroundColor?: string;
   data: Array<itemType>;
-  semiCircle?: Boolean;
+  semiCircle?: boolean;
 
-  showText?: Boolean;
+  showText?: boolean;
   textColor?: string;
   textSize?: number;
   fontStyle?: FontStyle;
   fontWeight?: string;
   font?: string;
-  showTextBackground?: Boolean;
+  showTextBackground?: boolean;
   textBackgroundColor?: string;
   textBackgroundRadius?: number;
-  showValuesAsLabels?: Boolean;
+  showValuesAsLabels?: boolean;
 
   centerLabelComponent?: Function;
   tiltAngle?: string;
@@ -41,8 +41,8 @@ type propTypes = {
   showGradient?: boolean;
   gradientCenterColor?: string;
   onPress?: Function;
-  focusOnPress?: Boolean;
-  toggleFocusOnPress?: Boolean;
+  focusOnPress?: boolean;
+  toggleFocusOnPress?: boolean;
   selectedIndex?: number;
   setSelectedIndex?: Function;
   sectionAutoFocus?: boolean;
@@ -115,7 +115,8 @@ export const PieChart = (props: propTypes) => {
               {
                 value: props.data[selectedIndex].value,
                 color:
-                  props.data[selectedIndex].color || colors[selectedIndex % 9],
+                  props.data[selectedIndex].color ||
+                  pieColors[selectedIndex % 9],
                 strokeColor: props.data[selectedIndex].strokeColor || undefined,
                 strokeWidth: props.data[selectedIndex].strokeWidth || undefined,
                 gradientCenterColor:

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
 import {LineChart} from '../../src/LineChart';
+import { ruleTypes } from '../../src/utils/constants';
 
 const AreaChartDynamicData = () => {
   const lcomp = (v) => <Text style={{width:50, color:'white',fontWeight:'bold'}}>{v}</Text>
@@ -161,7 +162,7 @@ useEffect(()=>{
           spacing={22}
           backgroundColor="#414141"
           rulesColor="gray"
-          rulesType="solid"
+          rulesType={ruleTypes.SOLID}
           initialSpacing={10}
           yAxisColor="lightgray"
           xAxisColor="lightgray"

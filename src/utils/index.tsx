@@ -1,3 +1,5 @@
+import {arrowConfigType} from './types';
+
 export const getCumulativeWidth = (
   data: any,
   index: number,
@@ -7,7 +9,7 @@ export const getCumulativeWidth = (
   for (let i = 0; i < index; i++) {
     let {barWidth} = data[i];
     barWidth = barWidth || 30;
-    cumWidth += barWidth + (spacing ? spacing : spacing === 0 ? 0 : 20);
+    cumWidth += barWidth + (spacing ?? 20);
   }
   return cumWidth;
 };
@@ -123,12 +125,6 @@ export const bezierCommand = (
   return `C ${cpsX},${cpsY} ${cpeX},${cpeY} ${point[0]},${point[1]}`;
 };
 
-export enum chartTypes {
-  BAR,
-  LINE,
-  LINE_BI_COLOR,
-}
-
 export const getArrowPoints = (
   arrowTipX,
   arrowTipY,
@@ -175,11 +171,12 @@ export const getArrowPoints = (
   return arrowPoints;
 };
 
-export const getAxesAndRulesProps = props => {
+export const getAxesAndRulesProps = (props, stepValue) => {
   return {
     yAxisSide: props.yAxisSide,
     yAxisLabelContainerStyle: props.yAxisLabelContainerStyle,
     yAxisColor: props.yAxisColor,
+    yAxisThickness: props.yAxisThickness,
     xAxisColor: props.xAxisColor,
     xAxisLength: props.xAxisLength,
     xAxisType: props.xAxisType,
@@ -201,8 +198,328 @@ export const getAxesAndRulesProps = props => {
     yAxisLabelPrefix: props.yAxisLabelPrefix,
     yAxisLabelSuffix: props.yAxisLabelSuffix,
     yAxisTextStyle: props.yAxisTextStyle,
+
+    referenceLinesConfig: {
+      showReferenceLine1: props.showReferenceLine1,
+      referenceLine1Position: props.referenceLine1Position,
+      referenceLine1Config: props.referenceLine1Config,
+      showReferenceLine2: props.showReferenceLine2,
+      referenceLine2Position: props.referenceLine2Position,
+      referenceLine2Config: props.referenceLine2Config,
+      showReferenceLine3: props.showReferenceLine3,
+      referenceLine3Position: props.referenceLine3Position,
+      referenceLine3Config: props.referenceLine3Config,
+    },
+
+    showVerticalLines: props.showVerticalLines,
+    verticalLinesThickness: props.verticalLinesThickness,
+    verticalLinesHeight: props.verticalLinesHeight,
+    verticalLinesColor: props.verticalLinesColor,
+    verticalLinesType: props.verticalLinesType,
+    verticalLinesShift: props.verticalLinesShift,
+    verticalLinesZIndex: props.verticalLinesZIndex,
+    verticalLinesSpacing: props.verticalLinesSpacing,
+    noOfVerticalLines: props.noOfVerticalLines,
+
+    //specific to Line charts-
+    verticalLinesUptoDataPoint: props.verticalLinesUptoDataPoint,
+
+    roundToDigits: props.roundToDigits,
+    stepValue,
+
+    secondaryYAxis: props.secondaryYAxis,
   };
 };
 
-export const getExtendedContainerHeightWithPadding = (containerHeight, overflowTop) =>
-  containerHeight + (overflowTop ?? 0) + 10;
+export const getExtendedContainerHeightWithPadding = (
+  containerHeight,
+  overflowTop,
+) => containerHeight + (overflowTop ?? 0) + 10;
+
+export const getSecondaryDataWithOffsetIncluded = (
+  secondaryData,
+  secondaryYAxis,
+) => {
+  if (secondaryData && secondaryYAxis?.yAxisOffset) {
+    return secondaryData?.map(item => {
+      item.value = item.value - (secondaryYAxis?.yAxisOffset ?? 0);
+      return item;
+    });
+  }
+  return secondaryData;
+};
+
+export const getArrowProperty = (
+  property: string,
+  count: number,
+  props: any,
+  defaultArrowConfig: arrowConfigType,
+) => {
+  return (
+    props[`arrowConfig${count}`]?.[`${property}`] ??
+    props[`arrowConfig`]?.[`${property}`] ??
+    defaultArrowConfig[`${property}`]
+  );
+};
+
+export const getAllArrowProperties = (
+  props: any,
+  defaultArrowConfig: arrowConfigType,
+) => {
+  const arrowLength1 = getArrowProperty('length', 1, props, defaultArrowConfig);
+  const arrowWidth1 = getArrowProperty('width', 1, props, defaultArrowConfig);
+  const arrowStrokeWidth1 = getArrowProperty(
+    'strokeWidth',
+    1,
+    props,
+    defaultArrowConfig,
+  );
+  const arrowStrokeColor1 = getArrowProperty(
+    'strokeColor',
+    1,
+    props,
+    defaultArrowConfig,
+  );
+  const arrowFillColor1 = getArrowProperty(
+    'fillColor',
+    1,
+    props,
+    defaultArrowConfig,
+  );
+  const showArrowBase1 = getArrowProperty(
+    'showArrowBase',
+    1,
+    props,
+    defaultArrowConfig,
+  );
+
+  const arrowLength2 = getArrowProperty('length', 2, props, defaultArrowConfig);
+  const arrowWidth2 = getArrowProperty('width', 2, props, defaultArrowConfig);
+  const arrowStrokeWidth2 = getArrowProperty(
+    'strokeWidth',
+    2,
+    props,
+    defaultArrowConfig,
+  );
+  const arrowStrokeColor2 = getArrowProperty(
+    'strokeColor',
+    2,
+    props,
+    defaultArrowConfig,
+  );
+  const arrowFillColor2 = getArrowProperty(
+    'fillColor',
+    2,
+    props,
+    defaultArrowConfig,
+  );
+  const showArrowBase2 = getArrowProperty(
+    'showArrowBase',
+    2,
+    props,
+    defaultArrowConfig,
+  );
+
+  const arrowLength3 = getArrowProperty('length', 3, props, defaultArrowConfig);
+  const arrowWidth3 = getArrowProperty('width', 3, props, defaultArrowConfig);
+  const arrowStrokeWidth3 = getArrowProperty(
+    'strokeWidth',
+    3,
+    props,
+    defaultArrowConfig,
+  );
+  const arrowStrokeColor3 = getArrowProperty(
+    'strokeColor',
+    3,
+    props,
+    defaultArrowConfig,
+  );
+  const arrowFillColor3 = getArrowProperty(
+    'fillColor',
+    3,
+    props,
+    defaultArrowConfig,
+  );
+  const showArrowBase3 = getArrowProperty(
+    'showArrowBase',
+    3,
+    props,
+    defaultArrowConfig,
+  );
+
+  const arrowLength4 = getArrowProperty('length', 4, props, defaultArrowConfig);
+  const arrowWidth4 = getArrowProperty('width', 4, props, defaultArrowConfig);
+  const arrowStrokeWidth4 = getArrowProperty(
+    'strokeWidth',
+    4,
+    props,
+    defaultArrowConfig,
+  );
+  const arrowStrokeColor4 = getArrowProperty(
+    'strokeColor',
+    4,
+    props,
+    defaultArrowConfig,
+  );
+  const arrowFillColor4 = getArrowProperty(
+    'fillColor',
+    4,
+    props,
+    defaultArrowConfig,
+  );
+  const showArrowBase4 = getArrowProperty(
+    'showArrowBase',
+    4,
+    props,
+    defaultArrowConfig,
+  );
+
+  const arrowLength5 = getArrowProperty('length', 5, props, defaultArrowConfig);
+  const arrowWidth5 = getArrowProperty('width', 5, props, defaultArrowConfig);
+  const arrowStrokeWidth5 = getArrowProperty(
+    'strokeWidth',
+    5,
+    props,
+    defaultArrowConfig,
+  );
+  const arrowStrokeColor5 = getArrowProperty(
+    'strokeColor',
+    5,
+    props,
+    defaultArrowConfig,
+  );
+  const arrowFillColor5 = getArrowProperty(
+    'fillColor',
+    5,
+    props,
+    defaultArrowConfig,
+  );
+  const showArrowBase5 = getArrowProperty(
+    'showArrowBase',
+    5,
+    props,
+    defaultArrowConfig,
+  );
+
+  return {
+    arrowLength1,
+    arrowWidth1,
+    arrowStrokeWidth1,
+    arrowStrokeColor1,
+    arrowFillColor1,
+    showArrowBase1,
+    arrowLength2,
+    arrowWidth2,
+    arrowStrokeWidth2,
+    arrowStrokeColor2,
+    arrowFillColor2,
+    showArrowBase2,
+    arrowLength3,
+    arrowWidth3,
+    arrowStrokeWidth3,
+    arrowStrokeColor3,
+    arrowFillColor3,
+    showArrowBase3,
+    arrowLength4,
+    arrowWidth4,
+    arrowStrokeWidth4,
+    arrowStrokeColor4,
+    arrowFillColor4,
+    showArrowBase4,
+    arrowLength5,
+    arrowWidth5,
+    arrowStrokeWidth5,
+    arrowStrokeColor5,
+    arrowFillColor5,
+    showArrowBase5,
+  };
+};
+
+type MaxAndMin = {
+  maxItem: number;
+  minItem: number;
+};
+
+export const maxAndMinUtil = (
+  maxItem,
+  minItem,
+  roundToDigits,
+  showFractionalValues,
+): MaxAndMin => {
+  if (showFractionalValues || roundToDigits) {
+    maxItem *= 10 * (roundToDigits || 1);
+    maxItem = maxItem + (10 - (maxItem % 10));
+    maxItem /= 10 * (roundToDigits || 1);
+    maxItem = parseFloat(maxItem.toFixed(roundToDigits || 1));
+
+    if (minItem !== 0) {
+      minItem *= 10 * (roundToDigits || 1);
+      minItem = minItem - (10 + (minItem % 10));
+      minItem /= 10 * (roundToDigits || 1);
+      minItem = parseFloat(minItem.toFixed(roundToDigits || 1));
+    }
+  } else {
+    maxItem = maxItem + (10 - (maxItem % 10));
+    if (minItem !== 0) {
+      minItem = minItem - (10 + (minItem % 10));
+    }
+  }
+
+  return {maxItem, minItem};
+};
+
+export const computeMaxAndMinItems = (
+  data,
+  roundToDigits,
+  showFractionalValues,
+): MaxAndMin => {
+  if (!data) {
+    return {maxItem: 0, minItem: 0};
+  }
+  let maxItem = 0,
+    minItem = 0;
+
+  data.forEach((item: any) => {
+    if (item.value > maxItem) {
+      maxItem = item.value;
+    }
+    if (item.value < minItem) {
+      minItem = item.value;
+    }
+  });
+
+  return maxAndMinUtil(maxItem, minItem, roundToDigits, showFractionalValues);
+};
+
+export const getLabelTextUtil = (
+  val,
+  index,
+  showFractionalValues,
+  yAxisLabelTexts,
+  yAxisOffset,
+  yAxisLabelPrefix,
+  yAxisLabelSuffix,
+) => {
+  let label = '';
+  if (
+    showFractionalValues ||
+    (yAxisLabelTexts && yAxisLabelTexts[index] !== undefined)
+  ) {
+    if (val) {
+      label = yAxisOffset ? (Number(val) + yAxisOffset).toString() : val;
+    } else {
+      label = yAxisOffset ? yAxisOffset.toString() : '0';
+    }
+  } else {
+    if (val) {
+      label = val.toString().split('.')[0];
+      if (yAxisOffset) {
+        label = (Number(label) + yAxisOffset).toString();
+      }
+    } else {
+      label = yAxisOffset ? yAxisOffset.toString() : '0';
+    }
+  }
+
+  return yAxisLabelPrefix + label + yAxisLabelSuffix;
+};

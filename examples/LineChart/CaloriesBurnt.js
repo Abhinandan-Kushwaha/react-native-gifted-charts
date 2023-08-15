@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {LineChart} from 'react-native-gifted-charts';
+import { ruleTypes } from '../../src/utils/constants';
 
 const CaloriesBurnt = () => {
   const data1 = [
@@ -40,7 +41,7 @@ const CaloriesBurnt = () => {
         noOfSections={4}
         yAxisColor="white"
         yAxisThickness={0}
-        rulesType="solid"
+        rulesType={ruleTypes.SOLID}
         rulesColor="gray"
         yAxisTextStyle={{color: 'gray'}}
         yAxisLabelSuffix="%"

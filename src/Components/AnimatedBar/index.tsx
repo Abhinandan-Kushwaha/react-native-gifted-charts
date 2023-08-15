@@ -27,7 +27,7 @@ type animatedBarPropTypes = {
   width: number;
   sideWidth?: number;
   height: number;
-  showGradient: Boolean;
+  showGradient: boolean;
   gradientColor: any;
   frontColor: ColorValue;
   sideColor: ColorValue;
@@ -36,8 +36,8 @@ type animatedBarPropTypes = {
   topLabelContainerStyle: any;
   opacity: number;
   side: String;
-  horizontal: Boolean;
-  intactTopLabel: Boolean;
+  horizontal: boolean;
+  intactTopLabel: boolean;
   barBackgroundPattern?: Function;
   patternId?: String;
   barStyle?: object;

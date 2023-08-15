@@ -49,16 +49,17 @@
     "react-native": "*"
   },
   "keywords": [
-    "react-native",
     "chart",
     "charts",
     "graph",
+    "data visualization",
     "bar",
     "pie",
     "donut",
     "area",
     "line",
     "react",
-    "react native"
+    "react native",
+    "react-native"
   ]
 }

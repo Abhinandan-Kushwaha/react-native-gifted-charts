@@ -1,6 +1,6 @@
 import React from 'react';
 import {View} from 'react-native';
-import {chartTypes} from '../../utils';
+import {chartTypes, ruleTypes} from '../../utils/constants';
 
 const RenderVerticalLines = props => {
   const {
@@ -12,6 +12,8 @@ const RenderVerticalLines = props => {
     verticalLinesHeight,
     verticalLinesThickness,
     verticalLinesColor,
+    verticalLinesType,
+    verticalLinesShift,
     verticalLinesUptoDataPoint,
     xAxisThickness,
     labelsExtraHeight,
@@ -25,18 +27,21 @@ const RenderVerticalLines = props => {
   } = props;
 
   const getHeightOfVerticalLine = index => {
-    if(verticalLinesUptoDataPoint){
-      if(index < data.length){
-        return (data[index].value * containerHeight) / maxValue - xAxisThickness;
-      }
-      else{
+    if (verticalLinesUptoDataPoint) {
+      if (index < data.length) {
+        return (
+          (data[index].value * containerHeight) / maxValue - xAxisThickness
+        );
+      } else {
         return verticalLinesHeight ?? 0;
       }
+    } else {
+      return (
+        verticalLinesHeight ||
+        containerHeightIncludingBelowXAxis - xAxisThickness
+      );
     }
-    else{
-      return verticalLinesHeight || containerHeightIncludingBelowXAxis - xAxisThickness;
-    }
-  }
+  };
 
   return verticalLinesAr.map((item: any, index: number) => {
     let totalSpacing = initialSpacing;
@@ -84,21 +89,33 @@ const RenderVerticalLines = props => {
     return (
       <View
         key={index}
-        style={{
-          position: 'absolute',
-          zIndex: verticalLinesZIndex || -1,
-          marginBottom: xAxisThickness,
-          height: getHeightOfVerticalLine(index),
-          width: verticalLinesThickness,
-          backgroundColor: verticalLinesColor,
-          bottom: 60 + labelsExtraHeight,
-          left:
-            chartType === chartTypes.BAR
-              ? totalSpacing
-              : verticalLinesSpacing
-              ? verticalLinesSpacing * (index + 1)
-              : index * spacing + (initialSpacing - 4 / 2),
-        }}
+        style={[
+          {
+            position: 'absolute',
+            zIndex: verticalLinesZIndex || -1,
+            marginBottom: xAxisThickness,
+            height: getHeightOfVerticalLine(index),
+            width: verticalLinesThickness,
+            bottom: 60 + labelsExtraHeight,
+            left:
+              verticalLinesShift +
+              (chartType === chartTypes.BAR
+                ? totalSpacing
+                : verticalLinesSpacing
+                ? verticalLinesSpacing * (index + 1)
+                : index * spacing + (initialSpacing - 4 / 2)),
+          },
+          verticalLinesType === ruleTypes.DASHED ||
+          verticalLinesType === ruleTypes.DOTTED
+            ? {
+                borderWidth: verticalLinesThickness,
+                borderStyle: verticalLinesType,
+                borderColor: verticalLinesColor,
+              }
+            : {
+                backgroundColor: verticalLinesColor,
+              },
+        ]}
       />
     );
   });

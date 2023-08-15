@@ -10,7 +10,7 @@ type PropTypes = {
   sideWidth: number;
   height: number;
   color: ColorValue;
-  showGradient: Boolean;
+  showGradient: boolean;
   gradientColor: any;
   frontColor: ColorValue;
   sideColor: ColorValue;
@@ -19,8 +19,8 @@ type PropTypes = {
   topLabelContainerStyle: any;
   opacity: number;
   side: String;
-  horizontal: Boolean;
-  intactTopLabel: Boolean;
+  horizontal: boolean;
+  intactTopLabel: boolean;
   value: number;
   barBackgroundPattern?: Function;
   patternId?: String;

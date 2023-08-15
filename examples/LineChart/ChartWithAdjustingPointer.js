@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import {LineChart} from '../../src/LineChart';
+import { ruleTypes } from '../../src/utils/constants';
 
 const ChartWithAdjustingPointer = () => {
   const ptData = [
@@ -85,7 +86,7 @@ const ChartWithAdjustingPointer = () => {
         maxValue={600}
         yAxisColor="white"
         yAxisThickness={0}
-        rulesType="solid"
+        rulesType={ruleTypes.SOLID}
         rulesColor="gray"
         yAxisTextStyle={{color: 'gray'}}
         yAxisLabelPrefix="hello"

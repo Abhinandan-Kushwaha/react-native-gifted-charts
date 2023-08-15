@@ -1,5 +1,7 @@
-import {ColorValue,View,StyleProp,TextStyle} from 'react-native';
+import {ColorValue,View} from 'react-native';
 import {stackItemType} from '../BarChart/RenderStackBars'
+import {yAxisSides} from '../utils/constants';
+import { RuleType, secondaryYAxisType } from '../utils/types';
 
 export type BarChartPropsType = {
     width?: number;
@@ -15,68 +17,70 @@ export type BarChartPropsType = {
     data?: Array<itemType>;
     stackData?: Array<stackItemType>;
     side?: String;
-    rotateLabel?: Boolean;
-    isAnimated?: Boolean;
+    rotateLabel?: boolean;
+    isAnimated?: boolean;
     animationDuration?: number;
     // animationEasing?: any;
     opacity?: number;
-    isThreeD?: Boolean;
+    isThreeD?: boolean;
     xAxisLength?: number;
     xAxisThickness?: number;
     xAxisColor?: ColorValue;
     yAxisThickness?: number;
     yAxisColor?: ColorValue;
-    xAxisType?: String;
+    xAxisType?: RuleType;
     yAxisLabelContainerStyle?: any;
     horizontalRulesStyle?: any;
     yAxisTextStyle?: any;
     yAxisTextNumberOfLines?: number;
     xAxisTextNumberOfLines?: number;
     yAxisLabelWidth?: number;
-    hideYAxisText?: Boolean;
-    yAxisSide?: string;
+    hideYAxisText?: boolean;
+    yAxisSide?: yAxisSides;
     yAxisOffset?: number;
     initialSpacing?: number;
     endSpacing?: number;
     barWidth?: number;
     sideWidth?: number;
-    showLine?: Boolean;
+    showLine?: boolean;
     lineData?: any;
     lineConfig?: lineConfigType;
     lineBehindBars?: boolean;
   
-    cappedBars?: Boolean;
+    cappedBars?: boolean;
     capThickness?: number;
     capColor?: ColorValue;
     capRadius?: number;
   
-    hideAxesAndRules?: Boolean;
-    hideRules?: Boolean;
+    hideAxesAndRules?: boolean;
+    hideRules?: boolean;
     rulesLength?: number;
     rulesColor?: ColorValue;
     rulesThickness?: number;
-    rulesType?: String;
+    rulesType?: RuleType;
     dashWidth?: number;
     dashGap?: number;
-    showReferenceLine1?: Boolean;
+    showReferenceLine1?: boolean;
     referenceLine1Config?: referenceConfigType;
     referenceLine1Position?: number;
-    showReferenceLine2?: Boolean;
+    showReferenceLine2?: boolean;
     referenceLine2Config?: referenceConfigType;
     referenceLine2Position?: number;
-    showReferenceLine3?: Boolean;
+    showReferenceLine3?: boolean;
     referenceLine3Config?: referenceConfigType;
     referenceLine3Position?: number;
-    showVerticalLines?: Boolean;
+    showVerticalLines?: boolean;
     verticalLinesThickness?: number;
     verticalLinesHeight?: number;
     verticalLinesColor?: ColorValue;
+    verticalLinesType?: RuleType;
+    verticalLinesShift?: number;
     verticalLinesZIndex?: number;
     noOfVerticalLines?: number;
     verticalLinesSpacing?: number;
   
-    showYAxisIndices?: Boolean;
-    showXAxisIndices?: Boolean;
+    showYAxisIndices?: boolean;
+    showXAxisIndices?: boolean;
     yAxisIndicesHeight?: number;
     xAxisIndicesHeight?: number;
     yAxisIndicesWidth?: number;
@@ -84,15 +88,15 @@ export type BarChartPropsType = {
     xAxisIndicesColor?: ColorValue;
     yAxisIndicesColor?: ColorValue;
   
-    showFractionalValues?: Boolean;
+    showFractionalValues?: boolean;
     roundToDigits?: number;
     backgroundColor?: ColorValue;
   
-    disableScroll?: Boolean;
+    disableScroll?: boolean;
     showScrollIndicator?: boolean;
     indicatorColor?: 'black' | 'default' | 'white';
-    roundedTop?: Boolean;
-    roundedBottom?: Boolean;
+    roundedTop?: boolean;
+    roundedBottom?: boolean;
     disablePress?: boolean;
   
     frontColor?: ColorValue;
@@ -100,26 +104,26 @@ export type BarChartPropsType = {
     sideColor?: ColorValue;
     topColor?: ColorValue;
     gradientColor?: ColorValue;
-    showGradient?: Boolean;
+    showGradient?: boolean;
     activeOpacity?: number;
   
-    horizontal?: Boolean;
-    yAxisAtTop?: Boolean;
+    horizontal?: boolean;
+    yAxisAtTop?: boolean;
   
-    intactTopLabel?: Boolean;
+    intactTopLabel?: boolean;
   
     horizSections?: Array<sectionType>;
     barBorderRadius?: number;
-    hideOrigin?: Boolean;
+    hideOrigin?: boolean;
     labelWidth?: number;
     yAxisLabelTexts?: Array<string>;
     xAxisLabelTexts?: Array<string>;
     xAxisLabelTextStyle?: any;
     yAxisLabelPrefix?: String;
     yAxisLabelSuffix?: String;
-    autoShiftLabels?: Boolean;
-    scrollToEnd?: Boolean;
-    scrollAnimation?: Boolean;
+    autoShiftLabels?: boolean;
+    scrollToEnd?: boolean;
+    scrollAnimation?: boolean;
     labelsExtraHeight?: number;
     barBackgroundPattern?: Function;
     patternId?: String;
@@ -129,15 +133,18 @@ export type BarChartPropsType = {
     leftShiftForTooltip?: number;
     leftShiftForLastIndexTooltip?: number;
     barStyle?: object;
+
+    secondaryData?: Array<itemType>;
+    secondaryYAxis?: secondaryYAxisType | boolean;
   };
   type lineConfigType = {
     initialSpacing?: number;
-    curved?: Boolean;
-    isAnimated?: Boolean;
+    curved?: boolean;
+    isAnimated?: boolean;
     delay?: number;
     thickness?: number;
     color?: ColorValue | String | any;
-    hideDataPoints?: Boolean;
+    hideDataPoints?: boolean;
     dataPointsShape?: String;
     dataPointsWidth?: number;
     dataPointsHeight?: number;
@@ -156,12 +163,12 @@ export type BarChartPropsType = {
   };
   export type defaultLineConfigType = {
     initialSpacing: number;
-    curved: Boolean;
-    isAnimated: Boolean;
+    curved: boolean;
+    isAnimated: boolean;
     delay: number;
     thickness: number;
     color: ColorValue | String | any;
-    hideDataPoints: Boolean;
+    hideDataPoints: boolean;
     dataPointsShape: String;
     dataPointsWidth: number;
     dataPointsHeight: number;
@@ -205,7 +212,7 @@ export type BarChartPropsType = {
     frontColor?: ColorValue;
     sideColor?: ColorValue;
     topColor?: ColorValue;
-    showGradient?: Boolean;
+    showGradient?: boolean;
     gradientColor?: any;
     label?: String;
     barWidth?: number;

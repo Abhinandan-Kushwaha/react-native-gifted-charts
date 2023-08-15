@@ -2,20 +2,35 @@ import React, {useCallback, useEffect, useMemo, useState, useRef} from 'react';
 import {Animated, Easing} from 'react-native';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
-import {bezierCommand, chartTypes, getArrowPoints, getAxesAndRulesProps, svgPath} from '../utils';
+import {
+  bezierCommand,
+  getArrowPoints,
+  getAxesAndRulesProps,
+  getSecondaryDataWithOffsetIncluded,
+  maxAndMinUtil,
+  svgPath,
+} from '../utils';
+import {
+  AxesAndRulesDefaults,
+  BarDefaults,
+  chartTypes,
+  defaultLineConfig,
+} from '../utils/constants';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
-import {BarChartPropsType, defaultLineConfigType, itemType} from './types';
+import {BarChartPropsType, itemType} from './types';
+import {BarAndLineChartsWrapperTypes, HorizSectionsType} from '../utils/types';
 
 export const BarChart = (props: BarChartPropsType) => {
   const scrollRef = useRef(null);
   const [points, setPoints] = useState('');
   const [arrowPoints, setArrowPoints] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  const showLine = props.showLine || false;
-  const spacing = props.spacing ?? 20;
+  const showLine = props.showLine || BarDefaults.showLine;
+  const spacing = props.spacing ?? BarDefaults.spacing;
   const initialSpacing = props.initialSpacing ?? spacing;
   const endSpacing = props.endSpacing ?? spacing;
-  const showFractionalValues = props.showFractionalValues || false;
+  const showFractionalValues =
+    props.showFractionalValues || AxesAndRulesDefaults.showFractionalValues;
 
   const data = useMemo(() => {
     if (!props.data) {
@@ -29,43 +44,22 @@ export const BarChart = (props: BarChartPropsType) => {
     }
     return props.data;
   }, [props.yAxisOffset, props.data]);
+
+  const secondaryData = getSecondaryDataWithOffsetIncluded(
+    props.secondaryData,
+    props.secondaryYAxis,
+  );
+
   const lineData = props.lineData || data;
-  const lineBehindBars = props.lineBehindBars || false;
-  const defaultLineConfig: defaultLineConfigType = {
-    initialSpacing: initialSpacing,
-    curved: false,
-    isAnimated: false,
-    thickness: 1,
-    color: 'black',
-    hideDataPoints: false,
-    dataPointsShape: 'circular',
-    dataPointsWidth: 4,
-    dataPointsHeight: 4,
-    dataPointsColor: 'black',
-    dataPointsRadius: 3,
-    textColor: 'gray',
-    textFontSize: 10,
-    textShiftX: 0,
-    textShiftY: 0,
-    shiftY: 0,
-    delay: 0,
-    startIndex: 0,
-    endIndex: lineData.length - 1,
-    showArrow: false,
-    arrowConfig: {
-      length: 10,
-      width: 10,
-      strokeWidth: 1,
-      strokeColor: 'black',
-      fillColor: 'none',
-      showArrowBase: true,
-    },
-  };
+  const lineBehindBars = props.lineBehindBars || BarDefaults.lineBehindBars;
+
+  defaultLineConfig.initialSpacing = spacing;
+  defaultLineConfig.endIndex = lineData.length - 1;
+
   const lineConfig = props.lineConfig
     ? {
         initialSpacing:
-          props.lineConfig.initialSpacing ??
-              defaultLineConfig.initialSpacing,
+          props.lineConfig.initialSpacing ?? defaultLineConfig.initialSpacing,
         curved: props.lineConfig.curved || defaultLineConfig.curved,
         isAnimated: props.lineConfig.isAnimated || defaultLineConfig.isAnimated,
         thickness: props.lineConfig.thickness || defaultLineConfig.thickness,
@@ -125,16 +119,19 @@ export const BarChart = (props: BarChartPropsType) => {
         customDataPoint: props.lineConfig.customDataPoint,
       }
     : defaultLineConfig;
-  const noOfSections = props.noOfSections || 10;
+  const noOfSections = props.noOfSections ?? AxesAndRulesDefaults.noOfSections;
   const containerHeight =
-    props.height ?? ((props.stepHeight ?? 0) * noOfSections || 200);
+    props.height ??
+    ((props.stepHeight ?? 0) * noOfSections ||
+      AxesAndRulesDefaults.containerHeight);
   const horizSections = [{value: '0'}];
-  const horizSectionsBelow: Array<Object> = [];
-  const stepHeight = props.stepHeight || containerHeight / noOfSections;
-  const labelWidth = props.labelWidth || 0;
-  const scrollToEnd = props.scrollToEnd || false;
-  const scrollAnimation = props.scrollAnimation === false ? false : true;
-  const labelsExtraHeight = props.labelsExtraHeight || 0;
+  const horizSectionsBelow: HorizSectionsType = [];
+  const stepHeight = props.stepHeight ?? containerHeight / noOfSections;
+  const labelWidth = props.labelWidth ?? AxesAndRulesDefaults.labelWidth;
+  const scrollToEnd = props.scrollToEnd ?? BarDefaults.scrollToEnd;
+  const scrollAnimation = props.scrollAnimation ?? BarDefaults.scrollAnimation;
+  const labelsExtraHeight =
+    props.labelsExtraHeight ?? AxesAndRulesDefaults.labelsExtraHeight;
 
   let totalWidth = initialSpacing;
   let maxItem = 0,
@@ -163,80 +160,64 @@ export const BarChart = (props: BarChartPropsType) => {
         minItem = item.value;
       }
       totalWidth +=
-        (item.barWidth ?? props.barWidth ?? 30) + (item.spacing ?? spacing);
+        (item.barWidth ?? props.barWidth ?? BarDefaults.barWidth) +
+        (item.spacing ?? spacing);
     });
   }
-  if (showFractionalValues || props.roundToDigits) {
-    maxItem *= 10 * (props.roundToDigits || 1);
-    maxItem = maxItem + (10 - (maxItem % 10));
-    maxItem /= 10 * (props.roundToDigits || 1);
-    maxItem = parseFloat(maxItem.toFixed(props.roundToDigits || 1));
-    if (minItem !== 0) {
-      minItem *= 10 * (props.roundToDigits || 1);
-      minItem = minItem - (10 + (minItem % 10));
-      minItem /= 10 * (props.roundToDigits || 1);
-      minItem = parseFloat(minItem.toFixed(props.roundToDigits || 1));
-    }
-  } else {
-    maxItem = maxItem + (10 - (maxItem % 10));
-    if (minItem !== 0) {
-      minItem = minItem - (10 + (minItem % 10));
-    }
-  }
 
-  const maxValue = props.maxValue || maxItem;
-  const minValue = props.minValue || minItem;
+  const maxAndMin = maxAndMinUtil(
+    maxItem,
+    minItem,
+    props.roundToDigits,
+    props.showFractionalValues,
+  );
 
-  const stepValue = props.stepValue || maxValue / noOfSections;
+  const maxValue = props.maxValue ?? maxAndMin.maxItem;
+  const minValue = props.minValue ?? maxAndMin.minItem;
+
+  const stepValue = props.stepValue ?? maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
-    props.noOfSectionsBelowXAxis || -minValue / stepValue;
-  const disableScroll = props.disableScroll || false;
-  const showScrollIndicator = props.showScrollIndicator || false;
-  const side = props.side || '';
-  const rotateLabel = props.rotateLabel || false;
-  const isAnimated = props.isAnimated || false;
-  const animationDuration = props.animationDuration || 800;
-  const opacity = props.opacity || 1;
-  const isThreeD = props.isThreeD || false;
+    props.noOfSectionsBelowXAxis ?? -minValue / stepValue;
+  const disableScroll = props.disableScroll ?? BarDefaults.disableScroll;
+  const showScrollIndicator =
+    props.showScrollIndicator ?? BarDefaults.showScrollIndicator;
+  const side = props.side ?? BarDefaults.side;
+  const rotateLabel = props.rotateLabel ?? AxesAndRulesDefaults.rotateLabel;
+  const isAnimated = props.isAnimated ?? BarDefaults.isAnimated;
+  const animationDuration =
+    props.animationDuration ?? BarDefaults.animationDuration;
+  const opacity = props.opacity ?? BarDefaults.opacity;
+  const isThreeD = props.isThreeD ?? BarDefaults.isThreeD;
 
-  const showVerticalLines = props.showVerticalLines || false;
-  const verticalLinesThickness =
-    props.verticalLinesThickness ?? 1;
-  const verticalLinesHeight = props.verticalLinesHeight;
-  const verticalLinesColor = props.verticalLinesColor || 'lightgray';
-  const verticalLinesZIndex = props.verticalLinesZIndex || -1;
-  let verticalLinesAr: Array<number> = [];
-  props.noOfVerticalLines
-    ? (verticalLinesAr = [...Array(props.noOfVerticalLines).keys()])
-    : (verticalLinesAr = [
-        ...Array(props.stackData ? props.stackData.length : data.length).keys(),
-      ]);
-  const verticalLinesSpacing = props.verticalLinesSpacing || 0;
+  const showXAxisIndices =
+    props.showXAxisIndices ?? AxesAndRulesDefaults.showXAxisIndices;
+  const xAxisIndicesHeight =
+    props.xAxisIndicesHeight ?? AxesAndRulesDefaults.xAxisIndicesHeight;
+  const xAxisIndicesWidth =
+    props.xAxisIndicesWidth ?? AxesAndRulesDefaults.xAxisIndicesWidth;
+  const xAxisIndicesColor =
+    props.xAxisIndicesColor ?? AxesAndRulesDefaults.xAxisIndicesColor;
 
-  const showXAxisIndices = props.showXAxisIndices || false;
-  const xAxisIndicesHeight = props.xAxisIndicesHeight || 2;
-  const xAxisIndicesWidth = props.xAxisIndicesWidth || 4;
-  const xAxisIndicesColor = props.xAxisIndicesColor || 'black';
+  const xAxisThickness =
+    props.xAxisThickness ?? AxesAndRulesDefaults.xAxisThickness;
 
-
-
-  const xAxisThickness = props.xAxisThickness ?? 1;
-
-
-  const yAxisThickness = props.yAxisThickness ?? 1;
-  const xAxisTextNumberOfLines = props.xAxisTextNumberOfLines || 1;
+  const xAxisTextNumberOfLines =
+    props.xAxisTextNumberOfLines ?? AxesAndRulesDefaults.xAxisTextNumberOfLines;
   const horizontalRulesStyle = props.horizontalRulesStyle;
-  const yAxisLabelWidth = props.yAxisLabelWidth || 35;
+  const yAxisLabelWidth =
+    props.yAxisLabelWidth ??
+    (props.hideYAxisText
+      ? AxesAndRulesDefaults.yAxisEmptyLabelWidth
+      : AxesAndRulesDefaults.yAxisLabelWidth);
 
-  const horizontal = props.horizontal || false;
-  const yAxisAtTop = props.yAxisAtTop || false;
-  const intactTopLabel = props.intactTopLabel || false;
-
+  const horizontal = props.horizontal ?? BarDefaults.horizontal;
+  const yAxisAtTop = props.yAxisAtTop ?? BarDefaults.yAxisAtTop;
+  const intactTopLabel = props.intactTopLabel ?? BarDefaults.intactTopLabel;
 
   const heightValue = useMemo(() => new Animated.Value(0), []);
   const opacValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
-  const autoShiftLabels = props.autoShiftLabels || false;
+  const autoShiftLabels = props.autoShiftLabels ?? false;
 
   const labelsAppear = useCallback(() => {
     opacValue.setValue(0);
@@ -264,14 +245,14 @@ export const BarChart = (props: BarChartPropsType) => {
       if (!lineConfig.curved) {
         for (let i = 0; i < lineData.length; i++) {
           if (i < lineConfig.startIndex || i > lineConfig.endIndex) continue;
-          const currentBarWidth = data?.[i]?.barWidth ?? props.barWidth ?? 30;
+          const currentBarWidth =
+            data?.[i]?.barWidth ?? props.barWidth ?? BarDefaults.barWidth;
           pp +=
             'L' +
             (yAxisLabelWidth +
               lineConfig.initialSpacing +
               6 -
               (initialSpacing - currentBarWidth / 2) +
-              
               (currentBarWidth + spacing) * i) +
             ' ' +
             (containerHeight -
@@ -305,7 +286,8 @@ export const BarChart = (props: BarChartPropsType) => {
         let p1Array: Array<Array<number>> = [];
         for (let i = 0; i < lineData.length; i++) {
           if (i < lineConfig.startIndex || i > lineConfig.endIndex) continue;
-          const currentBarWidth = data?.[i]?.barWidth ?? props.barWidth ?? 30;
+          const currentBarWidth =
+            data?.[i]?.barWidth ?? props.barWidth ?? BarDefaults.barWidth;
           p1Array.push([
             yAxisLabelWidth +
               lineConfig.initialSpacing +
@@ -353,23 +335,31 @@ export const BarChart = (props: BarChartPropsType) => {
     lineConfig.arrowConfig.showArrowBase,
   ]);
 
-  horizSections.pop();
-  for (let i = 0; i <= noOfSections; i++) {
-    let value = maxValue - stepValue * i;
-    if (showFractionalValues || props.roundToDigits) {
-      value = parseFloat(value.toFixed(props.roundToDigits || 1));
-    }
-    horizSections.push({
-      value: props.yAxisLabelTexts
-        ? props.yAxisLabelTexts[noOfSections - i] ?? value.toString()
-        : value.toString(),
-    });
-  }
+  // horizSections.pop();
+  // for (let i = 0; i <= noOfSections; i++) {
+  //   let value = maxValue - stepValue * i;
+  //   if (showFractionalValues || props.roundToDigits) {
+  //     value = parseFloat(
+  //       value.toFixed(
+  //         props.roundToDigits ?? AxesAndRulesDefaults.roundToDigits,
+  //       ),
+  //     );
+  //   }
+  //   horizSections.push({
+  //     value: props.yAxisLabelTexts
+  //       ? props.yAxisLabelTexts[noOfSections - i] ?? value.toString()
+  //       : value.toString(),
+  //   });
+  // }
   if (noOfSectionsBelowXAxis) {
     for (let i = 1; i <= noOfSectionsBelowXAxis; i++) {
       let value = stepValue * -i;
       if (showFractionalValues || props.roundToDigits) {
-        value = parseFloat(value.toFixed(props.roundToDigits || 1));
+        value = parseFloat(
+          value.toFixed(
+            props.roundToDigits ?? AxesAndRulesDefaults.roundToDigits,
+          ),
+        );
       }
       horizSectionsBelow.push({
         value: props.yAxisLabelTexts
@@ -487,20 +477,20 @@ export const BarChart = (props: BarChartPropsType) => {
     },
   };
 
-  const barAndLineChartsWrapperProps = {
+  const barAndLineChartsWrapperProps: BarAndLineChartsWrapperTypes = {
     chartType: chartTypes.BAR,
     containerHeight,
     horizSectionsBelow,
     stepHeight,
     labelsExtraHeight,
     yAxisLabelWidth,
-    yAxisThickness,
     horizontal,
     scrollRef,
     yAxisAtTop,
     initialSpacing,
     data,
     stackData: props.stackData,
+    secondaryData: secondaryData,
     barWidth: props.barWidth,
     xAxisThickness,
     totalWidth,
@@ -508,16 +498,9 @@ export const BarChart = (props: BarChartPropsType) => {
     showScrollIndicator,
     scrollToEnd,
     scrollAnimation,
+    indicatorColor: props.indicatorColor,
     setSelectedIndex,
-    showVerticalLines,
-    verticalLinesAr,
-    verticalLinesSpacing,
     spacing,
-    verticalLinesZIndex,
-    verticalLinesHeight,
-    verticalLinesThickness,
-    verticalLinesColor,
-    verticalLinesUptoDataPoint: false, // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
     showLine,
     lineConfig,
     maxValue,
@@ -537,19 +520,8 @@ export const BarChart = (props: BarChartPropsType) => {
     noOfSections,
     showFractionalValues,
 
-    axesAndRulesProps: getAxesAndRulesProps(props),
+    axesAndRulesProps: getAxesAndRulesProps(props, stepValue),
 
-    referenceLinesConfig: {
-      showReferenceLine1: props.showReferenceLine1,
-      referenceLine1Position: props.referenceLine1Position,
-      referenceLine1Config: props.referenceLine1Config,
-      showReferenceLine2: props.showReferenceLine2,
-      referenceLine2Position: props.referenceLine2Position,
-      referenceLine2Config: props.referenceLine2Config,
-      showReferenceLine3: props.showReferenceLine3,
-      referenceLine3Position: props.referenceLine3Position,
-      referenceLine3Config: props.referenceLine3Config,
-    },
     yAxisLabelTexts: props.yAxisLabelTexts,
     yAxisOffset: props.yAxisOffset,
     hideAxesAndRules: props.hideAxesAndRules,
