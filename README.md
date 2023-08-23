@@ -1,6 +1,6 @@
 <img width="866" alt="chandrayaan-3" src="https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/assets/20596944/896eed43-ebc4-4983-9f69-3a52463a1258">
 
-This is a proud moment for India and the world. Chandrayaan 3 is about to land on the South pole of the moon. If the mission succeeds, it will be the first soft landing near the lunar south pole!
+This is a proud moment for India and the world. Chandrayaan 3 has landed safely on the South pole of the moon, making India the first country to land on the lunar south pole!
 
 # react-native-gifted-charts [![Rate on Openbase](https://badges.openbase.com/js/rating/react-native-gifted-charts.svg)](https://openbase.com/js/react-native-gifted-charts?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
