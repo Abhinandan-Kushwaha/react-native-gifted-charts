@@ -49,6 +49,7 @@ export type secondaryLineConfigType = {
   dataPointsRadius?: number;
   dataPointsColor?: string;
   dataPointsShape?: string;
+  showValuesAsDataPointsText?: boolean;
   startFillColor?: string;
   endFillColor?: string;
   startOpacity?: number;
@@ -153,6 +154,7 @@ export type BarAndLineChartsWrapperTypes = {
   disableScroll: boolean;
   showScrollIndicator: boolean;
   scrollToEnd: boolean;
+  scrollToIndex: number | undefined;
   scrollAnimation: boolean;
   indicatorColor: 'black' | 'default' | 'white' | undefined;
   setSelectedIndex: any;

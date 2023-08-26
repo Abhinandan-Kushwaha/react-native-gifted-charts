@@ -154,6 +154,7 @@ export const LineDefaults = {
   scrollToEnd: false,
   scrollAnimation: true,
   showScrollIndicator: false,
+  showValuesAsDataPointsText: false,
 
   dataPointsHeight: 4,
   dataPointsWidth: 4,

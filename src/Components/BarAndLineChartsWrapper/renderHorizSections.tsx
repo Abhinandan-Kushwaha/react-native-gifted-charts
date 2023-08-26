@@ -98,7 +98,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     yAxisIndicesColor: secondaryYAxis?.yAxisIndicesColor ?? yAxisIndicesColor,
 
     yAxisSide: secondaryYAxis?.yAxisSide ?? yAxisSide,
-    yAxisOffset: secondaryYAxis?.yAxisOffset ?? yAxisOffset,
+    yAxisOffset: secondaryYAxis?.yAxisOffset,
     yAxisThickness: secondaryYAxis?.yAxisThickness ?? yAxisThickness,
     yAxisColor: secondaryYAxis?.yAxisColor ?? yAxisColor,
     yAxisLabelContainerStyle:

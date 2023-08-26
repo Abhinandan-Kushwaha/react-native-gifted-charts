@@ -7,12 +7,13 @@ import Animated2DWithGradient from './Animated2DWithGradient';
 import {Style} from 'util';
 import Cap from '../Components/BarSpecificComponents/cap';
 import BarBackgroundPattern from '../Components/BarSpecificComponents/barBackgroundPattern';
+import {itemType} from './types';
 
 type Props = {
   style?: any;
   width?: number;
   height?: number;
-  minHeight?: number;
+  minHeight: number;
   color?: ColorValue;
   showGradient?: boolean;
   gradientColor?: any;
@@ -30,7 +31,7 @@ type Props = {
   label: String;
   containerHeight?: number;
   maxValue: number;
-  spacing?: number;
+  spacing: number;
   propSpacing?: number;
   data?: any;
   barWidth?: number;
@@ -58,6 +59,10 @@ type Props = {
   horizontal: boolean;
   intactTopLabel: boolean;
   barBorderRadius?: number;
+  barBorderTopLeftRadius?: number;
+  barBorderTopRightRadius?: number;
+  barBorderBottomLeftRadius?: number;
+  barBorderBottomRightRadius?: number;
   autoShiftLabels?: boolean;
   barBackgroundPattern?: Function;
   patternId?: String;
@@ -71,35 +76,7 @@ type Props = {
   selectedIndex: number;
   setSelectedIndex: Function;
   barStyle?: object;
-};
-type itemType = {
-  value?: number;
-  onPress?: any;
-  frontColor?: ColorValue;
-  sideColor?: ColorValue;
-  topColor?: ColorValue;
-  showGradient?: boolean;
-  gradientColor?: any;
-  label?: String;
-  barWidth?: number;
-  sideWidth?: number;
-  labelTextStyle?: any;
-  topLabelComponent?: Function;
-  topLabelContainerStyle?: any;
-  disablePress?: any;
-  capThickness?: number;
-  capColor?: ColorValue;
-  capRadius?: number;
-  labelComponent?: Function;
-  barBorderRadius?: number;
-  topLabelComponentHeight?: number;
-  spacing?: number;
-  labelWidth?: number;
-  barBackgroundPattern?: Function;
-  patternId?: String;
-  barMarginBottom?: number;
-  leftShiftForTooltip?: number;
-  barStyle?: object;
+  xAxisThickness?: number;
 };
 const RenderBars = (props: Props) => {
   const {
@@ -113,6 +90,11 @@ const RenderBars = (props: Props) => {
     side,
     data,
     barStyle,
+    barBorderRadius,
+    barBorderTopLeftRadius,
+    barBorderTopRightRadius,
+    barBorderBottomLeftRadius,
+    barBorderBottomRightRadius,
     // oldValue,
 
     isThreeD,
@@ -131,6 +113,7 @@ const RenderBars = (props: Props) => {
     initialSpacing,
     selectedIndex,
     setSelectedIndex,
+    xAxisThickness,
   } = props;
 
   const barMarginBottom =
@@ -238,7 +221,19 @@ const RenderBars = (props: Props) => {
               position: 'absolute',
               width: '100%',
               height: '100%',
-              borderRadius: props.barBorderRadius || item.barBorderRadius || 0,
+              borderRadius: item.barBorderRadius || barBorderRadius || 0,
+              borderTopLeftRadius:
+                item.barBorderTopLeftRadius || barBorderTopLeftRadius || 0,
+              borderTopRightRadius:
+                item.barBorderTopRightRadius || barBorderTopRightRadius || 0,
+              borderBottomLeftRadius:
+                item.barBorderBottomLeftRadius ||
+                barBorderBottomLeftRadius ||
+                0,
+              borderBottomRightRadius:
+                item.barBorderBottomRightRadius ||
+                barBorderBottomRightRadius ||
+                0,
             },
             props.roundedBottom && {
               borderBottomLeftRadius:
@@ -315,7 +310,7 @@ const RenderBars = (props: Props) => {
   const barHeight = Math.max(
     minHeight,
     (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200) -
-      barMarginBottom,
+      (xAxisThickness ?? 0),
   );
 
   let leftSpacing = initialSpacing;
@@ -400,12 +395,7 @@ const RenderBars = (props: Props) => {
               topLabelComponent={item.topLabelComponent}
               opacity={opacity || 1}
               animationDuration={animationDuration || 800}
-              height={Math.max(
-                minHeight,
-                (Math.abs(item.value) * (containerHeight || 200)) /
-                  (maxValue || 200) -
-                  barMarginBottom,
-              )}
+              height={barHeight}
               intactTopLabel={props.intactTopLabel}
               horizontal={props.horizontal}
             />
@@ -436,12 +426,7 @@ const RenderBars = (props: Props) => {
               opacity={opacity || 1}
               horizontal={props.horizontal}
               intactTopLabel={props.intactTopLabel}
-              height={Math.max(
-                minHeight,
-                (Math.abs(item.value) * (containerHeight || 200)) /
-                  (maxValue || 200) -
-                  barMarginBottom,
-              )}
+              height={barHeight}
               value={item.value}
             />
           )
@@ -450,7 +435,7 @@ const RenderBars = (props: Props) => {
             <Animated2DWithGradient
               barBackgroundPattern={props.barBackgroundPattern}
               patternId={props.patternId}
-              barWidth={props.barWidth}
+              barWidth={props.barWidth || 30}
               barStyle={barStyle}
               item={item}
               opacity={opacity}
@@ -461,12 +446,8 @@ const RenderBars = (props: Props) => {
               frontColor={props.frontColor || 'black'}
               containerHeight={containerHeight}
               maxValue={maxValue}
-              height={Math.max(
-                minHeight,
-                (Math.abs(item.value) * (containerHeight || 200)) /
-                  (maxValue || 200),
-              )}
-              minHeight={minHeight}
+              height={barHeight}
+              minHeight={minHeight ?? 0}
               barMarginBottom={barMarginBottom}
               cappedBars={props.cappedBars}
               capThickness={props.capThickness}
@@ -475,6 +456,10 @@ const RenderBars = (props: Props) => {
               horizontal={props.horizontal}
               intactTopLabel={props.intactTopLabel}
               barBorderRadius={props.barBorderRadius || 0}
+              barBorderTopLeftRadius={barBorderTopLeftRadius}
+              barBorderTopRightRadius={barBorderTopRightRadius}
+              barBorderBottomLeftRadius={barBorderBottomLeftRadius}
+              barBorderBottomRightRadius={barBorderBottomRightRadius}
             />
           ) : (
             static2DWithGradient(item)
@@ -483,7 +468,7 @@ const RenderBars = (props: Props) => {
           <Animated2DWithGradient
             barBackgroundPattern={props.barBackgroundPattern}
             patternId={props.patternId}
-            barWidth={props.barWidth}
+            barWidth={props.barWidth || 30}
             barStyle={barStyle}
             item={item}
             opacity={opacity}
@@ -495,12 +480,8 @@ const RenderBars = (props: Props) => {
             frontColor={props.frontColor || 'black'}
             containerHeight={containerHeight}
             maxValue={maxValue}
-            height={Math.max(
-              minHeight,
-              (Math.abs(item.value) * (containerHeight || 200)) /
-                (maxValue || 200),
-            )}
-            minHeight={minHeight}
+            height={barHeight}
+            minHeight={minHeight || 0}
             barMarginBottom={barMarginBottom}
             cappedBars={props.cappedBars}
             capThickness={props.capThickness}
@@ -509,12 +490,16 @@ const RenderBars = (props: Props) => {
             horizontal={props.horizontal}
             intactTopLabel={props.intactTopLabel}
             barBorderRadius={props.barBorderRadius || 0}
+            barBorderTopLeftRadius={barBorderTopLeftRadius}
+            barBorderTopRightRadius={barBorderTopRightRadius}
+            barBorderBottomLeftRadius={barBorderBottomLeftRadius}
+            barBorderBottomRightRadius={barBorderBottomRightRadius}
           />
         ) : (
           <Animated2DWithGradient
             barBackgroundPattern={props.barBackgroundPattern}
             patternId={props.patternId}
-            barWidth={props.barWidth}
+            barWidth={props.barWidth || 30}
             barStyle={barStyle}
             item={item}
             opacity={opacity}
@@ -527,12 +512,8 @@ const RenderBars = (props: Props) => {
             frontColor={props.frontColor || 'black'}
             containerHeight={containerHeight}
             maxValue={maxValue}
-            height={Math.max(
-              minHeight,
-              (Math.abs(item.value) * (containerHeight || 200)) /
-                (maxValue || 200),
-            )}
-            minHeight={minHeight}
+            height={barHeight}
+            minHeight={minHeight || 0}
             barMarginBottom={barMarginBottom}
             cappedBars={props.cappedBars}
             capThickness={props.capThickness}
@@ -541,6 +522,10 @@ const RenderBars = (props: Props) => {
             horizontal={props.horizontal}
             intactTopLabel={props.intactTopLabel}
             barBorderRadius={props.barBorderRadius || 0}
+            barBorderTopLeftRadius={barBorderTopLeftRadius}
+            barBorderTopRightRadius={barBorderTopRightRadius}
+            barBorderBottomLeftRadius={barBorderBottomLeftRadius}
+            barBorderBottomRightRadius={barBorderBottomRightRadius}
           />
         )}
         {isAnimated
@@ -556,7 +541,7 @@ const RenderBars = (props: Props) => {
               index === data.length - 1
                 ? leftSpacing - leftShiftForLastIndexTooltip
                 : leftSpacing -
-                  (item.leftShiftForTooltip ?? leftShiftForTooltip),
+                  (item?.leftShiftForTooltip ?? leftShiftForTooltip ?? 0),
             zIndex: 1000,
           }}>
           {renderTooltip(item, index)}

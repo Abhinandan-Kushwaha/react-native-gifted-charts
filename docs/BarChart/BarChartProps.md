@@ -19,6 +19,8 @@
 | stepHeight                   | number         | Height of 1 step/section in the Y axis                                                                  | 20                  |
 | spacing                      | number         | Distance between 2 consecutive bars in the Bar chart                                                    | 20                  |
 | backgroundColor              | ColorValue     | Background color of the Bar chart                                                                       | \_                  |
+| scrollref                    | any            | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered     | React.useRef()      |
+| scrollToIndex                | number         | scroll to a particular index on chart load                                                              | \_                  | 
 | disableScroll                | boolean        | To disable horizontal scroll                                                                            | false               |
 | showScrollIndicator          | boolean        | To show horizontal scroll indicator                                                                     | false               |
 | indicatorColor               | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                         | default             |
@@ -157,35 +159,39 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 
 ### Item description
 
-| Key                    | Value type | Description                                                                    |
-| ---------------------- | ---------- | ------------------------------------------------------------------------------ |
-| value                  | number     | Value of the item representing height of the bar                               |
-| barWidth               | number     | Width of the bar                                                               |
-| onPress                | function   | Function called on pressing the bar                                            |
-| disablePress           | boolean    | Prop to disable the press action, defaults to false                            |
-| frontColor             | ColorValue | Color of the bar                                                               |
-| sideColor              | ColorValue | Color of the side view of the bar, only for 3 D                                |
-| sideWidth              | number     | Width of the side view of the bar, only for 3 D                                |
-| topColor               | ColorValue | Color of the top view of the bar, only for 3 D                                 |
-| barStyle               | object     | style object for the Bars                                                      |
-| showGradient           | boolean    | Prop to enable linear gradient for the bar color, defaults to false            |
-| gradientColor          | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
-| label                  | string     | Label text appearing below the bar (under the X axis)                          |
-| labelWidth             | number     | Width of the Label text appearing below the bar (under the X axis)             |
-| labelTextStyle         | object     | Style object for the label text appearing below the bar                        |
-| labelComponent         | Component  | Custom label component appearing below the bar                                 |
-| topLabelComponent      | Component  | Custom component appearing above the bar                                       |
-| topLabelContainerStyle | object     | Style object for the container of the custom component appearing above the bar |
-| cappedBars             | boolean    | To show caps on the top of bar                                                 |
-| capThickness           | number     | Thickness of the bar cap                                                       |
-| capColor               | ColorValue | Color of the bar cap                                                           |
-| capRadius              | number     | Border radius of the bar cap                                                   |
-| barBorderRadius        | number     | Border radius of the bar                                                       |
-| barMarginBottom        | number     | margin at the bottom of the bar (above X axis)                                 |
-| spacing                | number     | Distance of the next Bar from the currennt Bar                                 |
-| barBackgroundPattern   | Component  | A svg component containing the background pattern for bars                     |
-| patternId              | String     | ID of the pattern component                                                    |
-| leftShiftForTooltip    | number     | The distance by which the tooltip component should shift towards left          |
+| Key                        | Value type | Description                                                                    |
+| -------------------------- | ---------- | ------------------------------------------------------------------------------ |
+| value                      | number     | Value of the item representing height of the bar                               |
+| barWidth                   | number     | Width of the bar                                                               |
+| onPress                    | function   | Function called on pressing the bar                                            |
+| disablePress               | boolean    | Prop to disable the press action, defaults to false                            |
+| frontColor                 | ColorValue | Color of the bar                                                               |
+| sideColor                  | ColorValue | Color of the side view of the bar, only for 3 D                                |
+| sideWidth                  | number     | Width of the side view of the bar, only for 3 D                                |
+| topColor                   | ColorValue | Color of the top view of the bar, only for 3 D                                 |
+| barStyle                   | object     | style object for the Bars                                                      |
+| showGradient               | boolean    | Prop to enable linear gradient for the bar color, defaults to false            |
+| gradientColor              | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient         |
+| label                      | string     | Label text appearing below the bar (under the X axis)                          |
+| labelWidth                 | number     | Width of the Label text appearing below the bar (under the X axis)             |
+| labelTextStyle             | object     | Style object for the label text appearing below the bar                        |
+| labelComponent             | Component  | Custom label component appearing below the bar                                 |
+| topLabelComponent          | Component  | Custom component appearing above the bar                                       |
+| topLabelContainerStyle     | object     | Style object for the container of the custom component appearing above the bar |
+| cappedBars                 | boolean    | To show caps on the top of bar                                                 |
+| capThickness               | number     | Thickness of the bar cap                                                       |
+| capColor                   | ColorValue | Color of the bar cap                                                           |
+| capRadius                  | number     | Border radius of the bar cap                                                   |
+| barBorderRadius            | number     | Border radius of the bar                                                       |
+| barBorderTopLeftRadius     | number     | Top left border radius of the bar                                              |
+| barBorderTopRightRadius    | number     | Top right border radius of the bar                                             |
+| barBorderBottomLeftRadius  | number     | Bottom left border radius of the bar                                           |
+| barBorderBottomRightRadius | number     | Bottom right border radius of the bar                                          |
+| barMarginBottom            | number     | margin at the bottom of the bar (above X axis)                                 |
+| spacing                    | number     | Distance of the next Bar from the currennt Bar                                 |
+| barBackgroundPattern       | Component  | A svg component containing the background pattern for bars                     |
+| patternId                  | String     | ID of the pattern component                                                    |
+| leftShiftForTooltip        | number     | The distance by which the tooltip component should shift towards left          |
 
 ---
 
@@ -317,26 +323,30 @@ All the properties are optional. If you don't set a property in the **secondaryY
 
 ### Bar related props
 
-| Prop                 | Type       | Description                                                                | Default value            |
-| -------------------- | ---------- | -------------------------------------------------------------------------- | ------------------------ |
-| barWidth             | number     | Width of the bar                                                           | 30                       |
-| barStyle             | object     | style object for the Bars                                                  | \_                       |
-| isThreeD             | boolean    | Prop to render 3 dimensional bars                                          | false                    |
-| frontColor           | ColorValue | Color of the bar                                                           | black for 2D, red for 3D |
-| sideColor            | ColorValue | Color of the side view of the bar, only for 3 D                            | red                      |
-| sideWidth            | number     | Width of the side view of the bar, only for 3 D                            | red                      |
-| topColor             | ColorValue | Color of the top view of the bar, only for 3 D                             | red                      |
-| showGradient         | boolean    | Prop to enable linear gradient for the bar color                           | false                    |
-| gradientColor        | ColorValue | Along with frontColor, gradientColor constitutes the 2 colors for gradient | white                    |
-| roundedTop           | boolean    | To show rounded top                                                        | white                    |
-| roundedBottom        | boolean    | To show rounded bottom                                                     | white                    |
-| activeOpacity        | number     | activeOpacity on pressing the bar                                          | 0.2                      |
-| disablePress         | boolean    | Prop to disable the bar press action                                       | false                    |
-| barBorderRadius      | number     | Border radius of the bar                                                   | 0                        |
-| barMarginBottom      | number     | margin at the bottom of the bar (above X axis)                             | 0                        |
-| barBackgroundPattern | Component  | A svg component containing the background pattern for bars                 | \_                       |
-| patternId            | String     | ID of the pattern component                                                | \_                       |
-| minHeight            | number     | Minimum height of the Bars                                                 | 0                        |
+| Prop                       | Type       | Description                                                                | Default value            |
+| -------------------------- | ---------- | -------------------------------------------------------------------------- | ------------------------ |
+| barWidth                   | number     | Width of the bar                                                           | 30                       |
+| barStyle                   | object     | style object for the Bars                                                  | \_                       |
+| isThreeD                   | boolean    | Prop to render 3 dimensional bars                                          | false                    |
+| frontColor                 | ColorValue | Color of the bar                                                           | black for 2D, red for 3D |
+| sideColor                  | ColorValue | Color of the side view of the bar, only for 3 D                            | red                      |
+| sideWidth                  | number     | Width of the side view of the bar, only for 3 D                            | red                      |
+| topColor                   | ColorValue | Color of the top view of the bar, only for 3 D                             | red                      |
+| showGradient               | boolean    | Prop to enable linear gradient for the bar color                           | false                    |
+| gradientColor              | ColorValue | Along with frontColor, gradientColor constitutes the 2 colors for gradient | white                    |
+| roundedTop                 | boolean    | To show rounded top                                                        | white                    |
+| roundedBottom              | boolean    | To show rounded bottom                                                     | white                    |
+| activeOpacity              | number     | activeOpacity on pressing the bar                                          | 0.2                      |
+| disablePress               | boolean    | Prop to disable the bar press action                                       | false                    |
+| barBorderRadius            | number     | Border radius of the bar                                                   | 0                        |
+| barBorderTopLeftRadius     | number     | Top left border radius of the bar                                          | barBorderRadius \| 0     |
+| barBorderTopRightRadius    | number     | Top right border radius of the bar                                         | barBorderRadius \| 0     |
+| barBorderBottomLeftRadius  | number     | Bottom left border radius of the bar                                       | barBorderRadius \| 0     |
+| barBorderBottomRightRadius | number     | Bottom right border radius of the bar                                      | barBorderRadius \| 0     |
+| barMarginBottom            | number     | margin at the bottom of the bar (above X axis)                             | 0                        |
+| barBackgroundPattern       | Component  | A svg component containing the background pattern for bars                 | \_                       |
+| patternId                  | String     | ID of the pattern component                                                | \_                       |
+| minHeight                  | number     | Minimum height of the Bars                                                 | 0                        |
 
 ---
 

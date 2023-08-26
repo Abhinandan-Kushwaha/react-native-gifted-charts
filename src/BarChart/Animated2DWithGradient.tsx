@@ -9,6 +9,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import Cap from '../Components/BarSpecificComponents/cap';
+import {itemType} from './types';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -35,31 +36,12 @@ type propTypes = {
   horizontal: boolean;
   intactTopLabel: boolean;
   barBorderRadius?: number;
+  barBorderTopLeftRadius?: number;
+  barBorderTopRightRadius?: number;
+  barBorderBottomLeftRadius?: number;
+  barBorderBottomRightRadius?: number;
   containerHeight?: number;
   maxValue?: number;
-  barBackgroundPattern?: Function;
-  patternId?: String;
-  barMarginBottom?: number;
-  barStyle?: object;
-};
-type itemType = {
-  value: number;
-  onPress?: any;
-  frontColor?: ColorValue;
-  sideColor?: ColorValue;
-  topColor?: ColorValue;
-  showGradient?: boolean;
-  gradientColor?: any;
-  label?: String;
-  barWidth?: number;
-  labelTextStyle?: any;
-  topLabelComponent?: Function;
-  topLabelContainerStyle?: any;
-  disablePress?: any;
-  capThickness?: number;
-  capColor?: ColorValue;
-  capRadius?: number;
-  barBorderRadius?: number;
   barBackgroundPattern?: Function;
   patternId?: String;
   barMarginBottom?: number;
@@ -80,6 +62,11 @@ const Animated2DWithGradient = (props: propTypes) => {
     containerHeight,
     maxValue,
     barMarginBottom,
+    barBorderRadius,
+    barBorderTopLeftRadius,
+    barBorderTopRightRadius,
+    barBorderBottomLeftRadius,
+    barBorderBottomRightRadius,
   } = props;
   const [height, setHeight] = useState(noAnimation ? props.height : 2);
   const [initialRender, setInitialRender] = useState(
@@ -155,8 +142,23 @@ const Animated2DWithGradient = (props: propTypes) => {
                     height: '100%',
                     backgroundColor:
                       item.frontColor || props.frontColor || 'black',
-                    borderRadius:
-                      props.barBorderRadius || item.barBorderRadius || 0,
+                    borderRadius: item.barBorderRadius || barBorderRadius || 0,
+                    borderTopLeftRadius:
+                      item.barBorderTopLeftRadius ||
+                      barBorderTopLeftRadius ||
+                      0,
+                    borderTopRightRadius:
+                      item.barBorderTopRightRadius ||
+                      barBorderTopRightRadius ||
+                      0,
+                    borderBottomLeftRadius:
+                      item.barBorderBottomLeftRadius ||
+                      barBorderBottomLeftRadius ||
+                      0,
+                    borderBottomRightRadius:
+                      item.barBorderBottomRightRadius ||
+                      barBorderBottomRightRadius ||
+                      0,
                   },
                   props.roundedBottom && {
                     borderBottomLeftRadius:
@@ -197,8 +199,23 @@ const Animated2DWithGradient = (props: propTypes) => {
                     position: 'absolute',
                     width: '100%',
                     height: '100%',
-                    borderRadius:
-                      props.barBorderRadius || item.barBorderRadius || 0,
+                    borderRadius: item.barBorderRadius || barBorderRadius || 0,
+                    borderTopLeftRadius:
+                      item.barBorderTopLeftRadius ||
+                      barBorderTopLeftRadius ||
+                      0,
+                    borderTopRightRadius:
+                      item.barBorderTopRightRadius ||
+                      barBorderTopRightRadius ||
+                      0,
+                    borderBottomLeftRadius:
+                      item.barBorderBottomLeftRadius ||
+                      barBorderBottomLeftRadius ||
+                      0,
+                    borderBottomRightRadius:
+                      item.barBorderBottomRightRadius ||
+                      barBorderBottomRightRadius ||
+                      0,
                   },
                   props.roundedBottom && {
                     borderBottomLeftRadius:

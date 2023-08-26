@@ -21,7 +21,7 @@ import {BarChartPropsType, itemType} from './types';
 import {BarAndLineChartsWrapperTypes, HorizSectionsType} from '../utils/types';
 
 export const BarChart = (props: BarChartPropsType) => {
-  const scrollRef = useRef(null);
+  const scrollRef = props.scrollRef ?? useRef(null);
   const [points, setPoints] = useState('');
   const [arrowPoints, setArrowPoints] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -149,7 +149,9 @@ export const BarChart = (props: BarChartPropsType) => {
         minItem = stackSum;
       }
       totalWidth +=
-        (stackItem.stacks[0].barWidth ?? props.barWidth ?? 0) + spacing;
+        (stackItem.stacks[0].barWidth ??
+          props.barWidth ??
+          BarDefaults.barWidth) + spacing;
     });
   } else {
     data.forEach((item: itemType) => {
@@ -406,6 +408,10 @@ export const BarChart = (props: BarChartPropsType) => {
         horizontal: horizontal,
         intactTopLabel: intactTopLabel,
         barBorderRadius: props.barBorderRadius,
+        barBorderTopLeftRadius: props.barBorderTopLeftRadius,
+        barBorderTopRightRadius: props.barBorderTopRightRadius,
+        barBorderBottomLeftRadius: props.barBorderBottomLeftRadius,
+        barBorderBottomRightRadius: props.barBorderBottomRightRadius,
         color: props.color,
         showGradient: props.showGradient,
         gradientColor: props.gradientColor,
@@ -491,12 +497,13 @@ export const BarChart = (props: BarChartPropsType) => {
     data,
     stackData: props.stackData,
     secondaryData: secondaryData,
-    barWidth: props.barWidth,
+    barWidth: props.barWidth || BarDefaults.barWidth,
     xAxisThickness,
     totalWidth,
     disableScroll,
     showScrollIndicator,
     scrollToEnd,
+    scrollToIndex: props.scrollToIndex,
     scrollAnimation,
     indicatorColor: props.indicatorColor,
     setSelectedIndex,

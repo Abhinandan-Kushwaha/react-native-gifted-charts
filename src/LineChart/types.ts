@@ -67,6 +67,7 @@ export type LineChartPropsType = {
   onPress?: Function;
   unFocusOnPressOut?: boolean;
   delayBeforeUnFocus?: number;
+  showValuesAsDataPointsText?: boolean;
 
   rulesType?: RuleType;
   dashWidth?: number;
@@ -93,6 +94,11 @@ export type LineChartPropsType = {
   verticalLinesSpacing?: number;
   hideAxesAndRules?: boolean;
   areaChart?: boolean;
+  areaChart1?: boolean;
+  areaChart2?: boolean;
+  areaChart3?: boolean;
+  areaChart4?: boolean;
+  areaChart5?: boolean;
 
   disableScroll?: boolean;
   pointerConfig?: Pointer;
@@ -244,7 +250,9 @@ export type LineChartPropsType = {
   width?: number;
   yAxisLabelPrefix?: String;
   yAxisLabelSuffix?: String;
+  scrollRef?: any;
   scrollToEnd?: boolean;
+  scrollToIndex?: number;
   scrollAnimation?: boolean;
   noOfSectionsBelowXAxis?: number;
   labelsExtraHeight?: number;

@@ -42,7 +42,7 @@ let initialData: Array<itemType> | null = null;
 let animations: Array<any> = [];
 
 export const LineChart = (props: LineChartPropsType) => {
-  const scrollRef = useRef(null);
+  const scrollRef = props.scrollRef ?? useRef(null);
   const [scrollX, setScrollX] = useState(0);
   const [arrow1Points, setArrow1Points] = useState('');
   const [arrow2Points, setArrow2Points] = useState('');
@@ -102,7 +102,7 @@ export const LineChart = (props: LineChartPropsType) => {
       return [];
     }
     if (props.yAxisOffset) {
-      return props.data.map(item => {
+      return JSON.parse(JSON.stringify(props.data)).map(item => {
         item.value = item.value - (props.yAxisOffset ?? 0);
         return item;
       });
@@ -114,7 +114,7 @@ export const LineChart = (props: LineChartPropsType) => {
       return [];
     }
     if (props.yAxisOffset) {
-      return props.data2.map(item => {
+      return JSON.parse(JSON.stringify(props.data2)).map(item => {
         item.value = item.value - (props.yAxisOffset ?? 0);
         return item;
       });
@@ -126,7 +126,7 @@ export const LineChart = (props: LineChartPropsType) => {
       return [];
     }
     if (props.yAxisOffset) {
-      return props.data3.map(item => {
+      return JSON.parse(JSON.stringify(props.data3)).map(item => {
         item.value = item.value - (props.yAxisOffset ?? 0);
         return item;
       });
@@ -138,7 +138,7 @@ export const LineChart = (props: LineChartPropsType) => {
       return [];
     }
     if (props.yAxisOffset) {
-      return props.data4.map(item => {
+      return JSON.parse(JSON.stringify(props.data4)).map(item => {
         item.value = item.value - (props.yAxisOffset ?? 0);
         return item;
       });
@@ -150,7 +150,7 @@ export const LineChart = (props: LineChartPropsType) => {
       return [];
     }
     if (props.yAxisOffset) {
-      return props.data5.map(item => {
+      return JSON.parse(JSON.stringify(props.data5)).map(item => {
         item.value = item.value - (props.yAxisOffset ?? 0);
         return item;
       });
@@ -158,10 +158,11 @@ export const LineChart = (props: LineChartPropsType) => {
     return props.data5;
   }, [props.yAxisOffset, props.data5]);
 
-  const secondaryData = getSecondaryDataWithOffsetIncluded(
-    props.secondaryData,
-    props.secondaryYAxis,
-  );
+  const secondaryData =
+    getSecondaryDataWithOffsetIncluded(
+      props.secondaryData,
+      props.secondaryYAxis,
+    ) || [];
 
   const scrollToEnd = props.scrollToEnd || LineDefaults.scrollToEnd;
   const scrollAnimation = props.scrollAnimation ?? LineDefaults.scrollAnimation;
@@ -338,6 +339,20 @@ export const LineChart = (props: LineChartPropsType) => {
     LineDefaults.dataPointsShape;
 
   const areaChart = props.areaChart ?? false;
+  const areaChart1 = props.areaChart1 ?? false;
+  const areaChart2 = props.areaChart2 ?? false;
+  const areaChart3 = props.areaChart3 ?? false;
+  const areaChart4 = props.areaChart4 ?? false;
+  const areaChart5 = props.areaChart5 ?? false;
+
+  const atLeastOneAreaChart =
+    areaChart ||
+    areaChart1 ||
+    areaChart2 ||
+    areaChart3 ||
+    areaChart4 ||
+    areaChart5;
+
   const textFontSize1 =
     props.textFontSize1 ?? props.textFontSize ?? LineDefaults.textFontSize;
   const textFontSize2 =
@@ -546,6 +561,9 @@ export const LineChart = (props: LineChartPropsType) => {
     labelsAppear,
   ]);
 
+  const showValuesAsDataPointsText =
+    props.showValuesAsDataPointsText ?? LineDefaults.showValuesAsDataPointsText;
+
   const thickness1 =
     props.thickness1 ?? props.thickness ?? LineDefaults.thickness;
   const thickness2 =
@@ -694,6 +712,9 @@ export const LineChart = (props: LineChartPropsType) => {
       props.secondaryLineConfig?.dataPointsColor ?? dataPointsColor1,
     dataPointsShape:
       props.secondaryLineConfig?.dataPointsShape ?? dataPointsShape1,
+    showValuesAsDataPointsText:
+      props.secondaryLineConfig?.showValuesAsDataPointsText ??
+      showValuesAsDataPointsText,
     startFillColor:
       props.secondaryLineConfig?.startFillColor ?? startFillColor1,
     endFillColor: props.secondaryLineConfig?.endFillColor ?? endFillColor1,
@@ -867,14 +888,14 @@ export const LineChart = (props: LineChartPropsType) => {
       }
 
       /***************************          For Area Charts          *************************/
-      if (areaChart) {
+      if (atLeastOneAreaChart) {
         let ppp = '',
           ppp2 = '',
           ppp3 = '',
           ppp4 = '',
           ppp5 = '';
 
-        if (data.length && !animateOnDataChange) {
+        if ((areaChart || areaChart1) && data.length && !animateOnDataChange) {
           ppp = 'L' + initialSpacing + ' ' + heightUptoXaxis + ' ';
           ppp += pp;
           ppp +=
@@ -886,7 +907,7 @@ export const LineChart = (props: LineChartPropsType) => {
           setFillPoints(ppp.replace('L', 'M'));
         }
 
-        if (data2.length) {
+        if ((areaChart || areaChart2) && data2.length) {
           ppp2 = 'L' + initialSpacing + ' ' + heightUptoXaxis + ' ';
           ppp2 += pp2;
           ppp2 +=
@@ -898,7 +919,7 @@ export const LineChart = (props: LineChartPropsType) => {
           setFillPoints2(ppp2.replace('L', 'M'));
         }
 
-        if (data3.length) {
+        if ((areaChart || areaChart3) && data3.length) {
           ppp3 = 'L' + initialSpacing + ' ' + heightUptoXaxis + ' ';
           ppp3 += pp3;
           ppp3 +=
@@ -909,7 +930,7 @@ export const LineChart = (props: LineChartPropsType) => {
           ppp3 += 'L' + initialSpacing + ' ' + heightUptoXaxis + ' ';
           setFillPoints3(ppp3.replace('L', 'M'));
         }
-        if (data4.length) {
+        if ((areaChart || areaChart4) && data4.length) {
           ppp4 = 'L' + initialSpacing + ' ' + heightUptoXaxis + ' ';
           ppp4 += pp4;
           ppp4 +=
@@ -921,7 +942,7 @@ export const LineChart = (props: LineChartPropsType) => {
           setFillPoints4(ppp4.replace('L', 'M'));
         }
 
-        if (data5.length) {
+        if ((areaChart || areaChart5) && data5.length) {
           ppp5 = 'L' + initialSpacing + ' ' + heightUptoXaxis + ' ';
           ppp5 += pp5;
           ppp5 +=
@@ -1068,8 +1089,8 @@ export const LineChart = (props: LineChartPropsType) => {
 
       /***************************          For Area Charts          *************************/
 
-      if (areaChart) {
-        if (data.length) {
+      if (atLeastOneAreaChart) {
+        if ((areaChart || areaChart1) && data.length) {
           xx = addLeadingAndTrailingPathForAreaFill(
             xx,
             data[0].value,
@@ -1078,7 +1099,7 @@ export const LineChart = (props: LineChartPropsType) => {
           setFillPoints(xx);
         }
 
-        if (data2.length) {
+        if ((areaChart || areaChart2) && data2.length) {
           xx2 = addLeadingAndTrailingPathForAreaFill(
             xx2,
             data2[0].value,
@@ -1087,7 +1108,7 @@ export const LineChart = (props: LineChartPropsType) => {
           setFillPoints2(xx2);
         }
 
-        if (data3.length) {
+        if ((areaChart || areaChart3) && data3.length) {
           xx3 = addLeadingAndTrailingPathForAreaFill(
             xx3,
             data3[0].value,
@@ -1096,7 +1117,7 @@ export const LineChart = (props: LineChartPropsType) => {
           setFillPoints3(xx3);
         }
 
-        if (data4.length) {
+        if ((areaChart || areaChart4) && data4.length) {
           xx4 = addLeadingAndTrailingPathForAreaFill(
             xx,
             data4[0].value,
@@ -1105,7 +1126,7 @@ export const LineChart = (props: LineChartPropsType) => {
           setFillPoints4(xx4);
         }
 
-        if (data5.length) {
+        if ((areaChart || areaChart5) && data5.length) {
           xx5 = addLeadingAndTrailingPathForAreaFill(
             xx5,
             data5[0].value,
@@ -1120,6 +1141,8 @@ export const LineChart = (props: LineChartPropsType) => {
   }, [
     animateOnDataChange,
     areaChart,
+    areaChart1,
+    areaChart2,
     containerHeight,
     data,
     data2,
@@ -1545,7 +1568,9 @@ export const LineChart = (props: LineChartPropsType) => {
   };
 
   const renderDataPoints = (
+    hideDataPoints,
     dataForRender,
+    originalDataFromProps,
     dataPtsShape,
     dataPtsWidth,
     dataPtsHeight,
@@ -1556,6 +1581,7 @@ export const LineChart = (props: LineChartPropsType) => {
     startIndex,
     endIndex,
     isSecondary,
+    showValuesAsDataPointsText,
   ) => {
     const getYOrSecondaryY = isSecondary ? getSecondaryY : getY;
     return dataForRender.map((item: itemType, index: number) => {
@@ -1617,6 +1643,10 @@ export const LineChart = (props: LineChartPropsType) => {
         dataPointLabelComponent = item.dataPointLabelComponent;
       }
 
+      if (showValuesAsDataPointsText) {
+        text = originalDataFromProps[index].value;
+      }
+
       const currentStripHeight = item.stripHeight ?? stripHeight;
       const currentStripWidth = item.stripWidth ?? stripWidth;
       const currentStripOpacity = item.stripOpacity ?? stripOpacity;
@@ -1626,7 +1656,7 @@ export const LineChart = (props: LineChartPropsType) => {
         <Fragment key={index}>
           {focusEnabled ? (
             <>
-              {unFocusOnPressOut ? (
+              {unFocusOnPressOut ? ( // remove strip on onFocus
                 <Rect
                   onPressIn={() => onStripPress(item, index)}
                   onPressOut={() =>
@@ -1671,118 +1701,124 @@ export const LineChart = (props: LineChartPropsType) => {
               fill={currentStripColor}
             />
           ) : null}
-          {customDataPoint ? (
-            <View
-              style={[
-                styles.customDataPointContainer,
-                {
-                  height: dataPointsHeight,
-                  width: dataPointsWidth,
-                  top: getYOrSecondaryY(item.value),
-                  left: initialSpacing - dataPointsWidth + spacing * index,
-                },
-              ]}>
-              {customDataPoint()}
-            </View>
-          ) : null}
-          {dataPointsShape === 'rectangular' ? (
-            <Fragment key={index}>
-              {customDataPoint ? null : (
-                <Rect
-                  x={getX(index) - dataPointsWidth / 2}
-                  y={getYOrSecondaryY(item.value) - dataPointsHeight / 2}
-                  width={dataPointsWidth}
-                  height={dataPointsHeight}
-                  fill={
-                    showDataPointOnFocus
-                      ? index === selectedIndex
-                        ? dataPointsColor
-                        : 'none'
-                      : dataPointsColor
-                  }
-                  onPress={() => {
-                    item.onPress
-                      ? item.onPress(item, index)
-                      : props.onPress
-                      ? props.onPress(item, index)
-                      : null;
-                  }}
-                />
+          {hideDataPoints ? null : (
+            <>
+              {customDataPoint ? (
+                <View
+                  style={[
+                    styles.customDataPointContainer,
+                    {
+                      height: dataPointsHeight,
+                      width: dataPointsWidth,
+                      top: getYOrSecondaryY(item.value),
+                      left: initialSpacing - dataPointsWidth + spacing * index,
+                    },
+                  ]}>
+                  {customDataPoint()}
+                </View>
+              ) : null}
+              {dataPointsShape === 'rectangular' ? (
+                <Fragment key={index}>
+                  {customDataPoint ? null : (
+                    <Rect
+                      x={getX(index) - dataPointsWidth / 2}
+                      y={getYOrSecondaryY(item.value) - dataPointsHeight / 2}
+                      width={dataPointsWidth}
+                      height={dataPointsHeight}
+                      fill={
+                        showDataPointOnFocus
+                          ? index === selectedIndex
+                            ? dataPointsColor
+                            : 'none'
+                          : dataPointsColor
+                      }
+                      onPress={() => {
+                        item.onPress
+                          ? item.onPress(item, index)
+                          : props.onPress
+                          ? props.onPress(item, index)
+                          : null;
+                      }}
+                    />
+                  )}
+                </Fragment>
+              ) : (
+                <Fragment key={index}>
+                  {customDataPoint ? null : (
+                    <Circle
+                      cx={getX(index)}
+                      cy={getYOrSecondaryY(item.value)}
+                      r={dataPointsRadius}
+                      fill={
+                        showDataPointOnFocus
+                          ? index === selectedIndex
+                            ? dataPointsColor
+                            : 'none'
+                          : dataPointsColor
+                      }
+                      onPress={() => {
+                        item.onPress
+                          ? item.onPress(item, index)
+                          : props.onPress
+                          ? props.onPress(item, index)
+                          : null;
+                      }}
+                    />
+                  )}
+                </Fragment>
               )}
-            </Fragment>
-          ) : (
-            <Fragment key={index}>
-              {customDataPoint ? null : (
-                <Circle
-                  cx={getX(index)}
-                  cy={getYOrSecondaryY(item.value)}
-                  r={dataPointsRadius}
-                  fill={
-                    showDataPointOnFocus
-                      ? index === selectedIndex
-                        ? dataPointsColor
-                        : 'none'
-                      : dataPointsColor
-                  }
-                  onPress={() => {
-                    item.onPress
-                      ? item.onPress(item, index)
-                      : props.onPress
-                      ? props.onPress(item, index)
-                      : null;
-                  }}
-                />
-              )}
-            </Fragment>
+              {dataPointLabelComponent ? (
+                !showTextOnFocus || index === selectedIndex ? (
+                  <View
+                    style={[
+                      styles.customDataPointContainer,
+                      {
+                        top:
+                          containerHeight +
+                          (item.dataPointLabelShiftY ||
+                            props.dataPointLabelShiftY ||
+                            0) -
+                          (item.value * containerHeight) / maxValue,
+                        left:
+                          initialSpacing +
+                          (item.dataPointLabelShiftX ||
+                            props.dataPointLabelShiftX ||
+                            0) -
+                          (item.dataPointLabelWidth
+                            ? item.dataPointLabelWidth + 20
+                            : props.dataPointLabelWidth
+                            ? props.dataPointLabelWidth + 20
+                            : 50) /
+                            2 +
+                          spacing * index,
+                      },
+                    ]}>
+                    {dataPointLabelComponent()}
+                  </View>
+                ) : null
+              ) : text || item.dataPointText ? (
+                !showTextOnFocus || index === selectedIndex ? (
+                  <CanvasText
+                    fill={item.textColor || textColor}
+                    fontSize={item.textFontSize || textFontSize}
+                    x={
+                      getX(index) -
+                      dataPointsWidth +
+                      (item.textShiftX || props.textShiftX || 0)
+                    }
+                    y={
+                      getYOrSecondaryY(item.value) -
+                      dataPointsHeight / 2 +
+                      (item.textShiftY || props.textShiftY || 0)
+                    }>
+                    {!showTextOnFocus && !showValuesAsDataPointsText
+                      ? item.dataPointText
+                      : text}
+                  </CanvasText>
+                ) : null
+              ) : null}
+            </>
           )}
-          {dataPointLabelComponent ? (
-            !showTextOnFocus || index === selectedIndex ? (
-              <View
-                style={[
-                  styles.customDataPointContainer,
-                  {
-                    top:
-                      containerHeight +
-                      (item.dataPointLabelShiftY ||
-                        props.dataPointLabelShiftY ||
-                        0) -
-                      (item.value * containerHeight) / maxValue,
-                    left:
-                      initialSpacing +
-                      (item.dataPointLabelShiftX ||
-                        props.dataPointLabelShiftX ||
-                        0) -
-                      (item.dataPointLabelWidth
-                        ? item.dataPointLabelWidth + 20
-                        : props.dataPointLabelWidth
-                        ? props.dataPointLabelWidth + 20
-                        : 50) /
-                        2 +
-                      spacing * index,
-                  },
-                ]}>
-                {dataPointLabelComponent()}
-              </View>
-            ) : null
-          ) : text || item.dataPointText ? (
-            !showTextOnFocus || index === selectedIndex ? (
-              <CanvasText
-                fill={item.textColor || textColor}
-                fontSize={item.textFontSize || textFontSize}
-                x={
-                  getX(index) -
-                  dataPointsWidth +
-                  (item.textShiftX || props.textShiftX || 0)
-                }
-                y={
-                  getYOrSecondaryY(item.value) -
-                  dataPointsHeight / 2 +
-                  (item.textShiftY || props.textShiftY || 0)
-                }>
-                {!showTextOnFocus ? item.dataPointText : text}
-              </CanvasText>
-            ) : null
-          ) : null}
         </Fragment>
       );
     });
@@ -1794,7 +1830,13 @@ export const LineChart = (props: LineChartPropsType) => {
         return (
           <Rect
             key={index}
-            x={getX(index) - (item.verticalLineThickness || 1) / 2 - 1}
+            x={
+              getX(index) -
+              (item.verticalLineThickness ||
+                props.verticalLinesThickness ||
+                1) /
+                2
+            }
             y={
               item.verticalLineUptoDataPoint
                 ? getY(item.value)
@@ -2051,7 +2093,7 @@ export const LineChart = (props: LineChartPropsType) => {
 
         {/***********************      For Area Chart        ************/}
 
-        {areaChart && (
+        {atLeastOneAreaChart && (
           <LinearGradient
             id="Gradient"
             x1="0"
@@ -2070,7 +2112,7 @@ export const LineChart = (props: LineChartPropsType) => {
             />
           </LinearGradient>
         )}
-        {areaChart && (
+        {atLeastOneAreaChart && (
           <Path
             d={fillPoints}
             fill="url(#Gradient)"
@@ -2088,84 +2130,91 @@ export const LineChart = (props: LineChartPropsType) => {
         {renderSpecificVerticalLines(data5)}
 
         {/***  !!! Here it's done thrice intentionally, trying to make it to only 1 breaks things !!!  ***/}
-        {!hideDataPoints1
+        {renderDataPoints(
+          hideDataPoints1,
+          data,
+          props.data,
+          dataPointsShape1,
+          dataPointsWidth1,
+          dataPointsHeight1,
+          dataPointsColor1,
+          dataPointsRadius1,
+          textColor1,
+          textFontSize1,
+          startIndex1,
+          endIndex1,
+          false,
+          showValuesAsDataPointsText,
+        )}
+        {renderDataPoints(
+          hideDataPoints2,
+          data2,
+          props.data2,
+          dataPointsShape2,
+          dataPointsWidth2,
+          dataPointsHeight2,
+          dataPointsColor2,
+          dataPointsRadius2,
+          textColor2,
+          textFontSize2,
+          startIndex2,
+          endIndex2,
+          false,
+          showValuesAsDataPointsText,
+        )}
+        {renderDataPoints(
+          hideDataPoints3,
+          data3,
+          props.data3,
+          dataPointsShape3,
+          dataPointsWidth3,
+          dataPointsHeight3,
+          dataPointsColor3,
+          dataPointsRadius3,
+          textColor3,
+          textFontSize3,
+          startIndex3,
+          endIndex3,
+          false,
+          showValuesAsDataPointsText,
+        )}
+        {renderDataPoints(
+          hideDataPoints4,
+          data4,
+          props.data4,
+          dataPointsShape4,
+          dataPointsWidth4,
+          dataPointsHeight4,
+          dataPointsColor4,
+          dataPointsRadius4,
+          textColor4,
+          textFontSize4,
+          startIndex4,
+          endIndex4,
+          false,
+          showValuesAsDataPointsText,
+        )}
+        {renderDataPoints(
+          hideDataPoints5,
+          data5,
+          props.data5,
+          dataPointsShape5,
+          dataPointsWidth5,
+          dataPointsHeight5,
+          dataPointsColor5,
+          dataPointsRadius5,
+          textColor5,
+          textFontSize5,
+          startIndex5,
+          endIndex5,
+          false,
+          showValuesAsDataPointsText,
+        )}
+        {secondaryData?.length
           ? renderDataPoints(
-              data,
-              dataPointsShape1,
-              dataPointsWidth1,
-              dataPointsHeight1,
-              dataPointsColor1,
-              dataPointsRadius1,
-              textColor1,
-              textFontSize1,
-              startIndex1,
-              endIndex1,
-              false,
-            )
-          : null}
-        {!hideDataPoints2
-          ? renderDataPoints(
-              data2,
-              dataPointsShape2,
-              dataPointsWidth2,
-              dataPointsHeight2,
-              dataPointsColor2,
-              dataPointsRadius2,
-              textColor2,
-              textFontSize2,
-              startIndex2,
-              endIndex2,
-              false,
-            )
-          : null}
-        {!hideDataPoints3
-          ? renderDataPoints(
-              data3,
-              dataPointsShape3,
-              dataPointsWidth3,
-              dataPointsHeight3,
-              dataPointsColor3,
-              dataPointsRadius3,
-              textColor3,
-              textFontSize3,
-              startIndex3,
-              endIndex3,
-              false,
-            )
-          : null}
-        {!hideDataPoints4
-          ? renderDataPoints(
-              data4,
-              dataPointsShape4,
-              dataPointsWidth4,
-              dataPointsHeight4,
-              dataPointsColor4,
-              dataPointsRadius4,
-              textColor4,
-              textFontSize4,
-              startIndex4,
-              endIndex4,
-              false,
-            )
-          : null}
-        {!hideDataPoints5
-          ? renderDataPoints(
-              data5,
-              dataPointsShape5,
-              dataPointsWidth5,
-              dataPointsHeight5,
-              dataPointsColor5,
-              dataPointsRadius5,
-              textColor5,
-              textFontSize5,
-              startIndex5,
-              endIndex5,
-              false,
-            )
-          : null}
-        {!secondaryLineConfig.hideDataPoints
-          ? renderDataPoints(
+              secondaryLineConfig.hideDataPoints,
               secondaryData,
+              props.secondaryData,
               secondaryLineConfig.dataPointsShape,
               secondaryLineConfig.dataPointsWidth,
               secondaryLineConfig.dataPointsHeight,
@@ -2176,6 +2225,7 @@ export const LineChart = (props: LineChartPropsType) => {
               secondaryLineConfig.startIndex,
               secondaryLineConfig.endIndex,
               true,
+              secondaryLineConfig.showValuesAsDataPointsText,
             )
           : null}
         {showArrow && (
@@ -2971,6 +3021,7 @@ export const LineChart = (props: LineChartPropsType) => {
     disableScroll,
     showScrollIndicator,
     scrollToEnd,
+    scrollToIndex: props.scrollToIndex,
     scrollAnimation,
     indicatorColor: props.indicatorColor,
     setSelectedIndex,

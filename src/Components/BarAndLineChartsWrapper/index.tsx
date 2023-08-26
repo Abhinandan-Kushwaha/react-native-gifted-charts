@@ -34,6 +34,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     disableScroll,
     showScrollIndicator,
     scrollToEnd,
+    scrollToIndex,
     scrollAnimation,
     indicatorColor,
     setSelectedIndex,
@@ -290,7 +291,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
               horizontal && !yAxisAtTop
                 ? -initialSpacing -
                   yAxisThickness -
-                  (data[data.length - 1].barWidth ?? props.barWidth ?? 30) / 2
+                  (data[data.length - 1].barWidth ?? barWidth ?? 0) / 2
                 : yAxisSide === yAxisSides.RIGHT
                 ? 0
                 : yAxisLabelWidth + yAxisThickness,
@@ -321,6 +322,13 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         onContentSizeChange={() => {
           if (scrollRef.current && scrollToEnd) {
             scrollRef.current.scrollToEnd({animated: scrollAnimation});
+          } else if (scrollRef.current && scrollToIndex) {
+            scrollRef.current.scrollTo({
+              x:
+                initialSpacing +
+                ((barWidth ?? 0) + spacing) * scrollToIndex -
+                spacing,
+            });
           }
         }}
         {...remainingScrollViewProps}>

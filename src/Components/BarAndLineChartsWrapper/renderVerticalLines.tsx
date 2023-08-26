@@ -93,7 +93,6 @@ const RenderVerticalLines = props => {
           {
             position: 'absolute',
             zIndex: verticalLinesZIndex || -1,
-            marginBottom: xAxisThickness,
             height: getHeightOfVerticalLine(index),
             width: verticalLinesThickness,
             bottom: 60 + labelsExtraHeight,
@@ -103,7 +102,8 @@ const RenderVerticalLines = props => {
                 ? totalSpacing
                 : verticalLinesSpacing
                 ? verticalLinesSpacing * (index + 1)
-                : index * spacing + (initialSpacing - 4 / 2)),
+                : index * spacing + (initialSpacing - 4 / 2)) -
+              verticalLinesThickness / 2,
           },
           verticalLinesType === ruleTypes.DASHED ||
           verticalLinesType === ruleTypes.DOTTED
