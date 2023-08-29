@@ -44,6 +44,8 @@ The `lineConfig` prop describes the properties of the line chart that is display
 type lineConfigType = {
   initialSpacing?: number,
   curved?: boolean,
+  curvature: number,
+  curveType: CurveType, //CurveType is an enum defined below
   isAnimated?: boolean,
   delay?: number,
   thickness?: number,
@@ -74,12 +76,23 @@ type arrowType = {
 };
 ```
 
+CurveType -
+
+```js
+enum CurveType {
+  CUBIC,
+  QUADRATIC,
+}
+```
+
 The default value of the lineConfig object is -
 
 ```js
 defaultLineConfig = {
   initialSpacing: initialSpacing,
   curved: false,
+  curvature: 0.2,
+  curveType: CurveType.CUBIC,
   isAnimated: false,
   thickness: 1,
   color: 'black',

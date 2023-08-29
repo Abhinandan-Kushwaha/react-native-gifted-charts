@@ -50,7 +50,19 @@ export const BarChart = (props: BarChartPropsType) => {
     props.secondaryYAxis,
   );
 
-  const lineData = props.lineData || data;
+  const lineData = useMemo(() => {
+    if (!props.lineData) {
+      return data;
+    }
+    if (props.yAxisOffset) {
+      return props.lineData.map(item => {
+        item.value = item.value - (props.yAxisOffset ?? 0);
+        return item;
+      });
+    }
+    return props.lineData;
+  }, [props.yAxisOffset, props.lineData, data]);
+  
   const lineBehindBars = props.lineBehindBars || BarDefaults.lineBehindBars;
 
   defaultLineConfig.initialSpacing = spacing;
@@ -61,6 +73,8 @@ export const BarChart = (props: BarChartPropsType) => {
         initialSpacing:
           props.lineConfig.initialSpacing ?? defaultLineConfig.initialSpacing,
         curved: props.lineConfig.curved || defaultLineConfig.curved,
+        curvature: props.lineConfig.curvature ?? defaultLineConfig.curvature,
+        curveType: props.lineConfig.curveType ?? defaultLineConfig.curveType,
         isAnimated: props.lineConfig.isAnimated || defaultLineConfig.isAnimated,
         thickness: props.lineConfig.thickness || defaultLineConfig.thickness,
         color: props.lineConfig.color || defaultLineConfig.color,
@@ -301,7 +315,7 @@ export const BarChart = (props: BarChartPropsType) => {
               lineConfig.shiftY -
               (lineData[i].value * containerHeight) / maxValue,
           ]);
-          let xx = svgPath(p1Array, bezierCommand);
+          let xx = svgPath(p1Array, lineConfig.curveType, lineConfig.curvature);
           setPoints(xx);
         }
       }

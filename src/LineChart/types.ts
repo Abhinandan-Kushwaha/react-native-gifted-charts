@@ -1,6 +1,7 @@
 import {ColorValue} from 'react-native';
 import {yAxisSides} from '../utils/constants';
 import {
+  CurveType,
   RuleType,
   arrowConfigType,
   secondaryLineConfigType,
@@ -151,6 +152,8 @@ export type LineChartPropsType = {
 
   backgroundColor?: ColorValue;
   curved?: boolean;
+  curvature?: number;
+  curveType?: CurveType;
   horizSections?: Array<sectionType>;
 
   //Data points

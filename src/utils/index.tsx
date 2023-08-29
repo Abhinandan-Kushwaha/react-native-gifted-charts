@@ -1,4 +1,4 @@
-import {arrowConfigType} from './types';
+import {arrowConfigType, CurveType} from './types';
 
 export const getCumulativeWidth = (
   data: any,
@@ -66,7 +66,45 @@ export const getLighterColor = (color: String) => {
   return lighter;
 };
 
-export const svgPath = (points: Array<Array<number>>, command: Function) => {
+export const svgQuadraticCurvePath = points => {
+  let path = 'M' + points[0][0] + ',' + points[0][1];
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const xMid = (points[i][0] + points[i + 1][0]) / 2;
+    const yMid = (points[i][1] + points[i + 1][1]) / 2;
+    const cpX1 = (xMid + points[i][0]) / 2;
+    const cpX2 = (xMid + points[i + 1][0]) / 2;
+    path +=
+      'Q ' +
+      cpX1 +
+      ', ' +
+      points[i][1] +
+      ', ' +
+      xMid +
+      ', ' +
+      yMid +
+      (' Q ' +
+        cpX2 +
+        ', ' +
+        points[i + 1][1] +
+        ', ' +
+        points[i + 1][0] +
+        ', ' +
+        points[i + 1][1]);
+  }
+
+  return path;
+};
+
+export const svgPath = (
+  points: Array<Array<number>>,
+  curveType: CurveType,
+  curvature: number,
+) => {
+  if (!points?.length) return '';
+  if (curveType === CurveType.QUADRATIC) {
+    return svgQuadraticCurvePath(points);
+  }
   // build the d attributes by looping over the points
   const d = points.reduce(
     (acc, point, i, a) =>
@@ -74,7 +112,7 @@ export const svgPath = (points: Array<Array<number>>, command: Function) => {
         ? // if first point
           `M ${point[0]},${point[1]}`
         : // else
-          `${acc} ${command(point, i, a)}`,
+          `${acc} ${bezierCommand(point, i, a, curvature)}`,
     '',
   );
   return d;
@@ -90,6 +128,7 @@ const line = (pointA: Array<number>, pointB: Array<number>) => {
 };
 
 const controlPoint = (
+  curvature: number,
   current: Array<number>,
   previous: Array<number>,
   next: Array<number>,
@@ -101,7 +140,7 @@ const controlPoint = (
   const p = previous || current;
   const n = next || current;
   // The smoothing ratio
-  const smoothing = 0.2;
+  const smoothing = curvature;
   // Properties of the opposed-line
   const o = line(p, n);
   // If is end-control-point, add PI to the angle to go backward
@@ -117,11 +156,12 @@ export const bezierCommand = (
   point: Array<number>,
   i: number,
   a: Array<Array<number>>,
+  curvature: number,
 ) => {
   // start control point
-  const [cpsX, cpsY] = controlPoint(a[i - 1], a[i - 2], point);
+  const [cpsX, cpsY] = controlPoint(curvature, a[i - 1], a[i - 2], point);
   // end control point
-  const [cpeX, cpeY] = controlPoint(point, a[i - 1], a[i + 1], true);
+  const [cpeX, cpeY] = controlPoint(curvature, point, a[i - 1], a[i + 1], true);
   return `C ${cpsX},${cpsY} ${cpeX},${cpeY} ${point[0]},${point[1]}`;
 };
 

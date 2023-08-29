@@ -226,12 +226,11 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     containerHeight,
     lineConfig,
     maxValue,
-    lineData,
     animatedWidth,
     lineBehindBars,
     points,
     arrowPoints,
-    data,
+    data: lineData ?? data,
     totalWidth,
     barWidth,
   };

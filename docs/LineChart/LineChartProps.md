@@ -241,6 +241,8 @@ Properties of the secondary like color, thickness, curve, strokeWidth, startInde
 type secondaryLineConfigType = {
   zIndex?: number;
   curved?: boolean;
+  curvature: number;
+  curveType: CurveType; //CurveType is an enum defined below
   areaChart?: boolean;
   color?; ColorValue;
   thickness?: number;
@@ -266,6 +268,15 @@ type secondaryLineConfigType = {
 }
 ```
 
+CurveType -
+
+```js
+enum CurveType {
+  CUBIC,
+  QUADRATIC,
+}
+```
+
 All the properties of **secondaryLineConfig** are optional. Properties not provided in the secondaryLineConfig get their default values from the primary (or first) line.
 
 ### Line related props
@@ -273,6 +284,8 @@ All the properties of **secondaryLineConfig** are optional. Properties not provi
 | Prop             | Type          | Description                                                                                                 | Default value                |
 | ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | curved           | boolean       | To show curved line joining the data points                                                                 | false                        |
+| curvature        | number        | A number between 0 to 1 that controls the curvature of the cubic bezier curve                               | 0.2                          |
+| curveType        | CurveType     | Type of the curve- cubic or quadratic                                                                       | CurveType.CUBIC              |
 | color            | ColorValue    | Color of the lines joining the data points                                                                  | black                        |
 | color1           | ColorValue    | Color of the lines joining the first set of data points                                                     | color (from props)           |
 | color2           | ColorValue    | Color of the lines joining the second set of data points                                                    | color (from props)           |

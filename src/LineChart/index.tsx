@@ -19,7 +19,6 @@ import Svg, {
 } from 'react-native-svg';
 import {
   svgPath,
-  bezierCommand,
   getArrowPoints,
   getAxesAndRulesProps,
   getExtendedContainerHeightWithPadding,
@@ -43,6 +42,8 @@ let animations: Array<any> = [];
 
 export const LineChart = (props: LineChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
+  const curvature = props.curvature ?? LineDefaults.curvature;
+  const curveType = props.curveType ?? LineDefaults.curveType;
   const [scrollX, setScrollX] = useState(0);
   const [arrow1Points, setArrow1Points] = useState('');
   const [arrow2Points, setArrow2Points] = useState('');
@@ -692,6 +693,8 @@ export const LineChart = (props: LineChartPropsType) => {
   const secondaryLineConfig = {
     zIndex: props.secondaryLineConfig?.zIndex ?? zIndex1,
     curved: props.secondaryLineConfig?.curved ?? props.curved,
+    curvature: props.secondaryLineConfig?.curvature ?? curvature,
+    curveType: props.secondaryLineConfig?.curveType ?? curveType,
     areaChart: props.secondaryLineConfig?.areaChart ?? areaChart,
     color: props.secondaryLineConfig?.color ?? color1,
     thickness: props.secondaryLineConfig?.thickness ?? thickness1,
@@ -980,11 +983,11 @@ export const LineChart = (props: LineChartPropsType) => {
         }
       }
 
-      let xx = svgPath(p1Array, bezierCommand);
-      let xx2 = svgPath(p2Array, bezierCommand);
-      let xx3 = svgPath(p3Array, bezierCommand);
-      let xx4 = svgPath(p4Array, bezierCommand);
-      let xx5 = svgPath(p5Array, bezierCommand);
+      let xx = svgPath(p1Array, curveType, curvature);
+      let xx2 = svgPath(p2Array, curveType, curvature);
+      let xx3 = svgPath(p3Array, curveType, curvature);
+      let xx4 = svgPath(p4Array, curveType, curvature);
+      let xx5 = svgPath(p5Array, curveType, curvature);
 
       setPoints(xx);
       setPoints2(xx2);
@@ -1256,7 +1259,11 @@ export const LineChart = (props: LineChartPropsType) => {
         }
       }
 
-      let xx = svgPath(p1Array, bezierCommand);
+      let xx = svgPath(
+        p1Array,
+        secondaryLineConfig.curveType,
+        secondaryLineConfig.curvature,
+      );
 
       setSecondaryPoints(xx);
 

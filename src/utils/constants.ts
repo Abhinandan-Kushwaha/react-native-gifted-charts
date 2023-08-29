@@ -1,4 +1,5 @@
 import {defaultLineConfigType} from '../BarChart/types';
+import {CurveType} from './types';
 
 // Global
 
@@ -7,6 +8,9 @@ export enum chartTypes {
   LINE,
   LINE_BI_COLOR,
 }
+
+const defaultCurvature = 0.2;
+const defaultCurveType = CurveType.CUBIC;
 
 // Bar and Line chart Specific
 
@@ -117,6 +121,8 @@ export const BarDefaults = {
 export const defaultLineConfig: defaultLineConfigType = {
   initialSpacing: BarDefaults.spacing, // gets updated to spacing before being used
   curved: false,
+  curvature: defaultCurvature,
+  curveType: defaultCurveType,
   isAnimated: false,
   thickness: 1,
   color: 'black',
@@ -142,6 +148,8 @@ export const defaultLineConfig: defaultLineConfigType = {
 
 export const LineDefaults = {
   color: 'black',
+  curvature: defaultCurvature,
+  curveType: defaultCurveType,
   thickness: 2,
   isAnimated: false,
   hideDataPoints: false,

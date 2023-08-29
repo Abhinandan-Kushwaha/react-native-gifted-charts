@@ -607,7 +607,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                       style={{
                         position: 'absolute',
                         bottom:
-                          (referenceLine1Position * containerHeight) / maxValue,
+                          ((referenceLine1Position - (yAxisOffset ?? 0)) * containerHeight) / maxValue,
                         left:
                           yAxisSide === yAxisSides.RIGHT
                             ? 0
@@ -630,7 +630,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                       style={{
                         position: 'absolute',
                         bottom:
-                          (referenceLine2Position * containerHeight) / maxValue,
+                          ((referenceLine2Position - (yAxisOffset ?? 0)) * containerHeight) / maxValue,
                         left:
                           yAxisSide === yAxisSides.RIGHT
                             ? 0
@@ -653,7 +653,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                       style={{
                         position: 'absolute',
                         bottom:
-                          (referenceLine3Position * containerHeight) / maxValue,
+                          ((referenceLine3Position - (yAxisOffset ?? 0)) * containerHeight) / maxValue,
                         left:
                           yAxisSide === yAxisSides.RIGHT
                             ? 0

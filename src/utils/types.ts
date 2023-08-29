@@ -3,6 +3,11 @@ import {chartTypes, yAxisSides} from './constants';
 
 export type RuleType = 'solid' | 'dashed' | 'dotted';
 
+export enum CurveType {
+  CUBIC,
+  QUADRATIC,
+}
+
 export type secondaryYAxisType = {
   noOfSections?: number;
   maxValue?: number;
@@ -35,6 +40,8 @@ export type secondaryYAxisType = {
 export type secondaryLineConfigType = {
   zIndex?: number;
   curved?: boolean;
+  curvature?: number;
+  curveType?: CurveType;
   areaChart?: boolean;
   color?;
   ColorValue;

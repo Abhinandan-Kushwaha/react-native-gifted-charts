@@ -932,7 +932,7 @@ export const LineChartBicolor = (props: propTypes) => {
                   width: dataPointsWidth,
                   top:
                     containerHeight - (item.value * containerHeight) / maxValue,
-                  left: initialSpacing - dataPointsWidth + spacing * index,
+                  left: getX(index) - dataPointsWidth,
                 },
               ]}>
               {customDataPoint()}
@@ -942,7 +942,7 @@ export const LineChartBicolor = (props: propTypes) => {
             <Fragment key={index}>
               {customDataPoint ? null : (
                 <Rect
-                  x={initialSpacing - dataPointsWidth + spacing * index}
+                  x={getX(index) - dataPointsWidth}
                   y={
                     extendedContainerHeight +
                     dataPointsHeight / 2 -
@@ -971,11 +971,8 @@ export const LineChartBicolor = (props: propTypes) => {
             <Fragment key={index}>
               {customDataPoint ? null : (
                 <Circle
-                  cx={initialSpacing - dataPointsWidth / 2 + spacing * index}
-                  cy={
-                    extendedContainerHeight -
-                    (item.value * containerHeight) / maxValue
-                  }
+                  cx={getX(index)}
+                  cy={getY(index)}
                   r={dataPointsRadius}
                   fill={
                     showDataPointOnFocus
