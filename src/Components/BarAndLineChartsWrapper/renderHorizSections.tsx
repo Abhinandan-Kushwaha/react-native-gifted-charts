@@ -548,7 +548,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                     {
                       position: 'absolute',
                       zIndex: 1,
-                      bottom: stepHeight * (index - 1),
+                      bottom: stepHeight * (index),
                       width: yAxisLabelWidth,
                       height:
                         index === noOfSections ? stepHeight / 2 : stepHeight,

@@ -11,6 +11,7 @@ import {
 export type LineChartPropsType = {
   height?: number;
   overflowTop?: number;
+  overflowBottom?: number;
   noOfSections?: number;
   maxValue?: number;
   minValue?: number;

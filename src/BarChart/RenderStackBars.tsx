@@ -1,14 +1,23 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {
   View,
   TouchableOpacity,
   Text,
   ColorValue,
   GestureResponderEvent,
+  LayoutAnimation,
+  Platform,
+  UIManager,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {Style} from 'util';
+import {BarDefaults} from '../utils/constants';
+
+if (Platform.OS === 'android') {
+  UIManager.setLayoutAnimationEnabledExperimental &&
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 type Props = {
   style?: any;
@@ -54,6 +63,8 @@ type Props = {
   showGradient?: boolean;
   gradientColor?: any;
   stackData: Array<stackItemType>;
+  isAnimated?: boolean;
+  animationDuration?: number;
 };
 export type stackItemType = {
   value?: number;
@@ -116,7 +127,12 @@ const RenderStackBars = (props: Props) => {
     setSelectedIndex,
     activeOpacity,
     stackData,
+    isAnimated,
+    animationDuration = BarDefaults.animationDuration,
   } = props;
+  const cotainsNegative = item.stacks.some(item => item.value < 0);
+  const noAnimation = cotainsNegative || !isAnimated;
+
   let leftSpacing = initialSpacing;
   for (let i = 0; i < index; i++) {
     leftSpacing +=
@@ -170,8 +186,49 @@ const RenderStackBars = (props: Props) => {
     0,
   );
 
-  const static2DSimple = (item: stackItemType, index: number) => {
-    const cotainsNegative = item.stacks.some(item => item.value < 0);
+  const [height, setHeight] = useState(noAnimation ? totalHeight : 1);
+
+  useEffect(() => {
+    if (!noAnimation) {
+      layoutAppear();
+    }
+  }, [totalHeight]);
+
+  const elevate = () => {
+    LayoutAnimation.configureNext({
+      duration: animationDuration,
+      update: {type: 'linear', property: 'scaleXY'},
+    });
+    setHeight(totalHeight);
+  };
+
+  const layoutAppear = () => {
+    LayoutAnimation.configureNext({
+      duration: Platform.OS == 'ios' ? animationDuration : 20,
+      create: {type: 'linear', property: 'opacity'},
+      update: {type: 'linear', property: 'scaleXY'},
+    });
+    setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
+  };
+
+  const barWrapper = () => {
+    return noAnimation ? (
+      static2DSimple()
+    ) : (
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          height: height,
+          width: '100%',
+          overflow: 'hidden',
+        }}>
+        {static2DSimple()}
+      </View>
+    );
+  };
+
+  const static2DSimple = () => {
     return (
       <>
         <TouchableOpacity
@@ -341,7 +398,7 @@ const RenderStackBars = (props: Props) => {
             }}
           />
         )}
-        {static2DSimple(item, index)}
+        {barWrapper()}
         {renderLabel(label || '', labelTextStyle)}
       </View>
       {renderTooltip && selectedIndex === index && (

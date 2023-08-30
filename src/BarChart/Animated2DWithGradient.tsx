@@ -68,7 +68,7 @@ const Animated2DWithGradient = (props: propTypes) => {
     barBorderBottomLeftRadius,
     barBorderBottomRightRadius,
   } = props;
-  const [height, setHeight] = useState(noAnimation ? props.height : 2);
+  const [height, setHeight] = useState(noAnimation ? props.height : 0.2);
   const [initialRender, setInitialRender] = useState(
     noAnimation ? false : true,
   );

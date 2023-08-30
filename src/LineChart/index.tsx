@@ -2455,8 +2455,13 @@ export const LineChart = (props: LineChartPropsType) => {
         // }}
         style={{
           position: 'absolute',
-          height: containerHeightIncludingBelowXAxis,
-          bottom: 60 + labelsExtraHeight,
+          height:
+            containerHeightIncludingBelowXAxis +
+            (props.overflowBottom ?? dataPointsRadius1),
+          bottom:
+            60 +
+            labelsExtraHeight -
+            (props.overflowBottom ?? dataPointsRadius1),
           width: totalWidth,
           zIndex: zIndex,
         }}>

@@ -454,6 +454,8 @@ export const BarChart = (props: BarChartPropsType) => {
         return (
           <RenderStackBars
             stackData={props.stackData || []}
+            isAnimated={isAnimated}
+            animationDuration={animationDuration}
             {...getPropsCommonForBarAndStack(item, index)}
           />
         );

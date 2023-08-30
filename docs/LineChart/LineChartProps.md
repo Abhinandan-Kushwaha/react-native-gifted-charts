@@ -12,6 +12,7 @@
 | width                         | number         | Width of the Bar chart                                                                                         | width of the parent  |
 | height                        | number         | Height of the Bar chart (excluding the bottom label)                                                           | 200                  |
 | overflowTop                   | number         | Extra space at the top of the chart to make room for dataPointText                                             | 0                    |
+| overflowBottom                | number         | Extra space at the bottom of the chart to make room for dataPoints or dataPointText                            | dataPointRadius      |
 | maxValue                      | number         | Maximum value shown in the Y axis                                                                              | 200                  |
 | minValue                      | number         | Minimum negative value shown in the Y axis (to be used only if the data set has negative values too)           | \_                   |
 | noOfSections                  | number         | Number of sections in the Y axis                                                                               | 10                   |
@@ -21,8 +22,8 @@
 | spacing                       | number         | Distance between 2 consecutive bars in the Bar chart                                                           | 50                   |
 | adjustToWidth                 | boolean        | When set to true, it auto computes the spacing value to fit the Line chart in the available width              | false                |
 | backgroundColor               | ColorValue     | Background color of the Bar chart                                                                              | \_                   |
-| scrollref                    | any            | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered     | React.useRef()      |
-| scrollToIndex                | number         | scroll to a particular index on chart load                                                              | \_                  |
+| scrollref                    | any            | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered             | React.useRef()       |
+| scrollToIndex                | number         | scroll to a particular index on chart load                                                                      | \_                   |
 | disableScroll                 | boolean        | To disable horizontal scroll                                                                                   | false                |
 | showScrollIndicator           | boolean        | To show horizontal scroll indicator                                                                            | false                |
 | indicatorColor                | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                | default              |
