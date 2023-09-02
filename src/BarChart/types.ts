@@ -36,6 +36,7 @@ export type BarChartPropsType = {
   xAxisTextNumberOfLines?: number;
   yAxisLabelWidth?: number;
   hideYAxisText?: boolean;
+  rotateYAxisTexts?: number;
   yAxisSide?: yAxisSides;
   yAxisOffset?: number;
   initialSpacing?: number;
@@ -108,6 +109,8 @@ export type BarChartPropsType = {
   activeOpacity?: number;
 
   horizontal?: boolean;
+  rtl?: boolean;
+  labelsWidthForHorizontal?: number;
   yAxisAtTop?: boolean;
 
   intactTopLabel?: boolean;
@@ -162,6 +165,7 @@ type lineConfigType = {
   textFontSize?: number;
   textShiftX?: number;
   textShiftY?: number;
+  shiftX?: number;
   shiftY?: number;
   startIndex?: number;
   endIndex?: number;
@@ -188,6 +192,7 @@ export type defaultLineConfigType = {
   textFontSize: number;
   textShiftX: number;
   textShiftY: number;
+  shiftX: number;
   shiftY: number;
   startIndex: number;
   endIndex: number;

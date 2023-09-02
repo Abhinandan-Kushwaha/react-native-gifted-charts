@@ -55,6 +55,8 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     yAxisLabelPrefix,
     yAxisLabelSuffix,
     yAxisTextStyle,
+    rotateYAxisTexts,
+    rtl,
 
     containerHeight,
     maxValue,
@@ -454,7 +456,6 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                           {
                             translateX: (width ?? totalWidth) - 30 + endSpacing,
                           },
-                          {rotateY: '180deg'},
                         ],
                       },
                     yAxisLabelContainerStyle,
@@ -464,10 +465,15 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                     ellipsizeMode={'clip'}
                     style={[
                       yAxisTextStyle,
-                      horizontal &&
-                        !yAxisAtTop && {
-                          transform: [{rotateY: '180deg'}],
-                        },
+                      horizontal && {
+                        transform: [
+                          {
+                            rotate: `${
+                              rotateYAxisTexts ?? (rtl ? 90 : -90)
+                            }deg`,
+                          },
+                        ],
+                      },
                       index === noOfSections && {
                         marginBottom: stepHeight / -2,
                       },
@@ -548,7 +554,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                     {
                       position: 'absolute',
                       zIndex: 1,
-                      bottom: stepHeight * (index),
+                      bottom: stepHeight * index,
                       width: yAxisLabelWidth,
                       height:
                         index === noOfSections ? stepHeight / 2 : stepHeight,
@@ -607,7 +613,9 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                       style={{
                         position: 'absolute',
                         bottom:
-                          ((referenceLine1Position - (yAxisOffset ?? 0)) * containerHeight) / maxValue,
+                          ((referenceLine1Position - (yAxisOffset ?? 0)) *
+                            containerHeight) /
+                          maxValue,
                         left:
                           yAxisSide === yAxisSides.RIGHT
                             ? 0
@@ -630,7 +638,9 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                       style={{
                         position: 'absolute',
                         bottom:
-                          ((referenceLine2Position - (yAxisOffset ?? 0)) * containerHeight) / maxValue,
+                          ((referenceLine2Position - (yAxisOffset ?? 0)) *
+                            containerHeight) /
+                          maxValue,
                         left:
                           yAxisSide === yAxisSides.RIGHT
                             ? 0
@@ -653,7 +663,9 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                       style={{
                         position: 'absolute',
                         bottom:
-                          ((referenceLine3Position - (yAxisOffset ?? 0)) * containerHeight) / maxValue,
+                          ((referenceLine3Position - (yAxisOffset ?? 0)) *
+                            containerHeight) /
+                          maxValue,
                         left:
                           yAxisSide === yAxisSides.RIGHT
                             ? 0

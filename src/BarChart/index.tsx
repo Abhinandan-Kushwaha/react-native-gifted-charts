@@ -3,10 +3,11 @@ import {Animated, Easing} from 'react-native';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
 import {
-  bezierCommand,
   getArrowPoints,
   getAxesAndRulesProps,
   getSecondaryDataWithOffsetIncluded,
+  getXForLineInBar,
+  getYForLineInBar,
   maxAndMinUtil,
   svgPath,
 } from '../utils';
@@ -31,6 +32,14 @@ export const BarChart = (props: BarChartPropsType) => {
   const endSpacing = props.endSpacing ?? spacing;
   const showFractionalValues =
     props.showFractionalValues || AxesAndRulesDefaults.showFractionalValues;
+
+  const horizontal = props.horizontal ?? BarDefaults.horizontal;
+  const rtl = props.rtl ?? BarDefaults.rtl;
+  const yAxisAtTop = props.yAxisAtTop ?? BarDefaults.yAxisAtTop;
+  const intactTopLabel = props.intactTopLabel ?? BarDefaults.intactTopLabel;
+
+  const heightFromProps = horizontal ? props.width : props.height;
+  const widthFromProps = horizontal ? props.height : props.width;
 
   const data = useMemo(() => {
     if (!props.data) {
@@ -62,10 +71,10 @@ export const BarChart = (props: BarChartPropsType) => {
     }
     return props.lineData;
   }, [props.yAxisOffset, props.lineData, data]);
-  
+
   const lineBehindBars = props.lineBehindBars || BarDefaults.lineBehindBars;
 
-  defaultLineConfig.initialSpacing = spacing;
+  defaultLineConfig.initialSpacing = initialSpacing;
   defaultLineConfig.endIndex = lineData.length - 1;
 
   const lineConfig = props.lineConfig
@@ -97,6 +106,7 @@ export const BarChart = (props: BarChartPropsType) => {
           props.lineConfig.textFontSize || defaultLineConfig.textFontSize,
         textShiftX: props.lineConfig.textShiftX || defaultLineConfig.textShiftX,
         textShiftY: props.lineConfig.textShiftY || defaultLineConfig.textShiftY,
+        shiftX: props.lineConfig.shiftX || defaultLineConfig.shiftX,
         shiftY: props.lineConfig.shiftY || defaultLineConfig.shiftY,
         delay: props.lineConfig.delay || defaultLineConfig.delay,
         startIndex: props.lineConfig.startIndex || defaultLineConfig.startIndex,
@@ -135,7 +145,7 @@ export const BarChart = (props: BarChartPropsType) => {
     : defaultLineConfig;
   const noOfSections = props.noOfSections ?? AxesAndRulesDefaults.noOfSections;
   const containerHeight =
-    props.height ??
+    heightFromProps ??
     ((props.stepHeight ?? 0) * noOfSections ||
       AxesAndRulesDefaults.containerHeight);
   const horizSections = [{value: '0'}];
@@ -226,10 +236,6 @@ export const BarChart = (props: BarChartPropsType) => {
       ? AxesAndRulesDefaults.yAxisEmptyLabelWidth
       : AxesAndRulesDefaults.yAxisLabelWidth);
 
-  const horizontal = props.horizontal ?? BarDefaults.horizontal;
-  const yAxisAtTop = props.yAxisAtTop ?? BarDefaults.yAxisAtTop;
-  const intactTopLabel = props.intactTopLabel ?? BarDefaults.intactTopLabel;
-
   const heightValue = useMemo(() => new Animated.Value(0), []);
   const opacValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
@@ -258,6 +264,7 @@ export const BarChart = (props: BarChartPropsType) => {
   useEffect(() => {
     if (showLine) {
       let pp = '';
+      const firstBarWidth = data[0].barWidth ?? props.barWidth ?? 30;
       if (!lineConfig.curved) {
         for (let i = 0; i < lineData.length; i++) {
           if (i < lineConfig.startIndex || i > lineConfig.endIndex) continue;
@@ -265,15 +272,21 @@ export const BarChart = (props: BarChartPropsType) => {
             data?.[i]?.barWidth ?? props.barWidth ?? BarDefaults.barWidth;
           pp +=
             'L' +
-            (yAxisLabelWidth +
-              lineConfig.initialSpacing +
-              6 -
-              (initialSpacing - currentBarWidth / 2) +
-              (currentBarWidth + spacing) * i) +
+            getXForLineInBar(
+              i,
+              firstBarWidth,
+              currentBarWidth,
+              yAxisLabelWidth,
+              lineConfig,
+              spacing,
+            ) +
             ' ' +
-            (containerHeight -
-              lineConfig.shiftY -
-              (lineData[i].value * containerHeight) / maxValue) +
+            getYForLineInBar(
+              lineData[i].value,
+              lineConfig.shiftY,
+              containerHeight,
+              maxValue,
+            ) +
             ' ';
         }
         setPoints(pp.replace('L', 'M'));
@@ -305,15 +318,20 @@ export const BarChart = (props: BarChartPropsType) => {
           const currentBarWidth =
             data?.[i]?.barWidth ?? props.barWidth ?? BarDefaults.barWidth;
           p1Array.push([
-            yAxisLabelWidth +
-              lineConfig.initialSpacing +
-              6 -
-              (initialSpacing - currentBarWidth / 2) -
-              lineConfig.dataPointsWidth / 2 +
-              (currentBarWidth + spacing) * i,
-            containerHeight -
-              lineConfig.shiftY -
-              (lineData[i].value * containerHeight) / maxValue,
+            getXForLineInBar(
+              i,
+              firstBarWidth,
+              currentBarWidth,
+              yAxisLabelWidth,
+              lineConfig,
+              spacing,
+            ),
+            getYForLineInBar(
+              lineData[i].value,
+              lineConfig.shiftY,
+              containerHeight,
+              maxValue,
+            ),
           ]);
           let xx = svgPath(p1Array, lineConfig.curveType, lineConfig.curvature);
           setPoints(xx);
@@ -420,6 +438,7 @@ export const BarChart = (props: BarChartPropsType) => {
         xAxisIndicesWidth: xAxisIndicesWidth,
         xAxisIndicesColor: xAxisIndicesColor,
         horizontal: horizontal,
+        rtl: rtl,
         intactTopLabel: intactTopLabel,
         barBorderRadius: props.barBorderRadius,
         barBorderTopLeftRadius: props.barBorderTopLeftRadius,
@@ -507,6 +526,9 @@ export const BarChart = (props: BarChartPropsType) => {
     labelsExtraHeight,
     yAxisLabelWidth,
     horizontal,
+    rtl,
+    labelsWidthForHorizontal:
+      props.labelsWidthForHorizontal ?? BarDefaults.labelsWidthForHorizontal,
     scrollRef,
     yAxisAtTop,
     initialSpacing,
@@ -536,7 +558,7 @@ export const BarChart = (props: BarChartPropsType) => {
     remainingScrollViewProps,
 
     //horizSectionProps-
-    width: props.width,
+    width: widthFromProps,
     horizSections,
     endSpacing,
     horizontalRulesStyle,
@@ -547,6 +569,7 @@ export const BarChart = (props: BarChartPropsType) => {
 
     yAxisLabelTexts: props.yAxisLabelTexts,
     yAxisOffset: props.yAxisOffset,
+    rotateYAxisTexts: props.rotateYAxisTexts,
     hideAxesAndRules: props.hideAxesAndRules,
 
     showXAxisIndices,

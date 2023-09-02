@@ -116,6 +116,8 @@ export type horizSectionPropTypes = {
   yAxisLabelPrefix: string;
   yAxisLabelSuffix: string;
   yAxisTextStyle: any;
+  rotateYAxisTexts: number | undefined;
+  rtl: boolean;
 
   containerHeight: number;
   maxValue: number;
@@ -149,6 +151,8 @@ export type BarAndLineChartsWrapperTypes = {
   labelsExtraHeight: number;
   yAxisLabelWidth: number;
   horizontal: boolean;
+  rtl: boolean;
+  labelsWidthForHorizontal: number;
   scrollRef: any;
   yAxisAtTop: boolean;
   initialSpacing: number;
@@ -187,6 +191,7 @@ export type BarAndLineChartsWrapperTypes = {
 
   yAxisLabelTexts: Array<string> | undefined;
   yAxisOffset: number | undefined;
+  rotateYAxisTexts: number | undefined;
   hideAxesAndRules: boolean | undefined;
 
   showXAxisIndices: boolean;

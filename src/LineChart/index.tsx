@@ -3021,6 +3021,8 @@ export const LineChart = (props: LineChartPropsType) => {
     labelsExtraHeight,
     yAxisLabelWidth,
     horizontal,
+    rtl: false,
+    labelsWidthForHorizontal: 0,
     scrollRef,
     yAxisAtTop,
     initialSpacing,
@@ -3061,6 +3063,7 @@ export const LineChart = (props: LineChartPropsType) => {
 
     yAxisLabelTexts: props.yAxisLabelTexts,
     yAxisOffset: props.yAxisOffset,
+    rotateYAxisTexts: 0,
     hideAxesAndRules: props.hideAxesAndRules,
 
     showXAxisIndices,

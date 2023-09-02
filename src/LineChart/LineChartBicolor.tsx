@@ -182,6 +182,7 @@ type propTypes = {
   yAxisLabelPrefix?: String;
   yAxisLabelSuffix?: String;
   scrollToEnd?: boolean;
+  scrollToIndex?: number;
   scrollAnimation?: boolean;
   noOfSectionsBelowXAxis?: number;
   labelsExtraHeight?: number;
@@ -1338,6 +1339,8 @@ export const LineChartBicolor = (props: propTypes) => {
     labelsExtraHeight,
     yAxisLabelWidth,
     horizontal,
+    rtl: false,
+    labelsWidthForHorizontal: 0,
     scrollRef,
     yAxisAtTop,
     initialSpacing,
@@ -1350,6 +1353,7 @@ export const LineChartBicolor = (props: propTypes) => {
     disableScroll,
     showScrollIndicator,
     scrollToEnd,
+    scrollToIndex: props.scrollToIndex,
     scrollAnimation,
     indicatorColor: props.indicatorColor,
     setSelectedIndex,
@@ -1377,6 +1381,7 @@ export const LineChartBicolor = (props: propTypes) => {
 
     yAxisLabelTexts: props.yAxisLabelTexts,
     yAxisOffset: props.yAxisOffset,
+    rotateYAxisTexts: 0,
     hideAxesAndRules: props.hideAxesAndRules,
 
     showXAxisIndices,

@@ -563,3 +563,22 @@ export const getLabelTextUtil = (
 
   return yAxisLabelPrefix + label + yAxisLabelSuffix;
 };
+
+export const getXForLineInBar = (
+  index,
+  firstBarWidth,
+  currentBarWidth,
+  yAxisLabelWidth,
+  lineConfig,
+  spacing,
+) =>
+  yAxisLabelWidth +
+  firstBarWidth / 2 +
+  lineConfig.initialSpacing +
+  (currentBarWidth + spacing) * index +
+  lineConfig.shiftX -
+  lineConfig.dataPointsWidth / 2 -
+  32;
+
+export const getYForLineInBar = (value, shiftY, containerHeight, maxValue) =>
+  containerHeight - shiftY - (value * containerHeight) / maxValue;

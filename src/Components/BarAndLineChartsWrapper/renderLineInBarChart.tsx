@@ -2,6 +2,7 @@ import React, {Fragment} from 'react';
 import {View, Animated} from 'react-native';
 import Svg, {Circle, Path, Rect, Text as CanvasText} from 'react-native-svg';
 import {styles} from '../../BarChart/styles';
+import {getXForLineInBar, getYForLineInBar} from '../../utils';
 
 const RenderLineInBarChart = props => {
   const {
@@ -18,18 +19,10 @@ const RenderLineInBarChart = props => {
     data,
     totalWidth,
     barWidth,
+    labelsExtraHeight,
   } = props;
 
-  const getX = (index, currentBarWidth, dataPointsWidth) =>
-    yAxisLabelWidth +
-    lineConfig.initialSpacing +
-    8 -
-    (initialSpacing - currentBarWidth / 2) -
-    dataPointsWidth / 2 +
-    (currentBarWidth + spacing) * index;
-
-  const getY = (value, shiftY) =>
-    containerHeight - shiftY - (value * containerHeight) / maxValue;
+  const firstBarWidth = data[0].barWidth ?? barWidth;
 
   const renderSpecificVerticalLines = (dataForRender: any) => {
     return dataForRender.map((item: any, index: number) => {
@@ -83,9 +76,14 @@ const RenderLineInBarChart = props => {
                   containerHeight -
                   (item.value * containerHeight) / maxValue -
                   (item.shiftY ?? lineConfig.shiftY ?? 0),
-                left:
-                  getX(index, currentBarWidth, lineConfig.dataPointsWidth) -
-                  (item.shiftX ?? lineConfig.shiftX ?? 0),
+                left: getXForLineInBar(
+                  index,
+                  firstBarWidth,
+                  currentBarWidth,
+                  yAxisLabelWidth,
+                  lineConfig,
+                  spacing,
+                ),
               },
             ]}>
             {customDataPoint()}
@@ -96,9 +94,21 @@ const RenderLineInBarChart = props => {
         return (
           <Fragment key={index}>
             <Rect
-              x={getX(index, currentBarWidth, lineConfig.dataPointsWidth)}
+              x={getXForLineInBar(
+                index,
+                firstBarWidth,
+                currentBarWidth,
+                yAxisLabelWidth,
+                lineConfig,
+                spacing,
+              )}
               y={
-                getY(item.value, lineConfig.shiftY) -
+                getYForLineInBar(
+                  item.value,
+                  lineConfig.shiftY,
+                  containerHeight,
+                  maxValue,
+                ) -
                 lineConfig.dataPointsHeight / 2
               }
               width={lineConfig.dataPointsWidth}
@@ -110,11 +120,22 @@ const RenderLineInBarChart = props => {
                 fill={item.textColor || lineConfig.textColor}
                 fontSize={item.textFontSize || lineConfig.textFontSize}
                 x={
-                  getX(index, currentBarWidth, lineConfig.dataPointsWidth) +
-                  (item.textShiftX || lineConfig.textShiftX || 0)
+                  getXForLineInBar(
+                    index,
+                    firstBarWidth,
+                    currentBarWidth,
+                    yAxisLabelWidth,
+                    lineConfig,
+                    spacing,
+                  ) + (item.textShiftX || lineConfig.textShiftX || 0)
                 }
                 y={
-                  getY(item.value, lineConfig.shiftY) -
+                  getYForLineInBar(
+                    item.value,
+                    lineConfig.shiftY,
+                    containerHeight,
+                    maxValue,
+                  ) -
                   lineConfig.dataPointsHeight / 2 +
                   (item.textShiftY || lineConfig.textShiftY || 0)
                 }>
@@ -127,8 +148,20 @@ const RenderLineInBarChart = props => {
       return (
         <Fragment key={index}>
           <Circle
-            cx={getX(index, currentBarWidth, lineConfig.dataPointsWidth)}
-            cy={getY(item.value, lineConfig.shiftY)}
+            cx={getXForLineInBar(
+              index,
+              firstBarWidth,
+              currentBarWidth,
+              yAxisLabelWidth,
+              lineConfig,
+              spacing,
+            )}
+            cy={getYForLineInBar(
+              item.value,
+              lineConfig.shiftY,
+              containerHeight,
+              maxValue,
+            )}
             r={lineConfig.dataPointsRadius}
             fill={lineConfig.dataPointsColor}
           />
@@ -137,11 +170,22 @@ const RenderLineInBarChart = props => {
               fill={item.textColor || lineConfig.textColor}
               fontSize={item.textFontSize || lineConfig.textFontSize}
               x={
-                getX(index, currentBarWidth, lineConfig.dataPointsWidth) +
-                (item.textShiftX || lineConfig.textShiftX || 0)
+                getXForLineInBar(
+                  index,
+                  firstBarWidth,
+                  currentBarWidth,
+                  yAxisLabelWidth,
+                  lineConfig,
+                  spacing,
+                ) + (item.textShiftX || lineConfig.textShiftX || 0)
               }
               y={
-                getY(item.value, lineConfig.shiftY) -
+                getYForLineInBar(
+                  item.value,
+                  lineConfig.shiftY,
+                  containerHeight,
+                  maxValue,
+                ) -
                 lineConfig.dataPointsHeight / 2 +
                 (item.textShiftY || lineConfig.textShiftY || 0)
               }>
@@ -160,13 +204,21 @@ const RenderLineInBarChart = props => {
           return (
             <Fragment key={index}>
               <Rect
-                x={getX(
+                x={getXForLineInBar(
                   index,
+                  firstBarWidth,
                   currentBarWidth,
-                  item.dataPointWidth || lineConfig.dataPointsWidth,
+                  yAxisLabelWidth,
+                  lineConfig,
+                  spacing,
                 )}
                 y={
-                  getY(item.value, lineConfig.shiftY) -
+                  getYForLineInBar(
+                    item.value,
+                    lineConfig.shiftY,
+                    containerHeight,
+                    maxValue,
+                  ) -
                   item.dataPointsHeight / 2
                 }
                 width={item.dataPointWidth || lineConfig.dataPointsWidth}
@@ -178,14 +230,22 @@ const RenderLineInBarChart = props => {
                   fill={item.textColor || 'black'}
                   fontSize={item.textFontSize || 10}
                   x={
-                    getX(
+                    getXForLineInBar(
                       index,
+                      firstBarWidth,
                       currentBarWidth,
-                      item.dataPointWidth || lineConfig.dataPointsWidth,
+                      yAxisLabelWidth,
+                      lineConfig,
+                      spacing,
                     ) + (item.textShiftX || lineConfig.textShiftX || 0)
                   }
                   y={
-                    getY(item.value, lineConfig.shiftY) -
+                    getYForLineInBar(
+                      item.value,
+                      lineConfig.shiftY,
+                      containerHeight,
+                      maxValue,
+                    ) -
                     (item.dataPointHeight || lineConfig.dataPointsHeight) / 2 +
                     (item.textShiftY || lineConfig.textShiftY || 0)
                   }>
@@ -198,12 +258,20 @@ const RenderLineInBarChart = props => {
           return (
             <Fragment key={index}>
               <Circle
-                cx={getX(
+                cx={getXForLineInBar(
                   index,
+                  firstBarWidth,
                   currentBarWidth,
-                  item.dataPointsWidth || lineConfig.dataPointsWidth,
+                  yAxisLabelWidth,
+                  lineConfig,
+                  spacing,
                 )}
-                cy={getY(item.value, lineConfig.shiftY)}
+                cy={getYForLineInBar(
+                  item.value,
+                  lineConfig.shiftY,
+                  containerHeight,
+                  maxValue,
+                )}
                 r={item.dataPointRadius || 3}
                 fill={item.dataPointColor || 'black'}
               />
@@ -212,14 +280,22 @@ const RenderLineInBarChart = props => {
                   fill={item.textColor || 'black'}
                   fontSize={item.textFontSize || 10}
                   x={
-                    getX(
+                    getXForLineInBar(
                       index,
+                      firstBarWidth,
                       currentBarWidth,
-                      item.dataPointsWidth || lineConfig.dataPointsWidth,
+                      yAxisLabelWidth,
+                      lineConfig,
+                      spacing,
                     ) + (item.textShiftX || lineConfig.textShiftX || 0)
                   }
                   y={
-                    getY(item.value, lineConfig.shiftY) -
+                    getYForLineInBar(
+                      item.value,
+                      lineConfig.shiftY,
+                      containerHeight,
+                      maxValue,
+                    ) -
                     (item.dataPointHeight || lineConfig.dataPointsHeight) / 2 +
                     (item.textShiftY || lineConfig.textShiftY || 0)
                   }>
@@ -278,7 +354,7 @@ const RenderLineInBarChart = props => {
       <View
         style={{
           position: 'absolute',
-          height: containerHeight + 10,
+          height: containerHeight + 10 + labelsExtraHeight,
           left: 34 - yAxisLabelWidth,
           bottom: 50, //stepHeight * -0.5 + xAxisThickness,
           width: totalWidth,

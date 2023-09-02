@@ -20,7 +20,7 @@
 | spacing                      | number         | Distance between 2 consecutive bars in the Bar chart                                                    | 20                  |
 | backgroundColor              | ColorValue     | Background color of the Bar chart                                                                       | \_                  |
 | scrollref                    | any            | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered     | React.useRef()      |
-| scrollToIndex                | number         | scroll to a particular index on chart load                                                              | \_                  | 
+| scrollToIndex                | number         | scroll to a particular index on chart load                                                              | \_                  |
 | disableScroll                | boolean        | To disable horizontal scroll                                                                            | false               |
 | showScrollIndicator          | boolean        | To show horizontal scroll indicator                                                                     | false               |
 | indicatorColor               | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                         | default             |
@@ -60,6 +60,7 @@ type lineConfigType = {
   textFontSize?: number,
   textShiftX?: number,
   textShiftY?: number,
+  sfiftX?: number,
   shiftY?: number,
   startIndex?: number,
   endIndex?: number,
@@ -393,11 +394,14 @@ While rendering an Animated Bar chart, y axis labels may not appear sometimes. T
 
 ### Props for horizontal BarChart
 
-| Prop           | Type    | Description                                                                                   | Default value |
-| -------------- | ------- | --------------------------------------------------------------------------------------------- | ------------- |
-| horizontal     | boolean | Render horizontal BarChart                                                                    | false         |
-| yAxisAtTop     | boolean | In horizontal BarCharts the Y axis appears at bottom by default. Set it to true for otherwise | false         |
-| intactTopLabel | boolean | To rotate the top label component to make it intact with the Bars                             | false         |
+| Prop                     | Type    | Description                                                                                   | Default value |
+| ------------------------ | ------- | --------------------------------------------------------------------------------------------- | ------------- |
+| horizontal               | boolean | Render horizontal BarChart                                                                    | false         |
+| rtl                      | boolean | Render the chart from right to left                                                           | false         |
+| labelsWidthForHorizontal | number  | in horizontal charts, the labels width is needed to position the chart correctly              | 30            |
+| rotateYAxisTexts         | number  | angle by which the Y axis label texts should rotate in horizontal charts                      | -90           |
+| yAxisAtTop               | boolean | In horizontal BarCharts the Y axis appears at bottom by default. Set it to true for otherwise | false         |
+| intactTopLabel           | boolean | To rotate the top label component to make it intact with the Bars                             | false         |
 
 ## Props for Stacked Bar Charts
 

@@ -100,7 +100,10 @@ export const BarDefaults = {
   capRadius: 0,
 
   horizontal: false,
+  rtl: false,
+  labelsWidthForHorizontal: 30,
   yAxisAtTop: false,
+  rotateYAxisTexts: undefined,
   intactTopLabel: false,
 
   showLine: false,
@@ -136,6 +139,7 @@ export const defaultLineConfig: defaultLineConfigType = {
   textFontSize: 10,
   textShiftX: 0,
   textShiftY: 0,
+  shiftX: 0,
   shiftY: 0,
   delay: 0,
   startIndex: 0,

@@ -22,8 +22,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     labelsExtraHeight,
     yAxisLabelWidth,
     horizontal,
+    rtl,
+    labelsWidthForHorizontal,
     scrollRef,
-    yAxisAtTop,
     initialSpacing,
     data,
     stackData,
@@ -60,6 +61,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
 
     yAxisLabelTexts,
     yAxisOffset,
+    rotateYAxisTexts,
     hideAxesAndRules,
 
     showXAxisIndices,
@@ -73,6 +75,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     pointerX,
     pointerY,
   } = props;
+
+  let yAxisAtTop = rtl ? !props.yAxisAtTop : props.yAxisAtTop;
 
   const hideOrigin =
     axesAndRulesProps.hideOrigin ?? AxesAndRulesDefaults.hideOrigin;
@@ -200,6 +204,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     yAxisLabelPrefix,
     yAxisLabelSuffix,
     yAxisTextStyle,
+    rotateYAxisTexts,
+    rtl,
 
     containerHeight,
     maxValue,
@@ -233,6 +239,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     data: lineData ?? data,
     totalWidth,
     barWidth,
+    labelsExtraHeight,
   };
   const extendedContainerHeight = containerHeight + 10;
   const containerHeightIncludingBelowXAxis =
@@ -260,36 +267,66 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     containerHeightIncludingBelowXAxis,
   };
 
+  const actualContainerHeight =
+    containerHeightIncludingBelowXAxis + labelsExtraHeight - 10;
+  const actualContainerWidth = (width ?? totalWidth) + yAxisLabelWidth;
+
+  /*******************************************************************************************************************************************/
+  /***************                                 horizontal chart related calculations                                   *******************/
+  /*******************************************************************************************************************************************/
+
+  const containerHeightIncludingXaxisLabels =
+    actualContainerHeight + labelsWidthForHorizontal;
+
+  const difBwWidthHeight =
+    actualContainerWidth - containerHeightIncludingXaxisLabels;
+
+  const transformForHorizontal = [
+    {rotate: rtl ? '-90deg' : '90deg'},
+    {
+      translateY: (rtl ? -difBwWidthHeight + 14 : difBwWidthHeight) / 2 - 20,
+    },
+    {
+      translateX:
+        (rtl
+          ? (props.width ? -98 - endSpacing : -75 - endSpacing) -
+            difBwWidthHeight
+          : props.width
+          ? difBwWidthHeight
+          : difBwWidthHeight - 40) /
+          2 +
+        (yAxisAtTop ? (rtl ? (props.width ? 12 : 40) : 12) : 52),
+    },
+  ];
+
+  /*******************************************************************************************************************************************/
+  /*******************************************************************************************************************************************/
+
   const container = {
-    width: '100%',
-    marginBottom: 40,
+    width: horizontal ? actualContainerWidth : '100%',
+    height: actualContainerHeight,
+    marginBottom: 40, //This is to not let the Things that should be rendered below the chart overlap with it
   };
+
   return (
     <View
       style={[
         container,
-        {
-          height: containerHeightIncludingBelowXAxis + labelsExtraHeight - 10,
-        },
         horizontal && {
-          transform: [
-            {rotate: '90deg'},
-            {translateY: 15},
-            {translateX: props.width ?? 140}, // update needed
-          ],
+          transform: transformForHorizontal,
         },
       ]}>
-      {props.hideAxesAndRules !== true &&
-        renderHorizSections(horizSectionProps)}
+      {hideAxesAndRules !== true && renderHorizSections(horizSectionProps)}
       <ScrollView
         horizontal
         ref={scrollRef}
         style={[
           {
+            // backgroundColor:'red',
             marginLeft:
               horizontal && !yAxisAtTop
-                ? -initialSpacing -
-                  yAxisThickness -
+                ? -yAxisThickness -
+                  (props.width ? 20 : 0) -
                   (data[data.length - 1].barWidth ?? barWidth ?? 0) / 2
                 : yAxisSide === yAxisSides.RIGHT
                 ? 0
@@ -301,7 +338,10 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
               (chartType === chartTypes.LINE_BI_COLOR ? 0 : xAxisThickness),
           },
           !!props.width && {width: props.width - 11},
-          horizontal && {width: props.width ?? totalWidth},
+          horizontal && {
+            width:
+              (props.width ?? totalWidth) + (props.width ? endSpacing : -20),
+          },
         ]}
         contentContainerStyle={[
           {

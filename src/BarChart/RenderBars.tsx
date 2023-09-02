@@ -57,6 +57,7 @@ type Props = {
   xAxisIndicesWidth: number;
   xAxisIndicesColor: ColorValue;
   horizontal: boolean;
+  rtl: boolean;
   intactTopLabel: boolean;
   barBorderRadius?: number;
   barBorderTopLeftRadius?: number;
@@ -114,6 +115,8 @@ const RenderBars = (props: Props) => {
     selectedIndex,
     setSelectedIndex,
     xAxisThickness,
+    horizontal,
+    rtl,
   } = props;
 
   const barMarginBottom =
@@ -137,7 +140,7 @@ const RenderBars = (props: Props) => {
             bottom: (rotateLabel ? -40 : -25) - barMarginBottom,
           },
           rotateLabel
-            ? props.horizontal
+            ? horizontal
               ? {transform: [{rotate: '330deg'}]}
               : {
                   transform: [
@@ -146,7 +149,7 @@ const RenderBars = (props: Props) => {
                     {translateY: value < 0 ? 32 : 0},
                   ],
                 }
-            : props.horizontal
+            : horizontal
             ? {transform: [{rotate: '-90deg'}]}
             : value < 0
             ? {
@@ -161,7 +164,11 @@ const RenderBars = (props: Props) => {
           item.labelComponent()
         ) : (
           <Text
-            style={[{textAlign: 'center'}, labelTextStyle]}
+            style={[
+              {textAlign: 'center'},
+              rtl && {transform: [{rotate: '180deg'}]},
+              labelTextStyle,
+            ]}
             numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}
           </Text>
@@ -192,10 +199,10 @@ const RenderBars = (props: Props) => {
           },
           value < 0 && {transform: [{rotate: '180deg'}]},
           rotateLabel
-            ? props.horizontal
+            ? horizontal
               ? {transform: [{rotate: '330deg'}]}
               : {transform: [{rotate: '60deg'}]}
-            : props.horizontal
+            : horizontal
             ? {transform: [{rotate: '-90deg'}]}
             : {},
         ]}>
@@ -290,13 +297,13 @@ const RenderBars = (props: Props) => {
                 height: item.barWidth || props.barWidth || 30,
                 width: item.barWidth || props.barWidth || 30,
                 justifyContent:
-                  (props.horizontal && !props.intactTopLabel) || item.value < 0
+                  (horizontal && !props.intactTopLabel) || item.value < 0
                     ? 'center'
                     : 'flex-end',
                 alignItems: 'center',
               },
               item.value < 0 && {transform: [{rotate: '180deg'}]},
-              props.horizontal &&
+              horizontal &&
                 !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
               item.topLabelContainerStyle,
             ]}>
@@ -397,7 +404,7 @@ const RenderBars = (props: Props) => {
               animationDuration={animationDuration || 800}
               height={barHeight}
               intactTopLabel={props.intactTopLabel}
-              horizontal={props.horizontal}
+              horizontal={horizontal}
             />
           ) : (
             <ThreeDBar
@@ -424,7 +431,7 @@ const RenderBars = (props: Props) => {
               gradientColor={item.gradientColor || props.gradientColor}
               topLabelComponent={item.topLabelComponent || null}
               opacity={opacity || 1}
-              horizontal={props.horizontal}
+              horizontal={horizontal}
               intactTopLabel={props.intactTopLabel}
               height={barHeight}
               value={item.value}
@@ -453,7 +460,7 @@ const RenderBars = (props: Props) => {
               capThickness={props.capThickness}
               capColor={props.capColor}
               capRadius={props.capRadius}
-              horizontal={props.horizontal}
+              horizontal={horizontal}
               intactTopLabel={props.intactTopLabel}
               barBorderRadius={props.barBorderRadius || 0}
               barBorderTopLeftRadius={barBorderTopLeftRadius}
@@ -487,7 +494,7 @@ const RenderBars = (props: Props) => {
             capThickness={props.capThickness}
             capColor={props.capColor}
             capRadius={props.capRadius}
-            horizontal={props.horizontal}
+            horizontal={horizontal}
             intactTopLabel={props.intactTopLabel}
             barBorderRadius={props.barBorderRadius || 0}
             barBorderTopLeftRadius={barBorderTopLeftRadius}
@@ -519,7 +526,7 @@ const RenderBars = (props: Props) => {
             capThickness={props.capThickness}
             capColor={props.capColor}
             capRadius={props.capRadius}
-            horizontal={props.horizontal}
+            horizontal={horizontal}
             intactTopLabel={props.intactTopLabel}
             barBorderRadius={props.barBorderRadius || 0}
             barBorderTopLeftRadius={barBorderTopLeftRadius}
