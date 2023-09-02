@@ -372,6 +372,8 @@ type Pointer = {
   pointerLabelComponent?: Function;
   stripOverPointer?: boolean;
   autoAdjustPointerLabelPosition?: boolean;
+  autoAdjustPointerXLabelPosition?: boolean;
+  autoAdjustPointerYLabelPosition?: boolean;
   shiftPointerLabelX?: number;
   shiftPointerLabelY?: number;
   pointerLabelWidth?: number;
@@ -1937,6 +1939,14 @@ export const LineChart = (props: propTypes) => {
     pointerConfig && pointerConfig.autoAdjustPointerLabelPosition === false
       ? false
       : defaultPointerConfig.autoAdjustPointerLabelPosition;
+  const autoAdjustPointerXLabelPosition =
+    (pointerConfig && pointerConfig.autoAdjustPointerXLabelPosition === false) || (pointerConfig && pointerConfig.autoAdjustPointerLabelPosition === false)
+      ? false
+      : true
+  const autoAdjustPointerYLabelPosition =
+    (pointerConfig && pointerConfig.autoAdjustPointerYLabelPosition === false) || (pointerConfig && pointerConfig.autoAdjustPointerLabelPosition === false)
+      ? false
+      : true
   const pointerVanishDelay =
     pointerConfig && pointerConfig.pointerVanishDelay
       ? pointerConfig.pointerVanishDelay
@@ -2606,7 +2616,7 @@ export const LineChart = (props: propTypes) => {
 
     let left = 0,
       top = 0;
-    if (autoAdjustPointerLabelPosition) {
+    if (autoAdjustPointerXLabelPosition) {
       if (pointerX < pointerLabelWidth / 2) {
         left = 7;
       } else if (
@@ -2639,7 +2649,7 @@ export const LineChart = (props: propTypes) => {
       left = (pointerRadius || pointerWidth / 2) - 10 + shiftPointerLabelX;
     }
 
-    if (autoAdjustPointerLabelPosition) {
+    if (autoAdjustPointerYLabelPosition) {
       if (pointerLabelHeight - pointerYLocal > 10) {
         top = 10;
       } else {
