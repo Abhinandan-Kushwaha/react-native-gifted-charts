@@ -232,19 +232,27 @@ const RenderBars = (props: Props) => {
               position: 'absolute',
               width: '100%',
               height: '100%',
-              borderRadius: item.barBorderRadius || barBorderRadius || 0,
+              borderRadius: item.barBorderRadius ?? barBorderRadius ?? 0,
               borderTopLeftRadius:
-                item.barBorderTopLeftRadius || barBorderTopLeftRadius || 0,
+                item.barBorderTopLeftRadius ??
+                barBorderTopLeftRadius ??
+                item.barBorderRadius ??
+                barBorderRadius,
               borderTopRightRadius:
-                item.barBorderTopRightRadius || barBorderTopRightRadius || 0,
+                item.barBorderTopRightRadius ??
+                barBorderTopRightRadius ??
+                item.barBorderRadius ??
+                barBorderRadius,
               borderBottomLeftRadius:
-                item.barBorderBottomLeftRadius ||
-                barBorderBottomLeftRadius ||
-                0,
+                item.barBorderBottomLeftRadius ??
+                barBorderBottomLeftRadius ??
+                item.barBorderRadius ??
+                barBorderRadius,
               borderBottomRightRadius:
-                item.barBorderBottomRightRadius ||
-                barBorderBottomRightRadius ||
-                0,
+                item.barBorderBottomRightRadius ??
+                barBorderBottomRightRadius ??
+                item.barBorderRadius ??
+                barBorderRadius,
             },
             props.roundedBottom && {
               borderBottomLeftRadius:
@@ -368,15 +376,18 @@ const RenderBars = (props: Props) => {
           // { backgroundColor: item.frontColor || props.frontColor || 'black' },
           side !== 'right' && {zIndex: data.length - index},
         ]}>
-        {props.showXAxisIndices && (
+        {(props.showXAxisIndices || item.showXAxisIndex) && (
           <View
             style={{
               zIndex: 2,
               position: 'absolute',
               height: props.xAxisIndicesHeight,
               width: props.xAxisIndicesWidth,
-              bottom: 0,
-              left: (item.barWidth || props.barWidth || 30) / 2,
+              bottom: props.xAxisIndicesHeight / -2,
+              left:
+                ((item.barWidth || props.barWidth || 30) -
+                  props.xAxisIndicesWidth) /
+                2,
               backgroundColor: props.xAxisIndicesColor,
             }}
           />

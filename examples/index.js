@@ -29,6 +29,7 @@ import PieChartFocusOnPress from './PieChart/PieChartFocusOnPress';
 import BarPairWithLine from './BarChart/BarPairWithLine';
 import AreaChartDynamicData from './LineChart/AreaChartDynamicData';
 import BiColorAreaChart from './LineChart/BiColorAreaChart';
+import SecondaryLineChart from './LineChart/SecondaryLineChart';
 
 const Examples = () => {
   const [selectedFooterButton, setSelectedFooterButton] = useState(0);
@@ -100,6 +101,9 @@ const Examples = () => {
         <Separator />
         
         <BiColorAreaChart />
+        <Separator />
+
+        <SecondaryLineChart />
         <Separator />
 
         <CaloriesBurnt />

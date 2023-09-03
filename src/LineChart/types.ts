@@ -335,6 +335,7 @@ export type itemType = {
   pointerShiftX?: number;
   pointerShiftY?: number;
   onPress?: Function;
+  showXAxisIndex?: boolean;
 };
 
 type sectionType = {

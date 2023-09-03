@@ -700,7 +700,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
               width: secondaryYAxisConfig.yAxisLabelWidth,
               left: width
                 ? yAxisLabelWidth
-                : yAxisLabelWidth - (chartType === chartTypes.BAR ? 20 : 50),
+                : yAxisLabelWidth - (chartType === chartTypes.BAR ? 4 : 16),
               borderColor: secondaryYAxisConfig.yAxisColor,
               borderLeftWidth: secondaryYAxisConfig.yAxisThickness,
             }}>

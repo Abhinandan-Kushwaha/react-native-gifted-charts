@@ -256,4 +256,5 @@ export type itemType = {
   barMarginBottom?: number;
   leftShiftForTooltip?: number;
   barStyle?: object;
+  showXAxisIndex?: boolean;
 };
