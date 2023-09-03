@@ -1,7 +1,3 @@
-<img width="866" alt="chandrayaan-3" src="https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/assets/20596944/896eed43-ebc4-4983-9f69-3a52463a1258">
-
-This is a proud moment for India and the world. Chandrayaan 3 has landed safely on the south pole of the moon, making India the first country to land on the lunar south pole!
-
 # react-native-gifted-charts [![Rate on Openbase](https://badges.openbase.com/js/rating/react-native-gifted-charts.svg)](https://openbase.com/js/react-native-gifted-charts?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
 The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
@@ -41,8 +37,9 @@ However, we are planning to add support for web which will be available soon.
 
 ---
 
-## Version 1.2.x 🎉
-Version 1.2.0 onwards we are dependent only on `react-native-svg` and `react-native-linear-gradient`. Earlier, Pie and Donut charts were rendered using `react-native-canvas`, but now they are also rendered using <b>svg</b>. We are no longer using `react-native-canvas` neither `react-native-webview`!
+## [Version 1.3.4 🎉](release-notes/release-notes.md)
+Version 1.3.4 is a mojor release. It has code refactor, many bug fixes and some new features. Have a look at the Release Notes to see what's new in `1.3.4`.<br />
+**[Release notes](release-notes/release-notes.md)**
 
 ## Installation
 
