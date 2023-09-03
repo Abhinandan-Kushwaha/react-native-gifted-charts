@@ -9,14 +9,14 @@ import Svg, {
   RadialGradient,
   Stop,
 } from 'react-native-svg';
-import {colors} from './colors';
+import {pieColors} from '../utils/constants';
 
 type propTypes = {
   radius?: number;
-  isThreeD?: Boolean;
-  donut?: Boolean;
+  isThreeD?: boolean;
+  donut?: boolean;
   innerRadius?: number;
-  shadow?: Boolean;
+  shadow?: boolean;
   innerCircleColor?: ColorValue;
   innerCircleBorderWidth?: number;
   innerCircleBorderColor?: ColorValue;
@@ -28,18 +28,18 @@ type propTypes = {
   strokeColor?: string;
   backgroundColor?: string;
   data: Array<itemType>;
-  semiCircle?: Boolean;
+  semiCircle?: boolean;
 
-  showText?: Boolean;
+  showText?: boolean;
   textColor?: string;
   textSize?: number;
   fontStyle?: FontStyle;
   fontWeight?: string;
   font?: string;
-  showTextBackground?: Boolean;
+  showTextBackground?: boolean;
   textBackgroundColor?: string;
   textBackgroundRadius?: number;
-  showValuesAsLabels?: Boolean;
+  showValuesAsLabels?: boolean;
 
   centerLabelComponent?: Function;
   tiltAngle?: string;
@@ -48,12 +48,12 @@ type propTypes = {
   showGradient?: boolean;
   gradientCenterColor?: string;
   onPress?: Function;
-  focusOnPress?: Boolean;
-  toggleFocusOnPress?: Boolean;
+  focusOnPress?: boolean;
+  toggleFocusOnPress?: boolean;
   selectedIndex?: number;
-  setSelectedIndex?: Function;
+  setSelectedIndex: Function;
   onLabelPress?: Function;
-  isBiggerPie?: Boolean
+  isBiggerPie?: boolean;
 };
 type itemType = {
   value: number;
@@ -82,7 +82,7 @@ type itemType = {
 export const PieChartMain = (props: propTypes) => {
   const {isThreeD} = props;
   const propData = props.data;
-  const data = [];
+  const data: Array<itemType> = [];
   if (propData) {
     for (let i = 0; i < propData.length; i++) {
       if (propData[i].value !== 0) {
@@ -145,7 +145,7 @@ export const PieChartMain = (props: propTypes) => {
     minShiftY = 0,
     maxShiftY = 0,
     total = 0;
-    
+
   data.forEach((item: any) => {
     total += item.value;
     if (item.shiftX || item.shiftY) {
@@ -237,7 +237,7 @@ export const PieChartMain = (props: propTypes) => {
                 />
                 <Stop
                   offset="100%"
-                  stopColor={item.color || colors[index % 9]}
+                  stopColor={item.color || pieColors[index % 9]}
                   stopOpacity="1"
                 />
               </RadialGradient>
@@ -251,7 +251,9 @@ export const PieChartMain = (props: propTypes) => {
               cy={cy}
               r={radius}
               fill={
-                showGradient ? `url(#grad${0})` : data[0].color || colors[0 % 9]
+                showGradient
+                  ? `url(#grad${0})`
+                  : data[0].color || pieColors[0 % 9]
               }
               onPress={() => {
                 data[0].onPress
@@ -304,7 +306,7 @@ export const PieChartMain = (props: propTypes) => {
                     ? 'transparent'
                     : showGradient
                     ? `url(#grad${index})`
-                    : item.color || colors[index % 9]
+                    : item.color || pieColors[index % 9]
                 }
                 onPress={() => {
                   if (item.onPress) {
@@ -410,7 +412,9 @@ export const PieChartMain = (props: propTypes) => {
                   />
                 )}
                 <SvgText
-                  fill={item.textColor || textColor || colors[(index + 2) % 9]}
+                  fill={
+                    item.textColor || textColor || pieColors[(index + 2) % 9]
+                  }
                   fontSize={item.textSize || textSize}
                   fontFamily={item.font || props.font}
                   fontWeight={item.fontWeight || props.fontWeight}

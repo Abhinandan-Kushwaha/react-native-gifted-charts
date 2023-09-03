@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import {BarChart} from '../../src/BarChart';
+import { ruleTypes } from '../../src/utils/constants';
 
 const BarChartWithGivenNumberOfVerticalLines = () => {
   const data = [
@@ -17,7 +18,7 @@ const BarChartWithGivenNumberOfVerticalLines = () => {
         showVerticalLines
         noOfVerticalLines={7}
         verticalLinesSpacing={40}
-        rulesType="solid"
+        rulesType={ruleTypes.SOLID}
       />
     </View>
   );

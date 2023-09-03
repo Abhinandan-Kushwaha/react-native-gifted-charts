@@ -37,11 +37,11 @@ However, we are planning to add support for web which will be available soon.
 
 ---
 
-## Version 1.2.x 🎉
-Version 1.2.0 onwards we are dependent only on `react-native-svg` and `react-native-linear-gradient`. Earlier, Pie and Donut charts were rendered using `react-native-canvas`, but now they are also rendered using <b>svg</b>. We are no longer using `react-native-canvas` neither `react-native-webview`!
+## [Version 1.3.4 🎉](release-notes/release-notes.md)
+Version 1.3.4 is a mojor release. It has code refactor, many bug fixes and some new features. Have a look at the Release Notes to see what's new in `1.3.4`.<br />
+**[Release notes](release-notes/release-notes.md)**
 
 ## Installation
-
 ```sh
 npm install react-native-gifted-charts react-native-linear-gradient react-native-svg
 ```
@@ -51,6 +51,7 @@ For iOS-
 ```sh
 cd ios && pod install
 ```
+Please note that `react-native-svg` and `react-native-linear-gradient` are needed for the library to work, so make sure they are installed in your project.
 
 # Docs
 

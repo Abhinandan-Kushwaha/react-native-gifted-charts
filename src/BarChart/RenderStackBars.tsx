@@ -1,14 +1,23 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {
   View,
   TouchableOpacity,
   Text,
   ColorValue,
   GestureResponderEvent,
+  LayoutAnimation,
+  Platform,
+  UIManager,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {Style} from 'util';
+import {BarDefaults} from '../utils/constants';
+
+if (Platform.OS === 'android') {
+  UIManager.setLayoutAnimationEnabledExperimental &&
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+}
 
 type Props = {
   style?: any;
@@ -22,40 +31,42 @@ type Props = {
   labelTextStyle?: any;
   disablePress?: boolean;
 
-  item: itemType;
+  item: stackItemType;
   index: number;
   containerHeight?: number;
   maxValue: number;
-  spacing?: number;
+  spacing: number;
   propSpacing?: number;
   data?: any;
   barWidth?: number;
   onPress?: Function;
 
-  rotateLabel?: Boolean;
-  showXAxisIndices: Boolean;
+  rotateLabel?: boolean;
+  showXAxisIndices: boolean;
   xAxisIndicesHeight: number;
   xAxisIndicesWidth: number;
   xAxisIndicesColor: ColorValue;
-  horizontal: Boolean;
-  intactTopLabel: Boolean;
+  horizontal: boolean;
+  intactTopLabel: boolean;
   barBorderRadius?: number;
   xAxisThickness: number;
   barBackgroundPattern?: Function;
   patternId?: String;
   xAxisTextNumberOfLines: number;
-  renderTooltip: Function;
+  renderTooltip: Function | undefined;
   leftShiftForTooltip?: number;
   leftShiftForLastIndexTooltip: number;
   initialSpacing: number;
   selectedIndex: number;
   setSelectedIndex: Function;
   activeOpacity: number;
-  showGradient?: Boolean;
+  showGradient?: boolean;
   gradientColor?: any;
-  stackData: Array<itemType>;
+  stackData: Array<stackItemType>;
+  isAnimated?: boolean;
+  animationDuration?: number;
 };
-export type itemType = {
+export type stackItemType = {
   value?: number;
   onPress?: any;
   label?: String;
@@ -66,14 +77,14 @@ export type itemType = {
   topLabelContainerStyle?: any;
   disablePress?: any;
   color?: ColorValue;
-  showGradient?: Boolean;
+  showGradient?: boolean;
   gradientColor?: any;
   capThickness?: number;
   capColor?: ColorValue;
   capRadius?: number;
   labelComponent?: Function;
   borderRadius?: number;
-  stacks?: Array<{
+  stacks: Array<{
     value: number;
     color?: ColorValue;
     onPress?: (event: GestureResponderEvent) => void;
@@ -86,9 +97,10 @@ export type itemType = {
     showGradient?: boolean;
     gradientColor?: ColorValue;
     barWidth?: number;
+    innerBarComponent?: Function;
   }>;
   barBackgroundPattern?: Function;
-  barBorderRadius?: Number;
+  barBorderRadius?: number;
   patternId?: String;
   leftShiftForTooltip?: number;
 };
@@ -115,12 +127,17 @@ const RenderStackBars = (props: Props) => {
     setSelectedIndex,
     activeOpacity,
     stackData,
+    isAnimated,
+    animationDuration = BarDefaults.animationDuration,
   } = props;
+  const cotainsNegative = item.stacks.some(item => item.value < 0);
+  const noAnimation = cotainsNegative || !isAnimated;
+
   let leftSpacing = initialSpacing;
   for (let i = 0; i < index; i++) {
     leftSpacing +=
-      (stackData[i].spacing === 0 ? 0 : stackData[i].spacing || propSpacing) +
-      (stackData[i].stacks[0].barWidth || props.barWidth || 30);
+      (stackData[i].spacing ?? propSpacing ?? 0) +
+      (stackData[i].stacks[0].barWidth ?? props.barWidth ?? 30);
   }
   const disablePress = props.disablePress || false;
   const renderLabel = (label: String, labelTextStyle: any) => {
@@ -169,8 +186,49 @@ const RenderStackBars = (props: Props) => {
     0,
   );
 
-  const static2DSimple = (item: itemType, index: number) => {
-    const cotainsNegative = item.stacks.some(item => item.value < 0);
+  const [height, setHeight] = useState(noAnimation ? totalHeight : 1);
+
+  useEffect(() => {
+    if (!noAnimation) {
+      layoutAppear();
+    }
+  }, [totalHeight]);
+
+  const elevate = () => {
+    LayoutAnimation.configureNext({
+      duration: animationDuration,
+      update: {type: 'linear', property: 'scaleXY'},
+    });
+    setHeight(totalHeight);
+  };
+
+  const layoutAppear = () => {
+    LayoutAnimation.configureNext({
+      duration: Platform.OS == 'ios' ? animationDuration : 20,
+      create: {type: 'linear', property: 'opacity'},
+      update: {type: 'linear', property: 'scaleXY'},
+    });
+    setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
+  };
+
+  const barWrapper = () => {
+    return noAnimation ? (
+      static2DSimple()
+    ) : (
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          height: height,
+          width: '100%',
+          overflow: 'hidden',
+        }}>
+        {static2DSimple()}
+      </View>
+    );
+  };
+
+  const static2DSimple = () => {
     return (
       <>
         <TouchableOpacity
@@ -216,10 +274,10 @@ const RenderStackBars = (props: Props) => {
                     backgroundColor:
                       stackItem.color || item.color || props.color || 'black',
                     borderRadius:
-                      stackItem.borderRadius || props.barBorderRadius || 0,
+                      stackItem.barBorderRadius || props.barBorderRadius || 0,
                   },
                   !props.barBorderRadius &&
-                    !stackItem.borderRadius && {
+                    !stackItem.barBorderRadius && {
                       borderTopLeftRadius: stackItem.borderTopLeftRadius || 0,
                       borderTopRightRadius: stackItem.borderTopRightRadius || 0,
                       borderBottomLeftRadius:
@@ -264,7 +322,7 @@ const RenderStackBars = (props: Props) => {
               <Defs>
                 {item.barBackgroundPattern
                   ? item.barBackgroundPattern()
-                  : barBackgroundPattern()}
+                  : barBackgroundPattern?.()}
               </Defs>
               <Rect
                 stroke="transparent"
@@ -340,7 +398,7 @@ const RenderStackBars = (props: Props) => {
             }}
           />
         )}
-        {static2DSimple(item, index)}
+        {barWrapper()}
         {renderLabel(label || '', labelTextStyle)}
       </View>
       {renderTooltip && selectedIndex === index && (
@@ -352,7 +410,7 @@ const RenderStackBars = (props: Props) => {
               index === stackData.length - 1
                 ? leftSpacing - leftShiftForLastIndexTooltip
                 : leftSpacing -
-                  (item.leftShiftForTooltip ?? leftShiftForTooltip),
+                  (item.leftShiftForTooltip ?? leftShiftForTooltip ?? 0),
             zIndex: 1000,
           }}>
           {renderTooltip(item, index)}

@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-charts",
-  "version": "1.3.2",
+  "version": "1.3.4",
   "description": "The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.",
   "main": "src/index.tsx",
   "files": [
@@ -24,8 +24,6 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "react-native-linear-gradient": "^2.7.3",
-    "react-native-svg": "^13.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
@@ -46,19 +44,22 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-linear-gradient": "*",
+    "react-native-svg": "*"
   },
   "keywords": [
-    "react-native",
     "chart",
     "charts",
     "graph",
+    "data visualization",
     "bar",
     "pie",
     "donut",
     "area",
     "line",
     "react",
-    "react native"
+    "react native",
+    "react-native"
   ]
 }

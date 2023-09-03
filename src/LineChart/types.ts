@@ -1,0 +1,376 @@
+import {ColorValue} from 'react-native';
+import {yAxisSides} from '../utils/constants';
+import {
+  CurveType,
+  RuleType,
+  arrowConfigType,
+  secondaryLineConfigType,
+  secondaryYAxisType,
+} from '../utils/types';
+
+export type LineChartPropsType = {
+  height?: number;
+  overflowTop?: number;
+  overflowBottom?: number;
+  noOfSections?: number;
+  maxValue?: number;
+  minValue?: number;
+  stepHeight?: number;
+  stepValue?: number;
+  spacing?: number;
+  initialSpacing?: number;
+  endSpacing?: number;
+  data?: Array<itemType>;
+  data2?: Array<itemType>;
+  data3?: Array<itemType>;
+  data4?: Array<itemType>;
+  data5?: Array<itemType>;
+  zIndex1?: number;
+  zIndex2?: number;
+  zIndex3?: number;
+  zIndex4?: number;
+  zIndex5?: number;
+  thickness?: number;
+  thickness1?: number;
+  thickness2?: number;
+  thickness3?: number;
+  thickness4?: number;
+  thickness5?: number;
+  strokeDashArray?: Array<number>;
+  strokeDashArray1?: Array<number>;
+  strokeDashArray2?: Array<number>;
+  strokeDashArray3?: Array<number>;
+  strokeDashArray4?: Array<number>;
+  strokeDashArray5?: Array<number>;
+  rotateLabel?: boolean;
+  isAnimated?: boolean;
+  animateOnDataChange?: boolean;
+  animationDuration?: number;
+  onDataChangeAnimationDuration?: number;
+  animationEasing?: any;
+  animateTogether?: boolean;
+  xAxisLength?: number;
+  xAxisThickness?: number;
+  xAxisColor?: ColorValue;
+  xAxisType?: RuleType;
+  hideRules?: boolean;
+  rulesLength?: number;
+  rulesColor?: ColorValue;
+  rulesThickness?: number;
+  focusEnabled?: boolean;
+  onFocus?: Function;
+  showDataPointOnFocus?: boolean;
+  showStripOnFocus?: boolean;
+  showTextOnFocus?: boolean;
+  stripHeight?: number;
+  stripWidth?: number;
+  stripColor?: ColorValue | String | any;
+  stripOpacity?: number;
+  onPress?: Function;
+  unFocusOnPressOut?: boolean;
+  delayBeforeUnFocus?: number;
+  showValuesAsDataPointsText?: boolean;
+
+  rulesType?: RuleType;
+  dashWidth?: number;
+  dashGap?: number;
+  showReferenceLine1?: boolean;
+  referenceLine1Config?: referenceConfigType;
+  referenceLine1Position?: number;
+  showReferenceLine2?: boolean;
+  referenceLine2Config?: referenceConfigType;
+  referenceLine2Position?: number;
+  showReferenceLine3?: boolean;
+  referenceLine3Config?: referenceConfigType;
+  referenceLine3Position?: number;
+
+  showVerticalLines?: boolean;
+  verticalLinesUptoDataPoint?: boolean;
+  verticalLinesThickness?: number;
+  verticalLinesHeight?: number;
+  verticalLinesColor?: ColorValue;
+  verticalLinesType?: string;
+  verticalLinesShift?: number;
+  verticalLinesZIndex?: number;
+  noOfVerticalLines?: number;
+  verticalLinesSpacing?: number;
+  hideAxesAndRules?: boolean;
+  areaChart?: boolean;
+  areaChart1?: boolean;
+  areaChart2?: boolean;
+  areaChart3?: boolean;
+  areaChart4?: boolean;
+  areaChart5?: boolean;
+
+  disableScroll?: boolean;
+  pointerConfig?: Pointer;
+  showScrollIndicator?: boolean;
+  indicatorColor?: 'black' | 'default' | 'white';
+
+  //Indices
+
+  showYAxisIndices?: boolean;
+  showXAxisIndices?: boolean;
+  yAxisIndicesHeight?: number;
+  xAxisIndicesHeight?: number;
+  yAxisIndicesWidth?: number;
+  xAxisIndicesWidth?: number;
+  xAxisIndicesColor?: ColorValue;
+  yAxisIndicesColor?: ColorValue;
+  yAxisSide?: yAxisSides;
+  yAxisOffset?: number;
+
+  startIndex?: number;
+  startIndex1?: number;
+  startIndex2?: number;
+  startIndex3?: number;
+  startIndex4?: number;
+  startIndex5?: number;
+  endIndex?: number;
+  endIndex1?: number;
+  endIndex2?: number;
+  endIndex3?: number;
+  endIndex4?: number;
+  endIndex5?: number;
+
+  color?: string;
+  color1?: string;
+  color2?: string;
+  color3?: string;
+  color4?: string;
+  color5?: string;
+  yAxisThickness?: number;
+  yAxisColor?: ColorValue;
+  yAxisLabelContainerStyle?: any;
+  horizontalRulesStyle?: any;
+  yAxisTextStyle?: any;
+  yAxisTextNumberOfLines?: number;
+  xAxisTextNumberOfLines?: number;
+  showFractionalValues?: boolean;
+  roundToDigits?: number;
+  yAxisLabelWidth?: number;
+  hideYAxisText?: boolean;
+
+  backgroundColor?: ColorValue;
+  curved?: boolean;
+  curvature?: number;
+  curveType?: CurveType;
+  horizSections?: Array<sectionType>;
+
+  //Data points
+
+  hideDataPoints?: boolean;
+  dataPointsHeight?: number;
+  dataPointsWidth?: number;
+  dataPointsRadius?: number;
+  dataPointsColor?: string;
+  dataPointsShape?: string;
+  hideDataPoints1?: boolean;
+  dataPointsHeight1?: number;
+  dataPointsWidth1?: number;
+  dataPointsRadius1?: number;
+  dataPointsColor1?: string;
+  dataPointsShape1?: string;
+  hideDataPoints2?: boolean;
+  dataPointsHeight2?: number;
+  dataPointsWidth2?: number;
+  dataPointsRadius2?: number;
+  dataPointsColor2?: string;
+  dataPointsShape2?: string;
+  hideDataPoints3?: boolean;
+  dataPointsHeight3?: number;
+  dataPointsWidth3?: number;
+  dataPointsRadius3?: number;
+  dataPointsColor3?: string;
+  dataPointsShape3?: string;
+  hideDataPoints4?: boolean;
+  dataPointsHeight4?: number;
+  dataPointsWidth4?: number;
+  dataPointsRadius4?: number;
+  dataPointsColor4?: string;
+  dataPointsShape4?: string;
+  hideDataPoints5?: boolean;
+  dataPointsHeight5?: number;
+  dataPointsWidth5?: number;
+  dataPointsRadius5?: number;
+  dataPointsColor5?: string;
+  dataPointsShape5?: string;
+  customDataPoint?: Function;
+
+  focusedDataPointShape?: String;
+  focusedDataPointWidth?: number;
+  focusedDataPointHeight?: number;
+  focusedDataPointColor?: ColorValue | String | any;
+  focusedDataPointRadius?: number;
+  focusedCustomDataPoint?: Function;
+  dataPointLabelWidth?: number;
+  dataPointLabelShiftX?: number;
+  dataPointLabelShiftY?: number;
+
+  startFillColor?: string;
+  endFillColor?: string;
+  startOpacity?: number;
+  endOpacity?: number;
+  startFillColor1?: string;
+  endFillColor1?: string;
+  startOpacity1?: number;
+  endOpacity1?: number;
+  startFillColor2?: string;
+  endFillColor2?: string;
+  startOpacity2?: number;
+  endOpacity2?: number;
+  startFillColor3?: string;
+  endFillColor3?: string;
+  startOpacity3?: number;
+  endOpacity3?: number;
+  startFillColor4?: string;
+  endFillColor4?: string;
+  startOpacity4?: number;
+  endOpacity4?: number;
+  startFillColor5?: string;
+  endFillColor5?: string;
+  startOpacity5?: number;
+  endOpacity5?: number;
+  gradientDirection?: string;
+
+  textFontSize?: number;
+  textColor?: string;
+  textFontSize1?: number;
+  textColor1?: string;
+  textFontSize2?: number;
+  textColor2?: string;
+  textFontSize3?: number;
+  textColor3?: string;
+  textFontSize4?: number;
+  textColor4?: string;
+  textFontSize5?: number;
+  textColor5?: string;
+  hideOrigin?: boolean;
+  textShiftX?: number;
+  textShiftY?: number;
+  yAxisLabelTexts?: Array<string>;
+  xAxisLabelTexts?: Array<string>;
+  xAxisLabelTextStyle?: any;
+  width?: number;
+  yAxisLabelPrefix?: String;
+  yAxisLabelSuffix?: String;
+  scrollRef?: any;
+  scrollToEnd?: boolean;
+  scrollToIndex?: number;
+  scrollAnimation?: boolean;
+  noOfSectionsBelowXAxis?: number;
+  labelsExtraHeight?: number;
+  adjustToWidth?: boolean;
+  getPointerProps?: Function;
+  showArrows?: boolean;
+  arrowConfig?: arrowConfigType;
+  showArrow1?: boolean;
+  arrowConfig1?: arrowConfigType;
+  showArrow2?: boolean;
+  arrowConfig2?: arrowConfigType;
+  showArrow3?: boolean;
+  arrowConfig3?: arrowConfigType;
+  showArrow4?: boolean;
+  arrowConfig4?: arrowConfigType;
+  showArrow5?: boolean;
+  arrowConfig5?: arrowConfigType;
+
+  secondaryData?: Array<itemType>;
+  secondaryYAxis?: secondaryYAxisType;
+  secondaryLineConfig?: secondaryLineConfigType;
+};
+
+type referenceConfigType = {
+  thickness: number;
+  width: number;
+  color: ColorValue | String | any;
+  type: String;
+  dashWidth: number;
+  dashGap: number;
+  labelText: String;
+  labelTextStyle: any;
+};
+export type itemType = {
+  value: number;
+  label?: String;
+  labelComponent?: Function;
+  labelTextStyle?: any;
+  dataPointText?: string;
+  textShiftX?: number;
+  textShiftY?: number;
+  textColor?: string;
+  textFontSize?: number;
+
+  hideDataPoint?: boolean;
+  dataPointHeight?: number;
+  dataPointWidth?: number;
+  dataPointRadius?: number;
+  dataPointColor?: string;
+  dataPointShape?: string;
+  customDataPoint?: Function;
+
+  stripHeight?: number;
+  stripWidth?: number;
+  stripColor?: ColorValue | String | any;
+  stripOpacity?: number;
+
+  focusedDataPointShape?: String;
+  focusedDataPointWidth?: number;
+  focusedDataPointHeight?: number;
+  focusedDataPointColor?: ColorValue | String | any;
+  focusedDataPointRadius?: number;
+  focusedCustomDataPoint?: Function;
+
+  dataPointLabelComponent?: Function;
+  focusedDataPointLabelComponent?: Function;
+  dataPointLabelWidth?: number;
+  dataPointLabelShiftX?: number;
+  dataPointLabelShiftY?: number;
+  showStrip?: boolean;
+
+  showVerticalLine?: boolean;
+  verticalLineUptoDataPoint?: boolean;
+  verticalLineColor?: string;
+  verticalLineThickness?: number;
+  pointerShiftX?: number;
+  pointerShiftY?: number;
+  onPress?: Function;
+};
+
+type sectionType = {
+  value: string;
+};
+
+type Pointer = {
+  height?: number;
+  width?: number;
+  radius?: number;
+  pointerColor?: ColorValue;
+  pointer1Color?: ColorValue;
+  pointer2Color?: ColorValue;
+  pointer3Color?: ColorValue;
+  pointer4Color?: ColorValue;
+  pointer5Color?: ColorValue;
+  pointerComponent?: Function;
+  showPointerStrip?: boolean;
+  pointerStripWidth?: number;
+  pointerStripHeight?: number;
+  pointerStripColor?: ColorValue;
+  pointerStripUptoDataPoint?: boolean;
+  pointerLabelComponent?: Function;
+  stripOverPointer?: boolean;
+  autoAdjustPointerLabelPosition?: boolean;
+  shiftPointerLabelX?: number;
+  shiftPointerLabelY?: number;
+  pointerLabelWidth?: number;
+  pointerLabelHeight?: number;
+  pointerVanishDelay?: number;
+  activatePointersOnLongPress?: boolean;
+  activatePointersDelay?: number;
+  hidePointer1?: boolean;
+  hidePointer2?: boolean;
+  hidePointer3?: boolean;
+  hidePointer4?: boolean;
+  hidePointer5?: boolean;
+  strokeDashArray?: Array<number>;
+};
