@@ -90,7 +90,9 @@ export const BarChart = (props: BarChartPropsType) => {
         curvature: props.lineConfig.curvature ?? defaultLineConfig.curvature,
         curveType: props.lineConfig.curveType ?? defaultLineConfig.curveType,
         isAnimated: props.lineConfig.isAnimated || defaultLineConfig.isAnimated,
-        animationDuration: props.lineConfig.animationDuration || defaultLineConfig.animationDuration,
+        animationDuration:
+          props.lineConfig.animationDuration ||
+          defaultLineConfig.animationDuration,
         thickness: props.lineConfig.thickness || defaultLineConfig.thickness,
         color: props.lineConfig.color || defaultLineConfig.color,
         hideDataPoints:
@@ -530,8 +532,8 @@ export const BarChart = (props: BarChartPropsType) => {
     yAxisLabelWidth,
     horizontal,
     rtl,
-    labelsWidthForHorizontal:
-      props.labelsWidthForHorizontal ?? BarDefaults.labelsWidthForHorizontal,
+    shiftX: props.shiftX ?? 0,
+    shiftY: props.shiftY ?? 0,
     scrollRef,
     yAxisAtTop,
     initialSpacing,

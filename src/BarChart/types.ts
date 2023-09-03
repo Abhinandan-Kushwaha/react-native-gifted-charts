@@ -110,7 +110,8 @@ export type BarChartPropsType = {
 
   horizontal?: boolean;
   rtl?: boolean;
-  labelsWidthForHorizontal?: number;
+  shiftX?: number;
+  shiftY?: number;
   yAxisAtTop?: boolean;
 
   intactTopLabel?: boolean;

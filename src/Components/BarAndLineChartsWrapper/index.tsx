@@ -5,6 +5,7 @@ import RenderLineInBarChart from './renderLineInBarChart';
 import RenderVerticalLines from './renderVerticalLines';
 import {
   AxesAndRulesDefaults,
+  BarDefaults,
   chartTypes,
   yAxisSides,
 } from '../../utils/constants';
@@ -23,7 +24,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     yAxisLabelWidth,
     horizontal,
     rtl,
-    labelsWidthForHorizontal,
+    shiftX,
+    shiftY,
     scrollRef,
     initialSpacing,
     data,
@@ -276,7 +278,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   /*******************************************************************************************************************************************/
 
   const containerHeightIncludingXaxisLabels =
-    actualContainerHeight + labelsWidthForHorizontal;
+    actualContainerHeight + BarDefaults.labelsWidthForHorizontal;
 
   const difBwWidthHeight =
     actualContainerWidth - containerHeightIncludingXaxisLabels;
@@ -284,11 +286,11 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const transformForHorizontal = [
     {rotate: rtl ? '-90deg' : '90deg'},
     {
-      translateY: (rtl ? -difBwWidthHeight + 14 : difBwWidthHeight) / 2 - 20,
+      translateY: -shiftX + (rtl ? -difBwWidthHeight + 14 : difBwWidthHeight) / 2 - 20,
     },
     {
       translateX:
-        (rtl
+        shiftY + (rtl
           ? (props.width ? -98 - endSpacing : -75 - endSpacing) -
             difBwWidthHeight
           : props.width

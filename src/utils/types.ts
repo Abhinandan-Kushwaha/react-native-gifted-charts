@@ -152,7 +152,8 @@ export type BarAndLineChartsWrapperTypes = {
   yAxisLabelWidth: number;
   horizontal: boolean;
   rtl: boolean;
-  labelsWidthForHorizontal: number;
+  shiftX: number;
+  shiftY: number;
   scrollRef: any;
   yAxisAtTop: boolean;
   initialSpacing: number;

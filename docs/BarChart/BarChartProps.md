@@ -165,7 +165,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | textFontSize     | number     | Font size of the dataPointText                                       | 10                               |
 | textShiftX       | number     | To shift the dataPointText text horizontally                         | 0                                |
 | textShiftY       | number     | To shift the dataPointText text vertically                           | 0                                |
-| shiftY           | number     | To shift the Lift the Line chart up or down by the given quantity    | 0                                |
+| shiftY           | number     | To shift the Line chart up or down by the given quantity m           | 0                                |
 | startIndex       | number     | Start index for data line (used to display data lines having breaks) | 0                                |
 | endIndex         | number     | End index for data line (used to display data lines having breaks)   | lineData.length -1               |
 
@@ -398,7 +398,8 @@ While rendering an Animated Bar chart, y axis labels may not appear sometimes. T
 | ------------------------ | ------- | --------------------------------------------------------------------------------------------- | ------------- |
 | horizontal               | boolean | Render horizontal BarChart                                                                    | false         |
 | rtl                      | boolean | Render the chart from right to left                                                           | false         |
-| labelsWidthForHorizontal | number  | in horizontal charts, the labels width is needed to position the chart correctly              | 30            |
+| shiftX                   | number  | Shift the chart towards left or right by given value (only in horizontal charts)              | 0             |
+| shiftY                   | number  | Shift the chart upwards or downwards by given value (only in horizontal charts)               | 0             |
 | rotateYAxisTexts         | number  | angle by which the Y axis label texts should rotate in horizontal charts                      | -90           |
 | yAxisAtTop               | boolean | In horizontal BarCharts the Y axis appears at bottom by default. Set it to true for otherwise | false         |
 | intactTopLabel           | boolean | To rotate the top label component to make it intact with the Bars                             | false         |
