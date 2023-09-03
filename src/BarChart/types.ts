@@ -152,6 +152,7 @@ type lineConfigType = {
   curvature?: number;
   curveType?: CurveType;
   isAnimated?: boolean;
+  animationDuration?: number;
   delay?: number;
   thickness?: number;
   color?: ColorValue | String | any;
@@ -179,6 +180,7 @@ export type defaultLineConfigType = {
   curvature: number;
   curveType: CurveType;
   isAnimated: boolean;
+  animationDuration: number;
   delay: number;
   thickness: number;
   color: ColorValue | String | any;

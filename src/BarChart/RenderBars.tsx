@@ -210,7 +210,11 @@ const RenderBars = (props: Props) => {
           item.labelComponent()
         ) : (
           <Text
-            style={[{textAlign: 'center'}, labelTextStyle]}
+            style={[
+              {textAlign: 'center'},
+              rtl && {transform: [{rotate: '180deg'}]},
+              labelTextStyle,
+            ]}
             numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}
           </Text>

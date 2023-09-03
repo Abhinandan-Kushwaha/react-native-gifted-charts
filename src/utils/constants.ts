@@ -11,6 +11,7 @@ export enum chartTypes {
 
 const defaultCurvature = 0.2;
 const defaultCurveType = CurveType.CUBIC;
+const defaultAnimationDuration = 800;
 
 // Bar and Line chart Specific
 
@@ -127,6 +128,7 @@ export const defaultLineConfig: defaultLineConfigType = {
   curvature: defaultCurvature,
   curveType: defaultCurveType,
   isAnimated: false,
+  animationDuration: defaultAnimationDuration,
   thickness: 1,
   color: 'black',
   hideDataPoints: false,
@@ -160,7 +162,7 @@ export const LineDefaults = {
   spacing: 50,
   initialSpacing: 20,
   endSpacing: 20,
-  animationDuration: 800,
+  animationDuration: defaultAnimationDuration,
   animateTogether: false,
   disableScroll: false,
   scrollToEnd: false,

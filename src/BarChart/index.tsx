@@ -41,6 +41,10 @@ export const BarChart = (props: BarChartPropsType) => {
   const heightFromProps = horizontal ? props.width : props.height;
   const widthFromProps = horizontal ? props.height : props.width;
 
+  const isAnimated = props.isAnimated ?? BarDefaults.isAnimated;
+  const animationDuration =
+    props.animationDuration ?? BarDefaults.animationDuration;
+
   const data = useMemo(() => {
     if (!props.data) {
       return [];
@@ -76,6 +80,7 @@ export const BarChart = (props: BarChartPropsType) => {
 
   defaultLineConfig.initialSpacing = initialSpacing;
   defaultLineConfig.endIndex = lineData.length - 1;
+  defaultLineConfig.animationDuration = animationDuration;
 
   const lineConfig = props.lineConfig
     ? {
@@ -85,6 +90,7 @@ export const BarChart = (props: BarChartPropsType) => {
         curvature: props.lineConfig.curvature ?? defaultLineConfig.curvature,
         curveType: props.lineConfig.curveType ?? defaultLineConfig.curveType,
         isAnimated: props.lineConfig.isAnimated || defaultLineConfig.isAnimated,
+        animationDuration: props.lineConfig.animationDuration || defaultLineConfig.animationDuration,
         thickness: props.lineConfig.thickness || defaultLineConfig.thickness,
         color: props.lineConfig.color || defaultLineConfig.color,
         hideDataPoints:
@@ -209,9 +215,6 @@ export const BarChart = (props: BarChartPropsType) => {
     props.showScrollIndicator ?? BarDefaults.showScrollIndicator;
   const side = props.side ?? BarDefaults.side;
   const rotateLabel = props.rotateLabel ?? AxesAndRulesDefaults.rotateLabel;
-  const isAnimated = props.isAnimated ?? BarDefaults.isAnimated;
-  const animationDuration =
-    props.animationDuration ?? BarDefaults.animationDuration;
   const opacity = props.opacity ?? BarDefaults.opacity;
   const isThreeD = props.isThreeD ?? BarDefaults.isThreeD;
 
@@ -255,11 +258,11 @@ export const BarChart = (props: BarChartPropsType) => {
     widthValue.setValue(0);
     Animated.timing(widthValue, {
       toValue: 1,
-      duration: animationDuration,
+      duration: lineConfig.animationDuration,
       easing: Easing.linear,
       useNativeDriver: false,
     }).start();
-  }, [animationDuration, widthValue]);
+  }, [lineConfig.animationDuration, widthValue]);
 
   useEffect(() => {
     if (showLine) {
