@@ -42,7 +42,6 @@ Version 1.3.4 is a mojor release. It has code refactor, many bug fixes and some 
 **[Release notes](release-notes/release-notes.md)**
 
 ## Installation
-
 ```sh
 npm install react-native-gifted-charts react-native-linear-gradient react-native-svg
 ```
@@ -52,6 +51,7 @@ For iOS-
 ```sh
 cd ios && pod install
 ```
+Please note that `react-native-svg` and `react-native-linear-gradient` are needed for the library to work, so make sure they are installed in your project.
 
 # Docs
 
