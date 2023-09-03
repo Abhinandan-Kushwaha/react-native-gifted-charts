@@ -27,7 +27,7 @@ export type secondaryYAxisType = {
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
   yAxisLabelContainerStyle?: any;
-  yAxisLabelTexts: Array<string> | undefined;
+  yAxisLabelTexts?: Array<string> | undefined;
   yAxisTextStyle?: any;
   yAxisTextNumberOfLines?: number;
   yAxisLabelWidth?: number;
@@ -43,8 +43,7 @@ export type secondaryLineConfigType = {
   curvature?: number;
   curveType?: CurveType;
   areaChart?: boolean;
-  color?;
-  ColorValue;
+  color?: ColorValue;
   thickness?: number;
   zIndex1?: number;
   strokeDashArray?: Array<number>;

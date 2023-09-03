@@ -142,23 +142,27 @@ const Animated2DWithGradient = (props: propTypes) => {
                     height: '100%',
                     backgroundColor:
                       item.frontColor || props.frontColor || 'black',
-                    borderRadius: item.barBorderRadius || barBorderRadius || 0,
+                    borderRadius: item.barBorderRadius ?? barBorderRadius ?? 0,
                     borderTopLeftRadius:
-                      item.barBorderTopLeftRadius ||
-                      barBorderTopLeftRadius ||
-                      0,
+                      item.barBorderTopLeftRadius ??
+                      barBorderTopLeftRadius ??
+                      item.barBorderRadius ??
+                      barBorderRadius,
                     borderTopRightRadius:
-                      item.barBorderTopRightRadius ||
-                      barBorderTopRightRadius ||
-                      0,
+                      item.barBorderTopRightRadius ??
+                      barBorderTopRightRadius ??
+                      item.barBorderRadius ??
+                      barBorderRadius,
                     borderBottomLeftRadius:
-                      item.barBorderBottomLeftRadius ||
-                      barBorderBottomLeftRadius ||
-                      0,
+                      item.barBorderBottomLeftRadius ??
+                      barBorderBottomLeftRadius ??
+                      item.barBorderRadius ??
+                      barBorderRadius,
                     borderBottomRightRadius:
-                      item.barBorderBottomRightRadius ||
-                      barBorderBottomRightRadius ||
-                      0,
+                      item.barBorderBottomRightRadius ??
+                      barBorderBottomRightRadius ??
+                      item.barBorderRadius ??
+                      barBorderRadius,
                   },
                   props.roundedBottom && {
                     borderBottomLeftRadius:
@@ -199,23 +203,27 @@ const Animated2DWithGradient = (props: propTypes) => {
                     position: 'absolute',
                     width: '100%',
                     height: '100%',
-                    borderRadius: item.barBorderRadius || barBorderRadius || 0,
+                    borderRadius: item.barBorderRadius ?? barBorderRadius ?? 0,
                     borderTopLeftRadius:
-                      item.barBorderTopLeftRadius ||
-                      barBorderTopLeftRadius ||
-                      0,
+                      item.barBorderTopLeftRadius ??
+                      barBorderTopLeftRadius ??
+                      item.barBorderRadius ??
+                      barBorderRadius,
                     borderTopRightRadius:
-                      item.barBorderTopRightRadius ||
-                      barBorderTopRightRadius ||
-                      0,
+                      item.barBorderTopRightRadius ??
+                      barBorderTopRightRadius ??
+                      item.barBorderRadius ??
+                      barBorderRadius,
                     borderBottomLeftRadius:
-                      item.barBorderBottomLeftRadius ||
-                      barBorderBottomLeftRadius ||
-                      0,
+                      item.barBorderBottomLeftRadius ??
+                      barBorderBottomLeftRadius ??
+                      item.barBorderRadius ??
+                      barBorderRadius,
                     borderBottomRightRadius:
-                      item.barBorderBottomRightRadius ||
-                      barBorderBottomRightRadius ||
-                      0,
+                      item.barBorderBottomRightRadius ??
+                      barBorderBottomRightRadius ??
+                      item.barBorderRadius ??
+                      barBorderRadius,
                   },
                   props.roundedBottom && {
                     borderBottomLeftRadius:

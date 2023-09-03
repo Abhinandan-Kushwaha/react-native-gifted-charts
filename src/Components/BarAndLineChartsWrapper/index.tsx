@@ -329,7 +329,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
               horizontal && !yAxisAtTop
                 ? -yAxisThickness -
                   (props.width ? 20 : 0) -
-                  (data[data.length - 1].barWidth ?? barWidth ?? 0) / 2
+                  (data[data.length - 1]?.barWidth ?? barWidth ?? 0) / 2
                 : yAxisSide === yAxisSides.RIGHT
                 ? 0
                 : yAxisLabelWidth + yAxisThickness,
@@ -382,9 +382,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           {
             // Only For Line Charts-
             chartType === chartTypes.LINE &&
-              showXAxisIndices &&
               data.map((item: any, index: number) => {
-                return (
+                return (showXAxisIndices || item.showXAxisIndex)? (
                   <View
                     key={index + '' + item.value}
                     style={{
@@ -399,7 +398,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
                         3,
                     }}
                   />
-                );
+                ): null
               })
           }
           {renderChartContent()}

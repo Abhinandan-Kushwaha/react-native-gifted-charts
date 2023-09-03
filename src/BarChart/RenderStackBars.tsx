@@ -103,6 +103,7 @@ export type stackItemType = {
   barBorderRadius?: number;
   patternId?: String;
   leftShiftForTooltip?: number;
+  showXAxisIndex?: boolean;
 };
 const RenderStackBars = (props: Props) => {
   const {
@@ -385,15 +386,18 @@ const RenderStackBars = (props: Props) => {
             }}
           />
         )} */}
-        {props.showXAxisIndices && (
+        {(props.showXAxisIndices || item.showXAxisIndex) && (
           <View
             style={{
               zIndex: 2,
               position: 'absolute',
               height: props.xAxisIndicesHeight,
               width: props.xAxisIndicesWidth,
-              bottom: 0,
-              left: (item.barWidth || props.barWidth || 30) / 2,
+              bottom: props.xAxisIndicesHeight / -2,
+              left:
+                ((item.barWidth || props.barWidth || 30) -
+                  props.xAxisIndicesWidth) /
+                2,
               backgroundColor: props.xAxisIndicesColor,
             }}
           />

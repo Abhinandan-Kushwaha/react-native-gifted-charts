@@ -206,6 +206,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | barBackgroundPattern       | Component  | A svg component containing the background pattern for bars                     |
 | patternId                  | String     | ID of the pattern component                                                    |
 | leftShiftForTooltip        | number     | The distance by which the tooltip component should shift towards left          |
+| showXAxisIndex             | boolean    | show small graduation at the X axis for the corresponding bar                  |
 
 ---
 
@@ -484,6 +485,7 @@ A single stack item can be depicted as-
 | showGradient            | boolean    | Prop to enable linear gradient for the bar color, defaults to false    |
 | gradientColor           | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient |
 | barWidth                | number     | Width of the bar                                                       |
+| showXAxisIndex          | boolean    | show small graduation at the X axis for the corresponding stack        |
 
 ```
 
