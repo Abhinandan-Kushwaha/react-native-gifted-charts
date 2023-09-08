@@ -140,9 +140,15 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
         value.toFixed(roundToDigits ?? AxesAndRulesDefaults.roundToDigits),
       );
     }
+
+    let startIndex = noOfSections;
+    if (horizSectionsBelow.length > 0) {
+      startIndex += horizSectionsBelow.length;
+    }
+
     horizSections.push({
       value: yAxisLabelTexts?.length
-        ? yAxisLabelTexts[noOfSections - i] ?? value.toString()
+        ? yAxisLabelTexts[startIndex - i] ?? value.toString()
         : value.toString(),
     });
   }
