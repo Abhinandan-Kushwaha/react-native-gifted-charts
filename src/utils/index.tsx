@@ -539,6 +539,7 @@ export const getLabelTextUtil = (
   yAxisOffset,
   yAxisLabelPrefix,
   yAxisLabelSuffix,
+  roundToDigits,
 ) => {
   let label = '';
   if (
@@ -546,7 +547,11 @@ export const getLabelTextUtil = (
     (yAxisLabelTexts && yAxisLabelTexts[index] !== undefined)
   ) {
     if (val) {
-      label = yAxisOffset ? (Number(val) + yAxisOffset).toString() : val;
+      label = yAxisOffset
+        ? (Number(val) + yAxisOffset).toFixed(roundToDigits)
+        : isNaN(Number(val))
+        ? val
+        : Number(val).toFixed(roundToDigits);
     } else {
       label = yAxisOffset ? yAxisOffset.toString() : '0';
     }

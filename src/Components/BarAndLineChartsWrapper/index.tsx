@@ -164,7 +164,6 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     ? [...Array(noOfVerticalLines).keys()]
     : [...Array(stackData ? stackData.length : data.length).keys()];
 
-
   const horizSectionProps: horizSectionPropTypes = {
     chartType,
     width,
@@ -237,7 +236,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     lineBehindBars,
     points,
     arrowPoints,
-    data: lineData ?? data,
+    data: lineData?.length ? lineData : stackData ?? data,
     totalWidth,
     barWidth,
     labelsExtraHeight,
@@ -285,11 +284,13 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const transformForHorizontal = [
     {rotate: rtl ? '-90deg' : '90deg'},
     {
-      translateY: -shiftX + (rtl ? -difBwWidthHeight + 14 : difBwWidthHeight) / 2 - 20,
+      translateY:
+        -shiftX + (rtl ? -difBwWidthHeight + 14 : difBwWidthHeight) / 2 - 20,
     },
     {
       translateX:
-        shiftY + (rtl
+        shiftY +
+        (rtl
           ? (props.width ? -98 - endSpacing : -75 - endSpacing) -
             difBwWidthHeight
           : props.width
@@ -317,7 +318,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           transform: transformForHorizontal,
         },
       ]}>
-      {hideAxesAndRules !== true && renderHorizSections(horizSectionProps)}
+      {hideAxesAndRules !== true
+        ? renderHorizSections(horizSectionProps)
+        : null}
       <ScrollView
         horizontal
         ref={scrollRef}
@@ -382,7 +385,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
             // Only For Line Charts-
             chartType === chartTypes.LINE &&
               data.map((item: any, index: number) => {
-                return (showXAxisIndices || item.showXAxisIndex)? (
+                return showXAxisIndices || item.showXAxisIndex ? (
                   <View
                     key={index + '' + item.value}
                     style={{
@@ -397,7 +400,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
                         3,
                     }}
                   />
-                ): null
+                ) : null;
               })
           }
           {renderChartContent()}

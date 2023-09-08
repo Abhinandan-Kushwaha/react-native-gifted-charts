@@ -6,7 +6,7 @@ import React, {
   useState,
   useRef,
 } from 'react';
-import {View, Animated, Easing, Text, Dimensions, Platform} from 'react-native';
+import {View, Animated, Easing, Text, Dimensions, Platform, ColorValue} from 'react-native';
 import {styles} from './styles';
 import Svg, {
   Path,
@@ -35,7 +35,7 @@ import {
 } from '../utils/constants';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {LineChartPropsType, itemType} from './types';
-import {BarAndLineChartsWrapperTypes, HorizSectionsType} from '../utils/types';
+import {BarAndLineChartsWrapperTypes} from '../utils/types';
 
 let initialData: Array<itemType> | null = null;
 let animations: Array<any> = [];
@@ -2035,7 +2035,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const lineSvgComponent = (
     points: any,
     currentLineThickness: number | undefined,
-    color: string,
+    color: ColorValue,
     fillPoints: any,
     startFillColor: string,
     endFillColor: string,
@@ -2223,7 +2223,7 @@ export const LineChart = (props: LineChartPropsType) => {
     zIndex: number,
     points: any,
     currentLineThickness: number | undefined,
-    color: string,
+    color: ColorValue,
     fillPoints: any,
     startFillColor: string,
     endFillColor: string,
@@ -2462,7 +2462,7 @@ export const LineChart = (props: LineChartPropsType) => {
     points: any,
     animatedWidth: any,
     currentLineThickness: number | undefined,
-    color: string,
+    color: ColorValue,
     fillPoints: any,
     startFillColor: string,
     endFillColor: string,

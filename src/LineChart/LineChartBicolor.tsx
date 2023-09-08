@@ -27,11 +27,7 @@ import {
   chartTypes,
   yAxisSides,
 } from '../utils/constants';
-import {
-  BarAndLineChartsWrapperTypes,
-  HorizSectionsType,
-  RuleType,
-} from '../utils/types';
+import {BarAndLineChartsWrapperTypes, RuleType} from '../utils/types';
 
 let initialData: Array<itemType> | null = null;
 
@@ -1200,8 +1196,7 @@ export const LineChartBicolor = (props: propTypes) => {
       <View
         style={{
           position: 'absolute',
-          height:
-            extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
+          height: extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
           bottom: 60 + labelsExtraHeight,
           width: totalWidth,
           zIndex: zIndex,
@@ -1238,8 +1233,7 @@ export const LineChartBicolor = (props: propTypes) => {
       <Animated.View
         style={{
           position: 'absolute',
-          height:
-            extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
+          height: extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
           zIndex: zIndex,

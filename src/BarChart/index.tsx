@@ -19,7 +19,7 @@ import {
 } from '../utils/constants';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {BarChartPropsType, itemType} from './types';
-import {BarAndLineChartsWrapperTypes, HorizSectionsType} from '../utils/types';
+import {BarAndLineChartsWrapperTypes} from '../utils/types';
 
 export const BarChart = (props: BarChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
@@ -65,7 +65,7 @@ export const BarChart = (props: BarChartPropsType) => {
 
   const lineData = useMemo(() => {
     if (!props.lineData) {
-      return data;
+      return props.stackData ?? data;
     }
     if (props.yAxisOffset) {
       return props.lineData.map(item => {
@@ -74,7 +74,7 @@ export const BarChart = (props: BarChartPropsType) => {
       });
     }
     return props.lineData;
-  }, [props.yAxisOffset, props.lineData, data]);
+  }, [props.yAxisOffset, props.lineData, data, props.stackData]);
 
   const lineBehindBars = props.lineBehindBars || BarDefaults.lineBehindBars;
 
@@ -268,12 +268,21 @@ export const BarChart = (props: BarChartPropsType) => {
   useEffect(() => {
     if (showLine) {
       let pp = '';
-      const firstBarWidth = data[0].barWidth ?? props.barWidth ?? 30;
+      const firstBarWidth =
+        (props.stackData ?? data)[0].barWidth ?? props.barWidth ?? 30;
       if (!lineConfig.curved) {
         for (let i = 0; i < lineData.length; i++) {
           if (i < lineConfig.startIndex || i > lineConfig.endIndex) continue;
           const currentBarWidth =
             data?.[i]?.barWidth ?? props.barWidth ?? BarDefaults.barWidth;
+          const currentValue = props.lineData
+            ? props.lineData[i].value
+            : props.stackData
+            ? props.stackData[i].stacks.reduce(
+                (total, item) => total + item.value,
+                0,
+              )
+            : data[i].value;
           pp +=
             'L' +
             getXForLineInBar(
@@ -286,7 +295,7 @@ export const BarChart = (props: BarChartPropsType) => {
             ) +
             ' ' +
             getYForLineInBar(
-              lineData[i].value,
+              currentValue,
               lineConfig.shiftY,
               containerHeight,
               maxValue,
@@ -321,6 +330,14 @@ export const BarChart = (props: BarChartPropsType) => {
           if (i < lineConfig.startIndex || i > lineConfig.endIndex) continue;
           const currentBarWidth =
             data?.[i]?.barWidth ?? props.barWidth ?? BarDefaults.barWidth;
+          const currentValue = props.lineData
+            ? props.lineData[i].value
+            : props.stackData
+            ? props.stackData[i].stacks.reduce(
+                (total, item) => total + item.value,
+                0,
+              )
+            : data[i].value;
           p1Array.push([
             getXForLineInBar(
               i,
@@ -331,7 +348,7 @@ export const BarChart = (props: BarChartPropsType) => {
               spacing,
             ),
             getYForLineInBar(
-              lineData[i].value,
+              currentValue,
               lineConfig.shiftY,
               containerHeight,
               maxValue,

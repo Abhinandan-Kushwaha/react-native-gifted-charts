@@ -67,7 +67,6 @@ type Props = {
   animationDuration?: number;
 };
 export type stackItemType = {
-  value?: number;
   onPress?: any;
   label?: String;
   barWidth?: number;

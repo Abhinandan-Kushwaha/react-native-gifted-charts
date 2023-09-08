@@ -359,6 +359,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       yAxisOffset,
       yAxisLabelPrefix,
       yAxisLabelSuffix,
+      roundToDigits ?? AxesAndRulesDefaults.roundToDigits,
     );
   };
 
@@ -369,6 +370,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       yAxisOffset,
       yAxisLabelPrefix,
       yAxisLabelSuffix,
+      roundToDigits,
     } = secondaryYAxisConfig;
     return getLabelTextUtil(
       val,
@@ -378,6 +380,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       yAxisOffset,
       yAxisLabelPrefix,
       yAxisLabelSuffix,
+      roundToDigits ?? AxesAndRulesDefaults.roundToDigits,
     );
   };
 
@@ -805,11 +808,12 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
               borderColor: secondaryYAxisConfig.yAxisColor,
               borderLeftWidth: secondaryYAxisConfig.yAxisThickness,
             }}>
-            {!secondaryYAxisConfig.hideYAxisText &&
-              renderSecondaryYaxisLabels(secondaryHorizSections, false)}
-            {noOfSectionsBelowXAxis &&
-              !secondaryYAxisConfig.hideYAxisText &&
-              renderSecondaryYaxisLabels(secondaryHorizSectionsBelow, true)}
+            {!secondaryYAxisConfig.hideYAxisText
+              ? renderSecondaryYaxisLabels(secondaryHorizSections, false)
+              : null}
+            {noOfSectionsBelowXAxis && !secondaryYAxisConfig.hideYAxisText
+              ? renderSecondaryYaxisLabels(secondaryHorizSectionsBelow, true)
+              : null}
           </View>
         )
       }
