@@ -513,7 +513,7 @@ export const computeMaxAndMinItems = (
   roundToDigits,
   showFractionalValues,
 ): MaxAndMin => {
-  if (!data) {
+  if (!data?.length) {
     return {maxItem: 0, minItem: 0};
   }
   let maxItem = 0,

@@ -157,7 +157,6 @@ export const BarChart = (props: BarChartPropsType) => {
     ((props.stepHeight ?? 0) * noOfSections ||
       AxesAndRulesDefaults.containerHeight);
   const horizSections = [{value: '0'}];
-  const horizSectionsBelow: HorizSectionsType = [];
   const stepHeight = props.stepHeight ?? containerHeight / noOfSections;
   const labelWidth = props.labelWidth ?? AxesAndRulesDefaults.labelWidth;
   const scrollToEnd = props.scrollToEnd ?? BarDefaults.scrollToEnd;
@@ -374,41 +373,6 @@ export const BarChart = (props: BarChartPropsType) => {
     lineConfig.arrowConfig.showArrowBase,
   ]);
 
-  // horizSections.pop();
-  // for (let i = 0; i <= noOfSections; i++) {
-  //   let value = maxValue - stepValue * i;
-  //   if (showFractionalValues || props.roundToDigits) {
-  //     value = parseFloat(
-  //       value.toFixed(
-  //         props.roundToDigits ?? AxesAndRulesDefaults.roundToDigits,
-  //       ),
-  //     );
-  //   }
-  //   horizSections.push({
-  //     value: props.yAxisLabelTexts
-  //       ? props.yAxisLabelTexts[noOfSections - i] ?? value.toString()
-  //       : value.toString(),
-  //   });
-  // }
-  if (noOfSectionsBelowXAxis) {
-    for (let i = 1; i <= noOfSectionsBelowXAxis; i++) {
-      let value = stepValue * -i;
-      if (showFractionalValues || props.roundToDigits) {
-        value = parseFloat(
-          value.toFixed(
-            props.roundToDigits ?? AxesAndRulesDefaults.roundToDigits,
-          ),
-        );
-      }
-      horizSectionsBelow.push({
-        value: props.yAxisLabelTexts
-          ? props.yAxisLabelTexts[noOfSectionsBelowXAxis - i] ??
-            value.toString()
-          : value.toString(),
-      });
-    }
-  }
-
   const animatedHeight = heightValue.interpolate({
     inputRange: [0, 1],
     outputRange: ['0%', '100%'],
@@ -526,7 +490,7 @@ export const BarChart = (props: BarChartPropsType) => {
   const barAndLineChartsWrapperProps: BarAndLineChartsWrapperTypes = {
     chartType: chartTypes.BAR,
     containerHeight,
-    horizSectionsBelow,
+    noOfSectionsBelowXAxis,
     stepHeight,
     labelsExtraHeight,
     yAxisLabelWidth,

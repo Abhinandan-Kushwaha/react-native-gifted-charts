@@ -1303,7 +1303,6 @@ export const LineChart = (props: LineChartPropsType) => {
 
   const gradientDirection = props.gradientDirection ?? 'vertical';
   const horizSections = [{value: '0'}];
-  const horizSectionsBelow: HorizSectionsType = [];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
@@ -1441,35 +1440,8 @@ export const LineChart = (props: LineChartPropsType) => {
   const delayBeforeUnFocus =
     props.delayBeforeUnFocus ?? LineDefaults.delayBeforeUnFocus;
 
-  // horizSections.pop();
-  // for (let i = 0; i <= noOfSections; i++) {
-  //   let value = maxValue - stepValue * i;
-  //   if (props.showFractionalValues || props.roundToDigits) {
-  //     value = parseFloat(value.toFixed(props.roundToDigits || 1));
-  //   }
-  //   horizSections.push({
-  //     value: props.yAxisLabelTexts
-  //       ? props.yAxisLabelTexts[noOfSections - i] ?? value.toString()
-  //       : value.toString(),
-  //   });
-  // }
-  if (noOfSectionsBelowXAxis) {
-    for (let i = 1; i <= noOfSectionsBelowXAxis; i++) {
-      let value = stepValue * -i;
-      if (props.showFractionalValues || props.roundToDigits) {
-        value = parseFloat(value.toFixed(props.roundToDigits || 1));
-      }
-      horizSectionsBelow.push({
-        value: props.yAxisLabelTexts
-          ? props.yAxisLabelTexts[noOfSectionsBelowXAxis - i] ??
-            value.toString()
-          : value.toString(),
-      });
-    }
-  }
-
   const containerHeightIncludingBelowXAxis =
-    extendedContainerHeight + horizSectionsBelow.length * stepHeight;
+    extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight;
 
   const renderLabel = (
     index: number,
@@ -2968,7 +2940,7 @@ export const LineChart = (props: LineChartPropsType) => {
               position: 'absolute',
               height:
                 extendedContainerHeight +
-                horizSectionsBelow.length * stepHeight,
+                noOfSectionsBelowXAxis * stepHeight,
               bottom: 60 + labelsExtraHeight,
               width: totalWidth,
               zIndex: 20,
@@ -3016,7 +2988,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const barAndLineChartsWrapperProps: BarAndLineChartsWrapperTypes = {
     chartType: chartTypes.LINE,
     containerHeight,
-    horizSectionsBelow,
+    noOfSectionsBelowXAxis,
     stepHeight,
     labelsExtraHeight,
     yAxisLabelWidth,

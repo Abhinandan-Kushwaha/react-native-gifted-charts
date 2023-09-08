@@ -16,6 +16,7 @@ export type secondaryYAxisType = {
   stepHeight?: number;
   showFractionalValues?: boolean;
   roundToDigits?: number;
+  noOfSectionsBelowXAxis?: number;
 
   showYAxisIndices?: boolean;
   yAxisIndicesHeight?: number;
@@ -79,7 +80,7 @@ export type horizSectionPropTypes = {
   chartType: chartTypes;
   width: number | undefined;
   horizSections: Array<any>;
-  horizSectionsBelow: Array<any>;
+  noOfSectionsBelowXAxis: number;
   totalWidth: number;
   endSpacing: number;
   yAxisSide: yAxisSides;
@@ -145,7 +146,7 @@ export type HorizSectionsType = Array<HorizSectionObject>;
 export type BarAndLineChartsWrapperTypes = {
   chartType: chartTypes;
   containerHeight: number;
-  horizSectionsBelow: HorizSectionsType;
+  noOfSectionsBelowXAxis: number;
   stepHeight: number;
   labelsExtraHeight: number;
   yAxisLabelWidth: number;

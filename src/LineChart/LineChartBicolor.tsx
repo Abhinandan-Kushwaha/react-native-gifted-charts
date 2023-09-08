@@ -616,7 +616,6 @@ export const LineChartBicolor = (props: propTypes) => {
   ]);
 
   const horizSections = [{value: '0'}];
-  const horizSectionsBelow: HorizSectionsType = [];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
@@ -699,20 +698,6 @@ export const LineChartBicolor = (props: propTypes) => {
         ? props.yAxisLabelTexts[noOfSections - i] ?? value.toString()
         : value.toString(),
     });
-  }
-  if (noOfSectionsBelowXAxis) {
-    for (let i = 1; i <= noOfSectionsBelowXAxis; i++) {
-      let value = stepValue * -i;
-      if (props.showFractionalValues || props.roundToDigits) {
-        value = parseFloat(value.toFixed(props.roundToDigits || 1));
-      }
-      horizSectionsBelow.push({
-        value: props.yAxisLabelTexts
-          ? props.yAxisLabelTexts[noOfSectionsBelowXAxis - i] ??
-            value.toString()
-          : value.toString(),
-      });
-    }
   }
 
   const renderLabel = (
@@ -1216,7 +1201,7 @@ export const LineChartBicolor = (props: propTypes) => {
         style={{
           position: 'absolute',
           height:
-            extendedContainerHeight + horizSectionsBelow.length * stepHeight,
+            extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
           bottom: 60 + labelsExtraHeight,
           width: totalWidth,
           zIndex: zIndex,
@@ -1254,7 +1239,7 @@ export const LineChartBicolor = (props: propTypes) => {
         style={{
           position: 'absolute',
           height:
-            extendedContainerHeight + horizSectionsBelow.length * stepHeight,
+            extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
           zIndex: zIndex,
@@ -1334,7 +1319,7 @@ export const LineChartBicolor = (props: propTypes) => {
   const barAndLineChartsWrapperProps: BarAndLineChartsWrapperTypes = {
     chartType: chartTypes.LINE_BI_COLOR,
     containerHeight,
-    horizSectionsBelow,
+    noOfSectionsBelowXAxis,
     stepHeight,
     labelsExtraHeight,
     yAxisLabelWidth,

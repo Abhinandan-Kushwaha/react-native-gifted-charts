@@ -18,7 +18,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const {
     chartType,
     containerHeight,
-    horizSectionsBelow,
+    noOfSectionsBelowXAxis,
     stepHeight,
     labelsExtraHeight,
     yAxisLabelWidth,
@@ -164,13 +164,12 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     ? [...Array(noOfVerticalLines).keys()]
     : [...Array(stackData ? stackData.length : data.length).keys()];
 
-  // const
 
   const horizSectionProps: horizSectionPropTypes = {
     chartType,
     width,
     horizSections,
-    horizSectionsBelow,
+    noOfSectionsBelowXAxis,
     totalWidth,
     endSpacing,
     yAxisSide,
@@ -245,7 +244,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   };
   const extendedContainerHeight = containerHeight + 10;
   const containerHeightIncludingBelowXAxis =
-    extendedContainerHeight + horizSectionsBelow.length * stepHeight;
+    extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight;
   const verticalLinesProps = {
     verticalLinesAr,
     verticalLinesSpacing,
@@ -352,7 +351,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
             width: totalWidth - spacing + endSpacing,
             paddingLeft: initialSpacing,
             paddingBottom:
-              horizSectionsBelow.length * stepHeight + labelsExtraHeight,
+              noOfSectionsBelowXAxis * stepHeight + labelsExtraHeight,
             alignItems: 'flex-end',
           },
           !props.width && {width: totalWidth},
