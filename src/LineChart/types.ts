@@ -14,7 +14,7 @@ export type LineChartPropsType = {
   overflowBottom?: number;
   noOfSections?: number;
   maxValue?: number;
-  minValue?: number;
+  mostNegativeValue?: number;
   stepHeight?: number;
   stepValue?: number;
   spacing?: number;

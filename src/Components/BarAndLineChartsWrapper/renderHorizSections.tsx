@@ -85,7 +85,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
   const secondaryYAxisConfig: secondaryYAxisType = {
     noOfSections: secondaryYAxis?.noOfSections ?? noOfSections,
     maxValue: secondaryYAxis?.maxValue,
-    minValue: secondaryYAxis?.minValue,
+    mostNegativeValue: secondaryYAxis?.mostNegativeValue,
     stepValue: secondaryYAxis?.stepValue,
     stepHeight: secondaryYAxis?.stepHeight,
 
@@ -125,7 +125,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
   );
   secondaryYAxisConfig.maxValue =
     secondaryYAxisConfig.maxValue ?? (maxItem || maxValue);
-  secondaryYAxisConfig.minValue = secondaryYAxisConfig.maxValue ?? minItem;
+  secondaryYAxisConfig.mostNegativeValue = secondaryYAxisConfig.mostNegativeValue ?? minItem;
   secondaryYAxisConfig.stepValue =
     secondaryYAxisConfig.stepValue ??
     secondaryYAxisConfig.maxValue /

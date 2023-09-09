@@ -11,7 +11,7 @@ export enum CurveType {
 export type secondaryYAxisType = {
   noOfSections?: number;
   maxValue?: number;
-  minValue?: number;
+  mostNegativeValue?: number;
   stepValue?: number;
   stepHeight?: number;
   showFractionalValues?: boolean;

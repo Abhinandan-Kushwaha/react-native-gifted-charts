@@ -384,7 +384,7 @@ export const LineChart = (props: LineChartPropsType) => {
   );
 
   const maxValue = props.maxValue || maxItem;
-  const minValue = props.minValue || minItem;
+  const mostNegativeValue = props.mostNegativeValue || minItem;
 
   const extendedContainerHeight = getExtendedContainerHeightWithPadding(
     containerHeight,
@@ -1306,7 +1306,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
-    props.noOfSectionsBelowXAxis || -minValue / stepValue;
+    props.noOfSectionsBelowXAxis || -mostNegativeValue / stepValue;
 
   const showXAxisIndices =
     props.showXAxisIndices ?? AxesAndRulesDefaults.showXAxisIndices;

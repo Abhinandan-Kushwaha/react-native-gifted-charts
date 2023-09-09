@@ -546,23 +546,20 @@ export const getLabelTextUtil = (
     showFractionalValues ||
     (yAxisLabelTexts && yAxisLabelTexts[index] !== undefined)
   ) {
+    if (yAxisLabelTexts?.[index]) return val;
     if (val) {
-      label = yAxisOffset
-        ? (Number(val) + yAxisOffset).toFixed(roundToDigits)
-        : isNaN(Number(val))
+      label = isNaN(Number(val))
         ? val
-        : Number(val).toFixed(roundToDigits);
+        : (Number(val) + (yAxisOffset ?? 0)).toFixed(roundToDigits);
     } else {
-      label = yAxisOffset ? yAxisOffset.toString() : '0';
+      label = yAxisOffset?.toString() ?? '0';
     }
   } else {
     if (val) {
       label = val.toString().split('.')[0];
-      if (yAxisOffset) {
-        label = (Number(label) + yAxisOffset).toString();
-      }
+      label = (Number(label) + (yAxisOffset ?? 0)).toString();
     } else {
-      label = yAxisOffset ? yAxisOffset.toString() : '0';
+      label = yAxisOffset?.toString() ?? '0';
     }
   }
 

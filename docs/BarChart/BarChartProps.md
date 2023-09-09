@@ -12,7 +12,7 @@
 | onPress                      | Function       | Callback function called on press of a Bar (takes item and index as parameter)                          | null                |
 | maxValue                     | number         | Maximum value shown in the Y axis                                                                       | 200                 |
 | yAxisOffset                  | number         | Starting (minimum) value in the Y axis (value at the origin)                                            | 0                   |
-| minValue                     | number         | Minimum negative value shown in the Y axis (to be used only if the data set has negative values too)    | \_                  |
+| mostNegativeValue            | number         | The most negative value shown in the Y axis (to be used only if the data set has negative values too)   | \_                  |
 | noOfSections                 | number         | Number of sections in the Y axis                                                                        | 10                  |
 | noOfSectionsBelowXAxis       | number         | Number of sections in the Y axis below X axis (in case the data set has negative values too)            | 0                   |
 | stepValue                    | number         | Value of 1 step/section in the Y axis                                                                   | 20                  |
@@ -307,8 +307,7 @@ Use this prop to render a secondary Y axis on the right side of the chart. **sec
 type secondaryYAxisType = {
   noOfSections?: number,
   maxValue?: number,
-  minValue?: number,
-  stepValue?: number,
+  mostNegativeValue?: nuepValue?: number,
   stepHeight?: number,
   showFractionalValues?: boolean,
   roundToDigits?: number,

@@ -36,7 +36,7 @@ type propTypes = {
   overflowTop?: number;
   noOfSections?: number;
   maxValue?: number;
-  minValue?: number;
+  mostNegativeValue?: number;
   stepHeight?: number;
   stepValue?: number;
   spacing?: number;
@@ -384,7 +384,7 @@ export const LineChartBicolor = (props: propTypes) => {
   }
 
   const maxValue = props.maxValue || maxItem;
-  const minValue = props.minValue || minItem;
+  const mostNegativeValue = props.mostNegativeValue || minItem;
 
   useEffect(() => {
     decreaseWidth();
@@ -615,7 +615,7 @@ export const LineChartBicolor = (props: propTypes) => {
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
-    props.noOfSectionsBelowXAxis || -minValue / stepValue;
+    props.noOfSectionsBelowXAxis || -mostNegativeValue / stepValue;
   const thickness1 = props.thickness || LineDefaults.thickness;
   const zIndex = props.zIndex || 0;
 

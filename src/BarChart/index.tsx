@@ -206,11 +206,11 @@ export const BarChart = (props: BarChartPropsType) => {
   );
 
   const maxValue = props.maxValue ?? maxAndMin.maxItem;
-  const minValue = props.minValue ?? maxAndMin.minItem;
+  const mostNegativeValue = props.mostNegativeValue ?? maxAndMin.minItem;
 
   const stepValue = props.stepValue ?? maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
-    props.noOfSectionsBelowXAxis ?? -minValue / stepValue;
+    props.noOfSectionsBelowXAxis ?? -mostNegativeValue / stepValue;
   const disableScroll = props.disableScroll ?? BarDefaults.disableScroll;
   const showScrollIndicator =
     props.showScrollIndicator ?? BarDefaults.showScrollIndicator;
