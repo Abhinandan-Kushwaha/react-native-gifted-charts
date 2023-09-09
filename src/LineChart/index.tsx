@@ -1827,7 +1827,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 ? (item.value * containerHeight) / maxValue - xAxisThickness
                 : extendedContainerHeight - xAxisThickness
             }
-            fill={item.verticalLineColor || 'lightgray'}
+            fill={item.verticalLineColor || props.verticalLinesColor || 'lightgray'}
           />
         );
       }
@@ -2260,7 +2260,7 @@ export const LineChart = (props: LineChartPropsType) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            2;
+            1;
           setPointerX(z);
           setPointerIndex(factor);
           let item, y;
@@ -2345,7 +2345,7 @@ export const LineChart = (props: LineChartPropsType) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            2;
+            1;
           let item, y;
           setPointerX(z);
           setPointerIndex(factor);
@@ -2500,7 +2500,7 @@ export const LineChart = (props: LineChartPropsType) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            2;
+            1;
           setPointerX(z);
           setPointerIndex(factor);
           let item, y;
@@ -2585,7 +2585,7 @@ export const LineChart = (props: LineChartPropsType) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            2;
+            1;
           let item, y;
           setPointerX(z);
           setPointerIndex(factor);

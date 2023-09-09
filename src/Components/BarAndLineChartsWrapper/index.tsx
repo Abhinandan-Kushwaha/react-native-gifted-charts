@@ -326,7 +326,6 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         ref={scrollRef}
         style={[
           {
-            // backgroundColor:'red',
             marginLeft:
               horizontal && !yAxisAtTop
                 ? -yAxisThickness -
@@ -350,7 +349,10 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         contentContainerStyle={[
           {
             height:
-              containerHeightIncludingBelowXAxis + labelsExtraHeight + 120,
+              containerHeightIncludingBelowXAxis +
+              labelsExtraHeight +
+              stepHeight / 2 +
+              50,
             width: totalWidth - spacing + endSpacing,
             paddingLeft: initialSpacing,
             paddingBottom:
