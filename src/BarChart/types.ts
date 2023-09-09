@@ -10,7 +10,7 @@ export type BarChartPropsType = {
   noOfSections?: number;
   noOfSectionsBelowXAxis?: number;
   maxValue?: number;
-  minValue?: number;
+  mostNegativeValue?: number;
   stepHeight?: number;
   stepValue?: number;
   spacing?: number;

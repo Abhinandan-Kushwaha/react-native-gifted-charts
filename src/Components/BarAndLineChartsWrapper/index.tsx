@@ -18,7 +18,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const {
     chartType,
     containerHeight,
-    horizSectionsBelow,
+    noOfSectionsBelowXAxis,
     stepHeight,
     labelsExtraHeight,
     yAxisLabelWidth,
@@ -164,13 +164,11 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     ? [...Array(noOfVerticalLines).keys()]
     : [...Array(stackData ? stackData.length : data.length).keys()];
 
-  // const
-
   const horizSectionProps: horizSectionPropTypes = {
     chartType,
     width,
     horizSections,
-    horizSectionsBelow,
+    noOfSectionsBelowXAxis,
     totalWidth,
     endSpacing,
     yAxisSide,
@@ -238,14 +236,14 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     lineBehindBars,
     points,
     arrowPoints,
-    data: lineData ?? data,
+    data: lineData?.length ? lineData : stackData ?? data,
     totalWidth,
     barWidth,
     labelsExtraHeight,
   };
   const extendedContainerHeight = containerHeight + 10;
   const containerHeightIncludingBelowXAxis =
-    extendedContainerHeight + horizSectionsBelow.length * stepHeight;
+    extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight;
   const verticalLinesProps = {
     verticalLinesAr,
     verticalLinesSpacing,
@@ -286,11 +284,13 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const transformForHorizontal = [
     {rotate: rtl ? '-90deg' : '90deg'},
     {
-      translateY: -shiftX + (rtl ? -difBwWidthHeight + 14 : difBwWidthHeight) / 2 - 20,
+      translateY:
+        -shiftX + (rtl ? -difBwWidthHeight + 14 : difBwWidthHeight) / 2 - 20,
     },
     {
       translateX:
-        shiftY + (rtl
+        shiftY +
+        (rtl
           ? (props.width ? -98 - endSpacing : -75 - endSpacing) -
             difBwWidthHeight
           : props.width
@@ -318,13 +318,14 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           transform: transformForHorizontal,
         },
       ]}>
-      {hideAxesAndRules !== true && renderHorizSections(horizSectionProps)}
+      {hideAxesAndRules !== true
+        ? renderHorizSections(horizSectionProps)
+        : null}
       <ScrollView
         horizontal
         ref={scrollRef}
         style={[
           {
-            // backgroundColor:'red',
             marginLeft:
               horizontal && !yAxisAtTop
                 ? -yAxisThickness -
@@ -348,11 +349,14 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         contentContainerStyle={[
           {
             height:
-              containerHeightIncludingBelowXAxis + labelsExtraHeight + 120,
+              containerHeightIncludingBelowXAxis +
+              labelsExtraHeight +
+              stepHeight / 2 +
+              50,
             width: totalWidth - spacing + endSpacing,
             paddingLeft: initialSpacing,
             paddingBottom:
-              horizSectionsBelow.length * stepHeight + labelsExtraHeight,
+              noOfSectionsBelowXAxis * stepHeight + labelsExtraHeight,
             alignItems: 'flex-end',
           },
           !props.width && {width: totalWidth},
@@ -383,7 +387,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
             // Only For Line Charts-
             chartType === chartTypes.LINE &&
               data.map((item: any, index: number) => {
-                return (showXAxisIndices || item.showXAxisIndex)? (
+                return showXAxisIndices || item.showXAxisIndex ? (
                   <View
                     key={index + '' + item.value}
                     style={{
@@ -398,7 +402,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
                         3,
                     }}
                   />
-                ): null
+                ) : null;
               })
           }
           {renderChartContent()}

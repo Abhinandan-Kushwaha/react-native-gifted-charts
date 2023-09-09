@@ -27,11 +27,7 @@ import {
   chartTypes,
   yAxisSides,
 } from '../utils/constants';
-import {
-  BarAndLineChartsWrapperTypes,
-  HorizSectionsType,
-  RuleType,
-} from '../utils/types';
+import {BarAndLineChartsWrapperTypes, RuleType} from '../utils/types';
 
 let initialData: Array<itemType> | null = null;
 
@@ -40,7 +36,7 @@ type propTypes = {
   overflowTop?: number;
   noOfSections?: number;
   maxValue?: number;
-  minValue?: number;
+  mostNegativeValue?: number;
   stepHeight?: number;
   stepValue?: number;
   spacing?: number;
@@ -388,7 +384,7 @@ export const LineChartBicolor = (props: propTypes) => {
   }
 
   const maxValue = props.maxValue || maxItem;
-  const minValue = props.minValue || minItem;
+  const mostNegativeValue = props.mostNegativeValue || minItem;
 
   useEffect(() => {
     decreaseWidth();
@@ -616,11 +612,10 @@ export const LineChartBicolor = (props: propTypes) => {
   ]);
 
   const horizSections = [{value: '0'}];
-  const horizSectionsBelow: HorizSectionsType = [];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
-    props.noOfSectionsBelowXAxis || -minValue / stepValue;
+    props.noOfSectionsBelowXAxis || -mostNegativeValue / stepValue;
   const thickness1 = props.thickness || LineDefaults.thickness;
   const zIndex = props.zIndex || 0;
 
@@ -699,20 +694,6 @@ export const LineChartBicolor = (props: propTypes) => {
         ? props.yAxisLabelTexts[noOfSections - i] ?? value.toString()
         : value.toString(),
     });
-  }
-  if (noOfSectionsBelowXAxis) {
-    for (let i = 1; i <= noOfSectionsBelowXAxis; i++) {
-      let value = stepValue * -i;
-      if (props.showFractionalValues || props.roundToDigits) {
-        value = parseFloat(value.toFixed(props.roundToDigits || 1));
-      }
-      horizSectionsBelow.push({
-        value: props.yAxisLabelTexts
-          ? props.yAxisLabelTexts[noOfSectionsBelowXAxis - i] ??
-            value.toString()
-          : value.toString(),
-      });
-    }
   }
 
   const renderLabel = (
@@ -1215,8 +1196,7 @@ export const LineChartBicolor = (props: propTypes) => {
       <View
         style={{
           position: 'absolute',
-          height:
-            extendedContainerHeight + horizSectionsBelow.length * stepHeight,
+          height: extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
           bottom: 60 + labelsExtraHeight,
           width: totalWidth,
           zIndex: zIndex,
@@ -1253,8 +1233,7 @@ export const LineChartBicolor = (props: propTypes) => {
       <Animated.View
         style={{
           position: 'absolute',
-          height:
-            extendedContainerHeight + horizSectionsBelow.length * stepHeight,
+          height: extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
           bottom: 60, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
           zIndex: zIndex,
@@ -1334,7 +1313,7 @@ export const LineChartBicolor = (props: propTypes) => {
   const barAndLineChartsWrapperProps: BarAndLineChartsWrapperTypes = {
     chartType: chartTypes.LINE_BI_COLOR,
     containerHeight,
-    horizSectionsBelow,
+    noOfSectionsBelowXAxis,
     stepHeight,
     labelsExtraHeight,
     yAxisLabelWidth,

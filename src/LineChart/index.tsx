@@ -6,7 +6,7 @@ import React, {
   useState,
   useRef,
 } from 'react';
-import {View, Animated, Easing, Text, Dimensions, Platform} from 'react-native';
+import {View, Animated, Easing, Text, Dimensions, Platform, ColorValue} from 'react-native';
 import {styles} from './styles';
 import Svg, {
   Path,
@@ -35,7 +35,7 @@ import {
 } from '../utils/constants';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {LineChartPropsType, itemType} from './types';
-import {BarAndLineChartsWrapperTypes, HorizSectionsType} from '../utils/types';
+import {BarAndLineChartsWrapperTypes} from '../utils/types';
 
 let initialData: Array<itemType> | null = null;
 let animations: Array<any> = [];
@@ -384,7 +384,7 @@ export const LineChart = (props: LineChartPropsType) => {
   );
 
   const maxValue = props.maxValue || maxItem;
-  const minValue = props.minValue || minItem;
+  const mostNegativeValue = props.mostNegativeValue || minItem;
 
   const extendedContainerHeight = getExtendedContainerHeightWithPadding(
     containerHeight,
@@ -1303,11 +1303,10 @@ export const LineChart = (props: LineChartPropsType) => {
 
   const gradientDirection = props.gradientDirection ?? 'vertical';
   const horizSections = [{value: '0'}];
-  const horizSectionsBelow: HorizSectionsType = [];
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
-    props.noOfSectionsBelowXAxis || -minValue / stepValue;
+    props.noOfSectionsBelowXAxis || -mostNegativeValue / stepValue;
 
   const showXAxisIndices =
     props.showXAxisIndices ?? AxesAndRulesDefaults.showXAxisIndices;
@@ -1441,35 +1440,8 @@ export const LineChart = (props: LineChartPropsType) => {
   const delayBeforeUnFocus =
     props.delayBeforeUnFocus ?? LineDefaults.delayBeforeUnFocus;
 
-  // horizSections.pop();
-  // for (let i = 0; i <= noOfSections; i++) {
-  //   let value = maxValue - stepValue * i;
-  //   if (props.showFractionalValues || props.roundToDigits) {
-  //     value = parseFloat(value.toFixed(props.roundToDigits || 1));
-  //   }
-  //   horizSections.push({
-  //     value: props.yAxisLabelTexts
-  //       ? props.yAxisLabelTexts[noOfSections - i] ?? value.toString()
-  //       : value.toString(),
-  //   });
-  // }
-  if (noOfSectionsBelowXAxis) {
-    for (let i = 1; i <= noOfSectionsBelowXAxis; i++) {
-      let value = stepValue * -i;
-      if (props.showFractionalValues || props.roundToDigits) {
-        value = parseFloat(value.toFixed(props.roundToDigits || 1));
-      }
-      horizSectionsBelow.push({
-        value: props.yAxisLabelTexts
-          ? props.yAxisLabelTexts[noOfSectionsBelowXAxis - i] ??
-            value.toString()
-          : value.toString(),
-      });
-    }
-  }
-
   const containerHeightIncludingBelowXAxis =
-    extendedContainerHeight + horizSectionsBelow.length * stepHeight;
+    extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight;
 
   const renderLabel = (
     index: number,
@@ -1855,7 +1827,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 ? (item.value * containerHeight) / maxValue - xAxisThickness
                 : extendedContainerHeight - xAxisThickness
             }
-            fill={item.verticalLineColor || 'lightgray'}
+            fill={item.verticalLineColor || props.verticalLinesColor || 'lightgray'}
           />
         );
       }
@@ -2063,7 +2035,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const lineSvgComponent = (
     points: any,
     currentLineThickness: number | undefined,
-    color: string,
+    color: ColorValue,
     fillPoints: any,
     startFillColor: string,
     endFillColor: string,
@@ -2251,7 +2223,7 @@ export const LineChart = (props: LineChartPropsType) => {
     zIndex: number,
     points: any,
     currentLineThickness: number | undefined,
-    color: string,
+    color: ColorValue,
     fillPoints: any,
     startFillColor: string,
     endFillColor: string,
@@ -2288,7 +2260,7 @@ export const LineChart = (props: LineChartPropsType) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            2;
+            1;
           setPointerX(z);
           setPointerIndex(factor);
           let item, y;
@@ -2373,7 +2345,7 @@ export const LineChart = (props: LineChartPropsType) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            2;
+            1;
           let item, y;
           setPointerX(z);
           setPointerIndex(factor);
@@ -2490,7 +2462,7 @@ export const LineChart = (props: LineChartPropsType) => {
     points: any,
     animatedWidth: any,
     currentLineThickness: number | undefined,
-    color: string,
+    color: ColorValue,
     fillPoints: any,
     startFillColor: string,
     endFillColor: string,
@@ -2528,7 +2500,7 @@ export const LineChart = (props: LineChartPropsType) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            2;
+            1;
           setPointerX(z);
           setPointerIndex(factor);
           let item, y;
@@ -2613,7 +2585,7 @@ export const LineChart = (props: LineChartPropsType) => {
             initialSpacing +
             spacing * factor -
             (pointerRadius || pointerWidth / 2) -
-            2;
+            1;
           let item, y;
           setPointerX(z);
           setPointerIndex(factor);
@@ -2968,7 +2940,7 @@ export const LineChart = (props: LineChartPropsType) => {
               position: 'absolute',
               height:
                 extendedContainerHeight +
-                horizSectionsBelow.length * stepHeight,
+                noOfSectionsBelowXAxis * stepHeight,
               bottom: 60 + labelsExtraHeight,
               width: totalWidth,
               zIndex: 20,
@@ -3016,7 +2988,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const barAndLineChartsWrapperProps: BarAndLineChartsWrapperTypes = {
     chartType: chartTypes.LINE,
     containerHeight,
-    horizSectionsBelow,
+    noOfSectionsBelowXAxis,
     stepHeight,
     labelsExtraHeight,
     yAxisLabelWidth,

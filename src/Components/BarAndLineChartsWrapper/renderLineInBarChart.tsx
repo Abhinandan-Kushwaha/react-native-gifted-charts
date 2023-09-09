@@ -64,6 +64,9 @@ const RenderLineInBarChart = props => {
       const currentBarWidth = item.barWidth || barWidth || 30;
       const customDataPoint =
         item.customDataPoint || lineConfig.customDataPoint;
+      const value =
+        item.value ??
+        item.stacks.reduce((total, item) => total + item.value, 0);
       if (customDataPoint) {
         return (
           <View
@@ -74,7 +77,7 @@ const RenderLineInBarChart = props => {
                 width: lineConfig.dataPointsWidth,
                 top:
                   containerHeight -
-                  (item.value * containerHeight) / maxValue -
+                  (value * containerHeight) / maxValue -
                   (item.shiftY ?? lineConfig.shiftY ?? 0),
                 left: getXForLineInBar(
                   index,
@@ -104,7 +107,7 @@ const RenderLineInBarChart = props => {
               )}
               y={
                 getYForLineInBar(
-                  item.value,
+                  value,
                   lineConfig.shiftY,
                   containerHeight,
                   maxValue,
@@ -131,7 +134,7 @@ const RenderLineInBarChart = props => {
                 }
                 y={
                   getYForLineInBar(
-                    item.value,
+                    value,
                     lineConfig.shiftY,
                     containerHeight,
                     maxValue,
@@ -157,7 +160,7 @@ const RenderLineInBarChart = props => {
               spacing,
             )}
             cy={getYForLineInBar(
-              item.value,
+              value,
               lineConfig.shiftY,
               containerHeight,
               maxValue,
@@ -181,7 +184,7 @@ const RenderLineInBarChart = props => {
               }
               y={
                 getYForLineInBar(
-                  item.value,
+                  value,
                   lineConfig.shiftY,
                   containerHeight,
                   maxValue,

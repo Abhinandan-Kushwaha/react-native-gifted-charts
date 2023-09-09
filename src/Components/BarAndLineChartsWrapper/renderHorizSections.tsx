@@ -19,7 +19,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     chartType,
     width,
     horizSections: h,
-    horizSectionsBelow,
+    noOfSectionsBelowXAxis,
     totalWidth,
     endSpacing,
     yAxisSide,
@@ -85,13 +85,15 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
   const secondaryYAxisConfig: secondaryYAxisType = {
     noOfSections: secondaryYAxis?.noOfSections ?? noOfSections,
     maxValue: secondaryYAxis?.maxValue,
-    minValue: secondaryYAxis?.minValue,
+    mostNegativeValue: secondaryYAxis?.mostNegativeValue,
     stepValue: secondaryYAxis?.stepValue,
     stepHeight: secondaryYAxis?.stepHeight,
 
     showFractionalValues:
       secondaryYAxis?.showFractionalValues ?? showFractionalValues,
     roundToDigits: secondaryYAxis?.roundToDigits ?? roundToDigits,
+    noOfSectionsBelowXAxis:
+      secondaryYAxis?.noOfSectionsBelowXAxis ?? noOfSectionsBelowXAxis,
 
     showYAxisIndices: secondaryYAxis?.showYAxisIndices ?? showYAxisIndices,
     yAxisIndicesHeight:
@@ -123,7 +125,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
   );
   secondaryYAxisConfig.maxValue =
     secondaryYAxisConfig.maxValue ?? (maxItem || maxValue);
-  secondaryYAxisConfig.minValue = secondaryYAxisConfig.maxValue ?? minItem;
+  secondaryYAxisConfig.mostNegativeValue = secondaryYAxisConfig.mostNegativeValue ?? minItem;
   secondaryYAxisConfig.stepValue =
     secondaryYAxisConfig.stepValue ??
     secondaryYAxisConfig.maxValue /
@@ -141,16 +143,30 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       );
     }
 
-    let startIndex = noOfSections;
-    if (horizSectionsBelow.length > 0) {
-      startIndex += horizSectionsBelow.length;
-    }
-
     horizSections.push({
       value: yAxisLabelTexts?.length
-        ? yAxisLabelTexts[startIndex - i] ?? value.toString()
+        ? yAxisLabelTexts[noOfSections + noOfSectionsBelowXAxis - i] ??
+          value.toString()
         : value.toString(),
     });
+  }
+
+  const horizSectionsBelow: HorizSectionsType = [];
+  if (noOfSectionsBelowXAxis) {
+    for (let i = 1; i <= noOfSectionsBelowXAxis; i++) {
+      let value = stepValue * -i;
+      if (showFractionalValues || roundToDigits) {
+        value = parseFloat(
+          value.toFixed(roundToDigits ?? AxesAndRulesDefaults.roundToDigits),
+        );
+      }
+      horizSectionsBelow.push({
+        value: props.yAxisLabelTexts
+          ? props.yAxisLabelTexts[noOfSectionsBelowXAxis - i] ??
+            value.toString()
+          : value.toString(),
+      });
+    }
   }
 
   const secondaryHorizSections: HorizSectionsType = [];
@@ -174,7 +190,34 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       }
       secondaryHorizSections.push({
         value: secondaryYAxisConfig.yAxisLabelTexts?.length
-          ? secondaryYAxisConfig.yAxisLabelTexts[i] ?? value.toString()
+          ? secondaryYAxisConfig.yAxisLabelTexts[
+              i - noOfSectionsBelowXAxis - 1
+            ] ?? value.toString()
+          : value.toString(),
+      });
+    }
+  }
+
+  const secondaryHorizSectionsBelow: HorizSectionsType = [];
+  if (secondaryYAxisConfig.noOfSectionsBelowXAxis) {
+    for (let i = 1; i <= secondaryYAxisConfig.noOfSectionsBelowXAxis; i++) {
+      let value =
+        secondaryYAxisConfig.stepValue *
+        (i - secondaryYAxisConfig.noOfSectionsBelowXAxis - 1);
+      if (
+        secondaryYAxisConfig.showFractionalValues ||
+        secondaryYAxisConfig.roundToDigits
+      ) {
+        value = parseFloat(
+          value.toFixed(
+            secondaryYAxisConfig.roundToDigits ??
+              AxesAndRulesDefaults.roundToDigits,
+          ),
+        );
+      }
+      secondaryHorizSectionsBelow.push({
+        value: secondaryYAxisConfig.yAxisLabelTexts?.length
+          ? secondaryYAxisConfig.yAxisLabelTexts[i - 1] ?? value.toString()
           : value.toString(),
       });
     }
@@ -316,6 +359,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       yAxisOffset,
       yAxisLabelPrefix,
       yAxisLabelSuffix,
+      roundToDigits ?? AxesAndRulesDefaults.roundToDigits,
     );
   };
 
@@ -326,6 +370,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       yAxisOffset,
       yAxisLabelPrefix,
       yAxisLabelSuffix,
+      roundToDigits,
     } = secondaryYAxisConfig;
     return getLabelTextUtil(
       val,
@@ -335,6 +380,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       yAxisOffset,
       yAxisLabelPrefix,
       yAxisLabelSuffix,
+      roundToDigits ?? AxesAndRulesDefaults.roundToDigits,
     );
   };
 
@@ -393,6 +439,58 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       ) : null}
     </View>
   );
+
+  const renderSecondaryYaxisLabels = (
+    horizSections: HorizSectionsType,
+    isBelow: boolean,
+  ) =>
+    horizSections.map((sectionItems, index) => {
+      let label = getLabelTextsForSecondaryYAxis(sectionItems.value, index);
+      if (
+        secondaryYAxisConfig.hideOrigin &&
+        index === secondaryHorizSections.length - 1
+      ) {
+        label = '';
+      }
+      return (
+        <View
+          key={index}
+          style={[
+            styles.horizBar,
+            styles.leftLabel,
+            {
+              position: 'absolute',
+              zIndex: 1,
+              bottom:
+                (secondaryYAxisConfig.stepHeight ?? 0) *
+                ((isBelow ? 0 : noOfSectionsBelowXAxis) +
+                  index -
+                  (noOfSectionsBelowXAxis ? 0 : 0.5)),
+              width: secondaryYAxisConfig.yAxisLabelWidth,
+              height: secondaryYAxisConfig.stepHeight ?? 0,
+            },
+            yAxisLabelContainerStyle,
+          ]}>
+          {secondaryYAxisConfig.showYAxisIndices && index !== 0 ? (
+            <View
+              style={{
+                height: secondaryYAxisConfig.yAxisIndicesHeight,
+                width: secondaryYAxisConfig.yAxisIndicesWidth,
+                position: 'absolute',
+                left: (secondaryYAxisConfig.yAxisIndicesWidth ?? 0) / -2,
+                backgroundColor: secondaryYAxisConfig.yAxisIndicesColor,
+              }}
+            />
+          ) : null}
+          <Text
+            numberOfLines={secondaryYAxisConfig.yAxisTextNumberOfLines}
+            ellipsizeMode={'clip'}
+            style={[secondaryYAxisConfig.yAxisTextStyle]}>
+            {label}
+          </Text>
+        </View>
+      );
+    });
 
   return (
     <View style={{flexDirection: 'row'}}>
@@ -710,59 +808,12 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
               borderColor: secondaryYAxisConfig.yAxisColor,
               borderLeftWidth: secondaryYAxisConfig.yAxisThickness,
             }}>
-            {!secondaryYAxisConfig.hideYAxisText &&
-              secondaryHorizSections.map((sectionItems, index) => {
-                let label = getLabelTextsForSecondaryYAxis(
-                  sectionItems.value,
-                  index,
-                );
-                if (
-                  secondaryYAxisConfig.hideOrigin &&
-                  index === secondaryHorizSections.length - 1
-                ) {
-                  label = '';
-                }
-                return (
-                  <View
-                    key={index}
-                    style={[
-                      styles.horizBar,
-                      styles.leftLabel,
-                      {
-                        position: 'absolute',
-                        zIndex: 1,
-                        bottom:
-                          (secondaryYAxisConfig.stepHeight ?? 0) *
-                          (index - 0.5),
-                        width: secondaryYAxisConfig.yAxisLabelWidth,
-                        height: secondaryYAxisConfig.stepHeight ?? 0,
-                      },
-                      yAxisLabelContainerStyle,
-                    ]}>
-                    {secondaryYAxisConfig.showYAxisIndices && index !== 0 ? (
-                      <View
-                        style={{
-                          height: secondaryYAxisConfig.yAxisIndicesHeight,
-                          width: secondaryYAxisConfig.yAxisIndicesWidth,
-                          position: 'absolute',
-                          left:
-                            (secondaryYAxisConfig.yAxisIndicesWidth ?? 0) / -2,
-                          backgroundColor:
-                            secondaryYAxisConfig.yAxisIndicesColor,
-                        }}
-                      />
-                    ) : null}
-                    <Text
-                      numberOfLines={
-                        secondaryYAxisConfig.yAxisTextNumberOfLines
-                      }
-                      ellipsizeMode={'clip'}
-                      style={[secondaryYAxisConfig.yAxisTextStyle]}>
-                      {label}
-                    </Text>
-                  </View>
-                );
-              })}
+            {!secondaryYAxisConfig.hideYAxisText
+              ? renderSecondaryYaxisLabels(secondaryHorizSections, false)
+              : null}
+            {noOfSectionsBelowXAxis && !secondaryYAxisConfig.hideYAxisText
+              ? renderSecondaryYaxisLabels(secondaryHorizSectionsBelow, true)
+              : null}
           </View>
         )
       }

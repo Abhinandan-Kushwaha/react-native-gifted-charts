@@ -14,7 +14,7 @@
 | overflowTop                   | number         | Extra space at the top of the chart to make room for dataPointText                                             | 0                    |
 | overflowBottom                | number         | Extra space at the bottom of the chart to make room for dataPoints or dataPointText                            | dataPointRadius      |
 | maxValue                      | number         | Maximum value shown in the Y axis                                                                              | 200                  |
-| minValue                      | number         | Minimum negative value shown in the Y axis (to be used only if the data set has negative values too)           | \_                   |
+| mostNegativeValue                      | number         | The most negative value shown in the Y axis (to be used only if the data set has negative values too)          | \_                   |
 | noOfSections                  | number         | Number of sections in the Y axis                                                                               | 10                   |
 | noOfSectionsBelowXAxis        | number         | Number of sections in the Y axis below X axis (in case the data set has negative values too)                   | 0                    |
 | stepValue                     | number         | Value of 1 step/section in the Y axis                                                                          | 20                   |
@@ -196,7 +196,7 @@ Use this prop to render a secondary Y axis on the right side of the chart. **sec
 type secondaryYAxisType = {
   noOfSections?: number,
   maxValue?: number,
-  minValue?: number,
+  mostNegativeValue?: number,
   stepValue?: number,
   stepHeight?: number,
   showFractionalValues?: boolean,

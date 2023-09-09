@@ -513,7 +513,7 @@ export const computeMaxAndMinItems = (
   roundToDigits,
   showFractionalValues,
 ): MaxAndMin => {
-  if (!data) {
+  if (!data?.length) {
     return {maxItem: 0, minItem: 0};
   }
   let maxItem = 0,
@@ -539,25 +539,27 @@ export const getLabelTextUtil = (
   yAxisOffset,
   yAxisLabelPrefix,
   yAxisLabelSuffix,
+  roundToDigits,
 ) => {
   let label = '';
   if (
     showFractionalValues ||
     (yAxisLabelTexts && yAxisLabelTexts[index] !== undefined)
   ) {
+    if (yAxisLabelTexts?.[index]) return val;
     if (val) {
-      label = yAxisOffset ? (Number(val) + yAxisOffset).toString() : val;
+      label = isNaN(Number(val))
+        ? val
+        : (Number(val) + (yAxisOffset ?? 0)).toFixed(roundToDigits);
     } else {
-      label = yAxisOffset ? yAxisOffset.toString() : '0';
+      label = yAxisOffset?.toString() ?? '0';
     }
   } else {
     if (val) {
       label = val.toString().split('.')[0];
-      if (yAxisOffset) {
-        label = (Number(label) + yAxisOffset).toString();
-      }
+      label = (Number(label) + (yAxisOffset ?? 0)).toString();
     } else {
-      label = yAxisOffset ? yAxisOffset.toString() : '0';
+      label = yAxisOffset?.toString() ?? '0';
     }
   }
 
