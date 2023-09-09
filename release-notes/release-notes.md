@@ -1,4 +1,29 @@
-# Features added-
+# 🎉 1.3.6
+
+## ✨ Features added-
+1. secondary Y axis for charts with negative values
+2. Line chart inside stacked bar chart
+
+## 🔨 Refactor
+`minValue` is now renamed to `mostNegativeValue` to avoid confusion
+
+## 🐛 Bug fixes
+1. Fixed issue with `roundToDigits` for Y axis labels. Now we add trailing 0s after decimal point if needed. So if the Y axis label is 1.5 and we have `roundToDigits={2}`, then the label rendered will be 1.50
+2. Fixed Y axis label issue which displayed NaN as a label when we used `yAxisOffset` and `yAxisLabelTexts` props together.
+
+---
+---
+---
+# 🎉 1.3.5
+🐛 Minor bug fixes
+
+---
+---
+---
+
+
+# 🎉 1.3.4 Major release
+## ✨ Features added-
 
 ### 1. Y axis on both sides
 
@@ -40,9 +65,9 @@ The `isAnimated` prop is now supported in stacked bar charts.
 ### 9. endSpacing
 Similar to the `initialSpacing` we now have a prop named `endSpacing` as well.
 
-# Fixes
+## 🐛 Fixes
 
-### 1. Support for expo 🎉
+### 1. Support for expo ❤️
 The library used to break when used in an expo project. This was perhaps due to version conflicts in react-native-svg. We have now moved both `react-native-svg` and `react-native-linear-gradient` to peer dependencies. This should hopefully fix the issues with expo.
 
 ### 2. Fixed the issue with pointerConfig being jaggy on Android
