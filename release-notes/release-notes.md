@@ -65,6 +65,9 @@ The `isAnimated` prop is now supported in stacked bar charts.
 ### 9. endSpacing
 Similar to the `initialSpacing` we now have a prop named `endSpacing` as well.
 
+### 10. overflowBottom
+Similar to the `overflowTop` we now have a prop named `overflowBottom` as well, but it makes sense only for line and area charts. It gives extra space at the bottom of the chart to make room for dataPoints or dataPointText.
+
 ## 🐛 Fixes
 
 ### 1. Support for expo ❤️
