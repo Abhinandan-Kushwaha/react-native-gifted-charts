@@ -76,6 +76,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     pointerIndex,
     pointerX,
     pointerY,
+
+    scrollEventThrottle,
   } = props;
 
   let yAxisAtTop = rtl ? !props.yAxisAtTop : props.yAxisAtTop;
@@ -240,6 +242,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     totalWidth,
     barWidth,
     labelsExtraHeight,
+    scrollEventThrottle,
   };
   const extendedContainerHeight = containerHeight + 10;
   const containerHeightIncludingBelowXAxis =
@@ -322,6 +325,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         ? renderHorizSections(horizSectionProps)
         : null}
       <ScrollView
+        scrollEventThrottle={
+          props.scrollEventThrottle ? props.scrollEventThrottle : 16
+        }
         horizontal
         ref={scrollRef}
         style={[
