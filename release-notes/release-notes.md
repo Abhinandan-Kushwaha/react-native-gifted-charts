@@ -1,3 +1,16 @@
+# 🎉 1.3.7
+
+## ✨ Features added-
+1. Added the prop `scrollEventThrottle` (only for iOS) see https://reactnative.dev/docs/scrollview#scrolleventthrottle-ios - default value is 0\
+2. exposed secondaryDataItem in pointerLabelComponent see https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/388
+
+## 🐛 Bug fixes
+Fixed issue with `adjustToWidth` (Now if you pass the `adjustToWidth` prop, your chart will take the screen width automatically)
+
+---
+---
+---
+
 # 🎉 1.3.6
 
 ## ✨ Features added-
