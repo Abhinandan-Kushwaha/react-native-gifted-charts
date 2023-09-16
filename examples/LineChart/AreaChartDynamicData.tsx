@@ -5,6 +5,20 @@ import { ruleTypes } from '../../src/utils/constants';
 
 const AreaChartDynamicData = () => {
   const lcomp = (v) => <Text style={{width:50, color:'white',fontWeight:'bold'}}>{v}</Text>
+  const dPoint = () => {
+    return (
+      <View
+        style={{
+          width: 14,
+          height: 14,
+          backgroundColor: 'white',
+          borderWidth: 3,
+          borderRadius: 7,
+          borderColor: '#07BAD1',
+        }}
+      />
+    );
+  };
   const latestData = [
       {
         value: 350,
@@ -120,20 +134,7 @@ useEffect(()=>{
     setCurrentData(newData);
   },3500)
 },[])
-  const dPoint = () => {
-    return (
-      <View
-        style={{
-          width: 14,
-          height: 14,
-          backgroundColor: 'white',
-          borderWidth: 3,
-          borderRadius: 7,
-          borderColor: '#07BAD1',
-        }}
-      />
-    );
-  };
+  
   return (
     <View>
       <View

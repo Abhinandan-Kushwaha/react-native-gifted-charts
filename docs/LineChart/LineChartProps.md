@@ -33,6 +33,7 @@
 | onPress                       | Function       | The callback function that handles the press event. `item` and `index` are received as props                   | \_                   |
 | scrollToEnd                   | boolean        | When set to true, the chart automatically scrolls to the rightmost data point                                  | false                |
 | scrollAnimation               | boolean        | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true                 |
+| scrollEventThrottle           | number         | (only for iOS) see https://reactnative.dev/docs/scrollview#scrolleventthrottle-ios                             | 0                    |
 | initialSpacing                | number         | distance of the first data point from the Y axis                                                               | 20                   |
 | endSpacing                    | number         | distance/padding left at the end of the line chart                                                             | adjustWidth ? 0 : 20 |
 
@@ -459,12 +460,13 @@ type Pointer = {
   height?: number, // default: 0
   width?: number, // default: 0
   radius?: number, // default: 5
-  pointerColor?: ColorValue, // default: 'red
-  pointer1Color?: ColorValue, // default: 'red
-  pointer2Color?: ColorValue, // default: 'red
-  pointer3Color?: ColorValue, // default: 'red
-  pointer4Color?: ColorValue, // default: 'red
-  pointer5Color?: ColorValue, // default: 'red
+  pointerColor?: ColorValue, // default: 'red'
+  pointer1Color?: ColorValue, // default: 'red'
+  pointer2Color?: ColorValue, // default: 'red'
+  pointer3Color?: ColorValue, // default: 'red'
+  pointer4Color?: ColorValue, // default: 'red'
+  pointer5Color?: ColorValue, // default: 'red'
+  secondaryPointerColor?: ColorValue, // default: 'red'
   pointerComponent?: Function, // default: null
   showPointerStrip?: boolean, // default: true
   pointerStripWidth?: number, // default: containerHeight
@@ -486,6 +488,7 @@ type Pointer = {
   hidePointer3?: boolean, // default: false
   hidePointer4?: boolean, // default: false
   hidePointer5?: boolean, // default: false
+  hideSecondaryPointer?: boolean // default: false
   strokeDashArray?: Array<number>,
 };
 ```
@@ -501,7 +504,7 @@ The `strokeDashArray` property lets us render a dashed/dotted strip along the po
 
 #### pointerLabelComponent
 
-`pointerLabelComponent` is a function that returns the component to be rendered as a Label. It takes a single parameter - an array of items. So, if there are multiple data arrays, the parameter `items` will have the data item corresponding to each data array.
+`pointerLabelComponent` is a function that returns the component to be rendered as a Label. It takes 2 parameters - 1. an array of items 2. secondaryDataItem. So, if there are multiple data arrays, the parameter `items` will have the data item corresponding to each data array. If the chart has secondaryData, the parameter `secondaryDataItem` will have the corresponding item from the secondaryData.
 
 #### getPointerProps
 

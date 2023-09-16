@@ -161,6 +161,8 @@ export const BarChart = (props: BarChartPropsType) => {
   const labelWidth = props.labelWidth ?? AxesAndRulesDefaults.labelWidth;
   const scrollToEnd = props.scrollToEnd ?? BarDefaults.scrollToEnd;
   const scrollAnimation = props.scrollAnimation ?? BarDefaults.scrollAnimation;
+  const scrollEventThrottle =
+    props.scrollEventThrottle ?? BarDefaults.scrollEventThrottle;
   const labelsExtraHeight =
     props.labelsExtraHeight ?? AxesAndRulesDefaults.labelsExtraHeight;
 
@@ -529,6 +531,7 @@ export const BarChart = (props: BarChartPropsType) => {
     scrollToEnd,
     scrollToIndex: props.scrollToIndex,
     scrollAnimation,
+    scrollEventThrottle,
     indicatorColor: props.indicatorColor,
     setSelectedIndex,
     spacing,

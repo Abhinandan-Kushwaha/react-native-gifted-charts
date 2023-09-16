@@ -43,7 +43,7 @@ const BarThreeD = () => {
   return (
     <View>
       <BarChart
-        showFractionalValue
+        showFractionalValues
         showYAxisIndices
         hideRules
         noOfSections={4}

@@ -1,7 +1,13 @@
 import {ColorValue} from 'react-native';
 import {chartTypes, yAxisSides} from './constants';
 
-export type RuleType = 'solid' | 'dashed' | 'dotted';
+export type RuleType = 'solid' | 'dashed' | 'dotted' | string;
+
+export type RuleTypes = {
+  SOLID: RuleType;
+  DASHED: RuleType;
+  DOTTED: RuleType;
+};
 
 export enum CurveType {
   CUBIC,

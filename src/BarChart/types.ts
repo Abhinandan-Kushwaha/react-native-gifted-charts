@@ -134,6 +134,7 @@ export type BarChartPropsType = {
   scrollToEnd?: boolean;
   scrollToIndex?: number;
   scrollAnimation?: boolean;
+  scrollEventThrottle?: number;
   labelsExtraHeight?: number;
   barBackgroundPattern?: Function;
   patternId?: String;
