@@ -13,7 +13,7 @@ const SimpleBarAnimated = () => {
   return (
     <View>
       <BarChart
-        showFractionalValue
+        showFractionalValues
         showYAxisIndices
         noOfSections={4}
         maxValue={400}

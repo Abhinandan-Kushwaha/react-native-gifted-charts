@@ -6,7 +6,15 @@ import React, {
   useState,
   useRef,
 } from 'react';
-import {View, Animated, Easing, Text, Dimensions, Platform, ColorValue} from 'react-native';
+import {
+  View,
+  Animated,
+  Easing,
+  Text,
+  Dimensions,
+  Platform,
+  ColorValue,
+} from 'react-native';
 import {styles} from './styles';
 import Svg, {
   Path,
@@ -32,6 +40,7 @@ import {
   chartTypes,
   defaultArrowConfig,
   defaultPointerConfig,
+  screenWidth,
 } from '../utils/constants';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {LineChartPropsType, itemType} from './types';
@@ -75,6 +84,11 @@ export const LineChart = (props: LineChartPropsType) => {
   });
   const [pointerY5, setPointerY5] = useState(0);
   const [pointerItem5, setPointerItem5] = useState({
+    pointerShiftX: 0,
+    pointerShiftY: 0,
+  });
+  const [secondaryPointerY, setSecondaryPointerY] = useState(0);
+  const [secondaryPointerItem, setSecondaryPointerItem] = useState({
     pointerShiftX: 0,
     pointerShiftY: 0,
   });
@@ -167,6 +181,8 @@ export const LineChart = (props: LineChartPropsType) => {
 
   const scrollToEnd = props.scrollToEnd || LineDefaults.scrollToEnd;
   const scrollAnimation = props.scrollAnimation ?? LineDefaults.scrollAnimation;
+  const scrollEventThrottle =
+    props.scrollEventThrottle ?? LineDefaults.scrollEventThrottle;
 
   const opacValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
@@ -225,10 +241,16 @@ export const LineChart = (props: LineChartPropsType) => {
 
   const thickness = props.thickness || LineDefaults.thickness;
 
+  const yAxisLabelWidth =
+    props.yAxisLabelWidth ??
+    (props.hideYAxisText
+      ? AxesAndRulesDefaults.yAxisEmptyLabelWidth
+      : AxesAndRulesDefaults.yAxisLabelWidth);
+
   const spacing =
     props.spacing ??
     (adjustToWidth
-      ? ((props.width ?? AxesAndRulesDefaults.width) - initialSpacing) /
+      ? ((props.width ?? screenWidth - yAxisLabelWidth) - initialSpacing) /
         (data.length - 1)
       : LineDefaults.spacing);
 
@@ -1323,11 +1345,6 @@ export const LineChart = (props: LineChartPropsType) => {
   const horizontalRulesStyle = props.horizontalRulesStyle;
   const showFractionalValues =
     props.showFractionalValues ?? AxesAndRulesDefaults.showFractionalValues;
-  const yAxisLabelWidth =
-    props.yAxisLabelWidth ??
-    (props.hideYAxisText
-      ? AxesAndRulesDefaults.yAxisEmptyLabelWidth
-      : AxesAndRulesDefaults.yAxisLabelWidth);
 
   const horizontal = false;
   const yAxisAtTop = false;
@@ -1336,83 +1353,69 @@ export const LineChart = (props: LineChartPropsType) => {
 
   const pointerConfig = props.pointerConfig || null;
   const getPointerProps = props.getPointerProps || null;
-  const pointerHeight = pointerConfig?.height
-    ? pointerConfig.height
-    : defaultPointerConfig.height;
-  const pointerWidth = pointerConfig?.width
-    ? pointerConfig.width
-    : defaultPointerConfig.width;
-  const pointerRadius = pointerConfig?.radius
-    ? pointerConfig.radius
-    : defaultPointerConfig.radius;
-  const pointerColor = pointerConfig?.pointerColor
-    ? pointerConfig.pointerColor
-    : defaultPointerConfig.pointerColor;
-  const pointerComponent = pointerConfig?.pointerComponent
-    ? pointerConfig.pointerComponent
-    : defaultPointerConfig.pointerComponent;
+  const pointerHeight = pointerConfig?.height ?? defaultPointerConfig.height;
+  const pointerWidth = pointerConfig?.width ?? defaultPointerConfig.width;
+  const pointerRadius = pointerConfig?.radius ?? defaultPointerConfig.radius;
+  const pointerColor =
+    pointerConfig?.pointerColor ?? defaultPointerConfig.pointerColor;
+  const pointerComponent =
+    pointerConfig?.pointerComponent ?? defaultPointerConfig.pointerComponent;
 
   const showPointerStrip =
     pointerConfig?.showPointerStrip === false
       ? false
       : defaultPointerConfig.showPointerStrip;
-  const pointerStripHeight = pointerConfig?.pointerStripHeight
-    ? pointerConfig.pointerStripHeight
-    : defaultPointerConfig.pointerStripHeight;
-  const pointerStripWidth = pointerConfig?.pointerStripWidth
-    ? pointerConfig.pointerStripWidth
-    : defaultPointerConfig.pointerStripWidth;
-  const pointerStripColor = pointerConfig?.pointerStripColor
-    ? pointerConfig.pointerStripColor
-    : defaultPointerConfig.pointerStripColor;
-  const pointerStripUptoDataPoint = pointerConfig?.pointerStripUptoDataPoint
-    ? pointerConfig.pointerStripUptoDataPoint
-    : defaultPointerConfig.pointerStripUptoDataPoint;
-  const pointerLabelComponent = pointerConfig?.pointerLabelComponent
-    ? pointerConfig.pointerLabelComponent
-    : defaultPointerConfig.pointerLabelComponent;
-  const stripOverPointer = pointerConfig?.stripOverPointer
-    ? pointerConfig.stripOverPointer
-    : defaultPointerConfig.stripOverPointer;
-  const shiftPointerLabelX = pointerConfig?.shiftPointerLabelX
-    ? pointerConfig.shiftPointerLabelX
-    : defaultPointerConfig.shiftPointerLabelX;
-  const shiftPointerLabelY = pointerConfig?.shiftPointerLabelY
-    ? pointerConfig.shiftPointerLabelY
-    : defaultPointerConfig.shiftPointerLabelY;
-  const pointerLabelWidth = pointerConfig?.pointerLabelWidth
-    ? pointerConfig.pointerLabelWidth
-    : defaultPointerConfig.pointerLabelWidth;
-  const pointerLabelHeight = pointerConfig?.pointerLabelHeight
-    ? pointerConfig.pointerLabelHeight
-    : defaultPointerConfig.pointerLabelHeight;
+  const pointerStripHeight =
+    pointerConfig?.pointerStripHeight ??
+    defaultPointerConfig.pointerStripHeight;
+  const pointerStripWidth =
+    pointerConfig?.pointerStripWidth ?? defaultPointerConfig.pointerStripWidth;
+  const pointerStripColor =
+    pointerConfig?.pointerStripColor ?? defaultPointerConfig.pointerStripColor;
+  const pointerStripUptoDataPoint =
+    pointerConfig?.pointerStripUptoDataPoint ??
+    defaultPointerConfig.pointerStripUptoDataPoint;
+  const pointerLabelComponent =
+    pointerConfig?.pointerLabelComponent ??
+    defaultPointerConfig.pointerLabelComponent;
+  const stripOverPointer =
+    pointerConfig?.stripOverPointer ?? defaultPointerConfig.stripOverPointer;
+  const shiftPointerLabelX =
+    pointerConfig?.shiftPointerLabelX ??
+    defaultPointerConfig.shiftPointerLabelX;
+  const shiftPointerLabelY =
+    pointerConfig?.shiftPointerLabelY ??
+    defaultPointerConfig.shiftPointerLabelY;
+  const pointerLabelWidth =
+    pointerConfig?.pointerLabelWidth ?? defaultPointerConfig.pointerLabelWidth;
+  const pointerLabelHeight =
+    pointerConfig?.pointerLabelHeight ??
+    defaultPointerConfig.pointerLabelHeight;
   const autoAdjustPointerLabelPosition =
     pointerConfig?.autoAdjustPointerLabelPosition ??
     defaultPointerConfig.autoAdjustPointerLabelPosition;
-  const pointerVanishDelay = pointerConfig?.pointerVanishDelay
-    ? pointerConfig.pointerVanishDelay
-    : defaultPointerConfig.pointerVanishDelay;
-  const activatePointersOnLongPress = pointerConfig?.activatePointersOnLongPress
-    ? pointerConfig.activatePointersOnLongPress
-    : defaultPointerConfig.activatePointersOnLongPress;
-  const activatePointersDelay = pointerConfig?.activatePointersDelay
-    ? pointerConfig.activatePointersDelay
-    : defaultPointerConfig.activatePointersDelay;
-  const hidePointer1 = pointerConfig?.hidePointer1
-    ? pointerConfig.hidePointer1
-    : defaultPointerConfig.hidePointer1;
-  const hidePointer2 = pointerConfig?.hidePointer2
-    ? pointerConfig.hidePointer2
-    : defaultPointerConfig.hidePointer2;
-  const hidePointer3 = pointerConfig?.hidePointer3
-    ? pointerConfig.hidePointer3
-    : defaultPointerConfig.hidePointer3;
-  const hidePointer4 = pointerConfig?.hidePointer4
-    ? pointerConfig.hidePointer4
-    : defaultPointerConfig.hidePointer4;
-  const hidePointer5 = pointerConfig?.hidePointer5
-    ? pointerConfig.hidePointer5
-    : defaultPointerConfig.hidePointer5;
+  const pointerVanishDelay =
+    pointerConfig?.pointerVanishDelay ??
+    defaultPointerConfig.pointerVanishDelay;
+  const activatePointersOnLongPress =
+    pointerConfig?.activatePointersOnLongPress ??
+    defaultPointerConfig.activatePointersOnLongPress;
+  const activatePointersDelay =
+    pointerConfig?.activatePointersDelay ??
+    defaultPointerConfig.activatePointersDelay;
+  const hidePointer1 =
+    pointerConfig?.hidePointer1 ?? defaultPointerConfig.hidePointer1;
+  const hidePointer2 =
+    pointerConfig?.hidePointer2 ?? defaultPointerConfig.hidePointer2;
+  const hidePointer3 =
+    pointerConfig?.hidePointer3 ?? defaultPointerConfig.hidePointer3;
+  const hidePointer4 =
+    pointerConfig?.hidePointer4 ?? defaultPointerConfig.hidePointer4;
+  const hidePointer5 =
+    pointerConfig?.hidePointer5 ?? defaultPointerConfig.hidePointer5;
+  const hideSecondaryPointer =
+    pointerConfig?.hideSecondaryPointer ??
+    defaultPointerConfig.hideSecondaryPointer;
   const disableScroll =
     props.disableScroll ||
     (pointerConfig
@@ -1827,7 +1830,9 @@ export const LineChart = (props: LineChartPropsType) => {
                 ? (item.value * containerHeight) / maxValue - xAxisThickness
                 : extendedContainerHeight - xAxisThickness
             }
-            fill={item.verticalLineColor || props.verticalLinesColor || 'lightgray'}
+            fill={
+              item.verticalLineColor || props.verticalLinesColor || 'lightgray'
+            }
           />
         );
       }
@@ -1841,6 +1846,9 @@ export const LineChart = (props: LineChartPropsType) => {
     if (lineNumber === 3 && hidePointer3) return;
     if (lineNumber === 4 && hidePointer4) return;
     if (lineNumber === 5 && hidePointer5) return;
+    // 6 is for secondaryData
+    if (lineNumber === 6 && hideSecondaryPointer) return;
+
     let pointerItemLocal, pointerYLocal, pointerColorLocal;
     switch (lineNumber) {
       case 1:
@@ -1867,6 +1875,12 @@ export const LineChart = (props: LineChartPropsType) => {
         pointerItemLocal = pointerItem5;
         pointerYLocal = pointerY5;
         pointerColorLocal = pointerConfig?.pointer5Color || pointerColor;
+        break;
+      case 6:
+        pointerItemLocal = secondaryPointerItem;
+        pointerYLocal = secondaryPointerY;
+        pointerColorLocal =
+          pointerConfig?.secondaryPointerColor || pointerColor;
         break;
     }
 
@@ -1914,6 +1928,9 @@ export const LineChart = (props: LineChartPropsType) => {
     if (pointerY5 !== 0) {
       arr.push(pointerY5);
       pointerItemLocal.push(pointerItem5);
+    }
+    if (secondaryPointerY !== 0) {
+      pointerItemLocal.push(secondaryPointerItem);
     }
     pointerYLocal = Math.min(...arr);
 
@@ -2025,7 +2042,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 width: pointerLabelWidth,
               },
             ]}>
-            {pointerLabelComponent(pointerItemLocal)}
+            {pointerLabelComponent(pointerItemLocal, secondaryPointerItem)}
           </View>
         )}
       </View>
@@ -2320,6 +2337,18 @@ export const LineChart = (props: LineChartPropsType) => {
               setPointerItem5(item);
             }
           }
+          if (secondaryData?.length) {
+            item = secondaryData[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setSecondaryPointerY(y);
+              setSecondaryPointerItem(item);
+            }
+          }
         }}
         onResponderMove={evt => {
           if (!pointerConfig) return;
@@ -2403,6 +2432,18 @@ export const LineChart = (props: LineChartPropsType) => {
                 10;
               setPointerY5(y);
               setPointerItem5(item);
+            }
+          }
+          if (secondaryData?.length) {
+            item = secondaryData[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setSecondaryPointerY(y);
+              setSecondaryPointerItem(item);
             }
           }
         }}
@@ -2560,6 +2601,18 @@ export const LineChart = (props: LineChartPropsType) => {
               setPointerItem5(item);
             }
           }
+          if (secondaryData?.length) {
+            item = secondaryData[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setSecondaryPointerY(y);
+              setSecondaryPointerItem(item);
+            }
+          }
         }}
         onResponderMove={evt => {
           if (!pointerConfig) return;
@@ -2645,6 +2698,18 @@ export const LineChart = (props: LineChartPropsType) => {
               setPointerItem5(item);
             }
           }
+          if (secondaryData?.length) {
+            item = secondaryData[factor];
+            if (item) {
+              y =
+                containerHeight -
+                (item.value * containerHeight) / maxValue -
+                (pointerRadius || pointerHeight / 2) +
+                10;
+              setSecondaryPointerY(y);
+              setSecondaryPointerItem(item);
+            }
+          }
         }}
         // onResponderReject={evt => {
         //   console.log('evt...reject.......',evt);
@@ -2667,8 +2732,13 @@ export const LineChart = (props: LineChartPropsType) => {
         // }}
         style={{
           position: 'absolute',
-          height: containerHeightIncludingBelowXAxis,
-          bottom: 60, //stepHeight * -0.5 + xAxisThickness,
+          height:
+            containerHeightIncludingBelowXAxis +
+            (props.overflowBottom ?? dataPointsRadius1),
+          bottom:
+            60 +
+            labelsExtraHeight -
+            (props.overflowBottom ?? dataPointsRadius1),
           width: animatedWidth,
           zIndex: zIndex,
           // backgroundColor: 'wheat',
@@ -2939,8 +3009,7 @@ export const LineChart = (props: LineChartPropsType) => {
             style={{
               position: 'absolute',
               height:
-                extendedContainerHeight +
-                noOfSectionsBelowXAxis * stepHeight,
+                extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
               bottom: 60 + labelsExtraHeight,
               width: totalWidth,
               zIndex: 20,
@@ -2951,6 +3020,7 @@ export const LineChart = (props: LineChartPropsType) => {
             {points3 ? renderPointer(3) : null}
             {points4 ? renderPointer(4) : null}
             {points5 ? renderPointer(5) : null}
+            {secondaryPoints ? renderPointer(6) : null}
             {stripOverPointer && renderStripAndLabel()}
           </View>
         ) : null}
@@ -3010,6 +3080,7 @@ export const LineChart = (props: LineChartPropsType) => {
     scrollToEnd,
     scrollToIndex: props.scrollToIndex,
     scrollAnimation,
+    scrollEventThrottle,
     indicatorColor: props.indicatorColor,
     setSelectedIndex,
     spacing,

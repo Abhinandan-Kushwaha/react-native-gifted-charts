@@ -125,7 +125,8 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
   );
   secondaryYAxisConfig.maxValue =
     secondaryYAxisConfig.maxValue ?? (maxItem || maxValue);
-  secondaryYAxisConfig.mostNegativeValue = secondaryYAxisConfig.mostNegativeValue ?? minItem;
+  secondaryYAxisConfig.mostNegativeValue =
+    secondaryYAxisConfig.mostNegativeValue ?? minItem;
   secondaryYAxisConfig.stepValue =
     secondaryYAxisConfig.stepValue ??
     secondaryYAxisConfig.maxValue /
@@ -391,6 +392,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
         {
           borderColor: yAxisColor,
           backgroundColor: backgroundColor,
+          width: (props.width || totalWidth - spacing) + endSpacing,
         },
         yAxisSide === yAxisSides.RIGHT
           ? {borderRightWidth: yAxisThickness}

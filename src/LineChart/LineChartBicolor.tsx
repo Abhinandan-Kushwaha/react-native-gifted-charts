@@ -180,6 +180,7 @@ type propTypes = {
   scrollToEnd?: boolean;
   scrollToIndex?: number;
   scrollAnimation?: boolean;
+  scrollEventThrottle?: number;
   noOfSectionsBelowXAxis?: number;
   labelsExtraHeight?: number;
   adjustToWidth?: boolean;
@@ -197,8 +198,8 @@ type referenceConfigType = {
 };
 type itemType = {
   value: number;
-  label: String;
-  labelComponent: Function;
+  label?: String;
+  labelComponent?: Function;
   labelTextStyle?: any;
   dataPointText?: string;
   textShiftX?: number;
@@ -274,6 +275,8 @@ export const LineChartBicolor = (props: propTypes) => {
 
   const scrollToEnd = props.scrollToEnd ?? LineDefaults.scrollToEnd;
   const scrollAnimation = props.scrollAnimation ?? LineDefaults.scrollAnimation;
+  const scrollEventThrottle =
+    props.scrollEventThrottle ?? LineDefaults.scrollEventThrottle;
 
   const opacValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
@@ -700,7 +703,7 @@ export const LineChartBicolor = (props: propTypes) => {
     index: number,
     label: String,
     labelTextStyle: any,
-    labelComponent: Function,
+    labelComponent?: Function,
   ) => {
     return (
       <View
@@ -735,7 +738,7 @@ export const LineChartBicolor = (props: propTypes) => {
     index: number,
     label: String,
     labelTextStyle: any,
-    labelComponent: Function,
+    labelComponent?: Function,
   ) => {
     return (
       <Animated.View
@@ -1335,6 +1338,7 @@ export const LineChartBicolor = (props: propTypes) => {
     scrollToEnd,
     scrollToIndex: props.scrollToIndex,
     scrollAnimation,
+    scrollEventThrottle,
     indicatorColor: props.indicatorColor,
     setSelectedIndex,
     spacing,

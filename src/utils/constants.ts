@@ -1,5 +1,6 @@
 import {defaultLineConfigType} from '../BarChart/types';
-import {CurveType} from './types';
+import {CurveType, RuleTypes} from './types';
+import {Dimensions} from 'react-native';
 
 // Global
 
@@ -9,9 +10,12 @@ export enum chartTypes {
   LINE_BI_COLOR,
 }
 
+export const screenWidth = Dimensions.get('window').width;
+
 const defaultCurvature = 0.2;
 const defaultCurveType = CurveType.CUBIC;
 const defaultAnimationDuration = 800;
+const defaultScrollEventThrottle = 0;
 
 // Bar and Line chart Specific
 
@@ -20,7 +24,7 @@ export enum yAxisSides {
   RIGHT,
 }
 
-export const ruleTypes = {
+export const ruleTypes: RuleTypes = {
   SOLID: 'solid',
   DASHED: 'dashed',
   DOTTED: 'dotted',
@@ -114,6 +118,7 @@ export const BarDefaults = {
   scrollToEnd: false,
   scrollAnimation: true,
   showScrollIndicator: false,
+  scrollEventThrottle: defaultScrollEventThrottle,
 
   side: '',
   isAnimated: false,
@@ -168,6 +173,7 @@ export const LineDefaults = {
   scrollToEnd: false,
   scrollAnimation: true,
   showScrollIndicator: false,
+  scrollEventThrottle: defaultScrollEventThrottle,
   showValuesAsDataPointsText: false,
 
   dataPointsHeight: 4,
@@ -221,6 +227,7 @@ export const defaultPointerConfig = {
   hidePointer3: false,
   hidePointer4: false,
   hidePointer5: false,
+  hideSecondaryPointer: false,
 };
 
 // Pie chart specific

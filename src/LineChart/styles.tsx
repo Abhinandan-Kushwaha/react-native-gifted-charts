@@ -19,11 +19,11 @@ export const styles = StyleSheet.create({
   },
   leftPart: {
     justifyContent: 'center',
-    width: '100%',
+    // width: '100%',
   },
   lastLeftPart: {
     justifyContent: 'flex-end',
-    width: '100%',
+    // width: '100%',
   },
   line: {
     width: '100%',

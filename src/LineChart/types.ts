@@ -258,6 +258,7 @@ export type LineChartPropsType = {
   scrollToEnd?: boolean;
   scrollToIndex?: number;
   scrollAnimation?: boolean;
+  scrollEventThrottle?: number;
   noOfSectionsBelowXAxis?: number;
   labelsExtraHeight?: number;
   adjustToWidth?: boolean;
@@ -352,6 +353,7 @@ type Pointer = {
   pointer3Color?: ColorValue;
   pointer4Color?: ColorValue;
   pointer5Color?: ColorValue;
+  secondaryPointerColor?: ColorValue;
   pointerComponent?: Function;
   showPointerStrip?: boolean;
   pointerStripWidth?: number;
@@ -373,5 +375,6 @@ type Pointer = {
   hidePointer3?: boolean;
   hidePointer4?: boolean;
   hidePointer5?: boolean;
+  hideSecondaryPointer?: boolean;
   strokeDashArray?: Array<number>;
 };

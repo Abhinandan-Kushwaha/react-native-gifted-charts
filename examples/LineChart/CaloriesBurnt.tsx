@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {LineChart} from 'react-native-gifted-charts';
+import {LineChart} from '../../src/LineChart';
 import { ruleTypes } from '../../src/utils/constants';
 
 const CaloriesBurnt = () => {
