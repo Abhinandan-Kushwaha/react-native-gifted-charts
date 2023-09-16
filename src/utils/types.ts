@@ -205,4 +205,6 @@ export type BarAndLineChartsWrapperTypes = {
   pointerIndex: number;
   pointerX: number;
   pointerY: number;
+
+  scrollEventThrottle: number;
 };
