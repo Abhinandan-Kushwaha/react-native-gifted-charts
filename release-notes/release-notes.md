@@ -1,3 +1,15 @@
+# 🎉 1.3.8
+
+## ✨ Features added-
+1. Added the property named `isSecondary` in the `lineConfig` object see https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/392
+2. Replaced the prop `verticalLinesType` with `verticalLinesStrokeDashArray`
+
+## 🐛 Bug fixes
+Fixed issue with secondary Y axis position (it was shifting towards right earlier)
+
+---
+---
+---
 # 🎉 1.3.7
 
 ## ✨ Features added-
