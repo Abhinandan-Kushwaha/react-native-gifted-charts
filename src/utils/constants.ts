@@ -66,7 +66,7 @@ export const AxesAndRulesDefaults = {
   showVerticalLines: false,
   verticalLinesThickness: 1,
   verticalLinesColor: 'lightgray',
-  verticalLinesType: 'solid',
+  verticalLinesStrokeDashArray: '',
   verticalLinesShift: 0,
   verticalLinesZIndex: -1,
   verticalLinesSpacing: 0,
@@ -153,6 +153,7 @@ export const defaultLineConfig: defaultLineConfigType = {
   endIndex: 0, // gets updated to lineData.length - 1
   showArrow: false,
   arrowConfig: defaultArrowConfig,
+  isSecondary: false,
 };
 
 // Line chart specific

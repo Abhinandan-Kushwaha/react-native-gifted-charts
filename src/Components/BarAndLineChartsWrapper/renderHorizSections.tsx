@@ -800,13 +800,11 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
         /***********************************************************************************************/
         /*************************      Render the secondary Y Axis                *********************/
         /***********************************************************************************************/
-        secondaryYAxis && (
+        secondaryYAxis ? (
           <View
             style={{
               width: secondaryYAxisConfig.yAxisLabelWidth,
-              left: width
-                ? yAxisLabelWidth
-                : yAxisLabelWidth - (chartType === chartTypes.BAR ? 4 : 16),
+              left: width ? yAxisLabelWidth : yAxisLabelWidth - spacing,
               borderColor: secondaryYAxisConfig.yAxisColor,
               borderLeftWidth: secondaryYAxisConfig.yAxisThickness,
             }}>
@@ -817,7 +815,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
               ? renderSecondaryYaxisLabels(secondaryHorizSectionsBelow, true)
               : null}
           </View>
-        )
+        ) : null
       }
     </View>
   );

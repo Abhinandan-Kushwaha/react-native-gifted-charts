@@ -74,7 +74,7 @@ export type BarChartPropsType = {
   verticalLinesThickness?: number;
   verticalLinesHeight?: number;
   verticalLinesColor?: ColorValue;
-  verticalLinesType?: RuleType;
+  verticalLinesStrokeDashArray?: Array<number>;
   verticalLinesShift?: number;
   verticalLinesZIndex?: number;
   noOfVerticalLines?: number;
@@ -175,6 +175,7 @@ type lineConfigType = {
   showArrow?: boolean;
   arrowConfig?: arrowType;
   customDataPoint?: Function;
+  isSecondary?: boolean;
 };
 export type defaultLineConfigType = {
   initialSpacing: number;
@@ -203,6 +204,7 @@ export type defaultLineConfigType = {
   showArrow: boolean;
   arrowConfig: arrowType;
   customDataPoint?: Function;
+  isSecondary: boolean;
 };
 type arrowType = {
   length?: number;

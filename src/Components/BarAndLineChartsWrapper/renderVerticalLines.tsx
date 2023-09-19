@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
-import {chartTypes, ruleTypes} from '../../utils/constants';
+import {chartTypes} from '../../utils/constants';
+import {Line, Svg} from 'react-native-svg';
 
 const RenderVerticalLines = props => {
   const {
@@ -12,7 +13,7 @@ const RenderVerticalLines = props => {
     verticalLinesHeight,
     verticalLinesThickness,
     verticalLinesColor,
-    verticalLinesType,
+    verticalLinesStrokeDashArray,
     verticalLinesShift,
     verticalLinesUptoDataPoint,
     xAxisThickness,
@@ -24,6 +25,8 @@ const RenderVerticalLines = props => {
     maxValue,
     chartType,
     containerHeightIncludingBelowXAxis,
+    yAxisLabelWidth,
+    totalWidth,
   } = props;
 
   const getHeightOfVerticalLine = index => {
@@ -43,82 +46,86 @@ const RenderVerticalLines = props => {
     }
   };
 
-  return verticalLinesAr.map((item: any, index: number) => {
-    let totalSpacing = initialSpacing;
-    if (verticalLinesSpacing) {
-      totalSpacing = verticalLinesSpacing * (index + 1);
-    } else {
-      if (stackData) {
-        totalSpacing += (stackData[0].barWidth || barWidth || 30) / 2;
-      } else {
-        totalSpacing += (data[0].barWidth || barWidth || 30) / 2;
-      }
-      for (let i = 0; i < index; i++) {
-        let actualSpacing = spacing;
-        if (stackData) {
-          if (i >= stackData.length - 1) {
-            actualSpacing += (barWidth || 30) / 2;
-          } else {
-            if (stackData[i].spacing || stackData[i].spacing === 0) {
-              actualSpacing = stackData[i].spacing;
-            }
-            if (stackData[i + 1].barWidth) {
-              actualSpacing += stackData[i + 1].barWidth;
-            } else {
-              actualSpacing += barWidth || 30;
-            }
-          }
-        } else {
-          if (i >= data.length - 1) {
-            actualSpacing += (barWidth || 30) / 2;
-          } else {
-            if (data[i].spacing || data[i].spacing === 0) {
-              actualSpacing = data[i].spacing;
-            }
-            if (data[i + 1].barWidth) {
-              actualSpacing += data[i + 1].barWidth;
-            } else {
-              actualSpacing += barWidth || 30;
-            }
-          }
-        }
-        totalSpacing += actualSpacing;
-      }
-    }
+  const extendedContainerHeight = containerHeight + 10 + labelsExtraHeight;
 
-    return (
-      <View
-        key={index}
-        style={[
-          {
-            position: 'absolute',
-            zIndex: verticalLinesZIndex || -1,
-            height: getHeightOfVerticalLine(index),
-            width: verticalLinesThickness,
-            bottom: 60 + labelsExtraHeight,
-            left:
-              verticalLinesShift +
-              (chartType === chartTypes.BAR
-                ? totalSpacing
-                : verticalLinesSpacing
-                ? verticalLinesSpacing * (index + 1)
-                : index * spacing + (initialSpacing - 4 / 2)) -
-              verticalLinesThickness / 2,
-          },
-          verticalLinesType === ruleTypes.DASHED ||
-          verticalLinesType === ruleTypes.DOTTED
-            ? {
-                borderWidth: verticalLinesThickness,
-                borderStyle: verticalLinesType,
-                borderColor: verticalLinesColor,
+  return (
+    <View
+      style={{
+        position: 'absolute',
+        height: extendedContainerHeight,
+        left: 36 - yAxisLabelWidth,
+        bottom: 60, //stepHeight * -0.5 + xAxisThickness,
+        width: totalWidth,
+        zIndex: verticalLinesZIndex || -1,
+      }}>
+      <Svg>
+        {verticalLinesAr.map((item: any, index: number) => {
+          let totalSpacing = initialSpacing;
+          if (verticalLinesSpacing) {
+            totalSpacing = verticalLinesSpacing * (index + 1);
+          } else {
+            if (stackData) {
+              totalSpacing += (stackData[0].barWidth || barWidth || 30) / 2;
+            } else {
+              totalSpacing += (data[0].barWidth || barWidth || 30) / 2;
+            }
+            for (let i = 0; i < index; i++) {
+              let actualSpacing = spacing;
+              if (stackData) {
+                if (i >= stackData.length - 1) {
+                  actualSpacing += (barWidth || 30) / 2;
+                } else {
+                  if (stackData[i].spacing || stackData[i].spacing === 0) {
+                    actualSpacing = stackData[i].spacing;
+                  }
+                  if (stackData[i + 1].barWidth) {
+                    actualSpacing += stackData[i + 1].barWidth;
+                  } else {
+                    actualSpacing += barWidth || 30;
+                  }
+                }
+              } else {
+                if (i >= data.length - 1) {
+                  actualSpacing += (barWidth || 30) / 2;
+                } else {
+                  if (data[i].spacing || data[i].spacing === 0) {
+                    actualSpacing = data[i].spacing;
+                  }
+                  if (data[i + 1].barWidth) {
+                    actualSpacing += data[i + 1].barWidth;
+                  } else {
+                    actualSpacing += barWidth || 30;
+                  }
+                }
               }
-            : {
-                backgroundColor: verticalLinesColor,
-              },
-        ]}
-      />
-    );
-  });
+              totalSpacing += actualSpacing;
+            }
+          }
+
+          const x =
+            verticalLinesShift +
+            (chartType === chartTypes.BAR
+              ? totalSpacing - 1
+              : verticalLinesSpacing
+              ? verticalLinesSpacing * (index + 1)
+              : index * spacing + (initialSpacing - 2));
+
+          return (
+            <Line
+              key={index}
+              x1={x}
+              y1={extendedContainerHeight - getHeightOfVerticalLine(index)}
+              x2={x}
+              y2={extendedContainerHeight}
+              stroke={verticalLinesColor || 'lightgray'}
+              strokeWidth={verticalLinesThickness || 2}
+              strokeDasharray={verticalLinesStrokeDashArray ?? ''}
+            />
+          );
+        })}
+      </Svg>
+    </View>
+  );
 };
 
 export default RenderVerticalLines;

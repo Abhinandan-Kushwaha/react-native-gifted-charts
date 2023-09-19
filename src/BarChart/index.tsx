@@ -149,6 +149,8 @@ export const BarChart = (props: BarChartPropsType) => {
             defaultLineConfig.arrowConfig?.showArrowBase,
         },
         customDataPoint: props.lineConfig.customDataPoint,
+        isSecondary:
+          props.lineConfig.isSecondary ?? defaultLineConfig.isSecondary,
       }
     : defaultLineConfig;
   const noOfSections = props.noOfSections ?? AxesAndRulesDefaults.noOfSections;
@@ -200,6 +202,20 @@ export const BarChart = (props: BarChartPropsType) => {
     });
   }
 
+  let secondaryMaxItem = 0,
+    secondaryMinItem = 0;
+
+  if (lineConfig.isSecondary) {
+    lineData.forEach((item: itemType) => {
+      if (item.value > secondaryMaxItem) {
+        secondaryMaxItem = item.value;
+      }
+      if (item.value < secondaryMinItem) {
+        secondaryMinItem = item.value;
+      }
+    });
+  }
+
   const maxAndMin = maxAndMinUtil(
     maxItem,
     minItem,
@@ -207,7 +223,17 @@ export const BarChart = (props: BarChartPropsType) => {
     props.showFractionalValues,
   );
 
+  const secondaryMaxAndMin = maxAndMinUtil(
+    secondaryMaxItem,
+    secondaryMinItem,
+    props.roundToDigits,
+    props.showFractionalValues,
+  );
+
   const maxValue = props.maxValue ?? maxAndMin.maxItem;
+  const secondaryMaxValue = lineConfig.isSecondary
+    ? secondaryMaxAndMin.maxItem
+    : maxValue;
   const mostNegativeValue = props.mostNegativeValue ?? maxAndMin.minItem;
 
   const stepValue = props.stepValue ?? maxValue / noOfSections;
@@ -300,7 +326,7 @@ export const BarChart = (props: BarChartPropsType) => {
               currentValue,
               lineConfig.shiftY,
               containerHeight,
-              maxValue,
+              lineConfig.isSecondary ? secondaryMaxValue : maxValue,
             ) +
             ' ';
         }
@@ -353,7 +379,7 @@ export const BarChart = (props: BarChartPropsType) => {
               currentValue,
               lineConfig.shiftY,
               containerHeight,
-              maxValue,
+              lineConfig.isSecondary ? secondaryMaxValue : maxValue,
             ),
           ]);
           let xx = svgPath(p1Array, lineConfig.curveType, lineConfig.curvature);
@@ -554,7 +580,11 @@ export const BarChart = (props: BarChartPropsType) => {
     noOfSections,
     showFractionalValues,
 
-    axesAndRulesProps: getAxesAndRulesProps(props, stepValue),
+    axesAndRulesProps: getAxesAndRulesProps(
+      props,
+      stepValue,
+      secondaryMaxValue,
+    ),
 
     yAxisLabelTexts: props.yAxisLabelTexts,
     yAxisOffset: props.yAxisOffset,

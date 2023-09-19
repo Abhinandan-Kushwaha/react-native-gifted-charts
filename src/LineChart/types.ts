@@ -89,7 +89,7 @@ export type LineChartPropsType = {
   verticalLinesThickness?: number;
   verticalLinesHeight?: number;
   verticalLinesColor?: ColorValue;
-  verticalLinesType?: string;
+  verticalLinesStrokeDashArray?: Array<number>;
   verticalLinesShift?: number;
   verticalLinesZIndex?: number;
   noOfVerticalLines?: number;
@@ -333,6 +333,7 @@ export type itemType = {
   verticalLineUptoDataPoint?: boolean;
   verticalLineColor?: string;
   verticalLineThickness?: number;
+  verticalLineStrokeDashArray?: Array<number>;
   pointerShiftX?: number;
   pointerShiftY?: number;
   onPress?: Function;

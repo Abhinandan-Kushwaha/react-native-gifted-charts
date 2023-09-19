@@ -211,8 +211,8 @@ export const getArrowPoints = (
   return arrowPoints;
 };
 
-export const getAxesAndRulesProps = (props, stepValue) => {
-  return {
+export const getAxesAndRulesProps = (props, stepValue, maxValue) => {
+  const axesAndRulesProps = {
     yAxisSide: props.yAxisSide,
     yAxisLabelContainerStyle: props.yAxisLabelContainerStyle,
     yAxisColor: props.yAxisColor,
@@ -255,7 +255,6 @@ export const getAxesAndRulesProps = (props, stepValue) => {
     verticalLinesThickness: props.verticalLinesThickness,
     verticalLinesHeight: props.verticalLinesHeight,
     verticalLinesColor: props.verticalLinesColor,
-    verticalLinesType: props.verticalLinesType,
     verticalLinesShift: props.verticalLinesShift,
     verticalLinesZIndex: props.verticalLinesZIndex,
     verticalLinesSpacing: props.verticalLinesSpacing,
@@ -269,6 +268,11 @@ export const getAxesAndRulesProps = (props, stepValue) => {
 
     secondaryYAxis: props.secondaryYAxis,
   };
+  if (props.secondaryYAxis && maxValue !== undefined) {
+    axesAndRulesProps.secondaryYAxis = {...props.secondaryYAxis, maxValue};
+  }
+
+  return axesAndRulesProps;
 };
 
 export const getExtendedContainerHeightWithPadding = (

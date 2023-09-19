@@ -145,9 +145,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const verticalLinesColor =
     axesAndRulesProps.verticalLinesColor ??
     AxesAndRulesDefaults.verticalLinesColor;
-  const verticalLinesType =
-    axesAndRulesProps.verticalLinesType ??
-    AxesAndRulesDefaults.verticalLinesType;
+  const verticalLinesStrokeDashArray =
+    axesAndRulesProps.verticalLinesStrokeDashArray ??
+    AxesAndRulesDefaults.verticalLinesStrokeDashArray;
   const verticalLinesShift =
     axesAndRulesProps.verticalLinesShift ??
     AxesAndRulesDefaults.verticalLinesShift;
@@ -233,7 +233,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     spacing,
     containerHeight,
     lineConfig,
-    maxValue,
+    maxValue: secondaryYAxis?.maxValue ?? maxValue,
     animatedWidth,
     lineBehindBars,
     points,
@@ -256,7 +256,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     verticalLinesHeight,
     verticalLinesThickness,
     verticalLinesColor,
-    verticalLinesType,
+    verticalLinesStrokeDashArray,
     verticalLinesShift,
     verticalLinesUptoDataPoint,
     xAxisThickness,
@@ -268,6 +268,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     maxValue,
     chartType,
     containerHeightIncludingBelowXAxis,
+    yAxisLabelWidth,
+    totalWidth,
   };
 
   const actualContainerHeight =
@@ -384,7 +386,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         }}
         {...remainingScrollViewProps}>
         <Fragment>
-          {showVerticalLines && <RenderVerticalLines {...verticalLinesProps} />}
+          {showVerticalLines ? (
+            <RenderVerticalLines {...verticalLinesProps} />
+          ) : null}
           {
             // Only For Bar Charts-
             showLine ? <RenderLineInBarChart {...lineInBarChartProps} /> : null
