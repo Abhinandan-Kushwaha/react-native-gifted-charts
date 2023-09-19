@@ -71,6 +71,7 @@ export type secondaryLineConfigType = {
   textColor?: string;
   showArrow?: boolean;
   arrowConfig?: arrowConfigType;
+  isSecondary?: boolean;
 };
 
 export type arrowConfigType = {

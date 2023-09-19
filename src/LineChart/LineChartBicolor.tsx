@@ -90,7 +90,7 @@ type propTypes = {
   verticalLinesThickness?: number;
   verticalLinesHeight?: number;
   verticalLinesColor?: ColorValue;
-  verticalLinesType?: string;
+  verticalLinesStrokeDashArray?: Array<number>;
   verticalLinesShift?: number;
   verticalLinesZIndex?: number;
   noOfVerticalLines?: number;
@@ -1361,7 +1361,7 @@ export const LineChartBicolor = (props: propTypes) => {
     noOfSections,
     showFractionalValues,
 
-    axesAndRulesProps: getAxesAndRulesProps(props, stepValue),
+    axesAndRulesProps: getAxesAndRulesProps(props, stepValue, undefined),
 
     yAxisLabelTexts: props.yAxisLabelTexts,
     yAxisOffset: props.yAxisOffset,

@@ -1809,6 +1809,31 @@ export const LineChart = (props: LineChartPropsType) => {
   const renderSpecificVerticalLines = (dataForRender: any) => {
     return dataForRender.map((item: itemType, index: number) => {
       if (item.showVerticalLine) {
+        const x = getX(index);
+        return (
+          <Line
+            key={index}
+            x1={x}
+            y1={extendedContainerHeight}
+            x2={x}
+            y2={
+              item.verticalLineUptoDataPoint ?? props.verticalLinesUptoDataPoint
+                ? getY(item.value)
+                : -xAxisThickness
+            }
+            stroke={
+              item.verticalLineColor || props.verticalLinesColor || 'lightgray'
+            }
+            strokeWidth={
+              item.verticalLineThickness || props.verticalLinesThickness || 2
+            }
+            strokeDasharray={
+              item.verticalLineStrokeDashArray ??
+              props.verticalLinesStrokeDashArray ??
+              ''
+            }
+          />
+        );
         return (
           <Rect
             key={index}
@@ -1824,7 +1849,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 ? getY(item.value)
                 : -xAxisThickness
             }
-            width={item.verticalLineThickness || 1}
+            width={item.verticalLineThickness || 10}
             height={
               item.verticalLineUptoDataPoint
                 ? (item.value * containerHeight) / maxValue - xAxisThickness
@@ -3103,7 +3128,7 @@ export const LineChart = (props: LineChartPropsType) => {
     noOfSections,
     showFractionalValues,
 
-    axesAndRulesProps: getAxesAndRulesProps(props, stepValue),
+    axesAndRulesProps: getAxesAndRulesProps(props, stepValue, undefined),
 
     yAxisLabelTexts: props.yAxisLabelTexts,
     yAxisOffset: props.yAxisOffset,

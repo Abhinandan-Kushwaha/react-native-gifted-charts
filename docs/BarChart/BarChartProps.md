@@ -67,6 +67,7 @@ type lineConfigType = {
   endIndex?: number,
   showArrow?: boolean,
   arrowConfig?: arrowType,
+  isSecondary?: boolean;
 };
 type arrowType = {
   length?: number,
@@ -121,6 +122,7 @@ defaultLineConfig = {
     fillColor: 'none',
     showArrowBase: true,
   },
+isSecondary: false,
 };
 ```
 
@@ -252,7 +254,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | verticalLinesColor       | ColorValue          | Color of the vertical lines                                                                                 | lightgray              |
 | verticallinesThickness   | number              | Thickness of the vertical lines                                                                             | 1                      |
 | verticalLinesHeight      | number              | Height of the vertical lines                                                                                | chart height           |
-| verticalLinesType        | string              | 'solid', 'dashed' or 'dotted'                                                                               | solid                  |
+| verticalLinesStrokeDashArray | Array<number>   | Array of 2 numbers denoting the dashWidth and dashGap of the lines. Used to render dashed/dotted vertical line | ''                  |
 | verticalLinesShift       | number              | vertical lines are aligned with bars. Shift them left or right using +ve or -ve value of verticalLinesShift | 0                      |
 | verticalLinesZIndex      | number              | Z index of the vertical lines                                                                               | -1                     |
 | noOfVerticalLines        | number              | Number of vertical lines displayed                                                                          | data.length            |
