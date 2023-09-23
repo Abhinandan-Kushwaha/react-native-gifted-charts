@@ -53,7 +53,6 @@ const RenderVerticalLines = props => {
       style={{
         position: 'absolute',
         height: extendedContainerHeight,
-        left: 36 - yAxisLabelWidth,
         bottom: 60, //stepHeight * -0.5 + xAxisThickness,
         width: totalWidth,
         zIndex: verticalLinesZIndex || -1,

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
 import {LineChart} from '../../src/LineChart';
 import { ruleTypes } from '../../src/utils/constants';
+import { clone } from '../../src/utils';
 
 const AreaChartDynamicData = () => {
   const lcomp = (v) => <Text style={{width:50, color:'white',fontWeight:'bold'}}>{v}</Text>
@@ -102,7 +103,7 @@ const AreaChartDynamicData = () => {
         customDataPoint: dPoint,
       },
     ];
-const [currentData, setCurrentData] = useState(JSON.parse(JSON.stringify(latestData)));
+const [currentData, setCurrentData] = useState(clone(latestData));
 useEffect(()=>{
   setTimeout(()=>{
     const newData = latestData.map(item => {
