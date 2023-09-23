@@ -1,3 +1,14 @@
+# 🎉 1.3.9
+
+## 🐛 Bug fixes
+1. `focusedDataPointLabelComponent` now appears above other UI elements, as it is now given a zIndex of 1000. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/396
+2. Fixed issue with the position of verticalLines when `hideYAxisText` is set to true.
+
+## 🔨 Refactor
+1. replaced `JSON.parse(JSON.stringify())` with custom deepClone method (added in utils). It fixed this issue- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/397
+---
+---
+---
 # 🎉 1.3.8
 
 ## ✨ Features added-
