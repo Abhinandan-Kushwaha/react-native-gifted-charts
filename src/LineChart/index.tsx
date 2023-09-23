@@ -33,6 +33,7 @@ import {
   getSecondaryDataWithOffsetIncluded,
   getAllArrowProperties,
   computeMaxAndMinItems,
+  clone,
 } from '../utils';
 import {
   AxesAndRulesDefaults,
@@ -117,7 +118,7 @@ export const LineChart = (props: LineChartPropsType) => {
       return [];
     }
     if (props.yAxisOffset) {
-      return JSON.parse(JSON.stringify(props.data)).map(item => {
+      return clone(props.data).map(item => {
         item.value = item.value - (props.yAxisOffset ?? 0);
         return item;
       });
@@ -129,7 +130,7 @@ export const LineChart = (props: LineChartPropsType) => {
       return [];
     }
     if (props.yAxisOffset) {
-      return JSON.parse(JSON.stringify(props.data2)).map(item => {
+      return clone(props.data2).map(item => {
         item.value = item.value - (props.yAxisOffset ?? 0);
         return item;
       });
@@ -141,7 +142,7 @@ export const LineChart = (props: LineChartPropsType) => {
       return [];
     }
     if (props.yAxisOffset) {
-      return JSON.parse(JSON.stringify(props.data3)).map(item => {
+      return clone(props.data3).map(item => {
         item.value = item.value - (props.yAxisOffset ?? 0);
         return item;
       });
@@ -153,7 +154,7 @@ export const LineChart = (props: LineChartPropsType) => {
       return [];
     }
     if (props.yAxisOffset) {
-      return JSON.parse(JSON.stringify(props.data4)).map(item => {
+      return clone(props.data4).map(item => {
         item.value = item.value - (props.yAxisOffset ?? 0);
         return item;
       });
@@ -165,7 +166,7 @@ export const LineChart = (props: LineChartPropsType) => {
       return [];
     }
     if (props.yAxisOffset) {
-      return JSON.parse(JSON.stringify(props.data5)).map(item => {
+      return clone(props.data5).map(item => {
         item.value = item.value - (props.yAxisOffset ?? 0);
         return item;
       });
@@ -1755,6 +1756,7 @@ export const LineChart = (props: LineChartPropsType) => {
                     style={[
                       styles.customDataPointContainer,
                       {
+                        zIndex: index === selectedIndex ? 1000 : 0,
                         top:
                           containerHeight +
                           (item.dataPointLabelShiftY ||
