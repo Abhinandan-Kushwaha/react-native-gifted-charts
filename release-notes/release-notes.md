@@ -1,3 +1,11 @@
+# 🎉 1.3.10
+
+## 🐛 Bug fixes
+Fixed issue where a zero value was omitted in Pie chart. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/401
+
+---
+---
+---
 # 🎉 1.3.9
 
 ## 🐛 Bug fixes

@@ -87,6 +87,8 @@ export const PieChartMain = (props: propTypes) => {
     for (let i = 0; i < propData.length; i++) {
       if (propData[i].value !== 0) {
         data.push(propData[i]);
+      } else {
+        data.push({...propData[i], value: 0.0000009});
       }
     }
   }
