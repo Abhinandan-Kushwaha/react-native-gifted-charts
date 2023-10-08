@@ -1,6 +1,14 @@
 # 🎉 1.3.9
 
 ## 🐛 Bug fixes
+Fixed issue where a zero value was omitted in Pie chart. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/401
+
+---
+---
+---
+# 🎉 1.3.9
+
+## 🐛 Bug fixes
 1. `focusedDataPointLabelComponent` now appears above other UI elements, as it is now given a zIndex of 1000. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/396
 2. Fixed issue with the position of verticalLines when `hideYAxisText` is set to true.
 
