@@ -25,7 +25,7 @@ type trianglePropTypes = {
 type animatedBarPropTypes = {
   animationDuration: number;
   width: number;
-  sideWidth?: number;
+  sideWidth: number;
   height: number;
   showGradient: boolean;
   gradientColor: any;

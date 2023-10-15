@@ -297,7 +297,7 @@ export const BarChart = (props: BarChartPropsType) => {
     if (showLine) {
       let pp = '';
       const firstBarWidth =
-        (props.stackData ?? data)[0].barWidth ?? props.barWidth ?? 30;
+        (props.stackData ?? data)?.[0].barWidth ?? props.barWidth ?? 30;
       if (!lineConfig.curved) {
         for (let i = 0; i < lineData.length; i++) {
           if (i < lineConfig.startIndex || i > lineConfig.endIndex) continue;

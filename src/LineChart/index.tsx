@@ -1145,7 +1145,7 @@ export const LineChart = (props: LineChartPropsType) => {
 
         if ((areaChart || areaChart4) && data4.length) {
           xx4 = addLeadingAndTrailingPathForAreaFill(
-            xx,
+            xx4,
             data4[0].value,
             data4.length,
           );

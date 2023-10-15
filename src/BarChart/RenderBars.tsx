@@ -4,7 +4,6 @@ import ThreeDBar from '../Components/ThreeDBar';
 import AnimatedBar from '../Components/AnimatedBar';
 import LinearGradient from 'react-native-linear-gradient';
 import Animated2DWithGradient from './Animated2DWithGradient';
-import {Style} from 'util';
 import Cap from '../Components/BarSpecificComponents/cap';
 import BarBackgroundPattern from '../Components/BarSpecificComponents/barBackgroundPattern';
 import {itemType} from './types';
@@ -21,7 +20,7 @@ type Props = {
   sideColor?: ColorValue;
   topColor?: ColorValue;
   topLabelComponent?: Component;
-  topLabelContainerStyle?: Style;
+  topLabelContainerStyle?: any;
   opacity?: number;
   side?: String;
   labelTextStyle?: any;
