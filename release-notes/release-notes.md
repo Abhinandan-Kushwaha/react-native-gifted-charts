@@ -1,3 +1,14 @@
+# 🎉 1.3.11
+
+## 🐛 Bug fixes
+1. Fixed some typescript issues. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/269#issuecomment-1753162473
+2. Fixed issue with the 4th curve of curved area charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/402
+3. Fixed https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/406
+
+---
+---
+---
+
 # 🎉 1.3.10
 
 ## 🐛 Bug fixes

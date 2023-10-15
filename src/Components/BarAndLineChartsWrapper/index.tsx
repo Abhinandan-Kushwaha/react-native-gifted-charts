@@ -310,7 +310,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   /*******************************************************************************************************************************************/
 
   const container = {
-    width: horizontal ? actualContainerWidth : '100%',
+    width: '100%',
     height: actualContainerHeight,
     marginBottom: 40, //This is to not let the Things that should be rendered below the chart overlap with it
   };
@@ -320,6 +320,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
       style={[
         container,
         horizontal && {
+          width: actualContainerWidth,
           transform: transformForHorizontal,
         },
       ]}>

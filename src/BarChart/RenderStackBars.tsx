@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
-import {Style} from 'util';
 import {BarDefaults} from '../utils/constants';
 
 if (Platform.OS === 'android') {
@@ -25,7 +24,7 @@ type Props = {
   height?: number;
   color?: ColorValue;
   topLabelComponent?: Component;
-  topLabelContainerStyle?: Style;
+  topLabelContainerStyle?: any;
   opacity?: number;
   label: String;
   labelTextStyle?: any;
