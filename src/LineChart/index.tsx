@@ -14,6 +14,7 @@ import {
   Dimensions,
   Platform,
   ColorValue,
+  I18nManager,
 } from 'react-native';
 import {styles} from './styles';
 import Svg, {
@@ -1634,6 +1635,7 @@ export const LineChart = (props: LineChartPropsType) => {
       const currentStripWidth = item.stripWidth ?? stripWidth;
       const currentStripOpacity = item.stripOpacity ?? stripOpacity;
       const currentStripColor = item.stripColor || stripColor;
+      const position=I18nManager.isRTL ?  "right" :"left";
 
       return (
         <Fragment key={index}>
@@ -1694,7 +1696,8 @@ export const LineChart = (props: LineChartPropsType) => {
                       height: dataPointsHeight,
                       width: dataPointsWidth,
                       top: getYOrSecondaryY(item.value),
-                      left: initialSpacing - dataPointsWidth + spacing * index,
+                      [position]: initialSpacing - dataPointsWidth + spacing * index,
+                      transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
                     },
                   ]}>
                   {customDataPoint()}
@@ -2758,6 +2761,7 @@ export const LineChart = (props: LineChartPropsType) => {
         //   setTimeout(() => setPointerX(0), pointerVanishDelay);
         // }}
         style={{
+          transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
           position: 'absolute',
           height:
             containerHeightIncludingBelowXAxis +
