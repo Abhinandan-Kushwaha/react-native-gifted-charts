@@ -75,7 +75,11 @@ type itemType = {
 
 export const PieChart = (props: propTypes) => {
   const radius = props.radius || 120;
-  const extraRadiusForFocused = props.extraRadiusForFocused || radius / 10;
+  const extraRadiusForFocused =
+    props.extraRadiusForFocused ??
+    (props.focusOnPress || props.sectionAutoFocus)
+      ? radius / 10
+      : 0;
   const pi = props.semiCircle ? Math.PI / 2 : Math.PI;
   const [selectedIndex, setSelectedIndex] = useState(
     props.data.findIndex(item => item.focused === true),
@@ -97,46 +101,48 @@ export const PieChart = (props: propTypes) => {
       style={{
         height: (radius + extraRadiusForFocused) * 2,
         width: (radius + extraRadiusForFocused) * 2,
+        marginLeft: extraRadiusForFocused * 2,
+        marginTop: extraRadiusForFocused * 2,
       }}>
-      {!(
-        props.data.length <= 1 ||
-        !(props.focusOnPress || props.sectionAutoFocus) ||
-        selectedIndex === -1
-      ) && (
-        <View
-          style={{
-            position: 'absolute',
-            top: -extraRadiusForFocused,
-            left: -extraRadiusForFocused,
-          }}>
-          <PieChartMain
-            {...props}
-            data={[
-              {
-                value: props.data[selectedIndex].value,
-                color:
-                  props.data[selectedIndex].color ||
-                  pieColors[selectedIndex % 9],
-                strokeColor: props.data[selectedIndex].strokeColor || undefined,
-                strokeWidth: props.data[selectedIndex].strokeWidth || undefined,
-                gradientCenterColor:
-                  props.data[selectedIndex].gradientCenterColor || undefined,
-              },
-              {
-                value: total - props.data[selectedIndex].value,
-                peripheral: true,
-                strokeWidth: 0,
-              },
-            ]}
-            radius={radius + extraRadiusForFocused}
-            initialAngle={startAngle}
-            showText={false}
-            innerRadius={props.innerRadius || radius / 2.5}
-            isBiggerPie
-            setSelectedIndex={setSelectedIndex}
-          />
-        </View>
-      )}
+      {props.data.length > 1 &&
+        (props.focusOnPress || props.sectionAutoFocus) &&
+        selectedIndex !== -1 && (
+          <View
+            style={{
+              position: 'absolute',
+              top: -extraRadiusForFocused,
+              left: -extraRadiusForFocused,
+            }}>
+            <PieChartMain
+              {...props}
+              data={[
+                {
+                  value: props.data[selectedIndex].value,
+                  color:
+                    props.data[selectedIndex].color ||
+                    pieColors[selectedIndex % 9],
+                  strokeColor:
+                    props.data[selectedIndex].strokeColor || undefined,
+                  strokeWidth:
+                    props.data[selectedIndex].strokeWidth || undefined,
+                  gradientCenterColor:
+                    props.data[selectedIndex].gradientCenterColor || undefined,
+                },
+                {
+                  value: total - props.data[selectedIndex].value,
+                  peripheral: true,
+                  strokeWidth: 0,
+                },
+              ]}
+              radius={radius + extraRadiusForFocused}
+              initialAngle={startAngle}
+              showText={false}
+              innerRadius={props.innerRadius || radius / 2.5}
+              isBiggerPie
+              setSelectedIndex={setSelectedIndex}
+            />
+          </View>
+        )}
       <View style={{position: 'absolute'}}>
         <PieChartMain
           {...props}

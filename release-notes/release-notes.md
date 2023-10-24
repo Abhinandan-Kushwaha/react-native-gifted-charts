@@ -1,3 +1,16 @@
+# 🎉 1.3.12
+
+## ✨ Features added-
+1. Added **pointerConfig** behaviour to Bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/410
+
+## 🐛 Bug fixes
+1. Fixed issue with `pointerConfig`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/177
+2. Added types to util functions. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/379
+
+---
+---
+---
+
 # 🎉 1.3.11
 
 ## 🐛 Bug fixes

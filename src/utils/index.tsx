@@ -166,17 +166,17 @@ export const bezierCommand = (
 };
 
 export const getArrowPoints = (
-  arrowTipX,
-  arrowTipY,
-  x1,
-  y1,
-  arrowLength,
-  arrowWidth,
-  showArrowBase,
+  arrowTipX: number,
+  arrowTipY: number,
+  x1: number,
+  y1: number,
+  arrowLength?: number,
+  arrowWidth?: number,
+  showArrowBase?: boolean,
 ) => {
   let dataLineSlope = (arrowTipY - y1) / (arrowTipX - x1);
-  let d = arrowLength;
-  let d2 = arrowWidth / 2;
+  let d = arrowLength ?? 0;
+  let d2 = (arrowWidth ?? 0) / 2;
   let interSectionX =
     arrowTipX - Math.sqrt((d * d) / (dataLineSlope * dataLineSlope + 1));
   let interSectionY = arrowTipY - dataLineSlope * (arrowTipX - interSectionX);
@@ -211,7 +211,11 @@ export const getArrowPoints = (
   return arrowPoints;
 };
 
-export const getAxesAndRulesProps = (props, stepValue, maxValue) => {
+export const getAxesAndRulesProps = (
+  props: any,
+  stepValue: number,
+  maxValue?: number,
+) => {
   const axesAndRulesProps = {
     yAxisSide: props.yAxisSide,
     yAxisLabelContainerStyle: props.yAxisLabelContainerStyle,
@@ -276,13 +280,13 @@ export const getAxesAndRulesProps = (props, stepValue, maxValue) => {
 };
 
 export const getExtendedContainerHeightWithPadding = (
-  containerHeight,
-  overflowTop,
+  containerHeight: number,
+  overflowTop?: number,
 ) => containerHeight + (overflowTop ?? 0) + 10;
 
 export const getSecondaryDataWithOffsetIncluded = (
-  secondaryData,
-  secondaryYAxis,
+  secondaryData?: any,
+  secondaryYAxis?: any,
 ) => {
   if (secondaryData && secondaryYAxis?.yAxisOffset) {
     return secondaryData?.map(item => {
@@ -485,10 +489,10 @@ type MaxAndMin = {
 };
 
 export const maxAndMinUtil = (
-  maxItem,
-  minItem,
-  roundToDigits,
-  showFractionalValues,
+  maxItem: number,
+  minItem: number,
+  roundToDigits?: number,
+  showFractionalValues?: boolean,
 ): MaxAndMin => {
   if (showFractionalValues || roundToDigits) {
     maxItem *= 10 * (roundToDigits || 1);
@@ -513,9 +517,9 @@ export const maxAndMinUtil = (
 };
 
 export const computeMaxAndMinItems = (
-  data,
-  roundToDigits,
-  showFractionalValues,
+  data: any,
+  roundToDigits?: number,
+  showFractionalValues?: boolean,
 ): MaxAndMin => {
   if (!data?.length) {
     return {maxItem: 0, minItem: 0};
@@ -536,14 +540,14 @@ export const computeMaxAndMinItems = (
 };
 
 export const getLabelTextUtil = (
-  val,
-  index,
-  showFractionalValues,
-  yAxisLabelTexts,
-  yAxisOffset,
-  yAxisLabelPrefix,
-  yAxisLabelSuffix,
-  roundToDigits,
+  val: any,
+  index: number,
+  showFractionalValues?: boolean,
+  yAxisLabelTexts?: Array<string>,
+  yAxisOffset?: number,
+  yAxisLabelPrefix?: string,
+  yAxisLabelSuffix?: string,
+  roundToDigits?: number,
 ) => {
   let label = '';
   if (
@@ -571,12 +575,12 @@ export const getLabelTextUtil = (
 };
 
 export const getXForLineInBar = (
-  index,
-  firstBarWidth,
-  currentBarWidth,
-  yAxisLabelWidth,
-  lineConfig,
-  spacing,
+  index: number,
+  firstBarWidth: number,
+  currentBarWidth: number,
+  yAxisLabelWidth: number,
+  lineConfig: any,
+  spacing: number,
 ) =>
   yAxisLabelWidth +
   firstBarWidth / 2 +
@@ -589,22 +593,20 @@ export const getXForLineInBar = (
 export const getYForLineInBar = (value, shiftY, containerHeight, maxValue) =>
   containerHeight - shiftY - (value * containerHeight) / maxValue;
 
-export const clone = (obj) => {
-  if (obj === null || typeof (obj) !== 'object' || 'isActiveClone' in obj)
-      return obj;
+export const clone = obj => {
+  if (obj === null || typeof obj !== 'object' || 'isActiveClone' in obj)
+    return obj;
 
   let temp;
-  if (obj instanceof Date)
-      temp = new Date(obj);
-  else
-      temp = obj.constructor();
+  if (obj instanceof Date) temp = new Date(obj);
+  else temp = obj.constructor();
 
   for (let key in obj) {
-      if (Object.prototype.hasOwnProperty.call(obj, key)) {
-          obj['isActiveClone'] = null;
-          temp[key] = clone(obj[key]);
-          delete obj['isActiveClone'];
-      }
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      obj['isActiveClone'] = null;
+      temp[key] = clone(obj[key]);
+      delete obj['isActiveClone'];
+    }
   }
   return temp;
-}
+};

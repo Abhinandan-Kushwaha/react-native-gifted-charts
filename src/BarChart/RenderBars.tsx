@@ -7,6 +7,7 @@ import Animated2DWithGradient from './Animated2DWithGradient';
 import Cap from '../Components/BarSpecificComponents/cap';
 import BarBackgroundPattern from '../Components/BarSpecificComponents/barBackgroundPattern';
 import {itemType} from './types';
+import {Pointer} from '../utils/types';
 
 type Props = {
   style?: any;
@@ -77,6 +78,7 @@ type Props = {
   setSelectedIndex: Function;
   barStyle?: object;
   xAxisThickness?: number;
+  pointerConfig?: Pointer;
 };
 const RenderBars = (props: Props) => {
   const {
@@ -116,6 +118,7 @@ const RenderBars = (props: Props) => {
     xAxisThickness,
     horizontal,
     rtl,
+    pointerConfig,
   } = props;
 
   const barMarginBottom =
@@ -341,7 +344,11 @@ const RenderBars = (props: Props) => {
   return (
     <>
       <TouchableOpacity
-        disabled={item.disablePress || props.disablePress}
+        disabled={
+          item.disablePress ||
+          props.disablePress ||
+          (pointerConfig && pointerConfig.barTouchable !== false)
+        }
         activeOpacity={props.activeOpacity || 0.2}
         onPress={() => {
           if (renderTooltip) {
@@ -361,16 +368,26 @@ const RenderBars = (props: Props) => {
             height: barHeight,
             marginRight: spacing,
           },
-          item.value < 0 && {
-            transform: [
-              {
-                translateY:
-                  (Math.abs(item.value) * (containerHeight || 200)) /
-                  (maxValue || 200),
-              },
-              {rotateZ: '180deg'},
-            ],
-          },
+          item.value < 0
+            ? {
+                transform: [
+                  {
+                    translateY:
+                      (Math.abs(item.value) * (containerHeight || 200)) /
+                      (maxValue || 200),
+                  },
+                  {rotateZ: '180deg'},
+                ],
+              }
+            : pointerConfig
+            ? {
+                transform: [
+                  {
+                    translateY: (containerHeight || 200) - (barHeight - 10),
+                  },
+                ],
+              }
+            : null,
           // !isThreeD && !item.showGradient && !props.showGradient &&
           // { backgroundColor: item.frontColor || props.frontColor || 'black' },
           side !== 'right' && {zIndex: data.length - index},

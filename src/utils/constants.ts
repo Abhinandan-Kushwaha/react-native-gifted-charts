@@ -229,6 +229,7 @@ export const defaultPointerConfig = {
   hidePointer4: false,
   hidePointer5: false,
   hideSecondaryPointer: false,
+  barTouchable: false,
 };
 
 // Pie chart specific

@@ -395,6 +395,14 @@ While rendering an Animated Bar chart, y axis labels may not appear sometimes. T
 
 ---
 
+
+## pointerConfig
+
+pointerConfig is an object, when passed as a prop, creates a magical effect. It lets the user scroll over chart to move the pointer along the chart.
+To know more about pointerConfig, see pointerConfig in the [Line chart props page](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/LineChart/LineChartProps.md)
+
+---
+
 ### Props for horizontal BarChart
 
 | Prop                     | Type    | Description                                                                                   | Default value |
