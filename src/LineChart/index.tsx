@@ -46,6 +46,8 @@ import {
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {LineChartPropsType, itemType} from './types';
 import {BarAndLineChartsWrapperTypes} from '../utils/types';
+import {StripAndLabel} from '../Components/common/StripAndLabel';
+import {Pointer} from '../Components/common/Pointer';
 
 let initialData: Array<itemType> | null = null;
 let animations: Array<any> = [];
@@ -473,7 +475,7 @@ export const LineChart = (props: LineChartPropsType) => {
       Animated.parallel(
         animations.map((anItem, index) =>
           Animated.timing(anItem, {
-            toValue: data[index].value,
+            toValue: data[index]?.value ?? 0,
             useNativeDriver: Platform.OS === 'ios', // if useNativeDriver is set to true, animateOnDataChange feature fails for Android, so setting it true only for iOS
             duration: onDataChangeAnimationDuration,
           }),
@@ -1911,28 +1913,16 @@ export const LineChart = (props: LineChartPropsType) => {
         break;
     }
 
-    return (
-      <View
-        style={{
-          position: 'absolute',
-          left: pointerX + (pointerItemLocal.pointerShiftX || 0),
-          top: pointerYLocal,
-        }}>
-        {pointerComponent ? (
-          pointerComponent()
-        ) : (
-          <View
-            style={{
-              height: pointerHeight || pointerRadius * 2,
-              width: pointerWidth || pointerRadius * 2,
-              marginTop: pointerItemLocal.pointerShiftY || 0,
-              backgroundColor: pointerColorLocal,
-              borderRadius: pointerRadius || 0,
-            }}
-          />
-        )}
-      </View>
-    );
+    return Pointer({
+      pointerX,
+      pointerYLocal,
+      pointerComponent,
+      pointerHeight,
+      pointerRadius,
+      pointerWidth,
+      pointerItemLocal,
+      pointerColorLocal,
+    });
   };
 
   const renderStripAndLabel = () => {
@@ -1961,119 +1951,30 @@ export const LineChart = (props: LineChartPropsType) => {
     }
     pointerYLocal = Math.min(...arr);
 
-    let left = 0,
-      top = 0;
-    if (autoAdjustPointerLabelPosition) {
-      if (pointerX < pointerLabelWidth / 2) {
-        left = 7;
-      } else if (
-        activatePointersOnLongPress &&
-        pointerX - scrollX < pointerLabelWidth / 2 - 10
-      ) {
-        left = 7;
-      } else {
-        if (
-          !activatePointersOnLongPress &&
-          pointerX >
-            (props.width ||
-              Dimensions.get('window').width - yAxisLabelWidth - 15) -
-              pointerLabelWidth / 2
-        ) {
-          left = -pointerLabelWidth - 4;
-        } else if (
-          activatePointersOnLongPress &&
-          pointerX - scrollX >
-            ((props.width ?? 0) + 10 ||
-              Dimensions.get('window').width - yAxisLabelWidth - 15) -
-              pointerLabelWidth / 2
-        ) {
-          left = -pointerLabelWidth - 4;
-        } else {
-          left = -pointerLabelWidth / 2 + 5;
-        }
-      }
-    } else {
-      left = (pointerRadius || pointerWidth / 2) - 10 + shiftPointerLabelX;
-    }
-
-    if (autoAdjustPointerLabelPosition) {
-      if (pointerLabelHeight - pointerYLocal > 10) {
-        top = 10;
-      } else {
-        top = -pointerLabelHeight;
-      }
-    } else {
-      top =
-        (pointerStripUptoDataPoint
-          ? pointerRadius || pointerStripHeight / 2
-          : -pointerYLocal + 8) -
-        pointerLabelWidth / 2 +
-        shiftPointerLabelY;
-    }
-
-    return (
-      <View
-        style={{
-          position: 'absolute',
-          left: pointerX + (pointerItemLocal[0].pointerShiftX || 0),
-          top: pointerYLocal,
-        }}>
-        {showPointerStrip && (
-          <View
-            style={{
-              position: 'absolute',
-              left: (pointerRadius || pointerWidth) - pointerStripWidth / 4,
-              top: pointerStripUptoDataPoint
-                ? pointerRadius || pointerStripHeight / 2
-                : -pointerYLocal + 8,
-              width: pointerStripWidth,
-              height: pointerStripUptoDataPoint
-                ? containerHeight - pointerYLocal + 5 - xAxisThickness
-                : pointerStripHeight,
-              marginTop: pointerStripUptoDataPoint
-                ? 0
-                : containerHeight - pointerStripHeight,
-            }}>
-            <Svg>
-              <Line
-                stroke={pointerStripColor}
-                strokeWidth={pointerStripWidth}
-                strokeDasharray={
-                  pointerConfig?.strokeDashArray
-                    ? pointerConfig?.strokeDashArray
-                    : ''
-                }
-                x1={0}
-                y1={0}
-                x2={0}
-                y2={
-                  pointerStripUptoDataPoint
-                    ? containerHeight - pointerYLocal + 5 - xAxisThickness
-                    : pointerStripHeight
-                }
-              />
-            </Svg>
-          </View>
-        )}
-
-        {pointerLabelComponent && (
-          <View
-            style={[
-              {
-                position: 'absolute',
-                left: left,
-                top: top,
-                marginTop: pointerStripUptoDataPoint
-                  ? 0
-                  : containerHeight - pointerStripHeight,
-                width: pointerLabelWidth,
-              },
-            ]}>
-            {pointerLabelComponent(pointerItemLocal, secondaryPointerItem)}
-          </View>
-        )}
-      </View>
-    );
+    return StripAndLabel({
+      autoAdjustPointerLabelPosition,
+      pointerX,
+      pointerLabelWidth,
+      activatePointersOnLongPress,
+      yAxisLabelWidth,
+      pointerRadius,
+      pointerWidth,
+      shiftPointerLabelX,
+      pointerLabelHeight,
+      pointerYLocal,
+      pointerStripUptoDataPoint,
+      pointerStripHeight,
+      shiftPointerLabelY,
+      pointerItemLocal,
+      showPointerStrip,
+      pointerStripWidth,
+      containerHeight,
+      xAxisThickness,
+      pointerStripColor,
+      pointerConfig,
+      pointerLabelComponent,
+      secondaryPointerItem,
+    });
   };
 
   const lineSvgComponent = (
@@ -3033,6 +2934,7 @@ export const LineChart = (props: LineChartPropsType) => {
           : null}
         {pointerX > 0 ? (
           <View
+            pointerEvents="none"
             style={{
               position: 'absolute',
               height:

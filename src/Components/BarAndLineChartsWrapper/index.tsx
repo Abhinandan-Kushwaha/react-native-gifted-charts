@@ -420,7 +420,6 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         </Fragment>
       </ScrollView>
       {
-        // Only For Line Charts-
         pointerConfig && getPointerProps
           ? getPointerProps({pointerIndex, pointerX, pointerY})
           : null

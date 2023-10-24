@@ -1,7 +1,7 @@
 import {ColorValue, View} from 'react-native';
 import {stackItemType} from '../BarChart/RenderStackBars';
 import {yAxisSides} from '../utils/constants';
-import {CurveType, RuleType, secondaryYAxisType} from '../utils/types';
+import {CurveType, Pointer, RuleType, secondaryYAxisType} from '../utils/types';
 
 export type BarChartPropsType = {
   width?: number;
@@ -147,6 +147,8 @@ export type BarChartPropsType = {
 
   secondaryData?: Array<itemType>;
   secondaryYAxis?: secondaryYAxisType | boolean;
+  pointerConfig?: Pointer;
+  getPointerProps?: Function;
 };
 type lineConfigType = {
   initialSpacing?: number;

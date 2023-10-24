@@ -490,6 +490,7 @@ type Pointer = {
   hidePointer5?: boolean, // default: false
   hideSecondaryPointer?: boolean // default: false
   strokeDashArray?: Array<number>,
+  barTouchable?: boolean, //default : false (only applicable to bar charts having pointerConfig)
 };
 ```
 

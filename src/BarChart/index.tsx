@@ -1,10 +1,11 @@
 import React, {useCallback, useEffect, useMemo, useState, useRef} from 'react';
-import {Animated, Easing} from 'react-native';
+import {Animated, Easing, View} from 'react-native';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
 import {
   getArrowPoints,
   getAxesAndRulesProps,
+  getExtendedContainerHeightWithPadding,
   getSecondaryDataWithOffsetIncluded,
   getXForLineInBar,
   getYForLineInBar,
@@ -16,10 +17,14 @@ import {
   BarDefaults,
   chartTypes,
   defaultLineConfig,
+  defaultPointerConfig,
+  screenWidth,
 } from '../utils/constants';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {BarChartPropsType, itemType} from './types';
 import {BarAndLineChartsWrapperTypes} from '../utils/types';
+import {StripAndLabel} from '../Components/common/StripAndLabel';
+import {Pointer} from '../Components/common/Pointer';
 
 export const BarChart = (props: BarChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
@@ -239,7 +244,6 @@ export const BarChart = (props: BarChartPropsType) => {
   const stepValue = props.stepValue ?? maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
     props.noOfSectionsBelowXAxis ?? -mostNegativeValue / stepValue;
-  const disableScroll = props.disableScroll ?? BarDefaults.disableScroll;
   const showScrollIndicator =
     props.showScrollIndicator ?? BarDefaults.showScrollIndicator;
   const side = props.side ?? BarDefaults.side;
@@ -272,6 +276,89 @@ export const BarChart = (props: BarChartPropsType) => {
   const opacValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
   const autoShiftLabels = props.autoShiftLabels ?? false;
+
+  const extendedContainerHeight = getExtendedContainerHeightWithPadding(
+    containerHeight,
+    0,
+  );
+
+  const containerHeightIncludingBelowXAxis =
+    extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight;
+
+  const [pointerIndex, setPointerIndex] = useState(-1);
+  const [pointerX, setPointerX] = useState(0);
+  const [pointerY, setPointerY] = useState(0);
+  const [pointerItem, setPointerItem] = useState({
+    pointerShiftX: 0,
+    pointerShiftY: 0,
+  });
+  const [responderStartTime, setResponderStartTime] = useState(0);
+  const [responderActive, setResponderActive] = useState(false);
+
+  const pointerConfig = props.pointerConfig || undefined;
+  const getPointerProps = props.getPointerProps || null;
+  const pointerHeight = pointerConfig?.height ?? defaultPointerConfig.height;
+  const pointerWidth = pointerConfig?.width ?? defaultPointerConfig.width;
+  const pointerRadius = pointerConfig?.radius ?? defaultPointerConfig.radius;
+  const pointerColor =
+    pointerConfig?.pointerColor ?? defaultPointerConfig.pointerColor;
+  const pointerComponent =
+    pointerConfig?.pointerComponent ?? defaultPointerConfig.pointerComponent;
+
+  const showPointerStrip =
+    pointerConfig?.showPointerStrip === false
+      ? false
+      : defaultPointerConfig.showPointerStrip;
+  const pointerStripHeight =
+    pointerConfig?.pointerStripHeight ??
+    defaultPointerConfig.pointerStripHeight;
+  const pointerStripWidth =
+    pointerConfig?.pointerStripWidth ?? defaultPointerConfig.pointerStripWidth;
+  const pointerStripColor =
+    pointerConfig?.pointerStripColor ?? defaultPointerConfig.pointerStripColor;
+  const pointerStripUptoDataPoint =
+    pointerConfig?.pointerStripUptoDataPoint ??
+    defaultPointerConfig.pointerStripUptoDataPoint;
+  const pointerLabelComponent =
+    pointerConfig?.pointerLabelComponent ??
+    defaultPointerConfig.pointerLabelComponent;
+  const stripOverPointer =
+    pointerConfig?.stripOverPointer ?? defaultPointerConfig.stripOverPointer;
+  const shiftPointerLabelX =
+    pointerConfig?.shiftPointerLabelX ??
+    defaultPointerConfig.shiftPointerLabelX;
+  const shiftPointerLabelY =
+    pointerConfig?.shiftPointerLabelY ??
+    defaultPointerConfig.shiftPointerLabelY;
+  const pointerLabelWidth =
+    pointerConfig?.pointerLabelWidth ?? defaultPointerConfig.pointerLabelWidth;
+  const pointerLabelHeight =
+    pointerConfig?.pointerLabelHeight ??
+    defaultPointerConfig.pointerLabelHeight;
+  const autoAdjustPointerLabelPosition =
+    pointerConfig?.autoAdjustPointerLabelPosition ??
+    defaultPointerConfig.autoAdjustPointerLabelPosition;
+  const pointerVanishDelay =
+    pointerConfig?.pointerVanishDelay ??
+    defaultPointerConfig.pointerVanishDelay;
+  const activatePointersOnLongPress =
+    pointerConfig?.activatePointersOnLongPress ??
+    defaultPointerConfig.activatePointersOnLongPress;
+  const activatePointersDelay =
+    pointerConfig?.activatePointersDelay ??
+    defaultPointerConfig.activatePointersDelay;
+  const hidePointer1 =
+    pointerConfig?.hidePointer1 ?? defaultPointerConfig.hidePointer1;
+
+  const disableScroll =
+    props.disableScroll ||
+    (pointerConfig
+      ? activatePointersOnLongPress
+        ? responderActive
+          ? true
+          : false
+        : true
+      : false);
 
   const labelsAppear = useCallback(() => {
     opacValue.setValue(0);
@@ -432,7 +519,174 @@ export const BarChart = (props: BarChartPropsType) => {
     outputRange: [0, totalWidth],
   });
 
+  const renderPointer = (lineNumber: number) => {
+    if (lineNumber === 1 && hidePointer1) return;
+
+    const pointerItemLocal = pointerItem;
+    const pointerYLocal = pointerY;
+    const pointerColorLocal = pointerConfig?.pointer1Color || pointerColor;
+
+    return Pointer({
+      pointerX,
+      pointerYLocal,
+      pointerComponent,
+      pointerHeight,
+      pointerRadius,
+      pointerWidth,
+      pointerItemLocal,
+      pointerColorLocal,
+    });
+  };
+
+  const renderStripAndLabel = () => {
+    let pointerItemLocal,
+      pointerYLocal = pointerY;
+
+    pointerItemLocal = [pointerItem];
+    return StripAndLabel({
+      autoAdjustPointerLabelPosition,
+      pointerX,
+      pointerLabelWidth,
+      activatePointersOnLongPress,
+      yAxisLabelWidth,
+      pointerRadius,
+      pointerWidth,
+      shiftPointerLabelX,
+      pointerLabelHeight,
+      pointerYLocal,
+      pointerStripUptoDataPoint,
+      pointerStripHeight,
+      shiftPointerLabelY,
+      pointerItemLocal,
+      showPointerStrip,
+      pointerStripWidth,
+      containerHeight,
+      xAxisThickness,
+      pointerStripColor,
+      pointerConfig,
+      pointerLabelComponent,
+    });
+  };
+
   const renderChartContent = () => {
+    if (pointerConfig) {
+      const barWidth = props.barWidth || BarDefaults.barWidth;
+      return (
+        <View
+          onStartShouldSetResponder={evt => (pointerConfig ? true : false)}
+          onMoveShouldSetResponder={evt => (pointerConfig ? true : false)}
+          onResponderGrant={evt => {
+            if (!pointerConfig) return;
+            setResponderStartTime(evt.timeStamp);
+            if (activatePointersOnLongPress) {
+              return;
+            }
+            let x = evt.nativeEvent.locationX;
+            if (
+              !activatePointersOnLongPress &&
+              x > (props.width || screenWidth)
+            )
+              return;
+            let factor =
+              (x - initialSpacing - barWidth / 2) / (spacing + barWidth);
+            factor = Math.round(factor);
+            factor = Math.min(factor, data.length - 1);
+            factor = Math.max(factor, 0);
+            let z =
+              initialSpacing +
+              (spacing + barWidth) * factor -
+              (pointerRadius || pointerWidth / 2) +
+              barWidth / 2;
+            setPointerX(z);
+            setPointerIndex(factor);
+            let item, y;
+            item = data[factor];
+            y =
+              containerHeight -
+              (item.value * containerHeight) / maxValue -
+              (pointerRadius || pointerHeight / 2) +
+              10;
+            setPointerY(y);
+            setPointerItem(item);
+          }}
+          onResponderMove={evt => {
+            if (!pointerConfig) return;
+            if (
+              activatePointersOnLongPress &&
+              evt.timeStamp - responderStartTime < activatePointersDelay
+            ) {
+              return;
+            } else {
+              setResponderActive(true);
+            }
+            let x = evt.nativeEvent.locationX;
+            if (
+              !activatePointersOnLongPress &&
+              x > (props.width || screenWidth)
+            )
+              return;
+            let factor =
+              (x - initialSpacing - barWidth / 2) / (spacing + barWidth);
+            factor = Math.round(factor);
+            factor = Math.min(factor, data.length - 1);
+            factor = Math.max(factor, 0);
+            let z =
+              initialSpacing +
+              (spacing + barWidth) * factor -
+              (pointerRadius || pointerWidth / 2) +
+              barWidth / 2;
+            let item, y;
+            setPointerX(z);
+            setPointerIndex(factor);
+            item = data[factor];
+            y =
+              containerHeight -
+              (item.value * containerHeight) / maxValue -
+              (pointerRadius || pointerHeight / 2) +
+              10;
+            setPointerY(y);
+            setPointerItem(item);
+          }}
+          onResponderEnd={evt => {
+            setResponderStartTime(0);
+            setPointerIndex(-1);
+            setResponderActive(false);
+            setTimeout(() => setPointerX(0), pointerVanishDelay);
+          }}
+          onResponderTerminationRequest={evt => false}
+          style={{
+            position: 'absolute',
+            height: containerHeightIncludingBelowXAxis,
+            bottom: 60,
+            paddingLeft: initialSpacing,
+            width: totalWidth,
+            flexDirection: 'row',
+          }}>
+          {renderChart()}
+          {pointerX > 0 ? (
+            <View
+              pointerEvents="none"
+              style={{
+                position: 'absolute',
+                height:
+                  extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
+                bottom: 0 + labelsExtraHeight,
+                width: totalWidth,
+                zIndex: 20,
+              }}>
+              {!stripOverPointer && renderStripAndLabel()}
+              {renderPointer(1)}
+              {stripOverPointer && renderStripAndLabel()}
+            </View>
+          ) : null}
+        </View>
+      );
+    } else {
+      return renderChart();
+    }
+  };
+
+  const renderChart = () => {
     const getPropsCommonForBarAndStack = (item, index) => {
       return {
         key: index,
@@ -480,6 +734,7 @@ export const BarChart = (props: BarChartPropsType) => {
             ? props.xAxisLabelTexts[index]
             : ''),
         labelTextStyle: item.labelTextStyle || props.xAxisLabelTextStyle,
+        pointerConfig,
       };
     };
     if (props.stackData) {
@@ -597,11 +852,11 @@ export const BarChart = (props: BarChartPropsType) => {
     xAxisIndicesColor,
 
     // These are Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
-    pointerConfig: null,
-    getPointerProps: null,
-    pointerIndex: 0,
-    pointerX: 0,
-    pointerY: 0,
+    pointerConfig,
+    getPointerProps,
+    pointerIndex,
+    pointerX,
+    pointerY,
   };
 
   return <BarAndLineChartsWrapper {...barAndLineChartsWrapperProps} />;
