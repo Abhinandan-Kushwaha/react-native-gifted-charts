@@ -1637,7 +1637,7 @@ export const LineChart = (props: LineChartPropsType) => {
       const currentStripWidth = item.stripWidth ?? stripWidth;
       const currentStripOpacity = item.stripOpacity ?? stripOpacity;
       const currentStripColor = item.stripColor || stripColor;
-      const position=I18nManager.isRTL ?  "right" :"left";
+      const position= I18nManager.isRTL ?  "right" :"left";
 
       return (
         <Fragment key={index}>
