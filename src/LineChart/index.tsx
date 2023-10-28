@@ -1700,7 +1700,7 @@ export const LineChart = (props: LineChartPropsType) => {
                       top: getYOrSecondaryY(item.value),
                       [position]: initialSpacing - dataPointsWidth + spacing * index,
                       transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
-                  },
+                    },
                   ]}>
                   {customDataPoint()}
                 </View>
