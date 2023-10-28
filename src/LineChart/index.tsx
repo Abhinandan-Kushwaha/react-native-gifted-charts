@@ -14,6 +14,7 @@ import {
   Dimensions,
   Platform,
   ColorValue,
+  I18nManager,
 } from 'react-native';
 import {styles} from './styles';
 import Svg, {
@@ -46,8 +47,6 @@ import {
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {LineChartPropsType, itemType} from './types';
 import {BarAndLineChartsWrapperTypes} from '../utils/types';
-import {StripAndLabel} from '../Components/common/StripAndLabel';
-import {Pointer} from '../Components/common/Pointer';
 
 let initialData: Array<itemType> | null = null;
 let animations: Array<any> = [];
@@ -1636,6 +1635,7 @@ export const LineChart = (props: LineChartPropsType) => {
       const currentStripWidth = item.stripWidth ?? stripWidth;
       const currentStripOpacity = item.stripOpacity ?? stripOpacity;
       const currentStripColor = item.stripColor || stripColor;
+      const position=I18nManager.isRTL ?  "right" :"left";
 
       return (
         <Fragment key={index}>
@@ -1696,8 +1696,9 @@ export const LineChart = (props: LineChartPropsType) => {
                       height: dataPointsHeight,
                       width: dataPointsWidth,
                       top: getYOrSecondaryY(item.value),
-                      left: initialSpacing - dataPointsWidth + spacing * index,
-                    },
+                      [position]: initialSpacing - dataPointsWidth + spacing * index,
+                      transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
+                  },
                   ]}>
                   {customDataPoint()}
                 </View>
@@ -2405,6 +2406,7 @@ export const LineChart = (props: LineChartPropsType) => {
             (props.overflowBottom ?? dataPointsRadius1),
           width: totalWidth,
           zIndex: zIndex,
+          transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
         }}>
         {lineSvgComponent(
           points,
@@ -2669,6 +2671,7 @@ export const LineChart = (props: LineChartPropsType) => {
             (props.overflowBottom ?? dataPointsRadius1),
           width: animatedWidth,
           zIndex: zIndex,
+          transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
           // backgroundColor: 'wheat',
         }}>
         {lineSvgComponent(
