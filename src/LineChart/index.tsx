@@ -47,6 +47,8 @@ import {
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {LineChartPropsType, itemType} from './types';
 import {BarAndLineChartsWrapperTypes} from '../utils/types';
+import {StripAndLabel} from '../Components/common/StripAndLabel';
+import {Pointer} from '../Components/common/Pointer';
 
 let initialData: Array<itemType> | null = null;
 let animations: Array<any> = [];
