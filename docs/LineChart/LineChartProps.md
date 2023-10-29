@@ -14,7 +14,7 @@
 | overflowTop                   | number         | Extra space at the top of the chart to make room for dataPointText                                             | 0                    |
 | overflowBottom                | number         | Extra space at the bottom of the chart to make room for dataPoints or dataPointText                            | dataPointRadius      |
 | maxValue                      | number         | Maximum value shown in the Y axis                                                                              | 200                  |
-| mostNegativeValue                      | number         | The most negative value shown in the Y axis (to be used only if the data set has negative values too)          | \_                   |
+| mostNegativeValue             | number         | The most negative value shown in the Y axis (to be used only if the data set has negative values too)          | \_                   |
 | noOfSections                  | number         | Number of sections in the Y axis                                                                               | 10                   |
 | noOfSectionsBelowXAxis        | number         | Number of sections in the Y axis below X axis (in case the data set has negative values too)                   | 0                    |
 | stepValue                     | number         | Value of 1 step/section in the Y axis                                                                          | 20                   |
@@ -22,8 +22,8 @@
 | spacing                       | number         | Distance between 2 consecutive bars in the Bar chart                                                           | 50                   |
 | adjustToWidth                 | boolean        | When set to true, it auto computes the spacing value to fit the Line chart in the available width              | false                |
 | backgroundColor               | ColorValue     | Background color of the Bar chart                                                                              | \_                   |
-| scrollref                    | any            | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered             | React.useRef()       |
-| scrollToIndex                | number         | scroll to a particular index on chart load                                                                      | \_                   |
+| scrollref                     | any            | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered            | React.useRef()       |
+| scrollToIndex                 | number         | scroll to a particular index on chart load                                                                     | \_                   |
 | disableScroll                 | boolean        | To disable horizontal scroll                                                                                   | false                |
 | showScrollIndicator           | boolean        | To show horizontal scroll indicator                                                                            | false                |
 | indicatorColor                | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                | default              |
@@ -101,70 +101,71 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 
 ### Axes and rules related props
 
-| Prop                       | Type                    | Description                                                                                                       | Default value          |
-| -------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| xAxisLength                | number                  | X axis length                                                                                                     | width of the chart     |
-| xAxisColor                 | ColorValue              | X axis color                                                                                                      | black                  |
-| xAxisThickness             | number                  | X axis thickness                                                                                                  | 1                      |
-| xAxisType                  | RuleType                | solid or dotted/dashed                                                                                            | solid                  |
-| yAxisColor                 | ColorValue              | Y axis color                                                                                                      | black                  |
-| yAxisThickness             | number                  | Y axis thickness                                                                                                  | 1                      |
-| yAxisLabelWidth            | number                  | Width of the Y axis Label container                                                                               | 35                     |
-| yAxisTextStyle             | object                  | Style object for the Y axis text style                                                                            | \_                     |
-| yAxisTextNumberOfLines     | number                  | Number of lines for y axis label text                                                                             | 1                      |
-| yAxisLabelContainerStyle   | object                  | Style object for the Y axis label container                                                                       | \_                     |
-| yAxisOffset                | number                  | Starting value on Y Axis                                                                                          | 0                      |
-| horizontalRulesStyle       | object                  | Style object for the horizontal rules container                                                                   | \_                     |
-| showFractionalValues       | boolean                 | Allow fractional values for the Y axis label                                                                      | false                  |
-| roundToDigits              | number                  | Rounds the y axis values to given number of digits after decimal point                                            | 1                      |
-| yAxisLabelPrefix           | String                  | The String prepended to the y axis label text (for example- '$')                                                  | ''                     |
-| yAxisLabelSuffix           | String                  | The String appended to the y axis label text                                                                      | ''                     |
-| hideYAxisText              | boolean                 | To hide Y axis label text                                                                                         | false                  |
-| yAxisSide                  | String                  | Tells which side of the chart, should the y axis be present, defaults to 'left'                                   | 'left'                 |
-| rulesLength                | number                  | Length of the horizontal rules                                                                                    | width of the chart     |
-| rulesColor                 | ColorValue              | Color of the horizontal rules                                                                                     | lightgray              |
-| rulesThickness             | number                  | Thickness of the horizontal rules                                                                                 | 1                      |
-| hideRules                  | boolean                 | To hide the horizontal rules                                                                                      | false                  |
-| rulesType                  | RuleType                | solid or dotted/dashed                                                                                            | solid                  |
-| dashWidth                  | number                  | width of each dash                                                                                                | 4                      |
-| dashGap                    | number                  | gap between 2 dashes                                                                                              | 8                      |
-| showReferenceLine1         | boolean                 | show reference line                                                                                               | false                  |
-| referenceLine1Config       | referenceConfigType     | properties of reference line like thickness, color etc (described below the table)                                | \_                     |
-| referenceLine1Position     | number                  | position of reference line                                                                                        | containerHeight / 2    |
-| showReferenceLine2         | boolean                 | show second reference line                                                                                        | false                  |
-| referenceLine2Config       | referenceConfigType     | properties of reference line like thickness, color etc (described below the table)                                | \_                     |
-| referenceLine2Position     | number                  | position of second reference line                                                                                 | 3\*containerHeight / 2 |
-| showReferenceLine3         | boolean                 | show third reference line                                                                                         | false                  |
-| referenceLine3Config       | referenceConfigType     | properties of reference line like thickness, color etc (described below the table)                                | \_                     |
-| referenceLine3Position     | number                  | position of third reference line                                                                                  | containerHeight / 2    |
-| showVerticalLines          | boolean                 | To show vertical lines                                                                                            | false                  |
-| verticalLinesUptoDataPoint | boolean                 | To set the height of the vertical lines upto the corresponding data point                                         | false                  |
-| verticalLinesColor         | ColorValue              | Color of the vertical lines                                                                                       | lightgray              |
-| verticallinesThickness     | number                  | Thickness of the vertical lines                                                                                   | 1                      |
-| verticalLinesHeight        | number                  | Height of the vertical lines                                                                                      | chart height           |
-| verticalLinesStrokeDashArray | Array<number>         | Array of 2 numbers denoting the dashWidth and dashGap of the lines. Used to render dashed/dotted vertical line    | ''                     |
-| verticalLinesShift         | number                  | vertical lines are aligned with data point. Shift them left or right using +ve or -ve value of verticalLinesShift | 0                      |
-| verticalLinesZIndex        | number                  | Z index of the vertical lines                                                                                     | -1                     |
-| noOfVerticalLines          | number                  | Number of vertical lines displayed                                                                                | data.length            |
-| verticalLinesSpacing       | number                  | Distance between consecutive vertical lines                                                                       | spacing                |
-| showXAxisIndices           | boolean                 | To show the pointers on the X axis                                                                                | false                  |
-| xAxisIndicesHeight         | number                  | Height of the pointers on the X axis                                                                              | 2                      |
-| xAxisIndicesWidth          | number                  | Width of the pointers on the X axis                                                                               | 4                      |
-| xAxisIndicesColor          | ColorValue              | Color of the pointers on the X axis                                                                               | black                  |
-| showYAxisIndices           | boolean                 | To show the pointers on the Y axis                                                                                | false                  |
-| yAxisIndicesHeight         | number                  | Height of the pointers on the Y axis                                                                              | 2                      |
-| yAxisIndicesWidth          | number                  | Width of the pointers on the Y axis                                                                               | 4                      |
-| yAxisIndicesColor          | ColorValue              | Color of the pointers on the X axis                                                                               | black                  |
-| yAxisIndicesColor          | boolean                 | To hide axes, rules, labels altogether                                                                            | false                  |
-| yAxisLabelTexts            | Array<string>           | Array of label texts to be displayed along y axis                                                                 | null                   |
-| xAxisLabelTexts            | Array<string>           | Array of label texts to be displayed below x axis                                                                 | null                   |
-| xAxisLabelTextStyle        | object                  | Style of label texts to be displayed below x axis                                                                 | null                   |
-| xAxisTextNumberOfLines     | number                  | Number of lines for x axis label text                                                                             | 1                      |
-| rotateLabel                | boolean                 | To rotate the X axis labels (by 60deg)                                                                            | false                  |
-| hideOrigin                 | boolean                 | To hide the y Axis label at origin (i.e. 0)                                                                       | false                  |
-| secondaryYAxis             | secondaryYAxisType      | displays and controls the properties of the secondary Y axis on the right side                                    | null                   |
-| secondaryData              | Array of items          | the secondary data that will be rendered along the secondary Y axis                                               | undefined              |
-| secondaryLineConfig        | secondaryLineConfigType | properties of the secondary data line (secondaryLineConfigType is described below)                                | values of primary Line |
+| Prop                         | Type                      | Description                                                                                                       | Default value          |
+| ---------------------------- | ------------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| xAxisLength                  | number                    | X axis length                                                                                                     | width of the chart     |
+| xAxisColor                   | ColorValue                | X axis color                                                                                                      | black                  |
+| xAxisThickness               | number                    | X axis thickness                                                                                                  | 1                      |
+| xAxisType                    | RuleType                  | solid or dotted/dashed                                                                                            | solid                  |
+| yAxisColor                   | ColorValue                | Y axis color                                                                                                      | black                  |
+| yAxisThickness               | number                    | Y axis thickness                                                                                                  | 1                      |
+| yAxisLabelWidth              | number                    | Width of the Y axis Label container                                                                               | 35                     |
+| yAxisTextStyle               | object                    | Style object for the Y axis text style                                                                            | \_                     |
+| yAxisTextNumberOfLines       | number                    | Number of lines for y axis label text                                                                             | 1                      |
+| yAxisLabelContainerStyle     | object                    | Style object for the Y axis label container                                                                       | \_                     |
+| yAxisOffset                  | number                    | Starting value on Y Axis                                                                                          | 0                      |
+| horizontalRulesStyle         | object                    | Style object for the horizontal rules container                                                                   | \_                     |
+| showFractionalValues         | boolean                   | Allow fractional values for the Y axis label                                                                      | false                  |
+| roundToDigits                | number                    | Rounds the y axis values to given number of digits after decimal point                                            | 1                      |
+| yAxisLabelPrefix             | String                    | The String prepended to the y axis label text (for example- '$')                                                  | ''                     |
+| yAxisLabelSuffix             | String                    | The String appended to the y axis label text                                                                      | ''                     |
+| hideYAxisText                | boolean                   | To hide Y axis label text                                                                                         | false                  |
+| formatYLabel                 | (label: string) => string | a callback function that takes the label generated by the library and modifies it.                                | \_                     |
+| yAxisSide                    | String                    | Tells which side of the chart, should the y axis be present, defaults to 'left'                                   | 'left'                 |
+| rulesLength                  | number                    | Length of the horizontal rules                                                                                    | width of the chart     |
+| rulesColor                   | ColorValue                | Color of the horizontal rules                                                                                     | lightgray              |
+| rulesThickness               | number                    | Thickness of the horizontal rules                                                                                 | 1                      |
+| hideRules                    | boolean                   | To hide the horizontal rules                                                                                      | false                  |
+| rulesType                    | RuleType                  | solid or dotted/dashed                                                                                            | solid                  |
+| dashWidth                    | number                    | width of each dash                                                                                                | 4                      |
+| dashGap                      | number                    | gap between 2 dashes                                                                                              | 8                      |
+| showReferenceLine1           | boolean                   | show reference line                                                                                               | false                  |
+| referenceLine1Config         | referenceConfigType       | properties of reference line like thickness, color etc (described below the table)                                | \_                     |
+| referenceLine1Position       | number                    | position of reference line                                                                                        | containerHeight / 2    |
+| showReferenceLine2           | boolean                   | show second reference line                                                                                        | false                  |
+| referenceLine2Config         | referenceConfigType       | properties of reference line like thickness, color etc (described below the table)                                | \_                     |
+| referenceLine2Position       | number                    | position of second reference line                                                                                 | 3\*containerHeight / 2 |
+| showReferenceLine3           | boolean                   | show third reference line                                                                                         | false                  |
+| referenceLine3Config         | referenceConfigType       | properties of reference line like thickness, color etc (described below the table)                                | \_                     |
+| referenceLine3Position       | number                    | position of third reference line                                                                                  | containerHeight / 2    |
+| showVerticalLines            | boolean                   | To show vertical lines                                                                                            | false                  |
+| verticalLinesUptoDataPoint   | boolean                   | To set the height of the vertical lines upto the corresponding data point                                         | false                  |
+| verticalLinesColor           | ColorValue                | Color of the vertical lines                                                                                       | lightgray              |
+| verticallinesThickness       | number                    | Thickness of the vertical lines                                                                                   | 1                      |
+| verticalLinesHeight          | number                    | Height of the vertical lines                                                                                      | chart height           |
+| verticalLinesStrokeDashArray | Array<number>             | Array of 2 numbers denoting the dashWidth and dashGap of the lines. Used to render dashed/dotted vertical line    | ''                     |
+| verticalLinesShift           | number                    | vertical lines are aligned with data point. Shift them left or right using +ve or -ve value of verticalLinesShift | 0                      |
+| verticalLinesZIndex          | number                    | Z index of the vertical lines                                                                                     | -1                     |
+| noOfVerticalLines            | number                    | Number of vertical lines displayed                                                                                | data.length            |
+| verticalLinesSpacing         | number                    | Distance between consecutive vertical lines                                                                       | spacing                |
+| showXAxisIndices             | boolean                   | To show the pointers on the X axis                                                                                | false                  |
+| xAxisIndicesHeight           | number                    | Height of the pointers on the X axis                                                                              | 2                      |
+| xAxisIndicesWidth            | number                    | Width of the pointers on the X axis                                                                               | 4                      |
+| xAxisIndicesColor            | ColorValue                | Color of the pointers on the X axis                                                                               | black                  |
+| showYAxisIndices             | boolean                   | To show the pointers on the Y axis                                                                                | false                  |
+| yAxisIndicesHeight           | number                    | Height of the pointers on the Y axis                                                                              | 2                      |
+| yAxisIndicesWidth            | number                    | Width of the pointers on the Y axis                                                                               | 4                      |
+| yAxisIndicesColor            | ColorValue                | Color of the pointers on the X axis                                                                               | black                  |
+| yAxisIndicesColor            | boolean                   | To hide axes, rules, labels altogether                                                                            | false                  |
+| yAxisLabelTexts              | Array<string>             | Array of label texts to be displayed along y axis                                                                 | null                   |
+| xAxisLabelTexts              | Array<string>             | Array of label texts to be displayed below x axis                                                                 | null                   |
+| xAxisLabelTextStyle          | object                    | Style of label texts to be displayed below x axis                                                                 | null                   |
+| xAxisTextNumberOfLines       | number                    | Number of lines for x axis label text                                                                             | 1                      |
+| rotateLabel                  | boolean                   | To rotate the X axis labels (by 60deg)                                                                            | false                  |
+| hideOrigin                   | boolean                   | To hide the y Axis label at origin (i.e. 0)                                                                       | false                  |
+| secondaryYAxis               | secondaryYAxisType        | displays and controls the properties of the secondary Y axis on the right side                                    | null                   |
+| secondaryData                | Array of items            | the secondary data that will be rendered along the secondary Y axis                                               | undefined              |
+| secondaryLineConfig          | secondaryLineConfigType   | properties of the secondary data line (secondaryLineConfigType is described below)                                | values of primary Line |
 
 ```js
 type RuleType = 'solid' | 'dashed' | 'dotted';

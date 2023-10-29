@@ -149,6 +149,7 @@ export type BarChartPropsType = {
   secondaryYAxis?: secondaryYAxisType | boolean;
   pointerConfig?: Pointer;
   getPointerProps?: Function;
+  formatYLabel?: (label: string) => string;
 };
 type lineConfigType = {
   initialSpacing?: number;

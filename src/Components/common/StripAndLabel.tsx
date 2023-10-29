@@ -124,6 +124,7 @@ export const StripAndLabel = props => {
 
       {pointerLabelComponent && (
         <View
+          pointerEvents="none"
           style={[
             {
               position: 'absolute',

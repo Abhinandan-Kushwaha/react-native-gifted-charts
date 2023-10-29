@@ -2,11 +2,7 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import Rule from '../lineSvg';
 import {styles} from '../../LineChart/styles';
-import {
-  AxesAndRulesDefaults,
-  chartTypes,
-  yAxisSides,
-} from '../../utils/constants';
+import {AxesAndRulesDefaults, yAxisSides} from '../../utils/constants';
 import {
   HorizSectionsType,
   horizSectionPropTypes,
@@ -16,7 +12,6 @@ import {computeMaxAndMinItems, getLabelTextUtil} from '../../utils';
 
 export const renderHorizSections = (props: horizSectionPropTypes) => {
   const {
-    chartType,
     width,
     horizSections: h,
     noOfSectionsBelowXAxis,
@@ -74,6 +69,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
 
     secondaryData,
     secondaryYAxis,
+    formatYLabel,
   } = props;
 
   /***********************************************************************************************************************************
@@ -361,6 +357,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       yAxisLabelPrefix,
       yAxisLabelSuffix,
       roundToDigits ?? AxesAndRulesDefaults.roundToDigits,
+      formatYLabel,
     );
   };
 

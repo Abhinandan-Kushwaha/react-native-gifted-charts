@@ -84,7 +84,6 @@ export type arrowConfigType = {
 };
 
 export type horizSectionPropTypes = {
-  chartType: chartTypes;
   width: number | undefined;
   horizSections: Array<any>;
   noOfSectionsBelowXAxis: number;
@@ -142,6 +141,7 @@ export type horizSectionPropTypes = {
 
   secondaryData: Array<any> | undefined;
   secondaryYAxis: secondaryYAxisType | null;
+  formatYLabel?: (label: string) => string;
 };
 
 type HorizSectionObject = {
@@ -252,4 +252,3 @@ export type Pointer = {
   strokeDashArray?: Array<number>;
   barTouchable?: boolean;
 };
-

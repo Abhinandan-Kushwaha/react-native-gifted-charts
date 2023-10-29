@@ -185,6 +185,7 @@ type propTypes = {
   labelsExtraHeight?: number;
   adjustToWidth?: boolean;
   getPointerProps?: Function;
+  formatYLabel?: (label: string) => string;
 };
 type referenceConfigType = {
   thickness: number;
