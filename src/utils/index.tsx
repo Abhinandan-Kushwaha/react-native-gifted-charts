@@ -271,6 +271,7 @@ export const getAxesAndRulesProps = (
     stepValue,
 
     secondaryYAxis: props.secondaryYAxis,
+    formatYLabel: props.formatYLabel,
   };
   if (props.secondaryYAxis && maxValue !== undefined) {
     axesAndRulesProps.secondaryYAxis = {...props.secondaryYAxis, maxValue};
@@ -548,6 +549,7 @@ export const getLabelTextUtil = (
   yAxisLabelPrefix?: string,
   yAxisLabelSuffix?: string,
   roundToDigits?: number,
+  formatYLabel?: (label: string) => string,
 ) => {
   let label = '';
   if (
@@ -571,7 +573,11 @@ export const getLabelTextUtil = (
     }
   }
 
-  return yAxisLabelPrefix + label + yAxisLabelSuffix;
+  return (
+    yAxisLabelPrefix +
+    (formatYLabel ? formatYLabel(label) : label) +
+    yAxisLabelSuffix
+  );
 };
 
 export const getXForLineInBar = (

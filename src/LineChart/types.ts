@@ -280,6 +280,7 @@ export type LineChartPropsType = {
   secondaryData?: Array<itemType>;
   secondaryYAxis?: secondaryYAxisType;
   secondaryLineConfig?: secondaryLineConfigType;
+  formatYLabel?: (label: string) => string;
 };
 
 type referenceConfigType = {

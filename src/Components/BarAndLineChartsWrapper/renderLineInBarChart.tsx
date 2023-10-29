@@ -317,6 +317,7 @@ const RenderLineInBarChart = props => {
     // console.log('animatedWidth is-------->', animatedWidth);
     return (
       <Animated.View
+        pointerEvents="none"
         style={{
           position: 'absolute',
           height: containerHeight + 10,
@@ -355,6 +356,7 @@ const RenderLineInBarChart = props => {
   const renderLine = () => {
     return (
       <View
+        pointerEvents="none"
         style={{
           position: 'absolute',
           height: containerHeight + 10 + labelsExtraHeight,

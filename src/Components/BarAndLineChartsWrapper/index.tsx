@@ -167,7 +167,6 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     : [...Array(stackData ? stackData.length : data.length).keys()];
 
   const horizSectionProps: horizSectionPropTypes = {
-    chartType,
     width,
     horizSections,
     noOfSectionsBelowXAxis,
@@ -225,6 +224,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
 
     secondaryData,
     secondaryYAxis,
+    formatYLabel: axesAndRulesProps.formatYLabel,
   };
 
   const lineInBarChartProps = {
@@ -419,11 +419,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           {renderChartContent()}
         </Fragment>
       </ScrollView>
-      {
-        pointerConfig && getPointerProps
-          ? getPointerProps({pointerIndex, pointerX, pointerY})
-          : null
-      }
+      {pointerConfig && getPointerProps
+        ? getPointerProps({pointerIndex, pointerX, pointerY})
+        : null}
     </View>
   );
 };
