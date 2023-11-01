@@ -1450,6 +1450,13 @@ export const LineChart = (props: LineChartPropsType) => {
   const containerHeightIncludingBelowXAxis =
     extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight;
 
+  const lineGradient = props.lineGradient ?? LineDefaults.lineGradient;
+  const lineGradientDirection = props.lineGradientDirection ?? 'vertical';
+  const lineGradientStartColor =
+    props.lineGradientStartColor ?? LineDefaults.lineGradientStartColor;
+  const lineGradientEndColor =
+    props.lineGradientEndColor ?? LineDefaults.lineGradientEndColor;
+
   const renderLabel = (
     index: number,
     label: String,
@@ -1637,7 +1644,7 @@ export const LineChart = (props: LineChartPropsType) => {
       const currentStripWidth = item.stripWidth ?? stripWidth;
       const currentStripOpacity = item.stripOpacity ?? stripOpacity;
       const currentStripColor = item.stripColor || stripColor;
-      const position= I18nManager.isRTL ?  "right" :"left";
+      const position = I18nManager.isRTL ? 'right' : 'left';
 
       return (
         <Fragment key={index}>
@@ -1698,8 +1705,9 @@ export const LineChart = (props: LineChartPropsType) => {
                       height: dataPointsHeight,
                       width: dataPointsWidth,
                       top: getYOrSecondaryY(item.value),
-                      [position]: initialSpacing - dataPointsWidth + spacing * index,
-                      transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
+                      [position]:
+                        initialSpacing - dataPointsWidth + spacing * index,
+                      transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
                     },
                   ]}>
                   {customDataPoint()}
@@ -1980,6 +1988,51 @@ export const LineChart = (props: LineChartPropsType) => {
     });
   };
 
+  const getLineGradientComponent = () => {
+    return props.lineGradientComponent ? (
+      props.lineGradientComponent()
+    ) : (
+      <LinearGradient
+        id="lineGradient"
+        x1="0"
+        y1="0"
+        x2={lineGradientDirection === 'horizontal' ? '1' : '0'}
+        y2={lineGradientDirection === 'vertical' ? '1' : '0'}>
+        <Stop offset="0" stopColor={lineGradientStartColor} />
+        <Stop offset="1" stopColor={lineGradientEndColor} />
+      </LinearGradient>
+    );
+  };
+
+  const getAreaGradientComponent = (
+    startFillColor: string,
+    endFillColor: string,
+    startOpacity: number,
+    endOpacity: number,
+  ) => {
+    return props.areaGradientComponent ? (
+      props.areaGradientComponent()
+    ) : (
+      <LinearGradient
+        id="Gradient"
+        x1="0"
+        y1="0"
+        x2={gradientDirection === 'horizontal' ? '1' : '0'}
+        y2={gradientDirection === 'vertical' ? '1' : '0'}>
+        <Stop
+          offset="0"
+          stopColor={startFillColor}
+          stopOpacity={startOpacity.toString()}
+        />
+        <Stop
+          offset="1"
+          stopColor={endFillColor}
+          stopOpacity={endOpacity.toString()}
+        />
+      </LinearGradient>
+    );
+  };
+
   const lineSvgComponent = (
     points: any,
     currentLineThickness: number | undefined,
@@ -1998,6 +2051,7 @@ export const LineChart = (props: LineChartPropsType) => {
   ) => {
     return (
       <Svg>
+        {lineGradient && getLineGradientComponent()}
         {strokeDashArray &&
         strokeDashArray.length === 2 &&
         typeof strokeDashArray[0] === 'number' &&
@@ -2005,7 +2059,13 @@ export const LineChart = (props: LineChartPropsType) => {
           <Path
             d={points}
             fill="none"
-            stroke={color}
+            stroke={
+              lineGradient
+                ? props.lineGradientId
+                  ? `url(#${props.lineGradientId})`
+                  : `url(#lineGradient)`
+                : color
+            }
             strokeWidth={currentLineThickness || thickness}
             strokeDasharray={strokeDashArray}
           />
@@ -2013,36 +2073,34 @@ export const LineChart = (props: LineChartPropsType) => {
           <Path
             d={points}
             fill="none"
-            stroke={color}
+            stroke={
+              lineGradient
+                ? props.lineGradientId
+                  ? `url(#${props.lineGradientId})`
+                  : `url(#lineGradient)`
+                : color
+            }
             strokeWidth={currentLineThickness || thickness}
           />
         )}
 
         {/***********************      For Area Chart        ************/}
 
-        {atLeastOneAreaChart && (
-          <LinearGradient
-            id="Gradient"
-            x1="0"
-            y1="0"
-            x2={gradientDirection === 'horizontal' ? '1' : '0'}
-            y2={gradientDirection === 'vertical' ? '1' : '0'}>
-            <Stop
-              offset="0"
-              stopColor={startFillColor}
-              stopOpacity={startOpacity.toString()}
-            />
-            <Stop
-              offset="1"
-              stopColor={endFillColor}
-              stopOpacity={endOpacity.toString()}
-            />
-          </LinearGradient>
-        )}
+        {atLeastOneAreaChart &&
+          getAreaGradientComponent(
+            startFillColor,
+            endFillColor,
+            startOpacity,
+            endOpacity,
+          )}
         {atLeastOneAreaChart && (
           <Path
             d={fillPoints}
-            fill="url(#Gradient)"
+            fill={
+              props.areaGradientId
+                ? `url(#${props.areaGradientId})`
+                : `url(#Gradient)`
+            }
             stroke={'transparent'}
             strokeWidth={currentLineThickness || thickness}
           />
@@ -2408,7 +2466,7 @@ export const LineChart = (props: LineChartPropsType) => {
             (props.overflowBottom ?? dataPointsRadius1),
           width: totalWidth,
           zIndex: zIndex,
-          transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
+          transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
         }}>
         {lineSvgComponent(
           points,
@@ -2673,7 +2731,7 @@ export const LineChart = (props: LineChartPropsType) => {
             (props.overflowBottom ?? dataPointsRadius1),
           width: animatedWidth,
           zIndex: zIndex,
-          transform: [{ scaleX: I18nManager.isRTL ? -1 : 1 }],
+          transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
           // backgroundColor: 'wheat',
         }}>
         {lineSvgComponent(

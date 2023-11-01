@@ -190,6 +190,9 @@ export const LineDefaults = {
 
   startFillColor: 'gray',
   endFillColor: 'white',
+  lineGradient: false,
+  lineGradientStartColor: 'lightgreen',
+  lineGradientEndColor: 'orange',
   startOpacity: 1,
   endOpacity: 1,
 

@@ -341,57 +341,47 @@ const RenderBars = (props: Props) => {
       (data[i].barWidth || props.barWidth || 30);
   }
 
-  return (
-    <>
-      <TouchableOpacity
-        disabled={
-          item.disablePress ||
-          props.disablePress ||
-          (pointerConfig && pointerConfig.barTouchable !== false)
+  const barWrapperStyle = [
+    {
+      // overflow: 'visible',
+      marginBottom: 60 + barMarginBottom,
+      width: item.barWidth || props.barWidth || 30,
+      height: barHeight,
+      marginRight: spacing,
+    },
+    item.value < 0
+      ? {
+          transform: [
+            {
+              translateY:
+                (Math.abs(item.value) * (containerHeight || 200)) /
+                (maxValue || 200),
+            },
+            {rotateZ: '180deg'},
+          ],
         }
-        activeOpacity={props.activeOpacity || 0.2}
-        onPress={() => {
-          if (renderTooltip) {
-            setSelectedIndex(index);
-          }
-          item.onPress
-            ? item.onPress()
-            : props.onPress
-            ? props.onPress(item, index)
-            : null;
-        }}
-        style={[
-          {
-            // overflow: 'visible',
-            marginBottom: 60 + barMarginBottom,
-            width: item.barWidth || props.barWidth || 30,
-            height: barHeight,
-            marginRight: spacing,
-          },
-          item.value < 0
-            ? {
-                transform: [
-                  {
-                    translateY:
-                      (Math.abs(item.value) * (containerHeight || 200)) /
-                      (maxValue || 200),
-                  },
-                  {rotateZ: '180deg'},
-                ],
-              }
-            : pointerConfig
-            ? {
-                transform: [
-                  {
-                    translateY: (containerHeight || 200) - (barHeight - 10),
-                  },
-                ],
-              }
-            : null,
-          // !isThreeD && !item.showGradient && !props.showGradient &&
-          // { backgroundColor: item.frontColor || props.frontColor || 'black' },
-          side !== 'right' && {zIndex: data.length - index},
-        ]}>
+      : pointerConfig
+      ? {
+          transform: [
+            {
+              translateY: (containerHeight || 200) - (barHeight - 10),
+            },
+          ],
+        }
+      : null,
+    // !isThreeD && !item.showGradient && !props.showGradient &&
+    // { backgroundColor: item.frontColor || props.frontColor || 'black' },
+    side !== 'right' && {zIndex: data.length - index},
+  ];
+
+  const pressDisabled =
+    item.disablePress ||
+    props.disablePress ||
+    (pointerConfig && pointerConfig.barTouchable !== true);
+
+  const barContent = () => {
+    return (
+      <>
         {(props.showXAxisIndices || item.showXAxisIndex) && (
           <View
             style={{
@@ -569,7 +559,33 @@ const RenderBars = (props: Props) => {
         {isAnimated
           ? renderAnimatedLabel(label, labelTextStyle, item.value)
           : renderLabel(label, labelTextStyle, item.value)}
-      </TouchableOpacity>
+      </>
+    );
+  };
+
+  return (
+    <>
+      {pressDisabled ? (
+        <View pointerEvents="none" style={barWrapperStyle}>
+          {barContent()}
+        </View>
+      ) : (
+        <TouchableOpacity
+          activeOpacity={props.activeOpacity || 0.2}
+          onPress={() => {
+            if (renderTooltip) {
+              setSelectedIndex(index);
+            }
+            item.onPress
+              ? item.onPress()
+              : props.onPress
+              ? props.onPress(item, index)
+              : null;
+          }}
+          style={barWrapperStyle}>
+          {barContent()}
+        </TouchableOpacity>
+      )}
       {renderTooltip && selectedIndex === index && (
         <View
           style={{

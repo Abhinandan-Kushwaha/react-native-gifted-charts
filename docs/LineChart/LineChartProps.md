@@ -284,46 +284,77 @@ All the properties of **secondaryLineConfig** are optional. Properties not provi
 
 ### Line related props
 
-| Prop             | Type          | Description                                                                                                 | Default value                |
-| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| curved           | boolean       | To show curved line joining the data points                                                                 | false                        |
-| curvature        | number        | A number between 0 to 1 that controls the curvature of the cubic bezier curve                               | 0.2                          |
-| curveType        | CurveType     | Type of the curve- cubic or quadratic                                                                       | CurveType.CUBIC              |
-| color            | ColorValue    | Color of the lines joining the data points                                                                  | black                        |
-| color1           | ColorValue    | Color of the lines joining the first set of data points                                                     | color (from props)           |
-| color2           | ColorValue    | Color of the lines joining the second set of data points                                                    | color (from props)           |
-| color3           | ColorValue    | Color of the lines joining the third set of data points                                                     | color (from props)           |
-| color4           | ColorValue    | Color of the lines joining the fourth set of data points                                                    | color (from props)           |
-| color5           | ColorValue    | Color of the lines joining the fifth set of data points                                                     | color (from props)           |
-| thickness        | number        | Thickness of the lines joining the data points                                                              | 2                            |
-| thickness1       | number        | Thickness of the lines joining the first set of data points                                                 | thickness (from props)       |
-| thickness2       | number        | Thickness of the lines joining the second set of data points                                                | thickness (from props)       |
-| thickness3       | number        | Thickness of the lines joining the third set of data points                                                 | thickness (from props)       |
-| thickness4       | number        | Thickness of the lines joining the fourth set of data points                                                | thickness (from props)       |
-| thickness5       | number        | Thickness of the lines joining the fifth set of data points                                                 | thickness (from props)       |
-| zIndex1          | number        | zIndex of the lines joining the first set of data points                                                    | 0                            |
-| zIndex2          | number        | zIndex of the lines joining the second set of data points                                                   | 0                            |
-| zIndex3          | number        | zIndex of the lines joining the third set of data points                                                    | 0                            |
-| zIndex4          | number        | zIndex of the lines joining the fourth set of data points                                                   | 0                            |
-| zIndex5          | number        | zIndex of the lines joining the fifth set of data points                                                    | 0                            |
-| strokeDashArray  | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of the lines. Used to render dashed/dotted line chart | undefined                    |
-| strokeDashArray1 | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line1. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray2 | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line2. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray3 | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line3. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray4 | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line4. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray5 | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line5. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| startIndex       | number        | Start index for data line (used to display data lines having breaks)                                        | 0                            |
-| startIndex1      | number        | Start index for data line 1 (used to display data lines having breaks)                                      | 0                            |
-| startIndex2      | number        | Start index for data line 2 (used to display data lines having breaks)                                      | 0                            |
-| startIndex3      | number        | Start index for data line 3 (used to display data lines having breaks)                                      | 0                            |
-| startIndex4      | number        | Start index for data line 4 (used to display data lines having breaks)                                      | 0                            |
-| startIndex5      | number        | Start index for data line 5 (used to display data lines having breaks)                                      | 0                            |
-| endIndex         | number        | End index for data line (used to display data lines having breaks)                                          | data.length -1               |
-| endIndex1        | number        | End index for data line 1 (used to display data lines having breaks)                                        | data1.length -1              |
-| endIndex2        | number        | End index for data line 2 (used to display data lines having breaks)                                        | data2.length -1              |
-| endIndex3        | number        | End index for data line 3 (used to display data lines having breaks)                                        | data3.length -1              |
-| endIndex4        | number        | End index for data line 4 (used to display data lines having breaks)                                        | data4.length -1              |
-| endIndex5        | number        | End index for data line 5 (used to display data lines having breaks)                                        | data5.length -1              |
+| Prop                   | Type          | Description                                                                                                 | Default value                |
+| ---------------------- | ------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| curved                 | boolean       | To show curved line joining the data points                                                                 | false                        |
+| curvature              | number        | A number between 0 to 1 that controls the curvature of the cubic bezier curve                               | 0.2                          |
+| curveType              | CurveType     | Type of the curve- cubic or quadratic                                                                       | CurveType.CUBIC              |
+| color                  | ColorValue    | Color of the lines joining the data points                                                                  | black                        |
+| color1                 | ColorValue    | Color of the lines joining the first set of data points                                                     | color (from props)           |
+| color2                 | ColorValue    | Color of the lines joining the second set of data points                                                    | color (from props)           |
+| color3                 | ColorValue    | Color of the lines joining the third set of data points                                                     | color (from props)           |
+| color4                 | ColorValue    | Color of the lines joining the fourth set of data points                                                    | color (from props)           |
+| color5                 | ColorValue    | Color of the lines joining the fifth set of data points                                                     | color (from props)           |
+| thickness              | number        | Thickness of the lines joining the data points                                                              | 2                            |
+| thickness1             | number        | Thickness of the lines joining the first set of data points                                                 | thickness (from props)       |
+| thickness2             | number        | Thickness of the lines joining the second set of data points                                                | thickness (from props)       |
+| thickness3             | number        | Thickness of the lines joining the third set of data points                                                 | thickness (from props)       |
+| thickness4             | number        | Thickness of the lines joining the fourth set of data points                                                | thickness (from props)       |
+| thickness5             | number        | Thickness of the lines joining the fifth set of data points                                                 | thickness (from props)       |
+| zIndex1                | number        | zIndex of the lines joining the first set of data points                                                    | 0                            |
+| zIndex2                | number        | zIndex of the lines joining the second set of data points                                                   | 0                            |
+| zIndex3                | number        | zIndex of the lines joining the third set of data points                                                    | 0                            |
+| zIndex4                | number        | zIndex of the lines joining the fourth set of data points                                                   | 0                            |
+| zIndex5                | number        | zIndex of the lines joining the fifth set of data points                                                    | 0                            |
+| strokeDashArray        | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of the lines. Used to render dashed/dotted line chart | undefined                    |
+| strokeDashArray1       | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line1. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray2       | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line2. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray3       | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line3. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray4       | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line4. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray5       | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line5. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| startIndex             | number        | Start index for data line (used to display data lines having breaks)                                        | 0                            |
+| startIndex1            | number        | Start index for data line 1 (used to display data lines having breaks)                                      | 0                            |
+| startIndex2            | number        | Start index for data line 2 (used to display data lines having breaks)                                      | 0                            |
+| startIndex3            | number        | Start index for data line 3 (used to display data lines having breaks)                                      | 0                            |
+| startIndex4            | number        | Start index for data line 4 (used to display data lines having breaks)                                      | 0                            |
+| startIndex5            | number        | Start index for data line 5 (used to display data lines having breaks)                                      | 0                            |
+| endIndex               | number        | End index for data line (used to display data lines having breaks)                                          | data.length -1               |
+| endIndex1              | number        | End index for data line 1 (used to display data lines having breaks)                                        | data1.length -1              |
+| endIndex2              | number        | End index for data line 2 (used to display data lines having breaks)                                        | data2.length -1              |
+| endIndex3              | number        | End index for data line 3 (used to display data lines having breaks)                                        | data3.length -1              |
+| endIndex4              | number        | End index for data line 4 (used to display data lines having breaks)                                        | data4.length -1              |
+| endIndex5              | number        | End index for data line 5 (used to display data lines having breaks)                                        | data5.length -1              |
+| lineGradient           | boolean       | this prop is used to render the line with a gradient blend of colors                                        | false                        |
+| lineGradientComponent  | Function      | this prop defines the svg gradient that should be applied to the line (requires lineGradient to be truthy)  | null                         |
+| lineGradientId         | string        | id of the <LinearGradient> (needed along with lineGradientComponent prop)                                   | \_                           |
+| lineGradientDirection  | string        | 'vertical'/'horizontal'                                                                                     | 'vertical'                   |
+| lineGradientStartColor | string        | Start gradient color for the line (requires lineGradient to be truthy)                                      | 'lightgreen'                 |
+| lineGradientEndColor   | string        | End gradient color for the line (requires lineGradient to be truthy)                                        |                              |
+
+### An example of lineGradientComponent
+
+```js
+lineGradientId='ggrd' // lineGradientId is required while using lineGradientComponent
+lineGradientComponent={()=>{
+  return(
+    <LinearGradient
+      id="ggrd" // same as lineGradientId
+      x1="0"
+      y1="0"
+      x2={'0'}
+      y2={'1'}>
+      <Stop
+        offset="0"
+        stopColor={'blue'}
+      />
+      <Stop
+        offset="1"
+        stopColor={'yellow'}
+      />
+    </LinearGradient>
+  );
+}}
+```
 
 ## The arrow
 
@@ -571,38 +602,42 @@ Here is the list of prop names changed in version `1.3.2`-
 
 ### Props for Area Chart
 
-| Prop              | Type       | Description                                                            | Default value |
-| ----------------- | ---------- | ---------------------------------------------------------------------- | ------------- |
-| areaChart         | boolean    | If set true, renders area chart instead of line chart                  | false         |
-| areaChart1        | boolean    | If set true, renders area chart for 1st data set instead of line chart | areaChart     |
-| areaChart2        | boolean    | If set true, renders area chart for 2nd data set instead of line chart | areaChart     |
-| areaChart3        | boolean    | If set true, renders area chart for 3rd data set instead of line chart | areaChart     |
-| areaChart4        | boolean    | If set true, renders area chart for 4th data set instead of line chart | areaChart     |
-| areaChart5        | boolean    | If set true, renders area chart for 5th data set instead of line chart | areaChart     |
-| startFillColor    | ColorValue | Start gradient color for the area chart                                | gray          |
-| endFillColor      | ColorValue | End gradient color for the area chart                                  | white         |
-| startOpacity      | number     | Start gradient opacity for the area chart                              | 1             |
-| endOpacity        | number     | End gradient opacity for the area chart                                | 1             |
-| startFillColor1   | ColorValue | Start gradient color for the first dataset of the area chart           | gray          |
-| endFillColor1     | ColorValue | End gradient color for the first dataset of the area chart             | white         |
-| startOpacity1     | number     | Start gradient opacity for the first dataset of the area chart         | 1             |
-| endOpacity1       | number     | End gradient opacity for the first dataset of the area chart           | 1             |
-| startFillColor2   | ColorValue | Start gradient color for the second dataset of the area chart          | gray          |
-| endFillColor2     | ColorValue | End gradient color for the second dataset of the area chart            | white         |
-| startOpacity2     | number     | Start gradient color for the second dataset of the area chart          | 1             |
-| endOpacity2       | number     | End gradient opacity for the second dataset of the area chart          | 1             |
-| startFillColor3   | ColorValue | Start gradient color for the third dataset of the area chart           | gray          |
-| endFillColor3     | ColorValue | End gradient color for the third dataset of the area chart             | white         |
-| startOpacity3     | number     | Start gradient color for the third dataset of the area chart           | 1             |
-| endOpacity3       | number     | End gradient opacity for the third dataset of the area chart           | 1             |
-| startFillColor4   | ColorValue | Start gradient color for the fourth dataset of the area chart          | gray          |
-| endFillColor4     | ColorValue | End gradient color for the fourth dataset of the area chart            | white         |
-| startOpacity4     | number     | Start gradient color for the fourth dataset of the area chart          | 1             |
-| endOpacity4       | number     | End gradient opacity for the fourth dataset of the area chart          | 1             |
-| startFillColor5   | ColorValue | Start gradient color for the fifth dataset of the area chart           | gray          |
-| endFillColor5     | ColorValue | End gradient color for the fifth dataset of the area chart             | white         |
-| startOpacity5     | number     | Start gradient color for the fifth dataset of the area chart           | 1             |
-| endOpacity5       | number     | End gradient opacity for the fifth dataset of the area chart           | 1             |
-| gradientDirection | string     | Direction of the gradient (_'horizontal'_ or _'vertical'_)             | 'vertical'    |
+| Prop                  | Type       | Description                                                                                             | Default value |
+| --------------------- | ---------- | ------------------------------------------------------------------------------------------------------- | ------------- |
+| areaChart             | boolean    | If set true, renders area chart instead of line chart                                                   | false         |
+| areaChart1            | boolean    | If set true, renders area chart for 1st data set instead of line chart                                  | areaChart     |
+| areaChart2            | boolean    | If set true, renders area chart for 2nd data set instead of line chart                                  | areaChart     |
+| areaChart3            | boolean    | If set true, renders area chart for 3rd data set instead of line chart                                  | areaChart     |
+| areaChart4            | boolean    | If set true, renders area chart for 4th data set instead of line chart                                  | areaChart     |
+| areaChart5            | boolean    | If set true, renders area chart for 5th data set instead of line chart                                  | areaChart     |
+| startFillColor        | ColorValue | Start gradient color for the area chart                                                                 | gray          |
+| endFillColor          | ColorValue | End gradient color for the area chart                                                                   | white         |
+| startOpacity          | number     | Start gradient opacity for the area chart                                                               | 1             |
+| endOpacity            | number     | End gradient opacity for the area chart                                                                 | 1             |
+| startFillColor1       | ColorValue | Start gradient color for the first dataset of the area chart                                            | gray          |
+| endFillColor1         | ColorValue | End gradient color for the first dataset of the area chart                                              | white         |
+| startOpacity1         | number     | Start gradient opacity for the first dataset of the area chart                                          | 1             |
+| endOpacity1           | number     | End gradient opacity for the first dataset of the area chart                                            | 1             |
+| startFillColor2       | ColorValue | Start gradient color for the second dataset of the area chart                                           | gray          |
+| endFillColor2         | ColorValue | End gradient color for the second dataset of the area chart                                             | white         |
+| startOpacity2         | number     | Start gradient color for the second dataset of the area chart                                           | 1             |
+| endOpacity2           | number     | End gradient opacity for the second dataset of the area chart                                           | 1             |
+| startFillColor3       | ColorValue | Start gradient color for the third dataset of the area chart                                            | gray          |
+| endFillColor3         | ColorValue | End gradient color for the third dataset of the area chart                                              | white         |
+| startOpacity3         | number     | Start gradient color for the third dataset of the area chart                                            | 1             |
+| endOpacity3           | number     | End gradient opacity for the third dataset of the area chart                                            | 1             |
+| startFillColor4       | ColorValue | Start gradient color for the fourth dataset of the area chart                                           | gray          |
+| endFillColor4         | ColorValue | End gradient color for the fourth dataset of the area chart                                             | white         |
+| startOpacity4         | number     | Start gradient color for the fourth dataset of the area chart                                           | 1             |
+| endOpacity4           | number     | End gradient opacity for the fourth dataset of the area chart                                           | 1             |
+| startFillColor5       | ColorValue | Start gradient color for the fifth dataset of the area chart                                            | gray          |
+| endFillColor5         | ColorValue | End gradient color for the fifth dataset of the area chart                                              | white         |
+| startOpacity5         | number     | Start gradient color for the fifth dataset of the area chart                                            | 1             |
+| endOpacity5           | number     | End gradient opacity for the fifth dataset of the area chart                                            | 1             |
+| gradientDirection     | string     | Direction of the gradient (_'horizontal'_ or _'vertical'_)                                              | 'vertical'    |
+| areaGradientComponent | Function   | this prop defines the svg gradient that should be applied to the area (requires areaChart to be truthy) | null          |
+| areaGradientId        | string     | id of the <LinearGradient> (needed along with areaGradientComponent prop)                               | \_            |
 
----
+### Example of areaGradientComponent
+
+Same as [example of lineGradientComponent](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/LineChart/LineChartProps.md#an-example-of-linegradientcomponent)
