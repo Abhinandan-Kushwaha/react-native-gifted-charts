@@ -234,6 +234,9 @@ export type LineChartPropsType = {
   endOpacity5?: number;
   gradientDirection?: string;
 
+  areaGradientComponent?: () => any;
+  areaGradientId?: string;
+
   textFontSize?: number;
   textColor?: string;
   textFontSize1?: number;
@@ -281,6 +284,12 @@ export type LineChartPropsType = {
   secondaryYAxis?: secondaryYAxisType;
   secondaryLineConfig?: secondaryLineConfigType;
   formatYLabel?: (label: string) => string;
+  lineGradient?: boolean;
+  lineGradientComponent?: () => any;
+  lineGradientId?: string;
+  lineGradientDirection?: string;
+  lineGradientStartColor?: string;
+  lineGradientEndColor?: string;
 };
 
 type referenceConfigType = {
