@@ -565,6 +565,7 @@ export const BarChart = (props: BarChartPropsType) => {
       pointerStripColor,
       pointerConfig,
       pointerLabelComponent,
+      scrollX:0,
     });
   };
 
