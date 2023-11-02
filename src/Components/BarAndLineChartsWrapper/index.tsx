@@ -311,8 +311,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
 
   const container = {
     width: '100%',
-    height: actualContainerHeight,
-    marginBottom: 40, //This is to not let the Things that should be rendered below the chart overlap with it
+    height:
+      containerHeightIncludingBelowXAxis + labelsExtraHeight + stepHeight / 2,
+    marginBottom: 15, //This is to not let the Things that should be rendered below the chart overlap with it
   };
 
   return (
@@ -345,9 +346,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
                 : yAxisLabelWidth + yAxisThickness,
             position: 'absolute',
             bottom:
-              stepHeight * -0.5 -
-              60 +
-              (chartType === chartTypes.LINE_BI_COLOR ? 0 : xAxisThickness),
+              (chartType === chartTypes.LINE_BI_COLOR ? 0 : xAxisThickness) -
+              50,
           },
           !!props.width && {width: props.width},
           horizontal && {

@@ -47,12 +47,12 @@ const Examples = () => {
     };
     return (
       <View style={styles.header}>
-        <Text style={{fontSize: 20}}>{getTitle()}</Text>
+        <Text style={{fontSize: 20, color: 'white'}}>{getTitle()}</Text>
       </View>
     );
   };
 
-  const Separator = () => <View style={{height: 40}} />;
+  const Separator = () => <View style={{height: 30}} />;
 
   const BarAndStackCharts = () => {
     return (
@@ -99,7 +99,7 @@ const Examples = () => {
 
         <AreaChartDynamicData />
         <Separator />
-        
+
         <BiColorAreaChart />
         <Separator />
 
@@ -221,7 +221,14 @@ const Examples = () => {
 
 const styles = StyleSheet.create({
   container: {flex: 1, alignItems: 'center', backgroundColor: '#f5f5ff'},
-  header: {marginBottom: 20},
+  header: {
+    marginBottom: 10,
+    backgroundColor: '#334',
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderBottomLeftRadius: 6,
+    borderBottomRightRadius: 6,
+  },
   body: {
     paddingLeft: 10,
     width: '100%',
