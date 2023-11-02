@@ -1,6 +1,16 @@
+# 🎉 1.3.16
+
+🐛 A minor bug fix. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/422#issuecomment-1788316137
+
+---
+
+---
+
+---
+
 # 🎉 1.3.15
 
-🐛 A minor bug fixes. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/424
+🐛 A minor bug fix. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/424
 
 ---
 
