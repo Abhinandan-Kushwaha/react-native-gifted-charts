@@ -1985,6 +1985,7 @@ export const LineChart = (props: LineChartPropsType) => {
       pointerConfig,
       pointerLabelComponent,
       secondaryPointerItem,
+      scrollX,
     });
   };
 

@@ -26,6 +26,7 @@ export const StripAndLabel = props => {
     pointerConfig,
     pointerLabelComponent,
     secondaryPointerItem,
+    scrollX,
   } = props;
   let left = 0,
     top = 0;
