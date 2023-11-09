@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { View, ColorValue } from 'react-native';
-import { PieChartMain } from './main';
-import { FontStyle } from 'react-native-svg';
-import { pieColors } from '../utils/constants';
+import React, {useEffect, useState} from 'react';
+import {View, ColorValue} from 'react-native';
+import {PieChartMain} from './main';
+import {FontStyle} from 'react-native-svg';
+import {pieColors} from '../utils/constants';
 
 type propTypes = {
   radius?: number;
@@ -77,7 +77,7 @@ export const PieChart = (props: propTypes) => {
   const radius = props.radius || 120;
   const extraRadiusForFocused =
     props.extraRadiusForFocused ??
-      (props.focusOnPress || props.sectionAutoFocus)
+    (props.focusOnPress || props.sectionAutoFocus)
       ? radius / 10
       : 0;
   const pi = props.semiCircle ? Math.PI / 2 : Math.PI;
@@ -119,7 +119,7 @@ export const PieChart = (props: propTypes) => {
         marginLeft: extraRadiusForFocused * 2,
         marginTop: extraRadiusForFocused * 2,
       }}>
-      {props.data.length > 1 && props.data[selectedIndex] && // don't forget to add this one so they're no errors when the data is empty / updating
+      {props.data.length > 1 && props.data[selectedIndex] && // don't forget to add this one so there are no errors when the data is empty / updating
         (props.focusOnPress || props.sectionAutoFocus) &&
         selectedIndex !== -1 && (
           <View
@@ -158,7 +158,7 @@ export const PieChart = (props: propTypes) => {
             />
           </View>
         )}
-      <View style={{ position: 'absolute' }}>
+      <View style={{position: 'absolute'}}>
         <PieChartMain
           {...props}
           selectedIndex={selectedIndex}
