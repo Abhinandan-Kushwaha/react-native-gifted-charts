@@ -1,7 +1,13 @@
 import {ColorValue, View} from 'react-native';
 import {stackItemType} from '../BarChart/RenderStackBars';
 import {yAxisSides} from '../utils/constants';
-import {CurveType, Pointer, RuleType, secondaryYAxisType} from '../utils/types';
+import {
+  CurveType,
+  Pointer,
+  RuleType,
+  RulesConfig,
+  secondaryYAxisType,
+} from '../utils/types';
 
 export type BarChartPropsType = {
   width?: number;
@@ -34,6 +40,8 @@ export type BarChartPropsType = {
   yAxisTextStyle?: any;
   yAxisTextNumberOfLines?: number;
   xAxisTextNumberOfLines?: number;
+  xAxisLabelsHeight?: number;
+  xAxisLabelsVerticalShift?: number;
   yAxisLabelWidth?: number;
   hideYAxisText?: boolean;
   rotateYAxisTexts?: number;
@@ -61,6 +69,7 @@ export type BarChartPropsType = {
   rulesType?: RuleType;
   dashWidth?: number;
   dashGap?: number;
+  rulesConfigArray?: Array<RulesConfig>;
   showReferenceLine1?: boolean;
   referenceLine1Config?: referenceConfigType;
   referenceLine1Position?: number;

@@ -14,6 +14,15 @@ export enum CurveType {
   QUADRATIC,
 }
 
+export type RulesConfig = {
+  rulesLength?: number;
+  rulesColor?: ColorValue;
+  rulesThickness?: number;
+  rulesType?: RuleType;
+  dashWidth?: number;
+  dashGap?: number;
+}
+
 export type secondaryYAxisType = {
   noOfSections?: number;
   maxValue?: number;
@@ -103,6 +112,7 @@ export type horizSectionPropTypes = {
   xAxisType: RuleType;
   dashWidth: number;
   dashGap: number;
+  rulesConfigArray: Array<RulesConfig>;
   backgroundColor: string;
   hideRules: boolean;
   rulesLength: number;
@@ -243,6 +253,9 @@ export type Pointer = {
   pointerVanishDelay?: number;
   activatePointersOnLongPress?: boolean;
   activatePointersDelay?: number;
+  initialPointerIndex?: number;
+  initialPointerAppearDelay?: number;
+  persistPointer?: boolean;
   hidePointer1?: boolean;
   hidePointer2?: boolean;
   hidePointer3?: boolean;

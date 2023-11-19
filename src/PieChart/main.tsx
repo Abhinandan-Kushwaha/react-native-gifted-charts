@@ -88,7 +88,12 @@ export const PieChartMain = (props: propTypes) => {
       if (propData[i].value !== 0) {
         data.push(propData[i]);
       } else {
-        data.push({...propData[i], value: 0.0000009});
+        data.push({
+          ...propData[i],
+          value:
+            props.data.map(item => item.value).reduce((v, a) => v + a) /
+            36000000,
+        });
       }
     }
   }
@@ -149,7 +154,6 @@ export const PieChartMain = (props: propTypes) => {
     total = 0;
 
   data.forEach((item: any) => {
-    total += item.value;
     if (item.shiftX || item.shiftY) {
       isDataShifted = true;
       if (minShiftX > item.shiftX) {

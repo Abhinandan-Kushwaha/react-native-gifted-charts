@@ -1,3 +1,35 @@
+# 🎉 1.3.17
+
+## ✨ Features added-
+
+1. Added support for Step charts. To render a step chart, just pass the prop `stepChart` to the `<LineChart>` component. <br />
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/438 <br/>
+
+2. Added the properties- `initialPointerIndex`, `initialPointerAppearDelay`, and `persistPointer` to the `pointerConfig` object. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/427
+
+3. Added support for customizing individual / specific rules in charts using the prop `rulesConfigArray`.
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/432
+
+4. Added 2 new props- `xAxisLabelsHeight` and `xAxisLabelsVerticalShift`. Here's a brief description of the use case of these props-
+<p>
+The height of X axis labels container is computed automatically. Sometimes you may need to explicitly provide the height of X-axis labels container. An example case is when the font size of label texts is large. Use the `xAxisLabelsHeight`` prop if the labels appear cropped from bottom.
+
+_Note- Using the `xAxisLabelsHeight` prop may shift the X axis labels up or down, making the label text overlap with the chart content. In such a case you can use the `xAxisLabelsVerticalShift`` prop to adjust the vertical position of X axis labels._
+
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/433
+</b>
+
+## 🐛 Bug fixes
+
+1. Fixed issue- Pie charts get distorted when one value is non-zero and rest values are zero. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/436
+
+2. Fixed issue with programmatically changing focus does in Pie and Donut charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/428
+
+---
+
+---
+
+---
 # 🎉 1.3.16
 
 🐛 A minor bug fix. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/422#issuecomment-1788316137

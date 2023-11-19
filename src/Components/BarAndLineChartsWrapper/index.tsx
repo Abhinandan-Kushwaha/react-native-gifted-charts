@@ -97,6 +97,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const xAxisLength = axesAndRulesProps.xAxisLength;
   const xAxisType =
     axesAndRulesProps.xAxisType ?? AxesAndRulesDefaults.xAxisType;
+  const xAxisLabelsVerticalShift =
+    axesAndRulesProps.xAxisLabelsVerticalShift ??
+    AxesAndRulesDefaults.xAxisLabelsVerticalShift;
   const dashWidth =
     axesAndRulesProps.dashWidth ?? AxesAndRulesDefaults.dashWidth;
   const dashGap = axesAndRulesProps.dashGap ?? AxesAndRulesDefaults.dashGap;
@@ -111,6 +114,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     axesAndRulesProps.rulesThickness ?? AxesAndRulesDefaults.rulesThickness;
   const rulesColor =
     axesAndRulesProps.rulesColor ?? AxesAndRulesDefaults.rulesColor;
+  const rulesConfigArray = axesAndRulesProps.rulesConfigArray ?? AxesAndRulesDefaults.rulesConfigArray;
   const showYAxisIndices = axesAndRulesProps.showYAxisIndices ?? false;
   const yAxisIndicesHeight =
     axesAndRulesProps.yAxisIndicesHeight ??
@@ -192,6 +196,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     rulesType,
     rulesThickness,
     rulesColor,
+    rulesConfigArray,
     spacing,
     showYAxisIndices,
     yAxisIndicesHeight,
@@ -243,6 +248,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     barWidth,
     labelsExtraHeight,
     scrollEventThrottle,
+    xAxisLabelsVerticalShift,
   };
   const extendedContainerHeight = containerHeight + 10;
   const containerHeightIncludingBelowXAxis =
@@ -270,6 +276,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     containerHeightIncludingBelowXAxis,
     yAxisLabelWidth,
     totalWidth,
+    xAxisLabelsVerticalShift,
   };
 
   const actualContainerHeight =
@@ -312,7 +319,11 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const container = {
     width: '100%',
     height:
-      containerHeightIncludingBelowXAxis + labelsExtraHeight + stepHeight / 2,
+      containerHeightIncludingBelowXAxis +
+      labelsExtraHeight +
+      stepHeight / 2 +
+      xAxisLabelsVerticalShift +
+      50,
     marginBottom: 15, //This is to not let the Things that should be rendered below the chart overlap with it
   };
 
@@ -346,8 +357,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
                 : yAxisLabelWidth + yAxisThickness,
             position: 'absolute',
             bottom:
-              (chartType === chartTypes.LINE_BI_COLOR ? 0 : xAxisThickness) -
-              50,
+              (chartType === chartTypes.LINE_BI_COLOR ? 0 : xAxisThickness),
           },
           !!props.width && {width: props.width},
           horizontal && {
@@ -361,7 +371,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
               containerHeightIncludingBelowXAxis +
               labelsExtraHeight +
               stepHeight / 2 +
-              50,
+              (50 + xAxisLabelsVerticalShift),
             width: totalWidth - spacing + endSpacing,
             paddingLeft: initialSpacing,
             paddingBottom:
