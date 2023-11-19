@@ -265,6 +265,9 @@ export const BarChart = (props: BarChartPropsType) => {
 
   const xAxisTextNumberOfLines =
     props.xAxisTextNumberOfLines ?? AxesAndRulesDefaults.xAxisTextNumberOfLines;
+  const xAxisLabelsVerticalShift =
+    props.xAxisLabelsVerticalShift ??
+    AxesAndRulesDefaults.xAxisLabelsVerticalShift;
   const horizontalRulesStyle = props.horizontalRulesStyle;
   const yAxisLabelWidth =
     props.yAxisLabelWidth ??
@@ -276,6 +279,8 @@ export const BarChart = (props: BarChartPropsType) => {
   const opacValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
   const autoShiftLabels = props.autoShiftLabels ?? false;
+
+  const barWidth = props.barWidth || BarDefaults.barWidth;
 
   const extendedContainerHeight = getExtendedContainerHeightWithPadding(
     containerHeight,
@@ -347,6 +352,16 @@ export const BarChart = (props: BarChartPropsType) => {
   const activatePointersDelay =
     pointerConfig?.activatePointersDelay ??
     defaultPointerConfig.activatePointersDelay;
+  const initialPointerIndex =
+    pointerConfig?.initialPointerIndex ??
+    defaultPointerConfig.initialPointerIndex;
+  const initialPointerAppearDelay =
+    pointerConfig?.initialPointerAppearDelay ??
+    (isAnimated
+      ? animationDuration
+      : defaultPointerConfig.initialPointerAppearDelay);
+  const persistPointer =
+    pointerConfig?.persistPointer ?? defaultPointerConfig.persistPointer;
   const hidePointer1 =
     pointerConfig?.hidePointer1 ?? defaultPointerConfig.hidePointer1;
 
@@ -505,6 +520,36 @@ export const BarChart = (props: BarChartPropsType) => {
     lineConfig.arrowConfig.showArrowBase,
   ]);
 
+  useEffect(() => {
+    if (initialPointerIndex !== -1) {
+      const item = data[initialPointerIndex];
+      const x =
+        initialSpacing +
+        (spacing + barWidth) * initialPointerIndex -
+        (pointerRadius || pointerWidth / 2) +
+        barWidth / 2;
+      const y =
+        containerHeight -
+        (item.value * containerHeight) / maxValue -
+        (pointerRadius || pointerHeight / 2) +
+        10;
+      if (initialPointerAppearDelay) {
+        setTimeout(() => {
+          setPointerConfig(initialPointerIndex, item, x, y);
+        }, initialPointerAppearDelay);
+      } else {
+        setPointerConfig(initialPointerIndex, item, x, y);
+      }
+    }
+  }, []);
+
+  const setPointerConfig = (initialPointerIndex, item, x, y) => {
+    setPointerIndex(initialPointerIndex);
+    setPointerItem(item);
+    setPointerX(x);
+    setPointerY(y);
+  };
+
   const animatedHeight = heightValue.interpolate({
     inputRange: [0, 1],
     outputRange: ['0%', '100%'],
@@ -571,7 +616,6 @@ export const BarChart = (props: BarChartPropsType) => {
 
   const renderChartContent = () => {
     if (pointerConfig) {
-      const barWidth = props.barWidth || BarDefaults.barWidth;
       return (
         <View
           onStartShouldSetResponder={evt => (pointerConfig ? true : false)}
@@ -652,7 +696,8 @@ export const BarChart = (props: BarChartPropsType) => {
             setResponderStartTime(0);
             setPointerIndex(-1);
             setResponderActive(false);
-            setTimeout(() => setPointerX(0), pointerVanishDelay);
+            if (!persistPointer)
+              setTimeout(() => setPointerX(0), pointerVanishDelay);
           }}
           onResponderTerminationRequest={evt => false}
           style={{
@@ -671,7 +716,7 @@ export const BarChart = (props: BarChartPropsType) => {
                 position: 'absolute',
                 height:
                   extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
-                bottom: 0 + labelsExtraHeight,
+                bottom: xAxisLabelsVerticalShift + labelsExtraHeight,
                 width: totalWidth,
                 zIndex: 20,
               }}>
@@ -721,6 +766,8 @@ export const BarChart = (props: BarChartPropsType) => {
         patternId: props.patternId,
         onPress: props.onPress,
         xAxisTextNumberOfLines: xAxisTextNumberOfLines,
+        xAxisLabelsHeight: props.xAxisLabelsHeight,
+        xAxisLabelsVerticalShift,
         renderTooltip: props.renderTooltip,
         leftShiftForTooltip: props.leftShiftForTooltip || 0,
         initialSpacing: initialSpacing,

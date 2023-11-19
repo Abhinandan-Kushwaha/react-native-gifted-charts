@@ -17,7 +17,7 @@ export const Pointer = props => {
       style={{
         position: 'absolute',
         left: pointerX + (pointerX.pointerShiftX || 0),
-        top: pointerYLocal,
+        top: pointerYLocal - 2,
       }}>
       {pointerComponent ? (
         pointerComponent()

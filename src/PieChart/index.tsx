@@ -83,7 +83,9 @@ export const PieChart = (props: propTypes) => {
   const pi = props.semiCircle ? Math.PI / 2 : Math.PI;
   const [selectedIndex, setSelectedIndex] = useState(-1); // at the start, nothing is selected
   // because we're going to use a useEffect, we need startAngle and total to be state variables
-  const [startAngle, setStartAngle] = useState(props.initialAngle || (props.semiCircle ? -pi : 0));
+  const [startAngle, setStartAngle] = useState(
+    props.initialAngle || (props.semiCircle ? -pi : 0),
+  );
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
@@ -95,21 +97,39 @@ export const PieChart = (props: propTypes) => {
     setTotal(newTotal);
 
     // Update selectedIndex based on focused item
-    const newSelectedIndex = props.data.findIndex(item => item.focused === true);
+    const newSelectedIndex = props.data.findIndex(
+      item => item.focused === true,
+    );
     setSelectedIndex(newSelectedIndex);
 
     // Calculate the new start angle
     let newStartAngle = props.initialAngle || (props.semiCircle ? -pi : 0);
-    if (newSelectedIndex !== -1) { // it was !== 0 here before, which would not work, it's either !==-1 or >=0
+    if (newSelectedIndex !== -1) {
+      // it was !== 0 here before, which would not work, it's either !==-1 or >=0
       // This could be used to replace the for loop that was used before
       const sumBeforeSelectedIndex = props.data
         .slice(0, newSelectedIndex)
         .reduce((acc, item) => acc + item.value, 0);
-      setStartAngle(newStartAngle + (2 * pi * sumBeforeSelectedIndex) / newTotal);
+      setStartAngle(
+        newStartAngle + (2 * pi * sumBeforeSelectedIndex) / newTotal,
+      );
     } else {
       setStartAngle(newStartAngle);
     }
   }, [props.data, props.initialAngle, props.semiCircle]);
+
+  useEffect(() => {
+    if (selectedIndex !== -1) {
+      const newStartAngle = props.initialAngle || (props.semiCircle ? -pi : 0);
+      let start = 0;
+      for (let i = 0; i < selectedIndex; i++) {
+        start += props.data[i].value;
+      }
+      if (total) {
+        setStartAngle(newStartAngle + (2 * pi * start) / total);
+      }
+    }
+  }, [selectedIndex]);
 
   return (
     <View
@@ -119,7 +139,8 @@ export const PieChart = (props: propTypes) => {
         marginLeft: extraRadiusForFocused * 2,
         marginTop: extraRadiusForFocused * 2,
       }}>
-      {props.data.length > 1 && props.data[selectedIndex] && // don't forget to add this one so there are no errors when the data is empty / updating
+      {props.data.length > 1 &&
+        props.data[selectedIndex] && // don't forget to add this one so there are no errors when the data is empty / updating
         (props.focusOnPress || props.sectionAutoFocus) &&
         selectedIndex !== -1 && (
           <View

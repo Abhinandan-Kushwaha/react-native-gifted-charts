@@ -20,6 +20,7 @@ const RenderLineInBarChart = props => {
     totalWidth,
     barWidth,
     labelsExtraHeight,
+    xAxisLabelsVerticalShift,
   } = props;
 
   const firstBarWidth = data[0].barWidth ?? barWidth;
@@ -322,7 +323,7 @@ const RenderLineInBarChart = props => {
           position: 'absolute',
           height: containerHeight + 10,
           left: 34 - yAxisLabelWidth,
-          bottom: 50, //stepHeight * -0.5 + xAxisThickness,
+          bottom: 50 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
           zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'wheat',
@@ -361,7 +362,7 @@ const RenderLineInBarChart = props => {
           position: 'absolute',
           height: containerHeight + 10 + labelsExtraHeight,
           left: 34 - yAxisLabelWidth,
-          bottom: 50, //stepHeight * -0.5 + xAxisThickness,
+          bottom: 50 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
           width: totalWidth,
           zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'rgba(200,150,150,0.1)'

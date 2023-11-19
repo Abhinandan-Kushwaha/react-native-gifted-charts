@@ -52,6 +52,8 @@ type Props = {
   barBackgroundPattern?: Function;
   patternId?: String;
   xAxisTextNumberOfLines: number;
+  xAxisLabelsHeight?: number;
+  xAxisLabelsVerticalShift: number;
   renderTooltip: Function | undefined;
   leftShiftForTooltip?: number;
   leftShiftForLastIndexTooltip: number;
@@ -118,6 +120,7 @@ const RenderStackBars = (props: Props) => {
     label,
     labelTextStyle,
     xAxisTextNumberOfLines,
+    xAxisLabelsVerticalShift,
     renderTooltip,
     leftShiftForTooltip,
     leftShiftForLastIndexTooltip,
@@ -147,7 +150,7 @@ const RenderStackBars = (props: Props) => {
             width:
               (item.stacks[0].barWidth || props.barWidth || 30) + spacing / 2,
             position: 'absolute',
-            bottom: rotateLabel ? -40 : -25,
+            bottom: rotateLabel ? -40 : -6 - xAxisTextNumberOfLines * 18,
           },
           rotateLabel
             ? props.horizontal
@@ -365,7 +368,7 @@ const RenderStackBars = (props: Props) => {
         style={[
           {
             // overflow: 'visible',
-            marginBottom: 60,
+            marginBottom: 60 + xAxisLabelsVerticalShift,
             width: item.stacks[0].barWidth || props.barWidth || 30,
             height: totalHeight,
             marginRight: spacing,

@@ -4,6 +4,7 @@ import {
   CurveType,
   Pointer,
   RuleType,
+  RulesConfig,
   arrowConfigType,
   secondaryLineConfigType,
   secondaryYAxisType,
@@ -75,6 +76,7 @@ export type LineChartPropsType = {
   rulesType?: RuleType;
   dashWidth?: number;
   dashGap?: number;
+  rulesConfigArray?: Array<RulesConfig>;
   showReferenceLine1?: boolean;
   referenceLine1Config?: referenceConfigType;
   referenceLine1Position?: number;
@@ -102,6 +104,12 @@ export type LineChartPropsType = {
   areaChart3?: boolean;
   areaChart4?: boolean;
   areaChart5?: boolean;
+  stepChart?: boolean;
+  stepChart1?: boolean;
+  stepChart2?: boolean;
+  stepChart3?: boolean;
+  stepChart4?: boolean;
+  stepChart5?: boolean;
 
   disableScroll?: boolean;
   pointerConfig?: Pointer;
@@ -255,6 +263,8 @@ export type LineChartPropsType = {
   yAxisLabelTexts?: Array<string>;
   xAxisLabelTexts?: Array<string>;
   xAxisLabelTextStyle?: any;
+  xAxisLabelsHeight?: number;
+  xAxisLabelsVerticalShift?: number;
   width?: number;
   yAxisLabelPrefix?: String;
   yAxisLabelSuffix?: String;

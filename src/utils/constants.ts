@@ -38,6 +38,7 @@ export const AxesAndRulesDefaults = {
   xAxisThickness: 1,
   xAxisType: ruleTypes.SOLID,
   xAxisTextNumberOfLines: 1,
+  xAxisLabelsVerticalShift: 0,
   dashWidth: 4,
   dashGap: 8,
   backgroundColor: 'transparent',
@@ -46,6 +47,7 @@ export const AxesAndRulesDefaults = {
   rulesType: ruleTypes.DASHED,
   rulesThickness: 1,
   rulesColor: 'lightgray',
+  rulesConfigArray: [],
 
   rotateLabel: false,
 
@@ -226,6 +228,9 @@ export const defaultPointerConfig = {
   pointerVanishDelay: 150,
   activatePointersOnLongPress: false,
   activatePointersDelay: 150,
+  initialPointerIndex: -1,
+  initialPointerAppearDelay: 0,
+  persistPointer: false,
   hidePointer1: false,
   hidePointer2: false,
   hidePointer3: false,

@@ -37,6 +37,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     rulesType,
     rulesThickness,
     rulesColor,
+    rulesConfigArray,
     spacing,
     showYAxisIndices,
     yAxisIndicesHeight,
@@ -382,62 +383,71 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     );
   };
 
-  const renderAxesAndRules = (index: number) => (
-    <View
-      style={[
-        index === noOfSections ? styles.lastLeftPart : styles.leftPart,
-        {
-          borderColor: yAxisColor,
-          backgroundColor: backgroundColor,
-          width: (props.width || totalWidth - spacing) + endSpacing,
-        },
-        yAxisSide === yAxisSides.RIGHT
-          ? {borderRightWidth: yAxisThickness}
-          : {borderLeftWidth: yAxisThickness},
-      ]}>
-      {index === noOfSections ? (
-        <Rule
-          config={{
-            thickness: xAxisThickness,
-            color: xAxisColor,
-            width:
-              xAxisLength || (props.width || totalWidth - spacing) + endSpacing,
-            dashWidth: dashWidth,
-            dashGap: dashGap,
-            type: xAxisType,
-          }}
-        />
-      ) : hideRules ? null : (
-        <Rule
-          config={{
-            thickness: rulesThickness,
-            color: rulesColor,
-            width:
-              rulesLength || (props.width || totalWidth - spacing) + endSpacing,
-            dashWidth: dashWidth,
-            dashGap: dashGap,
-            type: rulesType,
-          }}
-        />
-      )}
-      {showYAxisIndices && index !== noOfSections ? (
-        <View
-          style={{
-            height: yAxisIndicesHeight,
-            width: yAxisIndicesWidth,
-            left:
-              yAxisIndicesWidth / -2 +
-              (yAxisSide === yAxisSides.RIGHT
-                ? (width ?? totalWidth) +
-                  yAxisLabelWidth / 2 +
-                  yAxisIndicesWidth / 4
-                : 0),
-            backgroundColor: yAxisIndicesColor,
-          }}
-        />
-      ) : null}
-    </View>
-  );
+  const renderAxesAndRules = (index: number) => {
+    const invertedIndex = horizSections.length - index - 1;
+    return (
+      <View
+        style={[
+          index === noOfSections ? styles.lastLeftPart : styles.leftPart,
+          {
+            borderColor: yAxisColor,
+            backgroundColor: backgroundColor,
+            width: (props.width || totalWidth - spacing) + endSpacing,
+          },
+          yAxisSide === yAxisSides.RIGHT
+            ? {borderRightWidth: yAxisThickness}
+            : {borderLeftWidth: yAxisThickness},
+        ]}>
+        {index === noOfSections ? (
+          <Rule
+            config={{
+              thickness: xAxisThickness,
+              color: xAxisColor,
+              width:
+                xAxisLength ||
+                (props.width || totalWidth - spacing) + endSpacing,
+              dashWidth: dashWidth,
+              dashGap: dashGap,
+              type: xAxisType,
+            }}
+          />
+        ) : hideRules ? null : (
+          <Rule
+            config={{
+              thickness:
+                rulesConfigArray[invertedIndex]?.rulesThickness ??
+                rulesThickness,
+              color: rulesConfigArray[invertedIndex]?.rulesColor ?? rulesColor,
+              width:
+                rulesConfigArray[invertedIndex]?.rulesLength ??
+                rulesLength ??
+                (props.width || totalWidth - spacing) + endSpacing,
+              dashWidth:
+                rulesConfigArray[invertedIndex]?.dashWidth ?? dashWidth,
+              dashGap: rulesConfigArray[invertedIndex]?.dashGap ?? dashGap,
+              type: rulesConfigArray[invertedIndex]?.rulesType ?? rulesType,
+            }}
+          />
+        )}
+        {showYAxisIndices && index !== noOfSections ? (
+          <View
+            style={{
+              height: yAxisIndicesHeight,
+              width: yAxisIndicesWidth,
+              left:
+                yAxisIndicesWidth / -2 +
+                (yAxisSide === yAxisSides.RIGHT
+                  ? (width ?? totalWidth) +
+                    yAxisLabelWidth / 2 +
+                    yAxisIndicesWidth / 4
+                  : 0),
+              backgroundColor: yAxisIndicesColor,
+            }}
+          />
+        ) : null}
+      </View>
+    );
+  };
 
   const renderSecondaryYaxisLabels = (
     horizSections: HorizSectionsType,

@@ -25,8 +25,8 @@ const RenderVerticalLines = props => {
     maxValue,
     chartType,
     containerHeightIncludingBelowXAxis,
-    yAxisLabelWidth,
     totalWidth,
+    xAxisLabelsVerticalShift,
   } = props;
 
   const getHeightOfVerticalLine = index => {
@@ -53,7 +53,7 @@ const RenderVerticalLines = props => {
       style={{
         position: 'absolute',
         height: extendedContainerHeight,
-        bottom: 60, //stepHeight * -0.5 + xAxisThickness,
+        bottom: 60 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
         width: totalWidth,
         zIndex: verticalLinesZIndex || -1,
       }}>
@@ -103,6 +103,7 @@ const RenderVerticalLines = props => {
 
           const x =
             verticalLinesShift +
+            1 +
             (chartType === chartTypes.BAR
               ? totalSpacing - 1
               : verticalLinesSpacing

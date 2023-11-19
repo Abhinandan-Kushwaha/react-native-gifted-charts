@@ -70,6 +70,8 @@ type Props = {
   barMarginBottom?: number;
   onPress?: Function;
   xAxisTextNumberOfLines: number;
+  xAxisLabelsHeight?: number;
+  xAxisLabelsVerticalShift: number;
   renderTooltip: Function | undefined;
   leftShiftForTooltip?: number;
   leftShiftForLastIndexTooltip: number;
@@ -109,6 +111,7 @@ const RenderBars = (props: Props) => {
     label,
     labelTextStyle,
     xAxisTextNumberOfLines,
+    xAxisLabelsVerticalShift,
     renderTooltip,
     leftShiftForTooltip,
     leftShiftForLastIndexTooltip,
@@ -139,7 +142,12 @@ const RenderBars = (props: Props) => {
                 30) + spacing,
             left: spacing / -2,
             position: 'absolute',
-            bottom: (rotateLabel ? -40 : -25) - barMarginBottom,
+            height: props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
+            bottom:
+              (rotateLabel
+                ? -40
+                : -6 - xAxisTextNumberOfLines * 18 - xAxisLabelsVerticalShift) -
+              barMarginBottom,
           },
           rotateLabel
             ? horizontal
@@ -196,7 +204,12 @@ const RenderBars = (props: Props) => {
                 30) + spacing,
             left: spacing / -2,
             position: 'absolute',
-            bottom: (rotateLabel ? -40 : -25) - barMarginBottom,
+            height: props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
+            bottom:
+              (rotateLabel
+                ? -40
+                : -6 - xAxisTextNumberOfLines * 18 - xAxisLabelsVerticalShift) -
+              barMarginBottom,
             opacity: appearingOpacity,
           },
           value < 0 && {transform: [{rotate: '180deg'}]},
@@ -344,7 +357,7 @@ const RenderBars = (props: Props) => {
   const barWrapperStyle = [
     {
       // overflow: 'visible',
-      marginBottom: 60 + barMarginBottom,
+      marginBottom: 60 + barMarginBottom + xAxisLabelsVerticalShift,
       width: item.barWidth || props.barWidth || 30,
       height: barHeight,
       marginRight: spacing,
@@ -364,7 +377,9 @@ const RenderBars = (props: Props) => {
       ? {
           transform: [
             {
-              translateY: (containerHeight || 200) - (barHeight - 10),
+              translateY:
+                (containerHeight || 200) -
+                (barHeight - 10 + xAxisLabelsVerticalShift),
             },
           ],
         }

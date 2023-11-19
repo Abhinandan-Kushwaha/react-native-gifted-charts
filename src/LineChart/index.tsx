@@ -380,6 +380,13 @@ export const LineChart = (props: LineChartPropsType) => {
     areaChart4 ||
     areaChart5;
 
+  const stepChart = props.stepChart ?? false;
+  const stepChart1 = props.stepChart1 ?? false;
+  const stepChart2 = props.stepChart2 ?? false;
+  const stepChart3 = props.stepChart3 ?? false;
+  const stepChart4 = props.stepChart4 ?? false;
+  const stepChart5 = props.stepChart5 ?? false;
+
   const textFontSize1 =
     props.textFontSize1 ?? props.textFontSize ?? LineDefaults.textFontSize;
   const textFontSize2 =
@@ -794,19 +801,84 @@ export const LineChart = (props: LineChartPropsType) => {
     if (!props.curved) {
       for (let i = 0; i < data.length; i++) {
         if (i >= startIndex1 && i <= endIndex1 && !animateOnDataChange) {
-          pp += 'L' + getX(i) + ' ' + getY(data[i].value) + ' ';
+          if (stepChart || stepChart1) {
+            pp +=
+              'L' +
+              (getX(i) - spacing / 2) +
+              ' ' +
+              getY(data[i].value) +
+              ' L' +
+              (getX(i) + spacing / 2) +
+              ' ' +
+              getY(data[i].value) +
+              ' ';
+          } else {
+            pp += 'L' + getX(i) + ' ' + getY(data[i].value) + ' ';
+          }
         }
         if (data2.length && i >= startIndex2 && i <= endIndex2) {
-          pp2 += 'L' + getX(i) + ' ' + getY(data2[i].value) + ' ';
+          if (stepChart || stepChart2) {
+            pp2 +=
+              'L' +
+              (getX(i) - spacing / 2) +
+              ' ' +
+              getY(data2[i].value) +
+              ' L' +
+              (getX(i) + spacing / 2) +
+              ' ' +
+              getY(data2[i].value) +
+              ' ';
+          } else {
+            pp2 += 'L' + getX(i) + ' ' + getY(data2[i].value) + ' ';
+          }
         }
         if (data3.length && i >= startIndex3 && i <= endIndex3) {
-          pp3 += 'L' + getX(i) + ' ' + getY(data3[i].value) + ' ';
+          if (stepChart || stepChart3) {
+            pp3 +=
+              'L' +
+              (getX(i) - spacing / 2) +
+              ' ' +
+              getY(data3[i].value) +
+              ' L' +
+              (getX(i) + spacing / 2) +
+              ' ' +
+              getY(data3[i].value) +
+              ' ';
+          } else {
+            pp3 += 'L' + getX(i) + ' ' + getY(data3[i].value) + ' ';
+          }
         }
         if (data4.length && i >= startIndex4 && i <= endIndex4) {
-          pp4 += 'L' + getX(i) + ' ' + getY(data4[i].value) + ' ';
+          if (stepChart || stepChart4) {
+            pp4 +=
+              'L' +
+              (getX(i) - spacing / 2) +
+              ' ' +
+              getY(data4[i].value) +
+              ' L' +
+              (getX(i) + spacing / 2) +
+              ' ' +
+              getY(data4[i].value) +
+              ' ';
+          } else {
+            pp4 += 'L' + getX(i) + ' ' + getY(data4[i].value) + ' ';
+          }
         }
         if (data5.length && i >= startIndex5 && i <= endIndex5) {
-          pp5 += 'L' + getX(i) + ' ' + getY(data5[i].value) + ' ';
+          if (stepChart || stepChart5) {
+            pp5 +=
+              'L' +
+              (getX(i) - spacing / 2) +
+              ' ' +
+              getY(data5[i].value) +
+              ' L' +
+              (getX(i) + spacing / 2) +
+              ' ' +
+              getY(data5[i].value) +
+              ' ';
+          } else {
+            pp5 += 'L' + getX(i) + ' ' + getY(data5[i].value) + ' ';
+          }
         }
       }
       setPoints2(pp2.replace('L', 'M'));
@@ -1346,6 +1418,9 @@ export const LineChart = (props: LineChartPropsType) => {
   // const yAxisThickness = props.yAxisThickness ?? 1;
   const xAxisTextNumberOfLines =
     props.xAxisTextNumberOfLines ?? AxesAndRulesDefaults.xAxisTextNumberOfLines;
+  const xAxisLabelsVerticalShift =
+    props.xAxisLabelsVerticalShift ??
+    AxesAndRulesDefaults.xAxisLabelsVerticalShift;
   const horizontalRulesStyle = props.horizontalRulesStyle;
   const showFractionalValues =
     props.showFractionalValues ?? AxesAndRulesDefaults.showFractionalValues;
@@ -1407,6 +1482,16 @@ export const LineChart = (props: LineChartPropsType) => {
   const activatePointersDelay =
     pointerConfig?.activatePointersDelay ??
     defaultPointerConfig.activatePointersDelay;
+  const initialPointerIndex =
+    pointerConfig?.initialPointerIndex ??
+    defaultPointerConfig.initialPointerIndex;
+  const initialPointerAppearDelay =
+    pointerConfig?.initialPointerAppearDelay ??
+    (isAnimated
+      ? animationDuration
+      : defaultPointerConfig.initialPointerAppearDelay);
+  const persistPointer =
+    pointerConfig?.persistPointer ?? defaultPointerConfig.persistPointer;
   const hidePointer1 =
     pointerConfig?.hidePointer1 ?? defaultPointerConfig.hidePointer1;
   const hidePointer2 =
@@ -1457,6 +1542,36 @@ export const LineChart = (props: LineChartPropsType) => {
   const lineGradientEndColor =
     props.lineGradientEndColor ?? LineDefaults.lineGradientEndColor;
 
+  useEffect(() => {
+    if (initialPointerIndex !== -1) {
+      const item = data[initialPointerIndex];
+      const x =
+        initialSpacing +
+        spacing * initialPointerIndex -
+        (pointerRadius || pointerWidth / 2) -
+        1;
+      const y =
+        containerHeight -
+        (item.value * containerHeight) / maxValue -
+        (pointerRadius || pointerHeight / 2) +
+        10;
+      if (initialPointerAppearDelay) {
+        setTimeout(() => {
+          setPointerConfig(initialPointerIndex, item, x, y);
+        }, initialPointerAppearDelay);
+      } else {
+        setPointerConfig(initialPointerIndex, item, x, y);
+      }
+    }
+  }, []);
+
+  const setPointerConfig = (initialPointerIndex, item, x, y) => {
+    setPointerIndex(initialPointerIndex);
+    setPointerItem(item);
+    setPointerX(x);
+    setPointerY(y);
+  };
+
   const renderLabel = (
     index: number,
     label: String,
@@ -1468,14 +1583,14 @@ export const LineChart = (props: LineChartPropsType) => {
         style={[
           {
             position: 'absolute',
-            bottom: 30,
+            bottom: 54 - xAxisTextNumberOfLines * 18,
             zIndex: 10,
             width: spacing + labelsExtraHeight,
             left:
               index === 0 && initialSpacing < 10
                 ? initialSpacing / 2 + spacing * index - spacing / 2 + 4
                 : initialSpacing / 2 + spacing * index - spacing / 2 - 10,
-            justifyContent: 'center',
+            height: props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
         ]}>
@@ -1502,9 +1617,11 @@ export const LineChart = (props: LineChartPropsType) => {
       <Animated.View
         style={[
           {
-            height: rotateLabel ? 40 : 20,
+            height: rotateLabel
+              ? 40
+              : props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
             position: 'absolute',
-            bottom: rotateLabel ? 10 : 30,
+            bottom: rotateLabel ? 10 : 54 - xAxisTextNumberOfLines * 18,
             zIndex: 10,
             width: spacing,
             left:
@@ -1677,22 +1794,22 @@ export const LineChart = (props: LineChartPropsType) => {
           {item.showStrip ||
           (focusEnabled && index === selectedIndex && showStripOnFocus) ? (
             <Rect
-              x={initialSpacing + (spacing * index - dataPointsWidth / 2)}
+              x={initialSpacing + spacing * index - currentStripWidth / 2 - 1}
               y={
                 currentStripHeight
                   ? containerHeight - currentStripHeight + 8
                   : containerHeight -
                     dataPointsHeight / 2 +
-                    20 -
+                    14 -
                     (item.value * containerHeight) / maxValue
               }
               width={currentStripWidth}
               height={
                 currentStripHeight ||
-                containerHeight - dataPointsHeight / 2 + 20
+                (item.value * containerHeight) / maxValue - 2
               }
               opacity={currentStripOpacity}
-              fill={currentStripColor}
+              fill={stripColor}
             />
           ) : null}
           {hideDataPoints ? null : (
@@ -2445,7 +2562,8 @@ export const LineChart = (props: LineChartPropsType) => {
           setResponderStartTime(0);
           setPointerIndex(-1);
           setResponderActive(false);
-          setTimeout(() => setPointerX(0), pointerVanishDelay);
+          if (!persistPointer)
+            setTimeout(() => setPointerX(0), pointerVanishDelay);
         }}
         onResponderTerminationRequest={evt => false}
         // onResponderTerminate={evt => {
@@ -2463,11 +2581,12 @@ export const LineChart = (props: LineChartPropsType) => {
             (props.overflowBottom ?? dataPointsRadius1),
           bottom:
             60 +
+            xAxisLabelsVerticalShift +
             labelsExtraHeight -
             (props.overflowBottom ?? dataPointsRadius1),
-          width: totalWidth,
           zIndex: zIndex,
           transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
+          width: totalWidth,
         }}>
         {lineSvgComponent(
           points,
@@ -2710,7 +2829,8 @@ export const LineChart = (props: LineChartPropsType) => {
           setResponderStartTime(0);
           setPointerIndex(-1);
           setResponderActive(false);
-          setTimeout(() => setPointerX(0), pointerVanishDelay);
+          if (!persistPointer)
+            setTimeout(() => setPointerX(0), pointerVanishDelay);
         }}
         onResponderTerminationRequest={evt => false}
         // onResponderTerminate={evt => {
@@ -2728,12 +2848,12 @@ export const LineChart = (props: LineChartPropsType) => {
             (props.overflowBottom ?? dataPointsRadius1),
           bottom:
             60 +
+            xAxisLabelsVerticalShift +
             labelsExtraHeight -
             (props.overflowBottom ?? dataPointsRadius1),
-          width: animatedWidth,
           zIndex: zIndex,
           transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
-          // backgroundColor: 'wheat',
+          width: animatedWidth,
         }}>
         {lineSvgComponent(
           points,
@@ -3003,7 +3123,7 @@ export const LineChart = (props: LineChartPropsType) => {
               position: 'absolute',
               height:
                 extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
-              bottom: 60 + labelsExtraHeight,
+              bottom: 58 + labelsExtraHeight + xAxisLabelsVerticalShift,
               width: totalWidth,
               zIndex: 20,
             }}>
