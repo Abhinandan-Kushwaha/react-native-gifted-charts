@@ -1,14 +1,31 @@
+# 🎉 1.3.18
+
+## ✨ Features added-
+
+1. Added support for line segments in Line and Area charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/432#issuecomment-1818308273
+2. Added support for 2 line charts inside Bar chart using the `lineData2` and `lineConfig2` props. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/440
+
+## 🐛 Bug fixes
+
+1. Fixed issue with step chart edge position. Added a prop named `edgePosition`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/438
+
+---
+
+---
+
+---
+
 # 🎉 1.3.17
 
 ## ✨ Features added-
 
 1. Added support for Step charts. To render a step chart, just pass the prop `stepChart` to the `<LineChart>` component. <br />
-See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/438 <br/>
+   See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/438 <br/>
 
 2. Added the properties- `initialPointerIndex`, `initialPointerAppearDelay`, and `persistPointer` to the `pointerConfig` object. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/427
 
 3. Added support for customizing individual / specific rules in charts using the prop `rulesConfigArray`.
-See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/432
+   See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/432#issuecomment-1817965308
 
 4. Added 2 new props- `xAxisLabelsHeight` and `xAxisLabelsVerticalShift`. Here's a brief description of the use case of these props-
 <p>
@@ -30,6 +47,7 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/433
 ---
 
 ---
+
 # 🎉 1.3.16
 
 🐛 A minor bug fix. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/422#issuecomment-1788316137

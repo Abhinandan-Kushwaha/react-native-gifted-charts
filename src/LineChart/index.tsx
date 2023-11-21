@@ -35,6 +35,9 @@ import {
   getAllArrowProperties,
   computeMaxAndMinItems,
   clone,
+  getCurvePathWithSegments,
+  getSegmentedPathObjects,
+  getSegmentString,
 } from '../utils';
 import {
   AxesAndRulesDefaults,
@@ -46,7 +49,11 @@ import {
 } from '../utils/constants';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {LineChartPropsType, itemType} from './types';
-import {BarAndLineChartsWrapperTypes} from '../utils/types';
+import {
+  BarAndLineChartsWrapperTypes,
+  EdgePosition,
+  LineSvgProps,
+} from '../utils/types';
 import {StripAndLabel} from '../Components/common/StripAndLabel';
 import {Pointer} from '../Components/common/Pointer';
 
@@ -228,6 +235,12 @@ export const LineChart = (props: LineChartPropsType) => {
   const startIndex5 = props.startIndex5 || 0;
   const endIndex5 = props.endIndex5 ?? data5.length - 1;
 
+  const lineSegments = props.lineSegments;
+  const lineSegments2 = props.lineSegments2;
+  const lineSegments3 = props.lineSegments3;
+  const lineSegments4 = props.lineSegments4;
+  const lineSegments5 = props.lineSegments5;
+
   if (!initialData) {
     initialData = [...data];
     animations = initialData.map(item => new Animated.Value(item.value));
@@ -386,6 +399,8 @@ export const LineChart = (props: LineChartPropsType) => {
   const stepChart3 = props.stepChart3 ?? false;
   const stepChart4 = props.stepChart4 ?? false;
   const stepChart5 = props.stepChart5 ?? false;
+
+  const edgePosition = props.edgePosition ?? LineDefaults.edgePosition;
 
   const textFontSize1 =
     props.textFontSize1 ?? props.textFontSize ?? LineDefaults.textFontSize;
@@ -792,6 +807,35 @@ export const LineChart = (props: LineChartPropsType) => {
       ' '
     );
   };
+
+  const getNextPoint = (data, index, around) => {
+    const isLast = index === data.length - 1;
+    return isLast && !around
+      ? ' '
+      : ' L' +
+          (getX(index) + (around ? (isLast ? 0 : spacing / 2) : spacing)) +
+          ' ' +
+          getY(data[index].value) +
+          ' ';
+  };
+  const getStepPath = (data, i) => {
+    const around = edgePosition === EdgePosition.AROUND_DATA_POINT;
+    return (
+      'L' +
+      (getX(i) - (around && i > 0 ? spacing / 2 : 0)) +
+      ' ' +
+      getY(data[i].value) +
+      getNextPoint(data, i, around)
+    );
+  };
+  const getSegmentPath = (data, i, lineSegment) =>
+    'L' +
+    getX(i) +
+    ' ' +
+    getY(data[i].value) +
+    ' ' +
+    getSegmentString(lineSegment, i);
+
   useEffect(() => {
     let pp = '',
       pp2 = '',
@@ -802,82 +846,38 @@ export const LineChart = (props: LineChartPropsType) => {
       for (let i = 0; i < data.length; i++) {
         if (i >= startIndex1 && i <= endIndex1 && !animateOnDataChange) {
           if (stepChart || stepChart1) {
-            pp +=
-              'L' +
-              (getX(i) - spacing / 2) +
-              ' ' +
-              getY(data[i].value) +
-              ' L' +
-              (getX(i) + spacing / 2) +
-              ' ' +
-              getY(data[i].value) +
-              ' ';
+            pp += getStepPath(data, i);
           } else {
-            pp += 'L' + getX(i) + ' ' + getY(data[i].value) + ' ';
+            pp += getSegmentPath(data, i, lineSegments);
           }
         }
         if (data2.length && i >= startIndex2 && i <= endIndex2) {
           if (stepChart || stepChart2) {
-            pp2 +=
-              'L' +
-              (getX(i) - spacing / 2) +
-              ' ' +
-              getY(data2[i].value) +
-              ' L' +
-              (getX(i) + spacing / 2) +
-              ' ' +
-              getY(data2[i].value) +
-              ' ';
+            pp2 += getStepPath(data2, i);
+            (' ');
           } else {
-            pp2 += 'L' + getX(i) + ' ' + getY(data2[i].value) + ' ';
+            pp2 += getSegmentPath(data2, i, lineSegments2);
           }
         }
         if (data3.length && i >= startIndex3 && i <= endIndex3) {
           if (stepChart || stepChart3) {
-            pp3 +=
-              'L' +
-              (getX(i) - spacing / 2) +
-              ' ' +
-              getY(data3[i].value) +
-              ' L' +
-              (getX(i) + spacing / 2) +
-              ' ' +
-              getY(data3[i].value) +
-              ' ';
+            pp3 += getStepPath(data3, i);
           } else {
-            pp3 += 'L' + getX(i) + ' ' + getY(data3[i].value) + ' ';
+            pp3 += getSegmentPath(data2, i, lineSegments2);
           }
         }
         if (data4.length && i >= startIndex4 && i <= endIndex4) {
           if (stepChart || stepChart4) {
-            pp4 +=
-              'L' +
-              (getX(i) - spacing / 2) +
-              ' ' +
-              getY(data4[i].value) +
-              ' L' +
-              (getX(i) + spacing / 2) +
-              ' ' +
-              getY(data4[i].value) +
-              ' ';
+            pp4 += getStepPath(data4, i);
           } else {
-            pp4 += 'L' + getX(i) + ' ' + getY(data4[i].value) + ' ';
+            pp4 += getSegmentPath(data4, i, lineSegments4);
           }
         }
         if (data5.length && i >= startIndex5 && i <= endIndex5) {
           if (stepChart || stepChart5) {
-            pp5 +=
-              'L' +
-              (getX(i) - spacing / 2) +
-              ' ' +
-              getY(data5[i].value) +
-              ' L' +
-              (getX(i) + spacing / 2) +
-              ' ' +
-              getY(data5[i].value) +
-              ' ';
+            pp5 += getStepPath(data5, i);
           } else {
-            pp5 += 'L' + getX(i) + ' ' + getY(data5[i].value) + ' ';
+            pp5 += getSegmentPath(data5, i, lineSegments5);
           }
         }
       }
@@ -1087,11 +1087,11 @@ export const LineChart = (props: LineChartPropsType) => {
       let xx4 = svgPath(p4Array, curveType, curvature);
       let xx5 = svgPath(p5Array, curveType, curvature);
 
-      setPoints(xx);
-      setPoints2(xx2);
-      setPoints3(xx3);
-      setPoints4(xx4);
-      setPoints5(xx5);
+      setPoints(getCurvePathWithSegments(xx, lineSegments));
+      setPoints2(getCurvePathWithSegments(xx2, lineSegments2));
+      setPoints3(getCurvePathWithSegments(xx3, lineSegments3));
+      setPoints4(getCurvePathWithSegments(xx4, lineSegments4));
+      setPoints5(getCurvePathWithSegments(xx5, lineSegments5));
 
       if (data.length > 1 && (props.showArrow1 || props.showArrows)) {
         let arrowTipY = p1Array[p1Array.length - 1][1];
@@ -2167,39 +2167,63 @@ export const LineChart = (props: LineChartPropsType) => {
     arrowStrokeColor,
     arrowFillColor,
   ) => {
+    const isCurved = points.includes('C');
+    let ar: [any] = [{}];
+    if (points.includes('segmentStart')) {
+      ar = getSegmentedPathObjects(
+        points,
+        color,
+        currentLineThickness,
+        thickness,
+        strokeDashArray,
+        isCurved,
+      );
+    }
+    const lineSvgPropsOuter: LineSvgProps = {
+      d: points,
+      fill: 'none',
+      stroke: lineGradient
+        ? props.lineGradientId
+          ? `url(#${props.lineGradientId})`
+          : `url(#lineGradient)`
+        : color,
+      strokeWidth: currentLineThickness || thickness,
+    };
+    if (
+      strokeDashArray &&
+      strokeDashArray.length === 2 &&
+      typeof strokeDashArray[0] === 'number' &&
+      typeof strokeDashArray[1] === 'number'
+    ) {
+      lineSvgPropsOuter.strokeDasharray = strokeDashArray;
+    }
     return (
       <Svg>
         {lineGradient && getLineGradientComponent()}
-        {strokeDashArray &&
-        strokeDashArray.length === 2 &&
-        typeof strokeDashArray[0] === 'number' &&
-        typeof strokeDashArray[1] === 'number' ? (
-          <Path
-            d={points}
-            fill="none"
-            stroke={
-              lineGradient
+        {points.includes('segmentStart') ? (
+          ar.map((item, index) => {
+            const lineSvgProps: LineSvgProps = {
+              d: item.d,
+              fill: 'none',
+              stroke: lineGradient
                 ? props.lineGradientId
                   ? `url(#${props.lineGradientId})`
                   : `url(#lineGradient)`
-                : color
+                : item.color,
+              strokeWidth: item.strokeWidth,
+            };
+            if (
+              item.strokeDashArray &&
+              item.strokeDashArray.length === 2 &&
+              typeof item.strokeDashArray[0] === 'number' &&
+              typeof item.strokeDashArray[1] === 'number'
+            ) {
+              lineSvgProps.strokeDasharray = item.strokeDashArray;
             }
-            strokeWidth={currentLineThickness || thickness}
-            strokeDasharray={strokeDashArray}
-          />
+            return <Path key={index} {...lineSvgProps} />;
+          })
         ) : (
-          <Path
-            d={points}
-            fill="none"
-            stroke={
-              lineGradient
-                ? props.lineGradientId
-                  ? `url(#${props.lineGradientId})`
-                  : `url(#lineGradient)`
-                : color
-            }
-            strokeWidth={currentLineThickness || thickness}
-          />
+          <Path {...lineSvgPropsOuter} />
         )}
 
         {/***********************      For Area Chart        ************/}
@@ -3198,12 +3222,15 @@ export const LineChart = (props: LineChartPropsType) => {
     setSelectedIndex,
     spacing,
     showLine: false,
-    lineConfig: null,
+    lineConfig: null, // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
+    lineConfig2: null, // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
     maxValue,
     lineData: [], // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
+    lineData2: [], // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
     animatedWidth,
     lineBehindBars: false,
     points,
+    points2: '', // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
     arrowPoints: [], // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
     renderChartContent,
     remainingScrollViewProps,

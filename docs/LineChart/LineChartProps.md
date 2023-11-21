@@ -2,48 +2,56 @@
 
 ### Basic props
 
-| Prop                          | Type           | Description                                                                                                    | Default value        |
-| ----------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------- | -------------------- |
-| data                          | Array of items | An item object represents a point in the line chart. It is described in the next table.                        | \_                   |
-| data2                         | Array of items | Second set of dataPoint for the second line                                                                    | \_                   |
-| data3                         | Array of items | Third set of dataPoint for the third line                                                                      | \_                   |
-| data4                         | Array of items | Third set of dataPoint for the fourth line                                                                     | \_                   |
-| data5                         | Array of items | Third set of dataPoint for the third line                                                                      | \_                   |
-| width                         | number         | Width of the Bar chart                                                                                         | width of the parent  |
-| height                        | number         | Height of the Bar chart (excluding the bottom label)                                                           | 200                  |
-| overflowTop                   | number         | Extra space at the top of the chart to make room for dataPointText                                             | 0                    |
-| overflowBottom                | number         | Extra space at the bottom of the chart to make room for dataPoints or dataPointText                            | dataPointRadius      |
-| maxValue                      | number         | Maximum value shown in the Y axis                                                                              | 200                  |
-| mostNegativeValue             | number         | The most negative value shown in the Y axis (to be used only if the data set has negative values too)          | \_                   |
-| noOfSections                  | number         | Number of sections in the Y axis                                                                               | 10                   |
-| noOfSectionsBelowXAxis        | number         | Number of sections in the Y axis below X axis (in case the data set has negative values too)                   | 0                    |
-| stepValue                     | number         | Value of 1 step/section in the Y axis                                                                          | 20                   |
-| stepHeight                    | number         | Height of 1 step/section in the Y axis                                                                         | 20                   |
-| spacing                       | number         | Distance between 2 consecutive bars in the Bar chart                                                           | 50                   |
-| adjustToWidth                 | boolean        | When set to true, it auto computes the spacing value to fit the Line chart in the available width              | false                |
-| backgroundColor               | ColorValue     | Background color of the Bar chart                                                                              | \_                   |
-| scrollref                     | any            | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered            | React.useRef()       |
-| scrollToIndex                 | number         | scroll to a particular index on chart load                                                                     | \_                   |
-| disableScroll                 | boolean        | To disable horizontal scroll                                                                                   | false                |
-| showScrollIndicator           | boolean        | To show horizontal scroll indicator                                                                            | false                |
-| indicatorColor                | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                | default              |
-| isAnimated                    | boolean        | To show animated Line or Area Chart. Animation occurs when the chart load for the first time                   | false                |
-| animateOnDataChange           | boolean        | To show animation on change in data. A smooth transition takes place between the iold and new line             | false                |
-| onDataChangeAnimationDuration | number         | Duration (milliseconds) in which the transition animation takes place on a change in data                      | 400                  |
-| onPress                       | Function       | The callback function that handles the press event. `item` and `index` are received as props                   | \_                   |
-| scrollToEnd                   | boolean        | When set to true, the chart automatically scrolls to the rightmost data point                                  | false                |
-| scrollAnimation               | boolean        | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true                 |
-| scrollEventThrottle           | number         | (only for iOS) see https://reactnative.dev/docs/scrollview#scrolleventthrottle-ios                             | 0                    |
-| initialSpacing                | number         | distance of the first data point from the Y axis                                                               | 20                   |
-| endSpacing                    | number         | distance/padding left at the end of the line chart                                                             | adjustWidth ? 0 : 20 |
-| stepChart                     | boolean        | If set true, renders a step chart                                                                              | false                |
-| stepChart1                    | boolean        | If set true, renders a step chart for 1st data set                                                             | stepChart            |
-| stepChart2                    | boolean        | If set true, renders a step chart for 2nd data set                                                             | stepChart            |
-| stepChart3                    | boolean        | If set true, renders a step chart for 3rd data set                                                             | stepChart            |
-| stepChart4                    | boolean        | If set true, renders a step chart for 4th data set                                                             | stepChart            |
-| stepChart5                    | boolean        | If set true, renders a step chart for 5th data set                                                             | stepChart            |
+| Prop                          | Type           | Description                                                                                                    | Default value              |
+| ----------------------------- | -------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------- |
+| data                          | Array of items | An item object represents a point in the line chart. It is described in the next table.                        | \_                         |
+| data2                         | Array of items | Second set of dataPoint for the second line                                                                    | \_                         |
+| data3                         | Array of items | Third set of dataPoint for the third line                                                                      | \_                         |
+| data4                         | Array of items | Third set of dataPoint for the fourth line                                                                     | \_                         |
+| data5                         | Array of items | Third set of dataPoint for the third line                                                                      | \_                         |
+| width                         | number         | Width of the Bar chart                                                                                         | width of the parent        |
+| height                        | number         | Height of the Bar chart (excluding the bottom label)                                                           | 200                        |
+| overflowTop                   | number         | Extra space at the top of the chart to make room for dataPointText                                             | 0                          |
+| overflowBottom                | number         | Extra space at the bottom of the chart to make room for dataPoints or dataPointText                            | dataPointRadius            |
+| maxValue                      | number         | Maximum value shown in the Y axis                                                                              | 200                        |
+| mostNegativeValue             | number         | The most negative value shown in the Y axis (to be used only if the data set has negative values too)          | \_                         |
+| noOfSections                  | number         | Number of sections in the Y axis                                                                               | 10                         |
+| noOfSectionsBelowXAxis        | number         | Number of sections in the Y axis below X axis (in case the data set has negative values too)                   | 0                          |
+| stepValue                     | number         | Value of 1 step/section in the Y axis                                                                          | 20                         |
+| stepHeight                    | number         | Height of 1 step/section in the Y axis                                                                         | 20                         |
+| spacing                       | number         | Distance between 2 consecutive bars in the Bar chart                                                           | 50                         |
+| adjustToWidth                 | boolean        | When set to true, it auto computes the spacing value to fit the Line chart in the available width              | false                      |
+| backgroundColor               | ColorValue     | Background color of the Bar chart                                                                              | \_                         |
+| scrollref                     | any            | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered            | React.useRef()             |
+| scrollToIndex                 | number         | scroll to a particular index on chart load                                                                     | \_                         |
+| disableScroll                 | boolean        | To disable horizontal scroll                                                                                   | false                      |
+| showScrollIndicator           | boolean        | To show horizontal scroll indicator                                                                            | false                      |
+| indicatorColor                | String         | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                | default                    |
+| isAnimated                    | boolean        | To show animated Line or Area Chart. Animation occurs when the chart load for the first time                   | false                      |
+| animateOnDataChange           | boolean        | To show animation on change in data. A smooth transition takes place between the iold and new line             | false                      |
+| onDataChangeAnimationDuration | number         | Duration (milliseconds) in which the transition animation takes place on a change in data                      | 400                        |
+| onPress                       | Function       | The callback function that handles the press event. `item` and `index` are received as props                   | \_                         |
+| scrollToEnd                   | boolean        | When set to true, the chart automatically scrolls to the rightmost data point                                  | false                      |
+| scrollAnimation               | boolean        | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true                       |
+| scrollEventThrottle           | number         | (only for iOS) see https://reactnative.dev/docs/scrollview#scrolleventthrottle-ios                             | 0                          |
+| initialSpacing                | number         | distance of the first data point from the Y axis                                                               | 20                         |
+| endSpacing                    | number         | distance/padding left at the end of the line chart                                                             | adjustWidth ? 0 : 20       |
+| stepChart                     | boolean        | If set true, renders a step chart                                                                              | false                      |
+| stepChart1                    | boolean        | If set true, renders a step chart for 1st data set                                                             | stepChart                  |
+| stepChart2                    | boolean        | If set true, renders a step chart for 2nd data set                                                             | stepChart                  |
+| stepChart3                    | boolean        | If set true, renders a step chart for 3rd data set                                                             | stepChart                  |
+| stepChart4                    | boolean        | If set true, renders a step chart for 4th data set                                                             | stepChart                  |
+| stepChart5                    | boolean        | If set true, renders a step chart for 5th data set                                                             | stepChart                  |
+| edgePosition                  | EdgePosition   | Used only for stepCharts to specify the edge positions of the steps                                            | EdgePosition.AT_DATA_POINT |
 
 ---
+
+```js
+enum EdgePosition {
+  AT_DATA_POINT,
+  AROUND_DATA_POINT,
+}
+```
 
 **Alert!**\
 These props are correlated:
@@ -184,13 +192,13 @@ type RuleType = 'solid' | 'dashed' | 'dotted';
 
 ```js
 type RulesConfig = {
-  rulesLength?: number;
-  rulesColor?: ColorValue;
-  rulesThickness?: number;
-  rulesType?: RuleType;
-  dashWidth?: number;
-  dashGap?: number;
-}
+  rulesLength?: number,
+  rulesColor?: ColorValue,
+  rulesThickness?: number,
+  rulesType?: RuleType,
+  dashWidth?: number,
+  dashGap?: number,
+};
 ```
 
 ReferenceConfigType has following properties-
@@ -304,52 +312,57 @@ All the properties of **secondaryLineConfig** are optional. Properties not provi
 
 ### Line related props
 
-| Prop                   | Type          | Description                                                                                                 | Default value                |
-| ---------------------- | ------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| curved                 | boolean       | To show curved line joining the data points                                                                 | false                        |
-| curvature              | number        | A number between 0 to 1 that controls the curvature of the cubic bezier curve                               | 0.2                          |
-| curveType              | CurveType     | Type of the curve- cubic or quadratic                                                                       | CurveType.CUBIC              |
-| color                  | ColorValue    | Color of the lines joining the data points                                                                  | black                        |
-| color1                 | ColorValue    | Color of the lines joining the first set of data points                                                     | color (from props)           |
-| color2                 | ColorValue    | Color of the lines joining the second set of data points                                                    | color (from props)           |
-| color3                 | ColorValue    | Color of the lines joining the third set of data points                                                     | color (from props)           |
-| color4                 | ColorValue    | Color of the lines joining the fourth set of data points                                                    | color (from props)           |
-| color5                 | ColorValue    | Color of the lines joining the fifth set of data points                                                     | color (from props)           |
-| thickness              | number        | Thickness of the lines joining the data points                                                              | 2                            |
-| thickness1             | number        | Thickness of the lines joining the first set of data points                                                 | thickness (from props)       |
-| thickness2             | number        | Thickness of the lines joining the second set of data points                                                | thickness (from props)       |
-| thickness3             | number        | Thickness of the lines joining the third set of data points                                                 | thickness (from props)       |
-| thickness4             | number        | Thickness of the lines joining the fourth set of data points                                                | thickness (from props)       |
-| thickness5             | number        | Thickness of the lines joining the fifth set of data points                                                 | thickness (from props)       |
-| zIndex1                | number        | zIndex of the lines joining the first set of data points                                                    | 0                            |
-| zIndex2                | number        | zIndex of the lines joining the second set of data points                                                   | 0                            |
-| zIndex3                | number        | zIndex of the lines joining the third set of data points                                                    | 0                            |
-| zIndex4                | number        | zIndex of the lines joining the fourth set of data points                                                   | 0                            |
-| zIndex5                | number        | zIndex of the lines joining the fifth set of data points                                                    | 0                            |
-| strokeDashArray        | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of the lines. Used to render dashed/dotted line chart | undefined                    |
-| strokeDashArray1       | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line1. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray2       | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line2. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray3       | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line3. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray4       | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line4. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray5       | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of line5. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| startIndex             | number        | Start index for data line (used to display data lines having breaks)                                        | 0                            |
-| startIndex1            | number        | Start index for data line 1 (used to display data lines having breaks)                                      | 0                            |
-| startIndex2            | number        | Start index for data line 2 (used to display data lines having breaks)                                      | 0                            |
-| startIndex3            | number        | Start index for data line 3 (used to display data lines having breaks)                                      | 0                            |
-| startIndex4            | number        | Start index for data line 4 (used to display data lines having breaks)                                      | 0                            |
-| startIndex5            | number        | Start index for data line 5 (used to display data lines having breaks)                                      | 0                            |
-| endIndex               | number        | End index for data line (used to display data lines having breaks)                                          | data.length -1               |
-| endIndex1              | number        | End index for data line 1 (used to display data lines having breaks)                                        | data1.length -1              |
-| endIndex2              | number        | End index for data line 2 (used to display data lines having breaks)                                        | data2.length -1              |
-| endIndex3              | number        | End index for data line 3 (used to display data lines having breaks)                                        | data3.length -1              |
-| endIndex4              | number        | End index for data line 4 (used to display data lines having breaks)                                        | data4.length -1              |
-| endIndex5              | number        | End index for data line 5 (used to display data lines having breaks)                                        | data5.length -1              |
-| lineGradient           | boolean       | this prop is used to render the line with a gradient blend of colors                                        | false                        |
-| lineGradientComponent  | Function      | this prop defines the svg gradient that should be applied to the line (requires lineGradient to be truthy)  | null                         |
-| lineGradientId         | string        | id of the <LinearGradient> (needed along with lineGradientComponent prop)                                   | \_                           |
-| lineGradientDirection  | string        | 'vertical'/'horizontal'                                                                                     | 'vertical'                   |
-| lineGradientStartColor | string        | Start gradient color for the line (requires lineGradient to be truthy)                                      | 'lightgreen'                 |
-| lineGradientEndColor   | string        | End gradient color for the line (requires lineGradient to be truthy)                                        |                              |
+| Prop                   | Type               | Description                                                                                                 | Default value                |
+| ---------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| curved                 | boolean            | To show curved line joining the data points                                                                 | false                        |
+| curvature              | number             | A number between 0 to 1 that controls the curvature of the cubic bezier curve                               | 0.2                          |
+| curveType              | CurveType          | Type of the curve- cubic or quadratic                                                                       | CurveType.CUBIC              |
+| color                  | ColorValue         | Color of the lines joining the data points                                                                  | black                        |
+| color1                 | ColorValue         | Color of the lines joining the first set of data points                                                     | color (from props)           |
+| color2                 | ColorValue         | Color of the lines joining the second set of data points                                                    | color (from props)           |
+| color3                 | ColorValue         | Color of the lines joining the third set of data points                                                     | color (from props)           |
+| color4                 | ColorValue         | Color of the lines joining the fourth set of data points                                                    | color (from props)           |
+| color5                 | ColorValue         | Color of the lines joining the fifth set of data points                                                     | color (from props)           |
+| thickness              | number             | Thickness of the lines joining the data points                                                              | 2                            |
+| thickness1             | number             | Thickness of the lines joining the first set of data points                                                 | thickness (from props)       |
+| thickness2             | number             | Thickness of the lines joining the second set of data points                                                | thickness (from props)       |
+| thickness3             | number             | Thickness of the lines joining the third set of data points                                                 | thickness (from props)       |
+| thickness4             | number             | Thickness of the lines joining the fourth set of data points                                                | thickness (from props)       |
+| thickness5             | number             | Thickness of the lines joining the fifth set of data points                                                 | thickness (from props)       |
+| zIndex1                | number             | zIndex of the lines joining the first set of data points                                                    | 0                            |
+| zIndex2                | number             | zIndex of the lines joining the second set of data points                                                   | 0                            |
+| zIndex3                | number             | zIndex of the lines joining the third set of data points                                                    | 0                            |
+| zIndex4                | number             | zIndex of the lines joining the fourth set of data points                                                   | 0                            |
+| zIndex5                | number             | zIndex of the lines joining the fifth set of data points                                                    | 0                            |
+| strokeDashArray        | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of the lines. Used to render dashed/dotted line chart | undefined                    |
+| strokeDashArray1       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line1. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray2       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line2. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray3       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line3. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray4       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line4. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray5       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line5. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| lineSegments           | Array<LineSegment> | Array of objects used to customize segments (parts) of line                                                 | \_                           |
+| lineSegments2          | Array<LineSegment> | Array of objects used to customize segments (parts) of line2                                                | \_                           |
+| lineSegments3          | Array<LineSegment> | Array of objects used to customize segments (parts) of line3                                                | \_                           |
+| lineSegments4          | Array<LineSegment> | Array of objects used to customize segments (parts) of line4                                                | \_                           |
+| lineSegments5          | Array<LineSegment> | Array of objects used to customize segments (parts) of line5                                                | \_                           |
+| startIndex             | number             | Start index for data line (used to display data lines having breaks)                                        | 0                            |
+| startIndex1            | number             | Start index for data line 1 (used to display data lines having breaks)                                      | 0                            |
+| startIndex2            | number             | Start index for data line 2 (used to display data lines having breaks)                                      | 0                            |
+| startIndex3            | number             | Start index for data line 3 (used to display data lines having breaks)                                      | 0                            |
+| startIndex4            | number             | Start index for data line 4 (used to display data lines having breaks)                                      | 0                            |
+| startIndex5            | number             | Start index for data line 5 (used to display data lines having breaks)                                      | 0                            |
+| endIndex               | number             | End index for data line (used to display data lines having breaks)                                          | data.length -1               |
+| endIndex1              | number             | End index for data line 1 (used to display data lines having breaks)                                        | data1.length -1              |
+| endIndex2              | number             | End index for data line 2 (used to display data lines having breaks)                                        | data2.length -1              |
+| endIndex3              | number             | End index for data line 3 (used to display data lines having breaks)                                        | data3.length -1              |
+| endIndex4              | number             | End index for data line 4 (used to display data lines having breaks)                                        | data4.length -1              |
+| endIndex5              | number             | End index for data line 5 (used to display data lines having breaks)                                        | data5.length -1              |
+| lineGradient           | boolean            | this prop is used to render the line with a gradient blend of colors                                        | false                        |
+| lineGradientComponent  | Function           | this prop defines the svg gradient that should be applied to the line (requires lineGradient to be truthy)  | null                         |
+| lineGradientId         | string             | id of the <LinearGradient> (needed along with lineGradientComponent prop)                                   | \_                           |
+| lineGradientDirection  | string             | 'vertical'/'horizontal'                                                                                     | 'vertical'                   |
+| lineGradientStartColor | string             | Start gradient color for the line (requires lineGradient to be truthy)                                      | 'lightgreen'                 |
+| lineGradientEndColor   | string             | End gradient color for the line (requires lineGradient to be truthy)                                        |                              |
 
 ### An example of lineGradientComponent
 
@@ -374,6 +387,18 @@ lineGradientComponent={()=>{
     </LinearGradient>
   );
 }}
+```
+
+### LineSegment
+
+```js
+type LineSegment = {
+  startIndex: number, // required
+  endIndex: number, // required
+  color?: string | ColorValue,
+  thickness?: number,
+  strokeDashArray?: Array<number>,
+};
 ```
 
 ## The arrow

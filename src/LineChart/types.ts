@@ -2,6 +2,8 @@ import {ColorValue} from 'react-native';
 import {yAxisSides} from '../utils/constants';
 import {
   CurveType,
+  EdgePosition,
+  LineSegment,
   Pointer,
   RuleType,
   RulesConfig,
@@ -110,6 +112,7 @@ export type LineChartPropsType = {
   stepChart3?: boolean;
   stepChart4?: boolean;
   stepChart5?: boolean;
+  edgePosition?: EdgePosition;
 
   disableScroll?: boolean;
   pointerConfig?: Pointer;
@@ -300,6 +303,11 @@ export type LineChartPropsType = {
   lineGradientDirection?: string;
   lineGradientStartColor?: string;
   lineGradientEndColor?: string;
+  lineSegments?: Array<LineSegment>;
+  lineSegments2?: Array<LineSegment>;
+  lineSegments3?: Array<LineSegment>;
+  lineSegments4?: Array<LineSegment>;
+  lineSegments5?: Array<LineSegment>;
 };
 
 type referenceConfigType = {

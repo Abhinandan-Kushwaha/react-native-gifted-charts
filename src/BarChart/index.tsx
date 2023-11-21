@@ -6,6 +6,7 @@ import {
   getArrowPoints,
   getAxesAndRulesProps,
   getExtendedContainerHeightWithPadding,
+  getLineConfigForBarChart,
   getSecondaryDataWithOffsetIncluded,
   getXForLineInBar,
   getYForLineInBar,
@@ -29,6 +30,7 @@ import {Pointer} from '../Components/common/Pointer';
 export const BarChart = (props: BarChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
   const [points, setPoints] = useState('');
+  const [points2, setPoints2] = useState('');
   const [arrowPoints, setArrowPoints] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const showLine = props.showLine || BarDefaults.showLine;
@@ -81,6 +83,8 @@ export const BarChart = (props: BarChartPropsType) => {
     return props.lineData;
   }, [props.yAxisOffset, props.lineData, data, props.stackData]);
 
+  const lineData2 = props.lineData2;
+
   const lineBehindBars = props.lineBehindBars || BarDefaults.lineBehindBars;
 
   defaultLineConfig.initialSpacing = initialSpacing;
@@ -88,75 +92,10 @@ export const BarChart = (props: BarChartPropsType) => {
   defaultLineConfig.animationDuration = animationDuration;
 
   const lineConfig = props.lineConfig
-    ? {
-        initialSpacing:
-          props.lineConfig.initialSpacing ?? defaultLineConfig.initialSpacing,
-        curved: props.lineConfig.curved || defaultLineConfig.curved,
-        curvature: props.lineConfig.curvature ?? defaultLineConfig.curvature,
-        curveType: props.lineConfig.curveType ?? defaultLineConfig.curveType,
-        isAnimated: props.lineConfig.isAnimated || defaultLineConfig.isAnimated,
-        animationDuration:
-          props.lineConfig.animationDuration ||
-          defaultLineConfig.animationDuration,
-        thickness: props.lineConfig.thickness || defaultLineConfig.thickness,
-        color: props.lineConfig.color || defaultLineConfig.color,
-        hideDataPoints:
-          props.lineConfig.hideDataPoints || defaultLineConfig.hideDataPoints,
-        dataPointsShape:
-          props.lineConfig.dataPointsShape || defaultLineConfig.dataPointsShape,
-        dataPointsHeight:
-          props.lineConfig.dataPointsHeight ||
-          defaultLineConfig.dataPointsHeight,
-        dataPointsWidth:
-          props.lineConfig.dataPointsWidth || defaultLineConfig.dataPointsWidth,
-        dataPointsColor:
-          props.lineConfig.dataPointsColor || defaultLineConfig.dataPointsColor,
-        dataPointsRadius:
-          props.lineConfig.dataPointsRadius ||
-          defaultLineConfig.dataPointsRadius,
-        textColor: props.lineConfig.textColor || defaultLineConfig.textColor,
-        textFontSize:
-          props.lineConfig.textFontSize || defaultLineConfig.textFontSize,
-        textShiftX: props.lineConfig.textShiftX || defaultLineConfig.textShiftX,
-        textShiftY: props.lineConfig.textShiftY || defaultLineConfig.textShiftY,
-        shiftX: props.lineConfig.shiftX || defaultLineConfig.shiftX,
-        shiftY: props.lineConfig.shiftY || defaultLineConfig.shiftY,
-        delay: props.lineConfig.delay || defaultLineConfig.delay,
-        startIndex: props.lineConfig.startIndex || defaultLineConfig.startIndex,
-        endIndex:
-          props.lineConfig.endIndex === 0
-            ? 0
-            : props.lineConfig.endIndex || defaultLineConfig.endIndex,
-
-        showArrow: props.lineConfig.showArrow ?? defaultLineConfig.showArrow,
-        arrowConfig: {
-          length:
-            props.lineConfig.arrowConfig?.length ??
-            defaultLineConfig.arrowConfig?.length,
-          width:
-            props.lineConfig.arrowConfig?.width ??
-            defaultLineConfig.arrowConfig?.width,
-
-          strokeWidth:
-            props.lineConfig.arrowConfig?.strokeWidth ??
-            defaultLineConfig.arrowConfig?.strokeWidth,
-
-          strokeColor:
-            props.lineConfig.arrowConfig?.strokeColor ??
-            defaultLineConfig.arrowConfig?.strokeColor,
-
-          fillColor:
-            props.lineConfig.arrowConfig?.fillColor ??
-            defaultLineConfig.arrowConfig?.fillColor,
-
-          showArrowBase:
-            props.lineConfig.arrowConfig?.showArrowBase ??
-            defaultLineConfig.arrowConfig?.showArrowBase,
-        },
-        customDataPoint: props.lineConfig.customDataPoint,
-        isSecondary:
-          props.lineConfig.isSecondary ?? defaultLineConfig.isSecondary,
-      }
+    ? getLineConfigForBarChart(props.lineConfig)
+    : defaultLineConfig;
+  const lineConfig2 = props.lineConfig2
+    ? getLineConfigForBarChart(props.lineConfig2)
     : defaultLineConfig;
   const noOfSections = props.noOfSections ?? AxesAndRulesDefaults.noOfSections;
   const containerHeight =
@@ -397,7 +336,8 @@ export const BarChart = (props: BarChartPropsType) => {
 
   useEffect(() => {
     if (showLine) {
-      let pp = '';
+      let pp = '',
+        pp2 = '';
       const firstBarWidth =
         (props.stackData ?? data)?.[0].barWidth ?? props.barWidth ?? 30;
       if (!lineConfig.curved) {
@@ -486,6 +426,67 @@ export const BarChart = (props: BarChartPropsType) => {
           ]);
           let xx = svgPath(p1Array, lineConfig.curveType, lineConfig.curvature);
           setPoints(xx);
+        }
+      }
+      if (lineData2?.length) {
+        if (!lineConfig2?.curved) {
+          for (let i = 0; i < lineData2.length; i++) {
+            if (i < lineConfig2.startIndex || i > lineConfig2.endIndex)
+              continue;
+            const currentBarWidth =
+              data?.[i]?.barWidth ?? props.barWidth ?? BarDefaults.barWidth;
+            const currentValue = lineData2[i].value;
+            pp2 +=
+              'L' +
+              getXForLineInBar(
+                i,
+                firstBarWidth,
+                currentBarWidth,
+                yAxisLabelWidth,
+                lineConfig2,
+                spacing,
+              ) +
+              ' ' +
+              getYForLineInBar(
+                currentValue,
+                lineConfig2.shiftY,
+                containerHeight,
+                lineConfig2.isSecondary ? secondaryMaxValue : maxValue,
+              ) +
+              ' ';
+          }
+          setPoints2(pp2.replace('L', 'M'));
+        } else {
+          let p2Array: Array<Array<number>> = [];
+          for (let i = 0; i < lineData2.length; i++) {
+            if (i < lineConfig2.startIndex || i > lineConfig2.endIndex)
+              continue;
+            const currentBarWidth =
+              data?.[i]?.barWidth ?? props.barWidth ?? BarDefaults.barWidth;
+            const currentValue = lineData2[i].value;
+            p2Array.push([
+              getXForLineInBar(
+                i,
+                firstBarWidth,
+                currentBarWidth,
+                yAxisLabelWidth,
+                lineConfig2,
+                spacing,
+              ),
+              getYForLineInBar(
+                currentValue,
+                lineConfig2.shiftY,
+                containerHeight,
+                lineConfig2.isSecondary ? secondaryMaxValue : maxValue,
+              ),
+            ]);
+            let xx = svgPath(
+              p2Array,
+              lineConfig2.curveType,
+              lineConfig2.curvature,
+            );
+            setPoints2(xx);
+          }
         }
       }
       if (lineConfig.isAnimated) {
@@ -866,11 +867,14 @@ export const BarChart = (props: BarChartPropsType) => {
     spacing,
     showLine,
     lineConfig,
+    lineConfig2,
     maxValue,
     lineData,
+    lineData2,
     animatedWidth,
     lineBehindBars,
     points,
+    points2,
     arrowPoints,
     renderChartContent,
     remainingScrollViewProps,

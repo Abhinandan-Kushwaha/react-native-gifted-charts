@@ -1,4 +1,5 @@
-import {arrowConfigType, CurveType} from './types';
+import {defaultLineConfig} from './constants';
+import {arrowConfigType, CurveType, LineProperties, LineSegment} from './types';
 
 export const getCumulativeWidth = (
   data: any,
@@ -110,7 +111,7 @@ export const svgPath = (
     (acc, point, i, a) =>
       i === 0
         ? // if first point
-          `M ${point[0]},${point[1]}`
+          `M${point[0]},${point[1]}`
         : // else
           `${acc} ${bezierCommand(point, i, a, curvature)}`,
     '',
@@ -162,7 +163,153 @@ export const bezierCommand = (
   const [cpsX, cpsY] = controlPoint(curvature, a[i - 1], a[i - 2], point);
   // end control point
   const [cpeX, cpeY] = controlPoint(curvature, point, a[i - 1], a[i + 1], true);
-  return `C ${cpsX},${cpsY} ${cpeX},${cpeY} ${point[0]},${point[1]}`;
+  return `C${cpsX},${cpsY} ${cpeX},${cpeY} ${point[0]},${point[1]}`;
+};
+
+export const getSegmentString = (lineSegment, index) => {
+  const segment = lineSegment?.find(segment => segment.startIndex === index);
+  return segment ? 'segmentStart' + JSON.stringify(segment) + 'segmentEnd' : '';
+};
+
+export const getCurvePathWithSegments = (
+  path: string,
+  lineSegment: LineSegment[] | undefined,
+) => {
+  if (!lineSegment?.length) return path;
+  let newPath = '';
+  const pathArray = path.split('C');
+  for (let i = 0; i < pathArray.length; i++) {
+    const segment = lineSegment?.find(segment => segment.startIndex === i);
+    newPath +=
+      (pathArray[i].startsWith('M') ? '' : 'C') +
+      pathArray[i] +
+      (segment ? 'segmentStart' + JSON.stringify(segment) + 'segmentEnd' : '');
+  }
+  return newPath;
+};
+
+export const getPreviousSegmentsLastPoint = (isCurved, previousSegment) => {
+  const prevSegmentLastPoint = isCurved
+    ? previousSegment.substring(previousSegment.trim().lastIndexOf(' '))
+    : previousSegment
+        .substring(previousSegment.lastIndexOf('L'))
+        .replace('L', 'M');
+
+  return (
+    (prevSegmentLastPoint.trim()[0] === 'M' ? '' : 'M') + prevSegmentLastPoint
+  );
+};
+
+export const getSegmentedPathObjects = (
+  points,
+  color,
+  currentLineThickness,
+  thickness,
+  strokeDashArray,
+  isCurved,
+) => {
+  const ar: [any] = [{}];
+  let tempStr = points;
+
+  if (!points.startsWith('segmentStart')) {
+    const lineSvgProps: LineProperties = {
+      d: points.substring(0, points.indexOf('segmentStart')),
+      color,
+      strokeWidth: currentLineThickness || thickness,
+    };
+    if (strokeDashArray) {
+      lineSvgProps.strokeDashArray = strokeDashArray;
+    }
+    ar.push(lineSvgProps);
+  }
+
+  while (tempStr.includes('segmentStart')) {
+    const startDelimeterIndex = tempStr.indexOf('segmentStart');
+    const endDelimeterIndex = tempStr.indexOf('segmentEnd');
+
+    const segmentConfig = JSON.parse(
+      tempStr.substring(
+        startDelimeterIndex + 'segmentStart'.length,
+        endDelimeterIndex,
+      ),
+    );
+
+    const {startIndex, endIndex} = segmentConfig;
+    const segmentLength = endIndex - startIndex;
+    let segment = tempStr.substring(endDelimeterIndex + 'segmentEnd'.length);
+    let c = 0,
+      s = 0,
+      i;
+    for (i = 0; i < segment.length; i++) {
+      if (segment[i] === (isCurved ? 'C' : 'L')) c++;
+      if (c === segmentLength) {
+        if (segment[i] === ' ') s++;
+        if (s === (isCurved ? 3 : 2)) break;
+      }
+    }
+    segment = segment.substring(0, i);
+
+    const previousSegment = ar[ar.length - 1].d;
+    const moveToLastPointOfPreviousSegment = getPreviousSegmentsLastPoint(
+      isCurved,
+      previousSegment,
+    );
+
+    const lineSvgProps: LineProperties = {
+      d: moveToLastPointOfPreviousSegment + segment,
+      color: segmentConfig.color ?? color,
+      strokeWidth:
+        segmentConfig.thickness ?? (currentLineThickness || thickness),
+    };
+    if (segmentConfig.strokeDashArray) {
+      lineSvgProps.strokeDashArray = segmentConfig.strokeDashArray;
+    }
+    ar.push(lineSvgProps);
+
+    tempStr = tempStr.substring(endDelimeterIndex + 'segmentEnd'.length + i);
+
+    const nextDelimiterIndex = tempStr.indexOf('segmentStart');
+    const stringUptoNextSegment = tempStr.substring(0, nextDelimiterIndex);
+    if (
+      nextDelimiterIndex !== -1 &&
+      stringUptoNextSegment.indexOf('C') !== -1
+    ) {
+      const previousSegment = ar[ar.length - 1].d;
+      const moveToLastPointOfPreviousSegment = getPreviousSegmentsLastPoint(
+        isCurved,
+        previousSegment,
+      );
+      const lineSvgProps: LineProperties = {
+        d: moveToLastPointOfPreviousSegment + ' ' + stringUptoNextSegment,
+        color,
+        strokeWidth: currentLineThickness || thickness,
+      };
+      if (strokeDashArray) {
+        lineSvgProps.strokeDashArray = strokeDashArray;
+      }
+      ar.push(lineSvgProps);
+    }
+  }
+
+  if (tempStr.length) {
+    const previousSegment = ar[ar.length - 1].d;
+    const moveToLastPointOfPreviousSegment = getPreviousSegmentsLastPoint(
+      isCurved,
+      previousSegment,
+    );
+    const lineSvgProps: LineProperties = {
+      d: moveToLastPointOfPreviousSegment + tempStr,
+      color,
+      strokeWidth: currentLineThickness || thickness,
+    };
+    if (strokeDashArray) {
+      lineSvgProps.strokeDashArray = strokeDashArray;
+    }
+    ar.push(lineSvgProps);
+  }
+
+  ar.shift();
+  return ar;
 };
 
 export const getArrowPoints = (
@@ -618,4 +765,69 @@ export const clone = obj => {
     }
   }
   return temp;
+};
+
+export const getLineConfigForBarChart = lineConfig => {
+  return {
+    initialSpacing:
+      lineConfig.initialSpacing ?? defaultLineConfig.initialSpacing,
+    curved: lineConfig.curved || defaultLineConfig.curved,
+    curvature: lineConfig.curvature ?? defaultLineConfig.curvature,
+    curveType: lineConfig.curveType ?? defaultLineConfig.curveType,
+    isAnimated: lineConfig.isAnimated || defaultLineConfig.isAnimated,
+    animationDuration:
+      lineConfig.animationDuration || defaultLineConfig.animationDuration,
+    thickness: lineConfig.thickness || defaultLineConfig.thickness,
+    color: lineConfig.color || defaultLineConfig.color,
+    hideDataPoints:
+      lineConfig.hideDataPoints || defaultLineConfig.hideDataPoints,
+    dataPointsShape:
+      lineConfig.dataPointsShape || defaultLineConfig.dataPointsShape,
+    dataPointsHeight:
+      lineConfig.dataPointsHeight || defaultLineConfig.dataPointsHeight,
+    dataPointsWidth:
+      lineConfig.dataPointsWidth || defaultLineConfig.dataPointsWidth,
+    dataPointsColor:
+      lineConfig.dataPointsColor || defaultLineConfig.dataPointsColor,
+    dataPointsRadius:
+      lineConfig.dataPointsRadius || defaultLineConfig.dataPointsRadius,
+    textColor: lineConfig.textColor || defaultLineConfig.textColor,
+    textFontSize: lineConfig.textFontSize || defaultLineConfig.textFontSize,
+    textShiftX: lineConfig.textShiftX || defaultLineConfig.textShiftX,
+    textShiftY: lineConfig.textShiftY || defaultLineConfig.textShiftY,
+    shiftX: lineConfig.shiftX || defaultLineConfig.shiftX,
+    shiftY: lineConfig.shiftY || defaultLineConfig.shiftY,
+    delay: lineConfig.delay || defaultLineConfig.delay,
+    startIndex: lineConfig.startIndex || defaultLineConfig.startIndex,
+    endIndex:
+      lineConfig.endIndex === 0
+        ? 0
+        : lineConfig.endIndex || defaultLineConfig.endIndex,
+
+    showArrow: lineConfig.showArrow ?? defaultLineConfig.showArrow,
+    arrowConfig: {
+      length:
+        lineConfig.arrowConfig?.length ?? defaultLineConfig.arrowConfig?.length,
+      width:
+        lineConfig.arrowConfig?.width ?? defaultLineConfig.arrowConfig?.width,
+
+      strokeWidth:
+        lineConfig.arrowConfig?.strokeWidth ??
+        defaultLineConfig.arrowConfig?.strokeWidth,
+
+      strokeColor:
+        lineConfig.arrowConfig?.strokeColor ??
+        defaultLineConfig.arrowConfig?.strokeColor,
+
+      fillColor:
+        lineConfig.arrowConfig?.fillColor ??
+        defaultLineConfig.arrowConfig?.fillColor,
+
+      showArrowBase:
+        lineConfig.arrowConfig?.showArrowBase ??
+        defaultLineConfig.arrowConfig?.showArrowBase,
+    },
+    customDataPoint: lineConfig.customDataPoint,
+    isSecondary: lineConfig.isSecondary ?? defaultLineConfig.isSecondary,
+  };
 };
