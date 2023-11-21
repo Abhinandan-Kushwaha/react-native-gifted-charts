@@ -53,7 +53,9 @@ export type BarChartPropsType = {
   sideWidth?: number;
   showLine?: boolean;
   lineData?: any;
+  lineData2?: any;
   lineConfig?: lineConfigType;
+  lineConfig2?: lineConfigType;
   lineBehindBars?: boolean;
 
   cappedBars?: boolean;

@@ -1344,12 +1344,15 @@ export const LineChartBicolor = (props: propTypes) => {
     setSelectedIndex,
     spacing,
     showLine: false,
-    lineConfig: null,
+    lineConfig: null, // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
+    lineConfig2: null, // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
     maxValue,
     lineData: [], // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
+    lineData2: [], // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
     animatedWidth,
     lineBehindBars: false,
     points: pointsArray,
+    points2: '', // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
     arrowPoints: [], // Not needed but passing this prop to maintain consistency (between LineChart and BarChart props)
     renderChartContent,
     remainingScrollViewProps: {},

@@ -14,6 +14,11 @@ export enum CurveType {
   QUADRATIC,
 }
 
+export enum EdgePosition {
+  AT_DATA_POINT,
+  AROUND_DATA_POINT,
+}
+
 export type RulesConfig = {
   rulesLength?: number;
   rulesColor?: ColorValue;
@@ -21,7 +26,7 @@ export type RulesConfig = {
   rulesType?: RuleType;
   dashWidth?: number;
   dashGap?: number;
-}
+};
 
 export type secondaryYAxisType = {
   noOfSections?: number;
@@ -190,11 +195,14 @@ export type BarAndLineChartsWrapperTypes = {
   spacing: number;
   showLine: boolean;
   lineConfig: any;
+  lineConfig2: any;
   maxValue: number;
   lineData: Array<any>;
+  lineData2: Array<any>;
   animatedWidth: any;
   lineBehindBars: boolean;
   points: string | Array<any>;
+  points2: string | Array<any>;
   arrowPoints: any;
   renderChartContent: any;
   remainingScrollViewProps: any;
@@ -264,4 +272,27 @@ export type Pointer = {
   hideSecondaryPointer?: boolean;
   strokeDashArray?: Array<number>;
   barTouchable?: boolean;
+};
+
+export type LineSegment = {
+  startIndex: number;
+  endIndex: number;
+  color?: string | ColorValue;
+  thickness?: number;
+  strokeDashArray?: Array<number>;
+};
+
+export type LineSvgProps = {
+  d: string;
+  fill: string;
+  stroke: string | ColorValue;
+  strokeWidth: number;
+  strokeDasharray?: Array<number>;
+};
+
+export type LineProperties = {
+  d: string;
+  color: string | ColorValue;
+  strokeWidth: number;
+  strokeDashArray?: Array<number>;
 };

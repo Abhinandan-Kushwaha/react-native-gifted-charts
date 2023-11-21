@@ -27,6 +27,8 @@
 | showLine                     | boolean        | To show a Line chart over the Bar chart with the same data                                              | false               |
 | lineData                     | Array of items | The data object for the line chart (use only when showLine is true)                                     | data                |
 | lineConfig                   | lineConfigType | Properties of the Line chart shown over the Bar chart (lineConfigType) is described below               | defaultLineConfig   |
+| lineData2                    | Array of items | The data object for the second line chart (use only when showLine is true)                              | \_                  |
+| lineConfig2                  | lineConfigType | Properties of the second Line chart shown over the Bar chart (lineConfigType) is described below        | defaultLineConfig   |
 | lineBehindBars               | boolean        | When set to true, the line chart will appear behind the Bars in case of overlap                         | false               |
 | autoShiftLabels              | boolean        | When set to true, automatically shifts the X axis labels for negative values                            | false               |
 | scrollToEnd                  | boolean        | When set to true, the chart automatically scrolls to the rightmost bar                                  | false               |
@@ -291,13 +293,13 @@ type RuleType = 'solid' | 'dashed' | 'dotted';
 
 ```js
 type RulesConfig = {
-  rulesLength?: number;
-  rulesColor?: ColorValue;
-  rulesThickness?: number;
-  rulesType?: RuleType;
-  dashWidth?: number;
-  dashGap?: number;
-}
+  rulesLength?: number,
+  rulesColor?: ColorValue,
+  rulesThickness?: number,
+  rulesType?: RuleType,
+  dashWidth?: number,
+  dashGap?: number,
+};
 ```
 
 ReferenceConfigType has following properties-

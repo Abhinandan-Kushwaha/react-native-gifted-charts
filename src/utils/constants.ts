@@ -1,5 +1,5 @@
 import {defaultLineConfigType} from '../BarChart/types';
-import {CurveType, RuleTypes} from './types';
+import {CurveType, EdgePosition, RuleTypes} from './types';
 import {Dimensions} from 'react-native';
 
 // Global
@@ -205,6 +205,7 @@ export const LineDefaults = {
   stripWidth: 2,
   unFocusOnPressOut: true,
   delayBeforeUnFocus: 300,
+  edgePosition: EdgePosition.AT_DATA_POINT,
 };
 
 export const defaultPointerConfig = {

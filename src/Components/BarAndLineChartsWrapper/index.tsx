@@ -44,11 +44,14 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     spacing,
     showLine,
     lineConfig,
+    lineConfig2,
     maxValue,
     lineData,
+    lineData2,
     animatedWidth,
     lineBehindBars,
     points,
+    points2,
     arrowPoints,
     renderChartContent,
     remainingScrollViewProps,
@@ -114,7 +117,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     axesAndRulesProps.rulesThickness ?? AxesAndRulesDefaults.rulesThickness;
   const rulesColor =
     axesAndRulesProps.rulesColor ?? AxesAndRulesDefaults.rulesColor;
-  const rulesConfigArray = axesAndRulesProps.rulesConfigArray ?? AxesAndRulesDefaults.rulesConfigArray;
+  const rulesConfigArray =
+    axesAndRulesProps.rulesConfigArray ?? AxesAndRulesDefaults.rulesConfigArray;
   const showYAxisIndices = axesAndRulesProps.showYAxisIndices ?? false;
   const yAxisIndicesHeight =
     axesAndRulesProps.yAxisIndicesHeight ??
@@ -250,6 +254,12 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     scrollEventThrottle,
     xAxisLabelsVerticalShift,
   };
+  const lineInBarChartProps2 = {
+    ...lineInBarChartProps,
+    lineConfig: lineConfig2,
+    points: points2,
+    data: lineData2,
+  };
   const extendedContainerHeight = containerHeight + 10;
   const containerHeightIncludingBelowXAxis =
     extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight;
@@ -356,8 +366,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
                 ? 0
                 : yAxisLabelWidth + yAxisThickness,
             position: 'absolute',
-            bottom:
-              (chartType === chartTypes.LINE_BI_COLOR ? 0 : xAxisThickness),
+            bottom: chartType === chartTypes.LINE_BI_COLOR ? 0 : xAxisThickness,
           },
           !!props.width && {width: props.width},
           horizontal && {
@@ -403,6 +412,12 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           {
             // Only For Bar Charts-
             showLine ? <RenderLineInBarChart {...lineInBarChartProps} /> : null
+          }
+          {
+            // Only For Bar Charts-
+            showLine && points2?.length ? (
+              <RenderLineInBarChart {...lineInBarChartProps2} />
+            ) : null
           }
           {
             // Only For Line Charts-
