@@ -1,3 +1,20 @@
+# 🎉 1.3.19
+
+## ✨ Features added-
+
+1. Added support for dynamic number of lines with the help of the `dataSet` prop. We can now pass an array of data instead of using `data`, `data2`, `data3` etc.
+2. Added property `formatYLabel` to the `secondaryYAxis`, so we can now format the labels of the secondary Y-Axis using `formatYLabel`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/442
+
+## 🐛 Bug fixes
+
+1. Fixed issue with Pie charts having all zero values. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/443
+
+---
+
+---
+
+---
+
 # 🎉 1.3.18
 
 ## ✨ Features added-

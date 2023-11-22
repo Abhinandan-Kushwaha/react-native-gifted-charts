@@ -26,7 +26,7 @@ export const Pointer = props => {
           style={{
             height: pointerHeight || pointerRadius * 2,
             width: pointerWidth || pointerRadius * 2,
-            marginTop: pointerItemLocal.pointerShiftY || 0,
+            marginTop: pointerItemLocal?.pointerShiftY || 0,
             backgroundColor: pointerColorLocal,
             borderRadius: pointerRadius || 0,
           }}

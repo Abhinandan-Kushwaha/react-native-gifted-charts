@@ -2,6 +2,7 @@ import {ColorValue} from 'react-native';
 import {yAxisSides} from '../utils/constants';
 import {
   CurveType,
+  DataSet,
   EdgePosition,
   LineSegment,
   Pointer,
@@ -29,6 +30,7 @@ export type LineChartPropsType = {
   data3?: Array<itemType>;
   data4?: Array<itemType>;
   data5?: Array<itemType>;
+  dataSet?: Array<DataSet>;
   zIndex1?: number;
   zIndex2?: number;
   zIndex3?: number;

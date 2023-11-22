@@ -212,6 +212,8 @@ export const getSegmentedPathObjects = (
   let tempStr = points;
 
   if (!points.startsWith('segmentStart')) {
+    /**********************            line upto first segment                 *****************/
+
     const lineSvgProps: LineProperties = {
       d: points.substring(0, points.indexOf('segmentStart')),
       color,
@@ -255,6 +257,8 @@ export const getSegmentedPathObjects = (
       previousSegment,
     );
 
+    /**********************            segment line                 *****************/
+
     const lineSvgProps: LineProperties = {
       d: moveToLastPointOfPreviousSegment + segment,
       color: segmentConfig.color ?? color,
@@ -270,9 +274,12 @@ export const getSegmentedPathObjects = (
 
     const nextDelimiterIndex = tempStr.indexOf('segmentStart');
     const stringUptoNextSegment = tempStr.substring(0, nextDelimiterIndex);
+
+    /**********************            line upto the next segment            *****************/
+
     if (
       nextDelimiterIndex !== -1 &&
-      stringUptoNextSegment.indexOf('C') !== -1
+      stringUptoNextSegment.indexOf(isCurved ? 'C' : 'L') !== -1
     ) {
       const previousSegment = ar[ar.length - 1].d;
       const moveToLastPointOfPreviousSegment = getPreviousSegmentsLastPoint(
@@ -290,6 +297,8 @@ export const getSegmentedPathObjects = (
       ar.push(lineSvgProps);
     }
   }
+
+  /**********************            line after the last segment            *****************/
 
   if (tempStr.length) {
     const previousSegment = ar[ar.length - 1].d;
@@ -600,6 +609,25 @@ export const getAllArrowProperties = (
     defaultArrowConfig,
   );
 
+  const arrowLengthsFromSet = props.dataSet?.map(
+    item => item?.arrowConfig?.length ?? arrowLength1,
+  );
+  const arrowWidthsFromSet = props.dataSet?.map(
+    item => item?.arrowConfig?.arrowWidth ?? arrowWidth1,
+  );
+  const arrowStrokeWidthsFromSet = props.dataSet?.map(
+    item => item?.arrowConfig?.arrowStrokeWidth ?? arrowStrokeWidth1,
+  );
+  const arrowStrokeColorsFromSet = props.dataSet?.map(
+    item => item?.arrowConfig?.arrowStrokeColor ?? arrowStrokeColor1,
+  );
+  const arrowFillColorsFromSet = props.dataSet?.map(
+    item => item?.arrowConfig?.arrowFillColor ?? arrowFillColor1,
+  );
+  const showArrowBasesFromSet = props.dataSet?.map(
+    item => item?.arrowConfig?.showArrowBase ?? showArrowBase1,
+  );
+
   return {
     arrowLength1,
     arrowWidth1,
@@ -631,6 +659,12 @@ export const getAllArrowProperties = (
     arrowStrokeColor5,
     arrowFillColor5,
     showArrowBase5,
+    arrowLengthsFromSet,
+    arrowWidthsFromSet,
+    arrowStrokeWidthsFromSet,
+    arrowStrokeColorsFromSet,
+    arrowFillColorsFromSet,
+    showArrowBasesFromSet,
   };
 };
 

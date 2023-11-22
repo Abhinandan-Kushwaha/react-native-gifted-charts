@@ -17,6 +17,7 @@ const AnimatedArea = () => {
     <View>
       <LineChart
         areaChart
+        stepChart
         hideDataPoints
         isAnimated
         animationDuration={1200}

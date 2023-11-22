@@ -43,47 +43,47 @@
 
 The `lineConfig` prop describes the properties of the line chart that is displayed when we set the `showLine` prop to true. The properties allowed by the lineConfig prop are-
 
-```js
+```ts
 type lineConfigType = {
-  initialSpacing?: number,
-  curved?: boolean,
-  curvature: number,
-  curveType: CurveType, //CurveType is an enum defined below
-  isAnimated?: boolean,
-  delay?: number,
-  thickness?: number,
-  color?: ColorValue | String | any,
-  hideDataPoints?: boolean,
-  dataPointsShape?: String,
-  dataPointsWidth?: number,
-  dataPointsHeight?: number,
-  dataPointsColor?: ColorValue | String | any,
-  dataPointsRadius?: number,
-  textColor?: ColorValue | String | any,
-  textFontSize?: number,
-  textShiftX?: number,
-  textShiftY?: number,
-  sfiftX?: number,
-  shiftY?: number,
-  startIndex?: number,
-  endIndex?: number,
-  showArrow?: boolean,
-  arrowConfig?: arrowType,
-  isSecondary?: boolean,
+  initialSpacing?: number;
+  curved?: boolean;
+  curvature: number;
+  curveType: CurveType; //CurveType is an enum defined below
+  isAnimated?: boolean;
+  delay?: number;
+  thickness?: number;
+  color?: ColorValue | String | any;
+  hideDataPoints?: boolean;
+  dataPointsShape?: String;
+  dataPointsWidth?: number;
+  dataPointsHeight?: number;
+  dataPointsColor?: ColorValue | String | any;
+  dataPointsRadius?: number;
+  textColor?: ColorValue | String | any;
+  textFontSize?: number;
+  textShiftX?: number;
+  textShiftY?: number;
+  sfiftX?: number;
+  shiftY?: number;
+  startIndex?: number;
+  endIndex?: number;
+  showArrow?: boolean;
+  arrowConfig?: arrowType;
+  isSecondary?: boolean;
 };
 type arrowType = {
-  length?: number,
-  width?: number,
-  strokeWidth?: number,
-  strokeColor?: string,
-  fillColor?: string,
-  showArrowBase?: boolean,
+  length?: number;
+  width?: number;
+  strokeWidth?: number;
+  strokeColor?: string;
+  fillColor?: string;
+  showArrowBase?: boolean;
 };
 ```
 
 CurveType -
 
-```js
+```ts
 enum CurveType {
   CUBIC,
   QUADRATIC,
@@ -92,7 +92,7 @@ enum CurveType {
 
 The default value of the lineConfig object is -
 
-```js
+```ts
 defaultLineConfig = {
   initialSpacing: initialSpacing,
   curved: false,
@@ -139,7 +139,7 @@ These props are correlated:
 
 They must follow the relation:
 
-```js
+```ts
 maxValue = noOfSections * stepValue;
 ```
 
@@ -287,33 +287,33 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 
 **Note** If you are setting yAxisSide to 'right', make sure to specify the width of the chart, using the `width` prop.
 
-```js
+```ts
 type RuleType = 'solid' | 'dashed' | 'dotted';
 ```
 
-```js
+```ts
 type RulesConfig = {
-  rulesLength?: number,
-  rulesColor?: ColorValue,
-  rulesThickness?: number,
-  rulesType?: RuleType,
-  dashWidth?: number,
-  dashGap?: number,
+  rulesLength?: number;
+  rulesColor?: ColorValue;
+  rulesThickness?: number;
+  rulesType?: RuleType;
+  dashWidth?: number;
+  dashGap?: number;
 };
 ```
 
 ReferenceConfigType has following properties-
 
-```js
+```ts
 type referenceConfigType = {
-  thickness: number,
-  width: number,
-  color: ColorValue | String | any,
-  type: ruleTypes,
-  dashWidth: number,
-  dashGap: number,
-  labelText: String,
-  labelTextStyle: object,
+  thickness: number;
+  width: number;
+  color: ColorValue | String | any;
+  type: ruleTypes;
+  dashWidth: number;
+  dashGap: number;
+  labelText: String;
+  labelTextStyle: object;
 };
 ```
 
@@ -323,7 +323,7 @@ type referenceConfigType = {
 
 Use this prop to render a secondary Y axis on the right side of the chart. **secondaryYAxis** is an object of type of **secondaryYAxisType** You can control the properties of secodary Y axis by passing an object of properties. Following is the type definition of the secondaryYAxisType object
 
-```js
+```ts
 type secondaryYAxisType = {
   noOfSections?: number,
   maxValue?: number,
@@ -350,6 +350,7 @@ type secondaryYAxisType = {
   yAxisLabelPrefix?: string,
   yAxisLabelSuffix?: string,
   hideOrigin?: boolean,
+  formatYLabel?: (label: string) => string;
 };
 ```
 
@@ -395,7 +396,7 @@ All the properties are optional. If you don't set a property in the **secondaryY
 **Alert!**\
 While rendering an Animated Bar chart, y axis labels may not appear sometimes. This can be fixed using a key prop as shown -
 
-```js
+```ts
 <BarChart key={'xyz'} data={data} isAnimated />
 ```
 
@@ -437,7 +438,7 @@ To know more about pointerConfig, see pointerConfig in the [Line chart props pag
 
 The structure of stackData is-
 
-```js
+```ts
 [
     {
       stacks:
