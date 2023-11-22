@@ -91,8 +91,7 @@ export const PieChartMain = (props: propTypes) => {
         data.push({
           ...propData[i],
           value:
-            props.data.map(item => item.value).reduce((v, a) => v + a) /
-            36000000,
+            props.data.map(item => item.value).reduce((v, a) => v + a) / 160000,
         });
       }
     }
@@ -337,6 +336,7 @@ export const PieChartMain = (props: propTypes) => {
 
         {showText &&
           data.map((item, index) => {
+            if (!props.data[index].value) return null;
             let mx = cx * (1 + Math.sin(2 * pi * mData[index] + initialAngle));
             let my = cy * (1 - Math.cos(2 * pi * mData[index] + initialAngle));
 

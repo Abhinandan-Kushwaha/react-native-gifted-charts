@@ -111,7 +111,7 @@ export const PieChart = (props: propTypes) => {
         .slice(0, newSelectedIndex)
         .reduce((acc, item) => acc + item.value, 0);
       setStartAngle(
-        newStartAngle + (2 * pi * sumBeforeSelectedIndex) / newTotal,
+        newStartAngle + (2 * pi * sumBeforeSelectedIndex) / (newTotal || 1),
       );
     } else {
       setStartAngle(newStartAngle);
@@ -126,10 +126,12 @@ export const PieChart = (props: propTypes) => {
         start += props.data[i].value;
       }
       if (total) {
-        setStartAngle(newStartAngle + (2 * pi * start) / total);
+        setStartAngle(newStartAngle + (2 * pi * start) / (total || 1));
       }
     }
   }, [selectedIndex]);
+
+  if (!total) return null;
 
   return (
     <View

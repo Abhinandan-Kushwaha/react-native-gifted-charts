@@ -1,8 +1,6 @@
 ## Features
 
 1. Issue with eslint - tsc https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/222
-2. Dynamic number of lines in Line charts
-3. Multicolor line chart
 
 ## To-dos in documentation-
 

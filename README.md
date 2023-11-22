@@ -98,15 +98,6 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 
 ## [Release notes 🎉](release-notes/release-notes.md)
 
-## Common issues
-
-| Issue                                                                                                                        | Solution                                                                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| BarChart- [Value and section line don't match](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35) | [Comment](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35#issuecomment-972673281) by the owner                                                   |
-| Setting `height`, `maxValue`, `stepValue`, `stepHeight`, or `noOfSections` breaks the chart                                  | Please make sure that<br/> `maxValue = noOfSections * stepValue;` <br/>is followed. [See this](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/71) |
-
-## To-dos
-
 [To do list](./src/todos.md)
 
 ## License

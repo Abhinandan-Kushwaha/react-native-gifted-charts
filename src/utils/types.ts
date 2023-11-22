@@ -1,5 +1,6 @@
 import {ColorValue} from 'react-native';
 import {chartTypes, yAxisSides} from './constants';
+import {itemType} from '../LineChart/types';
 
 export type RuleType = 'solid' | 'dashed' | 'dotted' | string;
 
@@ -56,6 +57,7 @@ export type secondaryYAxisType = {
   yAxisLabelPrefix?: string;
   yAxisLabelSuffix?: string;
   hideOrigin?: boolean;
+  formatYLabel?: (label: string) => string;
 };
 
 export type secondaryLineConfigType = {
@@ -295,4 +297,34 @@ export type LineProperties = {
   color: string | ColorValue;
   strokeWidth: number;
   strokeDashArray?: Array<number>;
+};
+
+export type DataSet = {
+  data: Array<itemType>;
+  zIndex?: number;
+  thickness?: number;
+  strokeDashArray?: Array<number>;
+  areaChart?: boolean;
+  stepChart?: boolean;
+  startIndex?: number;
+  endIndex?: number;
+  color?: string;
+  hideDataPoints?: boolean;
+  dataPointsHeight?: number;
+  dataPointsWidth?: number;
+  dataPointsRadius?: number;
+  dataPointsColor?: string;
+  dataPointsShape?: string;
+  startFillColor?: string;
+  endFillColor?: string;
+  startOpacity?: number;
+  endOpacity?: number;
+  textFontSize?: number;
+  textColor?: string;
+  showArrow?: boolean;
+  arrowConfig?: arrowConfigType;
+  curved?: boolean;
+  curvature?: number;
+  curveType?: CurveType;
+  lineSegments?: Array<LineSegment>;
 };

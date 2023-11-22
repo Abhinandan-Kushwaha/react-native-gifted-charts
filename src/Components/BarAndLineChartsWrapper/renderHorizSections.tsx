@@ -113,6 +113,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     yAxisLabelPrefix: secondaryYAxis?.yAxisLabelPrefix ?? yAxisLabelPrefix,
     yAxisLabelSuffix: secondaryYAxis?.yAxisLabelSuffix ?? yAxisLabelSuffix,
     hideOrigin: secondaryYAxis?.hideOrigin ?? hideOrigin,
+    formatYLabel: secondaryYAxis?.formatYLabel,
   };
 
   const {maxItem, minItem} = computeMaxAndMinItems(
@@ -370,6 +371,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       yAxisLabelPrefix,
       yAxisLabelSuffix,
       roundToDigits,
+      formatYLabel,
     } = secondaryYAxisConfig;
     return getLabelTextUtil(
       val,
@@ -380,6 +382,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       yAxisLabelPrefix,
       yAxisLabelSuffix,
       roundToDigits ?? AxesAndRulesDefaults.roundToDigits,
+      formatYLabel,
     );
   };
 

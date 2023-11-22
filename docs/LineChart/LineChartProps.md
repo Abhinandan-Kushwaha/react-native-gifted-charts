@@ -7,8 +7,9 @@
 | data                          | Array of items | An item object represents a point in the line chart. It is described in the next table.                        | \_                         |
 | data2                         | Array of items | Second set of dataPoint for the second line                                                                    | \_                         |
 | data3                         | Array of items | Third set of dataPoint for the third line                                                                      | \_                         |
-| data4                         | Array of items | Third set of dataPoint for the fourth line                                                                     | \_                         |
-| data5                         | Array of items | Third set of dataPoint for the third line                                                                      | \_                         |
+| data4                         | Array of items | Fourth set of dataPoint for the fourth line                                                                    | \_                         |
+| data5                         | Array of items | Fifth set of dataPoint for the third line                                                                      | \_                         |
+| dataSet                       | Array<DataSet> | Array of data sets (used instead of using `data2`, `data3`, `data4` etc)                                       | \_                         |
 | width                         | number         | Width of the Bar chart                                                                                         | width of the parent        |
 | height                        | number         | Height of the Bar chart (excluding the bottom label)                                                           | 200                        |
 | overflowTop                   | number         | Extra space at the top of the chart to make room for dataPointText                                             | 0                          |
@@ -46,11 +47,47 @@
 
 ---
 
-```js
+```ts
 enum EdgePosition {
   AT_DATA_POINT,
   AROUND_DATA_POINT,
 }
+```
+
+### dataSet : Dynamic number of lines
+
+Version `1.3.19` onwards, we support dynamic number of lines with the help of the `dataSet` prop. You can pass an array of data instead of using `data`, `data2`, `data3` etc.
+
+```ts
+type DataSet = {
+  data: Array<itemType>;
+  zIndex?: number;
+  thickness?: number;
+  strokeDashArray?: Array<number>;
+  areaChart?: boolean;
+  stepChart?: boolean;
+  startIndex?: number;
+  endIndex?: number;
+  color?: string;
+  hideDataPoints?: boolean;
+  dataPointsHeight?: number;
+  dataPointsWidth?: number;
+  dataPointsRadius?: number;
+  dataPointsColor?: string;
+  dataPointsShape?: string;
+  startFillColor?: string;
+  endFillColor?: string;
+  startOpacity?: number;
+  endOpacity?: number;
+  textFontSize?: number;
+  textColor?: string;
+  showArrow?: boolean;
+  arrowConfig?: arrowConfigType;
+  curved?: boolean;
+  curvature?: number;
+  curveType?: CurveType;
+  lineSegments?: Array<LineSegment>;
+};
 ```
 
 **Alert!**\
@@ -62,7 +99,7 @@ These props are correlated:
 
 They must follow the relation:
 
-```js
+```ts
 maxValue = noOfSections * stepValue;
 ```
 
@@ -186,11 +223,11 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 
 **Note** If you are setting yAxisSide to 'right', make sure to specify the width of the chart, using the `width` prop
 
-```js
+```ts
 type RuleType = 'solid' | 'dashed' | 'dotted';
 ```
 
-```js
+```ts
 type RulesConfig = {
   rulesLength?: number,
   rulesColor?: ColorValue,
@@ -203,7 +240,7 @@ type RulesConfig = {
 
 ReferenceConfigType has following properties-
 
-```js
+```ts
 type referenceConfigType = {
   thickness: number,
   width: number,
@@ -222,7 +259,7 @@ type referenceConfigType = {
 
 Use this prop to render a secondary Y axis on the right side of the chart. **secondaryYAxis** is an object of type of **secondaryYAxisType** You can control the properties of secodary Y axis by passing an object of properties. Following is the type definition of the secondaryYAxisType object
 
-```js
+```ts
 type secondaryYAxisType = {
   noOfSections?: number,
   maxValue?: number,
@@ -250,6 +287,7 @@ type secondaryYAxisType = {
   yAxisLabelPrefix?: string,
   yAxisLabelSuffix?: string,
   hideOrigin?: boolean,
+  formatYLabel?: (label: string) => string;
 };
 ```
 
@@ -268,7 +306,7 @@ This is achived by using the **secondaryYAxis** and the **secondaryData** props.
 
 Properties of the secondary like color, thickness, curve, strokeWidth, startIndex, endIndex can be controlled using **secondaryLineConfig**. Below is the list of properties with their types.
 
-```js
+```ts
 type secondaryLineConfigType = {
   zIndex?: number;
   curved?: boolean;
@@ -301,7 +339,7 @@ type secondaryLineConfigType = {
 
 CurveType -
 
-```js
+```ts
 enum CurveType {
   CUBIC,
   QUADRATIC,
@@ -366,7 +404,7 @@ All the properties of **secondaryLineConfig** are optional. Properties not provi
 
 ### An example of lineGradientComponent
 
-```js
+```ts
 lineGradientId='ggrd' // lineGradientId is required while using lineGradientComponent
 lineGradientComponent={()=>{
   return(
@@ -391,7 +429,7 @@ lineGradientComponent={()=>{
 
 ### LineSegment
 
-```js
+```ts
 type LineSegment = {
   startIndex: number, // required
   endIndex: number, // required
@@ -431,7 +469,7 @@ The properties of the arrow can controlled with the `arrowConfig` prop.
 
 The `arrowConfig` has the properties allowed by the `arrowType`-
 
-```js
+```ts
 type arrowType = {
   length?: number,
   width?: number,
@@ -444,7 +482,7 @@ type arrowType = {
 
 The default values of these properties are-
 
-```js
+```ts
 defaultArrowConfig = {
   length: 10,
   width: 10,
@@ -532,7 +570,7 @@ pointerConfig is an object, when passed as a prop, creates a magical effect. It 
 To enable such kind of csroll effect, just pass the prop pointerConfig.
 The pointerConfig object has following fields-
 
-```js
+```ts
 type Pointer = {
   height?: number, // default: 0
   width?: number, // default: 0
@@ -629,7 +667,7 @@ To achieve this the `focusEnabled` props must be set to true. In addition, use b
 
 #### Example of onFocus :
 
-```js
+```ts
 onFocus={(item, index) => {
     Alert.alert(item.value)
 }}

@@ -30,6 +30,11 @@ import BarPairWithLine from './BarChart/BarPairWithLine';
 import AreaChartDynamicData from './LineChart/AreaChartDynamicData';
 import BiColorAreaChart from './LineChart/BiColorAreaChart';
 import SecondaryLineChart from './LineChart/SecondaryLineChart';
+import PieWithZero from './PieChart/PieWithZero';
+import DataSetSteppedChart from './LineChart/DataSetSteppedChart';
+import Segmented from './LineChart/Segmented';
+import SegmentedDataSetCurved from './LineChart/SegmentedDataSetCurved';
+import SegmentedDataSetChart from './LineChart/SegmentedDataSet';
 
 const Examples = () => {
   const [selectedFooterButton, setSelectedFooterButton] = useState(0);
@@ -42,6 +47,8 @@ const Examples = () => {
         case 1:
           return 'Line and Area Charts';
         case 2:
+          return 'Line Charts with DataSet and Step';
+        case 3:
           return 'Pie and Donut Charts';
       }
     };
@@ -88,7 +95,7 @@ const Examples = () => {
         <LineChartTwo />
         <Separator />
 
-        <AnimatedArea />
+        <Segmented />
         <Separator />
 
         <AreaTwo />
@@ -113,6 +120,24 @@ const Examples = () => {
     );
   };
 
+  const LineChartsWithDataSet = () => {
+    return (
+      <View>
+        <DataSetSteppedChart />
+        <Separator />
+
+        <SegmentedDataSetChart />
+        <Separator />
+
+        <AnimatedArea />
+        <Separator />
+
+        <SegmentedDataSetCurved />
+        <Separator />
+      </View>
+    );
+  };
+
   const PieAndDonutCharts = () => {
     return (
       <View>
@@ -130,6 +155,9 @@ const Examples = () => {
 
         <PieChartFocusOnPress />
         <Separator />
+
+        <PieWithZero />
+        <Separator />
         <Separator />
       </View>
     );
@@ -142,6 +170,8 @@ const Examples = () => {
       case 1:
         return <LineAndAreaCharts />;
       case 2:
+        return <LineChartsWithDataSet />;
+      case 3:
         return <PieAndDonutCharts />;
     }
   };
@@ -202,6 +232,21 @@ const Examples = () => {
           <TouchableOpacity
             style={footerButtonStyle(2)}
             onPress={() => setSelectedFooterButton(2)}>
+            <Text>Set &</Text>
+            <Text>Step</Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={[
+            styles.footerButtonContainer,
+            selectedFooterButton === 3 ? {marginTop: -12} : null,
+          ]}>
+          {selectedFooterButton === 3 ? (
+            <View style={styles.connector} />
+          ) : null}
+          <TouchableOpacity
+            style={footerButtonStyle(3)}
+            onPress={() => setSelectedFooterButton(3)}>
             <Text>Pie</Text>
             <Text>Donut</Text>
           </TouchableOpacity>
