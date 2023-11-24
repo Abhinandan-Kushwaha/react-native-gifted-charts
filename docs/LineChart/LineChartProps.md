@@ -229,12 +229,12 @@ type RuleType = 'solid' | 'dashed' | 'dotted';
 
 ```ts
 type RulesConfig = {
-  rulesLength?: number,
-  rulesColor?: ColorValue,
-  rulesThickness?: number,
-  rulesType?: RuleType,
-  dashWidth?: number,
-  dashGap?: number,
+  rulesLength?: number;
+  rulesColor?: ColorValue;
+  rulesThickness?: number;
+  rulesType?: RuleType;
+  dashWidth?: number;
+  dashGap?: number;
 };
 ```
 
@@ -242,14 +242,14 @@ ReferenceConfigType has following properties-
 
 ```ts
 type referenceConfigType = {
-  thickness: number,
-  width: number,
-  color: ColorValue | String | any,
-  type: ruleTypes,
-  dashWidth: number,
-  dashGap: number,
-  labelText: String,
-  labelTextStyle: object,
+  thickness: number;
+  width: number;
+  color: ColorValue | String | any;
+  type: ruleTypes;
+  dashWidth: number;
+  dashGap: number;
+  labelText: String;
+  labelTextStyle: object;
 };
 ```
 
@@ -261,32 +261,32 @@ Use this prop to render a secondary Y axis on the right side of the chart. **sec
 
 ```ts
 type secondaryYAxisType = {
-  noOfSections?: number,
-  maxValue?: number,
-  mostNegativeValue?: number,
-  stepValue?: number,
-  stepHeight?: number,
-  showFractionalValues?: boolean,
-  roundToDigits?: number,
+  noOfSections?: number;
+  maxValue?: number;
+  mostNegativeValue?: number;
+  stepValue?: number;
+  stepHeight?: number;
+  showFractionalValues?: boolean;
+  roundToDigits?: number;
 
-  showYAxisIndices?: boolean,
-  yAxisIndicesHeight?: number,
-  yAxisIndicesWidth?: number,
-  yAxisIndicesColor?: ColorValue,
+  showYAxisIndices?: boolean;
+  yAxisIndicesHeight?: number;
+  yAxisIndicesWidth?: number;
+  yAxisIndicesColor?: ColorValue;
 
-  yAxisSide?: yAxisSides,
-  yAxisOffset?: number,
-  yAxisThickness?: number,
-  yAxisColor?: ColorValue,
-  yAxisLabelContainerStyle?: any,
-  yAxisLabelTexts: Array<string> | undefined,
-  yAxisTextStyle?: any,
-  yAxisTextNumberOfLines?: number,
-  yAxisLabelWidth?: number,
-  hideYAxisText?: boolean,
-  yAxisLabelPrefix?: string,
-  yAxisLabelSuffix?: string,
-  hideOrigin?: boolean,
+  yAxisSide?: yAxisSides;
+  yAxisOffset?: number;
+  yAxisThickness?: number;
+  yAxisColor?: ColorValue;
+  yAxisLabelContainerStyle?: any;
+  yAxisLabelTexts: Array<string> | undefined;
+  yAxisTextStyle?: any;
+  yAxisTextNumberOfLines?: number;
+  yAxisLabelWidth?: number;
+  hideYAxisText?: boolean;
+  yAxisLabelPrefix?: string;
+  yAxisLabelSuffix?: string;
+  hideOrigin?: boolean;
   formatYLabel?: (label: string) => string;
 };
 ```
@@ -313,7 +313,8 @@ type secondaryLineConfigType = {
   curvature: number;
   curveType: CurveType; //CurveType is an enum defined below
   areaChart?: boolean;
-  color?; ColorValue;
+  color?;
+  ColorValue;
   thickness?: number;
   zIndex1?: number;
   strokeDashArray?: Array<number>;
@@ -334,7 +335,7 @@ type secondaryLineConfigType = {
   textColor?: string;
   showArrow?: boolean;
   arrowConfig?: arrowConfigType;
-}
+};
 ```
 
 CurveType -
@@ -383,6 +384,7 @@ All the properties of **secondaryLineConfig** are optional. Properties not provi
 | lineSegments3          | Array<LineSegment> | Array of objects used to customize segments (parts) of line3                                                | \_                           |
 | lineSegments4          | Array<LineSegment> | Array of objects used to customize segments (parts) of line4                                                | \_                           |
 | lineSegments5          | Array<LineSegment> | Array of objects used to customize segments (parts) of line5                                                | \_                           |
+| highlightedRange       | HighlightedRange   | renders the parts of lines lying in a given data range with a different style (color, thickness,type)       | \_                           |
 | startIndex             | number             | Start index for data line (used to display data lines having breaks)                                        | 0                            |
 | startIndex1            | number             | Start index for data line 1 (used to display data lines having breaks)                                      | 0                            |
 | startIndex2            | number             | Start index for data line 2 (used to display data lines having breaks)                                      | 0                            |
@@ -431,11 +433,23 @@ lineGradientComponent={()=>{
 
 ```ts
 type LineSegment = {
-  startIndex: number, // required
-  endIndex: number, // required
-  color?: string | ColorValue,
-  thickness?: number,
-  strokeDashArray?: Array<number>,
+  startIndex: number; // required
+  endIndex: number; // required
+  color?: string | ColorValue;
+  thickness?: number;
+  strokeDashArray?: Array<number>;
+};
+```
+
+### HighlightedRange
+ An example of **HighlightedRange** on Stack overflow- https://stackoverflow.com/questions/70406903/different-colors-line-chart-with-react-native-chart-kit
+```ts
+type HighlightedRange = {
+  from: number;
+  to: number;
+  color?: string | ColorValue;
+  thickness?: number;
+  strokeDashArray?: Array<number>;
 };
 ```
 
@@ -471,12 +485,12 @@ The `arrowConfig` has the properties allowed by the `arrowType`-
 
 ```ts
 type arrowType = {
-  length?: number,
-  width?: number,
-  strokeWidth?: number,
-  strokeColor?: string,
-  fillColor?: string,
-  showArrowBase?: boolean,
+  length?: number;
+  width?: number;
+  strokeWidth?: number;
+  strokeColor?: string;
+  fillColor?: string;
+  showArrowBase?: boolean;
 };
 ```
 
@@ -572,43 +586,44 @@ The pointerConfig object has following fields-
 
 ```ts
 type Pointer = {
-  height?: number, // default: 0
-  width?: number, // default: 0
-  radius?: number, // default: 5
-  pointerColor?: ColorValue, // default: 'red'
-  pointer1Color?: ColorValue, // default: 'red'
-  pointer2Color?: ColorValue, // default: 'red'
-  pointer3Color?: ColorValue, // default: 'red'
-  pointer4Color?: ColorValue, // default: 'red'
-  pointer5Color?: ColorValue, // default: 'red'
-  secondaryPointerColor?: ColorValue, // default: 'red'
-  pointerComponent?: Function, // default: null
-  showPointerStrip?: boolean, // default: true
-  pointerStripWidth?: number, // default: containerHeight
-  pointerStripHeight?: number, // default: 1
-  pointerStripColor?: ColorValue, // default: 'black'
-  pointerStripUptoDataPoint?: boolean, // default: false
-  pointerLabelComponent?: Function, // default: null
-  stripOverPointer?: boolean, // default: false
-  shiftPointerLabelX?: number, // default: 0
-  shiftPointerLabelY?: number, // default: 0
-  pointerLabelWidth?: number, // default: 20
-  pointerLabelHeight?: number, // default: 20
-  autoAdjustPointerLabelPosition?: boolean, // default: false
-  pointerVanishDelay?: number, // default: 150
-  activatePointersOnLongPress?: boolean, // default: false
-  activatePointersDelay?: number, // default: 150
-  initialPointerIndex?: number, // default -1
-  initialPointerAppearDelay?: number, // if isAnimated, then animationDuration, else 0
-  persistPointer?: boolean, // false
-  hidePointer1?: boolean, // default: false
-  hidePointer2?: boolean, // default: false
-  hidePointer3?: boolean, // default: false
-  hidePointer4?: boolean, // default: false
-  hidePointer5?: boolean, // default: false
-  hideSecondaryPointer?: boolean // default: false
-  strokeDashArray?: Array<number>,
-  barTouchable?: boolean, //default : false (only applicable to bar charts having pointerConfig)
+  height?: number; // default: 0
+  width?: number; // default: 0
+  radius?: number; // default: 5
+  pointerColor?: ColorValue; // default: 'red'
+  pointer1Color?: ColorValue; // default: 'red'
+  pointer2Color?: ColorValue; // default: 'red'
+  pointer3Color?: ColorValue; // default: 'red'
+  pointer4Color?: ColorValue; // default: 'red'
+  pointer5Color?: ColorValue; // default: 'red'
+  secondaryPointerColor?: ColorValue; // default: 'red'
+  pointerComponent?: Function; // default: null
+  showPointerStrip?: boolean; // default: true
+  pointerStripWidth?: number; // default: containerHeight
+  pointerStripHeight?: number; // default: 1
+  pointerStripColor?: ColorValue; // default: 'black'
+  pointerStripUptoDataPoint?: boolean; // default: false
+  pointerLabelComponent?: Function; // default: null
+  stripOverPointer?: boolean; // default: false
+  shiftPointerLabelX?: number; // default: 0
+  shiftPointerLabelY?: number; // default: 0
+  pointerLabelWidth?: number; // default: 20
+  pointerLabelHeight?: number; // default: 20
+  autoAdjustPointerLabelPosition?: boolean; // default: false
+  pointerVanishDelay?: number; // default: 150
+  activatePointersOnLongPress?: boolean; // default: false
+  activatePointersDelay?: number; // default: 150
+  initialPointerIndex?: number; // default -1
+  initialPointerAppearDelay?: number; // if isAnimated, then animationDuration, else 0
+  persistPointer?: boolean; // false
+  hidePointer1?: boolean; // default: false
+  hidePointer2?: boolean; // default: false
+  hidePointer3?: boolean; // default: false
+  hidePointer4?: boolean; // default: false
+  hidePointer5?: boolean; // default: false
+  hideSecondaryPointer?: boolean; // default: false
+  strokeDashArray?: Array<number>;
+  barTouchable?: boolean; //default : false (only applicable to bar charts having pointerConfig)
+  pointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto'; // default: "none
 };
 ```
 
@@ -624,6 +639,8 @@ The `strokeDashArray` property lets us render a dashed/dotted strip along the po
 #### pointerLabelComponent
 
 `pointerLabelComponent` is a function that returns the component to be rendered as a Label. It takes 2 parameters - 1. an array of items 2. secondaryDataItem. So, if there are multiple data arrays, the parameter `items` will have the data item corresponding to each data array. If the chart has secondaryData, the parameter `secondaryDataItem` will have the corresponding item from the secondaryData.
+
+**Note** If you have a Pressable / Touchable item in your `pointerLabelComponent`, then you should set `pointerEvents` to **'auto'** inside the pointerConfig object.
 
 #### getPointerProps
 

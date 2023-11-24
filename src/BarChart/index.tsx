@@ -303,6 +303,7 @@ export const BarChart = (props: BarChartPropsType) => {
     pointerConfig?.persistPointer ?? defaultPointerConfig.persistPointer;
   const hidePointer1 =
     pointerConfig?.hidePointer1 ?? defaultPointerConfig.hidePointer1;
+  const pointerEvents = pointerConfig?.pointerEvents;
 
   const disableScroll =
     props.disableScroll ||
@@ -612,6 +613,7 @@ export const BarChart = (props: BarChartPropsType) => {
       pointerConfig,
       pointerLabelComponent,
       scrollX: 0,
+      pointerEvents,
     });
   };
 
@@ -712,7 +714,7 @@ export const BarChart = (props: BarChartPropsType) => {
           {renderChart()}
           {pointerX > 0 ? (
             <View
-              pointerEvents="none"
+              pointerEvents={pointerEvents ?? 'none'}
               style={{
                 position: 'absolute',
                 height:
@@ -755,6 +757,9 @@ export const BarChart = (props: BarChartPropsType) => {
         horizontal: horizontal,
         rtl: rtl,
         intactTopLabel: intactTopLabel,
+        showValuesAsTopLabel: props.showValuesAsTopLabel,
+        topLabelContainerStyle: props.topLabelContainerStyle,
+        topLabelTextStyle: props.topLabelTextStyle,
         barBorderRadius: props.barBorderRadius,
         barBorderTopLeftRadius: props.barBorderTopLeftRadius,
         barBorderTopRightRadius: props.barBorderTopRightRadius,

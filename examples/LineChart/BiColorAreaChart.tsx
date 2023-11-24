@@ -14,7 +14,7 @@ const BiColorAreaChart = () => {
     {value: 85},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <LineChartBicolor
         data={lineData}
         areaChart

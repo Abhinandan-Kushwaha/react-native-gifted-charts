@@ -24,11 +24,24 @@ export enum yAxisSides {
   RIGHT,
 }
 
+export enum loc {
+  IN,
+  UP,
+  DOWN
+}
+
+export const SEGMENT_START = 'segmentStart';
+export const SEGMENT_END = 'segmentEnd';
+export const RANGE_ENTER = 'RangeEnter';
+export const RANGE_EXIT = 'RangeExit';
+export const STOP = 'stop';
+
 export const ruleTypes: RuleTypes = {
   SOLID: 'solid',
   DASHED: 'dashed',
   DOTTED: 'dotted',
 };
+
 
 export const AxesAndRulesDefaults = {
   yAxisSide: yAxisSides.LEFT,
@@ -239,6 +252,7 @@ export const defaultPointerConfig = {
   hidePointer5: false,
   hideSecondaryPointer: false,
   barTouchable: false,
+  // pointerEvents: PointerEvent
 };
 
 // Pie chart specific

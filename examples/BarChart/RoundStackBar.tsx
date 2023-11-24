@@ -36,7 +36,7 @@ const RoundStackBar = () => {
     },
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <BarChart
         width={340}
         rotateLabel

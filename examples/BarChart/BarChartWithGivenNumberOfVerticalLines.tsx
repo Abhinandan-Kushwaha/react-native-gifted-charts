@@ -11,7 +11,7 @@ const BarChartWithGivenNumberOfVerticalLines = () => {
     {value: 30, label: 'Apr'},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <BarChart
         data={data}
         width={300}

@@ -12,7 +12,7 @@ const BarWithGradient = () => {
     {value: 0.7, label: '6'},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <BarChart
         showFractionalValues
         showYAxisIndices

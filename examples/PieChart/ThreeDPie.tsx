@@ -10,7 +10,7 @@ const ThreeDPie = () => {
   ];
 
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <PieChart
         donut
         isThreeD

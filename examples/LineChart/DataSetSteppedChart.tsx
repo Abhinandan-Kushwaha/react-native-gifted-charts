@@ -35,7 +35,7 @@ const DataSetSteppedChart = () => {
     {data: lineData2, color: 'orange', dataPointsColor: 'red'},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <LineChart
         dataSet={dataSet}
         stepChart

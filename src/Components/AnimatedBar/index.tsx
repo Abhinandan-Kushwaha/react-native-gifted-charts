@@ -6,6 +6,7 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
+  Text,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
@@ -32,12 +33,13 @@ type animatedBarPropTypes = {
   frontColor: ColorValue;
   sideColor: ColorValue;
   topColor: ColorValue;
-  topLabelComponent: any;
-  topLabelContainerStyle: any;
   opacity: number;
   side: String;
   horizontal: boolean;
   intactTopLabel: boolean;
+  showValuesAsTopLabel: boolean;
+  topLabelContainerStyle?: any;
+  topLabelTextStyle?: any;
   barBackgroundPattern?: Function;
   patternId?: String;
   barStyle?: object;
@@ -107,9 +109,18 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
     setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
   };
 
-  const {item, width, sideWidth, barStyle} = props;
-
-  const {barBackgroundPattern, patternId} = props;
+  const {
+    item,
+    width,
+    sideWidth,
+    barStyle,
+    barBackgroundPattern,
+    patternId,
+    intactTopLabel,
+    showValuesAsTopLabel,
+    topLabelContainerStyle,
+    topLabelTextStyle,
+  } = props;
 
   const showGradient = props.showGradient || false;
   const gradientColor = props.gradientColor || 'white';
@@ -117,9 +128,6 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
   const frontColor = props.frontColor || '#fe2233';
   const sideColor = props.sideColor || '#cc2233';
   const topColor = props.topColor || '#ff4433';
-
-  const topLabelComponent = props.topLabelComponent || null;
-  const topLabelContainerStyle = props.topLabelContainerStyle || {};
 
   const opacity = props.opacity || 1;
 
@@ -194,16 +202,17 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
           ) : null}
 
           <View
-            style={[{
-              width: width,
-              height: height, //animatedHeight
-              backgroundColor: frontColor,
-              borderLeftWidth: StyleSheet.hairlineWidth,
-              borderTopWidth: StyleSheet.hairlineWidth,
-              borderColor: 'white',
-              opacity: opacity,
-            },
-            item.barStyle || barStyle
+            style={[
+              {
+                width: width,
+                height: height, //animatedHeight
+                backgroundColor: frontColor,
+                borderLeftWidth: StyleSheet.hairlineWidth,
+                borderTopWidth: StyleSheet.hairlineWidth,
+                borderColor: 'white',
+                opacity: opacity,
+              },
+              item.barStyle || barStyle,
             ]}>
             {showGradient && (
               <LinearGradient
@@ -230,7 +239,7 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
 
           {/*******************          Top Label            *****************/}
 
-          {topLabelComponent && (
+          {(item.topLabelComponent || showValuesAsTopLabel) && (
             <View
               style={[
                 {
@@ -243,11 +252,15 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
                   opacity: opacity,
                 },
                 props.horizontal &&
-                  !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
+                  !intactTopLabel && {transform: [{rotate: '270deg'}]},
                 props.side === 'right' && {transform: [{rotateY: '180deg'}]},
-                topLabelContainerStyle,
+                topLabelContainerStyle ?? item.topLabelContainerStyle,
               ]}>
-              {topLabelComponent()}
+              {showValuesAsTopLabel ? (
+                <Text style={topLabelTextStyle}>{item.value}</Text>
+              ) : (
+                item.topLabelComponent?.()
+              )}
             </View>
           )}
 

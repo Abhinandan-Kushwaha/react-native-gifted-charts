@@ -13,7 +13,7 @@ const SimpleBlueBars = () => {
     {value: 300, label: 'S'},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <BarChart
         barWidth={22}
         noOfSections={3}

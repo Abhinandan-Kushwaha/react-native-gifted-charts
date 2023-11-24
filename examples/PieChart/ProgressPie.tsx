@@ -8,7 +8,7 @@ const ProgressPie = () => {
     {value: 30, color: 'lightgray'},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <PieChart
         donut
         innerRadius={80}

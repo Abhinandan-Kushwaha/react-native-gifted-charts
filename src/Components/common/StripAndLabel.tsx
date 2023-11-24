@@ -27,6 +27,7 @@ export const StripAndLabel = props => {
     pointerLabelComponent,
     secondaryPointerItem,
     scrollX,
+    pointerEvents,
   } = props;
   let left = 0,
     top = 0;
@@ -125,7 +126,7 @@ export const StripAndLabel = props => {
 
       {pointerLabelComponent && (
         <View
-          pointerEvents="none"
+          pointerEvents={pointerEvents ?? 'none'}
           style={[
             {
               position: 'absolute',

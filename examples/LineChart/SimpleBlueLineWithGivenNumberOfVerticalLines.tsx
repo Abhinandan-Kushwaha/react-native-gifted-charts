@@ -14,7 +14,7 @@ const SimpleBlueLineWithGivenNumberOfVerticalLines = () => {
     {value: 85},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <LineChart
         initialSpacing={0}
         data={lineData}

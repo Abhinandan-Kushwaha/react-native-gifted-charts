@@ -5,7 +5,7 @@ import {PieChart} from '../../src/PieChart';
 const PieSingleData = () => {
   const pieData = [{value: 54, color: '#177AD5', text: '54%'}];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <PieChart
         donut
         showText

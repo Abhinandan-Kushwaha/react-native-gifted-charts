@@ -35,6 +35,7 @@ import DataSetSteppedChart from './LineChart/DataSetSteppedChart';
 import Segmented from './LineChart/Segmented';
 import SegmentedDataSetCurved from './LineChart/SegmentedDataSetCurved';
 import SegmentedDataSetChart from './LineChart/SegmentedDataSet';
+import HighlightedRange from './LineChart/HighlightedRange';
 
 const Examples = () => {
   const [selectedFooterButton, setSelectedFooterButton] = useState(0);
@@ -133,6 +134,10 @@ const Examples = () => {
         <Separator />
 
         <SegmentedDataSetCurved />
+        <Separator />
+        
+        <HighlightedRange />
+        <Separator />
         <Separator />
       </View>
     );

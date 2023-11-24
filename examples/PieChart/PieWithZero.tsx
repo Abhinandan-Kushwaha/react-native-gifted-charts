@@ -12,7 +12,7 @@ const PieWithZero = () => {
     {value: 0, text: '0'},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <PieChart data={pieData} showText showTextBackground donut />
       <PieChart data={pieData2} />
     </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ColorValue} from 'react-native';
+import {View, StyleSheet, ColorValue, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {styles} from './styles';
@@ -15,12 +15,13 @@ type PropTypes = {
   frontColor: ColorValue;
   sideColor: ColorValue;
   topColor: ColorValue;
-  topLabelComponent: any;
-  topLabelContainerStyle: any;
   opacity: number;
   side: String;
   horizontal: boolean;
   intactTopLabel: boolean;
+  showValuesAsTopLabel: boolean;
+  topLabelContainerStyle?: any;
+  topLabelTextStyle?: any;
   value: number;
   barBackgroundPattern?: Function;
   patternId?: String;
@@ -80,8 +81,12 @@ const ThreeDBar = (props: PropTypes) => {
   const sideColor = props.sideColor || '#cc2233';
   const topColor = props.topColor || '#ff4433';
 
-  const topLabelComponent = props.topLabelComponent || null;
-  const topLabelContainerStyle = props.topLabelContainerStyle || {};
+  const {
+    intactTopLabel,
+    showValuesAsTopLabel,
+    topLabelContainerStyle,
+    topLabelTextStyle,
+  } = props;
 
   const opacity = props.opacity || 1;
   return (
@@ -184,7 +189,7 @@ const ThreeDBar = (props: PropTypes) => {
 
       {/*******************          Top Label            *****************/}
 
-      {topLabelComponent && (
+      {(item.topLabelComponent || showValuesAsTopLabel) && (
         <View
           style={[
             {
@@ -197,13 +202,17 @@ const ThreeDBar = (props: PropTypes) => {
             },
             value < 0 && {transform: [{rotate: '180deg'}]},
             props.horizontal &&
-              !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
+              !intactTopLabel && {transform: [{rotate: '270deg'}]},
             props.side === 'right'
               ? {right: (-1 * width) / 4}
               : {left: (-1 * width) / 4},
-            topLabelContainerStyle,
+            topLabelContainerStyle ?? item.topLabelContainerStyle,
           ]}>
-          {topLabelComponent()}
+          {showValuesAsTopLabel ? (
+            <Text style={topLabelTextStyle}>{item.value}</Text>
+          ) : (
+            item.topLabelComponent?.()
+          )}
         </View>
       )}
 
