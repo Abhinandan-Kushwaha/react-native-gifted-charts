@@ -1,4 +1,4 @@
-# 🎉 1.3.22
+# 🎉 1.3.23
 
 ## ✨ Features added-
 
@@ -28,7 +28,7 @@ type HighlightedRange = {
 
 ---
 
-### `1.3.20` was pushed by mistake, then pushed `1.3.21` as a revert of the mistake
+### Versions `1.3.20` and `1.3.21` and `1.3.22` were mistakes and reverts...
 
 ---
 
