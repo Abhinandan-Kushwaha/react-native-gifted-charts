@@ -405,7 +405,7 @@ const RenderBars = (props: Props) => {
     (pointerConfig && pointerConfig.barTouchable !== true);
 
   const barContent = () => {
-    const animated2DWithGradient = noGradient => (
+    const animated2DWithGradient = (noGradient, noAnimation) => (
       <Animated2DWithGradient
         barBackgroundPattern={props.barBackgroundPattern}
         patternId={props.patternId}
@@ -417,6 +417,7 @@ const RenderBars = (props: Props) => {
         roundedBottom={props.roundedBottom || false}
         roundedTop={props.roundedTop || false}
         noGradient={noGradient}
+        noAnimation={noAnimation}
         gradientColor={noGradient ? undefined : props.gradientColor}
         frontColor={props.frontColor || 'black'}
         containerHeight={containerHeight}
@@ -522,14 +523,14 @@ const RenderBars = (props: Props) => {
           )
         ) : item.showGradient || props.showGradient ? (
           isAnimated ? (
-            animated2DWithGradient(false)
+            animated2DWithGradient(false, false)
           ) : (
             static2DWithGradient(item)
           )
         ) : isAnimated ? (
-          animated2DWithGradient(true)
+          animated2DWithGradient(true, false)
         ) : (
-          animated2DWithGradient(true)
+          animated2DWithGradient(true, true)
         )}
         {isAnimated
           ? renderAnimatedLabel(label, labelTextStyle, item.value)
