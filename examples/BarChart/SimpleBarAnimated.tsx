@@ -11,7 +11,7 @@ const SimpleBarAnimated = () => {
     {value: 320, label: 'May', frontColor: '#91E3E3'},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <BarChart
         showFractionalValues
         showYAxisIndices

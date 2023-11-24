@@ -21,7 +21,7 @@ const CaloriesBurnt = () => {
     {value: 18},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <LineChart
         areaChart
         curved

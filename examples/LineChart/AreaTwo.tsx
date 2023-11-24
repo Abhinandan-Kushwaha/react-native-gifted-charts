@@ -24,7 +24,7 @@ const LineChartTwo = () => {
     {value: 85},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <LineChart
         areaChart
         curved

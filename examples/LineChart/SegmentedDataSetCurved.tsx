@@ -42,7 +42,7 @@ const SegmentedDataSetCurved = () => {
     },
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <LineChart
         areaChart
         curved

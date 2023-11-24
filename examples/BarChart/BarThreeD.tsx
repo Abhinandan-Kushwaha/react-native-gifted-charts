@@ -41,7 +41,7 @@ const BarThreeD = () => {
     },
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <BarChart
         showFractionalValues
         showYAxisIndices

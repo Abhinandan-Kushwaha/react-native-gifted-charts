@@ -38,10 +38,17 @@ import {
   getCurvePathWithSegments,
   getSegmentedPathObjects,
   getSegmentString,
+  getRegionPathObjects,
+  getPathWithHighlight,
 } from '../utils';
 import {
   AxesAndRulesDefaults,
   LineDefaults,
+  RANGE_ENTER,
+  RANGE_EXIT,
+  SEGMENT_END,
+  SEGMENT_START,
+  STOP,
   chartTypes,
   defaultArrowConfig,
   defaultPointerConfig,
@@ -258,16 +265,13 @@ export const LineChart = (props: LineChartPropsType) => {
   const startIndex5 = props.startIndex5 || 0;
   const endIndex5 = props.endIndex5 ?? data5.length - 1;
 
-  const startIndicesFromSet = dataSet?.map(set => set.startIndex ?? 0);
-  const endIndicesFromSet = dataSet?.map(
-    set => set.endIndex ?? set.data.length - 1,
-  );
-
   const lineSegments = props.lineSegments;
   const lineSegments2 = props.lineSegments2;
   const lineSegments3 = props.lineSegments3;
   const lineSegments4 = props.lineSegments4;
   const lineSegments5 = props.lineSegments5;
+
+  const highlightedRange = props.highlightedRange;
 
   if (!initialData) {
     initialData = data0 ?? [...data];
@@ -885,13 +889,29 @@ export const LineChart = (props: LineChartPropsType) => {
       getNextPoint(data, i, around)
     );
   };
-  const getSegmentPath = (data, i, lineSegment) =>
-    'L' +
-    getX(i) +
-    ' ' +
-    getY(data[i].value) +
-    ' ' +
-    getSegmentString(lineSegment, i);
+
+  const getSegmentPath = (data, i, lineSegment, startIndex, endIndex) => {
+    let path =
+      'L' +
+      getX(i) +
+      ' ' +
+      getY(data[i].value) +
+      ' ' +
+      getSegmentString(lineSegment, i, SEGMENT_START, SEGMENT_END);
+
+    if (highlightedRange) {
+      path += getPathWithHighlight(
+        data,
+        i,
+        highlightedRange,
+        startIndex,
+        endIndex,
+        getX,
+        getY,
+      );
+    }
+    return path;
+  };
 
   useEffect(() => {
     if (dataSet) {
@@ -907,8 +927,8 @@ export const LineChart = (props: LineChartPropsType) => {
           const pArray: Array<Array<number>> = [];
           for (let i = 0; i < setData.length; i++) {
             if (
-              i >= (startIndicesFromSet?.[index] ?? 0) &&
-              i <= (endIndicesFromSet?.[index] ?? -1)
+              i >= (set.startIndex ?? 0) &&
+              i <= (set.endIndex ?? set.data.length - 1)
             ) {
               pArray.push([getX(i), getY(setData[i].value)]);
             }
@@ -918,7 +938,14 @@ export const LineChart = (props: LineChartPropsType) => {
             set.curveType ?? curveType,
             set.curvature ?? curvature,
           );
-          pointsArray.push(getCurvePathWithSegments(xx, set.lineSegments));
+          pointsArray.push(
+            getCurvePathWithSegments(
+              xx,
+              set.lineSegments,
+              SEGMENT_START,
+              SEGMENT_END,
+            ),
+          );
 
           // For Arrow-
           if (setData.length > 1 && (set.showArrow ?? props.showArrows)) {
@@ -953,13 +980,19 @@ export const LineChart = (props: LineChartPropsType) => {
           let pp = '';
           for (let i = 0; i < setData.length; i++) {
             if (
-              i >= (startIndicesFromSet?.[index] ?? 0) &&
-              i <= (endIndicesFromSet?.[index] ?? -1)
+              i >= (set.startIndex ?? 0) &&
+              i <= (set.endIndex ?? set.data.length - 1)
             ) {
               if (set.stepChart || stepChart) {
                 pp += getStepPath(setData, i);
               } else {
-                pp += getSegmentPath(setData, i, set.lineSegments);
+                pp += getSegmentPath(
+                  setData,
+                  i,
+                  set.lineSegments,
+                  set.startIndex ?? 0,
+                  set.endIndex ?? set.data.length - 1,
+                );
               }
             }
           }
@@ -1018,7 +1051,13 @@ export const LineChart = (props: LineChartPropsType) => {
             if (stepChart || stepChart1) {
               pp += getStepPath(data, i);
             } else {
-              pp += getSegmentPath(data, i, lineSegments);
+              pp += getSegmentPath(
+                data,
+                i,
+                lineSegments,
+                startIndex1,
+                endIndex1,
+              );
             }
           }
           if (data2.length && i >= startIndex2 && i <= endIndex2) {
@@ -1026,28 +1065,52 @@ export const LineChart = (props: LineChartPropsType) => {
               pp2 += getStepPath(data2, i);
               (' ');
             } else {
-              pp2 += getSegmentPath(data2, i, lineSegments2);
+              pp2 += getSegmentPath(
+                data2,
+                i,
+                lineSegments2,
+                startIndex2,
+                endIndex2,
+              );
             }
           }
           if (data3.length && i >= startIndex3 && i <= endIndex3) {
             if (stepChart || stepChart3) {
               pp3 += getStepPath(data3, i);
             } else {
-              pp3 += getSegmentPath(data2, i, lineSegments2);
+              pp3 += getSegmentPath(
+                data2,
+                i,
+                lineSegments2,
+                startIndex3,
+                endIndex3,
+              );
             }
           }
           if (data4.length && i >= startIndex4 && i <= endIndex4) {
             if (stepChart || stepChart4) {
               pp4 += getStepPath(data4, i);
             } else {
-              pp4 += getSegmentPath(data4, i, lineSegments4);
+              pp4 += getSegmentPath(
+                data4,
+                i,
+                lineSegments4,
+                startIndex4,
+                endIndex4,
+              );
             }
           }
           if (data5.length && i >= startIndex5 && i <= endIndex5) {
             if (stepChart || stepChart5) {
               pp5 += getStepPath(data5, i);
             } else {
-              pp5 += getSegmentPath(data5, i, lineSegments5);
+              pp5 += getSegmentPath(
+                data5,
+                i,
+                lineSegments5,
+                startIndex5,
+                endIndex4,
+              );
             }
           }
         }
@@ -1271,11 +1334,46 @@ export const LineChart = (props: LineChartPropsType) => {
         let xx4 = svgPath(p4Array, curveType, curvature);
         let xx5 = svgPath(p5Array, curveType, curvature);
 
-        setPoints(getCurvePathWithSegments(xx, lineSegments));
-        setPoints2(getCurvePathWithSegments(xx2, lineSegments2));
-        setPoints3(getCurvePathWithSegments(xx3, lineSegments3));
-        setPoints4(getCurvePathWithSegments(xx4, lineSegments4));
-        setPoints5(getCurvePathWithSegments(xx5, lineSegments5));
+        setPoints(
+          getCurvePathWithSegments(
+            xx,
+            lineSegments,
+            SEGMENT_START,
+            SEGMENT_END,
+          ),
+        );
+        setPoints2(
+          getCurvePathWithSegments(
+            xx2,
+            lineSegments2,
+            SEGMENT_START,
+            SEGMENT_END,
+          ),
+        );
+        setPoints3(
+          getCurvePathWithSegments(
+            xx3,
+            lineSegments3,
+            SEGMENT_START,
+            SEGMENT_END,
+          ),
+        );
+        setPoints4(
+          getCurvePathWithSegments(
+            xx4,
+            lineSegments4,
+            SEGMENT_START,
+            SEGMENT_END,
+          ),
+        );
+        setPoints5(
+          getCurvePathWithSegments(
+            xx5,
+            lineSegments5,
+            SEGMENT_START,
+            SEGMENT_END,
+          ),
+        );
 
         if (data.length > 1 && (props.showArrow1 || props.showArrows)) {
           let arrowTipY = p1Array[p1Array.length - 1][1];
@@ -1691,6 +1789,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const hideSecondaryPointer =
     pointerConfig?.hideSecondaryPointer ??
     defaultPointerConfig.hideSecondaryPointer;
+  const pointerEvents = pointerConfig?.pointerEvents;
   const disableScroll =
     props.disableScroll ||
     (pointerConfig
@@ -2263,6 +2362,7 @@ export const LineChart = (props: LineChartPropsType) => {
       pointerLabelComponent,
       secondaryPointerItem,
       scrollX,
+      pointerEvents,
     });
   };
 
@@ -2330,7 +2430,19 @@ export const LineChart = (props: LineChartPropsType) => {
     if (!points) return null;
     const isCurved = points.includes('C');
     let ar: [any] = [{}];
-    if (points.includes('segmentStart')) {
+    if (points.includes(RANGE_ENTER)) {
+      ar = getRegionPathObjects(
+        points,
+        color,
+        currentLineThickness,
+        thickness,
+        strokeDashArray,
+        isCurved,
+        RANGE_ENTER,
+        STOP,
+        RANGE_EXIT,
+      );
+    } else if (points.includes(SEGMENT_START)) {
       ar = getSegmentedPathObjects(
         points,
         color,
@@ -2338,6 +2450,8 @@ export const LineChart = (props: LineChartPropsType) => {
         thickness,
         strokeDashArray,
         isCurved,
+        SEGMENT_START,
+        SEGMENT_END,
       );
     }
     const lineSvgPropsOuter: LineSvgProps = {
@@ -2361,7 +2475,7 @@ export const LineChart = (props: LineChartPropsType) => {
     return (
       <Svg>
         {lineGradient && getLineGradientComponent()}
-        {points.includes('segmentStart') ? (
+        {points.includes(SEGMENT_START) || points.includes(RANGE_ENTER) ? (
           ar.map((item, index) => {
             const lineSvgProps: LineSvgProps = {
               d: item.d,
@@ -3387,13 +3501,13 @@ export const LineChart = (props: LineChartPropsType) => {
           : null}
         {pointerX > 0 ? (
           <View
-            pointerEvents="none"
+            pointerEvents={pointerEvents ?? 'none'}
             style={{
               position: 'absolute',
               height:
                 extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
               bottom: 58 + labelsExtraHeight + xAxisLabelsVerticalShift,
-              width: totalWidth,
+              // width: totalWidth,
               zIndex: 20,
             }}>
             {!stripOverPointer && renderStripAndLabel()}

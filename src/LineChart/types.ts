@@ -4,6 +4,7 @@ import {
   CurveType,
   DataSet,
   EdgePosition,
+  HighlightedRange,
   LineSegment,
   Pointer,
   RuleType,
@@ -310,6 +311,7 @@ export type LineChartPropsType = {
   lineSegments3?: Array<LineSegment>;
   lineSegments4?: Array<LineSegment>;
   lineSegments5?: Array<LineSegment>;
+  highlightedRange?: HighlightedRange;
 };
 
 type referenceConfigType = {

@@ -103,6 +103,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const xAxisLabelsVerticalShift =
     axesAndRulesProps.xAxisLabelsVerticalShift ??
     AxesAndRulesDefaults.xAxisLabelsVerticalShift;
+  const xAxisLabelsHeight = axesAndRulesProps.xAxisLabelsHeight;
+  const xAxisTextNumberOfLines = axesAndRulesProps.xAxisTextNumberOfLines;
   const dashWidth =
     axesAndRulesProps.dashWidth ?? AxesAndRulesDefaults.dashWidth;
   const dashGap = axesAndRulesProps.dashGap ?? AxesAndRulesDefaults.dashGap;
@@ -334,7 +336,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
       stepHeight / 2 +
       xAxisLabelsVerticalShift +
       50,
-    marginBottom: 15, //This is to not let the Things that should be rendered below the chart overlap with it
+    marginBottom: (xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18) - 50, //This is to not let the Things that should be rendered below the chart overlap with it
   };
 
   return (

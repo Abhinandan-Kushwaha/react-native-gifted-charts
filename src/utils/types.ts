@@ -29,6 +29,8 @@ export type RulesConfig = {
   dashGap?: number;
 };
 
+export type PointerEvents = 'box-none' | 'none' | 'box-only' | 'auto';
+
 export type secondaryYAxisType = {
   noOfSections?: number;
   maxValue?: number;
@@ -274,6 +276,15 @@ export type Pointer = {
   hideSecondaryPointer?: boolean;
   strokeDashArray?: Array<number>;
   barTouchable?: boolean;
+  pointerEvents?: PointerEvents;
+};
+
+export type HighlightedRange = {
+  from: number;
+  to: number;
+  color?: string | ColorValue;
+  thickness?: number;
+  strokeDashArray?: Array<number>;
 };
 
 export type LineSegment = {

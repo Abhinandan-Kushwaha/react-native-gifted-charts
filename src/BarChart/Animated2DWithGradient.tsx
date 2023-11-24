@@ -5,6 +5,7 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
+  Text,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
@@ -35,6 +36,9 @@ type propTypes = {
   capRadius?: number;
   horizontal: boolean;
   intactTopLabel: boolean;
+  showValuesAsTopLabel: boolean;
+  topLabelContainerStyle?: any;
+  topLabelTextStyle?: any;
   barBorderRadius?: number;
   barBorderTopLeftRadius?: number;
   barBorderTopRightRadius?: number;
@@ -67,6 +71,10 @@ const Animated2DWithGradient = (props: propTypes) => {
     barBorderTopRightRadius,
     barBorderBottomLeftRadius,
     barBorderBottomRightRadius,
+    intactTopLabel,
+    showValuesAsTopLabel,
+    topLabelContainerStyle,
+    topLabelTextStyle,
   } = props;
   const [height, setHeight] = useState(noAnimation ? props.height : 0.2);
   const [initialRender, setInitialRender] = useState(
@@ -299,7 +307,7 @@ const Animated2DWithGradient = (props: propTypes) => {
               </Svg>
             )}
           </View>
-          {item.topLabelComponent && (
+          {(item.topLabelComponent || showValuesAsTopLabel) && (
             <View
               style={[
                 {
@@ -308,8 +316,7 @@ const Animated2DWithGradient = (props: propTypes) => {
                   height: item.barWidth || barWidth || 30,
                   width: item.barWidth || barWidth || 30,
                   justifyContent:
-                    (props.horizontal && !props.intactTopLabel) ||
-                    item.value < 0
+                    (props.horizontal && !intactTopLabel) || item.value < 0
                       ? 'center'
                       : 'flex-end',
                   alignItems: 'center',
@@ -317,10 +324,14 @@ const Animated2DWithGradient = (props: propTypes) => {
                 },
                 item.value < 0 && {transform: [{rotate: '180deg'}]},
                 props.horizontal &&
-                  !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
-                item.topLabelContainerStyle,
+                  !intactTopLabel && {transform: [{rotate: '270deg'}]},
+                topLabelContainerStyle ?? item.topLabelContainerStyle,
               ]}>
-              {item.topLabelComponent()}
+              {showValuesAsTopLabel ? (
+                <Text style={topLabelTextStyle}>{item.value}</Text>
+              ) : (
+                item.topLabelComponent?.()
+              )}
             </View>
           )}
         </View>

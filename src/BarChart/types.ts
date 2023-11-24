@@ -126,6 +126,9 @@ export type BarChartPropsType = {
   yAxisAtTop?: boolean;
 
   intactTopLabel?: boolean;
+  showValuesAsTopLabel?: boolean;
+  topLabelContainerStyle?: any;
+  topLabelTextStyle?: any;
 
   horizSections?: Array<sectionType>;
   barBorderRadius?: number;

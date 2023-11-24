@@ -1,4 +1,5 @@
 import React from 'react';
+import {View} from 'react-native';
 import {PieChart} from '../../src/PieChart';
 
 const SplitPie = () => {
@@ -7,7 +8,11 @@ const SplitPie = () => {
     {value: 40, color: '#79D2DE'},
     {value: 20, color: '#ED6665', shiftX: -10, shiftY: -18},
   ];
-  return <PieChart data={pieData} />;
+  return (
+    <View style={{borderWidth: 1}}>
+      <PieChart data={pieData} />
+    </View>
+  );
 };
 
 export default SplitPie;

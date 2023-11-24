@@ -1,4 +1,10 @@
-import {defaultLineConfig} from './constants';
+import {
+  RANGE_ENTER,
+  RANGE_EXIT,
+  STOP,
+  defaultLineConfig,
+  loc,
+} from './constants';
 import {arrowConfigType, CurveType, LineProperties, LineSegment} from './types';
 
 export const getCumulativeWidth = (
@@ -25,9 +31,6 @@ export const getLighterColor = (color: String) => {
       r = parseInt(color[1], 16);
       g = parseInt(color[2], 16);
       b = parseInt(color[3], 16);
-      // console.log('r', r);
-      // console.log('g', g);
-      // console.log('b', b);
       if (r < 14) {
         r += 2;
         lighter += r.toString(16);
@@ -40,14 +43,10 @@ export const getLighterColor = (color: String) => {
         b += 2;
         lighter += b.toString(16);
       }
-      // console.log('lighter', lighter);
     } else {
       r = parseInt(color[1] + color[2], 16);
       g = parseInt(color[3] + color[4], 16);
       b = parseInt(color[5] + color[6], 16);
-      // console.log('r', r);
-      // console.log('g', g);
-      // console.log('b', b);
 
       if (r < 224) {
         r += 32;
@@ -61,7 +60,6 @@ export const getLighterColor = (color: String) => {
         b += 32;
         lighter += b.toString(16);
       }
-      // console.log('lighter', lighter);
     }
   }
   return lighter;
@@ -166,14 +164,21 @@ export const bezierCommand = (
   return `C${cpsX},${cpsY} ${cpeX},${cpeY} ${point[0]},${point[1]}`;
 };
 
-export const getSegmentString = (lineSegment, index) => {
+export const getSegmentString = (
+  lineSegment,
+  index,
+  startDelimeter,
+  endDelimeter,
+) => {
   const segment = lineSegment?.find(segment => segment.startIndex === index);
-  return segment ? 'segmentStart' + JSON.stringify(segment) + 'segmentEnd' : '';
+  return segment ? startDelimeter + JSON.stringify(segment) + endDelimeter : '';
 };
 
 export const getCurvePathWithSegments = (
   path: string,
   lineSegment: LineSegment[] | undefined,
+  startDelimeter,
+  endDelimeter,
 ) => {
   if (!lineSegment?.length) return path;
   let newPath = '';
@@ -183,7 +188,7 @@ export const getCurvePathWithSegments = (
     newPath +=
       (pathArray[i].startsWith('M') ? '' : 'C') +
       pathArray[i] +
-      (segment ? 'segmentStart' + JSON.stringify(segment) + 'segmentEnd' : '');
+      (segment ? startDelimeter + JSON.stringify(segment) + endDelimeter : '');
   }
   return newPath;
 };
@@ -200,22 +205,156 @@ export const getPreviousSegmentsLastPoint = (isCurved, previousSegment) => {
   );
 };
 
-export const getSegmentedPathObjects = (
+export const getPathWithHighlight = (
+  data,
+  i,
+  highlightedRange,
+  startIndex,
+  endIndex,
+  getX,
+  getY,
+) => {
+  let path = '';
+  const {from, to} = highlightedRange;
+  const currentPointRegion =
+    data[i].value < from ? loc.DOWN : data[i].value > to ? loc.UP : loc.IN;
+
+  if (i !== endIndex) {
+    const nextPointRegion =
+      data[i + 1].value < from
+        ? loc.DOWN
+        : data[i + 1].value > to
+        ? loc.UP
+        : loc.IN;
+    if (
+      currentPointRegion !== nextPointRegion ||
+      (i === startIndex && currentPointRegion === loc.IN)
+    ) {
+      const x1 = getX(i),
+        y1 = getY(data[i].value),
+        x2 = getX(i + 1),
+        y2 = getY(data[i + 1].value);
+
+      let m = (y2 - y1) / (x2 - x1),
+        x,
+        y;
+      if (i === startIndex && currentPointRegion === loc.IN) {
+        // If the 1st point lies IN
+        y = y1;
+        x = x1;
+
+        path +=
+          'L' +
+          x +
+          ' ' +
+          y +
+          ' ' +
+          RANGE_ENTER +
+          JSON.stringify(highlightedRange) +
+          STOP;
+
+        if (nextPointRegion === loc.UP) {
+          y = getY(to);
+          x = (y - y1) / m + x1;
+
+          path += 'L' + x + ' ' + y + ' ' + RANGE_EXIT;
+        } else if (nextPointRegion === loc.DOWN) {
+          y = getY(from);
+          x = (y - y1) / m + x1;
+
+          path += 'L' + x + ' ' + y + ' ' + RANGE_EXIT;
+        }
+      } else if (currentPointRegion !== nextPointRegion) {
+        if (currentPointRegion === loc.DOWN && nextPointRegion === loc.UP) {
+          // if current point is in DOWN and next point is in UP, then we will add 2 points to the the path
+          y = getY(from);
+          x = (y - y1) / m + x1;
+
+          path +=
+            'L' +
+            x +
+            ' ' +
+            y +
+            ' ' +
+            RANGE_ENTER +
+            JSON.stringify(highlightedRange) +
+            STOP;
+          y = getY(to);
+          x = (y - y1) / m + x1;
+
+          path += 'L' + x + ' ' + y + ' ' + RANGE_EXIT;
+        } else if (
+          currentPointRegion === loc.UP &&
+          nextPointRegion === loc.DOWN
+        ) {
+          // if current point is in UP and next point is in DOWN, then we will add 2 points to the the path
+          y = getY(to);
+          x = (y - y1) / m + x1;
+
+          path +=
+            'L' +
+            x +
+            ' ' +
+            y +
+            ' ' +
+            RANGE_ENTER +
+            JSON.stringify(highlightedRange) +
+            STOP;
+          y = getY(from);
+          x = (y - y1) / m + x1;
+
+          path += 'L' + x + ' ' + y + ' ' + RANGE_EXIT;
+        } else {
+          if (
+            (currentPointRegion === loc.UP && nextPointRegion === loc.IN) ||
+            (currentPointRegion === loc.IN && nextPointRegion === loc.UP)
+          ) {
+            y = getY(to);
+          } else if (
+            (currentPointRegion === loc.IN && nextPointRegion === loc.DOWN) ||
+            (currentPointRegion === loc.DOWN && nextPointRegion === loc.IN)
+          ) {
+            y = getY(from);
+          }
+          m = (y2 - y1) / (x2 - x1);
+          x = (y - y1) / m + x1;
+
+          const prefix =
+            nextPointRegion === loc.IN
+              ? RANGE_ENTER + JSON.stringify(highlightedRange) + STOP
+              : RANGE_EXIT;
+
+          path += 'L' + x + ' ' + y + ' ' + prefix;
+        }
+      }
+    }
+  } else if (currentPointRegion === loc.IN) {
+    // If the last point lies IN, add RANGE_EXIT
+    path += RANGE_EXIT;
+  }
+
+  return path;
+};
+
+export const getRegionPathObjects = (
   points,
   color,
   currentLineThickness,
   thickness,
   strokeDashArray,
   isCurved,
+  startDelimeter,
+  stop,
+  endDelimeter,
 ) => {
   const ar: [any] = [{}];
   let tempStr = points;
 
-  if (!points.startsWith('segmentStart')) {
+  if (!points.startsWith(startDelimeter)) {
     /**********************            line upto first segment                 *****************/
 
     const lineSvgProps: LineProperties = {
-      d: points.substring(0, points.indexOf('segmentStart')),
+      d: points.substring(0, points.indexOf(startDelimeter)),
       color,
       strokeWidth: currentLineThickness || thickness,
     };
@@ -225,20 +364,131 @@ export const getSegmentedPathObjects = (
     ar.push(lineSvgProps);
   }
 
-  while (tempStr.includes('segmentStart')) {
-    const startDelimeterIndex = tempStr.indexOf('segmentStart');
-    const endDelimeterIndex = tempStr.indexOf('segmentEnd');
+  while (tempStr.includes(startDelimeter)) {
+    const startDelimeterIndex = tempStr.indexOf(startDelimeter);
+    const stopIndex = tempStr.indexOf(stop);
+    const endDelimeterIndex = tempStr.indexOf(endDelimeter);
 
-    const segmentConfig = JSON.parse(
-      tempStr.substring(
-        startDelimeterIndex + 'segmentStart'.length,
-        endDelimeterIndex,
-      ),
+    const segmentConfigString = tempStr.substring(
+      startDelimeterIndex + startDelimeter.length,
+      stopIndex,
     );
+
+    const segmentConfig = JSON.parse(segmentConfigString);
+
+    let segment = tempStr.substring(stopIndex + stop.length, endDelimeterIndex);
+
+    const previousSegment = ar[ar.length - 1].d;
+    const moveToLastPointOfPreviousSegment = getPreviousSegmentsLastPoint(
+      isCurved,
+      previousSegment,
+    );
+
+    /**********************            segment line                 *****************/
+
+    const lineSvgProps: LineProperties = {
+      d: moveToLastPointOfPreviousSegment + segment,
+      color: segmentConfig.color ?? color,
+      strokeWidth:
+        segmentConfig.thickness ?? (currentLineThickness || thickness),
+    };
+    if (segmentConfig.strokeDashArray) {
+      lineSvgProps.strokeDashArray = segmentConfig.strokeDashArray;
+    }
+    ar.push(lineSvgProps);
+
+    tempStr = tempStr.substring(endDelimeterIndex + endDelimeter.length);
+
+    const nextDelimiterIndex = tempStr.indexOf(startDelimeter);
+    const stringUptoNextSegment = tempStr.substring(0, nextDelimiterIndex);
+
+    /**********************            line upto the next segment            *****************/
+
+    if (
+      nextDelimiterIndex !== -1 &&
+      stringUptoNextSegment.indexOf(isCurved ? 'C' : 'L') !== -1
+    ) {
+      const previousSegment = ar[ar.length - 1].d;
+      const moveToLastPointOfPreviousSegment = getPreviousSegmentsLastPoint(
+        isCurved,
+        previousSegment,
+      );
+      const lineSvgProps: LineProperties = {
+        d: moveToLastPointOfPreviousSegment + ' ' + stringUptoNextSegment,
+        color,
+        strokeWidth: currentLineThickness || thickness,
+      };
+      if (strokeDashArray) {
+        lineSvgProps.strokeDashArray = strokeDashArray;
+      }
+      ar.push(lineSvgProps);
+    }
+  }
+
+  /**********************            line after the last segment            *****************/
+
+  if (tempStr.length) {
+    const previousSegment = ar[ar.length - 1].d;
+    const moveToLastPointOfPreviousSegment = getPreviousSegmentsLastPoint(
+      isCurved,
+      previousSegment,
+    );
+    const lineSvgProps: LineProperties = {
+      d: moveToLastPointOfPreviousSegment + tempStr,
+      color,
+      strokeWidth: currentLineThickness || thickness,
+    };
+    if (strokeDashArray) {
+      lineSvgProps.strokeDashArray = strokeDashArray;
+    }
+    ar.push(lineSvgProps);
+  }
+
+  ar.shift();
+  return ar;
+};
+
+export const getSegmentedPathObjects = (
+  points,
+  color,
+  currentLineThickness,
+  thickness,
+  strokeDashArray,
+  isCurved,
+  startDelimeter,
+  endDelimeter,
+) => {
+  const ar: [any] = [{}];
+  let tempStr = points;
+
+  if (!points.startsWith(startDelimeter)) {
+    /**********************            line upto first segment                 *****************/
+
+    const lineSvgProps: LineProperties = {
+      d: points.substring(0, points.indexOf(startDelimeter)),
+      color,
+      strokeWidth: currentLineThickness || thickness,
+    };
+    if (strokeDashArray) {
+      lineSvgProps.strokeDashArray = strokeDashArray;
+    }
+    ar.push(lineSvgProps);
+  }
+
+  while (tempStr.includes(startDelimeter)) {
+    const startDelimeterIndex = tempStr.indexOf(startDelimeter);
+    const endDelimeterIndex = tempStr.indexOf(endDelimeter);
+
+    const segmentConfigString = tempStr.substring(
+      startDelimeterIndex + startDelimeter.length,
+      endDelimeterIndex,
+    );
+
+    const segmentConfig = JSON.parse(segmentConfigString);
 
     const {startIndex, endIndex} = segmentConfig;
     const segmentLength = endIndex - startIndex;
-    let segment = tempStr.substring(endDelimeterIndex + 'segmentEnd'.length);
+    let segment = tempStr.substring(endDelimeterIndex + endDelimeter.length);
     let c = 0,
       s = 0,
       i;
@@ -270,9 +520,9 @@ export const getSegmentedPathObjects = (
     }
     ar.push(lineSvgProps);
 
-    tempStr = tempStr.substring(endDelimeterIndex + 'segmentEnd'.length + i);
+    tempStr = tempStr.substring(endDelimeterIndex + endDelimeter.length + i);
 
-    const nextDelimiterIndex = tempStr.indexOf('segmentStart');
+    const nextDelimiterIndex = tempStr.indexOf(startDelimeter);
     const stringUptoNextSegment = tempStr.substring(0, nextDelimiterIndex);
 
     /**********************            line upto the next segment            *****************/
@@ -380,6 +630,7 @@ export const getAxesAndRulesProps = (
     xAxisColor: props.xAxisColor,
     xAxisLength: props.xAxisLength,
     xAxisType: props.xAxisType,
+    xAxisTextNumberOfLines: props.xAxisTextNumberOfLines ?? 1,
     xAxisLabelsHeight: props.xAxisLabelsHeight,
     xAxisLabelsVerticalShift: props.xAxisLabelsVerticalShift,
     dashWidth: props.dashWidth,

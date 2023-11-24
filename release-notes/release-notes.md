@@ -1,3 +1,41 @@
+# 🎉 1.3.22
+
+## ✨ Features added-
+
+1. Added the props- `showValuesAsTopLabel`, `topLabelContainerStyle` and `topLabelTextStyle` to **Bar** charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/99#issuecomment-1824418965
+
+2. Added the prop `highlightedRange` to render the parts of lines lying in a given data range with a different style (color, thickness,type). See https://stackoverflow.com/questions/70406903/different-colors-line-chart-with-react-native-chart-kit
+
+```ts
+type HighlightedRange = {
+  from: number;
+  to: number;
+  color?: string | ColorValue;
+  thickness?: number;
+  strokeDashArray?: Array<number>;
+};
+```
+
+3. Added the property `pointerEvents` to the `pointerConfig` object. If you have a Pressable / Touchable item in your `pointerLabelComponent`, then you should set `pointerEvents` to **'auto'** inside the pointerConfig object. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/447
+
+## 🐛 Bug fixes
+
+1. Fixed the issue - Unwanted Spacing below the charts.See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/448
+
+---
+
+---
+
+---
+
+### `1.3.20` was pushed by mistake, then pushed `1.3.21` as a revert of the mistake
+
+---
+
+---
+
+---
+
 # 🎉 1.3.19
 
 ## ✨ Features added-

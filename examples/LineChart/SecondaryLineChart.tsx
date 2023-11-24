@@ -29,7 +29,7 @@ const SecondaryLineChart = () => {
     ];
   
     return (
-      <View style={{marginTop: 100}}>
+      <View style={{borderWidth:1}}>
         <LineChart
           data={d1}
           maxValue={140}

@@ -9,7 +9,7 @@ const SimplePie = () => {
     {value: 26, color: '#ED6665', text: '26%'},
   ];
   return (
-    <View>
+    <View style={{borderWidth:1}}>
       <PieChart
         donut
         showText
