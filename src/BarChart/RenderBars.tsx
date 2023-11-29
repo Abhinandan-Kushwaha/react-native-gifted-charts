@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {View, TouchableOpacity, Animated, Text, ColorValue} from 'react-native';
-import ThreeDBar from '../Components/ThreeDBar';
-import AnimatedBar from '../Components/AnimatedBar';
+import AnimatedThreeDBar from '../Components/AnimatedThreeDBar';
 import LinearGradient from 'react-native-linear-gradient';
 import Animated2DWithGradient from './Animated2DWithGradient';
 import Cap from '../Components/BarSpecificComponents/cap';
@@ -61,6 +60,8 @@ type Props = {
   rtl: boolean;
   intactTopLabel: boolean;
   showValuesAsTopLabel?: boolean;
+  barBorderWidth?: number;
+  barBorderColor: ColorValue;
   barBorderRadius?: number;
   barBorderTopLeftRadius?: number;
   barBorderTopRightRadius?: number;
@@ -96,6 +97,8 @@ const RenderBars = (props: Props) => {
     side,
     data,
     barStyle,
+    barBorderWidth,
+    barBorderColor,
     barBorderRadius,
     barBorderTopLeftRadius,
     barBorderTopRightRadius,
@@ -253,6 +256,8 @@ const RenderBars = (props: Props) => {
               position: 'absolute',
               width: '100%',
               height: '100%',
+              borderWidth: barBorderWidth ?? 0,
+              borderColor: barBorderColor,
               borderRadius: item.barBorderRadius ?? barBorderRadius ?? 0,
               borderTopLeftRadius:
                 item.barBorderTopLeftRadius ??
@@ -434,6 +439,8 @@ const RenderBars = (props: Props) => {
         showValuesAsTopLabel={!!showValuesAsTopLabel}
         topLabelContainerStyle={topLabelContainerStyle}
         topLabelTextStyle={topLabelTextStyle}
+        barBorderWidth={barBorderWidth}
+        barBorderColor={barBorderColor}
         barBorderRadius={props.barBorderRadius || 0}
         barBorderTopLeftRadius={barBorderTopLeftRadius}
         barBorderTopRightRadius={barBorderTopRightRadius}
@@ -460,67 +467,35 @@ const RenderBars = (props: Props) => {
           />
         )}
         {isThreeD ? (
-          isAnimated ? (
-            <AnimatedBar
-              barBackgroundPattern={
-                item.barBackgroundPattern || props.barBackgroundPattern
-              }
-              patternId={item.patternId || props.patternId}
-              width={item.barWidth || props.barWidth || 30}
-              barStyle={barStyle}
-              item={item}
-              sideWidth={
-                item.sideWidth ||
-                props.sideWidth ||
-                (item.barWidth || props.barWidth || 30) / 2
-              }
-              side={side || 'left'}
-              frontColor={item.frontColor || props.frontColor || ''}
-              sideColor={item.sideColor || props.sideColor || ''}
-              topColor={item.topColor || props.topColor || ''}
-              showGradient={item.showGradient || props.showGradient || false}
-              gradientColor={item.gradientColor || props.gradientColor}
-              opacity={opacity || 1}
-              animationDuration={animationDuration || 800}
-              height={barHeight}
-              intactTopLabel={intactTopLabel}
-              showValuesAsTopLabel={!!showValuesAsTopLabel}
-              topLabelContainerStyle={topLabelContainerStyle}
-              topLabelTextStyle={topLabelTextStyle}
-              horizontal={horizontal}
-            />
-          ) : (
-            <ThreeDBar
-              barBackgroundPattern={
-                item.barBackgroundPattern || props.barBackgroundPattern
-              }
-              patternId={item.patternId || props.patternId}
-              style={{}}
-              color={''}
-              width={item.barWidth || props.barWidth || 30}
-              sideWidth={
-                item.sideWidth ||
-                props.sideWidth ||
-                (item.barWidth || props.barWidth || 30) / 2
-              }
-              barStyle={barStyle}
-              item={item}
-              side={side || 'left'}
-              frontColor={item.frontColor || props.frontColor || ''}
-              sideColor={item.sideColor || props.sideColor || ''}
-              topColor={item.topColor || props.topColor || ''}
-              showGradient={item.showGradient || props.showGradient || false}
-              gradientColor={item.gradientColor || props.gradientColor}
-              opacity={opacity || 1}
-              horizontal={horizontal}
-              intactTopLabel={intactTopLabel}
-              showValuesAsTopLabel={!!showValuesAsTopLabel}
-              topLabelContainerStyle={topLabelContainerStyle}
-              topLabelTextStyle={topLabelTextStyle}
-              height={barHeight}
-              value={item.value}
-            />
-          )
+          <AnimatedThreeDBar
+            barBackgroundPattern={
+              item.barBackgroundPattern || props.barBackgroundPattern
+            }
+            patternId={item.patternId || props.patternId}
+            width={item.barWidth || props.barWidth || 30}
+            barStyle={barStyle}
+            item={item}
+            sideWidth={
+              item.sideWidth ||
+              props.sideWidth ||
+              (item.barWidth || props.barWidth || 30) / 2
+            }
+            side={side || 'left'}
+            frontColor={item.frontColor || props.frontColor || ''}
+            sideColor={item.sideColor || props.sideColor || ''}
+            topColor={item.topColor || props.topColor || ''}
+            showGradient={item.showGradient || props.showGradient || false}
+            gradientColor={item.gradientColor || props.gradientColor}
+            opacity={opacity || 1}
+            height={barHeight}
+            intactTopLabel={intactTopLabel}
+            showValuesAsTopLabel={!!showValuesAsTopLabel}
+            topLabelContainerStyle={topLabelContainerStyle}
+            topLabelTextStyle={topLabelTextStyle}
+            horizontal={horizontal}
+            isAnimated={isAnimated}
+            animationDuration={animationDuration || 800}
+          />
         ) : item.showGradient || props.showGradient ? (
           isAnimated ? (
             animated2DWithGradient(false, false)

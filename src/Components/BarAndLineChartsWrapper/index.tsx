@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {View, ScrollView} from 'react-native';
+import {View, ScrollView, StyleSheet} from 'react-native';
 import {renderHorizSections} from './renderHorizSections';
 import RenderLineInBarChart from './renderLineInBarChart';
 import RenderVerticalLines from './renderVerticalLines';
@@ -268,7 +268,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const verticalLinesProps = {
     verticalLinesAr,
     verticalLinesSpacing,
-    spacing,
+    spacing: lineConfig?.spacing ?? spacing,
     initialSpacing,
     verticalLinesZIndex,
     verticalLinesHeight,
@@ -328,21 +328,23 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   /*******************************************************************************************************************************************/
   /*******************************************************************************************************************************************/
 
-  const container = {
-    width: '100%',
-    height:
-      containerHeightIncludingBelowXAxis +
-      labelsExtraHeight +
-      stepHeight / 2 +
-      xAxisLabelsVerticalShift +
-      50,
-    marginBottom: (xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18) - 50, //This is to not let the Things that should be rendered below the chart overlap with it
-  };
+  const styles = StyleSheet.create({
+    container: {
+      width: '100%',
+      height:
+        containerHeightIncludingBelowXAxis +
+        labelsExtraHeight +
+        stepHeight / 2 +
+        xAxisLabelsVerticalShift +
+        50,
+      marginBottom: (xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18) - 50, //This is to not let the Things that should be rendered below the chart overlap with it
+    },
+  });
 
   return (
     <View
       style={[
-        container,
+        styles.container,
         horizontal && {
           width: actualContainerWidth,
           transform: transformForHorizontal,

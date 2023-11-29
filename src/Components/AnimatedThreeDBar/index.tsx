@@ -24,6 +24,7 @@ type trianglePropTypes = {
 };
 
 type animatedBarPropTypes = {
+  isAnimated?: boolean;
   animationDuration: number;
   width: number;
   sideWidth: number;
@@ -73,21 +74,36 @@ const triangleStyles = StyleSheet.create({
   },
 });
 
-const AnimatedBar = (props: animatedBarPropTypes) => {
-  const [initialRender, setInitialRender] = useState(true);
-  const [height, setHeight] = useState(Platform.OS === 'ios' ? 0 : 20);
+const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
+  const {
+    isAnimated,
+    animationDuration,
+    item,
+    width,
+    sideWidth,
+    barStyle,
+    barBackgroundPattern,
+    patternId,
+    intactTopLabel,
+    showValuesAsTopLabel,
+    topLabelContainerStyle,
+    topLabelTextStyle,
+  } = props;
 
-  const animationDuration = props.animationDuration || 800;
+  const [initialRender, setInitialRender] = useState(isAnimated);
+  const [height, setHeight] = useState(
+    isAnimated ? (Platform.OS === 'ios' ? 0 : 20) : props.height,
+  );
 
   useEffect(() => {
-    if (initialRender) {
-      // labelsAppear();
-      // increaseOpacity();
-      setTimeout(() => {
-        layoutAppear();
-      }, 20);
-    } else {
-      elevate();
+    if (isAnimated) {
+      if (initialRender) {
+        setTimeout(() => {
+          layoutAppear();
+        }, 20);
+      } else {
+        elevate();
+      }
     }
   }, [props.height]);
 
@@ -108,19 +124,6 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
     setInitialRender(false);
     setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
   };
-
-  const {
-    item,
-    width,
-    sideWidth,
-    barStyle,
-    barBackgroundPattern,
-    patternId,
-    intactTopLabel,
-    showValuesAsTopLabel,
-    topLabelContainerStyle,
-    topLabelTextStyle,
-  } = props;
 
   const showGradient = props.showGradient || false;
   const gradientColor = props.gradientColor || 'white';
@@ -271,4 +274,4 @@ const AnimatedBar = (props: animatedBarPropTypes) => {
   );
 };
 
-export default AnimatedBar;
+export default AnimatedThreeDBar;

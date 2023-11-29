@@ -220,6 +220,7 @@ export const BarChart = (props: BarChartPropsType) => {
   const autoShiftLabels = props.autoShiftLabels ?? false;
 
   const barWidth = props.barWidth || BarDefaults.barWidth;
+  const barBorderColor = props.barBorderColor ?? BarDefaults.barBorderColor;
 
   const extendedContainerHeight = getExtendedContainerHeightWithPadding(
     containerHeight,
@@ -521,10 +522,13 @@ export const BarChart = (props: BarChartPropsType) => {
     lineConfig.arrowConfig.width,
     lineConfig.arrowConfig.showArrowBase,
   ]);
-
   useEffect(() => {
     if (initialPointerIndex !== -1) {
-      const item = data[initialPointerIndex];
+      const item = (props.stackData ?? data)[initialPointerIndex];
+      const stackSum = item.stacks?.reduce(
+        (acc, stack) => acc + (stack.value ?? 0),
+        0,
+      );
       const x =
         initialSpacing +
         (spacing + barWidth) * initialPointerIndex -
@@ -532,7 +536,7 @@ export const BarChart = (props: BarChartPropsType) => {
         barWidth / 2;
       const y =
         containerHeight -
-        (item.value * containerHeight) / maxValue -
+        ((stackSum ?? item.value) * containerHeight) / maxValue -
         (pointerRadius || pointerHeight / 2) +
         10;
       if (initialPointerAppearDelay) {
@@ -648,10 +652,14 @@ export const BarChart = (props: BarChartPropsType) => {
             setPointerX(z);
             setPointerIndex(factor);
             let item, y;
-            item = data[factor];
+            item = (props.stackData ?? data)[factor];
+            const stackSum = item.stacks?.reduce(
+              (acc, stack) => acc + (stack.value ?? 0),
+              0,
+            );
             y =
               containerHeight -
-              (item.value * containerHeight) / maxValue -
+              ((stackSum ?? item.value) * containerHeight) / maxValue -
               (pointerRadius || pointerHeight / 2) +
               10;
             setPointerY(y);
@@ -676,7 +684,7 @@ export const BarChart = (props: BarChartPropsType) => {
             let factor =
               (x - initialSpacing - barWidth / 2) / (spacing + barWidth);
             factor = Math.round(factor);
-            factor = Math.min(factor, data.length - 1);
+            factor = Math.min(factor, (props.stackData ?? data).length - 1);
             factor = Math.max(factor, 0);
             let z =
               initialSpacing +
@@ -686,10 +694,14 @@ export const BarChart = (props: BarChartPropsType) => {
             let item, y;
             setPointerX(z);
             setPointerIndex(factor);
-            item = data[factor];
+            item = (props.stackData ?? data)[factor];
+            const stackSum = item.stacks?.reduce(
+              (acc, stack) => acc + (stack.value ?? 0),
+              0,
+            );
             y =
               containerHeight -
-              (item.value * containerHeight) / maxValue -
+              ((stackSum ?? item.value) * containerHeight) / maxValue -
               (pointerRadius || pointerHeight / 2) +
               10;
             setPointerY(y);
@@ -760,6 +772,8 @@ export const BarChart = (props: BarChartPropsType) => {
         showValuesAsTopLabel: props.showValuesAsTopLabel,
         topLabelContainerStyle: props.topLabelContainerStyle,
         topLabelTextStyle: props.topLabelTextStyle,
+        barBorderWidth: props.barBorderWidth,
+        barBorderColor: barBorderColor,
         barBorderRadius: props.barBorderRadius,
         barBorderTopLeftRadius: props.barBorderTopLeftRadius,
         barBorderTopRightRadius: props.barBorderTopRightRadius,
@@ -798,6 +812,11 @@ export const BarChart = (props: BarChartPropsType) => {
             stackData={props.stackData || []}
             isAnimated={isAnimated}
             animationDuration={animationDuration}
+            stackBorderRadius={props.stackBorderRadius}
+            stackBorderTopLeftRadius={props.stackBorderTopLeftRadius}
+            stackBorderTopRightRadius={props.stackBorderTopRightRadius}
+            stackBorderBottomLeftRadius={props.stackBorderBottomLeftRadius}
+            stackBorderBottomRightRadius={props.stackBorderBottomRightRadius}
             {...getPropsCommonForBarAndStack(item, index)}
           />
         );

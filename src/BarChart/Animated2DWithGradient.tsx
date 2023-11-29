@@ -39,6 +39,8 @@ type propTypes = {
   showValuesAsTopLabel: boolean;
   topLabelContainerStyle?: any;
   topLabelTextStyle?: any;
+  barBorderWidth?: number;
+  barBorderColor: ColorValue;
   barBorderRadius?: number;
   barBorderTopLeftRadius?: number;
   barBorderTopRightRadius?: number;
@@ -66,6 +68,8 @@ const Animated2DWithGradient = (props: propTypes) => {
     containerHeight,
     maxValue,
     barMarginBottom,
+    barBorderWidth,
+    barBorderColor,
     barBorderRadius,
     barBorderTopLeftRadius,
     barBorderTopRightRadius,
@@ -150,6 +154,8 @@ const Animated2DWithGradient = (props: propTypes) => {
                     height: '100%',
                     backgroundColor:
                       item.frontColor || props.frontColor || 'black',
+                    borderWidth: barBorderWidth ?? 0,
+                    borderColor: barBorderColor,
                     borderRadius: item.barBorderRadius ?? barBorderRadius ?? 0,
                     borderTopLeftRadius:
                       item.barBorderTopLeftRadius ??
@@ -211,6 +217,8 @@ const Animated2DWithGradient = (props: propTypes) => {
                     position: 'absolute',
                     width: '100%',
                     height: '100%',
+                    borderWidth: barBorderWidth ?? 0,
+                    borderColor: barBorderColor,
                     borderRadius: item.barBorderRadius ?? barBorderRadius ?? 0,
                     borderTopLeftRadius:
                       item.barBorderTopLeftRadius ??

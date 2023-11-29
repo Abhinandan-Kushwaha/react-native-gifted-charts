@@ -118,6 +118,7 @@ export const BarDefaults = {
   capThickness: 6,
   capColor: 'gray',
   capRadius: 0,
+  barBorderColor: 'gray',
 
   horizontal: false,
   rtl: false,

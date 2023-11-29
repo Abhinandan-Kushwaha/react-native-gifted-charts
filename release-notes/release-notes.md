@@ -1,3 +1,37 @@
+# 🎉 1.3.24
+
+## ✨ Features added-
+
+1. Added `pointerConfig` support to Stacked Bar charts.
+
+2. Added `barBorderWidth` and `barBorderColor` to Bar charts.
+
+3. Added separate `spacing` for Line charts inside BarCharts. The line rendered in a Bar chart can have its own `spacing` value independent from the spacing of the bars. It can be set using the `spacing` property in the `lineConfig` object.
+
+4. Added these props to apply border radius to Stacked Bar charts- 
+<ul>
+   <li> stackBorderRadius </li>
+   <li> stackBorderTopLeftRadius </li>
+   <li> stackBorderTopRightRadius </li>
+   <li> stackBorderBottomLeftRadius </li>
+   <li> stackBorderBottomRightRadius </li>
+</ul>
+
+## 🐛 Bug fixes
+
+1. Fixed the issue - initial pointer appearing at top for the second data line. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/453
+
+
+## 🔨 Refactor
+
+Merged `ThreeDBar` and `AnimatedBar` codes to make a single file named `AnimatedThreeDBar`
+
+---
+
+---
+
+---
+
 # 🎉 1.3.23
 
 ## ✨ Features added-

@@ -1827,6 +1827,14 @@ export const LineChart = (props: LineChartPropsType) => {
   const lineGradientEndColor =
     props.lineGradientEndColor ?? LineDefaults.lineGradientEndColor;
 
+  const getPointerY = value =>
+    value
+      ? containerHeight -
+        (value * containerHeight) / maxValue -
+        (pointerRadius || pointerHeight / 2) +
+        10
+      : 0;
+
   useEffect(() => {
     if (initialPointerIndex !== -1) {
       const item = (data0 ?? data)[initialPointerIndex];
@@ -1835,26 +1843,40 @@ export const LineChart = (props: LineChartPropsType) => {
         spacing * initialPointerIndex -
         (pointerRadius || pointerWidth / 2) -
         1;
-      const y =
-        containerHeight -
-        (item.value * containerHeight) / maxValue -
-        (pointerRadius || pointerHeight / 2) +
-        10;
+      const y = getPointerY(item.value);
+      const y2 = getPointerY(data2?.[initialPointerIndex]?.value);
+      const y3 = getPointerY(data3?.[initialPointerIndex]?.value);
+      const y4 = getPointerY(data4?.[initialPointerIndex]?.value);
+      const y5 = getPointerY(data5?.[initialPointerIndex]?.value);
+
       if (initialPointerAppearDelay) {
         setTimeout(() => {
-          setPointerConfig(initialPointerIndex, item, x, y);
+          setPointerConfig(initialPointerIndex, item, x, y, y2, y3, y4, y5);
         }, initialPointerAppearDelay);
       } else {
-        setPointerConfig(initialPointerIndex, item, x, y);
+        setPointerConfig(initialPointerIndex, item, x, y, y2, y3, y4, y5);
       }
     }
   }, []);
 
-  const setPointerConfig = (initialPointerIndex, item, x, y) => {
+  const setPointerConfig = (
+    initialPointerIndex,
+    item,
+    x,
+    y,
+    y2,
+    y3,
+    y4,
+    y5,
+  ) => {
     setPointerIndex(initialPointerIndex);
     setPointerItem(item);
     setPointerX(x);
     setPointerY(y);
+    setPointerY2(y2);
+    setPointerY3(y3);
+    setPointerY4(y4);
+    setPointerY5(y5);
   };
 
   const renderLabel = (
@@ -2112,7 +2134,7 @@ export const LineChart = (props: LineChartPropsType) => {
                       transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
                     },
                   ]}>
-                  {customDataPoint()}
+                  {customDataPoint(item, index)}
                 </View>
               ) : null}
               {dataPointsShape === 'rectangular' ? (

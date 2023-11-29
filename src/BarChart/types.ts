@@ -1,5 +1,4 @@
-import {ColorValue, View} from 'react-native';
-import {stackItemType} from '../BarChart/RenderStackBars';
+import {ColorValue, GestureResponderEvent, View} from 'react-native';
 import {yAxisSides} from '../utils/constants';
 import {
   CurveType,
@@ -8,6 +7,48 @@ import {
   RulesConfig,
   secondaryYAxisType,
 } from '../utils/types';
+
+export type stackItemType = {
+  onPress?: any;
+  label?: String;
+  barWidth?: number;
+  spacing?: number;
+  labelTextStyle?: any;
+  topLabelComponent?: Function;
+  topLabelContainerStyle?: any;
+  disablePress?: any;
+  color?: ColorValue;
+  showGradient?: boolean;
+  gradientColor?: any;
+  capThickness?: number;
+  capColor?: ColorValue;
+  capRadius?: number;
+  labelComponent?: Function;
+  stacks: Array<{
+    value: number;
+    color?: ColorValue;
+    onPress?: (event: GestureResponderEvent) => void;
+    marginBottom?: number;
+    borderRadius?: number;
+    borderTopLeftRadius?: number;
+    borderTopRightRadius?: number;
+    borderBottomLeftRadius?: number;
+    borderBottomRightRadius?: number;
+    showGradient?: boolean;
+    gradientColor?: ColorValue;
+    barWidth?: number;
+    innerBarComponent?: Function;
+  }>;
+  barBackgroundPattern?: Function;
+  borderRadius?: number;
+  borderTopLeftRadius?: number;
+  borderTopRightRadius?: number;
+  borderBottomLeftRadius?: number;
+  borderBottomRightRadius?: number;
+  patternId?: String;
+  leftShiftForTooltip?: number;
+  showXAxisIndex?: boolean;
+};
 
 export type BarChartPropsType = {
   width?: number;
@@ -131,11 +172,18 @@ export type BarChartPropsType = {
   topLabelTextStyle?: any;
 
   horizSections?: Array<sectionType>;
+  barBorderWidth?: number;
+  barBorderColor?: ColorValue;
   barBorderRadius?: number;
   barBorderTopLeftRadius?: number;
   barBorderTopRightRadius?: number;
   barBorderBottomLeftRadius?: number;
   barBorderBottomRightRadius?: number;
+  stackBorderRadius?: number;
+  stackBorderTopLeftRadius?: number;
+  stackBorderTopRightRadius?: number;
+  stackBorderBottomLeftRadius?: number;
+  stackBorderBottomRightRadius?: number;
   hideOrigin?: boolean;
   labelWidth?: number;
   yAxisLabelTexts?: Array<string>;
@@ -167,6 +215,7 @@ export type BarChartPropsType = {
 };
 type lineConfigType = {
   initialSpacing?: number;
+  spacing?: number;
   curved?: boolean;
   curvature?: number;
   curveType?: CurveType;
