@@ -12,6 +12,12 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {BarDefaults} from '../utils/constants';
+import {
+  isValueSumZeroForStackBottom,
+  isValueSumZeroForStackTop,
+} from '../utils';
+import {stackItemType} from './types';
+import {Pointer} from '../utils/types';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -47,7 +53,18 @@ type Props = {
   xAxisIndicesColor: ColorValue;
   horizontal: boolean;
   intactTopLabel: boolean;
+  barBorderWidth?: number;
+  barBorderColor: ColorValue;
   barBorderRadius?: number;
+  barBorderTopLeftRadius?: number;
+  barBorderTopRightRadius?: number;
+  barBorderBottomLeftRadius?: number;
+  barBorderBottomRightRadius?: number;
+  stackBorderRadius?: number;
+  stackBorderTopLeftRadius?: number;
+  stackBorderTopRightRadius?: number;
+  stackBorderBottomLeftRadius?: number;
+  stackBorderBottomRightRadius?: number;
   xAxisThickness: number;
   barBackgroundPattern?: Function;
   patternId?: String;
@@ -66,45 +83,9 @@ type Props = {
   stackData: Array<stackItemType>;
   isAnimated?: boolean;
   animationDuration?: number;
+  pointerConfig?: Pointer;
 };
-export type stackItemType = {
-  onPress?: any;
-  label?: String;
-  barWidth?: number;
-  spacing?: number;
-  labelTextStyle?: any;
-  topLabelComponent?: Function;
-  topLabelContainerStyle?: any;
-  disablePress?: any;
-  color?: ColorValue;
-  showGradient?: boolean;
-  gradientColor?: any;
-  capThickness?: number;
-  capColor?: ColorValue;
-  capRadius?: number;
-  labelComponent?: Function;
-  borderRadius?: number;
-  stacks: Array<{
-    value: number;
-    color?: ColorValue;
-    onPress?: (event: GestureResponderEvent) => void;
-    marginBottom?: number;
-    barBorderRadius?: number;
-    borderTopLeftRadius?: number;
-    borderTopRightRadius?: number;
-    borderBottomLeftRadius?: number;
-    borderBottomRightRadius?: number;
-    showGradient?: boolean;
-    gradientColor?: ColorValue;
-    barWidth?: number;
-    innerBarComponent?: Function;
-  }>;
-  barBackgroundPattern?: Function;
-  barBorderRadius?: number;
-  patternId?: String;
-  leftShiftForTooltip?: number;
-  showXAxisIndex?: boolean;
-};
+
 const RenderStackBars = (props: Props) => {
   const {
     barBackgroundPattern,
@@ -131,9 +112,24 @@ const RenderStackBars = (props: Props) => {
     stackData,
     isAnimated,
     animationDuration = BarDefaults.animationDuration,
+    barBorderWidth,
+    barBorderColor,
+    stackBorderRadius,
+    stackBorderTopLeftRadius,
+    stackBorderTopRightRadius,
+    stackBorderBottomLeftRadius,
+    stackBorderBottomRightRadius,
   } = props;
   const cotainsNegative = item.stacks.some(item => item.value < 0);
   const noAnimation = cotainsNegative || !isAnimated;
+
+  const {
+    borderRadius,
+    borderTopLeftRadius,
+    borderTopRightRadius,
+    borderBottomLeftRadius,
+    borderBottomRightRadius,
+  } = item;
 
   let leftSpacing = initialSpacing;
   for (let i = 0; i < index; i++) {
@@ -213,6 +209,76 @@ const RenderStackBars = (props: Props) => {
     setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
   };
 
+  const getStackBorderRadii = (item: stackItemType, index: number) => {
+    const stackItem = item.stacks[index];
+    const borderRadii = {
+      borderTopLeftRadius:
+        stackItem.borderTopLeftRadius ??
+        borderTopLeftRadius ??
+        stackItem.borderRadius ??
+        borderRadius ??
+        props.barBorderTopLeftRadius ??
+        props.barBorderRadius ??
+        0,
+      borderTopRightRadius:
+        stackItem.borderTopRightRadius ??
+        borderTopRightRadius ??
+        stackItem.borderRadius ??
+        borderRadius ??
+        props.barBorderTopRightRadius ??
+        props.barBorderRadius ??
+        0,
+      borderBottomLeftRadius:
+        stackItem.borderBottomLeftRadius ??
+        borderBottomLeftRadius ??
+        stackItem.borderRadius ??
+        borderRadius ??
+        props.barBorderBottomLeftRadius ??
+        props.barBorderRadius ??
+        0,
+      borderBottomRightRadius:
+        stackItem.borderBottomRightRadius ??
+        borderBottomRightRadius ??
+        stackItem.borderRadius ??
+        borderRadius ??
+        props.barBorderBottomRightRadius ??
+        props.barBorderRadius ??
+        0,
+    };
+    if (
+      !borderRadii.borderTopLeftRadius &&
+      isValueSumZeroForStackTop(item, index)
+    ) {
+      const stackTopLeft = stackBorderTopLeftRadius ?? stackBorderRadius ?? 0;
+      borderRadii.borderTopLeftRadius = stackTopLeft;
+    }
+    if (
+      !borderRadii.borderTopRightRadius &&
+      isValueSumZeroForStackTop(item, index)
+    ) {
+      const stackTopRight = stackBorderTopRightRadius ?? stackBorderRadius ?? 0;
+      borderRadii.borderTopRightRadius = stackTopRight;
+    }
+    if (
+      !borderRadii.borderBottomLeftRadius &&
+      isValueSumZeroForStackBottom(item, index)
+    ) {
+      const stackBottomLeft =
+        stackBorderBottomLeftRadius ?? stackBorderRadius ?? 0;
+      borderRadii.borderBottomLeftRadius = stackBottomLeft;
+    }
+    if (
+      !borderRadii.borderBottomRightRadius &&
+      isValueSumZeroForStackBottom(item, index)
+    ) {
+      const stackBottomRight =
+        stackBorderBottomRightRadius ?? stackBorderRadius ?? 0;
+      borderRadii.borderBottomRightRadius = stackBottomRight;
+    }
+
+    return borderRadii;
+  };
+
   const barWrapper = () => {
     return noAnimation ? (
       static2DSimple()
@@ -258,52 +324,37 @@ const RenderStackBars = (props: Props) => {
             },
           ]}>
           {item.stacks.map((stackItem, index) => {
+            const borderRadii = getStackBorderRadii(item, index);
             return (
               <TouchableOpacity
                 key={index}
                 onPress={stackItem.onPress}
                 activeOpacity={activeOpacity}
                 disabled={disablePress || !stackItem.onPress}
-                style={[
-                  {
-                    position: 'absolute',
-                    bottom: getPosition(index) + (stackItem.marginBottom || 0),
-                    width: '100%',
-                    height:
-                      (Math.abs(stackItem.value) * (containerHeight || 200)) /
-                        (maxValue || 200) -
-                      (stackItem.marginBottom || 0),
-                    backgroundColor:
-                      stackItem.color || item.color || props.color || 'black',
-                    borderRadius:
-                      stackItem.barBorderRadius || props.barBorderRadius || 0,
-                  },
-                  !props.barBorderRadius &&
-                    !stackItem.barBorderRadius && {
-                      borderTopLeftRadius: stackItem.borderTopLeftRadius || 0,
-                      borderTopRightRadius: stackItem.borderTopRightRadius || 0,
-                      borderBottomLeftRadius:
-                        stackItem.borderBottomLeftRadius || 0,
-                      borderBottomRightRadius:
-                        stackItem.borderBottomRightRadius || 0,
-                    },
-                ]}>
+                style={{
+                  position: 'absolute',
+                  bottom: getPosition(index) + (stackItem.marginBottom || 0),
+                  width: '100%',
+                  height:
+                    (Math.abs(stackItem.value) * (containerHeight || 200)) /
+                      (maxValue || 200) -
+                    (stackItem.marginBottom || 0),
+                  backgroundColor:
+                    stackItem.color || item.color || props.color || 'black',
+                  borderWidth: barBorderWidth ?? 0,
+                  borderColor: barBorderColor,
+                  ...borderRadii,
+                }}>
                 {stackItem.showGradient ||
                 item.showGradient ||
                 props.showGradient ? (
                   <LinearGradient
-                    style={[
-                      {
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        borderRadius:
-                          stackItem.barBorderRadius ||
-                          item.barBorderRadius ||
-                          props.barBorderRadius ||
-                          0,
-                      },
-                    ]}
+                    style={{
+                      position: 'absolute',
+                      width: '100%',
+                      height: '100%',
+                      ...borderRadii,
+                    }}
                     start={{x: 0, y: 0}}
                     end={{x: 0, y: 1}}
                     colors={[
@@ -365,6 +416,11 @@ const RenderStackBars = (props: Props) => {
   return (
     <>
       <View
+        pointerEvents={
+          props.pointerConfig
+            ? props.pointerConfig.pointerEvents ?? 'none'
+            : 'auto'
+        }
         style={[
           {
             // overflow: 'visible',
@@ -373,6 +429,18 @@ const RenderStackBars = (props: Props) => {
             height: totalHeight,
             marginRight: spacing,
           },
+
+          props.pointerConfig
+            ? {
+                transform: [
+                  {
+                    translateY:
+                      (containerHeight || 200) -
+                      (totalHeight - 10 + xAxisLabelsVerticalShift),
+                  },
+                ],
+              }
+            : null,
         ]}>
         {/* {props.showVerticalLines && (
           <View

@@ -46,6 +46,7 @@ The `lineConfig` prop describes the properties of the line chart that is display
 ```ts
 type lineConfigType = {
   initialSpacing?: number;
+  spacing?: number;
   curved?: boolean;
   curvature: number;
   curveType: CurveType; //CurveType is an enum defined below
@@ -373,6 +374,8 @@ All the properties are optional. If you don't set a property in the **secondaryY
 | roundedBottom              | boolean    | To show rounded bottom                                                     | white                    |
 | activeOpacity              | number     | activeOpacity on pressing the bar                                          | 0.2                      |
 | disablePress               | boolean    | Prop to disable the bar press action                                       | false                    |
+| barBorderWidth             | number     | Border width of the bar                                                    | 0                        |
+| barBorderColor             | ColorValue | Border color of the bar                                                    | 'gray'                   |
 | barBorderRadius            | number     | Border radius of the bar                                                   | 0                        |
 | barBorderTopLeftRadius     | number     | Top left border radius of the bar                                          | barBorderRadius \| 0     |
 | barBorderTopRightRadius    | number     | Top right border radius of the bar                                         | barBorderRadius \| 0     |
@@ -476,21 +479,36 @@ The stackData passed to the BarChart component is an array of objects.\
 Each object contains a mandatory key named stacks.\
 The value corresponding to the stacks key is an array of objects, each object representing a section of the stack.
 
-| Prop      | Type                  | Description                                                                                  | Default value |
-| --------- | --------------------- | -------------------------------------------------------------------------------------------- | ------------- |
-| stackData | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table | false         |
+| Prop                         | Type                  | Description                                                                                  | Default value        |
+| ---------------------------- | --------------------- | -------------------------------------------------------------------------------------------- | -------------------- |
+| stackData                    | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table | false                |
+| barBorderRadius              | number                | Border radius of each bar of the stack                                                       | 0                    |
+| barBorderTopLeftRadius       | number                | Top left border radius of each bar of the stack                                              | barBorderRadius \| 0 |
+| barBorderTopRightRadius      | number                | Top right border radius of each bar of the stack                                             | barBorderRadius \| 0 |
+| barBorderBottomLeftRadius    | number                | Bottom left border radius of each bar of the stack                                           | barBorderRadius \| 0 |
+| barBorderBottomRightRadius   | number                | Bottom right border radius of each bar of the stack                                          | barBorderRadius \| 0 |
+| stackBorderRadius            | number                | Border radius of the top and bottom bars of the stack                                        |
+| stackBorderTopLeftRadius     | number                | Top left border radius of the top bar of the stack                                           |
+| stackBorderTopRightRadius    | number                | Top right border radius of the top bar of the stack                                          |
+| stackBorderBottomLeftRadius  | number                | Bottom left border radius of the bottom bar of the stack                                     |
+| stackBorderBottomRightRadius | number                | Bottom right border radius of the bottom bar of the stack                                    |
 
 **Note** The `frontColor` prop is replaced by `color` prop in Stacked Bar charts.
 
 ### Stack Array description
 
-| Key            | Value type                                                | Description                                                                  |
-| -------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| stacks array   | Array of stack items                                      | A stack is made of 1 or more objects of the type described in the next table |
-| label          | string                                                    | Label text appearing below the stack (under the X axis)                      |
-| labelTextStyle | Style object for the label text appearing below the stack |
-| barWidth       | number                                                    |
-| spacing        | number                                                    |
+| Key                     | Value type                                                | Description                                                                  |
+| ----------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| stacks array            | Array of stack items                                      | A stack is made of 1 or more objects of the type described in the next table |
+| label                   | string                                                    | Label text appearing below the stack (under the X axis)                      |
+| labelTextStyle          | Style object for the label text appearing below the stack |
+| barWidth                | number                                                    |
+| spacing                 | number                                                    |
+| borderRadius            | number                                                    |
+| borderTopLeftRadius     | number                                                    |
+| borderTopRightRadius    | number                                                    |
+| borderBottomLeftRadius  | number                                                    |
+| borderBottomRightRadius | number                                                    |
 
 A single stack item can be depicted as-
 

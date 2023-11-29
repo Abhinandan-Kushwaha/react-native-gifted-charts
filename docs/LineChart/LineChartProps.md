@@ -573,6 +573,10 @@ The default value of `showArrowBase` is true. To fill the arrow with `fillColor`
 | dataPointLabelShiftY       | number     | vertical shift of a label from its corresponding data point                           | 0                                         |
 | showValuesAsDataPointsText | boolean    | When set to true, the data item value will be shown as a label text near data point   | false                                     |
 
+**Note** `customDataPoint` prop takes a callback function which accepts 2 parameters-
+1. **item** (object in the data array at the index of the data point)
+2. **index** (index of the data point)
+
 ---
 
 ## pointerConfig

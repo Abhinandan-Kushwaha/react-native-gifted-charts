@@ -1,3 +1,4 @@
+import {stackItemType} from '../BarChart/types';
 import {
   RANGE_ENTER,
   RANGE_EXIT,
@@ -1026,7 +1027,7 @@ export const getXForLineInBar = (
   yAxisLabelWidth +
   firstBarWidth / 2 +
   lineConfig.initialSpacing +
-  (currentBarWidth + spacing) * index +
+  (currentBarWidth + (lineConfig.spacing ?? spacing)) * index +
   lineConfig.shiftX -
   lineConfig.dataPointsWidth / 2 -
   32;
@@ -1056,6 +1057,7 @@ export const getLineConfigForBarChart = lineConfig => {
   return {
     initialSpacing:
       lineConfig.initialSpacing ?? defaultLineConfig.initialSpacing,
+    spacing: lineConfig.initialSpacing,
     curved: lineConfig.curved || defaultLineConfig.curved,
     curvature: lineConfig.curvature ?? defaultLineConfig.curvature,
     curveType: lineConfig.curveType ?? defaultLineConfig.curveType,
@@ -1115,4 +1117,34 @@ export const getLineConfigForBarChart = lineConfig => {
     customDataPoint: lineConfig.customDataPoint,
     isSecondary: lineConfig.isSecondary ?? defaultLineConfig.isSecondary,
   };
+};
+
+export const isValueSumZeroForStackBottom = (
+  item: stackItemType,
+  index: number,
+) => {
+  const {stacks} = item;
+  let isValueSumZero = true;
+  for (let i = 0; i < index; i++) {
+    if (stacks[i].value) {
+      isValueSumZero = false;
+      break;
+    }
+  }
+  return isValueSumZero;
+};
+
+export const isValueSumZeroForStackTop = (
+  item: stackItemType,
+  index: number,
+) => {
+  const {stacks} = item;
+  let isValueSumZero = true;
+  for (let i = stacks.length - 1; i > index; i--) {
+    if (stacks[i].value) {
+      isValueSumZero = false;
+      break;
+    }
+  }
+  return isValueSumZero;
 };

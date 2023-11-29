@@ -90,7 +90,7 @@ const RenderLineInBarChart = props => {
                 ),
               },
             ]}>
-            {customDataPoint()}
+            {customDataPoint(item, index)}
           </View>
         );
       }
