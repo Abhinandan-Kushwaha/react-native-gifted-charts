@@ -16,7 +16,7 @@ const RoundStackBar = () => {
       stacks: [
         {value: 10, color: '#4ABFF4'},
         {value: 11, color: 'orange', marginBottom: 2},
-        {value: 15, color: '#28B2B3', marginBottom: 2},
+        {value: 1, color: '#28B2B3', marginBottom: 2},
       ],
       label: 'Mar',
     },
@@ -41,11 +41,11 @@ const RoundStackBar = () => {
       <BarChart
         width={340}
         rotateLabel
-        barWidth={12}
         spacing={40}
         noOfSections={4}
-        barBorderRadius={20}
+        stackBorderTopLeftRadius={20}
         stackData={stackData}
+        showValuesAsTopLabel
         pointerConfig={{}}
       />
     </View>

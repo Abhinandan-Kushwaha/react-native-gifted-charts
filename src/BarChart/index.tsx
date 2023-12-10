@@ -240,7 +240,7 @@ export const BarChart = (props: BarChartPropsType) => {
   const [responderStartTime, setResponderStartTime] = useState(0);
   const [responderActive, setResponderActive] = useState(false);
 
-  const pointerConfig = props.pointerConfig || undefined;
+  const pointerConfig = props.pointerConfig;
   const getPointerProps = props.getPointerProps || null;
   const pointerHeight = pointerConfig?.height ?? defaultPointerConfig.height;
   const pointerWidth = pointerConfig?.width ?? defaultPointerConfig.width;
@@ -305,6 +305,8 @@ export const BarChart = (props: BarChartPropsType) => {
   const hidePointer1 =
     pointerConfig?.hidePointer1 ?? defaultPointerConfig.hidePointer1;
   const pointerEvents = pointerConfig?.pointerEvents;
+  const stripBehindBars =
+    pointerConfig?.stripBehindBars ?? defaultPointerConfig.stripBehindBars;
 
   const disableScroll =
     props.disableScroll ||
@@ -524,8 +526,9 @@ export const BarChart = (props: BarChartPropsType) => {
   ]);
   useEffect(() => {
     if (initialPointerIndex !== -1) {
-      const item = (props.stackData ?? data)[initialPointerIndex];
-      const stackSum = item.stacks?.reduce(
+      const item = data?.[initialPointerIndex];
+      const stackItem = props.stackData?.[initialPointerIndex];
+      const stackSum = stackItem?.stacks?.reduce(
         (acc, stack) => acc + (stack.value ?? 0),
         0,
       );
@@ -589,7 +592,7 @@ export const BarChart = (props: BarChartPropsType) => {
     });
   };
 
-  const renderStripAndLabel = () => {
+  const renderStripAndLabel = (stripBehindBars, pointerLabelComponent) => {
     let pointerItemLocal,
       pointerYLocal = pointerY;
 
@@ -618,6 +621,7 @@ export const BarChart = (props: BarChartPropsType) => {
       pointerLabelComponent,
       scrollX: 0,
       pointerEvents,
+      stripBehindBars,
     });
   };
 
@@ -723,6 +727,19 @@ export const BarChart = (props: BarChartPropsType) => {
             width: totalWidth,
             flexDirection: 'row',
           }}>
+          {pointerX > 0 && stripBehindBars ? (
+            <View
+              pointerEvents={pointerEvents ?? 'none'}
+              style={{
+                position: 'absolute',
+                height:
+                  extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
+                bottom: xAxisLabelsVerticalShift + labelsExtraHeight,
+                width: totalWidth,
+              }}>
+              {renderStripAndLabel(true, null)}
+            </View>
+          ) : null}
           {renderChart()}
           {pointerX > 0 ? (
             <View
@@ -735,9 +752,13 @@ export const BarChart = (props: BarChartPropsType) => {
                 width: totalWidth,
                 zIndex: 20,
               }}>
-              {!stripOverPointer && renderStripAndLabel()}
+              {!stripOverPointer &&
+                !stripBehindBars &&
+                renderStripAndLabel(false, pointerLabelComponent)}
               {renderPointer(1)}
-              {stripOverPointer && renderStripAndLabel()}
+              {stripOverPointer &&
+                !stripBehindBars &&
+                renderStripAndLabel(false, pointerLabelComponent)}
             </View>
           ) : null}
         </View>

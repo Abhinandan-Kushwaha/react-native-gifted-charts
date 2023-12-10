@@ -26,6 +26,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     yAxisThickness,
     yAxisColor,
     xAxisThickness,
+    trimYAxisAtTop,
     xAxisColor,
     xAxisLength,
     xAxisType,
@@ -248,6 +249,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     dashGap: dashGap,
     labelText: '',
     labelTextStyle: null,
+    zIndex: 1,
   };
 
   showReferenceLine1 = referenceLinesConfig.showReferenceLine1 || false;
@@ -280,6 +282,9 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
         labelTextStyle:
           referenceLinesConfig.referenceLine1Config.labelTextStyle ||
           defaultReferenceConfig.labelTextStyle,
+        zIndex:
+          referenceLinesConfig.referenceLine1Config.zIndex ??
+          defaultReferenceConfig.zIndex,
       }
     : defaultReferenceConfig;
 
@@ -313,6 +318,9 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
         labelTextStyle:
           referenceLinesConfig.referenceLine2Config.labelTextStyle ||
           defaultReferenceConfig.labelTextStyle,
+        zIndex:
+          referenceLinesConfig.referenceLine2Config.zIndex ??
+          defaultReferenceConfig.zIndex,
       }
     : defaultReferenceConfig;
 
@@ -346,6 +354,9 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
         labelTextStyle:
           referenceLinesConfig.referenceLine3Config.labelTextStyle ||
           defaultReferenceConfig.labelTextStyle,
+        zIndex:
+          referenceLinesConfig.referenceLine3Config.zIndex ??
+          defaultReferenceConfig.zIndex,
       }
     : defaultReferenceConfig;
 
@@ -391,12 +402,19 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     return (
       <View
         style={[
-          index === noOfSections ? styles.lastLeftPart : styles.leftPart,
+          index === noOfSections
+            ? styles.lastLeftPart
+            : trimYAxisAtTop && !index
+            ? {justifyContent: 'flex-start'}
+            : styles.leftPart,
           {
             borderColor: yAxisColor,
             backgroundColor: backgroundColor,
             width: (props.width || totalWidth - spacing) + endSpacing,
           },
+          trimYAxisAtTop && !index
+            ? {height: stepHeight / 2, marginTop: stepHeight / 2}
+            : null,
           yAxisSide === yAxisSides.RIGHT
             ? {borderRightWidth: yAxisThickness}
             : {borderLeftWidth: yAxisThickness},
@@ -710,24 +728,12 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
               //   label = '';
               // }
               return (
-                <View
-                  key={index}
-                  style={[
-                    styles.horizBar,
-                    styles.leftLabel,
-                    {
-                      position: 'absolute',
-                      zIndex: 1,
-                      top: stepHeight * index,
-                      width: yAxisLabelWidth,
-                      height:
-                        index === noOfSections ? stepHeight / 2 : stepHeight,
-                    },
-                  ]}>
+                <View key={index}>
                   {index === noOfSections && showReferenceLine1 ? (
                     <View
                       style={{
                         position: 'absolute',
+                        zIndex: referenceLine1Config.zIndex,
                         bottom:
                           ((referenceLine1Position - (yAxisOffset ?? 0)) *
                             containerHeight) /
@@ -753,6 +759,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                     <View
                       style={{
                         position: 'absolute',
+                        zIndex: referenceLine2Config.zIndex,
                         bottom:
                           ((referenceLine2Position - (yAxisOffset ?? 0)) *
                             containerHeight) /
@@ -778,6 +785,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                     <View
                       style={{
                         position: 'absolute',
+                        zIndex: referenceLine3Config.zIndex,
                         bottom:
                           ((referenceLine3Position - (yAxisOffset ?? 0)) *
                             containerHeight) /

@@ -93,6 +93,10 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const yAxisLabelContainerStyle = axesAndRulesProps.yAxisLabelContainerStyle;
   const yAxisColor =
     axesAndRulesProps.yAxisColor ?? AxesAndRulesDefaults.yAxisColor;
+  const trimYAxisAtTop =
+    axesAndRulesProps.trimYAxisAtTop ?? AxesAndRulesDefaults.trimYAxisAtTop;
+  const overflowTop =
+    axesAndRulesProps.overflowTop ?? AxesAndRulesDefaults.overflowTop;
   const yAxisThickness =
     axesAndRulesProps.yAxisThickness ?? AxesAndRulesDefaults.yAxisThickness;
   const xAxisColor =
@@ -190,6 +194,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     yAxisLabelContainerStyle,
     yAxisThickness,
     yAxisColor,
+    trimYAxisAtTop,
     xAxisThickness,
     xAxisColor,
     xAxisLength,
@@ -220,6 +225,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     rtl,
 
     containerHeight,
+    overflowTop,
     maxValue,
 
     referenceLinesConfig,
@@ -262,7 +268,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     points: points2,
     data: lineData2,
   };
-  const extendedContainerHeight = containerHeight + 10;
+  const extendedContainerHeight = containerHeight + overflowTop + 10;
   const containerHeightIncludingBelowXAxis =
     extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight;
   const verticalLinesProps = {
@@ -337,6 +343,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         stepHeight / 2 +
         xAxisLabelsVerticalShift +
         50,
+      marginTop: trimYAxisAtTop ? -24 : 0,
       marginBottom: (xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18) - 50, //This is to not let the Things that should be rendered below the chart overlap with it
     },
   });
@@ -370,7 +377,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
                 ? 0
                 : yAxisLabelWidth + yAxisThickness,
             position: 'absolute',
-            bottom: chartType === chartTypes.LINE_BI_COLOR ? 0 : xAxisThickness,
+            bottom:
+              overflowTop +
+              (chartType === chartTypes.LINE_BI_COLOR ? 0 : xAxisThickness),
           },
           !!props.width && {width: props.width},
           horizontal && {

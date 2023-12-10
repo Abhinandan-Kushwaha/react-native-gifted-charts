@@ -627,6 +627,8 @@ export const getAxesAndRulesProps = (
     yAxisSide: props.yAxisSide,
     yAxisLabelContainerStyle: props.yAxisLabelContainerStyle,
     yAxisColor: props.yAxisColor,
+    trimYAxisAtTop: props.trimYAxisAtTop,
+    overflowTop: props.overflowTop,
     yAxisThickness: props.yAxisThickness,
     xAxisColor: props.xAxisColor,
     xAxisLength: props.xAxisLength,
@@ -1119,32 +1121,32 @@ export const getLineConfigForBarChart = lineConfig => {
   };
 };
 
-export const isValueSumZeroForStackBottom = (
-  item: stackItemType,
-  index: number,
-) => {
-  const {stacks} = item;
-  let isValueSumZero = true;
-  for (let i = 0; i < index; i++) {
-    if (stacks[i].value) {
-      isValueSumZero = false;
-      break;
-    }
-  }
-  return isValueSumZero;
-};
+// export const isValueSumZeroForStackBottom = (
+//   item: stackItemType,
+//   index: number,
+// ) => {
+//   const {stacks} = item;
+//   let isValueSumZero = true;
+//   for (let i = 0; i < index; i++) {
+//     if (stacks[i].value) {
+//       isValueSumZero = false;
+//       break;
+//     }
+//   }
+//   return isValueSumZero;
+// };
 
-export const isValueSumZeroForStackTop = (
-  item: stackItemType,
-  index: number,
-) => {
-  const {stacks} = item;
-  let isValueSumZero = true;
-  for (let i = stacks.length - 1; i > index; i--) {
-    if (stacks[i].value) {
-      isValueSumZero = false;
-      break;
-    }
-  }
-  return isValueSumZero;
-};
+// export const isValueSumZeroForStackTop = (
+//   item: stackItemType,
+//   index: number,
+// ) => {
+//   const {stacks} = item;
+//   let isValueSumZero = true;
+//   for (let i = stacks.length - 1; i > index; i--) {
+//     if (stacks[i].value) {
+//       isValueSumZero = false;
+//       break;
+//     }
+//   }
+//   return isValueSumZero;
+// };

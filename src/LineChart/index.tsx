@@ -489,6 +489,7 @@ export const LineChart = (props: LineChartPropsType) => {
   if (animateOnDataChange) {
     animations.forEach((item, index) => {
       item.addListener(val => {
+        const temp = data[index]?.value ?? 0;
         data[index].value = val.value;
         let pp = '',
           ppp = '';
@@ -511,6 +512,7 @@ export const LineChart = (props: LineChartPropsType) => {
           setPointsOnChange();
         }
         counter++;
+        data[index].value = temp;
       });
     });
   }
@@ -1714,7 +1716,7 @@ export const LineChart = (props: LineChartPropsType) => {
 
   defaultPointerConfig.pointerStripHeight = containerHeight;
 
-  const pointerConfig = props.pointerConfig || null;
+  const pointerConfig = props.pointerConfig;
   const getPointerProps = props.getPointerProps || null;
   const pointerHeight = pointerConfig?.height ?? defaultPointerConfig.height;
   const pointerWidth = pointerConfig?.width ?? defaultPointerConfig.width;
@@ -1789,6 +1791,9 @@ export const LineChart = (props: LineChartPropsType) => {
   const hideSecondaryPointer =
     pointerConfig?.hideSecondaryPointer ??
     defaultPointerConfig.hideSecondaryPointer;
+  const resetPointerOnDataChange =
+    pointerConfig?.resetPointerOnDataChange ??
+    defaultPointerConfig.resetPointerOnDataChange;
   const pointerEvents = pointerConfig?.pointerEvents;
   const disableScroll =
     props.disableScroll ||
@@ -1835,7 +1840,7 @@ export const LineChart = (props: LineChartPropsType) => {
         10
       : 0;
 
-  useEffect(() => {
+  const initialisePointers = () => {
     if (initialPointerIndex !== -1) {
       const item = (data0 ?? data)[initialPointerIndex];
       const x =
@@ -1857,7 +1862,17 @@ export const LineChart = (props: LineChartPropsType) => {
         setPointerConfig(initialPointerIndex, item, x, y, y2, y3, y4, y5);
       }
     }
+  };
+
+  useEffect(() => {
+    initialisePointers();
   }, []);
+
+  useEffect(() => {
+    if (resetPointerOnDataChange) {
+      initialisePointers();
+    }
+  }, [data]);
 
   const setPointerConfig = (
     initialPointerIndex,
@@ -3528,7 +3543,11 @@ export const LineChart = (props: LineChartPropsType) => {
               position: 'absolute',
               height:
                 extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
-              bottom: 58 + labelsExtraHeight + xAxisLabelsVerticalShift,
+              bottom:
+                58 +
+                labelsExtraHeight +
+                xAxisLabelsVerticalShift -
+                (props.overflowTop ?? 0),
               // width: totalWidth,
               zIndex: 20,
             }}>

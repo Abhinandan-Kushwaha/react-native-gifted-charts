@@ -138,7 +138,7 @@ export const StripAndLabel = props => {
               width: pointerLabelWidth,
             },
           ]}>
-          {pointerLabelComponent(pointerItemLocal, secondaryPointerItem)}
+          {pointerLabelComponent?.(pointerItemLocal, secondaryPointerItem)}
         </View>
       )}
     </View>

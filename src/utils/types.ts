@@ -92,6 +92,18 @@ export type secondaryLineConfigType = {
   isSecondary?: boolean;
 };
 
+export type referenceConfigType = {
+  thickness?: number;
+  width?: number;
+  color?: ColorValue | String | any;
+  type?: String;
+  dashWidth?: number;
+  dashGap?: number;
+  labelText?: String;
+  labelTextStyle?: any;
+  zIndex?: number;
+};
+
 export type arrowConfigType = {
   length: number;
   width: number;
@@ -114,6 +126,7 @@ export type horizSectionPropTypes = {
   yAxisLabelWidth: number;
   yAxisLabelContainerStyle: any;
   yAxisThickness: number;
+  trimYAxisAtTop: boolean;
   yAxisColor: string;
   xAxisThickness: number;
   xAxisColor: string;
@@ -145,6 +158,7 @@ export type horizSectionPropTypes = {
   rtl: boolean;
 
   containerHeight: number;
+  overflowTop: number;
   maxValue: number;
 
   referenceLinesConfig: any;
@@ -229,7 +243,7 @@ export type BarAndLineChartsWrapperTypes = {
   xAxisIndicesWidth: number;
   xAxisIndicesColor: ColorValue;
 
-  pointerConfig: any;
+  pointerConfig?: Pointer;
   getPointerProps: any;
   pointerIndex: number;
   pointerX: number;
@@ -277,6 +291,8 @@ export type Pointer = {
   strokeDashArray?: Array<number>;
   barTouchable?: boolean;
   pointerEvents?: PointerEvents;
+  stripBehindBars?: boolean;
+  resetPointerOnDataChange?: boolean;
 };
 
 export type HighlightedRange = {
