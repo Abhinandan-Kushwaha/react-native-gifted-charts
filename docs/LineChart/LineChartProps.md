@@ -251,7 +251,8 @@ type referenceConfigType = {
   dashGap: number;
   labelText: String;
   labelTextStyle: object;
-  zIndex: number;
+  zIndex: number; // default 1
+  resetPointerOnDataChange: boolean; // default true
 };
 ```
 
