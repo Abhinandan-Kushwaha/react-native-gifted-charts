@@ -10,6 +10,8 @@
 
 4. `showValuesAsTopLabel` now shows the sum of stack item values at top of each stack. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/446 
 
+5. Added the property `resetPointerOnDataChange` to `pointerConfig` for Line charts. The default value of `resetPointerOnDataChange` is true. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/456
+
 
 ## 🐛 Bug fixes
 
