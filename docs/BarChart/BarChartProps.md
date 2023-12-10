@@ -230,6 +230,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | yAxisTextStyle               | object                    | Style object for the Y axis text style                                                                         | \_                           |
 | yAxisTextNumberOfLines       | number                    | Number of lines for y axis label text                                                                          | 1                            |
 | yAxisLabelContainerStyle     | object                    | Style object for the Y axis label container                                                                    | \_                           |
+| trimYAxisAtTop               | boolean                   | Removes the extra length of the Y axis from the top                                                            | false                        |
 | horizontalRulesStyle         | object                    | Style object for the horizontal rules container                                                                | \_                           |
 | showFractionalValues         | boolean                   | Allow fractional values for the Y axis label                                                                   | false                        |
 | roundToDigits                | number                    | Rounds the y axis values to given number of digits after decimal point                                         | 1                            |
@@ -315,6 +316,8 @@ type referenceConfigType = {
   dashGap: number;
   labelText: String;
   labelTextStyle: object;
+  zIndex: number;
+  stripBehindBars: boolean;
 };
 ```
 

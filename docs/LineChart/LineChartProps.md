@@ -164,6 +164,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | yAxisTextStyle               | object                    | Style object for the Y axis text style                                                                            | \_                           |
 | yAxisTextNumberOfLines       | number                    | Number of lines for y axis label text                                                                             | 1                            |
 | yAxisLabelContainerStyle     | object                    | Style object for the Y axis label container                                                                       | \_                           |
+| trimYAxisAtTop               | boolean                   | Removes the extra length of the Y axis from the top                                                               | false                        |
 | yAxisOffset                  | number                    | Starting value on Y Axis                                                                                          | 0                            |
 | horizontalRulesStyle         | object                    | Style object for the horizontal rules container                                                                   | \_                           |
 | showFractionalValues         | boolean                   | Allow fractional values for the Y axis label                                                                      | false                        |
@@ -250,6 +251,7 @@ type referenceConfigType = {
   dashGap: number;
   labelText: String;
   labelTextStyle: object;
+  zIndex: number;
 };
 ```
 
