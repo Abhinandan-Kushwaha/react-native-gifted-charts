@@ -5,6 +5,7 @@ import {
   Pointer,
   RuleType,
   RulesConfig,
+  referenceConfigType,
   secondaryYAxisType,
 } from '../utils/types';
 
@@ -16,6 +17,7 @@ export type stackItemType = {
   labelTextStyle?: any;
   topLabelComponent?: Function;
   topLabelContainerStyle?: any;
+  topLabelTextStyle?: any;
   disablePress?: any;
   color?: ColorValue;
   showGradient?: boolean;
@@ -75,6 +77,7 @@ export type BarChartPropsType = {
   xAxisColor?: ColorValue;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
+  trimYAxisAtTop?: boolean;
   xAxisType?: RuleType;
   yAxisLabelContainerStyle?: any;
   horizontalRulesStyle?: any;
@@ -280,16 +283,7 @@ type arrowType = {
   fillColor?: string;
   showArrowBase?: boolean;
 };
-type referenceConfigType = {
-  thickness: number;
-  width: number;
-  color: ColorValue | String | any;
-  type: String;
-  dashWidth: number;
-  dashGap: number;
-  labelText: String;
-  labelTextStyle: any;
-};
+
 type sectionType = {
   value: string;
 };

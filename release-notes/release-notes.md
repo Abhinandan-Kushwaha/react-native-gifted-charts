@@ -1,3 +1,28 @@
+# 🎉 1.3.25
+
+## ✨ Features added-
+
+1. Added the property `zIndex` to `referenceLine1Config`, `referenceLine2Config` and `referenceLine3Config`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/310
+
+2. Added `stripBehindBars` property to `pointerConfig` for Bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/410#issuecomment-1833514034
+
+3. Added the `trimYAxisAtTop` prop for Bar and Line charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/461
+
+4. `showValuesAsTopLabel` now shows the sum of stack item values at top of each stack. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/446 
+
+
+## 🐛 Bug fixes
+
+1. Fixed issue with `overflowTop`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/453#issuecomment-1847832747
+
+2. Fixed issue with `stackBorderRadius`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/354#issuecomment-1829504196 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/354#issuecomment-1849032349
+
+---
+
+---
+
+---
+
 # 🎉 1.3.24
 
 ## ✨ Features added-

@@ -27,7 +27,7 @@ export enum yAxisSides {
 export enum loc {
   IN,
   UP,
-  DOWN
+  DOWN,
 }
 
 export const SEGMENT_START = 'segmentStart';
@@ -42,11 +42,12 @@ export const ruleTypes: RuleTypes = {
   DOTTED: 'dotted',
 };
 
-
 export const AxesAndRulesDefaults = {
   yAxisSide: yAxisSides.LEFT,
   yAxisColor: 'black',
   yAxisThickness: 1,
+  trimYAxisAtTop: false,
+  overflowTop: 0,
   xAxisColor: 'black',
   xAxisThickness: 1,
   xAxisType: ruleTypes.SOLID,
@@ -253,6 +254,8 @@ export const defaultPointerConfig = {
   hidePointer5: false,
   hideSecondaryPointer: false,
   barTouchable: false,
+  stripBehindBars: true,
+  resetPointerOnDataChange: true,
   // pointerEvents: PointerEvent
 };
 

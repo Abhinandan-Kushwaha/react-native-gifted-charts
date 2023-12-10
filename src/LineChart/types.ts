@@ -10,6 +10,7 @@ import {
   RuleType,
   RulesConfig,
   arrowConfigType,
+  referenceConfigType,
   secondaryLineConfigType,
   secondaryYAxisType,
 } from '../utils/types';
@@ -156,6 +157,7 @@ export type LineChartPropsType = {
   color5?: string;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
+  trimYAxisAtTop?: boolean;
   yAxisLabelContainerStyle?: any;
   horizontalRulesStyle?: any;
   yAxisTextStyle?: any;
@@ -314,16 +316,6 @@ export type LineChartPropsType = {
   highlightedRange?: HighlightedRange;
 };
 
-type referenceConfigType = {
-  thickness: number;
-  width: number;
-  color: ColorValue | String | any;
-  type: String;
-  dashWidth: number;
-  dashGap: number;
-  labelText: String;
-  labelTextStyle: any;
-};
 export type itemType = {
   value: number;
   label?: String;

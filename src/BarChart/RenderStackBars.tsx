@@ -4,7 +4,6 @@ import {
   TouchableOpacity,
   Text,
   ColorValue,
-  GestureResponderEvent,
   LayoutAnimation,
   Platform,
   UIManager,
@@ -12,10 +11,6 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {BarDefaults} from '../utils/constants';
-import {
-  isValueSumZeroForStackBottom,
-  isValueSumZeroForStackTop,
-} from '../utils';
 import {stackItemType} from './types';
 import {Pointer} from '../utils/types';
 
@@ -84,6 +79,7 @@ type Props = {
   isAnimated?: boolean;
   animationDuration?: number;
   pointerConfig?: Pointer;
+  showValuesAsTopLabel?: boolean;
 };
 
 const RenderStackBars = (props: Props) => {
@@ -119,6 +115,7 @@ const RenderStackBars = (props: Props) => {
     stackBorderTopRightRadius,
     stackBorderBottomLeftRadius,
     stackBorderBottomRightRadius,
+    showValuesAsTopLabel,
   } = props;
   const cotainsNegative = item.stacks.some(item => item.value < 0);
   const noAnimation = cotainsNegative || !isAnimated;
@@ -209,76 +206,6 @@ const RenderStackBars = (props: Props) => {
     setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
   };
 
-  const getStackBorderRadii = (item: stackItemType, index: number) => {
-    const stackItem = item.stacks[index];
-    const borderRadii = {
-      borderTopLeftRadius:
-        stackItem.borderTopLeftRadius ??
-        borderTopLeftRadius ??
-        stackItem.borderRadius ??
-        borderRadius ??
-        props.barBorderTopLeftRadius ??
-        props.barBorderRadius ??
-        0,
-      borderTopRightRadius:
-        stackItem.borderTopRightRadius ??
-        borderTopRightRadius ??
-        stackItem.borderRadius ??
-        borderRadius ??
-        props.barBorderTopRightRadius ??
-        props.barBorderRadius ??
-        0,
-      borderBottomLeftRadius:
-        stackItem.borderBottomLeftRadius ??
-        borderBottomLeftRadius ??
-        stackItem.borderRadius ??
-        borderRadius ??
-        props.barBorderBottomLeftRadius ??
-        props.barBorderRadius ??
-        0,
-      borderBottomRightRadius:
-        stackItem.borderBottomRightRadius ??
-        borderBottomRightRadius ??
-        stackItem.borderRadius ??
-        borderRadius ??
-        props.barBorderBottomRightRadius ??
-        props.barBorderRadius ??
-        0,
-    };
-    if (
-      !borderRadii.borderTopLeftRadius &&
-      isValueSumZeroForStackTop(item, index)
-    ) {
-      const stackTopLeft = stackBorderTopLeftRadius ?? stackBorderRadius ?? 0;
-      borderRadii.borderTopLeftRadius = stackTopLeft;
-    }
-    if (
-      !borderRadii.borderTopRightRadius &&
-      isValueSumZeroForStackTop(item, index)
-    ) {
-      const stackTopRight = stackBorderTopRightRadius ?? stackBorderRadius ?? 0;
-      borderRadii.borderTopRightRadius = stackTopRight;
-    }
-    if (
-      !borderRadii.borderBottomLeftRadius &&
-      isValueSumZeroForStackBottom(item, index)
-    ) {
-      const stackBottomLeft =
-        stackBorderBottomLeftRadius ?? stackBorderRadius ?? 0;
-      borderRadii.borderBottomLeftRadius = stackBottomLeft;
-    }
-    if (
-      !borderRadii.borderBottomRightRadius &&
-      isValueSumZeroForStackBottom(item, index)
-    ) {
-      const stackBottomRight =
-        stackBorderBottomRightRadius ?? stackBorderRadius ?? 0;
-      borderRadii.borderBottomRightRadius = stackBottomRight;
-    }
-
-    return borderRadii;
-  };
-
   const barWrapper = () => {
     return noAnimation ? (
       static2DSimple()
@@ -297,6 +224,37 @@ const RenderStackBars = (props: Props) => {
   };
 
   const static2DSimple = () => {
+    const getStackBorderRadii = (item: stackItemType, index: number) => {
+      const stackItem = item.stacks[index];
+      const borderRadii = {
+        borderTopLeftRadius:
+          stackItem.borderTopLeftRadius ??
+          stackItem.borderRadius ??
+          props.barBorderTopLeftRadius ??
+          props.barBorderRadius ??
+          0,
+        borderTopRightRadius:
+          stackItem.borderTopRightRadius ??
+          stackItem.borderRadius ??
+          props.barBorderTopRightRadius ??
+          props.barBorderRadius ??
+          0,
+        borderBottomLeftRadius:
+          stackItem.borderBottomLeftRadius ??
+          stackItem.borderRadius ??
+          props.barBorderBottomLeftRadius ??
+          props.barBorderRadius ??
+          0,
+        borderBottomRightRadius:
+          stackItem.borderBottomRightRadius ??
+          stackItem.borderRadius ??
+          props.barBorderBottomRightRadius ??
+          props.barBorderRadius ??
+          0,
+      };
+      return borderRadii;
+    };
+
     return (
       <>
         <TouchableOpacity
@@ -315,6 +273,27 @@ const RenderStackBars = (props: Props) => {
               position: 'absolute',
               width: item.stacks[0].barWidth || props.barWidth || 30,
               height: '100%',
+              borderTopLeftRadius:
+                borderTopLeftRadius ??
+                borderRadius ??
+                stackBorderTopLeftRadius ??
+                stackBorderRadius,
+              borderTopRightRadius:
+                borderTopRightRadius ??
+                borderRadius ??
+                stackBorderTopRightRadius ??
+                stackBorderRadius,
+              borderBottomLeftRadius:
+                borderBottomLeftRadius ??
+                borderRadius ??
+                stackBorderBottomLeftRadius ??
+                stackBorderRadius,
+              borderBottomRightRadius:
+                borderBottomRightRadius ??
+                borderRadius ??
+                stackBorderBottomRightRadius ??
+                stackBorderRadius,
+              overflow: 'hidden',
             },
             cotainsNegative && {
               transform: [
@@ -388,7 +367,7 @@ const RenderStackBars = (props: Props) => {
             </Svg>
           )}
         </TouchableOpacity>
-        {item.topLabelComponent && (
+        {(item.topLabelComponent || showValuesAsTopLabel) && (
           <View
             style={[
               {
@@ -406,7 +385,13 @@ const RenderStackBars = (props: Props) => {
                 !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
               item.topLabelContainerStyle,
             ]}>
-            {item.topLabelComponent()}
+            {showValuesAsTopLabel ? (
+              <Text style={item.topLabelTextStyle}>
+                {item.stacks.reduce((acc, stack) => acc + stack.value, 0)}
+              </Text>
+            ) : (
+              item.topLabelComponent?.()
+            )}
           </View>
         )}
       </>
