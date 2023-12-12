@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import {BarChart} from '../../src/BarChart';
 
 const BarWithGradient = () => {
@@ -12,7 +12,7 @@ const BarWithGradient = () => {
     {value: 0.7, label: '6'},
   ];
   return (
-    <View style={{borderWidth:1}}>
+    <View style={{borderWidth: 1}}>
       <BarChart
         showFractionalValues
         showYAxisIndices
@@ -24,6 +24,25 @@ const BarWithGradient = () => {
         frontColor={'#1B6BB0'}
         gradientColor={'#FFEEFE'}
         backgroundColor={'#FECF9E'}
+        pointerConfig={{
+          initialPointerIndex: 0,
+          stripBehindBars: true,
+          pointerStripHeight: 207,
+          pointerLabelComponent: items => {
+            return (
+              <View
+                style={{
+                  width: 36,
+                  padding: 6,
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  backgroundColor: '#eee',
+                }}>
+                <Text>{items[0].value}</Text>
+              </View>
+            );
+          },
+        }}
       />
     </View>
   );

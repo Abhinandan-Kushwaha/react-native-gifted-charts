@@ -1,6 +1,6 @@
 import {BarChart} from '../../src/BarChart';
 import React from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 
 const RoundStackBar = () => {
   const stackData = [
@@ -10,7 +10,6 @@ const RoundStackBar = () => {
         {value: 20, color: '#4ABFF4', marginBottom: 2},
       ],
       label: 'Jan',
-      
     },
     {
       stacks: [
@@ -37,7 +36,7 @@ const RoundStackBar = () => {
     },
   ];
   return (
-    <View style={{borderWidth:1}}>
+    <View style={{borderWidth: 1}}>
       <BarChart
         width={340}
         rotateLabel
@@ -46,7 +45,25 @@ const RoundStackBar = () => {
         stackBorderTopLeftRadius={20}
         stackData={stackData}
         showValuesAsTopLabel
-        pointerConfig={{}}
+        pointerConfig={{
+          initialPointerIndex: 0,
+          stripBehindBars: true,
+          pointerStripHeight: 200,
+          pointerLabelComponent: items => {
+            return (
+              <View
+                style={{
+                  width: 30,
+                  padding: 6,
+                  borderWidth: 1,
+                  borderRadius: 8,
+                  backgroundColor: '#eee',
+                }}>
+                <Text>{items[0].stacks[0].value}</Text>
+              </View>
+            );
+          },
+        }}
       />
     </View>
   );

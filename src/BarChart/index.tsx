@@ -526,7 +526,7 @@ export const BarChart = (props: BarChartPropsType) => {
   ]);
   useEffect(() => {
     if (initialPointerIndex !== -1) {
-      const item = data?.[initialPointerIndex];
+      const item = (props.stackData ?? data)?.[initialPointerIndex];
       const stackItem = props.stackData?.[initialPointerIndex];
       const stackSum = stackItem?.stacks?.reduce(
         (acc, stack) => acc + (stack.value ?? 0),
@@ -539,7 +539,8 @@ export const BarChart = (props: BarChartPropsType) => {
         barWidth / 2;
       const y =
         containerHeight -
-        ((stackSum ?? item.value) * containerHeight) / maxValue -
+        ((stackSum ?? data[initialPointerIndex].value) * containerHeight) /
+          maxValue -
         (pointerRadius || pointerHeight / 2) +
         10;
       if (initialPointerAppearDelay) {
@@ -737,7 +738,7 @@ export const BarChart = (props: BarChartPropsType) => {
                 bottom: xAxisLabelsVerticalShift + labelsExtraHeight,
                 width: totalWidth,
               }}>
-              {renderStripAndLabel(true, null)}
+              {renderStripAndLabel(true, pointerLabelComponent)}
             </View>
           ) : null}
           {renderChart()}
