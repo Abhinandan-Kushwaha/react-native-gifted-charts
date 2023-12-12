@@ -1,3 +1,13 @@
+# 🎉 1.3.26
+
+🐛 Minor bug fixes with `stripΒehindBars` and `initialPointerIndex` for Bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/410#issuecomment-1849747263 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/410#issuecomment-1849757216
+
+---
+
+---
+
+---
+
 # 🎉 1.3.25
 
 ## ✨ Features added-
