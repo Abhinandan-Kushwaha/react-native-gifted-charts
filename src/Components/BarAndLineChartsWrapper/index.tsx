@@ -324,8 +324,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           ? (props.width ? -98 - endSpacing : -75 - endSpacing) -
             difBwWidthHeight
           : props.width
-            ? difBwWidthHeight
-            : difBwWidthHeight - 40) /
+          ? difBwWidthHeight
+          : difBwWidthHeight - 40) /
           2 +
         (yAxisAtTop ? (rtl ? (props.width ? 12 : 40) : 12) : 52),
     },
@@ -374,8 +374,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
                   (props.width ? 20 : 0) -
                   (data[data.length - 1]?.barWidth ?? barWidth ?? 0) / 2
                 : yAxisSide === yAxisSides.RIGHT
-                  ? 0
-                  : yAxisLabelWidth + yAxisThickness,
+                ? 0
+                : yAxisLabelWidth + yAxisThickness,
             position: 'absolute',
             bottom:
               overflowTop +

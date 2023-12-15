@@ -153,8 +153,8 @@ const RenderStackBars = (props: Props) => {
               ? {transform: [{rotate: '330deg'}]}
               : {transform: [{rotate: '60deg'}]}
             : props.horizontal
-              ? {transform: [{rotate: '-90deg'}]}
-              : {},
+            ? {transform: [{rotate: '-90deg'}]}
+            : {},
         ]}>
         {item.labelComponent ? (
           item.labelComponent()

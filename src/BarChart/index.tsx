@@ -358,11 +358,11 @@ export const BarChart = (props: BarChartPropsType) => {
           const currentValue = props.lineData
             ? props.lineData[i].value
             : props.stackData
-              ? props.stackData[i].stacks.reduce(
-                  (total, item) => total + item.value,
-                  0,
-                )
-              : data[i].value;
+            ? props.stackData[i].stacks.reduce(
+                (total, item) => total + item.value,
+                0,
+              )
+            : data[i].value;
           pp +=
             'L' +
             getXForLineInBar(
@@ -413,11 +413,11 @@ export const BarChart = (props: BarChartPropsType) => {
           const currentValue = props.lineData
             ? props.lineData[i].value
             : props.stackData
-              ? props.stackData[i].stacks.reduce(
-                  (total, item) => total + item.value,
-                  0,
-                )
-              : data[i].value;
+            ? props.stackData[i].stacks.reduce(
+                (total, item) => total + item.value,
+                0,
+              )
+            : data[i].value;
           p1Array.push([
             getXForLineInBar(
               i,
