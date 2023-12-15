@@ -165,13 +165,35 @@ const RenderStackBars = (props: Props) => {
   };
 
   const getPosition = (index: number) => {
-    let position = 0;
+    /* Returns bottom position for stack item
+       negative values are below origin (-> negative position) */
+    const height = getBarHeight(
+      item.stacks[index].value,
+      item.stacks[index].marginBottom,
+    );
+
+    const itemValue = item.stacks[index].value;
+    const isNegative = itemValue <= 0;
+    let position = isNegative ? -(height || 0) : 0;
+
     for (let i = 0; i < index; i++) {
-      position +=
-        (Math.abs(props.item.stacks[i].value) * (containerHeight || 200)) /
-        (maxValue || 200);
+      const valueOnIndex = item.stacks[i].value;
+      if (isNegative && valueOnIndex <= 0) {
+        position +=
+          (valueOnIndex * (containerHeight || 200)) / (maxValue || 200);
+      } else if (!isNegative && valueOnIndex >= 0) {
+        position +=
+          (valueOnIndex * (containerHeight || 200)) / (maxValue || 200);
+      }
     }
     return position;
+  };
+
+  const getBarHeight = (value: number, marginBottom?: number) => {
+    return (
+      (Math.abs(value) * (containerHeight || 200)) / (maxValue || 200) -
+      (marginBottom || 0)
+    );
   };
 
   const totalHeight = props.item.stacks.reduce(
@@ -295,15 +317,14 @@ const RenderStackBars = (props: Props) => {
                 stackBorderRadius,
               overflow: 'hidden',
             },
-            cotainsNegative && {
-              transform: [
-                {translateY: totalHeight + xAxisThickness / 2},
-                {rotate: '180deg'},
-              ],
-            },
           ]}>
           {item.stacks.map((stackItem, index) => {
             const borderRadii = getStackBorderRadii(item, index);
+            const barHeight = getBarHeight(
+              stackItem.value,
+              stackItem.marginBottom,
+            );
+
             return (
               <TouchableOpacity
                 key={index}
@@ -314,10 +335,7 @@ const RenderStackBars = (props: Props) => {
                   position: 'absolute',
                   bottom: getPosition(index) + (stackItem.marginBottom || 0),
                   width: '100%',
-                  height:
-                    (Math.abs(stackItem.value) * (containerHeight || 200)) /
-                      (maxValue || 200) -
-                    (stackItem.marginBottom || 0),
+                  height: barHeight,
                   backgroundColor:
                     stackItem.color || item.color || props.color || 'black',
                   borderWidth: barBorderWidth ?? 0,

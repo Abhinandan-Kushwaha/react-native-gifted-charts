@@ -395,6 +395,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
               stepHeight / 2 +
               (50 + xAxisLabelsVerticalShift),
             width: totalWidth - spacing + endSpacing,
+            marginTop: 12,
             paddingLeft: initialSpacing,
             paddingBottom:
               noOfSectionsBelowXAxis * stepHeight + labelsExtraHeight,
