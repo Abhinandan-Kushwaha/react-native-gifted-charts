@@ -193,7 +193,11 @@ const RenderStackBars = (props: Props) => {
   };
 
   const getLowestPosition = () => {
-    return item.stacks.map((_, index) => getPosition(index)).sort()?.[0] || 0;
+    return (
+      item.stacks
+        .map((_, index) => getPosition(index))
+        .sort((a, b) => a - b)?.[0] || 0
+    );
   };
 
   const getBarHeight = (value: number, marginBottom?: number) => {
