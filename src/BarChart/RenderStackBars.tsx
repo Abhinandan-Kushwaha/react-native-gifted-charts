@@ -136,6 +136,7 @@ const RenderStackBars = (props: Props) => {
   }
   const disablePress = props.disablePress || false;
   const renderLabel = (label: String, labelTextStyle: any) => {
+    const lowestBarPosition = getLowestPosition();
     return (
       <View
         style={[
@@ -143,7 +144,9 @@ const RenderStackBars = (props: Props) => {
             width:
               (item.stacks[0].barWidth || props.barWidth || 30) + spacing / 2,
             position: 'absolute',
-            bottom: rotateLabel ? -40 : -6 - xAxisTextNumberOfLines * 18,
+            bottom: rotateLabel
+              ? -40
+              : -6 - xAxisTextNumberOfLines * 18 + lowestBarPosition,
           },
           rotateLabel
             ? props.horizontal
@@ -187,6 +190,10 @@ const RenderStackBars = (props: Props) => {
       }
     }
     return position;
+  };
+
+  const getLowestPosition = () => {
+    return item.stacks.map((_, index) => getPosition(index)).sort()?.[0] || 0;
   };
 
   const getBarHeight = (value: number, marginBottom?: number) => {
@@ -315,7 +322,6 @@ const RenderStackBars = (props: Props) => {
                 borderRadius ??
                 stackBorderBottomRightRadius ??
                 stackBorderRadius,
-              // overflow: 'hidden',
             },
           ]}>
           {item.stacks.map((stackItem, index) => {
