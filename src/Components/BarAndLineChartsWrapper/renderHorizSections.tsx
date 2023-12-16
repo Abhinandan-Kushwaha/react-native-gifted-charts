@@ -25,8 +25,9 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     yAxisLabelContainerStyle,
     yAxisThickness,
     yAxisColor,
-    xAxisThickness,
+    yAxisExtraHeight,
     trimYAxisAtTop,
+    xAxisThickness,
     xAxisColor,
     xAxisLength,
     xAxisType,
@@ -73,6 +74,8 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     secondaryYAxis,
     formatYLabel,
   } = props;
+
+  const yAxisExtraHeightAtTop = trimYAxisAtTop ? 0 : yAxisExtraHeight;
 
   /***********************************************************************************************************************************
    *                                                                                                                                  *
@@ -404,7 +407,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
         style={[
           index === noOfSections
             ? styles.lastLeftPart
-            : trimYAxisAtTop && !index
+            : !index
             ? {justifyContent: 'flex-start'}
             : styles.leftPart,
           {
@@ -412,9 +415,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
             backgroundColor: backgroundColor,
             width: (props.width || totalWidth - spacing) + endSpacing,
           },
-          trimYAxisAtTop && !index
-            ? {height: stepHeight / 2, marginTop: stepHeight / 2}
-            : null,
+          !index ? {height: stepHeight / 2, marginTop: stepHeight / 2} : null,
           yAxisSide === yAxisSides.RIGHT
             ? {borderRightWidth: yAxisThickness}
             : {borderLeftWidth: yAxisThickness},
@@ -470,6 +471,46 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     );
   };
 
+  const renderExtraHeightOfYAxisAtTop = () => (
+    <View
+      style={[
+        styles.horizBar,
+        {
+          width: (width ?? totalWidth) + endSpacing,
+          top: stepHeight / 2,
+        },
+        horizontal &&
+          !yAxisAtTop && {
+            transform: [{rotateY: '180deg'}],
+          },
+        horizontalRulesStyle,
+      ]}>
+      <View
+        style={[
+          styles.leftLabel,
+          {
+            height: yAxisExtraHeightAtTop,
+            width: yAxisSide === yAxisSides.RIGHT ? 0 : yAxisLabelWidth,
+          },
+          yAxisLabelContainerStyle,
+        ]}
+      />
+      <View
+        style={[
+          styles.leftPart,
+          {
+            borderColor: yAxisColor,
+            backgroundColor: backgroundColor,
+            width: (props.width || totalWidth - spacing) + endSpacing,
+          },
+          yAxisSide === yAxisSides.RIGHT
+            ? {borderRightWidth: yAxisThickness}
+            : {borderLeftWidth: yAxisThickness},
+        ]}
+      />
+    </View>
+  );
+
   const renderSecondaryYaxisLabels = (
     horizSections: HorizSectionsType,
     isBelow: boolean,
@@ -523,8 +564,13 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     });
 
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        marginTop: stepHeight / -2,
+      }}>
       <View style={{width: (width ?? totalWidth) + endSpacing}}>
+        {yAxisExtraHeightAtTop ? renderExtraHeightOfYAxisAtTop() : null}
         {horizSections.map((sectionItems, index) => {
           return (
             <View
@@ -576,7 +622,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                     {
                       position: 'absolute',
                       zIndex: 1,
-                      top: stepHeight * index,
+                      top: stepHeight * index + yAxisExtraHeightAtTop,
                       width: yAxisLabelWidth,
                       height:
                         index === noOfSections ? stepHeight / 2 : stepHeight,
@@ -825,6 +871,8 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
               left: width ? yAxisLabelWidth : yAxisLabelWidth - spacing,
               borderColor: secondaryYAxisConfig.yAxisColor,
               borderLeftWidth: secondaryYAxisConfig.yAxisThickness,
+              height: containerHeight + yAxisExtraHeightAtTop,
+              bottom: stepHeight / -2,
             }}>
             {!secondaryYAxisConfig.hideYAxisText
               ? renderSecondaryYaxisLabels(secondaryHorizSections, false)

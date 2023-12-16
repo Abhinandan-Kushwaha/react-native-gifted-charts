@@ -80,7 +80,7 @@ type itemType = {
 };
 
 export const PieChartMain = (props: propTypes) => {
-  const {isThreeD} = props;
+  const {isThreeD, isBiggerPie} = props;
   const propData = props.data;
   const data: Array<itemType> = [];
   if (propData) {
@@ -111,14 +111,6 @@ export const PieChartMain = (props: propTypes) => {
   const strokeColor =
     props.strokeColor || (strokeWidth ? 'gray' : 'transparent');
   const innerRadius = props.innerRadius || radius / 2.5;
-  const innerCircleColor =
-    props.innerCircleColor || props.backgroundColor || 'white';
-  const innerCircleBorderWidth =
-    props.innerCircleBorderWidth ||
-    (props.innerCircleBorderColor ? strokeWidth || 2 : 0);
-  const innerCircleBorderColor = props.innerCircleBorderColor || 'lightgray';
-  const shiftInnerCenterX = props.shiftInnerCenterX || 0;
-  const shiftInnerCenterY = props.shiftInnerCenterY || 0;
 
   const showText = props.showText || false;
   const textColor = props.textColor || '';
@@ -145,7 +137,6 @@ export const PieChartMain = (props: propTypes) => {
   const gradientCenterColor = props.gradientCenterColor || 'white';
   const toggleFocusOnPress = props.toggleFocusOnPress === false ? false : true;
 
-  let isDataShifted = false;
   let minShiftX = 0,
     maxShiftX = 0,
     minShiftY = 0,
@@ -154,7 +145,6 @@ export const PieChartMain = (props: propTypes) => {
 
   data.forEach((item: any) => {
     if (item.shiftX || item.shiftY) {
-      isDataShifted = true;
       if (minShiftX > item.shiftX) {
         minShiftX = item.shiftX;
       }
@@ -199,6 +189,7 @@ export const PieChartMain = (props: propTypes) => {
 
   return (
     <View
+      pointerEvents="box-none"
       style={[
         {
           backgroundColor: backgroundColor,
@@ -209,6 +200,7 @@ export const PieChartMain = (props: propTypes) => {
         isThreeD && {transform: [{rotateX: tiltAngle}]},
       ]}>
       <Svg
+        pointerEvents="box-none"
         viewBox={`${strokeWidth / -2 + minShiftX} ${
           strokeWidth / -2 + minShiftY
         } ${
@@ -288,6 +280,8 @@ export const PieChartMain = (props: propTypes) => {
               cy * (1 - Math.cos(2 * pi * nextItem + initialAngle)) +
               (item.shiftY || 0);
 
+            if (isBiggerPie && index) return null;
+
             return (
               <Path
                 key={index + 'a'}
@@ -336,6 +330,7 @@ export const PieChartMain = (props: propTypes) => {
 
         {showText &&
           data.map((item, index) => {
+            if (isBiggerPie && index) return null;
             if (!props.data[index].value) return null;
             let mx = cx * (1 + Math.sin(2 * pi * mData[index] + initialAngle));
             let my = cy * (1 - Math.cos(2 * pi * mData[index] + initialAngle));
@@ -377,10 +372,6 @@ export const PieChartMain = (props: propTypes) => {
               }
             }
 
-            // console.log('sx', sx);
-            // console.log('sy', sy);
-            // console.log('ax', ax);
-            // console.log('ay', ay);
             return (
               <React.Fragment key={index}>
                 {/* <Line x1={mx} x2={cx} y1={my} y2={cy} stroke="black" /> */}
@@ -457,51 +448,6 @@ export const PieChartMain = (props: propTypes) => {
             );
           })}
       </Svg>
-      {(props.centerLabelComponent || (donut && !isDataShifted)) && (
-        <View
-          style={[
-            {
-              height: innerRadius * 2,
-              width: innerRadius * 2,
-              borderRadius: innerRadius,
-              position: 'absolute',
-              zIndex: 100,
-              alignSelf: 'center',
-              backgroundColor: innerCircleColor,
-              left: canvasWidth / 2 - innerRadius + shiftInnerCenterX,
-              top:
-                canvasHeight / 2 -
-                innerRadius +
-                shiftInnerCenterY -
-                (isThreeD ? radius / 5 : 0),
-              borderWidth: innerCircleBorderWidth,
-              borderColor: innerCircleBorderColor,
-              justifyContent: 'center',
-              alignItems: 'center',
-            },
-            isThreeD && {
-              borderTopWidth: innerCircleBorderWidth * 5,
-              borderLeftWidth: shiftInnerCenterX
-                ? innerCircleBorderWidth * 2
-                : innerCircleBorderWidth,
-            },
-            semiCircle &&
-              isThreeD && {
-                borderTopWidth: isThreeD
-                  ? innerCircleBorderWidth * 5
-                  : innerCircleBorderWidth,
-                borderLeftWidth: 0.5,
-                borderLeftColor: innerCircleColor,
-                borderBottomWidth: 0,
-                borderRightWidth: 0.5,
-                borderRightColor: innerCircleColor,
-              },
-          ]}>
-          <View style={{marginTop: semiCircle ? -0.5 * innerRadius : 0}}>
-            {props.centerLabelComponent ? props.centerLabelComponent() : null}
-          </View>
-        </View>
-      )}
       {isThreeD && shadow && !semiCircle ? (
         <View
           style={{

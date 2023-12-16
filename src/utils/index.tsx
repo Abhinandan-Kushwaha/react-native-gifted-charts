@@ -627,6 +627,7 @@ export const getAxesAndRulesProps = (
     yAxisSide: props.yAxisSide,
     yAxisLabelContainerStyle: props.yAxisLabelContainerStyle,
     yAxisColor: props.yAxisColor,
+    yAxisExtraHeight: props.yAxisExtraHeight,
     trimYAxisAtTop: props.trimYAxisAtTop,
     overflowTop: props.overflowTop,
     yAxisThickness: props.yAxisThickness,

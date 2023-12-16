@@ -225,6 +225,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | xAxisThickness               | number                    | X axis thickness                                                                                               | 1                            |
 | yAxisColor                   | ColorValue                | Y axis color                                                                                                   | black                        |
 | yAxisThickness               | number                    | Y axis thickness                                                                                               | 1                            |
+| yAxisExtraHeight             | number                    | Extra length of Y axis at the top                                                                              | (height / 20)                |
 | xAxisType                    | RuleType                  | solid or dotted/dashed                                                                                         | solid                        |
 | yAxisLabelWidth              | number                    | Width of the Y axis Label container                                                                            | 35                           |
 | yAxisTextStyle               | object                    | Style object for the Y axis text style                                                                         | \_                           |

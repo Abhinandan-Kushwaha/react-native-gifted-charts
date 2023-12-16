@@ -128,6 +128,7 @@ export type horizSectionPropTypes = {
   yAxisThickness: number;
   trimYAxisAtTop: boolean;
   yAxisColor: string;
+  yAxisExtraHeight: number;
   xAxisThickness: number;
   xAxisColor: string;
   xAxisLength: number;

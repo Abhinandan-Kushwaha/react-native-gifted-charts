@@ -157,6 +157,7 @@ export type LineChartPropsType = {
   color5?: string;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
+  yAxisExtraHeight?: number;
   trimYAxisAtTop?: boolean;
   yAxisLabelContainerStyle?: any;
   horizontalRulesStyle?: any;

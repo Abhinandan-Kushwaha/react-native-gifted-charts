@@ -135,35 +135,11 @@ const RenderStackBars = (props: Props) => {
       (stackData[i].stacks[0].barWidth ?? props.barWidth ?? 30);
   }
   const disablePress = props.disablePress || false;
-  const renderLabel = (label: String, labelTextStyle: any) => {
-    const lowestBarPosition = getLowestPosition();
+
+  const getBarHeight = (value: number, marginBottom?: number) => {
     return (
-      <View
-        style={[
-          {
-            width:
-              (item.stacks[0].barWidth || props.barWidth || 30) + spacing / 2,
-            position: 'absolute',
-            bottom: rotateLabel
-              ? -40
-              : -6 - xAxisTextNumberOfLines * 18 + lowestBarPosition,
-          },
-          rotateLabel
-            ? props.horizontal
-              ? {transform: [{rotate: '330deg'}]}
-              : {transform: [{rotate: '60deg'}]}
-            : props.horizontal
-            ? {transform: [{rotate: '-90deg'}]}
-            : {},
-        ]}>
-        {item.labelComponent ? (
-          item.labelComponent()
-        ) : (
-          <Text style={[labelTextStyle]} numberOfLines={xAxisTextNumberOfLines}>
-            {label || ''}
-          </Text>
-        )}
-      </View>
+      (Math.abs(value) * (containerHeight || 200)) / (maxValue || 200) -
+      (marginBottom || 0)
     );
   };
 
@@ -200,10 +176,36 @@ const RenderStackBars = (props: Props) => {
     );
   };
 
-  const getBarHeight = (value: number, marginBottom?: number) => {
+  const lowestBarPosition = getLowestPosition();
+
+  const renderLabel = (label: String, labelTextStyle: any) => {
     return (
-      (Math.abs(value) * (containerHeight || 200)) / (maxValue || 200) -
-      (marginBottom || 0)
+      <View
+        style={[
+          {
+            width:
+              (item.stacks[0].barWidth || props.barWidth || 30) + spacing / 2,
+            position: 'absolute',
+            bottom: rotateLabel
+              ? -40
+              : -6 - xAxisTextNumberOfLines * 18 + lowestBarPosition,
+          },
+          rotateLabel
+            ? props.horizontal
+              ? {transform: [{rotate: '330deg'}]}
+              : {transform: [{rotate: '60deg'}]}
+            : props.horizontal
+            ? {transform: [{rotate: '-90deg'}]}
+            : {},
+        ]}>
+        {item.labelComponent ? (
+          item.labelComponent()
+        ) : (
+          <Text style={[labelTextStyle]} numberOfLines={xAxisTextNumberOfLines}>
+            {label || ''}
+          </Text>
+        )}
+      </View>
     );
   };
 
@@ -326,6 +328,7 @@ const RenderStackBars = (props: Props) => {
                 borderRadius ??
                 stackBorderBottomRightRadius ??
                 stackBorderRadius,
+              overflow: lowestBarPosition ? 'visible' : 'hidden',
             },
           ]}>
           {item.stacks.map((stackItem, index) => {

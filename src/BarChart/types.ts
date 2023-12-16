@@ -77,6 +77,7 @@ export type BarChartPropsType = {
   xAxisColor?: ColorValue;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
+  yAxisExtraHeight?: number;
   trimYAxisAtTop?: boolean;
   xAxisType?: RuleType;
   yAxisLabelContainerStyle?: any;

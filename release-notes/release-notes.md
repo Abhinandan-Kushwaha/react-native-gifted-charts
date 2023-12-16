@@ -1,3 +1,23 @@
+
+# 🎉 1.3.27
+
+## ✨ Features added-
+
+1. Added support for mix of positive + negative values in Stacked Bar charts. Thanks to Christoph who added this feature through his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/470 
+2. Added the prop `yAxisExtraHeight` for extra length of Y axis at the top. Default value is 1/20th of the chart height.
+3. Added the prop `inwardExtraLengthForFocused`. This allows us to render donut charts whose focused section grows inwards. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/325
+
+## 🐛 Bug fixes
+
+1. Earlier, charts used to have an extra length of Y axis equal to `sectionHeight/2` at the top. Due to this, charts' height used to change along with `sectionHeight`. Fixed this by making the default value of `yAxisExtraHeight` to a constant value which equals 1/20th of the chart height. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/467
+2. Fixed the issue with `getPointerProps` which threw a warning - `Cannot update a component (xxx) while rendering a different component (yyy)`. See https://github.com/facebook/react/issues/22633
+
+---
+
+---
+
+---
+
 # 🎉 1.3.26
 
 🐛 Minor bug fixes with `stripΒehindBars` and `initialPointerIndex` for Bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/410#issuecomment-1849747263 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/410#issuecomment-1849757216

@@ -1690,7 +1690,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const stepHeight = props.stepHeight || containerHeight / noOfSections;
   const stepValue = props.stepValue || maxValue / noOfSections;
   const noOfSectionsBelowXAxis =
-    props.noOfSectionsBelowXAxis || -mostNegativeValue / stepValue;
+    props.noOfSectionsBelowXAxis || -mostNegativeValue / (stepValue || 1);
 
   const showXAxisIndices =
     props.showXAxisIndices ?? AxesAndRulesDefaults.showXAxisIndices;
