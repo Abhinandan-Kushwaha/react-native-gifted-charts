@@ -4,7 +4,9 @@ Pull requests are most welcome!
 
 ### Instructions
 
-Please clone the repo and then create a new branch. </br>
+1. Please clone the repo and then create a new branch. </br>
+2. In `package.json` remove all peer dependencies and put them in dependencies (with latest versions of each). This change is needed to run the project on your local system. Make sure to _**revert this change before pushing**_.
+
 The name of the new branch should follow this naming convention - </br>
 1. For a new feature- **feat/feature-name**
 2. For a bug fix, **fix/whatever-fix**
