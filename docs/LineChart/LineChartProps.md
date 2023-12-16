@@ -165,6 +165,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | yAxisTextNumberOfLines       | number                    | Number of lines for y axis label text                                                                             | 1                            |
 | yAxisLabelContainerStyle     | object                    | Style object for the Y axis label container                                                                       | \_                           |
 | trimYAxisAtTop               | boolean                   | Removes the extra length of the Y axis from the top                                                               | false                        |
+| yAxisExtraHeight             | number                    | Extra length of Y axis at the top                                                                                 | (height / 20)                |
 | yAxisOffset                  | number                    | Starting value on Y Axis                                                                                          | 0                            |
 | horizontalRulesStyle         | object                    | Style object for the horizontal rules container                                                                   | \_                           |
 | showFractionalValues         | boolean                   | Allow fractional values for the Y axis label                                                                      | false                        |
@@ -445,7 +446,9 @@ type LineSegment = {
 ```
 
 ### HighlightedRange
- An example of **HighlightedRange** on Stack overflow- https://stackoverflow.com/questions/70406903/different-colors-line-chart-with-react-native-chart-kit
+
+An example of **HighlightedRange** on Stack overflow- https://stackoverflow.com/questions/70406903/different-colors-line-chart-with-react-native-chart-kit
+
 ```ts
 type HighlightedRange = {
   from: number;
@@ -577,6 +580,7 @@ The default value of `showArrowBase` is true. To fill the arrow with `fillColor`
 | showValuesAsDataPointsText | boolean    | When set to true, the data item value will be shown as a label text near data point   | false                                     |
 
 **Note** `customDataPoint` prop takes a callback function which accepts 2 parameters-
+
 1. **item** (object in the data array at the index of the data point)
 2. **index** (index of the data point)
 

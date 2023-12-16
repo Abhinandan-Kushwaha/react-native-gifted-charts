@@ -45,6 +45,7 @@ export const ruleTypes: RuleTypes = {
 export const AxesAndRulesDefaults = {
   yAxisSide: yAxisSides.LEFT,
   yAxisColor: 'black',
+  yAxisExtraHeight: 0,
   yAxisThickness: 1,
   trimYAxisAtTop: false,
   overflowTop: 0,

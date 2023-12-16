@@ -12,6 +12,7 @@ import SimpleBlueBars from './BarChart/SimpleBlueBars';
 import BarThreeD from './BarChart/BarThreeD';
 import SimpleBarAnimated from './BarChart/SimpleBarAnimated';
 import RoundStackBar from './BarChart/RoundStackBar';
+import StackWithNegative from './BarChart/StackWithNegative';
 import CappedBars from './BarChart/CappedBars';
 import BarWithGradient from './BarChart/BarWithGradient';
 
@@ -37,6 +38,8 @@ import SegmentedDataSetCurved from './LineChart/SegmentedDataSetCurved';
 import SegmentedDataSetChart from './LineChart/SegmentedDataSet';
 import HighlightedRange from './LineChart/HighlightedRange';
 import GradientLineAndLabel from './LineChart/GradientLineAndLabel';
+import InwardFocusPie from './PieChart/InwardFocusPie';
+import BothSideFocusPie from './PieChart/BothSideFocusPie';
 
 const Examples = () => {
   const [selectedFooterButton, setSelectedFooterButton] = useState(0);
@@ -79,6 +82,9 @@ const Examples = () => {
         <Separator />
 
         <RoundStackBar />
+        <Separator />
+
+        <StackWithNegative />
         <Separator />
 
         <CappedBars />
@@ -163,6 +169,12 @@ const Examples = () => {
         <Separator />
 
         <PieChartFocusOnPress />
+        <Separator />
+
+        <InwardFocusPie />
+        <Separator />
+
+        <BothSideFocusPie />
         <Separator />
 
         <PieWithZero />

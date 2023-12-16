@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useEffect} from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
 import {renderHorizSections} from './renderHorizSections';
 import RenderLineInBarChart from './renderLineInBarChart';
@@ -93,6 +93,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const yAxisLabelContainerStyle = axesAndRulesProps.yAxisLabelContainerStyle;
   const yAxisColor =
     axesAndRulesProps.yAxisColor ?? AxesAndRulesDefaults.yAxisColor;
+  const yAxisExtraHeight =
+    axesAndRulesProps.yAxisExtraHeight ?? containerHeight / 20;
   const trimYAxisAtTop =
     axesAndRulesProps.trimYAxisAtTop ?? AxesAndRulesDefaults.trimYAxisAtTop;
   const overflowTop =
@@ -194,6 +196,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     yAxisLabelContainerStyle,
     yAxisThickness,
     yAxisColor,
+    yAxisExtraHeight,
     trimYAxisAtTop,
     xAxisThickness,
     xAxisColor,
@@ -331,6 +334,12 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     },
   ];
 
+  useEffect(() => {
+    if (pointerConfig && getPointerProps) {
+      getPointerProps({pointerIndex, pointerX, pointerY});
+    }
+  }, [pointerIndex, pointerX, pointerY]);
+
   /*******************************************************************************************************************************************/
   /*******************************************************************************************************************************************/
 
@@ -340,11 +349,11 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
       height:
         containerHeightIncludingBelowXAxis +
         labelsExtraHeight +
-        stepHeight / 2 +
         xAxisLabelsVerticalShift +
+        (trimYAxisAtTop ? 0 : yAxisExtraHeight) +
         50,
-      marginTop: trimYAxisAtTop ? -24 : 0,
-      marginBottom: (xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18) - 50, //This is to not let the Things that should be rendered below the chart overlap with it
+      marginTop: trimYAxisAtTop ? containerHeight / 20 : 0,
+      marginBottom: (xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18) - 55, //This is to not let the Things that should be rendered below the chart overlap with it
     },
   });
 
@@ -457,9 +466,6 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           {renderChartContent()}
         </Fragment>
       </ScrollView>
-      {pointerConfig && getPointerProps
-        ? getPointerProps({pointerIndex, pointerX, pointerY})
-        : null}
     </View>
   );
 };

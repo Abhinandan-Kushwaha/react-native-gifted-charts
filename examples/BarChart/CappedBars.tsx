@@ -1,6 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import {BarChart} from '../../src/BarChart';
+import { yAxisSides } from '../../src/utils/constants';
 
 const CappedBars = () => {
   const data = [
@@ -20,6 +21,8 @@ const CappedBars = () => {
         showGradient
         gradientColor={'rgba(200, 100, 244,0.8)'}
         frontColor={'rgba(219, 182, 249,0.2)'}
+        width={220}
+        yAxisSide={yAxisSides.RIGHT}
       />
     </View>
   );

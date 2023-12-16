@@ -48,6 +48,7 @@ type propTypes = {
   sectionAutoFocus?: boolean;
   onLabelPress?: Function;
   extraRadiusForFocused?: number;
+  inwardExtraLengthForFocused?: number;
 };
 type itemType = {
   value: number;
@@ -77,9 +78,7 @@ export const PieChart = (props: propTypes) => {
   const radius = props.radius || 120;
   const extraRadiusForFocused =
     props.extraRadiusForFocused ??
-    (props.focusOnPress || props.sectionAutoFocus)
-      ? radius / 10
-      : 0;
+    (props.focusOnPress || props.sectionAutoFocus ? radius / 10 : 0);
   const pi = props.semiCircle ? Math.PI / 2 : Math.PI;
   const [selectedIndex, setSelectedIndex] = useState(-1); // at the start, nothing is selected
   // because we're going to use a useEffect, we need startAngle and total to be state variables
@@ -131,6 +130,85 @@ export const PieChart = (props: propTypes) => {
     }
   }, [selectedIndex]);
 
+  const {
+    data,
+    donut,
+    isThreeD,
+    semiCircle,
+    inwardExtraLengthForFocused = 0,
+  } = props;
+  const canvasWidth = radius * 2;
+  const canvasHeight = isThreeD ? radius * 2.3 : radius * 2;
+
+  const strokeWidth = props.strokeWidth || 0;
+  const innerRadius = props.innerRadius || radius / 2.5;
+  const innerCircleColor =
+    props.innerCircleColor || props.backgroundColor || 'white';
+  const innerCircleBorderWidth =
+    props.innerCircleBorderWidth ||
+    (props.innerCircleBorderColor ? strokeWidth || 2 : 0);
+  const innerCircleBorderColor = props.innerCircleBorderColor || 'lightgray';
+  const shiftInnerCenterX = props.shiftInnerCenterX || 0;
+  const shiftInnerCenterY = props.shiftInnerCenterY || 0;
+
+  let tiltAngle = props.tiltAngle || '55deg';
+
+  let isDataShifted = false;
+
+  data.forEach((item: any) => {
+    if (item.shiftX || item.shiftY) {
+      isDataShifted = true;
+    }
+  });
+
+  const renderInnerCircle = innerRadius => {
+    if (props.centerLabelComponent || (donut && !isDataShifted)) {
+      return (
+        <View
+          style={[
+            {
+              height: innerRadius * 2,
+              width: innerRadius * 2,
+              borderRadius: innerRadius,
+              position: 'absolute',
+              // zIndex: 100,
+              alignSelf: 'center',
+              backgroundColor: innerCircleColor,
+              left: canvasWidth / 2 - innerRadius + shiftInnerCenterX,
+              top: canvasHeight / 2 - innerRadius + shiftInnerCenterY,
+              borderWidth: innerCircleBorderWidth,
+              borderColor: innerCircleBorderColor,
+              justifyContent: 'center',
+              alignItems: 'center',
+            },
+            isThreeD && {
+              borderTopWidth: innerCircleBorderWidth * 5,
+              borderLeftWidth: shiftInnerCenterX
+                ? innerCircleBorderWidth * 2
+                : innerCircleBorderWidth,
+              transform: [{rotateX: tiltAngle}],
+            },
+            semiCircle &&
+              isThreeD && {
+                borderTopWidth: isThreeD
+                  ? innerCircleBorderWidth * 5
+                  : innerCircleBorderWidth,
+                borderLeftWidth: 0.5,
+                borderLeftColor: innerCircleColor,
+                borderBottomWidth: 0,
+                borderRightWidth: 0.5,
+                borderRightColor: innerCircleColor,
+              },
+          ]}>
+          <View style={{marginTop: semiCircle ? -0.5 * innerRadius : 0}}>
+            {props.centerLabelComponent ? props.centerLabelComponent() : null}
+          </View>
+        </View>
+      );
+    }
+    return null;
+  };
+
   if (!total) return null;
 
   return (
@@ -141,11 +219,20 @@ export const PieChart = (props: propTypes) => {
         marginLeft: extraRadiusForFocused * 2,
         marginTop: extraRadiusForFocused * 2,
       }}>
+      <View style={{position: 'absolute'}}>
+        <PieChartMain
+          {...props}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
+        />
+      </View>
+      {renderInnerCircle(innerRadius)}
       {props.data.length > 1 &&
         props.data[selectedIndex] && // don't forget to add this one so there are no errors when the data is empty / updating
         (props.focusOnPress || props.sectionAutoFocus) &&
         selectedIndex !== -1 && (
           <View
+            pointerEvents="box-none"
             style={{
               position: 'absolute',
               top: -extraRadiusForFocused,
@@ -156,6 +243,7 @@ export const PieChart = (props: propTypes) => {
               data={[
                 {
                   value: props.data[selectedIndex].value,
+                  text: props.data[selectedIndex].text,
                   color:
                     props.data[selectedIndex].color ||
                     pieColors[selectedIndex % 9],
@@ -168,26 +256,20 @@ export const PieChart = (props: propTypes) => {
                 },
                 {
                   value: total - props.data[selectedIndex].value,
+                  onPress: () => alert('black'),
                   peripheral: true,
                   strokeWidth: 0,
                 },
               ]}
               radius={radius + extraRadiusForFocused}
               initialAngle={startAngle}
-              showText={false}
               innerRadius={props.innerRadius || radius / 2.5}
               isBiggerPie
               setSelectedIndex={setSelectedIndex}
             />
           </View>
         )}
-      <View style={{position: 'absolute'}}>
-        <PieChartMain
-          {...props}
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-        />
-      </View>
+      {renderInnerCircle(innerRadius - inwardExtraLengthForFocused)}
     </View>
   );
 };
