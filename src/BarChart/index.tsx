@@ -117,15 +117,21 @@ export const BarChart = (props: BarChartPropsType) => {
     minItem = 0;
   if (props.stackData) {
     props.stackData.forEach(stackItem => {
-      let stackSum = stackItem.stacks.reduce(
-        (acc, stack) => acc + (stack.value ?? 0),
+      const stackSumMax = stackItem.stacks.reduce(
+        (acc, stack) => acc + (stack.value >= 0 ? stack.value : 0),
         0,
       );
-      if (stackSum > maxItem) {
-        maxItem = stackSum;
+      const stackSumMin = stackItem.stacks.reduce(
+        (acc, stack) => acc + (stack.value < 0 ? stack.value : 0),
+        0,
+      );
+
+      if (stackSumMax > maxItem) {
+        maxItem = stackSumMax;
       }
-      if (stackSum < minItem) {
-        minItem = stackSum;
+
+      if (stackSumMin < minItem) {
+        minItem = stackSumMin;
       }
       totalWidth +=
         (stackItem.stacks[0].barWidth ??

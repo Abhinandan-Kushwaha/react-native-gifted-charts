@@ -136,6 +136,7 @@ const RenderStackBars = (props: Props) => {
   }
   const disablePress = props.disablePress || false;
   const renderLabel = (label: String, labelTextStyle: any) => {
+    const lowestBarPosition = getLowestPosition();
     return (
       <View
         style={[
@@ -143,7 +144,9 @@ const RenderStackBars = (props: Props) => {
             width:
               (item.stacks[0].barWidth || props.barWidth || 30) + spacing / 2,
             position: 'absolute',
-            bottom: rotateLabel ? -40 : -6 - xAxisTextNumberOfLines * 18,
+            bottom: rotateLabel
+              ? -40
+              : -6 - xAxisTextNumberOfLines * 18 + lowestBarPosition,
           },
           rotateLabel
             ? props.horizontal
@@ -165,13 +168,43 @@ const RenderStackBars = (props: Props) => {
   };
 
   const getPosition = (index: number) => {
-    let position = 0;
+    /* Returns bottom position for stack item
+       negative values are below origin (-> negative position) */
+    const height = getBarHeight(
+      item.stacks[index].value,
+      item.stacks[index].marginBottom,
+    );
+
+    const itemValue = item.stacks[index].value;
+    const isNegative = itemValue <= 0;
+    let position = isNegative ? -(height || 0) : 0;
+
     for (let i = 0; i < index; i++) {
-      position +=
-        (Math.abs(props.item.stacks[i].value) * (containerHeight || 200)) /
-        (maxValue || 200);
+      const valueOnIndex = item.stacks[i].value;
+      if (isNegative && valueOnIndex <= 0) {
+        position +=
+          (valueOnIndex * (containerHeight || 200)) / (maxValue || 200);
+      } else if (!isNegative && valueOnIndex >= 0) {
+        position +=
+          (valueOnIndex * (containerHeight || 200)) / (maxValue || 200);
+      }
     }
     return position;
+  };
+
+  const getLowestPosition = () => {
+    return (
+      item.stacks
+        .map((_, index) => getPosition(index))
+        .sort((a, b) => a - b)?.[0] || 0
+    );
+  };
+
+  const getBarHeight = (value: number, marginBottom?: number) => {
+    return (
+      (Math.abs(value) * (containerHeight || 200)) / (maxValue || 200) -
+      (marginBottom || 0)
+    );
   };
 
   const totalHeight = props.item.stacks.reduce(
@@ -293,17 +326,15 @@ const RenderStackBars = (props: Props) => {
                 borderRadius ??
                 stackBorderBottomRightRadius ??
                 stackBorderRadius,
-              overflow: 'hidden',
-            },
-            cotainsNegative && {
-              transform: [
-                {translateY: totalHeight + xAxisThickness / 2},
-                {rotate: '180deg'},
-              ],
             },
           ]}>
           {item.stacks.map((stackItem, index) => {
             const borderRadii = getStackBorderRadii(item, index);
+            const barHeight = getBarHeight(
+              stackItem.value,
+              stackItem.marginBottom,
+            );
+
             return (
               <TouchableOpacity
                 key={index}
@@ -314,10 +345,7 @@ const RenderStackBars = (props: Props) => {
                   position: 'absolute',
                   bottom: getPosition(index) + (stackItem.marginBottom || 0),
                   width: '100%',
-                  height:
-                    (Math.abs(stackItem.value) * (containerHeight || 200)) /
-                      (maxValue || 200) -
-                    (stackItem.marginBottom || 0),
+                  height: barHeight,
                   backgroundColor:
                     stackItem.color || item.color || props.color || 'black',
                   borderWidth: barBorderWidth ?? 0,
