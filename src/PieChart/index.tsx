@@ -161,7 +161,7 @@ export const PieChart = (props: propTypes) => {
     }
   });
 
-  const renderInnerCircle = innerRadius => {
+  const renderInnerCircle = (innerRadius, innerCircleBorderWidth) => {
     if (props.centerLabelComponent || (donut && !isDataShifted)) {
       return (
         <View
@@ -226,7 +226,7 @@ export const PieChart = (props: propTypes) => {
           setSelectedIndex={setSelectedIndex}
         />
       </View>
-      {renderInnerCircle(innerRadius)}
+      {renderInnerCircle(innerRadius, innerCircleBorderWidth)}
       {props.data.length > 1 &&
         props.data[selectedIndex] && // don't forget to add this one so there are no errors when the data is empty / updating
         (props.focusOnPress || props.sectionAutoFocus) &&
@@ -269,7 +269,7 @@ export const PieChart = (props: propTypes) => {
             />
           </View>
         )}
-      {renderInnerCircle(innerRadius - inwardExtraLengthForFocused)}
+      {renderInnerCircle(innerRadius - inwardExtraLengthForFocused, 0)}
     </View>
   );
 };

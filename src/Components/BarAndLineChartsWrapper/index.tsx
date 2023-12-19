@@ -400,6 +400,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           {
             height:
               containerHeightIncludingBelowXAxis +
+              yAxisExtraHeight +
               labelsExtraHeight +
               stepHeight / 2 +
               (50 + xAxisLabelsVerticalShift),
