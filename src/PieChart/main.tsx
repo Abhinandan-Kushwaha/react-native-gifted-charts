@@ -10,6 +10,7 @@ import Svg, {
   Stop,
 } from 'react-native-svg';
 import {pieColors} from '../utils/constants';
+import {rnVersion} from '../utils';
 
 type propTypes = {
   radius?: number;
@@ -135,7 +136,7 @@ export const PieChartMain = (props: propTypes) => {
   const showValuesAsLabels = props.showValuesAsLabels || false;
   const showGradient = props.showGradient || false;
   const gradientCenterColor = props.gradientCenterColor || 'white';
-  const toggleFocusOnPress = props.toggleFocusOnPress === false ? false : true;
+  const toggleFocusOnPress = props.toggleFocusOnPress ?? true;
 
   let minShiftX = 0,
     maxShiftX = 0,
@@ -200,7 +201,7 @@ export const PieChartMain = (props: propTypes) => {
         isThreeD && {transform: [{rotateX: tiltAngle}]},
       ]}>
       <Svg
-        pointerEvents="box-none"
+        pointerEvents={rnVersion >= 700000 ? 'box-none' : 'auto'}
         viewBox={`${strokeWidth / -2 + minShiftX} ${
           strokeWidth / -2 + minShiftY
         } ${
