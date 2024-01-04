@@ -214,7 +214,7 @@ export const PieChart = (props: propTypes) => {
   return (
     <View
       style={{
-        height: (radius + extraRadiusForFocused) * 2,
+        height: (radius + extraRadiusForFocused) * (props.semiCircle ? 1 : 2),
         width: (radius + extraRadiusForFocused) * 2,
         marginLeft: extraRadiusForFocused * 2,
         marginTop: extraRadiusForFocused * 2,
