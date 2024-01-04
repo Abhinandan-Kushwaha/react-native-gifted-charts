@@ -92,7 +92,7 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 **[1. BarChart, Horizontal BarChart and Stacked Bar Chart props](docs/BarChart/BarChartProps.md)** \
 **[2. LineChart and AreaChart props](docs/LineChart/LineChartProps.md)** \
 **[3. PieChart and DonutChart props](docs/PieChart/PieChartProps.md)** \
-**[4. Population Pyramid props](docs/PopulationPyramid/PopulationPyramid)**
+**[4. Population Pyramid props](docs/PopulationPyramid/PopulationPyramid.md)**
 
 ## Contributing
 
