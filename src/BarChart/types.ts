@@ -126,6 +126,7 @@ export type BarChartPropsType = {
   showReferenceLine3?: boolean;
   referenceLine3Config?: referenceConfigType;
   referenceLine3Position?: number;
+  referenceLinesOverChartContent?: boolean;
   showVerticalLines?: boolean;
   verticalLinesThickness?: number;
   verticalLinesHeight?: number;

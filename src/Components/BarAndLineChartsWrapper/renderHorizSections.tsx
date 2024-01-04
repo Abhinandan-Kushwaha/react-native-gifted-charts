@@ -73,6 +73,8 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     secondaryData,
     secondaryYAxis,
     formatYLabel,
+    onlyReferenceLines,
+    renderReferenceLines,
   } = props;
 
   const yAxisExtraHeightAtTop = trimYAxisAtTop ? 0 : yAxisExtraHeight;
@@ -408,8 +410,8 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
           index === noOfSections
             ? styles.lastLeftPart
             : !index
-            ? {justifyContent: 'flex-start'}
-            : styles.leftPart,
+              ? {justifyContent: 'flex-start'}
+              : styles.leftPart,
           {
             borderColor: yAxisColor,
             backgroundColor: backgroundColor,
@@ -563,326 +565,347 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
       );
     });
 
-  return (
-    <View
-      style={{
-        flexDirection: 'row',
-        marginTop: stepHeight / -2,
-      }}>
-      <View style={{width: (width ?? totalWidth) + endSpacing}}>
-        {yAxisExtraHeightAtTop ? renderExtraHeightOfYAxisAtTop() : null}
-        {horizSections.map((sectionItems, index) => {
-          return (
-            <View
-              key={index}
-              style={[
-                styles.horizBar,
-                {
-                  width: (width ?? totalWidth) + endSpacing,
-                },
-                horizontal &&
-                  !yAxisAtTop && {
-                    transform: [{rotateY: '180deg'}],
-                  },
-                horizontalRulesStyle,
-              ]}>
-              <View
+  const referenceLines = () => {
+    return (
+      <>
+        {showReferenceLine1 ? (
+          <View
+            style={{
+              position: 'absolute',
+              zIndex: referenceLine1Config.zIndex,
+              bottom:
+                ((referenceLine1Position - (yAxisOffset ?? 0)) *
+                  containerHeight) /
+                maxValue,
+              left:
+                yAxisSide === yAxisSides.RIGHT
+                  ? 0
+                  : yAxisLabelWidth + yAxisThickness,
+            }}>
+            <Rule config={referenceLine1Config} />
+            {referenceLine1Config.labelText ? (
+              <Text
                 style={[
-                  styles.leftLabel,
-                  {
-                    height:
-                      index === noOfSections ? stepHeight / 2 : stepHeight,
-                    width: yAxisSide === yAxisSides.RIGHT ? 0 : yAxisLabelWidth,
-                  },
-                  yAxisLabelContainerStyle,
-                ]}
-              />
-              {renderAxesAndRules(index)}
-            </View>
-          );
-        })}
+                  {position: 'absolute'},
+                  referenceLine1Config.labelTextStyle,
+                ]}>
+                {referenceLine1Config.labelText}
+              </Text>
+            ) : null}
+          </View>
+        ) : null}
+        {showReferenceLine2 ? (
+          <View
+            style={{
+              position: 'absolute',
+              zIndex: referenceLine2Config.zIndex,
+              bottom:
+                ((referenceLine2Position - (yAxisOffset ?? 0)) *
+                  containerHeight) /
+                maxValue,
+              left:
+                yAxisSide === yAxisSides.RIGHT
+                  ? 0
+                  : yAxisLabelWidth + yAxisThickness,
+            }}>
+            <Rule config={referenceLine2Config} />
+            {referenceLine2Config.labelText ? (
+              <Text
+                style={[
+                  {position: 'absolute'},
+                  referenceLine2Config.labelTextStyle,
+                ]}>
+                {referenceLine2Config.labelText}
+              </Text>
+            ) : null}
+          </View>
+        ) : null}
+        {showReferenceLine3 ? (
+          <View
+            style={{
+              position: 'absolute',
+              zIndex: referenceLine3Config.zIndex,
+              bottom:
+                ((referenceLine3Position - (yAxisOffset ?? 0)) *
+                  containerHeight) /
+                maxValue,
+              left:
+                yAxisSide === yAxisSides.RIGHT
+                  ? 0
+                  : yAxisLabelWidth + yAxisThickness,
+            }}>
+            <Rule config={referenceLine3Config} />
+            {referenceLine3Config.labelText ? (
+              <Text
+                style={[
+                  {position: 'absolute'},
+                  referenceLine3Config.labelTextStyle,
+                ]}>
+                {referenceLine3Config.labelText}
+              </Text>
+            ) : null}
+          </View>
+        ) : null}
+      </>
+    );
+  };
 
-        {
-          /***********************************************************************************************/
-          /**************************      Render the y axis labels separately      **********************/
-          /***********************************************************************************************/
-
-          !hideYAxisText &&
-            horizSections.map((sectionItems, index) => {
-              let label = getLabelTexts(sectionItems.value, index);
-              if (hideOrigin && index === horizSections.length - 1) {
-                label = '';
-              }
+  return (
+    <>
+      {onlyReferenceLines ? (
+        <View
+          style={{
+            flexDirection: 'row',
+            backgroundColor: 'green',
+          }}>
+          <View style={{width: (width ?? totalWidth) + endSpacing}}>
+            {referenceLines()}
+          </View>
+        </View>
+      ) : (
+        <View
+          style={{
+            flexDirection: 'row',
+            marginTop: stepHeight / -2,
+          }}>
+          <View style={{width: (width ?? totalWidth) + endSpacing}}>
+            {yAxisExtraHeightAtTop ? renderExtraHeightOfYAxisAtTop() : null}
+            {horizSections.map((sectionItems, index) => {
               return (
                 <View
                   key={index}
                   style={[
                     styles.horizBar,
-                    styles.leftLabel,
                     {
-                      position: 'absolute',
-                      zIndex: 1,
-                      top: stepHeight * index + yAxisExtraHeightAtTop,
-                      width: yAxisLabelWidth,
-                      height:
-                        index === noOfSections ? stepHeight / 2 : stepHeight,
-                    },
-                    yAxisSide === yAxisSides.RIGHT && {
-                      left: (width ?? totalWidth) + yAxisLabelWidth / 2,
+                      width: (width ?? totalWidth) + endSpacing,
                     },
                     horizontal &&
                       !yAxisAtTop && {
-                        transform: [
-                          {
-                            translateX: (width ?? totalWidth) - 30 + endSpacing,
-                          },
-                        ],
+                        transform: [{rotateY: '180deg'}],
                       },
-                    yAxisLabelContainerStyle,
+                    horizontalRulesStyle,
                   ]}>
-                  <Text
-                    numberOfLines={yAxisTextNumberOfLines}
-                    ellipsizeMode={'clip'}
+                  <View
                     style={[
-                      yAxisTextStyle,
-                      horizontal && {
-                        transform: [
-                          {
-                            rotate: `${
-                              rotateYAxisTexts ?? (rtl ? 90 : -90)
-                            }deg`,
-                          },
-                        ],
+                      styles.leftLabel,
+                      {
+                        height:
+                          index === noOfSections ? stepHeight / 2 : stepHeight,
+                        width:
+                          yAxisSide === yAxisSides.RIGHT ? 0 : yAxisLabelWidth,
                       },
-                      index === noOfSections && {
-                        marginBottom: stepHeight / -2,
-                      },
-                    ]}>
-                    {label}
-                  </Text>
+                      yAxisLabelContainerStyle,
+                    ]}
+                  />
+                  {renderAxesAndRules(index)}
                 </View>
               );
-            })
-          /***********************************************************************************************/
-          /***********************************************************************************************/
-        }
+            })}
 
-        {horizSectionsBelow.map((sectionItems, index) => {
-          return (
-            <View
-              key={index}
-              style={[
-                styles.horizBar,
-                {
-                  width: (width ?? totalWidth) + 15,
-                },
-                index === 0 && {marginTop: stepHeight / 2},
-              ]}>
-              <View
-                style={[
-                  styles.leftLabel,
-                  {
-                    borderRightWidth: yAxisThickness,
-                    borderColor: yAxisColor,
-                    marginLeft: yAxisThickness,
-                  },
-                  {
-                    height: index === 0 ? stepHeight * 1.5 : stepHeight,
-                    width: yAxisSide === yAxisSides.RIGHT ? 0 : yAxisLabelWidth,
-                  },
-                  index === 0 && {marginTop: -stepHeight / 2},
-                ]}
-              />
-              <View
-                style={[styles.leftPart, {backgroundColor: backgroundColor}]}>
-                {hideRules ? null : (
-                  <Rule
-                    config={{
-                      thickness: rulesThickness,
-                      color: rulesColor,
-                      width:
-                        rulesLength ||
-                        (props.width || totalWidth - spacing) + endSpacing,
-                      dashWidth: dashWidth,
-                      dashGap: dashGap,
-                      type: rulesType,
-                    }}
-                  />
-                )}
-              </View>
-            </View>
-          );
-        })}
+            {
+              /***********************************************************************************************/
+              /**************************      Render the y axis labels separately      **********************/
+              /***********************************************************************************************/
 
-        {
-          /***********************************************************************************************/
-          /*************************      Render the y axis labels below origin      *********************/
-          /***********************************************************************************************/
+              !hideYAxisText &&
+                horizSections.map((sectionItems, index) => {
+                  let label = getLabelTexts(sectionItems.value, index);
+                  if (hideOrigin && index === horizSections.length - 1) {
+                    label = '';
+                  }
+                  return (
+                    <View
+                      key={index}
+                      style={[
+                        styles.horizBar,
+                        styles.leftLabel,
+                        {
+                          position: 'absolute',
+                          zIndex: 1,
+                          top: stepHeight * index + yAxisExtraHeightAtTop,
+                          width: yAxisLabelWidth,
+                          height:
+                            index === noOfSections
+                              ? stepHeight / 2
+                              : stepHeight,
+                        },
+                        yAxisSide === yAxisSides.RIGHT && {
+                          left: (width ?? totalWidth) + yAxisLabelWidth / 2,
+                        },
+                        horizontal &&
+                          !yAxisAtTop && {
+                            transform: [
+                              {
+                                translateX:
+                                  (width ?? totalWidth) - 30 + endSpacing,
+                              },
+                            ],
+                          },
+                        yAxisLabelContainerStyle,
+                      ]}>
+                      <Text
+                        numberOfLines={yAxisTextNumberOfLines}
+                        ellipsizeMode={'clip'}
+                        style={[
+                          yAxisTextStyle,
+                          horizontal && {
+                            transform: [
+                              {
+                                rotate: `${
+                                  rotateYAxisTexts ?? (rtl ? 90 : -90)
+                                }deg`,
+                              },
+                            ],
+                          },
+                          index === noOfSections && {
+                            marginBottom: stepHeight / -2,
+                          },
+                        ]}>
+                        {label}
+                      </Text>
+                    </View>
+                  );
+                })
+              /***********************************************************************************************/
+              /***********************************************************************************************/
+            }
 
-          !hideYAxisText &&
-            horizSectionsBelow.map((sectionItems, index) => {
-              let label = getLabelTexts(
-                horizSectionsBelow[horizSectionsBelow.length - 1 - index].value,
-                index,
-              );
+            {horizSectionsBelow.map((sectionItems, index) => {
               return (
                 <View
                   key={index}
                   style={[
                     styles.horizBar,
-                    styles.leftLabel,
                     {
-                      position: 'absolute',
-                      zIndex: 1,
-                      bottom: stepHeight * index,
-                      width: yAxisLabelWidth,
-                      height:
-                        index === noOfSections ? stepHeight / 2 : stepHeight,
+                      width: (width ?? totalWidth) + 15,
                     },
-                    yAxisSide === yAxisSides.RIGHT && {
-                      left: (width ?? totalWidth) + yAxisLabelWidth,
-                    },
-                    yAxisLabelContainerStyle,
+                    index === 0 && {marginTop: stepHeight / 2},
                   ]}>
-                  <Text
-                    numberOfLines={yAxisTextNumberOfLines}
-                    ellipsizeMode={'clip'}
+                  <View
                     style={[
-                      yAxisTextStyle,
-                      index === noOfSections && {
-                        marginBottom: stepHeight / -2,
+                      styles.leftLabel,
+                      {
+                        borderRightWidth: yAxisThickness,
+                        borderColor: yAxisColor,
+                        marginLeft: yAxisThickness,
                       },
+                      {
+                        height: index === 0 ? stepHeight * 1.5 : stepHeight,
+                        width:
+                          yAxisSide === yAxisSides.RIGHT ? 0 : yAxisLabelWidth,
+                      },
+                      index === 0 && {marginTop: -stepHeight / 2},
+                    ]}
+                  />
+                  <View
+                    style={[
+                      styles.leftPart,
+                      {backgroundColor: backgroundColor},
                     ]}>
-                    {label}
-                  </Text>
+                    {hideRules ? null : (
+                      <Rule
+                        config={{
+                          thickness: rulesThickness,
+                          color: rulesColor,
+                          width:
+                            rulesLength ||
+                            (props.width || totalWidth - spacing) + endSpacing,
+                          dashWidth: dashWidth,
+                          dashGap: dashGap,
+                          type: rulesType,
+                        }}
+                      />
+                    )}
+                  </View>
                 </View>
               );
-            })
-          /***********************************************************************************************/
-          /***********************************************************************************************/
-        }
+            })}
 
-        {
-          /***********************************************************************************************/
-          /*************************      Render the reference lines separately      *********************/
-          /***********************************************************************************************/
+            {
+              /***********************************************************************************************/
+              /*************************      Render the y axis labels below origin      *********************/
+              /***********************************************************************************************/
 
-          !hideYAxisText &&
-            horizSections.map((sectionItems, index) => {
-              // let label = getLabelTexts(sectionItems.value, index);
-              // if (hideOrigin && index === horizSections.length - 1) {
-              //   label = '';
-              // }
-              return (
-                <View key={index}>
-                  {index === noOfSections && showReferenceLine1 ? (
+              !hideYAxisText &&
+                horizSectionsBelow.map((sectionItems, index) => {
+                  let label = getLabelTexts(
+                    horizSectionsBelow[horizSectionsBelow.length - 1 - index]
+                      .value,
+                    index,
+                  );
+                  return (
                     <View
-                      style={{
-                        position: 'absolute',
-                        zIndex: referenceLine1Config.zIndex,
-                        bottom:
-                          ((referenceLine1Position - (yAxisOffset ?? 0)) *
-                            containerHeight) /
-                          maxValue,
-                        left:
-                          yAxisSide === yAxisSides.RIGHT
-                            ? 0
-                            : yAxisLabelWidth + yAxisThickness,
-                      }}>
-                      <Rule config={referenceLine1Config} />
-                      {referenceLine1Config.labelText ? (
-                        <Text
-                          style={[
-                            {position: 'absolute'},
-                            referenceLine1Config.labelTextStyle,
-                          ]}>
-                          {referenceLine1Config.labelText}
-                        </Text>
-                      ) : null}
+                      key={index}
+                      style={[
+                        styles.horizBar,
+                        styles.leftLabel,
+                        {
+                          position: 'absolute',
+                          zIndex: 1,
+                          bottom: stepHeight * index,
+                          width: yAxisLabelWidth,
+                          height:
+                            index === noOfSections
+                              ? stepHeight / 2
+                              : stepHeight,
+                        },
+                        yAxisSide === yAxisSides.RIGHT && {
+                          left: (width ?? totalWidth) + yAxisLabelWidth,
+                        },
+                        yAxisLabelContainerStyle,
+                      ]}>
+                      <Text
+                        numberOfLines={yAxisTextNumberOfLines}
+                        ellipsizeMode={'clip'}
+                        style={[
+                          yAxisTextStyle,
+                          index === noOfSections && {
+                            marginBottom: stepHeight / -2,
+                          },
+                        ]}>
+                        {label}
+                      </Text>
                     </View>
-                  ) : null}
-                  {index === noOfSections && showReferenceLine2 ? (
-                    <View
-                      style={{
-                        position: 'absolute',
-                        zIndex: referenceLine2Config.zIndex,
-                        bottom:
-                          ((referenceLine2Position - (yAxisOffset ?? 0)) *
-                            containerHeight) /
-                          maxValue,
-                        left:
-                          yAxisSide === yAxisSides.RIGHT
-                            ? 0
-                            : yAxisLabelWidth + yAxisThickness,
-                      }}>
-                      <Rule config={referenceLine2Config} />
-                      {referenceLine2Config.labelText ? (
-                        <Text
-                          style={[
-                            {position: 'absolute'},
-                            referenceLine2Config.labelTextStyle,
-                          ]}>
-                          {referenceLine2Config.labelText}
-                        </Text>
-                      ) : null}
-                    </View>
-                  ) : null}
-                  {index === noOfSections && showReferenceLine3 ? (
-                    <View
-                      style={{
-                        position: 'absolute',
-                        zIndex: referenceLine3Config.zIndex,
-                        bottom:
-                          ((referenceLine3Position - (yAxisOffset ?? 0)) *
-                            containerHeight) /
-                          maxValue,
-                        left:
-                          yAxisSide === yAxisSides.RIGHT
-                            ? 0
-                            : yAxisLabelWidth + yAxisThickness,
-                      }}>
-                      <Rule config={referenceLine3Config} />
-                      {referenceLine3Config.labelText ? (
-                        <Text
-                          style={[
-                            {position: 'absolute'},
-                            referenceLine3Config.labelTextStyle,
-                          ]}>
-                          {referenceLine3Config.labelText}
-                        </Text>
-                      ) : null}
-                    </View>
-                  ) : null}
-                </View>
-              );
-            })
-          /***********************************************************************************************/
-          /***********************************************************************************************/
-        }
-      </View>
-      {
-        /***********************************************************************************************/
-        /*************************      Render the secondary Y Axis                *********************/
-        /***********************************************************************************************/
-        secondaryYAxis ? (
-          <View
-            style={{
-              width: secondaryYAxisConfig.yAxisLabelWidth,
-              left: width ? yAxisLabelWidth : yAxisLabelWidth - spacing,
-              borderColor: secondaryYAxisConfig.yAxisColor,
-              borderLeftWidth: secondaryYAxisConfig.yAxisThickness,
-              height: containerHeight + yAxisExtraHeightAtTop,
-              bottom: stepHeight / -2,
-            }}>
-            {!secondaryYAxisConfig.hideYAxisText
-              ? renderSecondaryYaxisLabels(secondaryHorizSections, false)
-              : null}
-            {noOfSectionsBelowXAxis && !secondaryYAxisConfig.hideYAxisText
-              ? renderSecondaryYaxisLabels(secondaryHorizSectionsBelow, true)
-              : null}
+                  );
+                })
+              /***********************************************************************************************/
+              /***********************************************************************************************/
+            }
+
+            {/***********************************************************************************************/
+            /*************************      Render the reference lines separately      *********************/
+            /***********************************************************************************************/}
+
+            {renderReferenceLines ? referenceLines() : null}
           </View>
-        ) : null
-      }
-    </View>
+          {
+            /***********************************************************************************************/
+            /*************************      Render the secondary Y Axis                *********************/
+            /***********************************************************************************************/
+            secondaryYAxis ? (
+              <View
+                style={{
+                  width: secondaryYAxisConfig.yAxisLabelWidth,
+                  left: width ? yAxisLabelWidth : yAxisLabelWidth - spacing,
+                  borderColor: secondaryYAxisConfig.yAxisColor,
+                  borderLeftWidth: secondaryYAxisConfig.yAxisThickness,
+                  height: containerHeight + yAxisExtraHeightAtTop,
+                  bottom: stepHeight / -2,
+                }}>
+                {!secondaryYAxisConfig.hideYAxisText
+                  ? renderSecondaryYaxisLabels(secondaryHorizSections, false)
+                  : null}
+                {noOfSectionsBelowXAxis && !secondaryYAxisConfig.hideYAxisText
+                  ? renderSecondaryYaxisLabels(
+                      secondaryHorizSectionsBelow,
+                      true,
+                    )
+                  : null}
+              </View>
+            ) : null
+          }
+        </View>
+      )}
+    </>
   );
 };

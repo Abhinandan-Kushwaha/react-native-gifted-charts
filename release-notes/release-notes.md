@@ -1,3 +1,33 @@
+# 🎉 1.3.29 Major release
+
+## ✨ Features added-
+
+1. Added support for **Population Pyramid** charts!! See **[4. Population Pyramid props](../docs/PopulationPyramid/PopulationPyramid)**
+2. Pointer labels will now be rendered on top of the rest of the chart content. Earlier, reference lines sometimes used to appear over the pointer lables, this has been fixed now. 
+3. Added the prop `referenceLinesOverChartContent` for Bar charts.
+
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- LineChart having a single data item and using the prop `adjustToWidth` caused crashes. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/484
+2. Fixed issue with data point label getting cropperd. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/486
+3. Fixed the issue- Reference line overlapping the tooltip. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/476
+
+---
+
+---
+
+---
+
+# 🎉 1.3.28
+
+🐛 Minor bug fixes with `pointerEvents` in Pie charts and `yAxisExtraHeight` with `pointerLabelComponent` in Bar and Line charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/472 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/467#issuecomment-1860907963
+
+---
+
+---
+
+---
 
 # 🎉 1.3.27
 

@@ -150,6 +150,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const roundToDigits = axesAndRulesProps.roundToDigits;
 
   const referenceLinesConfig = axesAndRulesProps.referenceLinesConfig;
+  const referenceLinesOverChartContent =
+    referenceLinesConfig.referenceLinesOverChartContent ??
+    AxesAndRulesDefaults.referenceLinesOverChartContent;
 
   const showVerticalLines =
     axesAndRulesProps.showVerticalLines ??
@@ -327,8 +330,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           ? (props.width ? -98 - endSpacing : -75 - endSpacing) -
             difBwWidthHeight
           : props.width
-          ? difBwWidthHeight
-          : difBwWidthHeight - 40) /
+            ? difBwWidthHeight
+            : difBwWidthHeight - 40) /
           2 +
         (yAxisAtTop ? (rtl ? (props.width ? 12 : 40) : 12) : 52),
     },
@@ -367,7 +370,11 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         },
       ]}>
       {hideAxesAndRules !== true
-        ? renderHorizSections(horizSectionProps)
+        ? renderHorizSections({
+            ...horizSectionProps,
+            onlyReferenceLines: false,
+            renderReferenceLines: !referenceLinesOverChartContent,
+          })
         : null}
       <ScrollView
         scrollEventThrottle={
@@ -383,8 +390,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
                   (props.width ? 20 : 0) -
                   (data[data.length - 1]?.barWidth ?? barWidth ?? 0) / 2
                 : yAxisSide === yAxisSides.RIGHT
-                ? 0
-                : yAxisLabelWidth + yAxisThickness,
+                  ? 0
+                  : yAxisLabelWidth + yAxisThickness,
             position: 'absolute',
             bottom:
               overflowTop +
@@ -404,7 +411,10 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
               labelsExtraHeight +
               stepHeight / 2 +
               (50 + xAxisLabelsVerticalShift),
-            width: totalWidth - spacing + endSpacing,
+            width: Math.max(
+              props.width ?? 0,
+              totalWidth - spacing + endSpacing,
+            ),
             paddingLeft: initialSpacing,
             paddingBottom:
               noOfSectionsBelowXAxis * stepHeight + labelsExtraHeight,
@@ -467,6 +477,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           {renderChartContent()}
         </Fragment>
       </ScrollView>
+      {referenceLinesOverChartContent
+        ? renderHorizSections({...horizSectionProps, onlyReferenceLines: true})
+        : null}
     </View>
   );
 };
