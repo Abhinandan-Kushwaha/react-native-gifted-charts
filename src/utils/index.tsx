@@ -237,8 +237,8 @@ export const getPathWithHighlight = (
       data[i + 1].value < from
         ? loc.DOWN
         : data[i + 1].value > to
-        ? loc.UP
-        : loc.IN;
+          ? loc.UP
+          : loc.IN;
     if (
       currentPointRegion !== nextPointRegion ||
       (i === startIndex && currentPointRegion === loc.IN)
@@ -679,6 +679,7 @@ export const getAxesAndRulesProps = (
       showReferenceLine3: props.showReferenceLine3,
       referenceLine3Position: props.referenceLine3Position,
       referenceLine3Config: props.referenceLine3Config,
+      referenceLinesOverChartContent: props.referenceLinesOverChartContent,
     },
 
     showVerticalLines: props.showVerticalLines,

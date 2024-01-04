@@ -358,11 +358,11 @@ export const BarChart = (props: BarChartPropsType) => {
           const currentValue = props.lineData
             ? props.lineData[i].value
             : props.stackData
-            ? props.stackData[i].stacks.reduce(
-                (total, item) => total + item.value,
-                0,
-              )
-            : data[i].value;
+              ? props.stackData[i].stacks.reduce(
+                  (total, item) => total + item.value,
+                  0,
+                )
+              : data[i].value;
           pp +=
             'L' +
             getXForLineInBar(
@@ -413,11 +413,11 @@ export const BarChart = (props: BarChartPropsType) => {
           const currentValue = props.lineData
             ? props.lineData[i].value
             : props.stackData
-            ? props.stackData[i].stacks.reduce(
-                (total, item) => total + item.value,
-                0,
-              )
-            : data[i].value;
+              ? props.stackData[i].stacks.reduce(
+                  (total, item) => total + item.value,
+                  0,
+                )
+              : data[i].value;
           p1Array.push([
             getXForLineInBar(
               i,
@@ -599,7 +599,7 @@ export const BarChart = (props: BarChartPropsType) => {
     });
   };
 
-  const renderStripAndLabel = (stripBehindBars, pointerLabelComponent) => {
+  const renderStripAndLabel = pointerLabelComponent => {
     let pointerItemLocal,
       pointerYLocal = pointerY;
 
@@ -628,7 +628,6 @@ export const BarChart = (props: BarChartPropsType) => {
       pointerLabelComponent,
       scrollX: 0,
       pointerEvents,
-      stripBehindBars,
     });
   };
 
@@ -744,7 +743,7 @@ export const BarChart = (props: BarChartPropsType) => {
                 bottom: xAxisLabelsVerticalShift + labelsExtraHeight,
                 width: totalWidth,
               }}>
-              {renderStripAndLabel(true, pointerLabelComponent)}
+              {renderStripAndLabel(null)}
             </View>
           ) : null}
           {renderChart()}
@@ -761,11 +760,15 @@ export const BarChart = (props: BarChartPropsType) => {
               }}>
               {!stripOverPointer &&
                 !stripBehindBars &&
-                renderStripAndLabel(false, pointerLabelComponent)}
+                renderStripAndLabel(null)}
               {renderPointer(1)}
               {stripOverPointer &&
                 !stripBehindBars &&
-                renderStripAndLabel(false, pointerLabelComponent)}
+                renderStripAndLabel(null)}
+              {
+                pointerLabelComponent &&
+                  renderStripAndLabel(pointerLabelComponent) // no matter what, pointerLabelComponent will be rendered at last -> over the chart content
+              }
             </View>
           ) : null}
         </View>

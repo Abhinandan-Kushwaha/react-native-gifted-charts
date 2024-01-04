@@ -1,6 +1,6 @@
 # react-native-gifted-charts [![Rate on Openbase](https://badges.openbase.com/js/rating/react-native-gifted-charts.svg)](https://openbase.com/js/react-native-gifted-charts?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
 
-The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
+The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar and Population Pyramid charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
 
 ### Yet another chart library? Why?
 
@@ -33,11 +33,16 @@ However, we are planning to add support for web which will be available soon.
     <td><img src='/demos/movingBars.gif' alt='' width=270 height=300/></td>
     <td><img src='/demos/pielabbelled.svg' alt='' height=280 width=270/></td>
   </tr>
+  <tr>
+  <td><img src='/demos/pyrLarge.png' alt='' height=280 width=260/></td>
+  <td><img src='/demos/popnPyramidLabelled.png' alt='' height=280 width=300/></td>
+  </tr>
 </table>
 
 ---
 
 ## Installation
+
 ```sh
 npm install react-native-gifted-charts react-native-linear-gradient react-native-svg
 ```
@@ -47,6 +52,7 @@ For iOS-
 ```sh
 cd ios && pod install
 ```
+
 Please note that `react-native-svg` and `react-native-linear-gradient` are needed for the library to work, so make sure they are installed in your project.
 
 # Docs
@@ -58,7 +64,7 @@ Please note that `react-native-svg` and `react-native-linear-gradient` are neede
 The simplest usage of various types of charts can be done as below-
 
 ```js
-import { BarChart, LineChart, PieChart } from "react-native-gifted-charts";
+import { BarChart, LineChart, PieChart, PopulationPyramid } from "react-native-gifted-charts";
 
 // ...
 const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
@@ -66,6 +72,7 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 <BarChart data = {data} />
 <LineChart data = {data} />
 <PieChart data = {data} />
+<PopulationPyramid data = {[{left:10,right:12}, {left:9,right:8}]} />
 
 // For Horizontal Bar chart, just add the prop horizontal to the <BarChart/> component
 
@@ -84,7 +91,8 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 
 **[1. BarChart, Horizontal BarChart and Stacked Bar Chart props](docs/BarChart/BarChartProps.md)** \
 **[2. LineChart and AreaChart props](docs/LineChart/LineChartProps.md)** \
-**[3. PieChart and DonutChart props](docs/PieChart/PieChartProps.md)**
+**[3. PieChart and DonutChart props](docs/PieChart/PieChartProps.md)** \
+**[4. Population Pyramid props](docs/PopulationPyramid/PopulationPyramid)**
 
 ## Contributing
 

@@ -86,7 +86,7 @@ export const StripAndLabel = props => {
         left: pointerX + (pointerItemLocal[0].pointerShiftX || 0),
         top: pointerYLocal,
       }}>
-      {showPointerStrip && (
+      {showPointerStrip && !pointerLabelComponent ? (
         <View
           style={{
             position: 'absolute',
@@ -122,9 +122,9 @@ export const StripAndLabel = props => {
             />
           </Svg>
         </View>
-      )}
+      ) : null}
 
-      {pointerLabelComponent && (
+      {pointerLabelComponent ? (
         <View
           pointerEvents={pointerEvents ?? 'none'}
           style={[
@@ -140,7 +140,7 @@ export const StripAndLabel = props => {
           ]}>
           {pointerLabelComponent?.(pointerItemLocal, secondaryPointerItem)}
         </View>
-      )}
+      ) : null}
     </View>
   );
 };

@@ -176,6 +176,8 @@ export type horizSectionPropTypes = {
   secondaryData: Array<any> | undefined;
   secondaryYAxis: secondaryYAxisType | null;
   formatYLabel?: (label: string) => string;
+  onlyReferenceLines?: boolean;
+  renderReferenceLines?: boolean;
 };
 
 type HorizSectionObject = {

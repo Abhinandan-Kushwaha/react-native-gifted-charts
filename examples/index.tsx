@@ -40,6 +40,7 @@ import HighlightedRange from './LineChart/HighlightedRange';
 import GradientLineAndLabel from './LineChart/GradientLineAndLabel';
 import InwardFocusPie from './PieChart/InwardFocusPie';
 import BothSideFocusPie from './PieChart/BothSideFocusPie';
+import PopulationChart from './LineChart/PopulationChart';
 
 const Examples = () => {
   const [selectedFooterButton, setSelectedFooterButton] = useState(0);
@@ -147,6 +148,9 @@ const Examples = () => {
         <Separator />
 
         <HighlightedRange />
+        <Separator />
+
+        <PopulationChart />
         <Separator />
         <Separator />
       </View>

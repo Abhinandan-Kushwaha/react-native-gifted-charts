@@ -1,6 +1,7 @@
 import {defaultLineConfigType} from '../BarChart/types';
 import {CurveType, EdgePosition, RuleTypes} from './types';
 import {Dimensions} from 'react-native';
+import {FontStyle} from 'react-native-svg';
 
 // Global
 
@@ -101,6 +102,7 @@ export const AxesAndRulesDefaults = {
 
   showFractionalValues: false,
   roundToDigits: 1,
+  referenceLinesOverChartContent: true,
 };
 
 export const defaultArrowConfig = {
@@ -272,3 +274,60 @@ export const pieColors = [
   'blue',
   'pink',
 ];
+
+export const populationDefaults = {
+  height: 200,
+  width: screenWidth,
+  verticalMarginBetweenBars : 1,
+  barsMapToYAxisSections: true,
+
+  xAxisNoOfSections: 4,
+  showXAxisIndices: true,
+  xAxisIndicesWidth: 2,
+  xAxisIndicesHeight: 4,
+  xAxisIndicesColor: 'black',
+  showXAxisLabelTexts: true,
+  xAxisRoundToDigits: 0,
+
+  showVerticalLines: true,
+  verticalLinesColor: 'lightgray',
+  verticalLinesThickness: 1,
+  verticalLinesType: ruleTypes.DASHED,
+  verticalLinesStrokeDashArray: [4,8],
+
+  defaultFontSize: 12,
+  defaultFontColor: 'black',
+  defaultFontStyle: <FontStyle>'normal',
+  defaultFontWeight: 1,
+  defaultFontFamily: '',
+
+  yAxisLabelTextMarginRight: 4,
+  showValuesAsBarLabels: false,
+  showMidAxis: false,
+  midAxisLabelWidth: 35,
+  midAxisType: ruleTypes.SOLID,
+
+  leftBarLabelWidth: 30,
+  rightBarLabelWidth: 30,
+
+  leftBarColor: 'skyblue',
+  rightBarColor: 'orange',
+  leftBarBorderColor: 'blue',
+  rightBarBorderColor: 'red',
+  leftBarBorderWidth: 0,
+  rightBarBorderWidth: 0,
+  leftBarBorderRadius: 0,
+  rightBarBorderRadius: 0,
+  allCornersRounded: false,
+  showSurplus: false,
+  showSurplusLeft: false,
+  showSurplusRight: false,
+  leftSurplusColor: '#334790',
+  leftSurplusBorderColor: 'blue',
+  rightSurplusColor: '#AC343C',
+  rightSurplusBorderColor: 'red',
+  leftSurplusBorderWidth: 0,
+  rightSurplusBorderWidth: 0,
+  prefix: '',
+  suffix: '',
+}
