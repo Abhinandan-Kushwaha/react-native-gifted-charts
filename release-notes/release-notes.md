@@ -2,7 +2,7 @@
 
 ## ✨ Features added-
 
-1. Added support for **Population Pyramid** charts!! See **[4. Population Pyramid props](../docs/PopulationPyramid/PopulationPyramid.md)**
+1. Added support for **Population Pyramid** charts!! See **[Population Pyramid props](../docs/PopulationPyramid/PopulationPyramid.md)**
 2. Pointer labels will now be rendered on top of the rest of the chart content. Earlier, reference lines sometimes used to appear over the pointer lables, this has been fixed now. 
 3. Added the prop `referenceLinesOverChartContent` for Bar charts.
 
