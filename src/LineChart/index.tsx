@@ -1081,9 +1081,9 @@ export const LineChart = (props: LineChartPropsType) => {
               pp3 += getStepPath(data3, i);
             } else {
               pp3 += getSegmentPath(
-                data2,
+                data3,
                 i,
-                lineSegments2,
+                lineSegments3,
                 startIndex3,
                 endIndex3,
               );
@@ -1111,7 +1111,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 i,
                 lineSegments5,
                 startIndex5,
-                endIndex4,
+                endIndex5,
               );
             }
           }
