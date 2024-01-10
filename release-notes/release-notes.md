@@ -1,11 +1,24 @@
+# 🎉 1.3.30
+
+## 🐛 Bug fixes
+
+1. Fixed issue with `pointerEvent value: box-none` in Pie charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/491 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/472
+2. Fixed issue with `data3` and `data4` in Line charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/490
+3. Fixed issue- strip not visible for Line and Area charts having `pointerConfig` with `pointerLabelComponent`.
+
+---
+
+---
+
+---
+
 # 🎉 1.3.29 Major release
 
 ## ✨ Features added-
 
 1. Added support for **Population Pyramid** charts!! See **[Population Pyramid props](../docs/PopulationPyramid/PopulationPyramid.md)**
-2. Pointer labels will now be rendered on top of the rest of the chart content. Earlier, reference lines sometimes used to appear over the pointer lables, this has been fixed now. 
+2. Pointer labels will now be rendered on top of the rest of the chart content. Earlier, reference lines sometimes used to appear over the pointer lables, this has been fixed now.
 3. Added the prop `referenceLinesOverChartContent` for Bar charts.
-
 
 ## 🐛 Bug fixes
 
@@ -33,7 +46,7 @@
 
 ## ✨ Features added-
 
-1. Added support for mix of positive + negative values in Stacked Bar charts. Thanks to Christoph who added this feature through his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/470 
+1. Added support for mix of positive + negative values in Stacked Bar charts. Thanks to Christoph who added this feature through his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/470
 2. Added the prop `yAxisExtraHeight` for extra length of Y axis at the top. Default value is 1/20th of the chart height.
 3. Added the prop `inwardExtraLengthForFocused`. This allows us to render donut charts whose focused section grows inwards. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/325
 
@@ -68,10 +81,9 @@
 
 3. Added the `trimYAxisAtTop` prop for Bar and Line charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/461
 
-4. `showValuesAsTopLabel` now shows the sum of stack item values at top of each stack. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/446 
+4. `showValuesAsTopLabel` now shows the sum of stack item values at top of each stack. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/446
 
 5. Added the property `resetPointerOnDataChange` to `pointerConfig` for Line charts. The default value of `resetPointerOnDataChange` is true. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/456
-
 
 ## 🐛 Bug fixes
 
@@ -95,7 +107,7 @@
 
 3. Added separate `spacing` for Line charts inside BarCharts. The line rendered in a Bar chart can have its own `spacing` value independent from the spacing of the bars. It can be set using the `spacing` property in the `lineConfig` object.
 
-4. Added these props to apply border radius to Stacked Bar charts- 
+4. Added these props to apply border radius to Stacked Bar charts-
 <ul>
    <li> stackBorderRadius </li>
    <li> stackBorderTopLeftRadius </li>
@@ -107,7 +119,6 @@
 ## 🐛 Bug fixes
 
 1. Fixed the issue - initial pointer appearing at top for the second data line. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/453
-
 
 ## 🔨 Refactor
 

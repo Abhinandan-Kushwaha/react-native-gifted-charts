@@ -628,6 +628,7 @@ export const BarChart = (props: BarChartPropsType) => {
       pointerLabelComponent,
       scrollX: 0,
       pointerEvents,
+      isBarChart: true,
     });
   };
 
