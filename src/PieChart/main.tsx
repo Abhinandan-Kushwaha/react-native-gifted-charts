@@ -128,8 +128,8 @@ export const PieChartMain = (props: propTypes) => {
   const labelsPosition = props.labelsPosition
     ? props.labelsPosition
     : donut || props.centerLabelComponent
-    ? 'outward'
-    : 'mid';
+      ? 'outward'
+      : 'mid';
 
   const showTextBackground = props.showTextBackground || false;
   const textBackgroundColor = props.textBackgroundColor || 'white';
@@ -201,7 +201,7 @@ export const PieChartMain = (props: propTypes) => {
         isThreeD && {transform: [{rotateX: tiltAngle}]},
       ]}>
       <Svg
-        pointerEvents={rnVersion >= 700000 ? 'box-none' : 'auto'}
+        pointerEvents={rnVersion >= 720000 ? 'box-none' : 'auto'} // use 'box-none' react-native version 0.72 onwards
         viewBox={`${strokeWidth / -2 + minShiftX} ${
           strokeWidth / -2 + minShiftY
         } ${
@@ -257,8 +257,8 @@ export const PieChartMain = (props: propTypes) => {
                 data[0].onPress
                   ? data[0].onPress()
                   : props.onPress
-                  ? props.onPress(data[0], 0)
-                  : null;
+                    ? props.onPress(data[0], 0)
+                    : null;
               }}
             />
           </>
@@ -298,15 +298,15 @@ export const PieChartMain = (props: propTypes) => {
                   props.focusOnPress && props.selectedIndex === index
                     ? 0
                     : item.strokeWidth === 0
-                    ? 0
-                    : item.strokeWidth || strokeWidth
+                      ? 0
+                      : item.strokeWidth || strokeWidth
                 }
                 fill={
                   props.selectedIndex === index || item.peripheral
                     ? 'transparent'
                     : showGradient
-                    ? `url(#grad${index})`
-                    : item.color || pieColors[index % 9]
+                      ? `url(#grad${index})`
+                      : item.color || pieColors[index % 9]
                 }
                 onPress={() => {
                   if (item.onPress) {
@@ -391,12 +391,12 @@ export const PieChartMain = (props: propTypes) => {
                       item.onLabelPress
                         ? item.onLabelPress()
                         : props.onLabelPress
-                        ? props.onLabelPress(item, index)
-                        : item.onPress
-                        ? item.onPress()
-                        : props.onPress
-                        ? props.onPress(item, index)
-                        : null;
+                          ? props.onLabelPress(item, index)
+                          : item.onPress
+                            ? item.onPress()
+                            : props.onPress
+                              ? props.onPress(item, index)
+                              : null;
                       if (props.focusOnPress) {
                         if (props.selectedIndex === index) {
                           if (toggleFocusOnPress) {
@@ -427,12 +427,12 @@ export const PieChartMain = (props: propTypes) => {
                     item.onLabelPress
                       ? item.onLabelPress()
                       : props.onLabelPress
-                      ? props.onLabelPress(item, index)
-                      : item.onPress
-                      ? item.onPress()
-                      : props.onPress
-                      ? props.onPress(item, index)
-                      : null;
+                        ? props.onLabelPress(item, index)
+                        : item.onPress
+                          ? item.onPress()
+                          : props.onPress
+                            ? props.onPress(item, index)
+                            : null;
                     if (props.focusOnPress) {
                       if (props.selectedIndex === index) {
                         if (toggleFocusOnPress) {

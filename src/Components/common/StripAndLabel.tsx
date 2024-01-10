@@ -28,6 +28,7 @@ export const StripAndLabel = props => {
     secondaryPointerItem,
     scrollX,
     pointerEvents,
+    isBarChart,
   } = props;
   let left = 0,
     top = 0;
@@ -86,7 +87,11 @@ export const StripAndLabel = props => {
         left: pointerX + (pointerItemLocal[0].pointerShiftX || 0),
         top: pointerYLocal,
       }}>
-      {showPointerStrip && !pointerLabelComponent ? (
+      {(
+        isBarChart
+          ? showPointerStrip && !pointerLabelComponent
+          : showPointerStrip
+      ) ? (
         <View
           style={{
             position: 'absolute',
