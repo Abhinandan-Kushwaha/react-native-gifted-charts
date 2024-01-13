@@ -41,6 +41,7 @@ const RoundStackBar = () => {
         width={340}
         rotateLabel
         spacing={40}
+        overflowTop={20}
         noOfSections={4}
         stackBorderTopLeftRadius={20}
         stackData={stackData}
@@ -48,7 +49,7 @@ const RoundStackBar = () => {
         pointerConfig={{
           initialPointerIndex: 0,
           stripBehindBars: true,
-          pointerStripHeight: 200,
+          pointerStripHeight: 210,
           pointerLabelComponent: items => {
             return (
               <View

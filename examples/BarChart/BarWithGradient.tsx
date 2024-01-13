@@ -18,6 +18,10 @@ const BarWithGradient = () => {
         showYAxisIndices
         showXAxisIndices
         hideRules
+        showVerticalLines
+        verticalLinesColor={'white'}
+        verticalLinesZIndex={100}
+        overflowTop={10}
         noOfSections={5}
         data={barData}
         showGradient
