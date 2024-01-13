@@ -664,6 +664,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
         </View>
       ) : (
         <View
+          pointerEvents='none'
           style={{
             flexDirection: 'row',
             marginTop: stepHeight / -2,

@@ -1,3 +1,18 @@
+# 🎉 1.3.31
+
+## 🐛 Bug fixes
+
+1. Fixed issue with onPress not working on elements just above the chart. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/497 <br/>
+   It was an issue with the <ScrollView> of the chart overflowing and overlapping in case stepHeight was large.
+
+2. Fixed the issue- `showStripOnFocus`: height of strip becomes smaller when using `overflowTop`.
+
+---
+
+---
+
+---
+
 # 🎉 1.3.30
 
 ## 🐛 Bug fixes

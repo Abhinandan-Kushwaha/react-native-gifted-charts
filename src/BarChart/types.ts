@@ -55,6 +55,7 @@ export type stackItemType = {
 export type BarChartPropsType = {
   width?: number;
   height?: number;
+  overflowTop?: number;
   minHeight?: number;
   noOfSections?: number;
   noOfSectionsBelowXAxis?: number;

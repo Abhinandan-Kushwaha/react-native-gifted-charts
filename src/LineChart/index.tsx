@@ -467,9 +467,11 @@ export const LineChart = (props: LineChartPropsType) => {
   const maxValue = props.maxValue || maxItem;
   const mostNegativeValue = props.mostNegativeValue || minItem;
 
+  const overflowTop = props.overflowTop ?? 0;
+
   const extendedContainerHeight = getExtendedContainerHeightWithPadding(
     containerHeight,
-    props.overflowTop,
+    overflowTop,
   );
   const getX = index => initialSpacing + spacing * index - 1;
   const getY = value =>
@@ -2107,7 +2109,7 @@ export const LineChart = (props: LineChartPropsType) => {
                   x={initialSpacing + (spacing * index - spacing / 2)}
                   y={8}
                   width={spacing}
-                  height={containerHeight - 0}
+                  height={containerHeight}
                   fill={'none'}
                 />
               )}
@@ -2128,7 +2130,7 @@ export const LineChart = (props: LineChartPropsType) => {
               width={currentStripWidth}
               height={
                 currentStripHeight ||
-                (item.value * containerHeight) / maxValue - 2
+                (item.value * containerHeight) / maxValue - 2 + overflowTop
               }
               opacity={currentStripOpacity}
               fill={stripColor}
@@ -3544,10 +3546,7 @@ export const LineChart = (props: LineChartPropsType) => {
               height:
                 extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
               bottom:
-                58 +
-                labelsExtraHeight +
-                xAxisLabelsVerticalShift -
-                (props.overflowTop ?? 0),
+                58 + labelsExtraHeight + xAxisLabelsVerticalShift - overflowTop,
               // width: totalWidth,
               zIndex: 20,
             }}>
