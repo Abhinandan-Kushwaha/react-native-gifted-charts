@@ -92,10 +92,10 @@ export const BarChart = (props: BarChartPropsType) => {
   defaultLineConfig.animationDuration = animationDuration;
 
   const lineConfig = props.lineConfig
-    ? getLineConfigForBarChart(props.lineConfig)
+    ? getLineConfigForBarChart(props.lineConfig, initialSpacing)
     : defaultLineConfig;
   const lineConfig2 = props.lineConfig2
-    ? getLineConfigForBarChart(props.lineConfig2)
+    ? getLineConfigForBarChart(props.lineConfig2, initialSpacing)
     : defaultLineConfig;
   const noOfSections = props.noOfSections ?? AxesAndRulesDefaults.noOfSections;
   const containerHeight =

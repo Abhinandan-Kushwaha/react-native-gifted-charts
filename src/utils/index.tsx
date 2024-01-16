@@ -1046,7 +1046,7 @@ export const getXForLineInBar = (
   (currentBarWidth + (lineConfig.spacing ?? spacing)) * index +
   lineConfig.shiftX -
   lineConfig.dataPointsWidth / 2 -
-  32;
+  4;
 
 export const getYForLineInBar = (value, shiftY, containerHeight, maxValue) =>
   containerHeight - shiftY - (value * containerHeight) / maxValue;
@@ -1069,11 +1069,13 @@ export const clone = obj => {
   return temp;
 };
 
-export const getLineConfigForBarChart = lineConfig => {
+export const getLineConfigForBarChart = (lineConfig, barInitialSpacing) => {
   return {
     initialSpacing:
-      lineConfig.initialSpacing ?? defaultLineConfig.initialSpacing,
-    spacing: lineConfig.initialSpacing,
+      lineConfig.initialSpacing ??
+      barInitialSpacing ??
+      defaultLineConfig.initialSpacing,
+    spacing: lineConfig.spacing,
     curved: lineConfig.curved || defaultLineConfig.curved,
     curvature: lineConfig.curvature ?? defaultLineConfig.curvature,
     curveType: lineConfig.curveType ?? defaultLineConfig.curveType,

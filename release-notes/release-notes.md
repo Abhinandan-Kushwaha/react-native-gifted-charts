@@ -1,3 +1,13 @@
+# 🎉 1.3.32
+
+🐛 Minor bug fixes with `initialSpacing` for Line inside Bar charts (combined Bar and Line charts).
+
+---
+
+---
+
+---
+
 # 🎉 1.3.31
 
 ## 🐛 Bug fixes
