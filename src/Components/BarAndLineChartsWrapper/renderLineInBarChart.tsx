@@ -361,7 +361,7 @@ const RenderLineInBarChart = props => {
         style={{
           position: 'absolute',
           height: containerHeight + 10 + labelsExtraHeight,
-          left: 34 - yAxisLabelWidth,
+          left: 6 - yAxisLabelWidth,
           bottom: 50 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
           width: totalWidth,
           zIndex: lineBehindBars ? -1 : 100000,
