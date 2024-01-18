@@ -1,9 +1,8 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   TouchableOpacity,
   Text,
-  ColorValue,
   LayoutAnimation,
   Platform,
   UIManager,
@@ -11,78 +10,14 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {BarDefaults} from '../utils/constants';
-import {stackItemType} from './types';
-import {Pointer} from '../utils/types';
+import {StackedBarChartPropsType, stackDataItem} from './types';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
     UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-type Props = {
-  style?: any;
-  width?: number;
-  height?: number;
-  color?: ColorValue;
-  topLabelComponent?: Component;
-  topLabelContainerStyle?: any;
-  opacity?: number;
-  label: String;
-  labelTextStyle?: any;
-  disablePress?: boolean;
-
-  item: stackItemType;
-  index: number;
-  containerHeight?: number;
-  maxValue: number;
-  spacing: number;
-  propSpacing?: number;
-  data?: any;
-  barWidth?: number;
-  onPress?: Function;
-
-  rotateLabel?: boolean;
-  showXAxisIndices: boolean;
-  xAxisIndicesHeight: number;
-  xAxisIndicesWidth: number;
-  xAxisIndicesColor: ColorValue;
-  horizontal: boolean;
-  intactTopLabel: boolean;
-  barBorderWidth?: number;
-  barBorderColor: ColorValue;
-  barBorderRadius?: number;
-  barBorderTopLeftRadius?: number;
-  barBorderTopRightRadius?: number;
-  barBorderBottomLeftRadius?: number;
-  barBorderBottomRightRadius?: number;
-  stackBorderRadius?: number;
-  stackBorderTopLeftRadius?: number;
-  stackBorderTopRightRadius?: number;
-  stackBorderBottomLeftRadius?: number;
-  stackBorderBottomRightRadius?: number;
-  xAxisThickness: number;
-  barBackgroundPattern?: Function;
-  patternId?: String;
-  xAxisTextNumberOfLines: number;
-  xAxisLabelsHeight?: number;
-  xAxisLabelsVerticalShift: number;
-  renderTooltip: Function | undefined;
-  leftShiftForTooltip?: number;
-  leftShiftForLastIndexTooltip: number;
-  initialSpacing: number;
-  selectedIndex: number;
-  setSelectedIndex: Function;
-  activeOpacity: number;
-  showGradient?: boolean;
-  gradientColor?: any;
-  stackData: Array<stackItemType>;
-  isAnimated?: boolean;
-  animationDuration?: number;
-  pointerConfig?: Pointer;
-  showValuesAsTopLabel?: boolean;
-};
-
-const RenderStackBars = (props: Props) => {
+const RenderStackBars = (props: StackedBarChartPropsType) => {
   const {
     barBackgroundPattern,
     patternId,
@@ -119,6 +54,9 @@ const RenderStackBars = (props: Props) => {
   } = props;
   const cotainsNegative = item.stacks.some(item => item.value < 0);
   const noAnimation = cotainsNegative || !isAnimated;
+
+  const localBarInnerComponent =
+    item.barInnerComponent ?? props.barInnerComponent;
 
   const {
     borderRadius,
@@ -195,8 +133,8 @@ const RenderStackBars = (props: Props) => {
               ? {transform: [{rotate: '330deg'}]}
               : {transform: [{rotate: '60deg'}]}
             : props.horizontal
-            ? {transform: [{rotate: '-90deg'}]}
-            : {},
+              ? {transform: [{rotate: '-90deg'}]}
+              : {},
         ]}>
         {item.labelComponent ? (
           item.labelComponent()
@@ -241,25 +179,8 @@ const RenderStackBars = (props: Props) => {
     setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
   };
 
-  const barWrapper = () => {
-    return noAnimation ? (
-      static2DSimple()
-    ) : (
-      <View
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          height: height,
-          width: '100%',
-          overflow: 'hidden',
-        }}>
-        {static2DSimple()}
-      </View>
-    );
-  };
-
   const static2DSimple = () => {
-    const getStackBorderRadii = (item: stackItemType, index: number) => {
+    const getStackBorderRadii = (item: stackDataItem, index: number) => {
       const stackItem = item.stacks[index];
       const borderRadii = {
         borderTopLeftRadius:
@@ -398,6 +319,11 @@ const RenderStackBars = (props: Props) => {
             </Svg>
           )}
         </TouchableOpacity>
+        {localBarInnerComponent ? (
+          <View style={{height: '100%', width: '100%'}}>
+            {localBarInnerComponent(item, index)}
+          </View>
+        ) : null}
         {(item.topLabelComponent || showValuesAsTopLabel) && (
           <View
             style={[
@@ -426,6 +352,23 @@ const RenderStackBars = (props: Props) => {
           </View>
         )}
       </>
+    );
+  };
+
+  const barWrapper = () => {
+    return noAnimation ? (
+      static2DSimple()
+    ) : (
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          height: height,
+          width: '100%',
+          overflow: 'hidden',
+        }}>
+        {static2DSimple()}
+      </View>
     );
   };
 

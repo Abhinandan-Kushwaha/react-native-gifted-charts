@@ -28,232 +28,16 @@ import {
   yAxisSides,
 } from '../utils/constants';
 import {BarAndLineChartsWrapperTypes, RuleType} from '../utils/types';
+import { LineChartBicolorPropsType, bicolorLineDataItem } from './types';
 
-let initialData: Array<itemType> | null = null;
-
-type propTypes = {
-  height?: number;
-  overflowTop?: number;
-  noOfSections?: number;
-  maxValue?: number;
-  mostNegativeValue?: number;
-  stepHeight?: number;
-  stepValue?: number;
-  spacing?: number;
-  initialSpacing?: number;
-  endSpacing?: number;
-  data?: Array<itemType>;
-  zIndex?: number;
-  thickness?: number;
-  strokeDashArray?: Array<number>;
-  rotateLabel?: boolean;
-  isAnimated?: boolean;
-  animationDuration?: number;
-  onDataChangeAnimationDuration?: number;
-  animationEasing?: any;
-  xAxisLength?: number;
-  xAxisThickness?: number;
-  xAxisColor?: ColorValue;
-  xAxisType?: RuleType;
-  hideRules?: boolean;
-  rulesLength?: number;
-  rulesColor?: ColorValue;
-  rulesThickness?: number;
-  focusEnabled?: boolean;
-  onFocus?: Function;
-  showDataPointOnFocus?: boolean;
-  showStripOnFocus?: boolean;
-  showTextOnFocus?: boolean;
-  stripHeight?: number;
-  stripWidth?: number;
-  stripColor?: ColorValue | String | any;
-  stripOpacity?: number;
-  onPress?: Function;
-  unFocusOnPressOut?: boolean;
-  delayBeforeUnFocus?: number;
-
-  rulesType?: RuleType;
-  dashWidth?: number;
-  dashGap?: number;
-  showReferenceLine1?: boolean;
-  referenceLine1Config?: referenceConfigType;
-  referenceLine1Position?: number;
-  showReferenceLine2?: boolean;
-  referenceLine2Config?: referenceConfigType;
-  referenceLine2Position?: number;
-  showReferenceLine3?: boolean;
-  referenceLine3Config?: referenceConfigType;
-  referenceLine3Position?: number;
-
-  showVerticalLines?: boolean;
-  verticalLinesUptoDataPoint?: boolean;
-  verticalLinesThickness?: number;
-  verticalLinesHeight?: number;
-  verticalLinesColor?: ColorValue;
-  verticalLinesStrokeDashArray?: Array<number>;
-  verticalLinesShift?: number;
-  verticalLinesZIndex?: number;
-  noOfVerticalLines?: number;
-  verticalLinesSpacing?: number;
-  hideAxesAndRules?: boolean;
-  areaChart?: boolean;
-
-  disableScroll?: boolean;
-  showScrollIndicator?: boolean;
-  indicatorColor?: 'black' | 'default' | 'white';
-
-  //Indices
-
-  showYAxisIndices?: boolean;
-  showXAxisIndices?: boolean;
-  yAxisIndicesHeight?: number;
-  xAxisIndicesHeight?: number;
-  yAxisIndicesWidth?: number;
-  xAxisIndicesWidth?: number;
-  xAxisIndicesColor?: ColorValue;
-  yAxisIndicesColor?: ColorValue;
-  yAxisSide?: yAxisSides;
-  yAxisOffset?: number;
-
-  startIndex?: number;
-  endIndex?: number;
-
-  color?: string;
-  colorNegative?: string;
-  yAxisThickness?: number;
-  yAxisColor?: ColorValue;
-  yAxisLabelContainerStyle?: any;
-  horizontalRulesStyle?: any;
-  yAxisTextStyle?: any;
-  yAxisTextNumberOfLines?: number;
-  xAxisTextNumberOfLines?: number;
-  showFractionalValues?: boolean;
-  roundToDigits?: number;
-  yAxisLabelWidth?: number;
-  hideYAxisText?: boolean;
-
-  backgroundColor?: ColorValue;
-  curved?: boolean;
-  horizSections?: Array<sectionType>;
-
-  //Data points
-
-  hideDataPoints?: boolean;
-  dataPointsHeight?: number;
-  dataPointsWidth?: number;
-  dataPointsRadius?: number;
-  dataPointsColor?: string;
-  dataPointsShape?: string;
-  customDataPoint?: Function;
-
-  focusedDataPointShape?: String;
-  focusedDataPointWidth?: number;
-  focusedDataPointHeight?: number;
-  focusedDataPointColor?: ColorValue | String | any;
-  focusedDataPointRadius?: number;
-  focusedCustomDataPoint?: Function;
-  dataPointLabelWidth?: number;
-  dataPointLabelShiftX?: number;
-  dataPointLabelShiftY?: number;
-
-  startFillColor?: string;
-  endFillColor?: string;
-  startFillColorNegative?: string;
-  endFillColorNegative?: string;
-  startOpacity?: number;
-  endOpacity?: number;
-  startOpacityNegative?: number;
-  endOpacityNegative?: number;
-  gradientDirection?: string;
-
-  textFontSize?: number;
-  textColor?: string;
-  hideOrigin?: boolean;
-  textShiftX?: number;
-  textShiftY?: number;
-  yAxisLabelTexts?: Array<string>;
-  xAxisLabelTexts?: Array<string>;
-  xAxisLabelTextStyle?: any;
-  width?: number;
-  yAxisLabelPrefix?: String;
-  yAxisLabelSuffix?: String;
-  scrollToEnd?: boolean;
-  scrollToIndex?: number;
-  scrollAnimation?: boolean;
-  scrollEventThrottle?: number;
-  noOfSectionsBelowXAxis?: number;
-  labelsExtraHeight?: number;
-  adjustToWidth?: boolean;
-  getPointerProps?: Function;
-  formatYLabel?: (label: string) => string;
-};
-type referenceConfigType = {
-  thickness: number;
-  width: number;
-  color: ColorValue | String | any;
-  type: String;
-  dashWidth: number;
-  dashGap: number;
-  labelText: String;
-  labelTextStyle: any;
-};
-type itemType = {
-  value: number;
-  label?: String;
-  labelComponent?: Function;
-  labelTextStyle?: any;
-  dataPointText?: string;
-  textShiftX?: number;
-  textShiftY?: number;
-  textColor?: string;
-  textFontSize?: number;
-
-  hideDataPoint?: boolean;
-  dataPointHeight?: number;
-  dataPointWidth?: number;
-  dataPointRadius?: number;
-  dataPointColor?: string;
-  dataPointShape?: string;
-  customDataPoint?: Function;
-
-  stripHeight?: number;
-  stripWidth?: number;
-  stripColor?: ColorValue | String | any;
-  stripOpacity?: number;
-
-  focusedDataPointShape?: String;
-  focusedDataPointWidth?: number;
-  focusedDataPointHeight?: number;
-  focusedDataPointColor?: ColorValue | String | any;
-  focusedDataPointRadius?: number;
-  focusedCustomDataPoint?: Function;
-
-  dataPointLabelComponent?: Function;
-  focusedDataPointLabelComponent?: Function;
-  dataPointLabelWidth?: number;
-  dataPointLabelShiftX?: number;
-  dataPointLabelShiftY?: number;
-  showStrip?: boolean;
-
-  showVerticalLine?: boolean;
-  verticalLineUptoDataPoint?: boolean;
-  verticalLineColor?: string;
-  verticalLineThickness?: number;
-  pointerShiftX?: number;
-  pointerShiftY?: number;
-  onPress?: Function;
-};
-
-type sectionType = {
-  value: string;
-};
+let initialData: Array<bicolorLineDataItem> | null = null;
 
 type Points = {
   points: string;
   color: string;
 };
 
-export const LineChartBicolor = (props: propTypes) => {
+export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
   const scrollRef = useRef();
   const [toggle, setToggle] = useState(false);
   const [pointsArray, setPointsArray] = useState<Array<Points>>([]);
@@ -358,7 +142,7 @@ export const LineChartBicolor = (props: propTypes) => {
   let totalWidth = initialSpacing;
   let maxItem = 0,
     minItem = 0;
-  data.forEach((item: itemType) => {
+  data.forEach((item: bicolorLineDataItem) => {
     if (item.value > maxItem) {
       maxItem = item.value;
     }
@@ -796,7 +580,7 @@ export const LineChartBicolor = (props: propTypes) => {
     startIndex,
     endIndex,
   ) => {
-    return dataForRender.map((item: itemType, index: number) => {
+    return dataForRender.map((item: bicolorLineDataItem, index: number) => {
       if (index < startIndex || index > endIndex) return null;
       if (item.hideDataPoint) {
         return null;
@@ -1034,7 +818,7 @@ export const LineChartBicolor = (props: propTypes) => {
   };
 
   const renderSpecificVerticalLines = (dataForRender: any) => {
-    return dataForRender.map((item: itemType, index: number) => {
+    return dataForRender.map((item: bicolorLineDataItem, index: number) => {
       if (item.showVerticalLine) {
         return (
           <Rect
@@ -1284,7 +1068,7 @@ export const LineChartBicolor = (props: propTypes) => {
               endOpacity,
               strokeDashArray1,
             )}
-        {data.map((item: itemType, index: number) => {
+        {data.map((item: bicolorLineDataItem, index: number) => {
           return (
             <View key={index}>
               {isAnimated

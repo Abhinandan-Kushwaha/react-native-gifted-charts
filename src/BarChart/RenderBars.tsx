@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {Component, ReactNode} from 'react';
 import {View, TouchableOpacity, Animated, Text, ColorValue} from 'react-native';
 import AnimatedThreeDBar from '../Components/AnimatedThreeDBar';
 import LinearGradient from 'react-native-linear-gradient';
 import Animated2DWithGradient from './Animated2DWithGradient';
 import Cap from '../Components/BarSpecificComponents/cap';
 import BarBackgroundPattern from '../Components/BarSpecificComponents/barBackgroundPattern';
-import {itemType} from './types';
+import {barDataItem} from './types';
 import {Pointer} from '../utils/types';
 
 type Props = {
@@ -26,7 +26,7 @@ type Props = {
   side?: String;
   labelTextStyle?: any;
 
-  item: itemType;
+  item: barDataItem;
   index: number;
   label: String;
   containerHeight?: number;
@@ -67,6 +67,7 @@ type Props = {
   barBorderTopRightRadius?: number;
   barBorderBottomLeftRadius?: number;
   barBorderBottomRightRadius?: number;
+  barInnerComponent?: (item?: barDataItem, index?: number) => ReactNode;
   autoShiftLabels?: boolean;
   barBackgroundPattern?: Function;
   patternId?: String;
@@ -133,6 +134,8 @@ const RenderBars = (props: Props) => {
     pointerConfig,
   } = props;
 
+  const localBarInnerComponent = item.barInnerComponent ?? props.barInnerComponent;
+
   const barMarginBottom =
     item.barMarginBottom === 0
       ? 0
@@ -169,15 +172,15 @@ const RenderBars = (props: Props) => {
                   ],
                 }
             : horizontal
-            ? {transform: [{rotate: '-90deg'}]}
-            : value < 0
-            ? {
-                transform: [
-                  {rotate: '180deg'},
-                  {translateY: autoShiftLabels ? 0 : 32},
-                ],
-              }
-            : {},
+              ? {transform: [{rotate: '-90deg'}]}
+              : value < 0
+                ? {
+                    transform: [
+                      {rotate: '180deg'},
+                      {translateY: autoShiftLabels ? 0 : 32},
+                    ],
+                  }
+                : {},
         ]}>
         {item.labelComponent ? (
           item.labelComponent()
@@ -227,8 +230,8 @@ const RenderBars = (props: Props) => {
               ? {transform: [{rotate: '330deg'}]}
               : {transform: [{rotate: '60deg'}]}
             : horizontal
-            ? {transform: [{rotate: '-90deg'}]}
-            : {},
+              ? {transform: [{rotate: '-90deg'}]}
+              : {},
         ]}>
         {item.labelComponent ? (
           item.labelComponent()
@@ -247,7 +250,7 @@ const RenderBars = (props: Props) => {
     );
   };
 
-  const static2DWithGradient = (item: itemType) => {
+  const static2DWithGradient = (item: barDataItem) => {
     return (
       <>
         <LinearGradient
@@ -352,6 +355,11 @@ const RenderBars = (props: Props) => {
             )}
           </View>
         )}
+        {localBarInnerComponent ? (
+          <View style={{height: '100%', width: '100%'}}>
+            {localBarInnerComponent(item, index)}
+          </View>
+        ) : null}
       </>
     );
   };
@@ -389,16 +397,16 @@ const RenderBars = (props: Props) => {
           ],
         }
       : pointerConfig
-      ? {
-          transform: [
-            {
-              translateY:
-                (containerHeight || 200) -
-                (barHeight - 10 + xAxisLabelsVerticalShift),
-            },
-          ],
-        }
-      : null,
+        ? {
+            transform: [
+              {
+                translateY:
+                  (containerHeight || 200) -
+                  (barHeight - 10 + xAxisLabelsVerticalShift),
+              },
+            ],
+          }
+        : null,
     // !isThreeD && !item.showGradient && !props.showGradient &&
     // { backgroundColor: item.frontColor || props.frontColor || 'black' },
     side !== 'right' && {zIndex: data.length - index},
@@ -417,6 +425,7 @@ const RenderBars = (props: Props) => {
         barWidth={props.barWidth || 30}
         barStyle={barStyle}
         item={item}
+        index={index}
         opacity={opacity}
         animationDuration={animationDuration || 800}
         roundedBottom={props.roundedBottom || false}
@@ -446,6 +455,7 @@ const RenderBars = (props: Props) => {
         barBorderTopRightRadius={barBorderTopRightRadius}
         barBorderBottomLeftRadius={barBorderBottomLeftRadius}
         barBorderBottomRightRadius={barBorderBottomRightRadius}
+        barInnerComponent={localBarInnerComponent}
       />
     );
     return (
@@ -471,10 +481,12 @@ const RenderBars = (props: Props) => {
             barBackgroundPattern={
               item.barBackgroundPattern || props.barBackgroundPattern
             }
+            barInnerComponent={localBarInnerComponent}
             patternId={item.patternId || props.patternId}
             width={item.barWidth || props.barWidth || 30}
             barStyle={barStyle}
             item={item}
+            index={index}
             sideWidth={
               item.sideWidth ||
               props.sideWidth ||
@@ -530,8 +542,8 @@ const RenderBars = (props: Props) => {
             item.onPress
               ? item.onPress()
               : props.onPress
-              ? props.onPress(item, index)
-              : null;
+                ? props.onPress(item, index)
+                : null;
           }}
           style={barWrapperStyle}>
           {barContent()}

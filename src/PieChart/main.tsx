@@ -1,91 +1,31 @@
 import React from 'react';
-import {ColorValue, View} from 'react-native';
+import {View} from 'react-native';
 import Svg, {
   Path,
   Circle,
   Text as SvgText,
-  FontStyle,
   Defs,
   RadialGradient,
   Stop,
+  G,
 } from 'react-native-svg';
 import {pieColors} from '../utils/constants';
 import {rnVersion} from '../utils';
+import {PieChartPropsType, pieDataItem} from './types';
 
-type propTypes = {
-  radius?: number;
-  isThreeD?: boolean;
-  donut?: boolean;
-  innerRadius?: number;
-  shadow?: boolean;
-  innerCircleColor?: ColorValue;
-  innerCircleBorderWidth?: number;
-  innerCircleBorderColor?: ColorValue;
-  shiftInnerCenterX?: number;
-  shiftInnerCenterY?: number;
-  shadowColor?: string;
-  shadowWidth?: number;
-  strokeWidth?: number;
-  strokeColor?: string;
-  backgroundColor?: string;
-  data: Array<itemType>;
-  semiCircle?: boolean;
-
-  showText?: boolean;
-  textColor?: string;
-  textSize?: number;
-  fontStyle?: FontStyle;
-  fontWeight?: string;
-  font?: string;
-  showTextBackground?: boolean;
-  textBackgroundColor?: string;
-  textBackgroundRadius?: number;
-  showValuesAsLabels?: boolean;
-
-  centerLabelComponent?: Function;
-  tiltAngle?: string;
-  initialAngle?: number;
-  labelsPosition?: 'onBorder' | 'outward' | 'inward' | 'mid';
-  showGradient?: boolean;
-  gradientCenterColor?: string;
-  onPress?: Function;
-  focusOnPress?: boolean;
-  toggleFocusOnPress?: boolean;
-  selectedIndex?: number;
+interface propTypes extends PieChartPropsType {
   setSelectedIndex: Function;
-  onLabelPress?: Function;
   isBiggerPie?: boolean;
-};
-type itemType = {
-  value: number;
-  shiftX?: number;
-  shiftY?: number;
-  color?: string;
-  gradientCenterColor?: string;
-  text?: string;
-  textColor?: string;
-  textSize?: number;
-  fontStyle?: FontStyle;
-  fontWeight?: string;
-  font?: string;
-  textBackgroundColor?: string;
-  textBackgroundRadius?: number;
-  shiftTextX?: number;
-  shiftTextY?: number;
-  labelPosition?: 'onBorder' | 'outward' | 'inward' | 'mid';
-  onPress?: Function;
-  onLabelPress?: Function;
-  strokeWidth?: number;
-  strokeColor?: string;
-  peripheral?: boolean;
-};
+}
 
 export const PieChartMain = (props: propTypes) => {
   const {isThreeD, isBiggerPie} = props;
   const propData = props.data;
-  const data: Array<itemType> = [];
+  const data: Array<pieDataItem> = [];
+  let itemHasInnerComponent = false;
   if (propData) {
     for (let i = 0; i < propData.length; i++) {
+      if(propData[i].pieInnerComponent) itemHasInnerComponent = true;
       if (propData[i].value !== 0) {
         data.push(propData[i]);
       } else {
@@ -97,6 +37,8 @@ export const PieChartMain = (props: propTypes) => {
       }
     }
   }
+  const showInnerComponent = (!!props.pieInnerComponent) || itemHasInnerComponent;
+
   const radius = props.radius || 120;
   const canvasWidth = radius * 2;
   const canvasHeight = isThreeD ? radius * 2.3 : radius * 2;
@@ -329,8 +271,10 @@ export const PieChartMain = (props: propTypes) => {
           })
         )}
 
-        {showText &&
+        {(showText || showInnerComponent) &&
           data.map((item, index) => {
+            const localPieInnerComponent =
+              item.pieInnerComponent ?? props.pieInnerComponent;
             if (isBiggerPie && index) return null;
             if (!props.data[index].value) return null;
             let mx = cx * (1 + Math.sin(2 * pi * mData[index] + initialAngle));
@@ -376,7 +320,7 @@ export const PieChartMain = (props: propTypes) => {
             return (
               <React.Fragment key={index}>
                 {/* <Line x1={mx} x2={cx} y1={my} y2={cy} stroke="black" /> */}
-                {showTextBackground && (
+                {showTextBackground ? (
                   <Circle
                     cx={x}
                     cy={y - (item.textSize || textSize) / 4}
@@ -408,7 +352,7 @@ export const PieChartMain = (props: propTypes) => {
                       }
                     }}
                   />
-                )}
+                ) : null}
                 <SvgText
                   fill={
                     item.textColor || textColor || pieColors[(index + 2) % 9]
@@ -445,6 +389,11 @@ export const PieChartMain = (props: propTypes) => {
                   }}>
                   {item.text || (showValuesAsLabels ? item.value + '' : '')}
                 </SvgText>
+                {localPieInnerComponent ? (
+                  <G x={x} y={y}>
+                    {localPieInnerComponent?.(item, index) ?? null}
+                  </G>
+                ) : null}
               </React.Fragment>
             );
           })}

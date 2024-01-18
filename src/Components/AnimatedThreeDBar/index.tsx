@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -11,6 +11,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {styles} from './styles';
+import {barDataItem} from '../../BarChart/types';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -42,9 +43,11 @@ type animatedBarPropTypes = {
   topLabelContainerStyle?: any;
   topLabelTextStyle?: any;
   barBackgroundPattern?: Function;
+  barInnerComponent?: (item?: barDataItem, index?: number) => ReactNode;
   patternId?: String;
   barStyle?: object;
   item: any;
+  index: number;
 };
 
 const TriangleCorner = (props: trianglePropTypes) => {
@@ -79,10 +82,12 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
     isAnimated,
     animationDuration,
     item,
+    index,
     width,
     sideWidth,
     barStyle,
     barBackgroundPattern,
+    barInnerComponent,
     patternId,
     intactTopLabel,
     showValuesAsTopLabel,
@@ -238,6 +243,11 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
                 />
               </Svg>
             )}
+            {barInnerComponent ? (
+              <View style={{height: '100%', width: '100%'}}>
+                {barInnerComponent(item, index)}
+              </View>
+            ) : null}
           </View>
 
           {/*******************          Top Label            *****************/}

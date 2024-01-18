@@ -1,4 +1,3 @@
-import {stackItemType} from '../BarChart/types';
 import {
   RANGE_ENTER,
   RANGE_EXIT,
@@ -1136,33 +1135,3 @@ export const getLineConfigForBarChart = (lineConfig, barInitialSpacing) => {
     isSecondary: lineConfig.isSecondary ?? defaultLineConfig.isSecondary,
   };
 };
-
-// export const isValueSumZeroForStackBottom = (
-//   item: stackItemType,
-//   index: number,
-// ) => {
-//   const {stacks} = item;
-//   let isValueSumZero = true;
-//   for (let i = 0; i < index; i++) {
-//     if (stacks[i].value) {
-//       isValueSumZero = false;
-//       break;
-//     }
-//   }
-//   return isValueSumZero;
-// };
-
-// export const isValueSumZeroForStackTop = (
-//   item: stackItemType,
-//   index: number,
-// ) => {
-//   const {stacks} = item;
-//   let isValueSumZero = true;
-//   for (let i = stacks.length - 1; i > index; i--) {
-//     if (stacks[i].value) {
-//       isValueSumZero = false;
-//       break;
-//     }
-//   }
-//   return isValueSumZero;
-// };

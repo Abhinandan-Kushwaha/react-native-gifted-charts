@@ -1,4 +1,4 @@
-import {ColorValue, GestureResponderEvent, View} from 'react-native';
+import {ColorValue, GestureResponderEvent} from 'react-native';
 import {yAxisSides} from '../utils/constants';
 import {
   CurveType,
@@ -8,8 +8,9 @@ import {
   referenceConfigType,
   secondaryYAxisType,
 } from '../utils/types';
+import {Component, ReactNode} from 'react';
 
-export type stackItemType = {
+export type stackDataItem = {
   onPress?: any;
   label?: String;
   barWidth?: number;
@@ -47,9 +48,74 @@ export type stackItemType = {
   borderTopRightRadius?: number;
   borderBottomLeftRadius?: number;
   borderBottomRightRadius?: number;
+  barInnerComponent?: (item?: stackDataItem, index?: number) => ReactNode;
   patternId?: String;
   leftShiftForTooltip?: number;
   showXAxisIndex?: boolean;
+};
+
+export type StackedBarChartPropsType = {
+  style?: any;
+  width?: number;
+  height?: number;
+  color?: ColorValue;
+  topLabelComponent?: Component;
+  topLabelContainerStyle?: any;
+  opacity?: number;
+  label: String;
+  labelTextStyle?: any;
+  disablePress?: boolean;
+
+  item: stackDataItem;
+  index: number;
+  containerHeight?: number;
+  maxValue: number;
+  spacing: number;
+  propSpacing?: number;
+  data?: any;
+  barWidth?: number;
+  onPress?: Function;
+
+  rotateLabel?: boolean;
+  showXAxisIndices: boolean;
+  xAxisIndicesHeight: number;
+  xAxisIndicesWidth: number;
+  xAxisIndicesColor: ColorValue;
+  horizontal: boolean;
+  intactTopLabel: boolean;
+  barBorderWidth?: number;
+  barBorderColor: ColorValue;
+  barBorderRadius?: number;
+  barBorderTopLeftRadius?: number;
+  barBorderTopRightRadius?: number;
+  barBorderBottomLeftRadius?: number;
+  barBorderBottomRightRadius?: number;
+  barInnerComponent?: (item?: barDataItem | stackDataItem, index?: number) => ReactNode;
+  stackBorderRadius?: number;
+  stackBorderTopLeftRadius?: number;
+  stackBorderTopRightRadius?: number;
+  stackBorderBottomLeftRadius?: number;
+  stackBorderBottomRightRadius?: number;
+  xAxisThickness: number;
+  barBackgroundPattern?: Function;
+  patternId?: String;
+  xAxisTextNumberOfLines: number;
+  xAxisLabelsHeight?: number;
+  xAxisLabelsVerticalShift: number;
+  renderTooltip: Function | undefined;
+  leftShiftForTooltip?: number;
+  leftShiftForLastIndexTooltip: number;
+  initialSpacing: number;
+  selectedIndex: number;
+  setSelectedIndex: Function;
+  activeOpacity: number;
+  showGradient?: boolean;
+  gradientColor?: any;
+  stackData: Array<stackDataItem>;
+  isAnimated?: boolean;
+  animationDuration?: number;
+  pointerConfig?: Pointer;
+  showValuesAsTopLabel?: boolean;
 };
 
 export type BarChartPropsType = {
@@ -64,8 +130,8 @@ export type BarChartPropsType = {
   stepHeight?: number;
   stepValue?: number;
   spacing?: number;
-  data?: Array<itemType>;
-  stackData?: Array<stackItemType>;
+  data?: Array<barDataItem>;
+  stackData?: Array<stackDataItem>;
   side?: String;
   rotateLabel?: boolean;
   isAnimated?: boolean;
@@ -212,8 +278,9 @@ export type BarChartPropsType = {
   leftShiftForTooltip?: number;
   leftShiftForLastIndexTooltip?: number;
   barStyle?: object;
+  barInnerComponent?: (item?: stackDataItem | barDataItem, index?: number) => ReactNode;
 
-  secondaryData?: Array<itemType>;
+  secondaryData?: Array<barDataItem>;
   secondaryYAxis?: secondaryYAxisType | boolean;
   pointerConfig?: Pointer;
   getPointerProps?: Function;
@@ -290,7 +357,7 @@ type arrowType = {
 type sectionType = {
   value: string;
 };
-export type itemType = {
+export type barDataItem = {
   value: number;
   onPress?: any;
   frontColor?: ColorValue;
@@ -322,5 +389,6 @@ export type itemType = {
   barMarginBottom?: number;
   leftShiftForTooltip?: number;
   barStyle?: object;
+  barInnerComponent?: (item?: barDataItem, index?: number) => ReactNode;
   showXAxisIndex?: boolean;
 };
