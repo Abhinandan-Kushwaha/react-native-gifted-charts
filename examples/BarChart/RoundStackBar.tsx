@@ -38,6 +38,7 @@ const RoundStackBar = () => {
   return (
     <View style={{borderWidth: 1}}>
       <BarChart
+        isAnimated
         width={340}
         rotateLabel
         spacing={40}
@@ -64,6 +65,26 @@ const RoundStackBar = () => {
               </View>
             );
           },
+        }}
+        barInnerComponent={(item, index) => {
+          return (
+            <View
+              style={{
+                height: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <View
+                style={{
+                  height: 20,
+                  width: 20,
+                  borderRadius: 10,
+                  backgroundColor: 'white',
+                }}>
+                <Text style={{color: 'blue',textAlign:'center'}}>{index}</Text>
+              </View>
+            </View>
+          );
         }}
       />
     </View>

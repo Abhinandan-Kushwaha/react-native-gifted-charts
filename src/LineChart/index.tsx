@@ -55,7 +55,7 @@ import {
   screenWidth,
 } from '../utils/constants';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
-import {LineChartPropsType, itemType} from './types';
+import {LineChartPropsType, lineDataItem} from './types';
 import {
   BarAndLineChartsWrapperTypes,
   EdgePosition,
@@ -64,7 +64,7 @@ import {
 import {StripAndLabel} from '../Components/common/StripAndLabel';
 import {Pointer} from '../Components/common/Pointer';
 
-let initialData: Array<itemType> | null = null;
+let initialData: Array<lineDataItem> | null = null;
 let animations: Array<any> = [];
 
 export const LineChart = (props: LineChartPropsType) => {
@@ -2018,7 +2018,7 @@ export const LineChart = (props: LineChartPropsType) => {
     showValuesAsDataPointsText,
   ) => {
     const getYOrSecondaryY = isSecondary ? getSecondaryY : getY;
-    return dataForRender.map((item: itemType, index: number) => {
+    return dataForRender.map((item: lineDataItem, index: number) => {
       if (index < startIndex || index > endIndex) return null;
       if (item.hideDataPoint) {
         return null;
@@ -2263,7 +2263,7 @@ export const LineChart = (props: LineChartPropsType) => {
   };
 
   const renderSpecificVerticalLines = (dataForRender: any) => {
-    return dataForRender.map((item: itemType, index: number) => {
+    return dataForRender.map((item: lineDataItem, index: number) => {
       if (item.showVerticalLine) {
         const x = getX(index);
         return (
@@ -3566,7 +3566,7 @@ export const LineChart = (props: LineChartPropsType) => {
             )}
           </View>
         ) : null}
-        {(data0 ?? data).map((item: itemType, index: number) => {
+        {(data0 ?? data).map((item: lineDataItem, index: number) => {
           return (
             <View key={index}>
               {isAnimated

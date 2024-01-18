@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import {
   View,
   ColorValue,
@@ -10,7 +10,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import Cap from '../Components/BarSpecificComponents/cap';
-import {itemType} from './types';
+import {barDataItem} from './types';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -18,7 +18,8 @@ if (Platform.OS === 'android') {
 }
 
 type propTypes = {
-  item: itemType;
+  item: barDataItem;
+  index: number;
   height: number;
   minHeight: number;
   opacity?: number;
@@ -52,6 +53,7 @@ type propTypes = {
   patternId?: String;
   barMarginBottom?: number;
   barStyle?: object;
+  barInnerComponent?: (item?: barDataItem, index?: number) => ReactNode;
 };
 
 const Animated2DWithGradient = (props: propTypes) => {
@@ -61,6 +63,7 @@ const Animated2DWithGradient = (props: propTypes) => {
     barWidth,
     barStyle,
     item,
+    index,
     opacity,
     animationDuration,
     noGradient,
@@ -75,6 +78,7 @@ const Animated2DWithGradient = (props: propTypes) => {
     barBorderTopRightRadius,
     barBorderBottomLeftRadius,
     barBorderBottomRightRadius,
+    barInnerComponent,
     intactTopLabel,
     showValuesAsTopLabel,
     topLabelContainerStyle,
@@ -121,6 +125,7 @@ const Animated2DWithGradient = (props: propTypes) => {
             position: 'absolute',
             bottom: 0,
             width: '100%',
+            overflow:'hidden',
             height:
               (noAnimation
                 ? Math.max(
@@ -314,6 +319,11 @@ const Animated2DWithGradient = (props: propTypes) => {
                 />
               </Svg>
             )}
+            {barInnerComponent ? (
+              <View style={{height: '100%', width: '100%'}}>
+                {barInnerComponent(item,index)}
+              </View>
+            ) : null}
           </View>
           {(item.topLabelComponent || showValuesAsTopLabel) && (
             <View

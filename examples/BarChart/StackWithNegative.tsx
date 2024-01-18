@@ -1,11 +1,10 @@
 import React from 'react';
 import {View} from 'react-native';
 import {BarChart} from '../../src/BarChart';
-import { yAxisSides } from '../../src/utils/constants';
-import { stackItemType } from '../../src/BarChart/types';
+import { stackDataItem } from '../../src/BarChart/types';
 
 const StackWithNegative = () => {
-    const stacks: stackItemType[] = [
+    const stacks: stackDataItem[] = [
         {
           // Mix of positive and negative values
           label: 'Nov "23',

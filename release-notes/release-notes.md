@@ -1,3 +1,39 @@
+
+# 🎉 1.3.33
+
+## ✨ Features added-
+
+1. Added the prop `barInnerComponent` to Bar and Stacked Bar charts. `barInnerComponent` can also be passed as a property inside the data items. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/500
+
+2. Added the prop `pieInnerComponent` to Pie and Donut charts. `pieInnerComponent` can also be passed as a property inside the data items. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/500
+
+3. Exported the following types from `react-native-gifted-charts`-
+<ul>
+   <li>barDataItem</li>
+   <li>stackDataItem</li>
+   <li>BarChartPropsType</li>
+   <li>StackedBarChartPropsType</li>
+   <li>pieDataItem</li>
+   <li>PieChartPropsType</li>
+   <li>lineDataItem</li>
+   <li>bicolorLineDataItem</li>
+   <li>LineChartPropsType</li>
+   <li>LineChartBicolorPropsType</li>
+   <li>popnPyramidDataItem</li>
+   <li>PopulationPyramidPropsType</li>
+</ul>
+
+
+## 🔨 Refactor
+
+1. Moved types to `'.\types.ts` files for each type of chart and gave proper names to types.
+ 
+---
+
+---
+
+---
+
 # 🎉 1.3.32
 
 🐛 Minor bug fixes with `initialSpacing` for Line inside Bar charts (combined Bar and Line charts).

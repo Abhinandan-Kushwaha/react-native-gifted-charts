@@ -22,7 +22,7 @@ import {
   screenWidth,
 } from '../utils/constants';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
-import {BarChartPropsType, itemType} from './types';
+import {BarChartPropsType, barDataItem} from './types';
 import {BarAndLineChartsWrapperTypes} from '../utils/types';
 import {StripAndLabel} from '../Components/common/StripAndLabel';
 import {Pointer} from '../Components/common/Pointer';
@@ -139,7 +139,7 @@ export const BarChart = (props: BarChartPropsType) => {
           BarDefaults.barWidth) + spacing;
     });
   } else {
-    data.forEach((item: itemType) => {
+    data.forEach((item: barDataItem) => {
       if (item.value > maxItem) {
         maxItem = item.value;
       }
@@ -156,7 +156,7 @@ export const BarChart = (props: BarChartPropsType) => {
     secondaryMinItem = 0;
 
   if (lineConfig.isSecondary) {
-    lineData.forEach((item: itemType) => {
+    lineData.forEach((item: barDataItem) => {
       if (item.value > secondaryMaxItem) {
         secondaryMaxItem = item.value;
       }
@@ -323,6 +323,8 @@ export const BarChart = (props: BarChartPropsType) => {
           : false
         : true
       : false);
+
+  const barInnerComponent = props.barInnerComponent;
 
   const labelsAppear = useCallback(() => {
     opacValue.setValue(0);
@@ -811,6 +813,7 @@ export const BarChart = (props: BarChartPropsType) => {
         barBorderTopRightRadius: props.barBorderTopRightRadius,
         barBorderBottomLeftRadius: props.barBorderBottomLeftRadius,
         barBorderBottomRightRadius: props.barBorderBottomRightRadius,
+        barInnerComponent,
         color: props.color,
         showGradient: props.showGradient,
         gradientColor: props.gradientColor,

@@ -2,7 +2,7 @@ import { ColorValue } from "react-native";
 import { RuleTypes } from "../utils/types";
 import { FontStyle, FontWeight } from "react-native-svg";
 
-export type PopnPyramidItem = {
+export type popnPyramidDataItem = {
     left: number;
     right: number;
     leftBarColor?: ColorValue;
@@ -73,7 +73,7 @@ export type RulesProps = {
 export type PopulationPyramidPropsType = {
     height?: number;
     width?: number;
-    data: Array<PopnPyramidItem>;
+    data: Array<popnPyramidDataItem>;
     hideRules?: boolean;
     stepHeight?: number;
     verticalMarginBetweenBars?: number;

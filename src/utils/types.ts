@@ -1,6 +1,6 @@
 import {ColorValue} from 'react-native';
 import {chartTypes, yAxisSides} from './constants';
-import {itemType} from '../LineChart/types';
+import {lineDataItem} from '../LineChart/types';
 
 export type RuleType = 'solid' | 'dashed' | 'dotted' | string;
 
@@ -330,7 +330,7 @@ export type LineProperties = {
 };
 
 export type DataSet = {
-  data: Array<itemType>;
+  data: Array<lineDataItem>;
   zIndex?: number;
   thickness?: number;
   strokeDashArray?: Array<number>;
