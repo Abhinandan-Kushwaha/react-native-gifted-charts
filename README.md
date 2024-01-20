@@ -103,6 +103,7 @@ This project exists thanks to all the people who contribute.
 <a href="https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Abhinandan-Kushwaha/react-native-gifted-charts" />
 </a>
+<br/><br/>
 
 _Dear developers_! Your small contribution can make someone's day 😊
 
