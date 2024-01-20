@@ -15,6 +15,8 @@ The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar and Popul
 7. Detailed [documentation](https://gifted-charts.web.app/) with examples
 8. Support for **_combined_** Bar and Line charts
 
+## [Release notes 🎉](release-notes/release-notes.md)
+
 **Alert:**
 
 This library doesn't support web apps yet. Use this library if you are planning mobile first.</br>
@@ -96,6 +98,12 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 
 ## Contributing
 
+This project exists thanks to all the people who contribute.
+
+<a href="https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Abhinandan-Kushwaha/react-native-gifted-charts" />
+</a>
+
 _Dear developers_! Your small contribution can make someone's day 😊
 
 One of the ways you can contribute is to address an [open issue](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues).
@@ -103,8 +111,6 @@ One of the ways you can contribute is to address an [open issue](https://github.
 Sometimes people report issues which don't exist, or request for features which are already present. Such issues can be addressed without pushing any code to the repo. Just show them in the comments how to do it.
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## [Release notes 🎉](release-notes/release-notes.md)
 
 [To do list](./src/todos.md)
 
