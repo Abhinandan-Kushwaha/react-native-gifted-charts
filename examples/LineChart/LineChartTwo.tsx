@@ -25,7 +25,7 @@ const LineChartTwo = () => {
     {value: 85},
   ];
   return (
-    <View style={{borderWidth:1}}>
+    <View style={{borderWidth: 1}}>
       <LineChart
         data={lineData}
         data2={lineData2}

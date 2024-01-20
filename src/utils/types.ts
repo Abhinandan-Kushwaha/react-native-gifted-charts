@@ -253,6 +253,9 @@ export type BarAndLineChartsWrapperTypes = {
   pointerY: number;
 
   scrollEventThrottle: number;
+
+  endReached?: () => void;
+  startReached?: () => void;
 };
 
 export type Pointer = {
