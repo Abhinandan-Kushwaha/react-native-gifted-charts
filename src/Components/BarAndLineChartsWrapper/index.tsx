@@ -83,6 +83,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     scrollEventThrottle,
 
     endReached,
+    startReached,
   } = props;
 
   let yAxisAtTop = rtl ? !props.yAxisAtTop : props.yAxisAtTop;
@@ -402,7 +403,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
             setCanMomentum(false);
           }
           if (isCloseToStart(nativeEvent) && canMomentum) {
-            endReached ? endReached() : null;
+            startReached ? startReached() : null;
             setCanMomentum(false);
           }
         }}
