@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import SimpleBlueBars from './BarChart/SimpleBlueBars';
+import SimpleBarsEndReached from './BarChart/SimpleBarsEndReached';
 import BarThreeD from './BarChart/BarThreeD';
 import SimpleBarAnimated from './BarChart/SimpleBarAnimated';
 import RoundStackBar from './BarChart/RoundStackBar';
@@ -17,6 +18,7 @@ import CappedBars from './BarChart/CappedBars';
 import BarWithGradient from './BarChart/BarWithGradient';
 
 import LineChartTwo from './LineChart/LineChartTwo';
+import LineChartEndReached from './LineChart/LineChartEndReached';
 import AnimatedArea from './LineChart/AnimatedArea';
 import AreaTwo from './LineChart/AreaTwo';
 import ChartWithPointer from './LineChart/ChartWithPointer';
@@ -73,6 +75,9 @@ const Examples = () => {
         <SimpleBlueBars />
         <Separator />
 
+        <SimpleBarsEndReached />
+        <Separator />
+
         <SimpleBarAnimated />
         <Separator />
 
@@ -102,6 +107,9 @@ const Examples = () => {
     return (
       <View>
         <LineChartTwo />
+        <Separator />
+
+        <LineChartEndReached />
         <Separator />
 
         <Segmented />

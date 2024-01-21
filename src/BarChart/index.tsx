@@ -968,6 +968,9 @@ export const BarChart = (props: BarChartPropsType) => {
     pointerIndex,
     pointerX,
     pointerY,
+
+    endReached: props.endReached,
+    startReached: props.startReached,
   };
 
   return <BarAndLineChartsWrapper {...barAndLineChartsWrapperProps} />;

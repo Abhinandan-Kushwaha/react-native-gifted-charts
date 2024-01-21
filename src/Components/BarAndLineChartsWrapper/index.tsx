@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {View, ScrollView, StyleSheet} from 'react-native';
 import {renderHorizSections} from './renderHorizSections';
 import RenderLineInBarChart from './renderLineInBarChart';
@@ -81,6 +81,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     pointerY,
 
     scrollEventThrottle,
+
+    endReached,
+    startReached,
   } = props;
 
   let yAxisAtTop = rtl ? !props.yAxisAtTop : props.yAxisAtTop;
@@ -337,6 +340,19 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     },
   ];
 
+  const [canMomentum, setCanMomentum] = useState(false);
+
+  const isCloseToEnd = ({layoutMeasurement, contentOffset, contentSize}) => {
+    return (
+      layoutMeasurement.width + contentOffset.x >=
+      contentSize.width - initialSpacing
+    );
+  };
+
+  const isCloseToStart = ({layoutMeasurement, contentOffset}) => {
+    return layoutMeasurement.width + contentOffset.x <= initialSpacing;
+  };
+
   useEffect(() => {
     if (pointerConfig && getPointerProps) {
       getPointerProps({pointerIndex, pointerX, pointerY});
@@ -378,6 +394,19 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           })
         : null}
       <ScrollView
+        onScrollBeginDrag={() => {
+          setCanMomentum(true);
+        }}
+        onMomentumScrollEnd={({nativeEvent}) => {
+          if (isCloseToEnd(nativeEvent) && canMomentum) {
+            endReached ? endReached() : null;
+            setCanMomentum(false);
+          }
+          if (isCloseToStart(nativeEvent) && canMomentum) {
+            startReached ? startReached() : null;
+            setCanMomentum(false);
+          }
+        }}
         scrollEventThrottle={
           props.scrollEventThrottle ? props.scrollEventThrottle : 16
         }
