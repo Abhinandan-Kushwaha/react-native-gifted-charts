@@ -1,3 +1,26 @@
+# 🎉 1.4.0 Mega Release ⭐️
+
+## 📣 This release contains a huge refactor. 🔨 We have now moved most of the logic and maths (including utils, constatnts and types) to our newly launched library named [gifted-charts-core](https://www.npmjs.com/package/gifted-charts-core)
+
+This helped in-
+
+1. Segragating UI and logic
+2. Modularity and code re-usability
+3. We are very soon going to launch a library for **web** named `react-gifted-charts`❤️ With this we will be able to render charts in **react** using exactly the same code we use in react-native-gifted-charts!
+<p>
+This huge refactor might have introduced some bugs. Please bear with us.🙏<br/>
+To avoid this in future mega releases, I am going to add thorough tests in the next release.
+<br /><br/>
+We will soon release version 2.0 after adding all types and unit tests for each component!!
+</p>
+
+## ✨ Features added-
+
+1. Added support for **Pagination** using the props `onEndReached`, `onStartReached` and `endReachedOffset`. Thanks to Houssem-Eddine Kellou who added this feature through his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/504. Pagination is now supported for Bar, Stack, Line and Area charts!
+
+2. Added the prop `onLongPress` to Bar and Stacked Bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/506
+
+---
 
 # 🎉 1.3.33
 
@@ -23,11 +46,10 @@
    <li>PopulationPyramidPropsType</li>
 </ul>
 
-
 ## 🔨 Refactor
 
 1. Moved types to `'.\types.ts` files for each type of chart and gave proper names to types.
- 
+
 ---
 
 ---

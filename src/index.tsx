@@ -8,22 +8,10 @@ export {
   barDataItem,
   stackDataItem,
   BarChartPropsType,
-  StackedBarChartPropsType,
-} from './BarChart/types';
-
-export {pieDataItem, PieChartPropsType} from './PieChart/types';
-
-export {
+  StackedBarChartPropsType,pieDataItem, PieChartPropsType,
   lineDataItem,
   bicolorLineDataItem,
   LineChartPropsType,
   LineChartBicolorPropsType,
-} from './LineChart/types';
-
-export {
   popnPyramidDataItem,
-  PopulationPyramidPropsType,
-} from './PopulationPyramid/types';
-
-export {chartTypes, yAxisSides, ruleTypes} from './utils/constants';
-export {CurveType, EdgePosition} from './utils/types';
+  PopulationPyramidPropsType,chartTypes, yAxisSides, EdgePosition} from 'gifted-charts-core';

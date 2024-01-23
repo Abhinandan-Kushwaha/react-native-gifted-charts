@@ -1,62 +1,23 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, { useEffect, useState} from 'react';
 import {
   View,
-  ColorValue,
   LayoutAnimation,
   Platform,
   UIManager,
   Text,
+  ViewStyle,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import Cap from '../Components/BarSpecificComponents/cap';
-import {barDataItem} from './types';
+import {getPropsForAnimated2DWithGradient,Animated2DWithGradientPropsType} from 'gifted-charts-core';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
     UIManager.setLayoutAnimationEnabledExperimental(true);
 }
 
-type propTypes = {
-  item: barDataItem;
-  index: number;
-  height: number;
-  minHeight: number;
-  opacity?: number;
-  animationDuration: number;
-  roundedTop: boolean;
-  roundedBottom: boolean;
-  barWidth: number;
-  gradientColor: ColorValue;
-  frontColor: ColorValue;
-  noGradient?: boolean;
-  noAnimation?: boolean;
-  cappedBars?: boolean;
-  capThickness?: number;
-  capColor?: ColorValue;
-  capRadius?: number;
-  horizontal: boolean;
-  intactTopLabel: boolean;
-  showValuesAsTopLabel: boolean;
-  topLabelContainerStyle?: any;
-  topLabelTextStyle?: any;
-  barBorderWidth?: number;
-  barBorderColor: ColorValue;
-  barBorderRadius?: number;
-  barBorderTopLeftRadius?: number;
-  barBorderTopRightRadius?: number;
-  barBorderBottomLeftRadius?: number;
-  barBorderBottomRightRadius?: number;
-  containerHeight?: number;
-  maxValue?: number;
-  barBackgroundPattern?: Function;
-  patternId?: String;
-  barMarginBottom?: number;
-  barStyle?: object;
-  barInnerComponent?: (item?: barDataItem, index?: number) => ReactNode;
-};
-
-const Animated2DWithGradient = (props: propTypes) => {
+const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
   const {
     barBackgroundPattern,
     patternId,
@@ -71,13 +32,6 @@ const Animated2DWithGradient = (props: propTypes) => {
     containerHeight,
     maxValue,
     barMarginBottom,
-    barBorderWidth,
-    barBorderColor,
-    barBorderRadius,
-    barBorderTopLeftRadius,
-    barBorderTopRightRadius,
-    barBorderBottomLeftRadius,
-    barBorderBottomRightRadius,
     barInnerComponent,
     intactTopLabel,
     showValuesAsTopLabel,
@@ -117,6 +71,11 @@ const Animated2DWithGradient = (props: propTypes) => {
     setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
   };
 
+  const{
+    commonStyleForBar,
+    barStyleWithBackground,
+  } = getPropsForAnimated2DWithGradient(props);
+
   return (
     <>
       {!initialRender && (
@@ -125,7 +84,7 @@ const Animated2DWithGradient = (props: propTypes) => {
             position: 'absolute',
             bottom: 0,
             width: '100%',
-            overflow:'hidden',
+            overflow: 'hidden',
             height:
               (noAnimation
                 ? Math.max(
@@ -152,58 +111,7 @@ const Animated2DWithGradient = (props: propTypes) => {
             ]}>
             {noGradient ? (
               <View
-                style={[
-                  {
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor:
-                      item.frontColor || props.frontColor || 'black',
-                    borderWidth: barBorderWidth ?? 0,
-                    borderColor: barBorderColor,
-                    borderRadius: item.barBorderRadius ?? barBorderRadius ?? 0,
-                    borderTopLeftRadius:
-                      item.barBorderTopLeftRadius ??
-                      barBorderTopLeftRadius ??
-                      item.barBorderRadius ??
-                      barBorderRadius,
-                    borderTopRightRadius:
-                      item.barBorderTopRightRadius ??
-                      barBorderTopRightRadius ??
-                      item.barBorderRadius ??
-                      barBorderRadius,
-                    borderBottomLeftRadius:
-                      item.barBorderBottomLeftRadius ??
-                      barBorderBottomLeftRadius ??
-                      item.barBorderRadius ??
-                      barBorderRadius,
-                    borderBottomRightRadius:
-                      item.barBorderBottomRightRadius ??
-                      barBorderBottomRightRadius ??
-                      item.barBorderRadius ??
-                      barBorderRadius,
-                  },
-                  props.roundedBottom && {
-                    borderBottomLeftRadius:
-                      (item.barWidth || barWidth || 30) / 2,
-                    borderBottomRightRadius:
-                      (item.barWidth || barWidth || 30) / 2,
-                  },
-                  props.cappedBars && {
-                    borderTopLeftRadius:
-                      item.capRadius === 0
-                        ? 0
-                        : item.capRadius || props.capRadius || 0,
-                    borderTopRightRadius:
-                      item.capRadius === 0
-                        ? 0
-                        : item.capRadius || props.capRadius || 0,
-                  },
-                  props.roundedTop && {
-                    borderTopLeftRadius: (item.barWidth || barWidth || 30) / 2,
-                    borderTopRightRadius: (item.barWidth || barWidth || 30) / 2,
-                  },
-                ]}>
+                style={barStyleWithBackground}>
                 {props.cappedBars && item.value ? (
                   <Cap
                     capThicknessFromItem={item.capThickness}
@@ -217,56 +125,7 @@ const Animated2DWithGradient = (props: propTypes) => {
               </View>
             ) : (
               <LinearGradient
-                style={[
-                  {
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    borderWidth: barBorderWidth ?? 0,
-                    borderColor: barBorderColor,
-                    borderRadius: item.barBorderRadius ?? barBorderRadius ?? 0,
-                    borderTopLeftRadius:
-                      item.barBorderTopLeftRadius ??
-                      barBorderTopLeftRadius ??
-                      item.barBorderRadius ??
-                      barBorderRadius,
-                    borderTopRightRadius:
-                      item.barBorderTopRightRadius ??
-                      barBorderTopRightRadius ??
-                      item.barBorderRadius ??
-                      barBorderRadius,
-                    borderBottomLeftRadius:
-                      item.barBorderBottomLeftRadius ??
-                      barBorderBottomLeftRadius ??
-                      item.barBorderRadius ??
-                      barBorderRadius,
-                    borderBottomRightRadius:
-                      item.barBorderBottomRightRadius ??
-                      barBorderBottomRightRadius ??
-                      item.barBorderRadius ??
-                      barBorderRadius,
-                  },
-                  props.roundedBottom && {
-                    borderBottomLeftRadius:
-                      (item.barWidth || barWidth || 30) / 2,
-                    borderBottomRightRadius:
-                      (item.barWidth || barWidth || 30) / 2,
-                  },
-                  props.cappedBars && {
-                    borderTopLeftRadius:
-                      item.capRadius === 0
-                        ? 0
-                        : item.capRadius || props.capRadius || 0,
-                    borderTopRightRadius:
-                      item.capRadius === 0
-                        ? 0
-                        : item.capRadius || props.capRadius || 0,
-                  },
-                  props.roundedTop && {
-                    borderTopLeftRadius: (item.barWidth || barWidth || 30) / 2,
-                    borderTopRightRadius: (item.barWidth || barWidth || 30) / 2,
-                  },
-                ]}
+                style={commonStyleForBar}
                 start={{x: 0, y: 0}}
                 end={{x: 1, y: 1}}
                 colors={[
@@ -321,7 +180,7 @@ const Animated2DWithGradient = (props: propTypes) => {
             )}
             {barInnerComponent ? (
               <View style={{height: '100%', width: '100%'}}>
-                {barInnerComponent(item,index)}
+                {barInnerComponent(item, index)}
               </View>
             ) : null}
           </View>

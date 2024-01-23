@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 import {BarChart} from '../../src/BarChart';
-import { ruleTypes } from '../../src/utils/constants';
+import { ruleTypes } from 'gifted-charts-core';
 
 const BarPairWithLine = () => {
   const data = [

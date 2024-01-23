@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import {LineChart} from '../../src/LineChart';
-import {DataSet} from '../../src/utils/types';
+import {DataSet} from 'gifted-charts-core';
 
 const DataSetSteppedChart = () => {
   const lineData = [

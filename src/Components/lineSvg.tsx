@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ColorValue} from 'react-native';
 import Svg, {G, Path} from 'react-native-svg';
-import { ruleTypes } from '../utils/constants';
+import { ruleTypes } from 'gifted-charts-core';
 
 type ruleProps = {
   thickness: number;
