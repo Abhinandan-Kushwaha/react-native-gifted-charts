@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -9,8 +9,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
-import {BarDefaults} from '../utils/constants';
-import {StackedBarChartPropsType, stackDataItem} from './types';
+import { useRenderStackBars, BarDefaults, StackedBarChartPropsType } from 'gifted-charts-core';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -24,11 +23,8 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     item,
     index,
     containerHeight,
-    maxValue,
     spacing,
-    propSpacing,
     rotateLabel,
-    xAxisThickness,
     label,
     labelTextStyle,
     xAxisTextNumberOfLines,
@@ -36,12 +32,10 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     renderTooltip,
     leftShiftForTooltip,
     leftShiftForLastIndexTooltip,
-    initialSpacing,
     selectedIndex,
     setSelectedIndex,
     activeOpacity,
     stackData,
-    isAnimated,
     animationDuration = BarDefaults.animationDuration,
     barBorderWidth,
     barBorderColor,
@@ -52,69 +46,25 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     stackBorderBottomRightRadius,
     showValuesAsTopLabel,
   } = props;
-  const cotainsNegative = item.stacks.some(item => item.value < 0);
-  const noAnimation = cotainsNegative || !isAnimated;
-
-  const localBarInnerComponent =
-    item.barInnerComponent ?? props.barInnerComponent;
-
   const {
+    cotainsNegative,
+    noAnimation,
+    localBarInnerComponent,
     borderRadius,
     borderTopLeftRadius,
     borderTopRightRadius,
     borderBottomLeftRadius,
     borderBottomRightRadius,
-  } = item;
-
-  let leftSpacing = initialSpacing;
-  for (let i = 0; i < index; i++) {
-    leftSpacing +=
-      (stackData[i].spacing ?? propSpacing ?? 0) +
-      (stackData[i].stacks[0].barWidth ?? props.barWidth ?? 30);
-  }
-  const disablePress = props.disablePress || false;
-
-  const getBarHeight = (value: number, marginBottom?: number) => {
-    return (
-      (Math.abs(value) * (containerHeight || 200)) / (maxValue || 200) -
-      (marginBottom || 0)
-    );
-  };
-
-  const getPosition = (index: number) => {
-    /* Returns bottom position for stack item
-       negative values are below origin (-> negative position) */
-    const height = getBarHeight(
-      item.stacks[index].value,
-      item.stacks[index].marginBottom,
-    );
-
-    const itemValue = item.stacks[index].value;
-    const isNegative = itemValue <= 0;
-    let position = isNegative ? -(height || 0) : 0;
-
-    for (let i = 0; i < index; i++) {
-      const valueOnIndex = item.stacks[i].value;
-      if (isNegative && valueOnIndex <= 0) {
-        position +=
-          (valueOnIndex * (containerHeight || 200)) / (maxValue || 200);
-      } else if (!isNegative && valueOnIndex >= 0) {
-        position +=
-          (valueOnIndex * (containerHeight || 200)) / (maxValue || 200);
-      }
-    }
-    return position;
-  };
-
-  const getLowestPosition = () => {
-    return (
-      item.stacks
-        .map((_, index) => getPosition(index))
-        .sort((a, b) => a - b)?.[0] || 0
-    );
-  };
-
-  const lowestBarPosition = getLowestPosition();
+    leftSpacing,
+    disablePress,
+    totalHeight,
+    height,
+    setHeight,
+    getBarHeight,
+    getPosition,
+    lowestBarPosition,
+    getStackBorderRadii,
+  } = useRenderStackBars(props);
 
   const renderLabel = (label: String, labelTextStyle: any) => {
     return (
@@ -147,15 +97,6 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     );
   };
 
-  const totalHeight = props.item.stacks.reduce(
-    (acc, stack) =>
-      acc +
-      (Math.abs(stack.value) * (containerHeight || 200)) / (maxValue || 200),
-    0,
-  );
-
-  const [height, setHeight] = useState(noAnimation ? totalHeight : 1);
-
   useEffect(() => {
     if (!noAnimation) {
       layoutAppear();
@@ -180,36 +121,6 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
   };
 
   const static2DSimple = () => {
-    const getStackBorderRadii = (item: stackDataItem, index: number) => {
-      const stackItem = item.stacks[index];
-      const borderRadii = {
-        borderTopLeftRadius:
-          stackItem.borderTopLeftRadius ??
-          stackItem.borderRadius ??
-          props.barBorderTopLeftRadius ??
-          props.barBorderRadius ??
-          0,
-        borderTopRightRadius:
-          stackItem.borderTopRightRadius ??
-          stackItem.borderRadius ??
-          props.barBorderTopRightRadius ??
-          props.barBorderRadius ??
-          0,
-        borderBottomLeftRadius:
-          stackItem.borderBottomLeftRadius ??
-          stackItem.borderRadius ??
-          props.barBorderBottomLeftRadius ??
-          props.barBorderRadius ??
-          0,
-        borderBottomRightRadius:
-          stackItem.borderBottomRightRadius ??
-          stackItem.borderRadius ??
-          props.barBorderBottomRightRadius ??
-          props.barBorderRadius ??
-          0,
-      };
-      return borderRadii;
-    };
 
     return (
       <>
@@ -222,6 +133,13 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
               item.onPress();
             } else if (props.onPress) {
               props.onPress(item, index);
+            }
+          }}
+          onLongPress={()=>{
+            if (item.onLongPress) {
+              item.onLongPress();
+            } else if (props.onLongPress) {
+              props.onLongPress(item, index);
             }
           }}
           style={[

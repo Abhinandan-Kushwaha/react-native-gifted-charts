@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import {BarChart} from '../../src/BarChart';
-import { yAxisSides } from '../../src/utils/constants';
+import { yAxisSides } from 'gifted-charts-core';
 
 const CappedBars = () => {
   const data = [

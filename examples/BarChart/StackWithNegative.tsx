@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import {BarChart} from '../../src/BarChart';
-import { stackDataItem } from '../../src/BarChart/types';
+import { stackDataItem } from 'gifted-charts-core';
 
 const StackWithNegative = () => {
     const stacks: stackDataItem[] = [

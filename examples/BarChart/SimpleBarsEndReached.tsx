@@ -40,7 +40,7 @@ const SimpleBarsEndReached = () => {
         data={barData1}
         yAxisThickness={0}
         xAxisThickness={0}
-        endReached={() => setOnEndReached(true)}
+        onEndReached={() => setOnEndReached(true)}
       />
     </View>
   );

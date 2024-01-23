@@ -150,6 +150,16 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 
 ---
 
+### Pagination related props
+
+| Prop             | Type     | Description                                                         | Default value |
+| ---------------- | -------- | ------------------------------------------------------------------- | ------------- |
+| onEndReached     | Function | Callback function called when the chart is scrolled upto end        | \_            |
+| onStartReached   | Function | Callback function called when the chart is scrolled upto start      | \_            |
+| endReachedOffset | number   | distance before end of scroll when onEndReached should be triggered | 80            |
+
+---
+
 ### Axes and rules related props
 
 | Prop                         | Type                      | Description                                                                                                       | Default value                |

@@ -1,22 +1,17 @@
 import React from 'react';
-import {View, Dimensions} from 'react-native';
+import {View} from 'react-native';
 import Svg, {Line} from 'react-native-svg';
+import {getTopAndLeftForStripAndLabel} from 'gifted-charts-core';
 
 export const StripAndLabel = props => {
   const {
-    autoAdjustPointerLabelPosition,
     pointerX,
     pointerLabelWidth,
-    activatePointersOnLongPress,
-    yAxisLabelWidth,
     pointerRadius,
     pointerWidth,
-    shiftPointerLabelX,
-    pointerLabelHeight,
     pointerYLocal,
     pointerStripUptoDataPoint,
     pointerStripHeight,
-    shiftPointerLabelY,
     pointerItemLocal,
     showPointerStrip,
     pointerStripWidth,
@@ -26,59 +21,11 @@ export const StripAndLabel = props => {
     pointerConfig,
     pointerLabelComponent,
     secondaryPointerItem,
-    scrollX,
     pointerEvents,
     isBarChart,
   } = props;
-  let left = 0,
-    top = 0;
-  if (autoAdjustPointerLabelPosition) {
-    if (pointerX < pointerLabelWidth / 2) {
-      left = 7;
-    } else if (
-      activatePointersOnLongPress &&
-      pointerX - scrollX < pointerLabelWidth / 2 - 10
-    ) {
-      left = 7;
-    } else {
-      if (
-        !activatePointersOnLongPress &&
-        pointerX >
-          (props.width ||
-            Dimensions.get('window').width - yAxisLabelWidth - 15) -
-            pointerLabelWidth / 2
-      ) {
-        left = -pointerLabelWidth - 4;
-      } else if (
-        activatePointersOnLongPress &&
-        pointerX - scrollX >
-          ((props.width ?? 0) + 10 ||
-            Dimensions.get('window').width - yAxisLabelWidth - 15) -
-            pointerLabelWidth / 2
-      ) {
-        left = -pointerLabelWidth - 4;
-      } else {
-        left = -pointerLabelWidth / 2 + 5;
-      }
-    }
-  } else {
-    left = (pointerRadius || pointerWidth / 2) - 10 + shiftPointerLabelX;
-  }
 
-  if (autoAdjustPointerLabelPosition) {
-    if (pointerLabelHeight - pointerYLocal > 10) {
-      top = 10;
-    } else {
-      top = -pointerLabelHeight;
-    }
-  } else {
-    top =
-      (pointerStripUptoDataPoint
-        ? pointerRadius || pointerStripHeight / 2
-        : -pointerYLocal + 8) -
-      pointerLabelWidth / 2 +
-      shiftPointerLabelY;
-  }
+  const {top, left} = getTopAndLeftForStripAndLabel(props);
 
   return (
     <View

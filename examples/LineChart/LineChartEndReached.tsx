@@ -47,7 +47,7 @@ const LineChartEndReached = () => {
         textShiftY={-2}
         textShiftX={-5}
         textFontSize={13}
-        endReached={() => setOnEndReached(true)}
+        onEndReached={() => setOnEndReached(true)}
       />
     </View>
   );

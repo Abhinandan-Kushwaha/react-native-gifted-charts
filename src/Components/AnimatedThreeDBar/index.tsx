@@ -1,8 +1,7 @@
-import React, {ReactNode, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
-  ColorValue,
   LayoutAnimation,
   Platform,
   UIManager,
@@ -11,44 +10,12 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {styles} from './styles';
-import {barDataItem} from '../../BarChart/types';
+import { useAnimatedThreeDBar, animatedBarPropTypes, trianglePropTypes, BarDefaults } from 'gifted-charts-core';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
     UIManager.setLayoutAnimationEnabledExperimental(true);
 }
-
-type trianglePropTypes = {
-  style: any;
-  width: number;
-  color: ColorValue;
-};
-
-type animatedBarPropTypes = {
-  isAnimated?: boolean;
-  animationDuration: number;
-  width: number;
-  sideWidth: number;
-  height: number;
-  showGradient: boolean;
-  gradientColor: any;
-  frontColor: ColorValue;
-  sideColor: ColorValue;
-  topColor: ColorValue;
-  opacity: number;
-  side: String;
-  horizontal: boolean;
-  intactTopLabel: boolean;
-  showValuesAsTopLabel: boolean;
-  topLabelContainerStyle?: any;
-  topLabelTextStyle?: any;
-  barBackgroundPattern?: Function;
-  barInnerComponent?: (item?: barDataItem, index?: number) => ReactNode;
-  patternId?: String;
-  barStyle?: object;
-  item: any;
-  index: number;
-};
 
 const TriangleCorner = (props: trianglePropTypes) => {
   return (
@@ -78,6 +45,10 @@ const triangleStyles = StyleSheet.create({
 });
 
 const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
+  const [height, setHeight] = useState(
+    props.isAnimated ? (Platform.OS === 'ios' ? 0 : 20) : props.height,
+  );
+
   const {
     isAnimated,
     animationDuration,
@@ -95,10 +66,16 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
     topLabelTextStyle,
   } = props;
 
-  const [initialRender, setInitialRender] = useState(isAnimated);
-  const [height, setHeight] = useState(
-    isAnimated ? (Platform.OS === 'ios' ? 0 : 20) : props.height,
-  );
+  const {
+    showGradient,
+    gradientColor,
+    frontColor,
+    sideColor,
+    topColor,
+    opacity,
+    initialRender,
+    setInitialRender,
+  } = useAnimatedThreeDBar(props);
 
   useEffect(() => {
     if (isAnimated) {
@@ -129,15 +106,6 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
     setInitialRender(false);
     setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
   };
-
-  const showGradient = props.showGradient || false;
-  const gradientColor = props.gradientColor || 'white';
-
-  const frontColor = props.frontColor || '#fe2233';
-  const sideColor = props.sideColor || '#cc2233';
-  const topColor = props.topColor || '#ff4433';
-
-  const opacity = props.opacity || 1;
 
   return (
     <View style={styles.container}>
