@@ -1,3 +1,9 @@
+## 🎉 1.4.1
+
+Exported `ruleTypes` which was missed in version `1.4.0`
+
+---
+
 # 🎉 1.4.0 Mega Release ⭐️
 
 ## 📣 This release contains a huge refactor. 🔨 We have now moved most of the logic and maths (including utils, constatnts and types) to our newly launched library named [gifted-charts-core](https://www.npmjs.com/package/gifted-charts-core)
@@ -19,6 +25,10 @@ We will soon release version 2.0 after adding all types and unit tests for each 
 1. Added support for **Pagination** using the props `onEndReached`, `onStartReached` and `endReachedOffset`. Thanks to Houssem-Eddine Kellou who added this feature through his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/504. Pagination is now supported for Bar, Stack, Line and Area charts!
 
 2. Added the prop `onLongPress` to Bar and Stacked Bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/506
+
+---
+
+---
 
 ---
 
