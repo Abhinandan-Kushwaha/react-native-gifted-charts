@@ -1,3 +1,24 @@
+
+# 🎉 1.4.2
+
+## ✨ Features added-
+
+Added the props `focusBarOnPress` and `focusedBarConfig` to Bar charts. Using these, we can focus or highlight a bar on press. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/512
+
+## 🐛 Bug fixes
+
+1. Fixed issues with `stepValue`, `noOfSections` and `maxValue`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/511
+2. Fixed issue with pagination, (isCloseToStart not returning true) PR https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/2 by **Houssem-Eddine Kellou**
+
+## 🔨 Refactor
+
+Moved `gifted-charts-core` to dependency and put the 3rd party libraries into devDependency. PR https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/514 by **Armon Raphiel**
+
+---
+
+---
+
+---
 ## 🎉 1.4.1
 
 Exported `ruleTypes` which was missed in version `1.4.0`
