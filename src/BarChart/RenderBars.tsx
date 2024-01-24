@@ -5,8 +5,11 @@ import LinearGradient from 'react-native-linear-gradient';
 import Animated2DWithGradient from './Animated2DWithGradient';
 import Cap from '../Components/BarSpecificComponents/cap';
 import BarBackgroundPattern from '../Components/BarSpecificComponents/barBackgroundPattern';
-import { getPropsForAnimated2DWithGradient,RenderBarsPropsType, barDataItem } from 'gifted-charts-core';
-
+import {
+  getPropsForAnimated2DWithGradient,
+  RenderBarsPropsType,
+  barDataItem,
+} from 'gifted-charts-core';
 
 const RenderBars = (props: RenderBarsPropsType) => {
   const {
@@ -21,12 +24,6 @@ const RenderBars = (props: RenderBarsPropsType) => {
     data,
     barBorderWidth,
     barBorderColor,
-    barBorderTopLeftRadius,
-    barBorderTopRightRadius,
-    barBorderBottomLeftRadius,
-    barBorderBottomRightRadius,
-    // oldValue,
-
     isThreeD,
     isAnimated,
     rotateLabel,
@@ -53,7 +50,26 @@ const RenderBars = (props: RenderBarsPropsType) => {
     pointerConfig,
   } = props;
 
-  const localBarInnerComponent = item.barInnerComponent ?? props.barInnerComponent;
+  const barHeight = Math.max(
+    minHeight,
+    (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200) -
+      (xAxisThickness ?? 0),
+  );
+
+  const {
+    commonStyleForBar,
+    barStyleWithBackground,
+    commonPropsFor2Dand3Dbars,
+    isFocused,
+    focusedBarConfig,
+    localFrontColor,
+  } = getPropsForAnimated2DWithGradient({...props, barHeight});
+
+  const itemOrPropsBarInnerComponent =
+    item.barInnerComponent ?? props.barInnerComponent;
+  const localBarInnerComponent = isFocused
+    ? focusedBarConfig?.barInnerComponent ?? itemOrPropsBarInnerComponent
+    : itemOrPropsBarInnerComponent;
 
   const barMarginBottom =
     item.barMarginBottom === 0
@@ -169,12 +185,6 @@ const RenderBars = (props: RenderBarsPropsType) => {
     );
   };
 
-  const barHeight = Math.max(
-    minHeight,
-    (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200) -
-      (xAxisThickness ?? 0),
-  );
-
   let leftSpacing = initialSpacing;
   for (let i = 0; i < index; i++) {
     leftSpacing +=
@@ -182,9 +192,9 @@ const RenderBars = (props: RenderBarsPropsType) => {
       (data[i].barWidth || props.barWidth || 30);
   }
 
-  const {commonStyleForBar, commonPropsFor2Dand3Dbars} = getPropsForAnimated2DWithGradient({...props, barHeight});
-
   const static2DWithGradient = (item: barDataItem) => {
+    const localGradientColor =
+      item.gradientColor || props.gradientColor || 'white';
     return (
       <>
         <LinearGradient
@@ -192,8 +202,10 @@ const RenderBars = (props: RenderBarsPropsType) => {
           start={{x: 0, y: 0}}
           end={{x: 0, y: 1}}
           colors={[
-            item.gradientColor || props.gradientColor || 'white',
-            item.frontColor || props.frontColor || 'black',
+            isFocused
+              ? focusedBarConfig?.gradientColor ?? localGradientColor
+              : localGradientColor,
+            localFrontColor,
           ]}>
           {props.cappedBars && item.value ? (
             <Cap
@@ -253,7 +265,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
     {
       // overflow: 'visible',
       marginBottom: 60 + barMarginBottom + xAxisLabelsVerticalShift,
-      width: item.barWidth || props.barWidth || 30,
+      width: commonPropsFor2Dand3Dbars.barWidth,
       height: barHeight,
       marginRight: spacing,
     },
@@ -279,8 +291,6 @@ const RenderBars = (props: RenderBarsPropsType) => {
             ],
           }
         : null,
-    // !isThreeD && !item.showGradient && !props.showGradient &&
-    // { backgroundColor: item.frontColor || props.frontColor || 'black' },
     side !== 'right' && {zIndex: data.length - index},
   ];
 
@@ -293,13 +303,11 @@ const RenderBars = (props: RenderBarsPropsType) => {
     const animated2DWithGradient = (noGradient, noAnimation) => (
       <Animated2DWithGradient
         {...commonPropsFor2Dand3Dbars}
-        barWidth={props.barWidth || 30}
         animationDuration={animationDuration || 800}
         roundedBottom={props.roundedBottom || false}
         roundedTop={props.roundedTop || false}
         noGradient={noGradient}
         noAnimation={noAnimation}
-        gradientColor={noGradient ? undefined : props.gradientColor}
         containerHeight={containerHeight}
         maxValue={maxValue}
         minHeight={minHeight ?? 0}
@@ -311,11 +319,8 @@ const RenderBars = (props: RenderBarsPropsType) => {
         horizontal={horizontal}
         barBorderWidth={barBorderWidth}
         barBorderColor={barBorderColor}
-        barBorderRadius={props.barBorderRadius || 0}
-        barBorderTopLeftRadius={barBorderTopLeftRadius}
-        barBorderTopRightRadius={barBorderTopRightRadius}
-        barBorderBottomLeftRadius={barBorderBottomLeftRadius}
-        barBorderBottomRightRadius={barBorderBottomRightRadius}
+        commonStyleForBar={commonStyleForBar}
+        barStyleWithBackground={barStyleWithBackground}
       />
     );
     return (
@@ -350,6 +355,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
             horizontal={horizontal}
             isAnimated={isAnimated}
             animationDuration={animationDuration || 800}
+            selectedIndex={selectedIndex}
           />
         ) : item.showGradient || props.showGradient ? (
           isAnimated ? (
@@ -379,7 +385,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
         <TouchableOpacity
           activeOpacity={props.activeOpacity || 0.2}
           onPress={() => {
-            if (renderTooltip) {
+            if (renderTooltip || props.focusBarOnPress) {
               setSelectedIndex(index);
             }
             item.onPress
@@ -388,7 +394,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
                 ? props.onPress(item, index)
                 : null;
           }}
-          onLongPress={()=>{
+          onLongPress={() => {
             item.onLongPress
               ? item.onLongPress()
               : props.onLongPress

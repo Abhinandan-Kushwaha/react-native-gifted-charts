@@ -1,16 +1,9 @@
-import React, { useEffect, useState} from 'react';
-import {
-  View,
-  LayoutAnimation,
-  Platform,
-  UIManager,
-  Text,
-  ViewStyle,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, LayoutAnimation, Platform, UIManager, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import Cap from '../Components/BarSpecificComponents/cap';
-import {getPropsForAnimated2DWithGradient,Animated2DWithGradientPropsType} from 'gifted-charts-core';
+import {Animated2DWithGradientPropsType} from 'gifted-charts-core';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -37,6 +30,8 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
     showValuesAsTopLabel,
     topLabelContainerStyle,
     topLabelTextStyle,
+    commonStyleForBar,
+    barStyleWithBackground,
   } = props;
   const [height, setHeight] = useState(noAnimation ? props.height : 0.2);
   const [initialRender, setInitialRender] = useState(
@@ -70,11 +65,6 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
     setInitialRender(false);
     setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
   };
-
-  const{
-    commonStyleForBar,
-    barStyleWithBackground,
-  } = getPropsForAnimated2DWithGradient(props);
 
   return (
     <>
@@ -110,8 +100,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
               item.barStyle || barStyle,
             ]}>
             {noGradient ? (
-              <View
-                style={barStyleWithBackground}>
+              <View style={barStyleWithBackground}>
                 {props.cappedBars && item.value ? (
                   <Cap
                     capThicknessFromItem={item.capThickness}

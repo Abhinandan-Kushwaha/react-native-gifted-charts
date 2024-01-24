@@ -10,7 +10,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {styles} from './styles';
-import { useAnimatedThreeDBar, animatedBarPropTypes, trianglePropTypes, BarDefaults } from 'gifted-charts-core';
+import { useAnimatedThreeDBar, animatedBarPropTypes, trianglePropTypes } from 'gifted-charts-core';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -54,7 +54,7 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
     animationDuration,
     item,
     index,
-    width,
+    barWidth,
     sideWidth,
     barStyle,
     barBackgroundPattern,
@@ -129,8 +129,8 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
               <View style={{position: 'absolute', top: sideWidth / -2}}>
                 <View
                   style={{
-                    width: width,
-                    height: width * 0.4,
+                    width: barWidth,
+                    height: barWidth * 0.4,
                     // left: width / 2,
                     backgroundColor: topColor,
                     opacity: opacity,
@@ -141,7 +141,7 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
                 style={{
                   position: 'absolute',
                   top: sideWidth / -2,
-                  left: width,
+                  left: barWidth,
                 }}>
                 <TriangleCorner
                   color={topColor}
@@ -180,7 +180,7 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
           <View
             style={[
               {
-                width: width,
+                width: barWidth,
                 height: height, //animatedHeight
                 backgroundColor: frontColor,
                 borderLeftWidth: StyleSheet.hairlineWidth,
@@ -205,7 +205,7 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
                   stroke="transparent"
                   x="1"
                   y="1"
-                  width={width || 30}
+                  width={barWidth || 30}
                   height={height}
                   fill={`url(#${patternId})`}
                 />
@@ -225,9 +225,9 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
               style={[
                 {
                   position: 'absolute',
-                  top: width * -2,
-                  height: (width * 3) / 2,
-                  width: (width * 3) / 2,
+                  top: barWidth * -2,
+                  height: (barWidth * 3) / 2,
+                  width: (barWidth * 3) / 2,
                   justifyContent: 'flex-end',
                   alignItems: 'center',
                   opacity: opacity,

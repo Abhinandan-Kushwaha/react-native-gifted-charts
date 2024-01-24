@@ -11,6 +11,8 @@
 | height                       | number               | Height of the Bar chart (excluding the bottom label)                                                    | 200                 |
 | onPress                      | Function             | Callback function called on press of a Bar (takes item and index as parameter)                          | null                |
 | onLongPress                  | Function             | Callback function called on long press of a Bar (takes item and index as parameter)                     | null                |
+| focusBarOnPress              | boolean              | used to focus a bar on press by applying styles defined in focusedBarConfig                             | false               |
+| focusedBarConfig             | FocusedBarConfig     | styles for the focused bar including color, width, opacity, borderRadius etc                            | \_                  |
 | maxValue                     | number               | Maximum value shown in the Y axis                                                                       | 200                 |
 | yAxisOffset                  | number               | Starting (minimum) value in the Y axis (value at the origin)                                            | 0                   |
 | mostNegativeValue            | number               | The most negative value shown in the Y axis (to be used only if the data set has negative values too)   | \_                  |
@@ -129,7 +131,22 @@ defaultLineConfig = {
   isSecondary: false,
 };
 ```
+#### FocusedBarConfig
 
+```ts
+type FocusedBarConfig = {
+  color?: ColorValue; // default lightgreen
+  sideColor?: ColorValue;
+  topColor?: ColorValue;
+  gradientColor?: ColorValue;
+  width?: number;
+  borderRadius?: number;
+  roundedTop?: boolean;
+  roundedBottom?: boolean;
+  opacity?: number;
+  barInnerComponent?: (item?: barDataItem, index?: number) => ReactNode;
+};
+```
 ---
 
 **Alert!**\
