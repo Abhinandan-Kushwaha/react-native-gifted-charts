@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet, I18nManager} from 'react-native';
 import {renderHorizSections} from './renderHorizSections';
 import RenderLineInBarChart from './renderLineInBarChart';
 import RenderVerticalLines from './renderVerticalLines';
@@ -166,12 +166,15 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
               (50 + xAxisLabelsVerticalShift),
             width: Math.max(
               props.width ?? 0,
-              totalWidth - spacing + endSpacing,
+              I18nManager.isRTL
+                ? totalWidth + endSpacing
+                : totalWidth - spacing + endSpacing,
             ),
             paddingLeft: initialSpacing,
             paddingBottom:
               noOfSectionsBelowXAxis * stepHeight + labelsExtraHeight,
             alignItems: 'flex-end',
+            flexDirection: I18nManager.isRTL ? 'row-reverse' : 'row',
           },
           !props.width && {width: totalWidth},
         ]}
