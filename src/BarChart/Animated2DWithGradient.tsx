@@ -173,35 +173,35 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
               </View>
             ) : null}
           </View>
-          {(item.topLabelComponent || showValuesAsTopLabel) && (
-            <View
-              style={[
-                {
-                  position: 'absolute',
-                  top: (item.barWidth || barWidth || 30) * -1,
-                  height: item.barWidth || barWidth || 30,
-                  width: item.barWidth || barWidth || 30,
-                  justifyContent:
-                    (props.horizontal && !intactTopLabel) || item.value < 0
-                      ? 'center'
-                      : 'flex-end',
-                  alignItems: 'center',
-                  opacity: opacity,
-                },
-                item.value < 0 && {transform: [{rotate: '180deg'}]},
-                props.horizontal &&
-                  !intactTopLabel && {transform: [{rotate: '270deg'}]},
-                topLabelContainerStyle ?? item.topLabelContainerStyle,
-              ]}>
-              {showValuesAsTopLabel ? (
-                <Text style={topLabelTextStyle}>{item.value}</Text>
-              ) : (
-                item.topLabelComponent?.()
-              )}
-            </View>
-          )}
         </View>
       )}
+      {item.topLabelComponent || showValuesAsTopLabel ? (
+        <View
+          style={[
+            {
+              position: 'absolute',
+              top: (item.barWidth || barWidth || 30) * -1,
+              height: item.barWidth || barWidth || 30,
+              width: item.barWidth || barWidth || 30,
+              justifyContent:
+                (props.horizontal && !intactTopLabel) || item.value < 0
+                  ? 'center'
+                  : 'flex-end',
+              alignItems: 'center',
+              opacity: opacity,
+            },
+            item.value < 0 && {transform: [{rotate: '180deg'}]},
+            props.horizontal &&
+              !intactTopLabel && {transform: [{rotate: '270deg'}]},
+            topLabelContainerStyle ?? item.topLabelContainerStyle,
+          ]}>
+          {showValuesAsTopLabel ? (
+            <Text style={topLabelTextStyle}>{item.value}</Text>
+          ) : (
+            item.topLabelComponent?.()
+          )}
+        </View>
+      ) : null}
     </>
   );
 };

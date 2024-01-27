@@ -104,7 +104,6 @@ export const LineChart = (props: LineChartPropsType) => {
     arrowPointsFromSet,
     selectedIndex,
     setSelectedIndex,
-    noOfSections,
     containerHeight,
     data,
     data2,
@@ -298,7 +297,7 @@ export const LineChart = (props: LineChartPropsType) => {
 
   if (!initialData) {
     initialData = data0 ?? [...data];
-    animations = initialData.map(item => new Animated.Value(item.value));
+    animations = initialData?.map(item => new Animated.Value(item.value));
   }
 
   const widthValuesFromSet = useMemo(
