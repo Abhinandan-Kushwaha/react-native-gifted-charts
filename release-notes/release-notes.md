@@ -1,3 +1,20 @@
+# 🎉 1.4.3
+
+## ✨ Features added-
+
+1. Added `interpolation` to Line charts. These props can be used to control interpolation- `interpolateMissingValues`, `showDataPointsForMissingValues` and `onlyPositive`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/LineChart/LineChartProps.md#interpolation
+2. Added `BEFORE_DATA_POINT` to `EdgePosition` enum for step charts, and renamed the `AT_DATA_POINT` EdgePosition to `AFTER_DATA_POINT`. The default EdgePosition is `AFTER_DATA_POINT`.
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- _"topLabelComponent not visible for bar charts"_. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/519
+2. Fixed RTL issue in pagination. Thanks to Houssem-Eddine Kellou for his PR https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/3
+
+---
+
+---
+
+---
 
 # 🎉 1.4.2
 
@@ -19,6 +36,7 @@ Moved `gifted-charts-core` to dependency and put the 3rd party libraries into de
 ---
 
 ---
+
 ## 🎉 1.4.1
 
 Exported `ruleTypes` which was missed in version `1.4.0`

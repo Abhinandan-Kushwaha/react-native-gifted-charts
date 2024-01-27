@@ -10,7 +10,11 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import {styles} from './styles';
-import { useAnimatedThreeDBar, animatedBarPropTypes, trianglePropTypes } from 'gifted-charts-core';
+import {
+  useAnimatedThreeDBar,
+  animatedBarPropTypes,
+  trianglePropTypes,
+} from 'gifted-charts-core';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -154,28 +158,26 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
 
           {/*******************************************************************/}
 
-          {props.height ? (
-            <View style={{marginTop: sideWidth / -2}}>
-              <TriangleCorner
-                color={sideColor}
-                width={sideWidth}
-                style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
-              />
-              <View
-                style={{
-                  width: sideWidth / 2,
-                  height: height - sideWidth / 2, //animatedSideHeight
-                  backgroundColor: sideColor,
-                  opacity: opacity,
-                }}
-              />
-              <TriangleCorner
-                color={sideColor}
-                width={sideWidth}
-                style={{transform: [{rotate: '90deg'}], opacity: opacity}}
-              />
-            </View>
-          ) : null}
+          <View style={{marginTop: sideWidth / -2}}>
+            <TriangleCorner
+              color={height ? sideColor : 'transparent'}
+              width={sideWidth}
+              style={{transform: [{rotate: '-90deg'}], opacity: opacity}}
+            />
+            <View
+              style={{
+                width: sideWidth / 2,
+                height: height - sideWidth / 2, //animatedSideHeight
+                backgroundColor: sideColor,
+                opacity: opacity,
+              }}
+            />
+            <TriangleCorner
+              color={height ? sideColor : 'transparent'}
+              width={sideWidth}
+              style={{transform: [{rotate: '90deg'}], opacity: opacity}}
+            />
+          </View>
 
           <View
             style={[

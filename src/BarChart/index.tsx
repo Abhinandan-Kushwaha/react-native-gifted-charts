@@ -3,11 +3,7 @@ import {Animated, Easing, View} from 'react-native';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
-import {
-  BarChartPropsType,
-  useBarChart,
-  screenWidth,
-} from 'gifted-charts-core';
+import {BarChartPropsType, useBarChart, screenWidth} from 'gifted-charts-core';
 import {StripAndLabel} from '../Components/common/StripAndLabel';
 import {Pointer} from '../Components/common/Pointer';
 
@@ -338,7 +334,7 @@ export const BarChart = (props: BarChartPropsType) => {
         <RenderBars
           data={data}
           side={side}
-          minHeight={props.minHeight || 0}
+          minHeight={props.minHeight ?? (isAnimated && !isThreeD ? 0.1 : 0)}
           sideWidth={props.sideWidth}
           labelWidth={labelWidth}
           isThreeD={isThreeD}
