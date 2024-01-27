@@ -2,7 +2,7 @@
 
 ## ✨ Features added-
 
-1. Added `interpolation` to Line charts. These props can be used to control interpolation- `interpolateMissingValues`, `showDataPointsForMissingValues` and `onlyPositive`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/LineChart/LineChartProps.md#interpolation
+1. Added `interpolation` to Line charts. These props can be used to control interpolation- `interpolateMissingValues`, `showDataPointsForMissingValues` and `onlyPositive`. See **[Interpolation in Line chart docs](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/LineChart/LineChartProps.md#interpolation)**
 2. Added `BEFORE_DATA_POINT` to `EdgePosition` enum for step charts, and renamed the `AT_DATA_POINT` EdgePosition to `AFTER_DATA_POINT`. The default EdgePosition is `AFTER_DATA_POINT`.
 
 ## 🐛 Bug fixes
