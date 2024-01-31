@@ -9,7 +9,11 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
-import { useRenderStackBars, BarDefaults, StackedBarChartPropsType } from 'gifted-charts-core';
+import {
+  useRenderStackBars,
+  BarDefaults,
+  StackedBarChartPropsType,
+} from 'gifted-charts-core';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -121,7 +125,6 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
   };
 
   const static2DSimple = () => {
-
     return (
       <>
         <TouchableOpacity
@@ -135,11 +138,18 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
               props.onPress(item, index);
             }
           }}
-          onLongPress={()=>{
+          onLongPress={() => {
             if (item.onLongPress) {
               item.onLongPress();
             } else if (props.onLongPress) {
               props.onLongPress(item, index);
+            }
+          }}
+          onPressOut={() => {
+            if (item.onPressOut) {
+              item.onPressOut();
+            } else if (props.onPressOut) {
+              props.onPressOut(item, index);
             }
           }}
           style={[

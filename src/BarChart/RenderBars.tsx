@@ -48,6 +48,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
     topLabelContainerStyle,
     topLabelTextStyle,
     pointerConfig,
+    noOfSectionsBelowXAxis,
   } = props;
 
   const barHeight = Math.max(
@@ -112,7 +113,11 @@ const RenderBars = (props: RenderBarsPropsType) => {
                 ? {
                     transform: [
                       {rotate: '180deg'},
-                      {translateY: autoShiftLabels ? 0 : 32},
+                      {
+                        translateY: autoShiftLabels
+                          ? 0
+                          : 16.5 * xAxisTextNumberOfLines + 14,
+                      },
                     ],
                   }
                 : {},
@@ -166,7 +171,18 @@ const RenderBars = (props: RenderBarsPropsType) => {
               : {transform: [{rotate: '60deg'}]}
             : horizontal
               ? {transform: [{rotate: '-90deg'}]}
-              : {},
+              : value < 0
+                ? {
+                    transform: [
+                      {rotate: '180deg'},
+                      {
+                        translateY: autoShiftLabels
+                          ? 0
+                          : 16.5 * xAxisTextNumberOfLines + 14,
+                      },
+                    ],
+                  }
+                : {},
         ]}>
         {item.labelComponent ? (
           item.labelComponent()
@@ -300,6 +316,8 @@ const RenderBars = (props: RenderBarsPropsType) => {
     (pointerConfig && pointerConfig.barTouchable !== true);
 
   const barContent = () => {
+    const isBarBelowXaxisAndInvisible =
+      item.value < 0 && !noOfSectionsBelowXAxis;
     const animated2DWithGradient = (noGradient, noAnimation) => (
       <Animated2DWithGradient
         {...commonPropsFor2Dand3Dbars}
@@ -341,7 +359,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
             }}
           />
         )}
-        {isThreeD ? (
+        {isBarBelowXaxisAndInvisible ? null : isThreeD ? (
           <AnimatedThreeDBar
             {...commonPropsFor2Dand3Dbars}
             sideWidth={
@@ -399,6 +417,13 @@ const RenderBars = (props: RenderBarsPropsType) => {
               ? item.onLongPress()
               : props.onLongPress
                 ? props.onLongPress(item, index)
+                : null;
+          }}
+          onPressOut={() => {
+            item.onPressOut
+              ? item.onPressOut()
+              : props.onPressOut
+                ? props.onPressOut(item, index)
                 : null;
           }}
           style={barWrapperStyle}>

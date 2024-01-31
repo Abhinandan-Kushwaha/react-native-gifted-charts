@@ -11,6 +11,7 @@
 | height                       | number               | Height of the Bar chart (excluding the bottom label)                                                    | 200                 |
 | onPress                      | Function             | Callback function called on press of a Bar (takes item and index as parameter)                          | null                |
 | onLongPress                  | Function             | Callback function called on long press of a Bar (takes item and index as parameter)                     | null                |
+| onPressOut                   | Function             | Callback function called on press out of a Bar (takes item and index as parameter)                      | null                |
 | focusBarOnPress              | boolean              | used to focus a bar on press by applying styles defined in focusedBarConfig                             | false               |
 | focusedBarConfig             | FocusedBarConfig     | styles for the focused bar including color, width, opacity, borderRadius etc                            | \_                  |
 | maxValue                     | number               | Maximum value shown in the Y axis                                                                       | 200                 |
@@ -203,6 +204,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | barWidth                   | number     | Width of the bar                                                               |
 | onPress                    | function   | Function called on pressing the bar                                            |
 | onLongPress                | function   | Function called on long pressing the bar                                       |
+| onPressOut                 | Function   | Callback function called on press out of a bar                                 |
 | disablePress               | boolean    | Prop to disable the press action, defaults to false                            |
 | frontColor                 | ColorValue | Color of the bar                                                               |
 | sideColor                  | ColorValue | Color of the side view of the bar, only for 3 D                                |
@@ -556,6 +558,7 @@ A single stack item can be depicted as-
 | color                   | ColorValue | Color of the stack item                                                |
 | onPress                 | function   | Function called on pressing the stack item                             |
 | onLongPress             | function   | Function called on long pressing the stack item                        |
+| onPressOut              | Function   | Callback function called on press out of a bar                         |
 | marginBottom            | number     | margin below a particular stack section                                |
 | barBorderRadius         | number     | Border radius of a stack section                                       |
 | borderTopLeftRadius     | number     | borderTopLeftRadius for a stack section                                |
