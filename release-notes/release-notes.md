@@ -1,3 +1,19 @@
+# 🎉 1.4.4
+
+## ✨ Features added-
+
+Added the prop `onPressOut` to Bar and Stacked Bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/523
+
+## 🐛 Bug fixes
+
+Fixed issue with `noOfSectionsBelowXAxis` not taking the value 0 for Line charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/526
+
+---
+
+---
+
+---
+
 # 🎉 1.4.3
 
 ## ✨ Features added-
