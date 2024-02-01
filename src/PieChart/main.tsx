@@ -56,6 +56,9 @@ export const PieChartMain = (props: PieChartMainProps) => {
     cy,
     pData,
     mData,
+    paddingHorizontal,
+    paddingVertical,
+    extraRadiusForFocused,
   } = getPieChartMainProps(props);
 
   return (
@@ -64,27 +67,38 @@ export const PieChartMain = (props: PieChartMainProps) => {
       style={[
         {
           backgroundColor: backgroundColor,
-          height: semiCircle ? canvasHeight / 2 : canvasHeight,
-          width: canvasWidth,
+          height: semiCircle
+            ? (canvasHeight + paddingVertical) / 2 + extraRadiusForFocused
+            : canvasHeight + paddingVertical + extraRadiusForFocused * 2,
+          width: canvasWidth + paddingHorizontal + extraRadiusForFocused * 2,
           overflow: 'hidden',
         },
         isThreeD && {transform: [{rotateX: tiltAngle}]},
       ]}>
       <Svg
         pointerEvents={rnVersion >= 720000 ? 'box-none' : 'auto'} // use 'box-none' react-native version 0.72 onwards
-        viewBox={`${strokeWidth / -2 + minShiftX} ${
-          strokeWidth / -2 + minShiftY
+        viewBox={`${strokeWidth / -2 + minShiftX - extraRadiusForFocused - paddingHorizontal / 2} ${
+          strokeWidth / -2 +
+          minShiftY -
+          extraRadiusForFocused -
+          paddingVertical / 2
         } ${
-          (radius + strokeWidth) * 2 +
+          (radius + extraRadiusForFocused + strokeWidth) * 2 +
+          paddingHorizontal +
           horizAdjustment +
           (horizAdjustment ? strokeWidth : 0)
         } ${
-          (radius + strokeWidth) * 2 +
-          +vertAdjustment +
+          (radius + extraRadiusForFocused + strokeWidth) * 2 +
+          paddingVertical +
+          vertAdjustment +
           (vertAdjustment ? strokeWidth : 0)
         }`}
-        height={radius * 2 + strokeWidth}
-        width={radius * 2 + strokeWidth}>
+        height={
+          (radius + extraRadiusForFocused) * 2 + strokeWidth + paddingVertical
+        }
+        width={
+          (radius + extraRadiusForFocused) * 2 + strokeWidth + paddingHorizontal
+        }>
         <Defs>
           {data.map((item, index) => {
             return (
@@ -334,7 +348,8 @@ export const PieChartMain = (props: PieChartMainProps) => {
             backgroundColor: shadowColor,
             borderRadius: radius,
             position: 'absolute',
-            top: shadowWidth,
+            top: shadowWidth + paddingVertical / 2,
+            left: paddingHorizontal / 2,
             zIndex: -1,
           }}
         />

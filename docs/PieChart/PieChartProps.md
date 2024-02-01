@@ -36,6 +36,8 @@
 | semiCircle                  | boolean              | When set to true, renders the Pie Chart in a semi-circle. donut semiCircle charts look like a speed-meter | false                                          |
 | labelsPosition              | string               | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid'  | 'outward' for donut and semicircle, else 'mid' |
 | pieInnerComponent           | () => svg element    | Svg element to be rendered inside each Pie like a label (position controlled by 'labelsPosition' )        | \_                                             |
+| paddingHorizontal           | number               | horizontal padding in the chart svg component (useful to accomodate _"onBorder"_ labels)                  | 0                                              |
+| paddingVertical             | number               | vertical padding in the chart svg component (useful to accomodate _"onBorder"_ labels)                    | 0                                              |
 
 #### initialAngle
 
@@ -65,6 +67,8 @@ labels can be positioned 'onBorder', 'outward', 'mid' or 'inward'. Here's a demo
 <br/><br/>
 
 The default value for labelsPosition is 'mid'. In case of donut and semicircle charts the default value becomes 'outward'
+
+**Note** if *labelsPosition* is 'onBorder' then **paddingHorizontal** and **paddingVertical** have a default value equal to *textBackgroundRadius*
 
 ---
 

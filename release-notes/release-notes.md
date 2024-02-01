@@ -1,3 +1,20 @@
+# 🎉 1.4.5
+
+## ✨ Features added-
+
+1. Added the prop `onScroll` to Bar, Stacked Bar, Line and Area charts. It is a callback function that takes _event_ as a parameter.
+2. Added the props `paddingHorizontal` and `paddingVertical` to Pie (and Donut) charts. This will be useful to accomodate _"onBorder"_ labels. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/528
+
+## 🐛 Bug fixes
+
+Fixed issue with `barInnerComponent` for Bar charts that don't have gradient. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/500#issuecomment-1920895288
+
+---
+
+---
+
+---
+
 # 🎉 1.4.4
 
 ## ✨ Features added-

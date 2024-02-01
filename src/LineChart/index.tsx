@@ -1790,6 +1790,7 @@ export const LineChart = (props: LineChartPropsType) => {
 
   const remainingScrollViewProps = {
     onScroll: (ev: any) => {
+      props.onScroll?.(ev);
       if (
         pointerConfig &&
         pointerConfig.activatePointersOnLongPress &&
