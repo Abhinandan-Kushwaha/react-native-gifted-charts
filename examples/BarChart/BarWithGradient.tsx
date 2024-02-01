@@ -20,7 +20,6 @@ const BarWithGradient = () => {
         hideRules
         showVerticalLines
         verticalLinesColor={'white'}
-        verticalLinesZIndex={100}
         overflowTop={10}
         noOfSections={5}
         data={barData}
@@ -30,7 +29,7 @@ const BarWithGradient = () => {
         backgroundColor={'#FECF9E'}
         pointerConfig={{
           initialPointerIndex: 0,
-          stripBehindBars: true,
+          stripBehindBars: false,
           pointerStripHeight: 207,
           pointerLabelComponent: items => {
             return (

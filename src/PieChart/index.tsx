@@ -25,6 +25,8 @@ export const PieChart = (props: PieChartPropsType) => {
     shiftInnerCenterY,
     tiltAngle,
     isDataShifted,
+    paddingHorizontal,
+    paddingVertical,
   } = usePieChart(props);
 
   const renderInnerCircle = (innerRadius, innerCircleBorderWidth) => {
@@ -40,8 +42,18 @@ export const PieChart = (props: PieChartPropsType) => {
               // zIndex: 100,
               alignSelf: 'center',
               backgroundColor: innerCircleColor,
-              left: canvasWidth / 2 - innerRadius + shiftInnerCenterX,
-              top: canvasHeight / 2 - innerRadius + shiftInnerCenterY,
+              left:
+                canvasWidth / 2 -
+                innerRadius +
+                shiftInnerCenterX +
+                extraRadiusForFocused +
+                paddingHorizontal / 2,
+              top:
+                canvasHeight / 2 -
+                innerRadius +
+                shiftInnerCenterY +
+                extraRadiusForFocused +
+                paddingVertical / 2,
               borderWidth: innerCircleBorderWidth,
               borderColor: innerCircleBorderColor,
               justifyContent: 'center',
@@ -80,16 +92,20 @@ export const PieChart = (props: PieChartPropsType) => {
   return (
     <View
       style={{
-        height: (radius + extraRadiusForFocused) * (props.semiCircle ? 1 : 2),
-        width: (radius + extraRadiusForFocused) * 2,
-        marginLeft: extraRadiusForFocused * 2,
-        marginTop: extraRadiusForFocused * 2,
+        height:
+          (radius + extraRadiusForFocused + paddingVertical / 2) *
+          (props.semiCircle ? 1 : 2),
+        width: (radius + extraRadiusForFocused + paddingHorizontal / 2) * 2,
+        overflow: 'hidden',
       }}>
       <View style={{position: 'absolute'}}>
         <PieChartMain
           {...props}
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
+          paddingHorizontal={paddingHorizontal}
+          paddingVertical={paddingVertical}
+          extraRadiusForFocused={extraRadiusForFocused}
         />
       </View>
       {renderInnerCircle(innerRadius, innerCircleBorderWidth)}
@@ -132,6 +148,9 @@ export const PieChart = (props: PieChartPropsType) => {
               innerRadius={props.innerRadius || radius / 2.5}
               isBiggerPie
               setSelectedIndex={setSelectedIndex}
+              paddingHorizontal={paddingHorizontal}
+              paddingVertical={paddingVertical}
+              extraRadiusForFocused={extraRadiusForFocused}
             />
           </View>
         )}

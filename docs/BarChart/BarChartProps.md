@@ -38,6 +38,7 @@
 | scrollToEnd                  | boolean              | When set to true, the chart automatically scrolls to the rightmost bar                                  | false               |
 | scrollAnimation              | boolean              | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost bar | true                |
 | scrollEventThrottle          | number               | (only for iOS) see https://reactnative.dev/docs/scrollview#scrolleventthrottle-ios                      | 0                   |
+| onScroll                     | Function             | callback function called when the chart is scrolled horizontally                                        | \_                  |
 | initialSpacing               | number               | distance of the first bar from the Y axis                                                               | 40                  |
 | renderTooltip                | Function             | tooltip component appearing above the bar when it is pressed, takes item and index as parameters        | null                |
 | leftShiftForTooltip          | number               | The distance by which the tooltip component should shift towards left                                   | 0                   |

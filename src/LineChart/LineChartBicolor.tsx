@@ -732,6 +732,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
       scrollRef={scrollRef}
       animatedWidth={animatedWidth}
       renderChartContent={renderChartContent}
+      remainingScrollViewProps={{onScroll: (ev: any) => props.onScroll?.(ev)}}
     />
   );
 };
