@@ -68,7 +68,7 @@ labels can be positioned 'onBorder', 'outward', 'mid' or 'inward'. Here's a demo
 
 The default value for labelsPosition is 'mid'. In case of donut and semicircle charts the default value becomes 'outward'
 
-**Note** if *labelsPosition* is 'onBorder' then **paddingHorizontal** and **paddingVertical** have a default value equal to *textBackgroundRadius*
+**Note** if _labelsPosition_ is 'onBorder' then **paddingHorizontal** and **paddingVertical** have a default value equal to _textBackgroundRadius_
 
 ---
 
@@ -81,6 +81,8 @@ The default value for labelsPosition is 'mid'. In case of donut and semicircle c
 | shiftY               | number            | Translates (shifts) the particular section vertically by given value                                                    |
 | shiftTextX           | number            | Translates (shifts) the position of label text horizontally                                                             |
 | shiftTextY           | number            | Translates (shifts) the position of label text vertically                                                               |
+| shiftTextBackgroundX | number            | Shifts the background of label text horizontally (default value is shiftTextX)                                          |
+| shiftTextBackgroundY | number            | Shifts the background of label text vertically (default value is shiftTextY)                                            |
 | color                | ColorValue        | Color (background color) of the section                                                                                 |
 | text                 | string            | Label text for the sections                                                                                             |
 | textColor            | ColorValue        | Color of the text (label) inside the section                                                                            |
@@ -97,6 +99,8 @@ The default value for labelsPosition is 'mid'. In case of donut and semicircle c
 | strokeColor          | ColorValue        | Stroke (line) color                                                                                                     |
 | focused              | boolean           | When set to true, the section for that item is focused, sectionAutoFocus must be set true in order to use this property |
 | pieInnerComponent    | () => svg element | Svg element to be rendered inside the Pie like a label (position controlled by 'labelsPosition' )                       |
+
+**Note** If we pass `shiftTextX`, the background will also shift (because the library assigns a default value of shiftTextBackgroundX = shiftTextX). This can be _overridden_ by manually passing **shiftTextBackgroundX**. Same applies to `shiftTextBackgroundY`
 
 ### Donut chart related props
 

@@ -1,3 +1,21 @@
+# 🎉 1.4.6
+
+## ✨ Features added-
+
+1. Added the properties `shiftTextBackgroundX` and `shiftTextBackgroundY` to data items of Pie (and donut) charts. If we pass `shiftTextX`, the background will also shift (because the library assigns a default value of shiftTextBackgroundX = shiftTextX). This can be _overridden_ by manually passing **shiftTextBackgroundX**. Same applies to `shiftTextBackgroundY`
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- _"shiftTextX not working to focused section of the Pie (and donut) charts"_ Thanks to **YASH-TRONX** for his PR https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/534
+2. Fixed the issue- **line inside Bar (combined chart) getting cropped from right side in case of _secondary_** See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/532
+   This actually got fixed in the core library (version 0.0.16). Here I just had to use the latest version of _gifted-charts-core_
+
+---
+
+---
+
+---
+
 # 🎉 1.4.5
 
 ## ✨ Features added-

@@ -264,8 +264,12 @@ export const PieChartMain = (props: PieChartMainProps) => {
                 {/* <Line x1={mx} x2={cx} y1={my} y2={cy} stroke="black" /> */}
                 {showTextBackground ? (
                   <Circle
-                    cx={x}
-                    cy={y - (item.textSize || textSize) / 4}
+                    cx={x + (item.shiftTextBackgroundX ?? item.shiftTextX ?? 0)}
+                    cy={
+                      y +
+                      (item.shiftTextBackgroundY ?? item.shiftTextY ?? 0) -
+                      (item.textSize || textSize) / 4
+                    }
                     r={
                       item.textBackgroundRadius ||
                       props.textBackgroundRadius ||
