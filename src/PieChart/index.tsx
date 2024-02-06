@@ -136,7 +136,7 @@ export const PieChart = (props: PieChartPropsType) => {
                   gradientCenterColor:
                     props.data[selectedIndex].gradientCenterColor || undefined,
                   shiftTextX: props.data[selectedIndex].shiftTextX || undefined,
-                  shiftTextY: props.data[selectedIndex].shiftTextY || undefined
+                  shiftTextY: props.data[selectedIndex].shiftTextY || undefined,
                 },
                 {
                   value: total - props.data[selectedIndex].value,
