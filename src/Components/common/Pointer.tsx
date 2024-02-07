@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 
 export const Pointer = props => {
   const {
@@ -20,7 +20,7 @@ export const Pointer = props => {
         top: pointerYLocal - 2,
       }}>
       {pointerComponent ? (
-        pointerComponent()
+        pointerComponent({ pointerColor: pointerColorLocal })
       ) : (
         <View
           style={{
