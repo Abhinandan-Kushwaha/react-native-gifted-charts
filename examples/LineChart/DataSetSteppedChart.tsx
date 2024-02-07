@@ -5,25 +5,25 @@ import {DataSet} from 'gifted-charts-core';
 
 const DataSetSteppedChart = () => {
   const lineData = [
-    {value: 0, dataPointText: '0'},
-    {value: 10, dataPointText: '10'},
-    {value: 8, dataPointText: '8'},
-    {value: 58, dataPointText: '58'},
-    {value: 56, dataPointText: '56'},
-    {value: 78, dataPointText: '78'},
-    {value: 74, dataPointText: '74'},
-    {value: 98, dataPointText: '98'},
+    {value: 100},
+    {value: 110},
+    {value: 108},
+    {value: 158},
+    {value: 156},
+    {value: 178},
+    {value: 174},
+    {value: 198},
   ];
 
   const lineData2 = [
-    {value: 0, dataPointText: '0'},
-    {value: 20, dataPointText: '20'},
-    {value: 18, dataPointText: '18'},
-    {value: 40, dataPointText: '40'},
-    {value: 36, dataPointText: '36'},
-    {value: 60, dataPointText: '60'},
-    {value: 54, dataPointText: '54'},
-    {value: 85, dataPointText: '85'},
+    {value: 100},
+    {value: 120},
+    {value: 118},
+    {value: 140},
+    {value: 136},
+    {value: 160},
+    {value: 154},
+    {value: 185},
   ];
   const dataSet: Array<DataSet> = [
     {
@@ -48,6 +48,8 @@ const DataSetSteppedChart = () => {
         textShiftY={-2}
         textShiftX={-5}
         textFontSize={13}
+        showValuesAsDataPointsText
+        yAxisOffset={80}
       />
     </View>
   );

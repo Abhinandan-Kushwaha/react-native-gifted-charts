@@ -1,3 +1,16 @@
+# 🎉 1.4.7
+
+## 🐛 Bug fixes
+
+1. Fixed the issue - `animateOnDataChange` skipping the initial render, thus rendering an empty chart. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/537
+2. Fixed the issue - `yAxisOffset` not working with `dataSet` in Line (and Area) charts.
+
+---
+
+---
+
+---
+
 # 🎉 1.4.6
 
 ## ✨ Features added-

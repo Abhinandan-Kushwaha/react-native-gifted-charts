@@ -31,13 +31,14 @@ import {
   lineDataItem,
   LineSvgProps,
   useLineChart,
+  adjustToOffset,
 } from 'gifted-charts-core';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {StripAndLabel} from '../Components/common/StripAndLabel';
 import {Pointer} from '../Components/common/Pointer';
 
 let initialData: Array<lineDataItem> | null = null;
-let animations: Array<any> = [];
+let animations: Array<Animated.Value> = [];
 
 export const LineChart = (props: LineChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
@@ -47,6 +48,11 @@ export const LineChart = (props: LineChartPropsType) => {
   const widthValue3 = useMemo(() => new Animated.Value(0), []);
   const widthValue4 = useMemo(() => new Animated.Value(0), []);
   const widthValue5 = useMemo(() => new Animated.Value(0), []);
+
+  if (!initialData) {
+    initialData = props.dataSet?.[0]?.data ?? props.data ?? [];
+    animations = initialData.map(item => new Animated.Value(item.value));
+  }
 
   const {
     scrollX,
@@ -294,11 +300,6 @@ export const LineChart = (props: LineChartPropsType) => {
     lineGradientEndColor,
     barAndLineChartsWrapperProps,
   } = useLineChart({...props, animations});
-
-  if (!initialData) {
-    initialData = data0 ?? [...data];
-    animations = initialData?.map(item => new Animated.Value(item.value));
-  }
 
   const widthValuesFromSet = useMemo(
     () => dataSet?.map(set => new Animated.Value(0)),
@@ -1120,14 +1121,10 @@ export const LineChart = (props: LineChartPropsType) => {
 
         {dataSet?.map(set => renderSpecificVerticalLines(set?.data)) ?? null}
         {dataSet?.map(set => {
-          const setData = set.data.map(item => {
-            item.value = item.value - (props.yAxisOffset ?? 0);
-            return item;
-          });
           return renderDataPoints(
             set.hideDataPoints ?? hideDataPoints1,
-            setData,
             set.data,
+            adjustToOffset(set.data, -(props.yAxisOffset ?? 0)), // need the actual values passed by user
             set.dataPointsShape ?? dataPointsShape1,
             set.dataPointsWidth ?? dataPointsWidth1,
             set.dataPointsHeight ?? dataPointsHeight1,
