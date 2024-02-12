@@ -1,7 +1,12 @@
 import React from 'react';
 import {View} from 'react-native';
 import {PieChartMain} from './main';
-import {PieChartPropsType, pieColors, usePieChart} from 'gifted-charts-core';
+import {
+  PieChartPropsType,
+  pieColors,
+  pieDataItem,
+  usePieChart,
+} from 'gifted-charts-core';
 
 export const PieChart = (props: PieChartPropsType) => {
   const {
@@ -100,7 +105,20 @@ export const PieChart = (props: PieChartPropsType) => {
       }}>
       <View style={{position: 'absolute'}}>
         <PieChartMain
-          {...props}
+          {...(props.data[selectedIndex] &&
+          (props.focusOnPress || props.sectionAutoFocus)
+            ? {
+                ...props,
+                data: props.data.map((item: pieDataItem, index: number) =>
+                  index === selectedIndex
+                    ? {
+                        ...item,
+                        text: undefined,
+                      }
+                    : {...item},
+                ),
+              }
+            : {...props})}
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
           paddingHorizontal={paddingHorizontal}
