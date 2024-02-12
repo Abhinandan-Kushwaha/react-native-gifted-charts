@@ -105,7 +105,8 @@ export const PieChart = (props: PieChartPropsType) => {
       }}>
       <View style={{position: 'absolute'}}>
         <PieChartMain
-          {...(props.data[selectedIndex] &&
+          {...(props.data.length > 1 &&
+          props.data[selectedIndex] &&
           (props.focusOnPress || props.sectionAutoFocus)
             ? {
                 ...props,
