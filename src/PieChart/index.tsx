@@ -110,16 +110,12 @@ export const PieChart = (props: PieChartPropsType) => {
           (props.focusOnPress || props.sectionAutoFocus)
             ? {
                 ...props,
-                data: props.data.map((item: pieDataItem, index: number) =>
-                  index === selectedIndex
-                    ? {
-                        ...item,
-                        text: undefined,
-                      }
-                    : {...item},
-                ),
+                data: props.data.map((item: pieDataItem, index: number) => ({
+                  ...item,
+                  text: index === selectedIndex ? undefined : item.text,
+                })),
               }
-            : {...props})}
+            : props)}
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
           paddingHorizontal={paddingHorizontal}
