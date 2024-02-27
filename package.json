@@ -2,7 +2,8 @@
   "name": "react-native-gifted-charts",
   "version": "1.4.7",
   "description": "The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar and Population Pyramid charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.",
-  "main": "src/index.tsx",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "src"
   ],
@@ -11,7 +12,9 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prebuild": "git clean -fdx dist",
+    "build": "tsup src/index.tsx --dts"
   },
   "repository": "https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts",
   "author": "Abhinandan Kushwaha <kushabhi5@gmail.com> (https://github.com/Abhinandan-Kushwaha)",
@@ -29,7 +32,6 @@
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/runtime": "^7.22.5",
-    "@react-native-community/eslint-config": "^3.2.0",
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.3",
     "@types/react": "^18.2.14",
@@ -45,6 +47,7 @@
     "react-native-svg": "^14.1.0",
     "react-test-renderer": "18.2.0",
     "ts-jest": "^29.1.1",
+    "tsup": "^8.0.2",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {

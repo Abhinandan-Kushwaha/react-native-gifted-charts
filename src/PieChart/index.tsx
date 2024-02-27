@@ -1,7 +1,7 @@
+import { PieChartPropsType, pieColors, usePieChart } from 'gifted-charts-core';
 import React from 'react';
-import {View} from 'react-native';
-import {PieChartMain} from './main';
-import {PieChartPropsType, pieColors, usePieChart} from 'gifted-charts-core';
+import { Alert, View } from 'react-native';
+import { PieChartMain } from './main';
 
 export const PieChart = (props: PieChartPropsType) => {
   const {
@@ -140,7 +140,7 @@ export const PieChart = (props: PieChartPropsType) => {
                 },
                 {
                   value: total - props.data[selectedIndex].value,
-                  onPress: () => alert('black'),
+                  onPress: () => Alert.alert('black'),
                   peripheral: true,
                   strokeWidth: 0,
                 },
