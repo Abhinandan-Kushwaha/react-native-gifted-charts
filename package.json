@@ -32,7 +32,6 @@
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/runtime": "^7.22.5",
-    "@tsconfig/react-native": "^3.0.3",
     "@types/jest": "^29.5.2",
     "@types/node": "^20.3.3",
     "@types/react": "^18.2.14",
