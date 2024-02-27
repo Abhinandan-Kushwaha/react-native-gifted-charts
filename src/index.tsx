@@ -4,7 +4,7 @@ export {LineChart} from './LineChart';
 export {LineChartBicolor} from './LineChart/LineChartBicolor';
 export {PopulationPyramid} from './PopulationPyramid';
 
-export {
+export type {
   barDataItem,
   stackDataItem,
   BarChartPropsType,
@@ -17,8 +17,11 @@ export {
   LineChartBicolorPropsType,
   popnPyramidDataItem,
   PopulationPyramidPropsType,
+} from 'gifted-charts-core';
+
+export { 
   chartTypes,
-  ruleTypes,
-  yAxisSides,
-  EdgePosition,
+  ruleTypes, 
+  yAxisSides, 
+  EdgePosition
 } from 'gifted-charts-core';
