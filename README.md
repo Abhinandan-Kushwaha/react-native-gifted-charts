@@ -45,17 +45,20 @@ However, we are planning to add support for web which will be available soon.
 
 ## Installation
 
+### React Native CLI
+
 ```sh
 npm install react-native-gifted-charts react-native-linear-gradient react-native-svg
-```
-
-For iOS-
-
-```sh
 cd ios && pod install
 ```
 
-Please note that `react-native-svg` and `react-native-linear-gradient` are needed for the library to work, so make sure they are installed in your project.
+### Expo
+
+```sh
+npx expo install react-native-gifted-charts expo-linear-gradient react-native-svg
+```
+
+Please note that `react-native-svg` and `react-native-linear-gradient`/`expo-linear-gradient` are needed for the library to work, so make sure they are installed in your project.
 
 # Docs
 
