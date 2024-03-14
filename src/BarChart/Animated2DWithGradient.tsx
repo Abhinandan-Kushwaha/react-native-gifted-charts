@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {View, LayoutAnimation, Platform, UIManager, Text} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import Cap from '../Components/BarSpecificComponents/cap';
+import LinearGradient from "../Components/common/LinearGradient";
 import {Animated2DWithGradientPropsType} from 'gifted-charts-core';
 
 if (Platform.OS === 'android') {
