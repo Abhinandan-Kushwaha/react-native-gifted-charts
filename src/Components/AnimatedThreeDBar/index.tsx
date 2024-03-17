@@ -49,8 +49,9 @@ const triangleStyles = StyleSheet.create({
 });
 
 const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
+  const heightCopy = props.height;
   const [height, setHeight] = useState(
-    props.isAnimated ? (Platform.OS === 'ios' ? 0 : 20) : props.height,
+    props.isAnimated ? (Platform.OS === 'ios' ? 0 : 20) : heightCopy,
   );
 
   const {
@@ -134,7 +135,7 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
                 <View
                   style={{
                     width: barWidth,
-                    height: barWidth * 0.4,
+                    height: barWidth,
                     // left: width / 2,
                     backgroundColor: topColor,
                     opacity: opacity,
@@ -145,7 +146,7 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
                 style={{
                   position: 'absolute',
                   top: sideWidth / -2,
-                  left: barWidth,
+                  left: barWidth - 1,
                 }}>
                 <TriangleCorner
                   color={topColor}
@@ -158,7 +159,7 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
 
           {/*******************************************************************/}
 
-          <View style={{marginTop: sideWidth / -2}}>
+          <View style={{marginTop: sideWidth / -2 - 1}}>
             <TriangleCorner
               color={height ? sideColor : 'transparent'}
               width={sideWidth}
@@ -166,7 +167,7 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
             />
             <View
               style={{
-                width: sideWidth / 2,
+                width: sideWidth / 2 + 1,
                 height: height - sideWidth / 2, //animatedSideHeight
                 backgroundColor: sideColor,
                 opacity: opacity,
@@ -174,7 +175,7 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
             />
             <TriangleCorner
               color={height ? sideColor : 'transparent'}
-              width={sideWidth}
+              width={sideWidth + 1}
               style={{transform: [{rotate: '90deg'}], opacity: opacity}}
             />
           </View>

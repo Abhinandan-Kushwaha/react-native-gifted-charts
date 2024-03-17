@@ -16,6 +16,7 @@ import RoundStackBar from './BarChart/RoundStackBar';
 import StackWithNegative from './BarChart/StackWithNegative';
 import CappedBars from './BarChart/CappedBars';
 import BarWithGradient from './BarChart/BarWithGradient';
+import BarChartWithGivenNumberOfVerticalLines from './BarChart/BarChartWithGivenNumberOfVerticalLines';
 
 import LineChartTwo from './LineChart/LineChartTwo';
 import LineChartEndReached from './LineChart/LineChartEndReached';
@@ -72,6 +73,9 @@ const Examples = () => {
   const BarAndStackCharts = () => {
     return (
       <View>
+        <BarChartWithGivenNumberOfVerticalLines />
+        <Separator />
+
         <SimpleBlueBars />
         <Separator />
 

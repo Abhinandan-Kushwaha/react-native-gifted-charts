@@ -9,6 +9,7 @@ import {
   getPropsForAnimated2DWithGradient,
   RenderBarsPropsType,
   barDataItem,
+  AxesAndRulesDefaults,
 } from 'gifted-charts-core';
 
 const RenderBars = (props: RenderBarsPropsType) => {
@@ -40,7 +41,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
     initialSpacing,
     selectedIndex,
     setSelectedIndex,
-    xAxisThickness,
+    xAxisThickness = AxesAndRulesDefaults.xAxisThickness,
     horizontal,
     rtl,
     intactTopLabel,
@@ -49,12 +50,13 @@ const RenderBars = (props: RenderBarsPropsType) => {
     topLabelTextStyle,
     pointerConfig,
     noOfSectionsBelowXAxis,
+    yAxisOffset,
   } = props;
 
   const barHeight = Math.max(
     minHeight,
     (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200) -
-      (xAxisThickness ?? 0),
+      xAxisThickness,
   );
 
   const {
@@ -128,7 +130,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
           <Text
             style={[
               {textAlign: 'center'},
-              rtl && {transform: [{rotate: '180deg'}]},
+              rtl && horizontal && {transform: [{rotate: '180deg'}]},
               labelTextStyle,
             ]}
             numberOfLines={xAxisTextNumberOfLines}>
@@ -190,7 +192,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
           <Text
             style={[
               {textAlign: 'center'},
-              rtl && {transform: [{rotate: '180deg'}]},
+              rtl && horizontal && {transform: [{rotate: '180deg'}]},
               labelTextStyle,
             ]}
             numberOfLines={xAxisTextNumberOfLines}>
@@ -262,7 +264,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
               topLabelContainerStyle ?? item.topLabelContainerStyle,
             ]}>
             {showValuesAsTopLabel ? (
-              <Text style={topLabelTextStyle}>{item.value}</Text>
+              <Text style={topLabelTextStyle}>{item.value + yAxisOffset}</Text>
             ) : (
               item.topLabelComponent?.()
             )}
@@ -280,7 +282,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
   const barWrapperStyle = [
     {
       // overflow: 'visible',
-      marginBottom: 60 + barMarginBottom + xAxisLabelsVerticalShift,
+      marginBottom: 60 + barMarginBottom + xAxisLabelsVerticalShift - 0.5,
       width: commonPropsFor2Dand3Dbars.barWidth,
       height: barHeight,
       marginRight: spacing,

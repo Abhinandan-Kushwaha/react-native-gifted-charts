@@ -32,6 +32,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
     topLabelTextStyle,
     commonStyleForBar,
     barStyleWithBackground,
+    yAxisOffset,
   } = props;
   const [height, setHeight] = useState(noAnimation ? props.height : 0.2);
   const [initialRender, setInitialRender] = useState(
@@ -72,16 +73,12 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
         <View
           style={{
             position: 'absolute',
-            bottom: 0,
+            bottom: -0.5,
             width: '100%',
             overflow: 'hidden',
             height:
               (noAnimation
-                ? Math.max(
-                    props.minHeight,
-                    (Math.abs(item.value) * (containerHeight || 200)) /
-                      (maxValue || 200),
-                  )
+                ? Math.max(props.minHeight, Math.abs(height))
                 : height) - (barMarginBottom || 0),
           }}>
           <View
@@ -90,11 +87,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
                 width: '100%',
                 height:
                   (noAnimation
-                    ? Math.max(
-                        props.minHeight,
-                        (Math.abs(item.value) * (containerHeight || 200)) /
-                          (maxValue || 200),
-                      )
+                    ? Math.max(props.minHeight, Math.abs(height))
                     : height) - (barMarginBottom || 0),
               },
               item.barStyle || barStyle,
@@ -157,12 +150,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
                   x="1"
                   y="1"
                   width={item.barWidth || props.barWidth || 30}
-                  height={
-                    noAnimation
-                      ? (Math.abs(item.value) * (containerHeight || 200)) /
-                        (maxValue || 200)
-                      : height
-                  }
+                  height={noAnimation ? Math.abs(height) : height}
                   fill={`url(#${item.patternId || patternId})`}
                 />
               </Svg>
@@ -196,7 +184,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
             topLabelContainerStyle ?? item.topLabelContainerStyle,
           ]}>
           {showValuesAsTopLabel ? (
-            <Text style={topLabelTextStyle}>{item.value}</Text>
+            <Text style={topLabelTextStyle}>{item.value + yAxisOffset}</Text>
           ) : (
             item.topLabelComponent?.()
           )}

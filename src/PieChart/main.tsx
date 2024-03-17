@@ -13,8 +13,8 @@ import {
   getPieChartMainProps,
   PieChartMainProps,
   pieColors,
-  rnVersion,
 } from 'gifted-charts-core';
+import { rnVersion } from '../utils';
 
 export const PieChartMain = (props: PieChartMainProps) => {
   const {
