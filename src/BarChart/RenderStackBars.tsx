@@ -7,8 +7,8 @@ import {
   Platform,
   UIManager,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import Svg, {Defs, Rect} from 'react-native-svg';
+import LinearGradient from "../Components/common/LinearGradient";
 import {
   useRenderStackBars,
   BarDefaults,
