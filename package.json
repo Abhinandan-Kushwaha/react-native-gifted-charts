@@ -51,7 +51,16 @@
     "react": "*",
     "react-native": "*",
     "react-native-linear-gradient": "*",
+    "expo-linear-gradient": "*",
     "react-native-svg": "*"
+  },
+  "peerDependenciesMeta": {
+    "react-native-linear-gradient": {
+      "optional": true
+    },
+    "expo-linear-gradient": {
+      "optional": true
+    }
   },
   "keywords": [
     "chart",

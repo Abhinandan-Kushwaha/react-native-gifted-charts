@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, TouchableOpacity, Animated, Text} from 'react-native';
 import AnimatedThreeDBar from '../Components/AnimatedThreeDBar';
-import LinearGradient from 'react-native-linear-gradient';
 import Animated2DWithGradient from './Animated2DWithGradient';
 import Cap from '../Components/BarSpecificComponents/cap';
 import BarBackgroundPattern from '../Components/BarSpecificComponents/barBackgroundPattern';
+import LinearGradient from "../Components/common/LinearGradient";
 import {
   getPropsForAnimated2DWithGradient,
   RenderBarsPropsType,
