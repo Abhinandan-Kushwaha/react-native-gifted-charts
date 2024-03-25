@@ -18,8 +18,9 @@ import {
 
 export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
   const scrollRef = useRef();
-  const opacValue = useMemo(() => new Animated.Value(0), []);
+  // const heightValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
+  const opacValue = useMemo(() => new Animated.Value(0), []);
 
   const {
     pointsArray,

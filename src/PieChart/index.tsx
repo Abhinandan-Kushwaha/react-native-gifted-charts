@@ -156,7 +156,10 @@ export const PieChart = (props: PieChartPropsType) => {
             />
           </View>
         )}
-      {renderInnerCircle(innerRadius - inwardExtraLengthForFocused, innerCircleBorderWidth)}
+      {renderInnerCircle(
+        innerRadius - inwardExtraLengthForFocused,
+        inwardExtraLengthForFocused ? 0 : innerCircleBorderWidth,
+      )}
     </View>
   );
 };

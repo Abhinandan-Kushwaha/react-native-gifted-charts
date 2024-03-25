@@ -15,12 +15,14 @@ The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar and Popul
 7. Detailed [documentation](https://gifted-charts.web.app/) with examples
 8. Support for **_combined_** Bar and Line charts
 
+## 📣 Announcement
+
+The web counterpart of this library is public now. Try out our new reactJS library- [react-gifted-charts](https://github.com/Abhinandan-Kushwaha/react-gifted-charts) <br />
+The exact same piece of code that you write to render charts in react-native, can be used to render charts in reactJS using this library!
+
+
 ## [Release notes 🎉](release-notes/release-notes.md)
 
-**Alert:**
-
-This library doesn't support web apps yet. Use this library if you are planning mobile first.</br>
-However, we are planning to add support for web which will be available soon.
 
 <img src='/demos/bars.png' alt=''/>
 <img src='/demos/lineArea.png' alt=''/>
@@ -49,7 +51,6 @@ However, we are planning to add support for web which will be available soon.
 
 ```sh
 npm install react-native-gifted-charts react-native-linear-gradient react-native-svg
-cd ios && pod install
 ```
 
 ### Expo

@@ -3,9 +3,10 @@ import {Animated, Easing, View} from 'react-native';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
-import {BarChartPropsType, useBarChart, screenWidth} from 'gifted-charts-core';
+import {BarChartPropsType, useBarChart} from 'gifted-charts-core';
 import {StripAndLabel} from '../Components/common/StripAndLabel';
 import {Pointer} from '../Components/common/Pointer';
+import {screenWidth} from '../utils';
 
 export const BarChart = (props: BarChartPropsType) => {
   const heightValue = useMemo(() => new Animated.Value(0), []);

@@ -31,7 +31,7 @@ export const StripAndLabel = props => {
     <View
       style={{
         position: 'absolute',
-        left: pointerX + (pointerItemLocal[0].pointerShiftX || 0),
+        left: pointerX + (pointerItemLocal[0]?.pointerShiftX || 0),
         top: pointerYLocal,
       }}>
       {(

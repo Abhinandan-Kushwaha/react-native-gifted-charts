@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from 'react';
-import {View, ScrollView, StyleSheet} from 'react-native';
+import {View, ScrollView, StyleSheet, I18nManager} from 'react-native';
 import {renderHorizSections} from './renderHorizSections';
 import RenderLineInBarChart from './renderLineInBarChart';
 import RenderVerticalLines from './renderVerticalLines';
@@ -77,7 +77,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     verticalLinesProps,
     lineInBarChartProps,
     lineInBarChartProps2,
-  } = useBarAndLineChartsWrapper(props);
+  } = useBarAndLineChartsWrapper({...props, isRTL:I18nManager.isRTL});
 
   useEffect(() => {
     if (pointerConfig && getPointerProps) {

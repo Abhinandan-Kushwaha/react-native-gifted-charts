@@ -14,6 +14,7 @@ import {
   Text as SvgText,
   Use,
 } from 'react-native-svg';
+import {screenWidth} from '../utils';
 
 export const PopulationPyramid = (props: PopulationPyramidPropsType) => {
   const {
@@ -105,7 +106,7 @@ export const PopulationPyramid = (props: PopulationPyramidPropsType) => {
     verticalLinesCommonProps,
     xAxisLabelsCommonProps,
     getXLabel,
-  } = usePopulationPyramid(props);
+  } = usePopulationPyramid({...props, screenWidth});
 
   return (
     <View style={{height: containerHeightWithXaxisLabels, width}}>
