@@ -1,3 +1,21 @@
+# 🎉 1.4.8 Mega Release ⭐️
+
+## ✨ Features added-
+### Animation in Pie and donut charts using the __`<PieChartPro>`__ component. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/555
+### Curved paths (border-radius) in donut sections supported using the __`<PieChartPro>`__ component. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/554
+### Support for expo gradient, thanks to onyx-flame for his PR https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/571
+
+
+## 🐛 Bug fixes
+
+1. refactors and adjustments related to xAxisThickness and yAxisOffset. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/574
+
+---
+
+---
+
+---
+
 # 🎉 1.4.7
 
 ## 🐛 Bug fixes
