@@ -1650,9 +1650,10 @@ export const LineChart = (props: LineChartPropsType) => {
                 (item.value * containerHeight) / maxValue -
                 (pointerRadius || pointerHeight / 2) +
                 10;
-              // @ts-ignore
+
               setSecondaryPointerY(y);
-              if (item) setSecondaryPointerItem(item);
+              // @ts-ignore
+              setSecondaryPointerItem(item);
             }
           }
         }}
