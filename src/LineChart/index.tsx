@@ -1463,7 +1463,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 (pointerRadius || pointerHeight / 2) +
                 10;
               setSecondaryPointerY(y);
-              setSecondaryPointerItem(item);
+              //setSecondaryPointerItem(item);
             }
           }
         }}
