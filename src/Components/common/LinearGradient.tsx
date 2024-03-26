@@ -1,12 +1,12 @@
 import React from 'react';
-import {ViewStyle} from "react-native";
 
 type LinearGradientProps = {
-  style?: ViewStyle;
-  start?: { x: number, y: number };
-  end?: { x: number, y: number };
+  style?: any;
+  start?: {x: number; y: number};
+  end?: {x: number; y: number};
   colors: string[];
-}
+  children?: any;
+};
 
 let LinearGradient: React.FC<LinearGradientProps>;
 
@@ -19,7 +19,7 @@ try {
     LinearGradient = require('expo-linear-gradient').LinearGradient;
   } catch (e) {
     throw new Error(
-      'Gradient package was not found. Make sure "react-native-linear-gradient" or "expo-linear-gradient" is installed'
+      'Gradient package was not found. Make sure "react-native-linear-gradient" or "expo-linear-gradient" is installed',
     );
   }
 }

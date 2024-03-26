@@ -16,7 +16,7 @@ export const BarChart = (props: BarChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
   const remainingScrollViewProps = {
     onScroll: (ev: any) => props.onScroll?.(ev),
-    onTouchStart: evt => {
+    onTouchStart: (evt: any) => {
       if (props.renderTooltip) {
         setSelectedIndex(-1);
       }
@@ -134,7 +134,7 @@ export const BarChart = (props: BarChartPropsType) => {
     });
   };
 
-  const renderStripAndLabel = pointerLabelComponent => {
+  const renderStripAndLabel = (pointerLabelComponent: any) => {
     let pointerItemLocal,
       pointerYLocal = pointerY;
 
@@ -197,12 +197,16 @@ export const BarChart = (props: BarChartPropsType) => {
               barWidth / 2;
             setPointerX(z);
             setPointerIndex(factor);
+
             let item, y;
             item = (props.stackData ?? data)[factor];
-            const stackSum = item.stacks?.reduce(
-              (acc, stack) => acc + (stack.value ?? 0),
-              0,
-            );
+            let stackSum = 0;
+            if ('stacks' in item) {
+              stackSum = item.stacks.reduce(
+                (acc: number, stack: any) => acc + (stack.value ?? 0),
+                0,
+              );
+            }
             y =
               containerHeight -
               ((stackSum ?? item.value) * containerHeight) / maxValue -
@@ -241,10 +245,13 @@ export const BarChart = (props: BarChartPropsType) => {
             setPointerX(z);
             setPointerIndex(factor);
             item = (props.stackData ?? data)[factor];
-            const stackSum = item.stacks?.reduce(
-              (acc, stack) => acc + (stack.value ?? 0),
-              0,
-            );
+            let stackSum = 0;
+            if ('stacks' in item) {
+              item.stacks?.reduce(
+                (acc: number, stack: any) => acc + (stack.value ?? 0),
+                0,
+              );
+            }
             y =
               containerHeight -
               ((stackSum ?? item.value) * containerHeight) / maxValue -

@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {chartTypes} from 'gifted-charts-core';
 import {Line, Svg} from 'react-native-svg';
 
-const RenderVerticalLines = props => {
+const RenderVerticalLines = (props: any) => {
   const {
     verticalLinesAr,
     verticalLinesSpacing,
@@ -29,7 +29,7 @@ const RenderVerticalLines = props => {
     xAxisLabelsVerticalShift,
   } = props;
 
-  const getHeightOfVerticalLine = index => {
+  const getHeightOfVerticalLine = (index: number) => {
     if (verticalLinesUptoDataPoint) {
       if (index < data.length) {
         return (
@@ -107,8 +107,8 @@ const RenderVerticalLines = props => {
             (chartType === chartTypes.BAR
               ? totalSpacing - 1
               : verticalLinesSpacing
-              ? verticalLinesSpacing * (index + 1)
-              : index * spacing + (initialSpacing - 2));
+                ? verticalLinesSpacing * (index + 1)
+                : index * spacing + (initialSpacing - 2));
 
           return (
             <Line

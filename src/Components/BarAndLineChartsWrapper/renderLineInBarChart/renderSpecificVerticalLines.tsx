@@ -1,7 +1,7 @@
 import React from 'react';
 import {Rect} from 'react-native-svg';
 
-export const renderSpecificVerticalLines = props => {
+export const renderSpecificVerticalLines = (props: any) => {
   const {
     data,
     barWidth,
