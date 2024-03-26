@@ -1334,6 +1334,7 @@ export const LineChart = (props: LineChartPropsType) => {
           (pointerRadius || pointerHeight / 2) +
           10;
         setSecondaryPointerY(y);
+        // @ts-ignore
         setSecondaryPointerItem(item);
       }
     }
@@ -1463,6 +1464,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 (pointerRadius || pointerHeight / 2) +
                 10;
               setSecondaryPointerY(y);
+              // @ts-ignore
               setSecondaryPointerItem(item);
             }
           }
@@ -1648,8 +1650,9 @@ export const LineChart = (props: LineChartPropsType) => {
                 (item.value * containerHeight) / maxValue -
                 (pointerRadius || pointerHeight / 2) +
                 10;
+              // @ts-ignore
               setSecondaryPointerY(y);
-              setSecondaryPointerItem(item);
+              if (item) setSecondaryPointerItem(item);
             }
           }
         }}
