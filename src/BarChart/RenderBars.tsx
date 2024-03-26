@@ -4,7 +4,7 @@ import AnimatedThreeDBar from '../Components/AnimatedThreeDBar';
 import Animated2DWithGradient from './Animated2DWithGradient';
 import Cap from '../Components/BarSpecificComponents/cap';
 import BarBackgroundPattern from '../Components/BarSpecificComponents/barBackgroundPattern';
-import LinearGradient from "../Components/common/LinearGradient";
+import LinearGradient from '../Components/common/LinearGradient';
 import {
   getPropsForAnimated2DWithGradient,
   RenderBarsPropsType,
@@ -320,7 +320,10 @@ const RenderBars = (props: RenderBarsPropsType) => {
   const barContent = () => {
     const isBarBelowXaxisAndInvisible =
       item.value < 0 && !noOfSectionsBelowXAxis;
-    const animated2DWithGradient = (noGradient, noAnimation) => (
+    const animated2DWithGradient = (
+      noGradient: boolean,
+      noAnimation: boolean,
+    ) => (
       <Animated2DWithGradient
         {...commonPropsFor2Dand3Dbars}
         animationDuration={animationDuration || 800}
