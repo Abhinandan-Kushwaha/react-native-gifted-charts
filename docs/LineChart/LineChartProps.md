@@ -90,6 +90,7 @@ type DataSet = {
   curvature?: number;
   curveType?: CurveType;
   lineSegments?: Array<LineSegment>;
+  isSecondary?: boolean;
 };
 ```
 
