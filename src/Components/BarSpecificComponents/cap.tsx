@@ -2,7 +2,7 @@ import React from 'react';
 import {View} from 'react-native';
 import {BarDefaults} from 'gifted-charts-core';
 
-const Cap = props => {
+const Cap = (props: any) => {
   const {
     capThicknessFromItem,
     capThicknessFromProps,

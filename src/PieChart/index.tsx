@@ -29,7 +29,10 @@ export const PieChart = (props: PieChartPropsType) => {
     paddingVertical,
   } = usePieChart(props);
 
-  const renderInnerCircle = (innerRadius, innerCircleBorderWidth) => {
+  const renderInnerCircle = (
+    innerRadius: number,
+    innerCircleBorderWidth: number,
+  ) => {
     if (props.centerLabelComponent || (donut && !isDataShifted)) {
       return (
         <View

@@ -5,7 +5,7 @@ import {renderSpecificVerticalLines} from './renderSpecificVerticalLines';
 import {renderDataPoints} from './renderDataPoints';
 import {renderSpecificDataPoints} from './renderSpecificDataPoints';
 
-const RenderLineInBarChart = props => {
+const RenderLineInBarChart = (props: any) => {
   const {
     yAxisLabelWidth,
     initialSpacing,
