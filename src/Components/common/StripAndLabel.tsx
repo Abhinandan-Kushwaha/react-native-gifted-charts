@@ -3,7 +3,34 @@ import {View} from 'react-native';
 import Svg, {Line} from 'react-native-svg';
 import {getTopAndLeftForStripAndLabel} from 'gifted-charts-core';
 
-export const StripAndLabel = props => {
+export const StripAndLabel = (props: {
+  autoAdjustPointerLabelPosition?: boolean | undefined;
+  pointerX: any;
+  pointerLabelWidth: any;
+  activatePointersOnLongPress?: boolean | undefined;
+  yAxisLabelWidth?: number;
+  pointerRadius: any;
+  pointerWidth: any;
+  shiftPointerLabelX?: number;
+  pointerLabelHeight?: number;
+  pointerYLocal: any;
+  pointerStripUptoDataPoint: any;
+  pointerStripHeight: any;
+  shiftPointerLabelY?: number;
+  pointerItemLocal?: any;
+  showPointerStrip?: any;
+  pointerStripWidth?: any;
+  containerHeight?: any;
+  xAxisThickness?: any;
+  pointerStripColor?: any;
+  pointerConfig?: any;
+  pointerLabelComponent?: any;
+  scrollX?: number;
+  pointerEvents?: any;
+  isBarChart?: any;
+  secondaryPointerItem?: any;
+  width?: number | undefined;
+}) => {
   const {
     pointerX,
     pointerLabelWidth,

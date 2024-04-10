@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {View, LayoutAnimation, Platform, UIManager, Text} from 'react-native';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import Cap from '../Components/BarSpecificComponents/cap';
-import LinearGradient from "../Components/common/LinearGradient";
+import LinearGradient from '../Components/common/LinearGradient';
 import {Animated2DWithGradientPropsType} from 'gifted-charts-core';
 
 if (Platform.OS === 'android') {
@@ -184,7 +184,9 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
             topLabelContainerStyle ?? item.topLabelContainerStyle,
           ]}>
           {showValuesAsTopLabel ? (
-            <Text style={topLabelTextStyle}>{item.value + yAxisOffset}</Text>
+            <Text style={topLabelTextStyle}>
+              {item.value + (yAxisOffset ?? 0)}
+            </Text>
           ) : (
             item.topLabelComponent?.()
           )}

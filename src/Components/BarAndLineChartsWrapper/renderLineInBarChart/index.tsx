@@ -5,7 +5,23 @@ import {renderSpecificVerticalLines} from './renderSpecificVerticalLines';
 import {renderDataPoints} from './renderDataPoints';
 import {renderSpecificDataPoints} from './renderSpecificDataPoints';
 
-const RenderLineInBarChart = props => {
+const RenderLineInBarChart = (props: {
+  yAxisLabelWidth: any;
+  initialSpacing: any;
+  spacing: any;
+  containerHeight: any;
+  lineConfig: any;
+  maxValue: any;
+  animatedWidth: any;
+  lineBehindBars: any;
+  points: any;
+  arrowPoints: any;
+  data: any;
+  totalWidth: any;
+  barWidth: any;
+  labelsExtraHeight: any;
+  xAxisLabelsVerticalShift: any;
+}) => {
   const {
     yAxisLabelWidth,
     initialSpacing,

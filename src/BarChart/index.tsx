@@ -3,7 +3,12 @@ import {Animated, Easing, View} from 'react-native';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
-import {BarChartPropsType, useBarChart} from 'gifted-charts-core';
+import {
+  BarChartPropsType,
+  barDataItem,
+  stackDataItem,
+  useBarChart,
+} from 'gifted-charts-core';
 import {StripAndLabel} from '../Components/common/StripAndLabel';
 import {Pointer} from '../Components/common/Pointer';
 import {screenWidth} from '../utils';
@@ -16,7 +21,7 @@ export const BarChart = (props: BarChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
   const remainingScrollViewProps = {
     onScroll: (ev: any) => props.onScroll?.(ev),
-    onTouchStart: evt => {
+    onTouchStart: () => {
       if (props.renderTooltip) {
         setSelectedIndex(-1);
       }
@@ -134,7 +139,7 @@ export const BarChart = (props: BarChartPropsType) => {
     });
   };
 
-  const renderStripAndLabel = pointerLabelComponent => {
+  const renderStripAndLabel = (pointerLabelComponent: any) => {
     let pointerItemLocal,
       pointerYLocal = pointerY;
 
@@ -199,17 +204,18 @@ export const BarChart = (props: BarChartPropsType) => {
             setPointerIndex(factor);
             let item, y;
             item = (props.stackData ?? data)[factor];
-            const stackSum = item.stacks?.reduce(
+            const stackSum = (item as stackDataItem).stacks?.reduce(
               (acc, stack) => acc + (stack.value ?? 0),
               0,
             );
             y =
               containerHeight -
-              ((stackSum ?? item.value) * containerHeight) / maxValue -
+              ((stackSum ?? (item as barDataItem).value) * containerHeight) /
+                maxValue -
               (pointerRadius || pointerHeight / 2) +
               10;
             setPointerY(y);
-            setPointerItem(item);
+            setPointerItem(item as any);
           }}
           onResponderMove={evt => {
             if (!pointerConfig) return;
@@ -241,17 +247,18 @@ export const BarChart = (props: BarChartPropsType) => {
             setPointerX(z);
             setPointerIndex(factor);
             item = (props.stackData ?? data)[factor];
-            const stackSum = item.stacks?.reduce(
+            const stackSum = (item as stackDataItem)?.stacks?.reduce(
               (acc, stack) => acc + (stack.value ?? 0),
               0,
             );
             y =
               containerHeight -
-              ((stackSum ?? item.value) * containerHeight) / maxValue -
+              ((stackSum ?? (item as barDataItem).value) * containerHeight) /
+                maxValue -
               (pointerRadius || pointerHeight / 2) +
               10;
             setPointerY(y);
-            setPointerItem(item);
+            setPointerItem(item as any);
           }}
           onResponderEnd={evt => {
             setResponderStartTime(0);
@@ -317,6 +324,11 @@ export const BarChart = (props: BarChartPropsType) => {
   const renderChart = () => {
     if (props.stackData) {
       return props.stackData.map((item, index) => {
+        const {
+          index: finalIndex,
+          item: finalItem,
+          ...rest
+        } = getPropsCommonForBarAndStack(item, index);
         return (
           <RenderStackBars
             stackData={props.stackData || []}
@@ -327,38 +339,49 @@ export const BarChart = (props: BarChartPropsType) => {
             stackBorderTopRightRadius={props.stackBorderTopRightRadius}
             stackBorderBottomLeftRadius={props.stackBorderBottomLeftRadius}
             stackBorderBottomRightRadius={props.stackBorderBottomRightRadius}
-            {...getPropsCommonForBarAndStack(item, index)}
+            index={finalIndex}
+            item={finalItem as stackDataItem}
+            {...rest}
           />
         );
       });
     } else {
-      return data.map((item, index) => (
-        <RenderBars
-          data={data}
-          side={side}
-          minHeight={props.minHeight ?? (isAnimated && !isThreeD ? 0.1 : 0)}
-          sideWidth={props.sideWidth}
-          labelWidth={labelWidth}
-          isThreeD={isThreeD}
-          isAnimated={isAnimated}
-          animationDuration={animationDuration}
-          animatedHeight={animatedHeight}
-          appearingOpacity={appearingOpacity}
-          roundedTop={props.roundedTop}
-          roundedBottom={props.roundedBottom}
-          frontColor={props.frontColor}
-          sideColor={props.sideColor}
-          topColor={props.topColor}
-          cappedBars={props.cappedBars}
-          capThickness={props.capThickness}
-          capColor={props.capColor}
-          capRadius={props.capRadius}
-          autoShiftLabels={autoShiftLabels}
-          barMarginBottom={props.barMarginBottom}
-          barStyle={props.barStyle}
-          {...getPropsCommonForBarAndStack(item, index)}
-        />
-      ));
+      return data.map((item, index) => {
+        const {
+          index: finalIndex,
+          item: finalItem,
+          ...rest
+        } = getPropsCommonForBarAndStack(item, index);
+        return (
+          <RenderBars
+            data={data}
+            side={side}
+            minHeight={props.minHeight ?? (isAnimated && !isThreeD ? 0.1 : 0)}
+            sideWidth={props.sideWidth}
+            labelWidth={labelWidth}
+            isThreeD={isThreeD}
+            isAnimated={isAnimated}
+            animationDuration={animationDuration}
+            animatedHeight={animatedHeight}
+            appearingOpacity={appearingOpacity}
+            roundedTop={props.roundedTop}
+            roundedBottom={props.roundedBottom}
+            frontColor={props.frontColor}
+            sideColor={props.sideColor}
+            topColor={props.topColor}
+            cappedBars={props.cappedBars}
+            capThickness={props.capThickness}
+            capColor={props.capColor}
+            capRadius={props.capRadius}
+            autoShiftLabels={autoShiftLabels}
+            barMarginBottom={props.barMarginBottom}
+            barStyle={props.barStyle}
+            index={finalIndex}
+            item={finalItem as barDataItem}
+            {...rest}
+          />
+        );
+      });
     }
   };
 

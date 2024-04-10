@@ -4,7 +4,16 @@ import {View} from 'react-native';
 import {getXForLineInBar, getYForLineInBar} from 'gifted-charts-core';
 import {Rect, Text as CanvasText, Circle} from 'react-native-svg';
 
-export const renderDataPoints = props => {
+export const renderDataPoints = (props: {
+  data: any;
+  lineConfig: any;
+  barWidth: any;
+  containerHeight: any;
+  maxValue: any;
+  firstBarWidth: any;
+  yAxisLabelWidth: any;
+  spacing: any;
+}) => {
   const {
     data,
     lineConfig,
@@ -22,7 +31,8 @@ export const renderDataPoints = props => {
     const currentBarWidth = item.barWidth || barWidth || 30;
     const customDataPoint = item.customDataPoint || lineConfig.customDataPoint;
     const value =
-      item.value ?? item.stacks.reduce((total, item) => total + item.value, 0);
+      item.value ??
+      item.stacks.reduce((total: number, item: any) => total + item.value, 0);
     if (customDataPoint) {
       return (
         <View

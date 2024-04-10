@@ -19,6 +19,7 @@ import Svg, {
   Rect,
   Text as CanvasText,
   Line,
+  NumberProp,
 } from 'react-native-svg';
 import {
   getSegmentedPathObjects,
@@ -167,7 +168,7 @@ export const LineChart = (props: LineChartPropsType) => {
     dataPointsRadius5,
     dataPointsColor5,
     dataPointsShape5,
-    getIsNthAreaChart,
+    //getIsNthAreaChart, TODO not exposed in core?
     textFontSize1,
     textFontSize2,
     textFontSize3,
@@ -408,6 +409,7 @@ export const LineChart = (props: LineChartPropsType) => {
     widthValuesFromSet?.forEach((item, index) => {
       setTimeout(
         () => {
+          // @ts-ignore
           decreaseWidthsFromSet?.[index]?.();
         },
         animateTogether ? 0 : animationDuration * index,
@@ -546,7 +548,7 @@ export const LineChart = (props: LineChartPropsType) => {
     outputRange: [0, totalWidth],
   });
 
-  const onStripPress = (item, index) => {
+  const onStripPress = (item: any, index: number) => {
     setSelectedIndex(index);
     if (props.onFocus) {
       props.onFocus(item, index);
@@ -554,20 +556,20 @@ export const LineChart = (props: LineChartPropsType) => {
   };
 
   const renderDataPoints = (
-    hideDataPoints,
-    dataForRender,
-    originalDataFromProps,
-    dataPtsShape,
-    dataPtsWidth,
-    dataPtsHeight,
-    dataPtsColor,
-    dataPtsRadius,
-    textColor,
-    textFontSize,
-    startIndex,
-    endIndex,
-    isSecondary,
-    showValuesAsDataPointsText,
+    hideDataPoints: boolean,
+    dataForRender: lineDataItem[],
+    originalDataFromProps: {value: any}[] | undefined,
+    dataPtsShape: string,
+    dataPtsWidth: number,
+    dataPtsHeight: number,
+    dataPtsColor: string,
+    dataPtsRadius: number,
+    textColor: string,
+    textFontSize: number,
+    startIndex: number,
+    endIndex: number,
+    isSecondary: boolean,
+    showValuesAsDataPointsText: boolean,
   ) => {
     const getYOrSecondaryY = isSecondary ? getSecondaryY : getY;
     return dataForRender.map((item: lineDataItem, index: number) => {
@@ -630,7 +632,7 @@ export const LineChart = (props: LineChartPropsType) => {
       }
 
       if (showValuesAsDataPointsText) {
-        text = originalDataFromProps[index].value;
+        text = originalDataFromProps ? originalDataFromProps[index]?.value : '';
       }
 
       const currentStripHeight = item.stripHeight ?? stripHeight;
@@ -856,7 +858,9 @@ export const LineChart = (props: LineChartPropsType) => {
     // 6 is for secondaryData
     if (lineNumber === 6 && hideSecondaryPointer) return;
 
-    let pointerItemLocal, pointerYLocal, pointerColorLocal;
+    let pointerItemLocal,
+      pointerYLocal = 0,
+      pointerColorLocal;
     switch (lineNumber) {
       case 1:
         pointerItemLocal = pointerItem;
@@ -1012,16 +1016,16 @@ export const LineChart = (props: LineChartPropsType) => {
     startOpacity: number,
     endOpacity: number,
     strokeDashArray: Array<number> | undefined | null,
-    showArrow: boolean,
-    arrowPoints,
-    arrowStrokeWidth,
-    arrowStrokeColor,
-    arrowFillColor,
-    key,
+    showArrow: undefined | boolean,
+    arrowPoints: string | undefined,
+    arrowStrokeWidth: NumberProp | undefined,
+    arrowStrokeColor: ColorValue | undefined,
+    arrowFillColor: ColorValue | undefined,
+    key: number | undefined,
   ) => {
     if (!points) return null;
     const isCurved = points.includes('C');
-    const isNthAreaChart = getIsNthAreaChart(key ?? 0);
+    const isNthAreaChart = false; // getIsNthAreaChart(key ?? 0);
     let ar: LineProperties[] = [{d: '', color: '', strokeWidth: 0}];
     if (points.includes(RANGE_ENTER)) {
       ar = getRegionPathObjects(
@@ -1255,7 +1259,7 @@ export const LineChart = (props: LineChartPropsType) => {
     );
   };
 
-  const activatePointers = x => {
+  const activatePointers = (x: number) => {
     let factor = (x - initialSpacing) / spacing;
     factor = Math.round(factor);
     factor = Math.min(factor, (data0 ?? data).length - 1);
@@ -1349,11 +1353,11 @@ export const LineChart = (props: LineChartPropsType) => {
     startOpacity: number,
     endOpacity: number,
     strokeDashArray: Array<number> | undefined | null,
-    showArrow,
-    arrowPoints,
-    arrowStrokeWidth,
-    arrowStrokeColor,
-    arrowFillColor,
+    showArrow: boolean | undefined,
+    arrowPoints: string | undefined,
+    arrowStrokeWidth: NumberProp | undefined,
+    arrowStrokeColor: ColorValue | undefined,
+    arrowFillColor: ColorValue | undefined,
     key?: number,
   ) => {
     return (
@@ -1534,11 +1538,11 @@ export const LineChart = (props: LineChartPropsType) => {
     startOpacity: number,
     endOpacity: number,
     strokeDashArray: Array<number> | undefined | null,
-    showArrow,
-    arrowPoints,
-    arrowStrokeWidth,
-    arrowStrokeColor,
-    arrowFillColor,
+    showArrow: boolean | undefined,
+    arrowPoints: string,
+    arrowStrokeWidth: number | undefined,
+    arrowStrokeColor: string | undefined,
+    arrowFillColor: string | undefined,
     key?: number,
   ) => {
     return (
