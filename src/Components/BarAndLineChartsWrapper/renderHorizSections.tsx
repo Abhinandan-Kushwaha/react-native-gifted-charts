@@ -63,7 +63,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
   const {
     secondaryYAxisConfig,
     horizSections,
-    yAxisExtraHeightAtTop,
+    yAxisExtraHeightAtTop = 0,
     secondaryHorizSections,
     showReferenceLine1,
     referenceLine1Config,

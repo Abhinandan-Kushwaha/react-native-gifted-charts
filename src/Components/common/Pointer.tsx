@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 
-export const Pointer = props => {
+export const Pointer = (props: any) => {
   const {
     pointerX,
     pointerYLocal,

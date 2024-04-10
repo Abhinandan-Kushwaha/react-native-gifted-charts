@@ -1,5 +1,5 @@
 import React, {Fragment, useCallback, useEffect, useMemo, useRef} from 'react';
-import {View, Animated, Easing, Text} from 'react-native';
+import {View, Animated, Easing, Text, ColorValue} from 'react-native';
 import {styles} from './styles';
 import Svg, {
   Path,
@@ -190,7 +190,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
     outputRange: [0, totalWidth],
   });
 
-  const onStripPress = (item, index) => {
+  const onStripPress = (item: any, index: number) => {
     setSelectedIndex(index);
     if (props.onFocus) {
       props.onFocus(item, index);
@@ -198,16 +198,16 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
   };
 
   const renderDataPoints = (
-    dataForRender,
-    dataPtsShape,
-    dataPtsWidth,
-    dataPtsHeight,
-    dataPtsColor,
-    dataPtsRadius,
-    textColor,
-    textFontSize,
-    startIndex,
-    endIndex,
+    dataForRender: bicolorLineDataItem[],
+    dataPtsShape: string | undefined,
+    dataPtsWidth: number,
+    dataPtsHeight: number,
+    dataPtsColor: ColorValue,
+    dataPtsRadius: number,
+    textColor: ColorValue,
+    textFontSize: number,
+    startIndex: number,
+    endIndex: number,
   ) => {
     return dataForRender.map((item: bicolorLineDataItem, index: number) => {
       if (index < startIndex || index > endIndex) return null;
@@ -495,27 +495,31 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
         strokeDashArray.length === 2 &&
         typeof strokeDashArray[0] === 'number' &&
         typeof strokeDashArray[1] === 'number'
-          ? pointsArray.map((points, index) => (
-              <Path
-                key={index}
-                d={points.points}
-                fill="none"
-                stroke={points.color === 'green' ? color : colorNegative}
-                strokeWidth={currentLineThickness || thickness}
-                strokeDasharray={strokeDashArray}
-              />
-            ))
-          : pointsArray.map((points, index) => {
-              return (
+          ? pointsArray.map(
+              (points: {points: string; color: ColorValue}, index: number) => (
                 <Path
                   key={index}
                   d={points.points}
                   fill="none"
                   stroke={points.color === 'green' ? color : colorNegative}
                   strokeWidth={currentLineThickness || thickness}
+                  strokeDasharray={strokeDashArray}
                 />
-              );
-            })}
+              ),
+            )
+          : pointsArray.map(
+              (points: {points: string; color: ColorValue}, index: number) => {
+                return (
+                  <Path
+                    key={index}
+                    d={points.points}
+                    fill="none"
+                    stroke={points.color === 'green' ? color : colorNegative}
+                    strokeWidth={currentLineThickness || thickness}
+                  />
+                );
+              },
+            )}
 
         {/***********************      For Area Chart        ************/}
 
