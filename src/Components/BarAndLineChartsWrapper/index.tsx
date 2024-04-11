@@ -52,6 +52,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
 
     onEndReached,
     onStartReached,
+    onMomentumScrollEnd,
   } = props;
 
   const {
@@ -77,7 +78,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     verticalLinesProps,
     lineInBarChartProps,
     lineInBarChartProps2,
-  } = useBarAndLineChartsWrapper({...props, isRTL:I18nManager.isRTL});
+  } = useBarAndLineChartsWrapper({...props, isRTL: I18nManager.isRTL});
 
   useEffect(() => {
     if (pointerConfig && getPointerProps) {
@@ -124,6 +125,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
           setCanMomentum(true);
         }}
         onMomentumScrollEnd={({nativeEvent}) => {
+          if (onMomentumScrollEnd) {
+            onMomentumScrollEnd();
+          }
           if (isCloseToEnd(nativeEvent) && canMomentum) {
             onEndReached ? onEndReached() : null;
             setCanMomentum(false);
