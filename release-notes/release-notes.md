@@ -1,3 +1,15 @@
+# 🎉 1.4.10
+
+## ✨ Features added-
+
+Added the prop `onMomentumScrollEnd` to Bar and Line charts. It can be used to fire an event when scroll is completed. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/601
+
+---
+
+---
+
+---
+
 # 🎉 1.4.9
 
 ## ✨ Features added-

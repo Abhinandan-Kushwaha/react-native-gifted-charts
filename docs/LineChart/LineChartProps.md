@@ -36,6 +36,7 @@
 | scrollAnimation               | boolean              | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true                          |
 | scrollEventThrottle           | number               | (only for iOS) see https://reactnative.dev/docs/scrollview#scrolleventthrottle-ios                             | 0                             |
 | onScroll                      | Function             | callback function called when the chart is scrolled horizontally                                               | \_                            |
+| onMomentumScrollEnd           | Function             | callback function called when scroll is completed                                                              | \_                            |
 | initialSpacing                | number               | distance of the first data point from the Y axis                                                               | 20                            |
 | endSpacing                    | number               | distance/padding left at the end of the line chart                                                             | adjustWidth ? 0 : 20          |
 | stepChart                     | boolean              | If set true, renders a step chart                                                                              | false                         |
