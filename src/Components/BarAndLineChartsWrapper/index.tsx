@@ -1,14 +1,14 @@
-import React, {Fragment, useEffect} from 'react';
-import {View, ScrollView, StyleSheet, I18nManager} from 'react-native';
-import {renderHorizSections} from './renderHorizSections';
+import {
+  BarAndLineChartsWrapperTypes,
+  chartTypes,
+  useBarAndLineChartsWrapper,
+  yAxisSides,
+} from 'gifted-charts-core';
+import React, { Fragment, useEffect } from 'react';
+import { I18nManager, ScrollView, StyleSheet, View } from 'react-native';
+import { renderHorizSections } from './renderHorizSections';
 import RenderLineInBarChart from './renderLineInBarChart';
 import RenderVerticalLines from './renderVerticalLines';
-import {
-  chartTypes,
-  yAxisSides,
-  BarAndLineChartsWrapperTypes,
-  useBarAndLineChartsWrapper,
-} from 'gifted-charts-core';
 
 const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const {
@@ -53,6 +53,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     onEndReached,
     onStartReached,
     onMomentumScrollEnd,
+    nestedScrollEnabled
   } = props;
 
   const {
@@ -124,6 +125,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         onScrollBeginDrag={() => {
           setCanMomentum(true);
         }}
+        nestedScrollEnabled={nestedScrollEnabled}
         onMomentumScrollEnd={({nativeEvent}) => {
           if (onMomentumScrollEnd) {
             onMomentumScrollEnd();
