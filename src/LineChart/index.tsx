@@ -40,7 +40,7 @@ import {StripAndLabel} from '../Components/common/StripAndLabel';
 import {Pointer} from '../Components/common/Pointer';
 
 let initialData: Array<lineDataItem> | null = null;
-let animations: Array<Animated.Value> = [];
+let animations: Array<Animated.Value | undefined> = [];
 
 export const LineChart = (props: LineChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
@@ -54,7 +54,7 @@ export const LineChart = (props: LineChartPropsType) => {
 
   if (!initialData) {
     initialData = props.dataSet?.[0]?.data ?? props.data ?? [];
-    animations = initialData.map(item => new Animated.Value(item.value));
+    animations = initialData.map(item => {if(item.value) return new Animated.Value(item.value)});
   }
 
   const {
