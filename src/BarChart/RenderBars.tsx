@@ -4,7 +4,7 @@ import AnimatedThreeDBar from '../Components/AnimatedThreeDBar';
 import Animated2DWithGradient from './Animated2DWithGradient';
 import Cap from '../Components/BarSpecificComponents/cap';
 import BarBackgroundPattern from '../Components/BarSpecificComponents/barBackgroundPattern';
-import LinearGradient from "../Components/common/LinearGradient";
+import LinearGradient from '../Components/common/LinearGradient';
 import {
   getPropsForAnimated2DWithGradient,
   RenderBarsPropsType,
@@ -51,6 +51,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
     pointerConfig,
     noOfSectionsBelowXAxis,
     yAxisOffset,
+    barWidth,
   } = props;
 
   const barHeight = Math.max(
@@ -88,8 +89,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
               (item.labelWidth ||
                 props.labelWidth ||
                 item.barWidth ||
-                props.barWidth ||
-                30) + spacing,
+                barWidth) + spacing,
             left: spacing / -2,
             position: 'absolute',
             height: props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
@@ -154,8 +154,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
               (item.labelWidth ||
                 props.labelWidth ||
                 item.barWidth ||
-                props.barWidth ||
-                30) + spacing,
+                barWidth) + spacing,
             left: spacing / -2,
             position: 'absolute',
             height: props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
@@ -206,8 +205,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
   let leftSpacing = initialSpacing;
   for (let i = 0; i < index; i++) {
     leftSpacing +=
-      (data[i].spacing ?? propSpacing) +
-      (data[i].barWidth || props.barWidth || 30);
+      (data[i].spacing ?? propSpacing) + (data[i].barWidth || barWidth);
   }
 
   const static2DWithGradient = (item: barDataItem) => {
@@ -249,9 +247,9 @@ const RenderBars = (props: RenderBarsPropsType) => {
             style={[
               {
                 position: 'absolute',
-                top: (item.barWidth || props.barWidth || 30) * -1,
-                height: item.barWidth || props.barWidth || 30,
-                width: item.barWidth || props.barWidth || 30,
+                top: (item.barWidth || barWidth) * -1,
+                height: item.barWidth || barWidth,
+                width: item.barWidth || barWidth,
                 justifyContent:
                   (horizontal && !intactTopLabel) || item.value < 0
                     ? 'center'
@@ -287,25 +285,30 @@ const RenderBars = (props: RenderBarsPropsType) => {
       height: barHeight,
       marginRight: spacing,
     },
-    item.value < 0
+
+    pointerConfig
       ? {
           transform: [
             {
               translateY:
-                (Math.abs(item.value) * (containerHeight || 200)) /
-                (maxValue || 200),
+                (containerHeight || 200) -
+                (barHeight - 10 + xAxisLabelsVerticalShift) +
+                (item.value < 0
+                  ? (Math.abs(item.value) * (containerHeight || 200)) /
+                    (maxValue || 200)
+                  : 0),
             },
-            {rotateZ: '180deg'},
           ],
         }
-      : pointerConfig
+      : item.value < 0
         ? {
             transform: [
               {
                 translateY:
-                  (containerHeight || 200) -
-                  (barHeight - 10 + xAxisLabelsVerticalShift),
+                  (Math.abs(item.value) * (containerHeight || 200)) /
+                  (maxValue || 200),
               },
+              {rotateZ: '180deg'},
             ],
           }
         : null,
@@ -353,10 +356,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
               height: props.xAxisIndicesHeight,
               width: props.xAxisIndicesWidth,
               bottom: props.xAxisIndicesHeight / -2,
-              left:
-                ((item.barWidth || props.barWidth || 30) -
-                  props.xAxisIndicesWidth) /
-                2,
+              left: ((item.barWidth || barWidth) - props.xAxisIndicesWidth) / 2,
               backgroundColor: props.xAxisIndicesColor,
             }}
           />
@@ -367,7 +367,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
             sideWidth={
               item.sideWidth ||
               props.sideWidth ||
-              (item.barWidth || props.barWidth || 30) / 2
+              (item.barWidth || barWidth) / 2
             }
             side={side || 'left'}
             sideColor={item.sideColor || props.sideColor || ''}

@@ -40,7 +40,7 @@ export const PieChartPro = (props: PieChartPropsType) => {
     edgesRadius = 0,
     showGradient,
     ring,
-    pieInnerComponent,
+    centerLabelComponent,
     strokeDashArray,
     semiCircle,
   } = props;
@@ -103,7 +103,7 @@ export const PieChartPro = (props: PieChartPropsType) => {
             ? {position: 'absolute', bottom: 0}
             : {position: 'absolute'}
         }>
-        {pieInnerComponent ? pieInnerComponent() : null}
+        {centerLabelComponent ? centerLabelComponent() : null}
       </View>
       <Svg
         {...rnSvgProps}

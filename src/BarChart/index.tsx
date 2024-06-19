@@ -86,7 +86,7 @@ export const BarChart = (props: BarChartPropsType) => {
     autoShiftLabels,
     getPropsCommonForBarAndStack,
     barAndLineChartsWrapperProps,
-  } = useBarChart({...props, heightValue, widthValue, opacValue});
+  } = useBarChart({...props, heightValue, widthValue, opacValue, parentWidth: props.parentWidth ?? screenWidth});
 
   const labelsAppear = useCallback(() => {
     opacValue.setValue(0);
