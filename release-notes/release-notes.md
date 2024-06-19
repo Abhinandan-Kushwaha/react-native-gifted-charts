@@ -8,7 +8,7 @@
 ## 🐛 Bug fixes
 
 1. Fixed the issue- Bar chart with pointerConfig breaks with negative values. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/654
-2. Fixed the issue- When using dataSet, only one pointer is displayed on the line chart. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/610
+2. Fixed the issue- When using dataSet, only one pointer is displayed on the line chart. Also added the prop `pointerColorsForDataSet`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/610
 3. Fixed issue with pointers on secondary data line not displaying at proper position (earlier they were all displayed at x-axis)
 4. Removed the wrong prop name `pieInnerComponent` in PieChartPro and replaced it with the correct name- `centerLabelComponent`
 
