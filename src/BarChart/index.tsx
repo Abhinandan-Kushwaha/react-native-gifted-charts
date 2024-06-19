@@ -1,12 +1,12 @@
-import { BarChartPropsType, useBarChart } from 'gifted-charts-core';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import { Animated, Easing, View } from 'react-native';
-import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
-import { Pointer } from '../Components/common/Pointer';
-import { StripAndLabel } from '../Components/common/StripAndLabel';
-import { screenWidth } from '../utils';
+import React, {useCallback, useEffect, useMemo, useRef} from 'react';
+import {Animated, Easing, View} from 'react-native';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
+import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
+import {BarChartPropsType, useBarChart} from 'gifted-charts-core';
+import {StripAndLabel} from '../Components/common/StripAndLabel';
+import {Pointer} from '../Components/common/Pointer';
+import {screenWidth} from '../utils';
 
 export const BarChart = (props: BarChartPropsType) => {
   const heightValue = useMemo(() => new Animated.Value(0), []);
