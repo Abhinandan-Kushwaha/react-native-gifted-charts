@@ -87,6 +87,8 @@ export const LineChart = (props: LineChartPropsType) => {
     setPointerItem4,
     pointerY5,
     setPointerY5,
+    pointerYsForDataSet,
+    setPointerYsForDataSet,
     pointerItem5,
     setPointerItem5,
     secondaryPointerY,
@@ -185,6 +187,7 @@ export const LineChart = (props: LineChartPropsType) => {
     getX,
     getY,
     getSecondaryY,
+    secondaryMaxValue,
     showValuesAsDataPointsText,
     thickness1,
     thickness2,
@@ -290,6 +293,7 @@ export const LineChart = (props: LineChartPropsType) => {
     showDataPointOnFocus,
     showStripOnFocus,
     showTextOnFocus,
+    showDataPointLabelOnFocus,
     stripHeight,
     stripWidth,
     stripColor,
@@ -302,7 +306,11 @@ export const LineChart = (props: LineChartPropsType) => {
     lineGradientStartColor,
     lineGradientEndColor,
     barAndLineChartsWrapperProps,
-  } = useLineChart({...props, animations, screenWidth});
+  } = useLineChart({
+    ...props,
+    animations,
+    parentWidth: props.parentWidth ?? screenWidth,
+  });
 
   const widthValuesFromSet = useMemo(
     () => dataSet?.map(set => new Animated.Value(0)),
@@ -783,7 +791,11 @@ export const LineChart = (props: LineChartPropsType) => {
                           spacing * index,
                       },
                     ]}>
-                    {dataPointLabelComponent()}
+                    {showDataPointLabelOnFocus
+                      ? index === selectedIndex
+                        ? dataPointLabelComponent()
+                        : null
+                      : dataPointLabelComponent()}
                   </View>
                 ) : null
               ) : text || item.dataPointText ? (
@@ -847,7 +859,31 @@ export const LineChart = (props: LineChartPropsType) => {
     });
   };
 
-  const renderPointer = (lineNumber: number) => {
+  const renderPointer = (lineNumber: number, isDataSet?: boolean) => {
+    if (isDataSet) {
+      let pointerItemLocal, pointerYLocal, pointerColorLocal;
+      return dataSet?.map((set, index) => {
+        const pIndex = barAndLineChartsWrapperProps.pointerIndex;
+        pointerItemLocal = set[pIndex];
+        pointerYLocal = pointerYsForDataSet[index];
+        pointerColorLocal =
+          pointerConfig?.pointerColorsForDataSet?.[index] ?? pointerColor;
+        return (
+          <Fragment key={'dSetPts' + index}>
+            {Pointer({
+              pointerX,
+              pointerYLocal: pointerYLocal + xAxisThickness,
+              pointerComponent,
+              pointerHeight,
+              pointerRadius,
+              pointerWidth,
+              pointerItemLocal,
+              pointerColorLocal,
+            })}
+          </Fragment>
+        );
+      });
+    }
     if (lineNumber === 1 && hidePointer1) return;
     if (lineNumber === 2 && hidePointer2) return;
     if (lineNumber === 3 && hidePointer3) return;
@@ -1144,7 +1180,7 @@ export const LineChart = (props: LineChartPropsType) => {
           );
         }) ?? null}
 
-        {/***  !!! Here it's done thrice intentionally, trying to make it to only 1 breaks things !!!  ***/}
+        {/***  !!! Here it's done 5 times intentionally, trying to make it to only 1 breaks things !!!  ***/}
         {renderDataPoints(
           hideDataPoints1,
           data,
@@ -1329,11 +1365,25 @@ export const LineChart = (props: LineChartPropsType) => {
       if (item) {
         y =
           containerHeight -
-          (item.value * containerHeight) / maxValue -
+          (item.value * containerHeight) / secondaryMaxValue -
           (pointerRadius || pointerHeight / 2) +
           10;
         setSecondaryPointerY(y);
         setSecondaryPointerItem(item);
+      }
+    }
+    if (dataSet?.length) {
+      if (dataSet[0].data[factor]) {
+        const ysForDataSet = dataSet.map(set => {
+          const item = set.data[factor];
+          const y =
+            containerHeight -
+            (item.value * containerHeight) / maxValue -
+            (pointerRadius || pointerHeight / 2) +
+            10;
+          return y;
+        });
+        setPointerYsForDataSet(ysForDataSet);
       }
     }
   };
@@ -1458,11 +1508,25 @@ export const LineChart = (props: LineChartPropsType) => {
             if (item) {
               y =
                 containerHeight -
-                (item.value * containerHeight) / maxValue -
+                (item.value * containerHeight) / secondaryMaxValue -
                 (pointerRadius || pointerHeight / 2) +
                 10;
               setSecondaryPointerY(y);
               setSecondaryPointerItem(item);
+            }
+          }
+          if (dataSet?.length) {
+            if (dataSet[0].data[factor]) {
+              const ysForDataSet = dataSet.map(set => {
+                const item = set.data[factor];
+                const y =
+                  containerHeight -
+                  (item.value * containerHeight) / maxValue -
+                  (pointerRadius || pointerHeight / 2) +
+                  10;
+                return y;
+              });
+              setPointerYsForDataSet(ysForDataSet);
             }
           }
         }}
@@ -1644,11 +1708,25 @@ export const LineChart = (props: LineChartPropsType) => {
             if (item) {
               y =
                 containerHeight -
-                (item.value * containerHeight) / maxValue -
+                (item.value * containerHeight) / secondaryMaxValue -
                 (pointerRadius || pointerHeight / 2) +
                 10;
               setSecondaryPointerY(y);
               setSecondaryPointerItem(item);
+            }
+          }
+          if (dataSet?.length) {
+            if (dataSet[0].data[factor]) {
+              const ysForDataSet = dataSet.map(set => {
+                const item = set.data[factor];
+                const y =
+                  containerHeight -
+                  (item.value * containerHeight) / maxValue -
+                  (pointerRadius || pointerHeight / 2) +
+                  10;
+                return y;
+              });
+              setPointerYsForDataSet(ysForDataSet);
             }
           }
         }}
@@ -2021,8 +2099,9 @@ export const LineChart = (props: LineChartPropsType) => {
             }}>
             {!stripOverPointer && renderStripAndLabel()}
             {dataSet ? (
-              renderPointer(1)
+              renderPointer(0, true)
             ) : (
+              // dataSet.map((set, index) => renderPointer(index))
               <>
                 {renderPointer(1)}
                 {points2 ? renderPointer(2) : null}
