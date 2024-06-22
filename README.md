@@ -17,7 +17,7 @@ The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar and Popul
 
 ## 📣 Announcement
 
-The web counterpart of this library is public now. Try out our new reactJS library- [react-gifted-charts](https://github.com/Abhinandan-Kushwaha/react-gifted-charts) <br />
+The web counterpart of this library is public now. Try out our new reactJS library- [react-gifted-charts](https://www.npmjs.com/package/react-gifted-charts) <br />
 The exact same piece of code that you write to render charts in react-native, can be used to render charts in reactJS using this library!
 
 
