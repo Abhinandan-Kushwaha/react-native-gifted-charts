@@ -53,6 +53,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     onEndReached,
     onStartReached,
     onMomentumScrollEnd,
+    nestedScrollEnabled
   } = props;
 
   const {
@@ -124,6 +125,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         onScrollBeginDrag={() => {
           setCanMomentum(true);
         }}
+        nestedScrollEnabled={nestedScrollEnabled}
         onMomentumScrollEnd={({nativeEvent}) => {
           if (onMomentumScrollEnd) {
             onMomentumScrollEnd();
