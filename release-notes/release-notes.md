@@ -1,3 +1,21 @@
+# 🎉 1.4.12
+
+## ✨ Features added-
+
+1. Added the prop `focusedDataPointIndex` to Line charts used to set initially focused data point and to override the focus behaviour on `onFocus`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/680
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- data points getting cropped in non-scrollable fixed width Line and Area charts. See- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/623 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/681
+2. Fixed the issue- yAxisLabelTexts not working (showing NaN as labels) See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/22#issuecomment-2192243599
+
+
+---
+
+---
+
+---
+
 # 🎉 1.4.11
 
 ## ✨ Features added-

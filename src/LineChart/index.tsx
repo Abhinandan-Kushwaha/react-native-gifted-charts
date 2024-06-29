@@ -555,7 +555,9 @@ export const LineChart = (props: LineChartPropsType) => {
   });
 
   const onStripPress = (item, index) => {
-    setSelectedIndex(index);
+    if (props.focusedDataPointIndex === undefined || !props.onFocus) {
+      setSelectedIndex(index);
+    }
     if (props.onFocus) {
       props.onFocus(item, index);
     }
