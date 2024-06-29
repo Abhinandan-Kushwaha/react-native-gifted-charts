@@ -606,6 +606,7 @@ The default value of `showArrowBase` is true. To fill the arrow with `fillColor`
 | dataPointsRadius5          | number       | Radius of data points for the fifth dataset (when data points' shape is circular)               | 3                                         |
 | dataPointsColor5           | ColorValue   | Color of data points for the fifth dataset                                                      | black                                     |
 | dataPointsShape5           | string       | Shape of data points for the fifth dataset (_'rectangular'_ or _'circular'_)                    | 'circular'                                |
+| focusedDataPointIndex      | number       | Index of the focused data point, works only when focusEnabled prop is used                      | \_                                        |
 | focusedDataPointShape      | String       | Shape of the data points when focused due to press event                                        | item.dataPointsShape OR dataPointsShape   |
 | focusedDataPointWidth      | number       | Width of the data points when focused due to press event                                        | item.dataPointsWidth OR dataPointsWidth   |
 | focusedDataPointHeight     | number       | Height of the data points when focused due to press event                                       | item.dataPointsHeight OR dataPointsHeight |
@@ -725,6 +726,7 @@ To achieve this the `focusEnabled` props must be set to true. In addition, use b
 | ------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
 | focusEnabled              | boolean    | If set true, allows users to press on the chart and focuses the nearest data point (focus event can be then handled using the `onFocus` prop) | false                                     |
 | onFocus                   | Function   | The callback function that handles the focus event. `item` and `index` are received as props                                                  | \_                                        |
+| focusedDataPointIndex     | number     | Index of the focused data point, used to set initially focused data point and to override the focus behaviour on onFocus                      | \_                                        |
 | showDataPointOnFocus      | boolean    | If set true, it shows the data point corresponding to the focused area of the chart                                                           | false                                     |
 | showStripOnFocus          | boolean    | If set true, it shows a vertical strip corresponding to the focused area of the chart                                                         | false                                     |
 | showTextOnFocus           | boolean    | If set true, it shows the data point text corresponding to the focused area of the chart                                                      | false                                     |
