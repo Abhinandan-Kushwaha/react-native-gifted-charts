@@ -2,12 +2,13 @@
   "name": "react-native-gifted-charts",
   "version": "1.4.12",
   "description": "The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar and Population Pyramid charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.",
-  "main": "src/index.tsx",
+  "main": "dist/index.tsx",
   "files": [
-    "src"
+    "dist"
   ],
   "scripts": {
     "android": "react-native run-android",
+    "build": "babel --extensions .ts,.tsx ./src -d ./dist",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
@@ -27,7 +28,11 @@
     "gifted-charts-core": "^0.1.8"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.5",
+    "@babel/cli": "^7.24.7",
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
     "@babel/runtime": "^7.22.5",
     "@react-native-community/eslint-config": "^3.2.0",
     "@types/jest": "^29.5.2",
