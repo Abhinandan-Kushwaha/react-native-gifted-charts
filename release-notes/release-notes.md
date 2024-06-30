@@ -1,4 +1,4 @@
-# 🎉 1.4.12
+# 🎉 1.4.13
 
 ## ✨ Features added-
 
@@ -9,6 +9,16 @@
 1. Fixed the issue- data points getting cropped in non-scrollable fixed width Line and Area charts. See- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/623 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/681
 2. Fixed the issue- yAxisLabelTexts not working (showing NaN as labels) See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/22#issuecomment-2192243599
 
+
+---
+
+---
+
+---
+
+# 1.4.12
+
+Accidental release, please don't use this version.
 
 ---
 
