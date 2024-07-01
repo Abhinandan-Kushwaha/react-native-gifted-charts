@@ -23,6 +23,7 @@ export const renderDataPoints = props => {
     const customDataPoint = item.customDataPoint || lineConfig.customDataPoint;
     const value =
       item.value ?? item.stacks.reduce((total, item) => total + item.value, 0);
+    if (item.hideDataPoint) return null;
     if (customDataPoint) {
       return (
         <View
