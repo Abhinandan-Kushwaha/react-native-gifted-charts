@@ -52,6 +52,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
     noOfSectionsBelowXAxis,
     yAxisOffset,
     barWidth,
+    labelsDistanceFromXaxis = 0,
   } = props;
 
   const barHeight = Math.max(
@@ -97,7 +98,8 @@ const RenderBars = (props: RenderBarsPropsType) => {
               (rotateLabel
                 ? -40
                 : -6 - xAxisTextNumberOfLines * 18 - xAxisLabelsVerticalShift) -
-              barMarginBottom,
+              barMarginBottom -
+              labelsDistanceFromXaxis,
           },
           rotateLabel
             ? horizontal
@@ -406,7 +408,9 @@ const RenderBars = (props: RenderBarsPropsType) => {
           activeOpacity={props.activeOpacity || 0.2}
           onPress={() => {
             if (renderTooltip || props.focusBarOnPress) {
-              setSelectedIndex(index);
+              if (props.focusedBarIndex === undefined || !props.onPress) {
+                setSelectedIndex(index);
+              }
             }
             item.onPress
               ? item.onPress()

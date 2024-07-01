@@ -1,3 +1,21 @@
+# 🎉 1.4.14
+
+## ✨ Features added-
+
+1. Added the prop `focusedBarIndex` to Bar charts used to set initially focused bar and to override the focus behaviour on `onPress`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/675
+2. Added the prop `labelsDistanceFromXaxis` to shift the X-axis labels vertically up or down from their original position (that is just below the x axis). This prop will be very useful in case of Stacked Bar charts having both +ve and -ve values in the same stack. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/678
+3. Added the prop `autoShiftLabelsForNegativeStacks` to stacked Bar charts and its default value is `true`. It is used to decide whether the X-axis labels should appear just under the negative bar (in case of Stacked Bar charts having both +ve and -ve values in the same stack), or whether they all should appear in one single line. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/678
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- Y-axis under the X-axis has one less section than expected. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/676
+
+---
+
+---
+
+---
+
 # 🎉 1.4.13
 
 ## ✨ Features added-
@@ -8,7 +26,6 @@
 
 1. Fixed the issue- data points getting cropped in non-scrollable fixed width Line and Area charts. See- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/623 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/681
 2. Fixed the issue- yAxisLabelTexts not working (showing NaN as labels) See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/22#issuecomment-2192243599
-
 
 ---
 
@@ -62,7 +79,7 @@ Added the prop `onMomentumScrollEnd` to Bar and Line charts. It can be used to f
 
 ## ✨ Features added-
 
-1. Added support for multiple lines corresponding to secondary y-axis. Now we can add the property `isSecondary` inside the objects of the `dataSet` array. When using isSecondary, make sure to pass the `secondaryYAxis` prop. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/586 
+1. Added support for multiple lines corresponding to secondary y-axis. Now we can add the property `isSecondary` inside the objects of the `dataSet` array. When using isSecondary, make sure to pass the `secondaryYAxis` prop. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/586
 
 2. Added support for <b>`ring`</b> Pie charts. Just pass the prop `ring` in the `<PieChartPro>` component to make a ring like Pie chart. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/584
 
@@ -77,10 +94,12 @@ Added the prop `onMomentumScrollEnd` to Bar and Line charts. It can be used to f
 # 🎉 1.4.8 Mega Release ⭐️
 
 ## ✨ Features added-
-### Animation in Pie and donut charts using the __`<PieChartPro>`__ component. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/555
-### Curved paths (border-radius) in donut sections supported using the __`<PieChartPro>`__ component. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/554
-### Support for expo gradient, thanks to onyx-flame for his PR https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/571
 
+### Animation in Pie and donut charts using the **`<PieChartPro>`** component. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/555
+
+### Curved paths (border-radius) in donut sections supported using the **`<PieChartPro>`** component. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/554
+
+### Support for expo gradient, thanks to onyx-flame for his PR https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/571
 
 ## 🐛 Bug fixes
 

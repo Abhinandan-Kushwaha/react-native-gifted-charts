@@ -14,6 +14,7 @@
 | onPressOut                   | Function             | Callback function called on press out of a Bar (takes item and index as parameter)                                | null                |
 | focusBarOnPress              | boolean              | used to focus a bar on press by applying styles defined in focusedBarConfig                                       | false               |
 | focusedBarConfig             | FocusedBarConfig     | styles for the focused bar including color, width, opacity, borderRadius etc                                      | \_                  |
+| focusedBarIndex              | number               | index of the initially focused bar, works only when focusBarOnPress is true                                       | -1                  |
 | maxValue                     | number               | Maximum value shown in the Y axis                                                                                 | 200                 |
 | yAxisOffset                  | number               | Starting (minimum) value in the Y axis (value at the origin)                                                      | 0                   |
 | mostNegativeValue            | number               | The most negative value shown in the Y axis (to be used only if the data set has negative values too)             | \_                  |
@@ -223,6 +224,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | labelWidth                 | number     | Width of the Label text appearing below the bar (under the X axis)             |
 | labelTextStyle             | object     | Style object for the label text appearing below the bar                        |
 | labelComponent             | Component  | Custom label component appearing below the bar                                 |
+| labelsDistanceFromXaxis    | number     | Distance of the X Axis label from the X axis                                   |
 | topLabelComponent          | Component  | Custom component appearing above the bar                                       |
 | topLabelContainerStyle     | object     | Style object for the container of the custom component appearing above the bar |
 | cappedBars                 | boolean    | To show caps on the top of bar                                                 |
@@ -309,6 +311,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | hideAxesAndRules               | boolean                   | To hide axes, rules, labels altogether                                                                         | false                        |
 | hideOrigin                     | boolean                   | To hide the y Axis label at origin (i.e. 0)                                                                    | false                        |
 | labelWidth                     | number                    | Width of the Label text appearing below the bar (under the X axis)                                             | barWidth                     |
+| labelsDistanceFromXaxis        | number                    | Distance of the X Axis label from the X axis                                                                   | 0                            |
 | xAxisTextNumberOfLines         | number                    | Number of lines for x axis label text                                                                          | 1                            |
 | xAxisLabelsHeight              | number                    | Height of X axis labels container                                                                              | xAxisTextNumberOfLines \* 18 |
 | xAxisLabelsVerticalShift       | number                    | prop to adjust the vertical position of X axis labels (move X axis labels up or down)                          | 0                            |
@@ -521,19 +524,20 @@ The stackData passed to the BarChart component is an array of objects.\
 Each object contains a mandatory key named stacks.\
 The value corresponding to the stacks key is an array of objects, each object representing a section of the stack.
 
-| Prop                         | Type                  | Description                                                                                  | Default value        |
-| ---------------------------- | --------------------- | -------------------------------------------------------------------------------------------- | -------------------- |
-| stackData                    | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table | false                |
-| barBorderRadius              | number                | Border radius of each bar of the stack                                                       | 0                    |
-| barBorderTopLeftRadius       | number                | Top left border radius of each bar of the stack                                              | barBorderRadius \| 0 |
-| barBorderTopRightRadius      | number                | Top right border radius of each bar of the stack                                             | barBorderRadius \| 0 |
-| barBorderBottomLeftRadius    | number                | Bottom left border radius of each bar of the stack                                           | barBorderRadius \| 0 |
-| barBorderBottomRightRadius   | number                | Bottom right border radius of each bar of the stack                                          | barBorderRadius \| 0 |
-| stackBorderRadius            | number                | Border radius of the top and bottom bars of the stack                                        |
-| stackBorderTopLeftRadius     | number                | Top left border radius of the top bar of the stack                                           |
-| stackBorderTopRightRadius    | number                | Top right border radius of the top bar of the stack                                          |
-| stackBorderBottomLeftRadius  | number                | Bottom left border radius of the bottom bar of the stack                                     |
-| stackBorderBottomRightRadius | number                | Bottom right border radius of the bottom bar of the stack                                    |
+| Prop                             | Type                  | Description                                                                                                               | Default value        |
+| -------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| stackData                        | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table                              | false                |
+| barBorderRadius                  | number                | Border radius of each bar of the stack                                                                                    | 0                    |
+| barBorderTopLeftRadius           | number                | Top left border radius of each bar of the stack                                                                           | barBorderRadius \| 0 |
+| barBorderTopRightRadius          | number                | Top right border radius of each bar of the stack                                                                          | barBorderRadius \| 0 |
+| barBorderBottomLeftRadius        | number                | Bottom left border radius of each bar of the stack                                                                        | barBorderRadius \| 0 |
+| barBorderBottomRightRadius       | number                | Bottom right border radius of each bar of the stack                                                                       | barBorderRadius \| 0 |
+| stackBorderRadius                | number                | Border radius of the top and bottom bars of the stack                                                                     |
+| stackBorderTopLeftRadius         | number                | Top left border radius of the top bar of the stack                                                                        |
+| stackBorderTopRightRadius        | number                | Top right border radius of the top bar of the stack                                                                       |
+| stackBorderBottomLeftRadius      | number                | Bottom left border radius of the bottom bar of the stack                                                                  |
+| stackBorderBottomRightRadius     | number                | Bottom right border radius of the bottom bar of the stack                                                                 |
+| autoShiftLabelsForNegativeStacks | boolean               | Whether the x axis labels should auto shift to a position below the bar, if the bar is under x-axis due to negative value |
 
 **Note** The `frontColor` prop is replaced by `color` prop in Stacked Bar charts.
 
