@@ -30,7 +30,7 @@
 | showScrollIndicator          | boolean              | To show horizontal scroll indicator                                                                               | false               |
 | indicatorColor               | String               | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                   | default             |
 | showLine                     | boolean              | To show a Line chart over the Bar chart with the same data                                                        | false               |
-| lineData                     | Array of items       | The data object for the line chart (use only when showLine is true)                                               | data                |
+| lineData                     | Array of items       | The data object for the line chart (use only when showLine is true). To hide any datapoint pass hideDataPoint prop as true in specific data item.                                                | data                |
 | lineConfig                   | lineConfigType       | Properties of the Line chart shown over the Bar chart (lineConfigType) is described below                         | defaultLineConfig   |
 | lineData2                    | Array of items       | The data object for the second line chart (use only when showLine is true)                                        | \_                  |
 | lineConfig2                  | lineConfigType       | Properties of the second Line chart shown over the Bar chart (lineConfigType) is described below                  | defaultLineConfig   |
