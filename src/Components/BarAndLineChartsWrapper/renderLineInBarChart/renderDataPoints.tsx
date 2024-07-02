@@ -16,6 +16,7 @@ export const renderDataPoints = props => {
     spacing,
   } = props;
   return data.map((item: any, index: number) => {
+    if (item.hideDataPoint) return null;
     if (index < lineConfig.startIndex || index > lineConfig.endIndex) {
       return null;
     }
@@ -23,7 +24,6 @@ export const renderDataPoints = props => {
     const customDataPoint = item.customDataPoint || lineConfig.customDataPoint;
     const value =
       item.value ?? item.stacks.reduce((total, item) => total + item.value, 0);
-    if (item.hideDataPoint) return null;
     if (customDataPoint) {
       return (
         <View
