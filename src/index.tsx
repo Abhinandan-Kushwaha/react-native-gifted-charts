@@ -22,4 +22,5 @@ export {
   ruleTypes,
   yAxisSides,
   EdgePosition,
+  DataSet,
 } from 'gifted-charts-core';
