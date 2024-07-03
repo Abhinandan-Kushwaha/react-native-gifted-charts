@@ -1,6 +1,7 @@
 ## Features
 
-1. Issue with eslint - tsc https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/222
+1. Scatter Chart - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/518
+2. Issue with eslint - tsc https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/222
 
 ## To-dos in documentation-
 
