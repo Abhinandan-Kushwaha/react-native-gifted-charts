@@ -20,9 +20,12 @@
 | noOfSectionsBelowXAxis        | number               | Number of sections in the Y axis below X axis (in case the data set has negative values too)                   | 0                             |
 | stepValue                     | number               | Value of 1 step/section in the Y axis                                                                          | 20                            |
 | stepHeight                    | number               | Height of 1 step/section in the Y axis                                                                         | 20                            |
+| negativeStepValue             | number               | Value of 1 step/section in the Y axis for negative values (in the 4th quadrant)                                | stepValue                     |
+| negativeStepHeight            | number               | Height of 1 step/section in the Y axis for negative values (in the 4th quadrant)                               | stepHeight                    |
 | spacing                       | number               | Distance between 2 consecutive bars in the Bar chart                                                           | 50                            |
 | adjustToWidth                 | boolean              | When set to true, it auto computes the spacing value to fit the Line chart in the available width              | false                         |
 | backgroundColor               | ColorValue           | Background color of the Bar chart                                                                              | \_                            |
+| sectionColors                 | ColorValue           | Background color of the horizontal sections of the chart                                                       | backgroundColor               |
 | scrollref                     | any                  | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered            | React.useRef()                |
 | scrollToIndex                 | number               | scroll to a particular index on chart load                                                                     | \_                            |
 | disableScroll                 | boolean              | To disable horizontal scroll                                                                                   | false                         |
