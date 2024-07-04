@@ -44,6 +44,7 @@ import GradientLineAndLabel from './LineChart/GradientLineAndLabel';
 import InwardFocusPie from './PieChart/InwardFocusPie';
 import BothSideFocusPie from './PieChart/BothSideFocusPie';
 import PopulationChart from './LineChart/PopulationChart';
+import StackPairWithPattern from './BarChart/StackPairWithPattern';
 
 const Examples = () => {
   const [selectedFooterButton, setSelectedFooterButton] = useState(0);
@@ -77,6 +78,9 @@ const Examples = () => {
         <Separator />
 
         <SimpleBlueBars />
+        <Separator />
+
+        <StackPairWithPattern />
         <Separator />
 
         <SimpleBarsEndReached />

@@ -73,7 +73,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
         <View
           style={{
             position: 'absolute',
-            bottom: -0.5,
+            bottom: 0,
             width: '100%',
             overflow: 'hidden',
             height:

@@ -1,3 +1,23 @@
+# 🎉 1.4.15
+
+## ✨ Features added-
+
+1. Added the props `negativeStepValue` and `negativeStepHeight` to control the value and height of 1 step/section in the Y axis for negative values (in the 4th quadrant). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/686 (Supported in both- Bar and Line charts, but currently functional in Bar charts only)
+
+2. Added the prop `sectionColors` to set the background color of the horizontal sections of the chart. It is an array of ColorValues (or strings denoting colors). So, each section can have a different background color now. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/547
+
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- y-axis gets distorted for large negative values. Y-axis below origin will now have adequate number of sections instead of the default 10 sections. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/685
+2. Fixed the issue- Bars slightly below the rules. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/670#issuecomment-2183338829 (Issue was there only in non-gradient Bar chart)
+
+---
+
+---
+
+---
+
 # 🎉 1.4.14
 
 ## ✨ Features added-

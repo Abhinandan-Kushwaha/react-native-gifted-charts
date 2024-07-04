@@ -53,12 +53,20 @@ const RenderBars = (props: RenderBarsPropsType) => {
     yAxisOffset,
     barWidth,
     labelsDistanceFromXaxis = 0,
+    stepHeight,
+    stepValue,
+    negativeStepHeight,
+    negativeStepValue,
   } = props;
+
+  const heightFactor =
+    item.value < 0
+      ? negativeStepHeight / negativeStepValue
+      : stepHeight / stepValue;
 
   const barHeight = Math.max(
     minHeight,
-    (Math.abs(item.value) * (containerHeight || 200)) / (maxValue || 200) -
-      xAxisThickness,
+    Math.abs(item.value) * heightFactor - xAxisThickness,
   );
 
   const {
@@ -295,10 +303,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
               translateY:
                 (containerHeight || 200) -
                 (barHeight - 10 + xAxisLabelsVerticalShift) +
-                (item.value < 0
-                  ? (Math.abs(item.value) * (containerHeight || 200)) /
-                    (maxValue || 200)
-                  : 0),
+                (item.value < 0 ? Math.abs(item.value) * heightFactor : 0),
             },
           ],
         }
@@ -306,9 +311,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
         ? {
             transform: [
               {
-                translateY:
-                  (Math.abs(item.value) * (containerHeight || 200)) /
-                  (maxValue || 200),
+                translateY: Math.abs(item.value) * heightFactor,
               },
               {rotateZ: '180deg'},
             ],
