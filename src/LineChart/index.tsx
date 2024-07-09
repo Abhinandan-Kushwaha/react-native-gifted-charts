@@ -1518,18 +1518,17 @@ export const LineChart = (props: LineChartPropsType) => {
             }
           }
           if (dataSet?.length) {
-            if (dataSet[0].data[factor]) {
-              const ysForDataSet = dataSet.map(set => {
-                const item = set.data[factor];
-                const y =
-                  containerHeight -
+            const ysForDataSet = dataSet.map(set => {
+              const item = set.data[factor];
+              const y = item
+                ? containerHeight -
                   (item.value * containerHeight) / maxValue -
                   (pointerRadius || pointerHeight / 2) +
-                  10;
-                return y;
-              });
-              setPointerYsForDataSet(ysForDataSet);
-            }
+                  10
+                : 0;
+              return y;
+            });
+            setPointerYsForDataSet(ysForDataSet);
           }
         }}
         // onResponderReject={evt => {

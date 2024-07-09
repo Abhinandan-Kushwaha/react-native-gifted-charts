@@ -7,10 +7,12 @@ import {
   yAxisSides,
   HorizSectionsType,
   horizSectionPropTypes,
+  chartTypes,
 } from 'gifted-charts-core';
 
 export const renderHorizSections = (props: horizSectionPropTypes) => {
   const {
+    chartType,
     width,
     noOfSectionsBelowXAxis,
     totalWidth,
@@ -330,6 +332,12 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     );
   };
 
+  const leftShiftForRIghtYaxis =
+    (width ? width + 20 : totalWidth) +
+    yAxisLabelWidth / 2 +
+    endSpacing -
+    (chartType === chartTypes.BAR ? 40 : 60);
+
   return (
     <>
       {onlyReferenceLines ? (
@@ -411,7 +419,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                               : stepHeight,
                         },
                         yAxisSide === yAxisSides.RIGHT && {
-                          left: (width ?? totalWidth) + yAxisLabelWidth / 2,
+                          left: leftShiftForRIghtYaxis,
                         },
                         horizontal &&
                           !yAxisAtTop && {

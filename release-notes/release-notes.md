@@ -1,3 +1,25 @@
+# 🎉 1.4.16
+
+## ✨ Features added-
+
+1. Added the prop `focusedPieIndex` to Pie charts used to set initially focused pie and to override the focus behaviour on `onPress`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/702
+
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- Line inside Bar chart with secondary y-axis is misaligned. Fix taken from [this patch-package](https://github.com/Abhinandan-Kushwaha/gifted-charts-core/issues/4). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/543
+
+2. Fixed the issue- When using LineChart with specifying both dataSet and pointerConfig, "Cannot read property 'value' of undefined" error occurs. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/673
+
+3. Fixed the issue- y-axis labels misaligned for right-side y-axis when passing an `endSpacing` value. Fixed this by rectifying the calculation of `totalWidth` in gifted-charts-core.
+
+---
+
+---
+
+---
+
+
 # 🎉 1.4.15
 
 ## ✨ Features added-
