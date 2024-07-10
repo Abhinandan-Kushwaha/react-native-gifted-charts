@@ -14,6 +14,7 @@
 | extraRadiusForFocused       | number               | Extra radius for the focused Pie section                                                                  | radius/10                                      |
 | inwardExtraLengthForFocused | number               | Extra length of focused Pie section towards the center (only for donut charts)                            | 0                                              |
 | sectionAutoFocus            | boolean              | In case you don't want focusOnPress but want a particular section to autofocus, this prop will be needed  | false                                          |
+| focusedPieIndex             | number               | index of the initially focused Pie, works only when focusOnPress is true                                  | -1                                             |
 | onLabelPress                | Function             | Callback function called on press of a Label (takes item and index as parameter)                          | onPress OR null                                |
 | tiltAngle                   | Angle in deg         | The angle by which the chart should be tilted                                                             | '55deg' for 3D charts, otherwise 0             |
 | shadow                      | boolean              | Shadow to the Pie chart, when set to true, it enhances the 3D effect                                      | false                                          |
@@ -117,4 +118,4 @@ The default value for labelsPosition is 'mid'. In case of donut and semicircle c
 
 ## Animation and Curved paths
 
-Animation and curved paths are supported in **`<PieChartPro>`** component. It receives all the above props (same as the __`<PieChart>`__ component)
+Animation and curved paths are supported in **`<PieChartPro>`** component. It receives all the above props (same as the **`<PieChart>`** component)

@@ -4,46 +4,52 @@
 
 ### Basic props
 
-| Prop                         | Type                 | Description                                                                                             | Default value       |
-| ---------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------- | ------------------- |
-| data                         | Array of barDataItem | An item object represents a bar in the bar chart. It is described in the next table.                    | \_                  |
-| width                        | number               | Width of the Bar chart                                                                                  | width of the parent |
-| height                       | number               | Height of the Bar chart (excluding the bottom label)                                                    | 200                 |
-| onPress                      | Function             | Callback function called on press of a Bar (takes item and index as parameter)                          | null                |
-| onLongPress                  | Function             | Callback function called on long press of a Bar (takes item and index as parameter)                     | null                |
-| onPressOut                   | Function             | Callback function called on press out of a Bar (takes item and index as parameter)                      | null                |
-| focusBarOnPress              | boolean              | used to focus a bar on press by applying styles defined in focusedBarConfig                             | false               |
-| focusedBarConfig             | FocusedBarConfig     | styles for the focused bar including color, width, opacity, borderRadius etc                            | \_                  |
-| maxValue                     | number               | Maximum value shown in the Y axis                                                                       | 200                 |
-| yAxisOffset                  | number               | Starting (minimum) value in the Y axis (value at the origin)                                            | 0                   |
-| mostNegativeValue            | number               | The most negative value shown in the Y axis (to be used only if the data set has negative values too)   | \_                  |
-| noOfSections                 | number               | Number of sections in the Y axis                                                                        | 10                  |
-| noOfSectionsBelowXAxis       | number               | Number of sections in the Y axis below X axis (in case the data set has negative values too)            | 0                   |
-| stepValue                    | number               | Value of 1 step/section in the Y axis                                                                   | 20                  |
-| stepHeight                   | number               | Height of 1 step/section in the Y axis                                                                  | 20                  |
-| spacing                      | number               | Distance between 2 consecutive bars in the Bar chart                                                    | 20                  |
-| backgroundColor              | ColorValue           | Background color of the Bar chart                                                                       | \_                  |
-| scrollref                    | any                  | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered     | React.useRef()      |
-| scrollToIndex                | number               | scroll to a particular index on chart load                                                              | \_                  |
-| disableScroll                | boolean              | To disable horizontal scroll                                                                            | false               |
-| showScrollIndicator          | boolean              | To show horizontal scroll indicator                                                                     | false               |
-| indicatorColor               | String               | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                         | default             |
-| showLine                     | boolean              | To show a Line chart over the Bar chart with the same data                                              | false               |
-| lineData                     | Array of items       | The data object for the line chart (use only when showLine is true)                                     | data                |
-| lineConfig                   | lineConfigType       | Properties of the Line chart shown over the Bar chart (lineConfigType) is described below               | defaultLineConfig   |
-| lineData2                    | Array of items       | The data object for the second line chart (use only when showLine is true)                              | \_                  |
-| lineConfig2                  | lineConfigType       | Properties of the second Line chart shown over the Bar chart (lineConfigType) is described below        | defaultLineConfig   |
-| lineBehindBars               | boolean              | When set to true, the line chart will appear behind the Bars in case of overlap                         | false               |
-| autoShiftLabels              | boolean              | When set to true, automatically shifts the X axis labels for negative values                            | false               |
-| scrollToEnd                  | boolean              | When set to true, the chart automatically scrolls to the rightmost bar                                  | false               |
-| scrollAnimation              | boolean              | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost bar | true                |
-| scrollEventThrottle          | number               | (only for iOS) see https://reactnative.dev/docs/scrollview#scrolleventthrottle-ios                      | 0                   |
-| onScroll                     | Function             | callback function called when the chart is scrolled horizontally                                        | \_                  |
-| onMomentumScrollEnd          | Function             | callback function called when scroll is completed                                                       | \_                  |
-| initialSpacing               | number               | distance of the first bar from the Y axis                                                               | 40                  |
-| renderTooltip                | Function             | tooltip component appearing above the bar when it is pressed, takes item and index as parameters        | null                |
-| leftShiftForTooltip          | number               | The distance by which the tooltip component should shift towards left                                   | 0                   |
-| leftShiftForLastIndexTooltip | number               | The distance by which the tooltip component of the last bar should shift towards left                   | 0                   |
+| Prop                         | Type                 | Description                                                                                                       | Default value       |
+| ---------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------- | ------------------- |
+| data                         | Array of barDataItem | An item object represents a bar in the bar chart. It is described in the next table.                              | \_                  |
+| width                        | number               | Width of the Bar chart                                                                                            | width of the parent |
+| height                       | number               | Height of the Bar chart (excluding the bottom label)                                                              | 200                 |
+| onPress                      | Function             | Callback function called on press of a Bar (takes item and index as parameter)                                    | null                |
+| onLongPress                  | Function             | Callback function called on long press of a Bar (takes item and index as parameter)                               | null                |
+| onPressOut                   | Function             | Callback function called on press out of a Bar (takes item and index as parameter)                                | null                |
+| focusBarOnPress              | boolean              | used to focus a bar on press by applying styles defined in focusedBarConfig                                       | false               |
+| focusedBarConfig             | FocusedBarConfig     | styles for the focused bar including color, width, opacity, borderRadius etc                                      | \_                  |
+| focusedBarIndex              | number               | index of the initially focused bar, works only when focusBarOnPress is true                                       | -1                  |
+| maxValue                     | number               | Maximum value shown in the Y axis                                                                                 | 200                 |
+| yAxisOffset                  | number               | Starting (minimum) value in the Y axis (value at the origin)                                                      | 0                   |
+| mostNegativeValue            | number               | The most negative value shown in the Y axis (to be used only if the data set has negative values too)             | \_                  |
+| noOfSections                 | number               | Number of sections in the Y axis                                                                                  | 10                  |
+| noOfSectionsBelowXAxis       | number               | Number of sections in the Y axis below X axis (in case the data set has negative values too)                      | 0                   |
+| stepValue                    | number               | Value of 1 step/section in the Y axis                                                                             | 20                  |
+| stepHeight                   | number               | Height of 1 step/section in the Y axis                                                                            | 20                  |
+| negativeStepValue            | number               | Value of 1 step/section in the Y axis for negative values (in the 4th quadrant)                                   | stepValue           |
+| negativeStepHeight           | number               | Height of 1 step/section in the Y axis for negative values (in the 4th quadrant)                                  | stepHeight          |
+| spacing                      | number               | Distance between 2 consecutive bars in the Bar chart                                                              | 20                  |
+| backgroundColor              | ColorValue           | Background color of the Bar chart                                                                                 | \_                  |
+| sectionColors                | ColorValue           | Background color of the horizontal sections of the chart                                                          | backgroundColor     |
+| scrollref                    | any                  | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered               | React.useRef()      |
+| scrollToIndex                | number               | scroll to a particular index on chart load                                                                        | \_                  |
+| disableScroll                | boolean              | To disable horizontal scroll                                                                                      | false               |
+| showScrollIndicator          | boolean              | To show horizontal scroll indicator                                                                               | false               |
+| indicatorColor               | String               | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                   | default             |
+| showLine                     | boolean              | To show a Line chart over the Bar chart with the same data                                                        | false               |
+| lineData                     | Array of items       | The data object for the line chart (use only when showLine is true). To hide any datapoint pass hideDataPoint prop as true in specific data item.                                                | data                |
+| lineConfig                   | lineConfigType       | Properties of the Line chart shown over the Bar chart (lineConfigType) is described below                         | defaultLineConfig   |
+| lineData2                    | Array of items       | The data object for the second line chart (use only when showLine is true)                                        | \_                  |
+| lineConfig2                  | lineConfigType       | Properties of the second Line chart shown over the Bar chart (lineConfigType) is described below                  | defaultLineConfig   |
+| lineBehindBars               | boolean              | When set to true, the line chart will appear behind the Bars in case of overlap                                   | false               |
+| autoShiftLabels              | boolean              | When set to true, automatically shifts the X axis labels for negative values                                      | false               |
+| scrollToEnd                  | boolean              | When set to true, the chart automatically scrolls to the rightmost bar                                            | false               |
+| scrollAnimation              | boolean              | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost bar           | true                |
+| scrollEventThrottle          | number               | (only for iOS) see https://reactnative.dev/docs/scrollview#scrolleventthrottle-ios                                | 0                   |
+| onScroll                     | Function             | callback function called when the chart is scrolled horizontally                                                  | \_                  |
+| onMomentumScrollEnd          | Function             | callback function called when scroll is completed                                                                 | \_                  |
+| initialSpacing               | number               | distance of the first bar from the Y axis                                                                         | 40                  |
+| renderTooltip                | Function             | tooltip component appearing above the bar when it is pressed, takes item and index as parameters                  | null                |
+| leftShiftForTooltip          | number               | The distance by which the tooltip component should shift towards left                                             | 0                   |
+| leftShiftForLastIndexTooltip | number               | The distance by which the tooltip component of the last bar should shift towards left                             | 0                   |
+| adjustToWidth                | boolean              | When set to true, it auto-computes the barWidth and spacing to fit the chart in the available width / parentWidth | false               |
+| parentWidth                  | number               | The width of the parent View or the width that the chart should auto-fit into when `adjustToWidth` is true        | screenWidth         |
 
 #### lineConfig
 
@@ -134,6 +140,7 @@ defaultLineConfig = {
   isSecondary: false,
 };
 ```
+
 #### FocusedBarConfig
 
 ```ts
@@ -150,6 +157,7 @@ type FocusedBarConfig = {
   barInnerComponent?: (item?: barDataItem, index?: number) => ReactNode;
 };
 ```
+
 ---
 
 **Alert!**\
@@ -219,6 +227,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | labelWidth                 | number     | Width of the Label text appearing below the bar (under the X axis)             |
 | labelTextStyle             | object     | Style object for the label text appearing below the bar                        |
 | labelComponent             | Component  | Custom label component appearing below the bar                                 |
+| labelsDistanceFromXaxis    | number     | Distance of the X Axis label from the X axis                                   |
 | topLabelComponent          | Component  | Custom component appearing above the bar                                       |
 | topLabelContainerStyle     | object     | Style object for the container of the custom component appearing above the bar |
 | cappedBars                 | boolean    | To show caps on the top of bar                                                 |
@@ -305,6 +314,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | hideAxesAndRules               | boolean                   | To hide axes, rules, labels altogether                                                                         | false                        |
 | hideOrigin                     | boolean                   | To hide the y Axis label at origin (i.e. 0)                                                                    | false                        |
 | labelWidth                     | number                    | Width of the Label text appearing below the bar (under the X axis)                                             | barWidth                     |
+| labelsDistanceFromXaxis        | number                    | Distance of the X Axis label from the X axis                                                                   | 0                            |
 | xAxisTextNumberOfLines         | number                    | Number of lines for x axis label text                                                                          | 1                            |
 | xAxisLabelsHeight              | number                    | Height of X axis labels container                                                                              | xAxisTextNumberOfLines \* 18 |
 | xAxisLabelsVerticalShift       | number                    | prop to adjust the vertical position of X axis labels (move X axis labels up or down)                          | 0                            |
@@ -517,19 +527,20 @@ The stackData passed to the BarChart component is an array of objects.\
 Each object contains a mandatory key named stacks.\
 The value corresponding to the stacks key is an array of objects, each object representing a section of the stack.
 
-| Prop                         | Type                  | Description                                                                                  | Default value        |
-| ---------------------------- | --------------------- | -------------------------------------------------------------------------------------------- | -------------------- |
-| stackData                    | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table | false                |
-| barBorderRadius              | number                | Border radius of each bar of the stack                                                       | 0                    |
-| barBorderTopLeftRadius       | number                | Top left border radius of each bar of the stack                                              | barBorderRadius \| 0 |
-| barBorderTopRightRadius      | number                | Top right border radius of each bar of the stack                                             | barBorderRadius \| 0 |
-| barBorderBottomLeftRadius    | number                | Bottom left border radius of each bar of the stack                                           | barBorderRadius \| 0 |
-| barBorderBottomRightRadius   | number                | Bottom right border radius of each bar of the stack                                          | barBorderRadius \| 0 |
-| stackBorderRadius            | number                | Border radius of the top and bottom bars of the stack                                        |
-| stackBorderTopLeftRadius     | number                | Top left border radius of the top bar of the stack                                           |
-| stackBorderTopRightRadius    | number                | Top right border radius of the top bar of the stack                                          |
-| stackBorderBottomLeftRadius  | number                | Bottom left border radius of the bottom bar of the stack                                     |
-| stackBorderBottomRightRadius | number                | Bottom right border radius of the bottom bar of the stack                                    |
+| Prop                             | Type                  | Description                                                                                                               | Default value        |
+| -------------------------------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| stackData                        | Array of stack arrays | A stack array represents a stack of bars in the bar chart. It is described in the next table                              | false                |
+| barBorderRadius                  | number                | Border radius of each bar of the stack                                                                                    | 0                    |
+| barBorderTopLeftRadius           | number                | Top left border radius of each bar of the stack                                                                           | barBorderRadius \| 0 |
+| barBorderTopRightRadius          | number                | Top right border radius of each bar of the stack                                                                          | barBorderRadius \| 0 |
+| barBorderBottomLeftRadius        | number                | Bottom left border radius of each bar of the stack                                                                        | barBorderRadius \| 0 |
+| barBorderBottomRightRadius       | number                | Bottom right border radius of each bar of the stack                                                                       | barBorderRadius \| 0 |
+| stackBorderRadius                | number                | Border radius of the top and bottom bars of the stack                                                                     |
+| stackBorderTopLeftRadius         | number                | Top left border radius of the top bar of the stack                                                                        |
+| stackBorderTopRightRadius        | number                | Top right border radius of the top bar of the stack                                                                       |
+| stackBorderBottomLeftRadius      | number                | Bottom left border radius of the bottom bar of the stack                                                                  |
+| stackBorderBottomRightRadius     | number                | Bottom right border radius of the bottom bar of the stack                                                                 |
+| autoShiftLabelsForNegativeStacks | boolean               | Whether the x axis labels should auto shift to a position below the bar, if the bar is under x-axis due to negative value |
 
 **Note** The `frontColor` prop is replaced by `color` prop in Stacked Bar charts.
 

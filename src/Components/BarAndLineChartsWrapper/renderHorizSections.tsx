@@ -7,10 +7,12 @@ import {
   yAxisSides,
   HorizSectionsType,
   horizSectionPropTypes,
+  chartTypes,
 } from 'gifted-charts-core';
 
 export const renderHorizSections = (props: horizSectionPropTypes) => {
   const {
+    chartType,
     width,
     noOfSectionsBelowXAxis,
     totalWidth,
@@ -18,7 +20,9 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     yAxisSide,
     horizontalRulesStyle,
     noOfSections,
+    sectionColors,
     stepHeight,
+    negativeStepHeight,
     yAxisLabelWidth,
     yAxisLabelContainerStyle,
     yAxisThickness,
@@ -92,7 +96,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
               : styles.leftPart,
           {
             borderColor: yAxisColor,
-            backgroundColor: backgroundColor,
+            backgroundColor: sectionColors?.[invertedIndex] ?? backgroundColor,
             width: (props.width || totalWidth - spacing) + endSpacing,
           },
           !index ? {height: stepHeight / 2, marginTop: stepHeight / 2} : null,
@@ -328,6 +332,12 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     );
   };
 
+  const leftShiftForRIghtYaxis =
+    (width ? width + 20 : totalWidth) +
+    yAxisLabelWidth / 2 +
+    endSpacing -
+    (chartType === chartTypes.BAR ? 40 : 60);
+
   return (
     <>
       {onlyReferenceLines ? (
@@ -409,7 +419,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                               : stepHeight,
                         },
                         yAxisSide === yAxisSides.RIGHT && {
-                          left: (width ?? totalWidth) + yAxisLabelWidth / 2,
+                          left: leftShiftForRIghtYaxis,
                         },
                         horizontal &&
                           !yAxisAtTop && {
@@ -458,7 +468,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                     {
                       width: (width ?? totalWidth) + 15,
                     },
-                    index === 0 && {marginTop: stepHeight / 2},
+                    index === 0 && {marginTop: negativeStepHeight / 2},
                   ]}>
                   <View
                     style={[
@@ -469,11 +479,14 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                         marginLeft: yAxisThickness,
                       },
                       {
-                        height: index === 0 ? stepHeight * 1.5 : stepHeight,
+                        height:
+                          index === 0
+                            ? negativeStepHeight * 1.5
+                            : negativeStepHeight,
                         width:
                           yAxisSide === yAxisSides.RIGHT ? 0 : yAxisLabelWidth,
                       },
-                      index === 0 && {marginTop: -stepHeight / 2},
+                      index === 0 && {marginTop: -negativeStepHeight / 2},
                     ]}
                   />
                   <View
@@ -521,12 +534,12 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                         {
                           position: 'absolute',
                           zIndex: 1,
-                          bottom: stepHeight * index,
+                          bottom: negativeStepHeight * index,
                           width: yAxisLabelWidth,
                           height:
-                            index === noOfSections
-                              ? stepHeight / 2
-                              : stepHeight,
+                            index === noOfSectionsBelowXAxis
+                              ? negativeStepHeight / 2
+                              : negativeStepHeight,
                         },
                         yAxisSide === yAxisSides.RIGHT && {
                           left: (width ?? totalWidth) + yAxisLabelWidth,
@@ -538,8 +551,8 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                         ellipsizeMode={'clip'}
                         style={[
                           yAxisTextStyle,
-                          index === noOfSections && {
-                            marginBottom: stepHeight / -2,
+                          index === noOfSectionsBelowXAxis && {
+                            marginBottom: negativeStepHeight / -2,
                           },
                         ]}>
                         {label}
