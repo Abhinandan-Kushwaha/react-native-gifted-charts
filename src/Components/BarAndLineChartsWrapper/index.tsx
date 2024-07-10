@@ -53,6 +53,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     onEndReached,
     onStartReached,
     onMomentumScrollEnd,
+    nestedScrollEnabled,
     extraWidthDueToDataPoint = 0, // extraWidthDueToDataPoint will be receved from props onlhy in case of LineCharts, for other charts it will be undefined and will default to 0
   } = props;
 
@@ -125,6 +126,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         onScrollBeginDrag={() => {
           setCanMomentum(true);
         }}
+        nestedScrollEnabled={nestedScrollEnabled}
         onMomentumScrollEnd={({nativeEvent}) => {
           if (onMomentumScrollEnd) {
             onMomentumScrollEnd();
