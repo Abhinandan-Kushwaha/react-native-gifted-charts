@@ -20,9 +20,12 @@
 | noOfSectionsBelowXAxis        | number               | Number of sections in the Y axis below X axis (in case the data set has negative values too)                   | 0                             |
 | stepValue                     | number               | Value of 1 step/section in the Y axis                                                                          | 20                            |
 | stepHeight                    | number               | Height of 1 step/section in the Y axis                                                                         | 20                            |
+| negativeStepValue             | number               | Value of 1 step/section in the Y axis for negative values (in the 4th quadrant)                                | stepValue                     |
+| negativeStepHeight            | number               | Height of 1 step/section in the Y axis for negative values (in the 4th quadrant)                               | stepHeight                    |
 | spacing                       | number               | Distance between 2 consecutive bars in the Bar chart                                                           | 50                            |
 | adjustToWidth                 | boolean              | When set to true, it auto computes the spacing value to fit the Line chart in the available width              | false                         |
 | backgroundColor               | ColorValue           | Background color of the Bar chart                                                                              | \_                            |
+| sectionColors                 | ColorValue           | Background color of the horizontal sections of the chart                                                       | backgroundColor               |
 | scrollref                     | any                  | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered            | React.useRef()                |
 | scrollToIndex                 | number               | scroll to a particular index on chart load                                                                     | \_                            |
 | disableScroll                 | boolean              | To disable horizontal scroll                                                                                   | false                         |
@@ -36,6 +39,7 @@
 | scrollAnimation               | boolean              | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true                          |
 | scrollEventThrottle           | number               | (only for iOS) see https://reactnative.dev/docs/scrollview#scrolleventthrottle-ios                             | 0                             |
 | onScroll                      | Function             | callback function called when the chart is scrolled horizontally                                               | \_                            |
+| onMomentumScrollEnd           | Function             | callback function called when scroll is completed                                                              | \_                            |
 | initialSpacing                | number               | distance of the first data point from the Y axis                                                               | 20                            |
 | endSpacing                    | number               | distance/padding left at the end of the line chart                                                             | adjustWidth ? 0 : 20          |
 | stepChart                     | boolean              | If set true, renders a step chart                                                                              | false                         |
@@ -90,6 +94,7 @@ type DataSet = {
   curvature?: number;
   curveType?: CurveType;
   lineSegments?: Array<LineSegment>;
+  isSecondary?: boolean;
 };
 ```
 
@@ -566,59 +571,61 @@ The default value of `showArrowBase` is true. To fill the arrow with `fillColor`
 
 ### Data points related props
 
-| Prop                       | Type       | Description                                                                           | Default value                             |
-| -------------------------- | ---------- | ------------------------------------------------------------------------------------- | ----------------------------------------- |
-| hideDataPoints             | boolean    | To hide data points                                                                   | false                                     |
-| dataPointsHeight           | number     | Height of data points (when data points' shape is rectangular)                        | 4                                         |
-| dataPointsWidth            | number     | Width of data points (when data points' shape is rectangular)                         | 4                                         |
-| dataPointsRadius           | number     | Radius of data points (when data points' shape is circular)                           | 3                                         |
-| dataPointsColor            | ColorValue | Color of the data points                                                              | black                                     |
-| dataPointsShape            | string     | Shape of the data points (_'rectangular'_ or _'circular'_)                            | 'circular'                                |
-| hideDataPoints1            | boolean    | To hide data points for the first set of data                                         | false                                     |
-| dataPointsHeight1          | number     | Height of data points for the first dataset (when data points' shape is rectangular)  | 4                                         |
-| dataPointsWidth1           | number     | Width of data points for the first dataset (when data points' shape is rectangular)   | 4                                         |
-| dataPointsRadius1          | number     | Radius of data points for the first dataset (when data points' shape is circular)     | 3                                         |
-| dataPointsColor1           | ColorValue | Color of data points for the first dataset                                            | black                                     |
-| dataPointsShape1           | string     | Shape of data points for the first dataset                                            | 'circular'                                |
-| hideDataPoints2            | boolean    | To hide data points for the second set of data                                        | false                                     |
-| dataPointsHeight2          | number     | Height of data points for the second dataset (when data points' shape is rectangular) | 4                                         |
-| dataPointsWidth2           | number     | Width of data points for the second dataset (when data points' shape is rectangular)  | 4                                         |
-| dataPointsRadius2          | number     | Radius of data points for the second dataset (when data points' shape is circular)    | 3                                         |
-| dataPointsColor2           | ColorValue | Color of data points for the second dataset                                           | blue                                      |
-| dataPointsShape2           | string     | Shape of data points for the second dataset (_'rectangular'_ or _'circular'_)         | 'circular'                                |
-| hideDataPoints3            | boolean    | To hide data points for the third set of data                                         | false                                     |
-| dataPointsHeight3          | number     | Height of data points for the third dataset (when data points' shape is rectangular)  | 4                                         |
-| dataPointsWidth3           | number     | Width of data points for the third dataset (when data points' shape is rectangular)   | 4                                         |
-| dataPointsRadius3          | number     | Radius of data points for the third dataset (when data points' shape is circular)     | 3                                         |
-| dataPointsColor3           | ColorValue | Color of data points for the third dataset                                            | red                                       |
-| dataPointsShape3           | string     | Shape of data points for the third dataset (_'rectangular'_ or _'circular'_)          | 'circular'                                |
-| hideDataPoints4            | boolean    | To hide data points for the fourth set of data                                        | false                                     |
-| dataPointsHeight4          | number     | Height of data points for the fourth dataset (when data points' shape is rectangular) | 4                                         |
-| dataPointsWidth4           | number     | Width of data points for the fourth dataset (when data points' shape is rectangular)  | 4                                         |
-| dataPointsRadius4          | number     | Radius of data points for the fourth dataset (when data points' shape is circular)    | 3                                         |
-| dataPointsColor4           | ColorValue | Color of data points for the fourth dataset                                           | black                                     |
-| dataPointsShape4           | string     | Shape of data points for the fourth dataset (_'rectangular'_ or _'circular'_)         | 'circular'                                |
-| hideDataPoints5            | boolean    | To hide data points for the fifth set of data                                         | false                                     |
-| dataPointsHeight5          | number     | Height of data points for the fifth dataset (when data points' shape is rectangular)  | 4                                         |
-| dataPointsWidth5           | number     | Width of data points for the fifth dataset (when data points' shape is rectangular)   | 4                                         |
-| dataPointsRadius5          | number     | Radius of data points for the fifth dataset (when data points' shape is circular)     | 3                                         |
-| dataPointsColor5           | ColorValue | Color of data points for the fifth dataset                                            | black                                     |
-| dataPointsShape5           | string     | Shape of data points for the fifth dataset (_'rectangular'_ or _'circular'_)          | 'circular'                                |
-| focusedDataPointShape      | String     | Shape of the data points when focused due to press event                              | item.dataPointsShape OR dataPointsShape   |
-| focusedDataPointWidth      | number     | Width of the data points when focused due to press event                              | item.dataPointsWidth OR dataPointsWidth   |
-| focusedDataPointHeight     | number     | Height of the data points when focused due to press event                             | item.dataPointsHeight OR dataPointsHeight |
-| focusedDataPointColor      | ColorValue | Color of the data points when focused due to press event                              | item.dataPointsColor OR dataPointsColor   |
-| focusedDataPointRadius     | number     | Radius of the data points when focused due to press event                             | item.dataPointsRadius OR dataPointsRadius |
-| focusedCustomDataPoint     | Function   | Custom data point when focused due to press event                                     | item.customDataPoint OR customDataPoint   |
-| textColor                  | ColorValue | Color of the dataPointText                                                            | 'black'                                   |
-| textFontSize               | number     | Font size of the dataPointText                                                        | \_                                        |
-| textShiftX                 | number     | To shift the dataPointText text horizontally                                          | 0                                         |
-| textShiftY                 | number     | To shift the dataPointText text vertically                                            | 0                                         |
-| customDataPoint            | Function   | A callback function to render a custom component as the data points                   | \_                                        |
-| dataPointLabelWidth        | number     | width of the label shown beside a data point                                          | 30                                        |
-| dataPointLabelShiftX       | number     | horizontal shift of a label from its corresponding data point                         | 0                                         |
-| dataPointLabelShiftY       | number     | vertical shift of a label from its corresponding data point                           | 0                                         |
-| showValuesAsDataPointsText | boolean    | When set to true, the data item value will be shown as a label text near data point   | false                                     |
+| Prop                       | Type         | Description                                                                                     | Default value                             |
+| -------------------------- | ------------ | ----------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| hideDataPoints             | boolean      | To hide data points                                                                             | false                                     |
+| dataPointsHeight           | number       | Height of data points (when data points' shape is rectangular)                                  | 4                                         |
+| dataPointsWidth            | number       | Width of data points (when data points' shape is rectangular)                                   | 4                                         |
+| dataPointsRadius           | number       | Radius of data points (when data points' shape is circular)                                     | 3                                         |
+| dataPointsColor            | ColorValue   | Color of the data points                                                                        | black                                     |
+| dataPointsShape            | string       | Shape of the data points (_'rectangular'_ or _'circular'_)                                      | 'circular'                                |
+| hideDataPoints1            | boolean      | To hide data points for the first set of data                                                   | false                                     |
+| dataPointsHeight1          | number       | Height of data points for the first dataset (when data points' shape is rectangular)            | 4                                         |
+| dataPointsWidth1           | number       | Width of data points for the first dataset (when data points' shape is rectangular)             | 4                                         |
+| dataPointsRadius1          | number       | Radius of data points for the first dataset (when data points' shape is circular)               | 3                                         |
+| dataPointsColor1           | ColorValue   | Color of data points for the first dataset                                                      | black                                     |
+| dataPointsShape1           | string       | Shape of data points for the first dataset                                                      | 'circular'                                |
+| hideDataPoints2            | boolean      | To hide data points for the second set of data                                                  | false                                     |
+| dataPointsHeight2          | number       | Height of data points for the second dataset (when data points' shape is rectangular)           | 4                                         |
+| dataPointsWidth2           | number       | Width of data points for the second dataset (when data points' shape is rectangular)            | 4                                         |
+| dataPointsRadius2          | number       | Radius of data points for the second dataset (when data points' shape is circular)              | 3                                         |
+| dataPointsColor2           | ColorValue   | Color of data points for the second dataset                                                     | blue                                      |
+| dataPointsShape2           | string       | Shape of data points for the second dataset (_'rectangular'_ or _'circular'_)                   | 'circular'                                |
+| hideDataPoints3            | boolean      | To hide data points for the third set of data                                                   | false                                     |
+| dataPointsHeight3          | number       | Height of data points for the third dataset (when data points' shape is rectangular)            | 4                                         |
+| dataPointsWidth3           | number       | Width of data points for the third dataset (when data points' shape is rectangular)             | 4                                         |
+| dataPointsRadius3          | number       | Radius of data points for the third dataset (when data points' shape is circular)               | 3                                         |
+| dataPointsColor3           | ColorValue   | Color of data points for the third dataset                                                      | red                                       |
+| dataPointsShape3           | string       | Shape of data points for the third dataset (_'rectangular'_ or _'circular'_)                    | 'circular'                                |
+| hideDataPoints4            | boolean      | To hide data points for the fourth set of data                                                  | false                                     |
+| dataPointsHeight4          | number       | Height of data points for the fourth dataset (when data points' shape is rectangular)           | 4                                         |
+| dataPointsWidth4           | number       | Width of data points for the fourth dataset (when data points' shape is rectangular)            | 4                                         |
+| dataPointsRadius4          | number       | Radius of data points for the fourth dataset (when data points' shape is circular)              | 3                                         |
+| dataPointsColor4           | ColorValue   | Color of data points for the fourth dataset                                                     | black                                     |
+| dataPointsShape4           | string       | Shape of data points for the fourth dataset (_'rectangular'_ or _'circular'_)                   | 'circular'                                |
+| hideDataPoints5            | boolean      | To hide data points for the fifth set of data                                                   | false                                     |
+| dataPointsHeight5          | number       | Height of data points for the fifth dataset (when data points' shape is rectangular)            | 4                                         |
+| dataPointsWidth5           | number       | Width of data points for the fifth dataset (when data points' shape is rectangular)             | 4                                         |
+| dataPointsRadius5          | number       | Radius of data points for the fifth dataset (when data points' shape is circular)               | 3                                         |
+| dataPointsColor5           | ColorValue   | Color of data points for the fifth dataset                                                      | black                                     |
+| dataPointsShape5           | string       | Shape of data points for the fifth dataset (_'rectangular'_ or _'circular'_)                    | 'circular'                                |
+| focusedDataPointIndex      | number       | Index of the focused data point, works only when focusEnabled prop is used                      | \_                                        |
+| focusedDataPointShape      | String       | Shape of the data points when focused due to press event                                        | item.dataPointsShape OR dataPointsShape   |
+| focusedDataPointWidth      | number       | Width of the data points when focused due to press event                                        | item.dataPointsWidth OR dataPointsWidth   |
+| focusedDataPointHeight     | number       | Height of the data points when focused due to press event                                       | item.dataPointsHeight OR dataPointsHeight |
+| focusedDataPointColor      | ColorValue   | Color of the data points when focused due to press event                                        | item.dataPointsColor OR dataPointsColor   |
+| focusedDataPointRadius     | number       | Radius of the data points when focused due to press event                                       | item.dataPointsRadius OR dataPointsRadius |
+| focusedCustomDataPoint     | Function     | Custom data point when focused due to press event                                               | item.customDataPoint OR customDataPoint   |
+| textColor                  | ColorValue   | Color of the dataPointText                                                                      | 'black'                                   |
+| textFontSize               | number       | Font size of the dataPointText                                                                  | \_                                        |
+| textShiftX                 | number       | To shift the dataPointText text horizontally                                                    | 0                                         |
+| textShiftY                 | number       | To shift the dataPointText text vertically                                                      | 0                                         |
+| customDataPoint            | Function     | A callback function to render a custom component as the data points                             | \_                                        |
+| dataPointLabelWidth        | number       | width of the label shown beside a data point                                                    | 30                                        |
+| dataPointLabelShiftX       | number       | horizontal shift of a label from its corresponding data point                                   | 0                                         |
+| dataPointLabelShiftY       | number       | vertical shift of a label from its corresponding data point                                     | 0                                         |
+| showValuesAsDataPointsText | boolean      | When set to true, the data item value will be shown as a label text near data point             | false                                     |
+| pointerColorsForDataSet    | ColorValue[] | When using pointers with dataSet, you can set pointer colors on each data line using this array | \_                                        |
 
 **Note** `customDataPoint` prop takes a callback function which accepts 2 parameters-
 
@@ -706,6 +713,10 @@ When the chart is pressed, it returns the index of the data point pressed.<br/>
 When the chart is scrolled after pressing, it returns the index of the data point currently focused.<br/>
 When the chart is released, it returns the index -1.<br/>
 
+#### pointerColorsForDataSet
+
+When using pointers with dataSet, you can set pointer colors on each data line using the pointerColorsForDataSet which is an array of color values.
+
 ### onFocus and strip related props
 
 Line or Area charts can be made interactive by allowing users to press on the chart and highlight that particular data point. For example-
@@ -714,25 +725,27 @@ Line or Area charts can be made interactive by allowing users to press on the ch
 
 To achieve this the `focusEnabled` props must be set to true. In addition, use below props like `focusedDataPointShape`, `focusedDataPointColor`, `focusedDataPointRadius` to focus the pressed data point. The prop `onFocus` can be used to pass a function that will be called when a data point is focused.
 
-| Prop                   | Type       | Description                                                                                                                                   | Default value                             |
-| ---------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| focusEnabled           | boolean    | If set true, allows users to press on the chart and focuses the nearest data point (focus event can be then handled using the `onFocus` prop) | false                                     |
-| onFocus                | Function   | The callback function that handles the focus event. `item` and `index` are received as props                                                  | \_                                        |
-| showDataPointOnFocus   | boolean    | If set true, it shows the data point corresponding to the focused area of the chart                                                           | false                                     |
-| showStripOnFocus       | boolean    | If set true, it shows a vertical strip corresponding to the focused area of the chart                                                         | false                                     |
-| showTextOnFocus        | boolean    | If set true, it shows the data point text corresponding to the focused area of the chart                                                      | false                                     |
-| stripHeight            | number     | Height of the vertical strip that becomes visible on pressing the corresponding area of the chart                                             | height of the data point                  |
-| stripWidth             | number     | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart                                              | 2                                         |
-| stripColor             | ColorValue | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart                                              | 'orange'                                  |
-| stripOpacity           | number     | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart                                            | (startOpacity+endOpacity)/2               |
-| unFocusOnPressOut      | boolean    | If set true, it unselects/unfocuses the focused/selected data point                                                                           | true                                      |
-| delayBeforeUnFocus     | number     | Delay (in milliseconds) between the release of the press and ghe unfocusing of the data point                                                 | 300                                       |
-| focusedDataPointShape  | String     | Shape of the data points when focused due to press event                                                                                      | item.dataPointsShape OR dataPointsShape   |
-| focusedDataPointWidth  | number     | Width of the data points when focused due to press event                                                                                      | item.dataPointsWidth OR dataPointsWidth   |
-| focusedDataPointHeight | number     | Height of the data points when focused due to press event                                                                                     | item.dataPointsHeight OR dataPointsHeight |
-| focusedDataPointColor  | ColorValue | Color of the data points when focused due to press event                                                                                      | item.dataPointsColor OR dataPointsColor   |
-| focusedDataPointRadius | number     | Radius of the data points when focused due to press event                                                                                     | item.dataPointsRadius OR dataPointsRadius |
-| focusedCustomDataPoint | Function   | Custom data point when focused due to press event                                                                                             | item.customDataPoint OR customDataPoint   |
+| Prop                      | Type       | Description                                                                                                                                   | Default value                             |
+| ------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| focusEnabled              | boolean    | If set true, allows users to press on the chart and focuses the nearest data point (focus event can be then handled using the `onFocus` prop) | false                                     |
+| onFocus                   | Function   | The callback function that handles the focus event. `item` and `index` are received as props                                                  | \_                                        |
+| focusedDataPointIndex     | number     | Index of the focused data point, used to set initially focused data point and to override the focus behaviour on onFocus                      | \_                                        |
+| showDataPointOnFocus      | boolean    | If set true, it shows the data point corresponding to the focused area of the chart                                                           | false                                     |
+| showStripOnFocus          | boolean    | If set true, it shows a vertical strip corresponding to the focused area of the chart                                                         | false                                     |
+| showTextOnFocus           | boolean    | If set true, it shows the data point text corresponding to the focused area of the chart                                                      | false                                     |
+| showDataPointLabelOnFocus | boolean    | If set true, it shows the data point corresponding to the focused area of the chart                                                           | false                                     |
+| stripHeight               | number     | Height of the vertical strip that becomes visible on pressing the corresponding area of the chart                                             | height of the data point                  |
+| stripWidth                | number     | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart                                              | 2                                         |
+| stripColor                | ColorValue | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart                                              | 'orange'                                  |
+| stripOpacity              | number     | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart                                            | (startOpacity+endOpacity)/2               |
+| unFocusOnPressOut         | boolean    | If set true, it unselects/unfocuses the focused/selected data point                                                                           | true                                      |
+| delayBeforeUnFocus        | number     | Delay (in milliseconds) between the release of the press and ghe unfocusing of the data point                                                 | 300                                       |
+| focusedDataPointShape     | String     | Shape of the data points when focused due to press event                                                                                      | item.dataPointsShape OR dataPointsShape   |
+| focusedDataPointWidth     | number     | Width of the data points when focused due to press event                                                                                      | item.dataPointsWidth OR dataPointsWidth   |
+| focusedDataPointHeight    | number     | Height of the data points when focused due to press event                                                                                     | item.dataPointsHeight OR dataPointsHeight |
+| focusedDataPointColor     | ColorValue | Color of the data points when focused due to press event                                                                                      | item.dataPointsColor OR dataPointsColor   |
+| focusedDataPointRadius    | number     | Radius of the data points when focused due to press event                                                                                     | item.dataPointsRadius OR dataPointsRadius |
+| focusedCustomDataPoint    | Function   | Custom data point when focused due to press event                                                                                             | item.customDataPoint OR customDataPoint   |
 
 #### Example of onFocus :
 

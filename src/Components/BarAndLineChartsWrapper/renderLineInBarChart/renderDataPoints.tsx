@@ -16,7 +16,7 @@ export const renderDataPoints = (props: any) => {
     spacing,
   } = props;
   return data.map((item: any, index: number) => {
-    if (index < lineConfig.startIndex || index > lineConfig.endIndex) {
+    if (index < lineConfig.startIndex || index > lineConfig.endIndex || item.hideDataPoint) {
       return null;
     }
     const currentBarWidth = item.barWidth || barWidth || 30;

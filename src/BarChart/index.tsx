@@ -86,7 +86,14 @@ export const BarChart = (props: BarChartPropsType) => {
     autoShiftLabels,
     getPropsCommonForBarAndStack,
     barAndLineChartsWrapperProps,
-  } = useBarChart({...props, heightValue, widthValue, opacValue});
+    autoShiftLabelsForNegativeStacks,
+  } = useBarChart({
+    ...props,
+    heightValue,
+    widthValue,
+    opacValue,
+    parentWidth: props.parentWidth ?? screenWidth,
+  });
 
   const labelsAppear = useCallback(() => {
     opacValue.setValue(0);
@@ -334,6 +341,7 @@ export const BarChart = (props: BarChartPropsType) => {
             stackBorderTopRightRadius={props.stackBorderTopRightRadius}
             stackBorderBottomLeftRadius={props.stackBorderBottomLeftRadius}
             stackBorderBottomRightRadius={props.stackBorderBottomRightRadius}
+            autoShiftLabelsForNegativeStacks={autoShiftLabelsForNegativeStacks}
             {...getPropsCommonForBarAndStack(item, index)}
           />
         );

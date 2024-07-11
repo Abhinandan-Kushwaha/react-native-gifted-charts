@@ -8,7 +8,7 @@ import {
   UIManager,
 } from 'react-native';
 import Svg, {Defs, Rect} from 'react-native-svg';
-import LinearGradient from "../Components/common/LinearGradient";
+import LinearGradient from '../Components/common/LinearGradient';
 import {
   useRenderStackBars,
   BarDefaults,
@@ -49,6 +49,8 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     stackBorderBottomLeftRadius,
     stackBorderBottomRightRadius,
     showValuesAsTopLabel,
+    autoShiftLabelsForNegativeStacks = true,
+    labelsDistanceFromXaxis = 0,
   } = props;
   const {
     cotainsNegative,
@@ -78,9 +80,9 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
             width:
               (item.stacks[0].barWidth || props.barWidth || 30) + spacing / 2,
             position: 'absolute',
-            bottom: rotateLabel
-              ? -40
-              : -6 - xAxisTextNumberOfLines * 18 + lowestBarPosition,
+            bottom: autoShiftLabelsForNegativeStacks
+              ? -6 - xAxisTextNumberOfLines * 18 + lowestBarPosition
+              : -labelsDistanceFromXaxis,
           },
           rotateLabel
             ? props.horizontal

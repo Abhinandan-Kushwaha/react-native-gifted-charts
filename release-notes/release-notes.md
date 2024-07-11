@@ -1,10 +1,125 @@
+# 🎉 1.4.15
+
+## ✨ Features added-
+
+1. Added the props `negativeStepValue` and `negativeStepHeight` to control the value and height of 1 step/section in the Y axis for negative values (in the 4th quadrant). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/686 (Supported in both- Bar and Line charts, but currently functional in Bar charts only)
+
+2. Added the prop `sectionColors` to set the background color of the horizontal sections of the chart. It is an array of ColorValues (or strings denoting colors). So, each section can have a different background color now. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/547
+
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- y-axis gets distorted for large negative values. Y-axis below origin will now have adequate number of sections instead of the default 10 sections. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/685
+2. Fixed the issue- Bars slightly below the rules. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/670#issuecomment-2183338829 (Issue was there only in non-gradient Bar chart)
+
+---
+
+---
+
+---
+
+# 🎉 1.4.14
+
+## ✨ Features added-
+
+1. Added the prop `focusedBarIndex` to Bar charts used to set initially focused bar and to override the focus behaviour on `onPress`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/675
+2. Added the prop `labelsDistanceFromXaxis` to shift the X-axis labels vertically up or down from their original position (that is just below the x axis). This prop will be very useful in case of Stacked Bar charts having both +ve and -ve values in the same stack. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/678
+3. Added the prop `autoShiftLabelsForNegativeStacks` to stacked Bar charts and its default value is `true`. It is used to decide whether the X-axis labels should appear just under the negative bar (in case of Stacked Bar charts having both +ve and -ve values in the same stack), or whether they all should appear in one single line. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/678
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- Y-axis under the X-axis has one less section than expected. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/676
+
+---
+
+---
+
+---
+
+# 🎉 1.4.13
+
+## ✨ Features added-
+
+1. Added the prop `focusedDataPointIndex` to Line charts used to set initially focused data point and to override the focus behaviour on `onFocus`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/680
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- data points getting cropped in non-scrollable fixed width Line and Area charts. See- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/623 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/681
+2. Fixed the issue- yAxisLabelTexts not working (showing NaN as labels) See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/22#issuecomment-2192243599
+
+---
+
+---
+
+---
+
+# 1.4.12
+
+Accidental release, please don't use this version.
+
+---
+
+---
+
+---
+
+# 🎉 1.4.11
+
+## ✨ Features added-
+
+1. Added the props `adjustToWidth` and `parentWidth` to Bar chart. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/660
+2. Added the prop `showDataPointLabelOnFocus` to Line / Area charts to show dataPointLabel (tooltip) on the focused data point. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/664
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- Bar chart with pointerConfig breaks with negative values. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/654
+2. Fixed the issue- When using dataSet, only one pointer is displayed on the line chart. Also added the prop `pointerColorsForDataSet`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/610
+3. Fixed issue with pointers on secondary data line not displaying at proper position (earlier they were all displayed at x-axis)
+4. Removed the wrong prop name `pieInnerComponent` in PieChartPro and replaced it with the correct name- `centerLabelComponent`
+
+---
+
+---
+
+---
+
+# 🎉 1.4.10
+
+## ✨ Features added-
+
+Added the prop `onMomentumScrollEnd` to Bar and Line charts. It can be used to fire an event when scroll is completed. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/601
+
+---
+
+---
+
+---
+
+# 🎉 1.4.9
+
+## ✨ Features added-
+
+1. Added support for multiple lines corresponding to secondary y-axis. Now we can add the property `isSecondary` inside the objects of the `dataSet` array. When using isSecondary, make sure to pass the `secondaryYAxis` prop. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/586
+
+2. Added support for <b>`ring`</b> Pie charts. Just pass the prop `ring` in the `<PieChartPro>` component to make a ring like Pie chart. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/584
+
+3. Added support for `pieInnerComponent` to `<PieChartPro>`
+
+---
+
+---
+
+---
+
 # 🎉 1.4.8 Mega Release ⭐️
 
 ## ✨ Features added-
-### Animation in Pie and donut charts using the __`<PieChartPro>`__ component. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/555
-### Curved paths (border-radius) in donut sections supported using the __`<PieChartPro>`__ component. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/554
-### Support for expo gradient, thanks to onyx-flame for his PR https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/571
 
+### Animation in Pie and donut charts using the **`<PieChartPro>`** component. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/555
+
+### Curved paths (border-radius) in donut sections supported using the **`<PieChartPro>`** component. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/554
+
+### Support for expo gradient, thanks to onyx-flame for his PR https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/571
 
 ## 🐛 Bug fixes
 
