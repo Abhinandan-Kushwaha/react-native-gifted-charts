@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import Svg, {Line} from 'react-native-svg';
 import {getTopAndLeftForStripAndLabel} from 'gifted-charts-core';
 
-export const StripAndLabel = props => {
+export const StripAndLabel = (props: any) => {
   const {
     pointerX,
     pointerLabelWidth,

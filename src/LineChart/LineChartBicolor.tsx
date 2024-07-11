@@ -191,7 +191,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
     outputRange: [0, totalWidth],
   });
 
-  const onStripPress = (item, index) => {
+  const onStripPress = (item: any, index: number) => {
     setSelectedIndex(index);
     if (props.onFocus) {
       props.onFocus(item, index);
@@ -199,16 +199,16 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
   };
 
   const renderDataPoints = (
-    dataForRender,
-    dataPtsShape,
-    dataPtsWidth,
-    dataPtsHeight,
-    dataPtsColor,
-    dataPtsRadius,
-    textColor,
-    textFontSize,
-    startIndex,
-    endIndex,
+    dataForRender: any,
+    dataPtsShape: any,
+    dataPtsWidth: any,
+    dataPtsHeight: any,
+    dataPtsColor: any,
+    dataPtsRadius: any,
+    textColor: any,
+    textFontSize: any,
+    startIndex: number,
+    endIndex: number,
   ) => {
     return dataForRender.map((item: bicolorLineDataItem, index: number) => {
       if (index < startIndex || index > endIndex) return null;
@@ -496,7 +496,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
         strokeDashArray.length === 2 &&
         typeof strokeDashArray[0] === 'number' &&
         typeof strokeDashArray[1] === 'number'
-          ? pointsArray.map((points, index) => (
+          ? pointsArray.map((points: any, index: number) => (
               <Path
                 key={index}
                 d={points.points}
@@ -506,7 +506,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
                 strokeDasharray={strokeDashArray}
               />
             ))
-          : pointsArray.map((points, index) => {
+          : pointsArray.map((points: any, index: number) => {
               return (
                 <Path
                   key={index}

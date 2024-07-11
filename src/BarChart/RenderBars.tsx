@@ -328,7 +328,10 @@ const RenderBars = (props: RenderBarsPropsType) => {
   const barContent = () => {
     const isBarBelowXaxisAndInvisible =
       item.value < 0 && !noOfSectionsBelowXAxis;
-    const animated2DWithGradient = (noGradient, noAnimation) => (
+    const animated2DWithGradient = (
+      noGradient: boolean,
+      noAnimation: boolean,
+    ) => (
       <Animated2DWithGradient
         {...commonPropsFor2Dand3Dbars}
         animationDuration={animationDuration || 800}

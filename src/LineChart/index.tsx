@@ -413,10 +413,10 @@ export const LineChart = (props: LineChartPropsType) => {
   useEffect(() => {
     decreaseWidth();
     labelsAppear();
-    widthValuesFromSet?.forEach((item, index) => {
+    widthValuesFromSet?.forEach((item: any, index: number) => {
       setTimeout(
         () => {
-          decreaseWidthsFromSet?.[index]?.();
+          decreaseWidthsFromSet();
         },
         animateTogether ? 0 : animationDuration * index,
       );
@@ -554,7 +554,7 @@ export const LineChart = (props: LineChartPropsType) => {
     outputRange: [0, totalWidth],
   });
 
-  const onStripPress = (item, index) => {
+  const onStripPress = (item: any, index: number) => {
     if (props.focusedDataPointIndex === undefined || !props.onFocus) {
       setSelectedIndex(index);
     }
@@ -564,20 +564,20 @@ export const LineChart = (props: LineChartPropsType) => {
   };
 
   const renderDataPoints = (
-    hideDataPoints,
-    dataForRender,
-    originalDataFromProps,
-    dataPtsShape,
-    dataPtsWidth,
-    dataPtsHeight,
-    dataPtsColor,
-    dataPtsRadius,
-    textColor,
-    textFontSize,
-    startIndex,
-    endIndex,
-    isSecondary,
-    showValuesAsDataPointsText,
+    hideDataPoints: any,
+    dataForRender: any,
+    originalDataFromProps: any,
+    dataPtsShape: any,
+    dataPtsWidth: any,
+    dataPtsHeight: any,
+    dataPtsColor: any,
+    dataPtsRadius: any,
+    textColor: any,
+    textFontSize: any,
+    startIndex: any,
+    endIndex: any,
+    isSecondary: any,
+    showValuesAsDataPointsText: any,
   ) => {
     const getYOrSecondaryY = isSecondary ? getSecondaryY : getY;
     return dataForRender.map((item: lineDataItem, index: number) => {
@@ -928,6 +928,7 @@ export const LineChart = (props: LineChartPropsType) => {
           pointerConfig?.secondaryPointerColor || pointerColor;
         break;
     }
+    if (!pointerYLocal) return;
 
     return Pointer({
       pointerX,
@@ -1051,11 +1052,11 @@ export const LineChart = (props: LineChartPropsType) => {
     endOpacity: number,
     strokeDashArray: Array<number> | undefined | null,
     showArrow: boolean,
-    arrowPoints,
-    arrowStrokeWidth,
-    arrowStrokeColor,
-    arrowFillColor,
-    key,
+    arrowPoints: any,
+    arrowStrokeWidth: any,
+    arrowStrokeColor: any,
+    arrowFillColor: any,
+    key: any,
   ) => {
     if (!points) return null;
     const isCurved = points.includes('C');
@@ -1293,7 +1294,7 @@ export const LineChart = (props: LineChartPropsType) => {
     );
   };
 
-  const activatePointers = x => {
+  const activatePointers = (x: number) => {
     let factor = (x - initialSpacing) / spacing;
     factor = Math.round(factor);
     factor = Math.min(factor, (data0 ?? data).length - 1);
@@ -1371,6 +1372,7 @@ export const LineChart = (props: LineChartPropsType) => {
           (pointerRadius || pointerHeight / 2) +
           10;
         setSecondaryPointerY(y);
+        // @ts-ignore
         setSecondaryPointerItem(item);
       }
     }
@@ -1401,11 +1403,11 @@ export const LineChart = (props: LineChartPropsType) => {
     startOpacity: number,
     endOpacity: number,
     strokeDashArray: Array<number> | undefined | null,
-    showArrow,
-    arrowPoints,
-    arrowStrokeWidth,
-    arrowStrokeColor,
-    arrowFillColor,
+    showArrow: any,
+    arrowPoints: any,
+    arrowStrokeWidth: any,
+    arrowStrokeColor: any,
+    arrowFillColor: any,
     key?: number,
   ) => {
     return (
@@ -1514,6 +1516,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 (pointerRadius || pointerHeight / 2) +
                 10;
               setSecondaryPointerY(y);
+              // @ts-ignore
               setSecondaryPointerItem(item);
             }
           }
@@ -1599,11 +1602,11 @@ export const LineChart = (props: LineChartPropsType) => {
     startOpacity: number,
     endOpacity: number,
     strokeDashArray: Array<number> | undefined | null,
-    showArrow,
-    arrowPoints,
-    arrowStrokeWidth,
-    arrowStrokeColor,
-    arrowFillColor,
+    showArrow: any,
+    arrowPoints: any,
+    arrowStrokeWidth: any,
+    arrowStrokeColor: any,
+    arrowFillColor: any,
     key?: number,
   ) => {
     return (
@@ -1712,7 +1715,9 @@ export const LineChart = (props: LineChartPropsType) => {
                 (item.value * containerHeight) / secondaryMaxValue -
                 (pointerRadius || pointerHeight / 2) +
                 10;
+
               setSecondaryPointerY(y);
+              // @ts-ignore
               setSecondaryPointerItem(item);
             }
           }
