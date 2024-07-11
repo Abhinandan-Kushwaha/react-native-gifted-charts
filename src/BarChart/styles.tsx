@@ -39,4 +39,9 @@ export const styles = StyleSheet.create({
   bottomLabel: {
     width: '100%',
   },
+  customDataPointContainer: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

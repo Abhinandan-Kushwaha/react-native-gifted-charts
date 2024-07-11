@@ -1,219 +1,104 @@
 import React from 'react';
-import {ColorValue, View} from 'react-native';
+import {View} from 'react-native';
 import Svg, {
   Path,
   Circle,
   Text as SvgText,
-  FontStyle,
   Defs,
   RadialGradient,
   Stop,
+  G,
 } from 'react-native-svg';
-import {colors} from './colors';
+import {
+  getPieChartMainProps,
+  PieChartMainProps,
+  pieColors,
+} from 'gifted-charts-core';
+import { rnVersion } from '../utils';
 
-type propTypes = {
-  radius?: number;
-  isThreeD?: Boolean;
-  donut?: Boolean;
-  innerRadius?: number;
-  shadow?: Boolean;
-  innerCircleColor?: ColorValue;
-  innerCircleBorderWidth?: number;
-  innerCircleBorderColor?: ColorValue;
-  shiftInnerCenterX?: number;
-  shiftInnerCenterY?: number;
-  shadowColor?: string;
-  shadowWidth?: number;
-  strokeWidth?: number;
-  strokeColor?: string;
-  backgroundColor?: string;
-  data: Array<itemType>;
-  semiCircle?: Boolean;
-
-  showText?: Boolean;
-  textColor?: string;
-  textSize?: number;
-  fontStyle?: FontStyle;
-  fontWeight?: string;
-  font?: string;
-  showTextBackground?: Boolean;
-  textBackgroundColor?: string;
-  textBackgroundRadius?: number;
-  showValuesAsLabels?: Boolean;
-
-  centerLabelComponent?: Function;
-  tiltAngle?: string;
-  initialAngle?: number;
-  labelsPosition?: 'onBorder' | 'outward' | 'inward' | 'mid';
-  showGradient?: boolean;
-  gradientCenterColor?: string;
-  onPress?: Function;
-  focusOnPress?: Boolean;
-  toggleFocusOnPress?: Boolean;
-  selectedIndex?: number;
-  setSelectedIndex?: Function;
-  onLabelPress?: Function;
-};
-type itemType = {
-  value: number;
-  shiftX?: number;
-  shiftY?: number;
-  color?: string;
-  gradientCenterColor?: string;
-  text?: string;
-  textColor?: string;
-  textSize?: number;
-  fontStyle?: FontStyle;
-  fontWeight?: string;
-  font?: string;
-  textBackgroundColor?: string;
-  textBackgroundRadius?: number;
-  shiftTextX?: number;
-  shiftTextY?: number;
-  labelPosition?: 'onBorder' | 'outward' | 'inward' | 'mid';
-  onPress?: Function;
-  onLabelPress?: Function;
-  strokeWidth?: number;
-  strokeColor?: string;
-  peripheral?: boolean;
-};
-
-export const PieChartMain = (props: propTypes) => {
-  const {isThreeD} = props;
-  const propData = props.data;
-  const data = [];
-  if (propData) {
-    for (let i = 0; i < propData.length; i++) {
-      if (propData[i].value !== 0) {
-        data.push(propData[i]);
-      }
-    }
-  }
-  const radius = props.radius || 120;
-  const canvasWidth = radius * 2;
-  const canvasHeight = isThreeD ? radius * 2.3 : radius * 2;
-  const shadowWidth = props.shadowWidth || radius / 5;
-  const backgroundColor = props.backgroundColor || 'transparent';
-  const shadowColor = props.shadowColor || 'lightgray';
-  const semiCircle = props.semiCircle || false;
-  let pi = Math.PI;
-  const initialAngle = props.initialAngle || (semiCircle ? pi / -2 : 0);
-  const shadow = props.shadow || false;
-  const donut = props.donut || false;
-  const strokeWidth = props.strokeWidth || 0;
-  const strokeColor =
-    props.strokeColor || (strokeWidth ? 'gray' : 'transparent');
-  const innerRadius = props.innerRadius || radius / 2.5;
-  const innerCircleColor =
-    props.innerCircleColor || props.backgroundColor || 'white';
-  const innerCircleBorderWidth =
-    props.innerCircleBorderWidth ||
-    (props.innerCircleBorderColor ? strokeWidth || 2 : 0);
-  const innerCircleBorderColor = props.innerCircleBorderColor || 'lightgray';
-  const shiftInnerCenterX = props.shiftInnerCenterX || 0;
-  const shiftInnerCenterY = props.shiftInnerCenterY || 0;
-
-  const showText = props.showText || false;
-  const textColor = props.textColor || '';
-  const textSize = props.textSize ? Math.min(props.textSize, radius / 5) : 16;
-  let tiltAngle = props.tiltAngle || '55deg';
-  if (
-    tiltAngle &&
-    !isNaN(Number(tiltAngle)) &&
-    !(tiltAngle + '').endsWith('deg')
-  ) {
-    tiltAngle += 'deg';
-  }
-  // const tilt = props.tilt ? Math.min(props.tilt, 1) : props.isThreeD ? 0.5 : 1;
-  const labelsPosition = props.labelsPosition
-    ? props.labelsPosition
-    : donut || props.centerLabelComponent
-    ? 'outward'
-    : 'mid';
-
-  const showTextBackground = props.showTextBackground || false;
-  const textBackgroundColor = props.textBackgroundColor || 'white';
-  const showValuesAsLabels = props.showValuesAsLabels || false;
-  const showGradient = props.showGradient || false;
-  const gradientCenterColor = props.gradientCenterColor || 'white';
-  const toggleFocusOnPress = props.toggleFocusOnPress === false ? false : true;
-
-  let isDataShifted = false;
-  let minShiftX = 0,
-    maxShiftX = 0,
-    minShiftY = 0,
-    maxShiftY = 0;
-  data.forEach((item: any) => {
-    total += item.value;
-    if (item.shiftX || item.shiftY) {
-      isDataShifted = true;
-      if (minShiftX > item.shiftX) {
-        minShiftX = item.shiftX;
-      }
-      if (minShiftY > item.shiftY) {
-        minShiftY = item.shiftY;
-      }
-      if (maxShiftX < item.shiftX) {
-        maxShiftX = item.shiftX;
-      }
-      if (maxShiftY < item.shiftY) {
-        maxShiftY = item.shiftY;
-      }
-    }
-  });
-
-  const horizAdjustment = maxShiftX - minShiftX;
-  const vertAdjustment = maxShiftY - minShiftY;
-
-  if (semiCircle) {
-    pi = Math.PI / 2;
-  }
-
-  let cx = radius,
-    cy = radius;
-
-  let total =
-    data && data.length
-      ? data.map(item => item.value).reduce((v, a) => v + a)
-      : 0;
-  let acc = 0;
-  let pData = data.map(item => {
-    acc += item.value / total;
-    return acc;
-  });
-  acc = 0;
-  let mData = data.map(item => {
-    let pAcc = acc;
-    acc += item.value / total;
-    return pAcc + (acc - pAcc) / 2;
-  });
-  pData = [0, ...pData];
+export const PieChartMain = (props: PieChartMainProps) => {
+  const {
+    isThreeD,
+    isBiggerPie,
+    data,
+    showInnerComponent,
+    radius,
+    canvasWidth,
+    canvasHeight,
+    shadowWidth,
+    backgroundColor,
+    shadowColor,
+    semiCircle,
+    pi,
+    initialAngle,
+    shadow,
+    donut,
+    strokeWidth,
+    strokeColor,
+    innerRadius,
+    showText,
+    textColor,
+    textSize,
+    tiltAngle,
+    labelsPosition,
+    showTextBackground,
+    textBackgroundColor,
+    showValuesAsLabels,
+    showGradient,
+    gradientCenterColor,
+    toggleFocusOnPress,
+    minShiftX,
+    minShiftY,
+    total,
+    horizAdjustment,
+    vertAdjustment,
+    cx,
+    cy,
+    pData,
+    mData,
+    paddingHorizontal,
+    paddingVertical,
+    extraRadiusForFocused,
+  } = getPieChartMainProps(props);
 
   return (
     <View
+      pointerEvents="box-none"
       style={[
         {
           backgroundColor: backgroundColor,
-          height: semiCircle ? canvasHeight / 2 : canvasHeight,
-          width: canvasWidth,
+          height: semiCircle
+            ? (canvasHeight + paddingVertical) / 2 + extraRadiusForFocused
+            : canvasHeight + paddingVertical + extraRadiusForFocused * 2,
+          width: canvasWidth + paddingHorizontal + extraRadiusForFocused * 2,
           overflow: 'hidden',
         },
         isThreeD && {transform: [{rotateX: tiltAngle}]},
       ]}>
       <Svg
-        viewBox={`${strokeWidth / -2 + minShiftX} ${
-          strokeWidth / -2 + minShiftY
+        pointerEvents={rnVersion >= 720000 ? 'box-none' : 'auto'} // use 'box-none' react-native version 0.72 onwards
+        viewBox={`${strokeWidth / -2 + minShiftX - extraRadiusForFocused - paddingHorizontal / 2} ${
+          strokeWidth / -2 +
+          minShiftY -
+          extraRadiusForFocused -
+          paddingVertical / 2
         } ${
-          (radius + strokeWidth) * 2 +
+          (radius + extraRadiusForFocused + strokeWidth) * 2 +
+          paddingHorizontal +
           horizAdjustment +
           (horizAdjustment ? strokeWidth : 0)
         } ${
-          (radius + strokeWidth) * 2 +
-          +vertAdjustment +
+          (radius + extraRadiusForFocused + strokeWidth) * 2 +
+          paddingVertical +
+          vertAdjustment +
           (vertAdjustment ? strokeWidth : 0)
         }`}
-        height={radius * 2 + strokeWidth}
-        width={radius * 2 + strokeWidth}>
+        height={
+          (radius + extraRadiusForFocused) * 2 + strokeWidth + paddingVertical
+        }
+        width={
+          (radius + extraRadiusForFocused) * 2 + strokeWidth + paddingHorizontal
+        }>
         <Defs>
           {data.map((item, index) => {
             return (
@@ -234,7 +119,7 @@ export const PieChartMain = (props: propTypes) => {
                 />
                 <Stop
                   offset="100%"
-                  stopColor={item.color || colors[index % 9]}
+                  stopColor={item.color || pieColors[index % 9]}
                   stopOpacity="1"
                 />
               </RadialGradient>
@@ -248,14 +133,16 @@ export const PieChartMain = (props: propTypes) => {
               cy={cy}
               r={radius}
               fill={
-                showGradient ? `url(#grad${0})` : data[0].color || colors[0 % 9]
+                showGradient
+                  ? `url(#grad${0})`
+                  : data[0].color || pieColors[0 % 9]
               }
               onPress={() => {
                 data[0].onPress
                   ? data[0].onPress()
                   : props.onPress
-                  ? props.onPress(data[0], 0)
-                  : null;
+                    ? props.onPress(data[0], 0)
+                    : null;
               }}
             />
           </>
@@ -278,6 +165,8 @@ export const PieChartMain = (props: propTypes) => {
               cy * (1 - Math.cos(2 * pi * nextItem + initialAngle)) +
               (item.shiftY || 0);
 
+            if (isBiggerPie && index) return null;
+
             return (
               <Path
                 key={index + 'a'}
@@ -293,15 +182,15 @@ export const PieChartMain = (props: propTypes) => {
                   props.focusOnPress && props.selectedIndex === index
                     ? 0
                     : item.strokeWidth === 0
-                    ? 0
-                    : item.strokeWidth || strokeWidth
+                      ? 0
+                      : item.strokeWidth || strokeWidth
                 }
                 fill={
                   props.selectedIndex === index || item.peripheral
                     ? 'transparent'
                     : showGradient
-                    ? `url(#grad${index})`
-                    : item.color || colors[index % 9]
+                      ? `url(#grad${index})`
+                      : item.color || pieColors[index % 9]
                 }
                 onPress={() => {
                   if (item.onPress) {
@@ -310,7 +199,7 @@ export const PieChartMain = (props: propTypes) => {
                     props.onPress(item, index);
                   }
                   if (props.focusOnPress) {
-                    if (props.selectedIndex === index) {
+                    if (props.selectedIndex === index || props.isBiggerPie) {
                       if (toggleFocusOnPress) {
                         props.setSelectedIndex(-1);
                       }
@@ -324,8 +213,12 @@ export const PieChartMain = (props: propTypes) => {
           })
         )}
 
-        {showText &&
+        {(showText || showInnerComponent) &&
           data.map((item, index) => {
+            const localPieInnerComponent =
+              item.pieInnerComponent ?? props.pieInnerComponent;
+            if (isBiggerPie && index) return null;
+            if (!props.data[index].value) return null;
             let mx = cx * (1 + Math.sin(2 * pi * mData[index] + initialAngle));
             let my = cy * (1 - Math.cos(2 * pi * mData[index] + initialAngle));
 
@@ -366,18 +259,17 @@ export const PieChartMain = (props: propTypes) => {
               }
             }
 
-            // console.log('sx', sx);
-            // console.log('sy', sy);
-            // console.log('ax', ax);
-            // console.log('ay', ay);
             return (
-              <>
+              <React.Fragment key={index}>
                 {/* <Line x1={mx} x2={cx} y1={my} y2={cy} stroke="black" /> */}
-                {showTextBackground && (
+                {showTextBackground ? (
                   <Circle
-                    key={index + 'b'}
-                    cx={x}
-                    cy={y - (item.textSize || textSize) / 4}
+                    cx={x + (item.shiftTextBackgroundX ?? item.shiftTextX ?? 0)}
+                    cy={
+                      y +
+                      (item.shiftTextBackgroundY ?? item.shiftTextY ?? 0) -
+                      (item.textSize || textSize) / 4
+                    }
                     r={
                       item.textBackgroundRadius ||
                       props.textBackgroundRadius ||
@@ -389,12 +281,12 @@ export const PieChartMain = (props: propTypes) => {
                       item.onLabelPress
                         ? item.onLabelPress()
                         : props.onLabelPress
-                        ? props.onLabelPress(item, index)
-                        : item.onPress
-                        ? item.onPress()
-                        : props.onPress
-                        ? props.onPress(item, index)
-                        : null;
+                          ? props.onLabelPress(item, index)
+                          : item.onPress
+                            ? item.onPress()
+                            : props.onPress
+                              ? props.onPress(item, index)
+                              : null;
                       if (props.focusOnPress) {
                         if (props.selectedIndex === index) {
                           if (toggleFocusOnPress) {
@@ -406,9 +298,11 @@ export const PieChartMain = (props: propTypes) => {
                       }
                     }}
                   />
-                )}
+                ) : null}
                 <SvgText
-                  fill={item.textColor || textColor || colors[(index + 2) % 9]}
+                  fill={
+                    item.textColor || textColor || pieColors[(index + 2) % 9]
+                  }
                   fontSize={item.textSize || textSize}
                   fontFamily={item.font || props.font}
                   fontWeight={item.fontWeight || props.fontWeight}
@@ -423,12 +317,12 @@ export const PieChartMain = (props: propTypes) => {
                     item.onLabelPress
                       ? item.onLabelPress()
                       : props.onLabelPress
-                      ? props.onLabelPress(item, index)
-                      : item.onPress
-                      ? item.onPress()
-                      : props.onPress
-                      ? props.onPress(item, index)
-                      : null;
+                        ? props.onLabelPress(item, index)
+                        : item.onPress
+                          ? item.onPress()
+                          : props.onPress
+                            ? props.onPress(item, index)
+                            : null;
                     if (props.focusOnPress) {
                       if (props.selectedIndex === index) {
                         if (toggleFocusOnPress) {
@@ -441,55 +335,15 @@ export const PieChartMain = (props: propTypes) => {
                   }}>
                   {item.text || (showValuesAsLabels ? item.value + '' : '')}
                 </SvgText>
-              </>
+                {localPieInnerComponent ? (
+                  <G x={x} y={y}>
+                    {localPieInnerComponent?.(item, index) ?? null}
+                  </G>
+                ) : null}
+              </React.Fragment>
             );
           })}
       </Svg>
-      {(props.centerLabelComponent || (donut && !isDataShifted)) && (
-        <View
-          style={[
-            {
-              height: innerRadius * 2,
-              width: innerRadius * 2,
-              borderRadius: innerRadius,
-              position: 'absolute',
-              zIndex: 100,
-              alignSelf: 'center',
-              backgroundColor: innerCircleColor,
-              left: canvasWidth / 2 - innerRadius + shiftInnerCenterX,
-              top:
-                canvasHeight / 2 -
-                innerRadius +
-                shiftInnerCenterY -
-                (isThreeD ? radius / 5 : 0),
-              borderWidth: innerCircleBorderWidth,
-              borderColor: innerCircleBorderColor,
-              justifyContent: 'center',
-              alignItems: 'center',
-            },
-            isThreeD && {
-              borderTopWidth: innerCircleBorderWidth * 5,
-              borderLeftWidth: shiftInnerCenterX
-                ? innerCircleBorderWidth * 2
-                : innerCircleBorderWidth,
-            },
-            semiCircle &&
-              isThreeD && {
-                borderTopWidth: isThreeD
-                  ? innerCircleBorderWidth * 5
-                  : innerCircleBorderWidth,
-                borderLeftWidth: 0.5,
-                borderLeftColor: innerCircleColor,
-                borderBottomWidth: 0,
-                borderRightWidth: 0.5,
-                borderRightColor: innerCircleColor,
-              },
-          ]}>
-          <View style={{marginTop: semiCircle ? -0.5 * innerRadius : 0}}>
-            {props.centerLabelComponent ? props.centerLabelComponent() : null}
-          </View>
-        </View>
-      )}
       {isThreeD && shadow && !semiCircle ? (
         <View
           style={{
@@ -498,7 +352,8 @@ export const PieChartMain = (props: propTypes) => {
             backgroundColor: shadowColor,
             borderRadius: radius,
             position: 'absolute',
-            top: shadowWidth,
+            top: shadowWidth + paddingVertical / 2,
+            left: paddingHorizontal / 2,
             zIndex: -1,
           }}
         />

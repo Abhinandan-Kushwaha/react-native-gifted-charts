@@ -1,3 +1,10 @@
+package-lock.json
+
+.yalc
+yalc.lock
+
+App.tsx
+
 # OSX
 #
 .DS_Store
@@ -20,6 +27,7 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
+dist
 
 # Android/IntelliJ
 #

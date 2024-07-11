@@ -1,6 +1,6 @@
-# react-native-gifted-charts [![Rate on Openbase](https://badges.openbase.com/js/rating/react-native-gifted-charts.svg)](https://openbase.com/js/react-native-gifted-charts?utm_source=embedded&utm_medium=badge&utm_campaign=rate-badge)
+# react-native-gifted-charts
 
-The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
+The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar and Population Pyramid charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
 
 ### Yet another chart library? Why?
 
@@ -15,10 +15,14 @@ The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts
 7. Detailed [documentation](https://gifted-charts.web.app/) with examples
 8. Support for **_combined_** Bar and Line charts
 
-**Alert:**
+## 📣 Announcement
 
-This library doesn't support web apps yet. Use this library if you are planning mobile first.</br>
-However, we are planning to add support for web which will be available soon.
+The web counterpart of this library is public now. Try out our new reactJS library- [react-gifted-charts](https://www.npmjs.com/package/react-gifted-charts) <br />
+The exact same piece of code that you write to render charts in react-native, can be used to render charts in reactJS using this library!
+
+
+## [Release notes 🎉](release-notes/release-notes.md)
+
 
 <img src='/demos/bars.png' alt=''/>
 <img src='/demos/lineArea.png' alt=''/>
@@ -33,24 +37,29 @@ However, we are planning to add support for web which will be available soon.
     <td><img src='/demos/movingBars.gif' alt='' width=270 height=300/></td>
     <td><img src='/demos/pielabbelled.svg' alt='' height=280 width=270/></td>
   </tr>
+  <tr>
+  <td><img src='/demos/pyrLarge.png' alt='' height=280 width=260/></td>
+  <td><img src='/demos/popnPyramidLabelled.png' alt='' height=280 width=300/></td>
+  </tr>
 </table>
 
 ---
 
-## Version 1.2.x 🎉
-Version 1.2.0 onwards we are dependent only on `react-native-svg` and `react-native-linear-gradient`. Earlier, Pie and Donut charts were rendered using `react-native-canvas`, but now they are also rendered using <b>svg</b>. We are no longer using `react-native-canvas` neither `react-native-webview`!
-
 ## Installation
+
+### React Native CLI
 
 ```sh
 npm install react-native-gifted-charts react-native-linear-gradient react-native-svg
 ```
 
-For iOS-
+### Expo
 
 ```sh
-cd ios && pod install
+npx expo install react-native-gifted-charts expo-linear-gradient react-native-svg
 ```
+
+Please note that `react-native-svg` and `react-native-linear-gradient`/`expo-linear-gradient` are needed for the library to work, so make sure they are installed in your project.
 
 # Docs
 
@@ -61,7 +70,7 @@ cd ios && pod install
 The simplest usage of various types of charts can be done as below-
 
 ```js
-import { BarChart, LineChart, PieChart } from "react-native-gifted-charts";
+import { BarChart, LineChart, PieChart, PopulationPyramid } from "react-native-gifted-charts";
 
 // ...
 const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
@@ -69,6 +78,7 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 <BarChart data = {data} />
 <LineChart data = {data} />
 <PieChart data = {data} />
+<PopulationPyramid data = {[{left:10,right:12}, {left:9,right:8}]} />
 
 // For Horizontal Bar chart, just add the prop horizontal to the <BarChart/> component
 
@@ -87,9 +97,17 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 
 **[1. BarChart, Horizontal BarChart and Stacked Bar Chart props](docs/BarChart/BarChartProps.md)** \
 **[2. LineChart and AreaChart props](docs/LineChart/LineChartProps.md)** \
-**[3. PieChart and DonutChart props](docs/PieChart/PieChartProps.md)**
+**[3. PieChart and DonutChart props](docs/PieChart/PieChartProps.md)** \
+**[4. Population Pyramid props](docs/PopulationPyramid/PopulationPyramid.md)**
 
 ## Contributing
+
+This project exists thanks to all the people who contribute.
+
+<a href="https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Abhinandan-Kushwaha/react-native-gifted-charts" />
+</a>
+<br/><br/>
 
 _Dear developers_! Your small contribution can make someone's day 😊
 
@@ -98,16 +116,6 @@ One of the ways you can contribute is to address an [open issue](https://github.
 Sometimes people report issues which don't exist, or request for features which are already present. Such issues can be addressed without pushing any code to the repo. Just show them in the comments how to do it.
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## Common issues
-
-| Issue                                                                                                                        | Solution                                                                                                                                                                    |
-| ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [BarChart - Value and section line don't match](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35) | [Comment by the owner](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/35#issuecomment-972673281)                                                  |
-| Setting `height`, `maxValue`, `stepValue`, `stepHeight`, or `noOfSections` breaks the chart                                  | Please make sure that<br/> `maxValue = noOfSections * stepValue;` <br/>is followed. [See this](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/71) |
-| Charts with datasets having negative values (4th quadrant) break https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/261 | Not yest solved |
-
-## To-dos
 
 [To do list](./src/todos.md)
 

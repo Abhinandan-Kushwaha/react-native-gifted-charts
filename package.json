@@ -1,13 +1,14 @@
 {
   "name": "react-native-gifted-charts",
-  "version": "1.2.42",
-  "description": "The most complete library for Bar, Line, Area, Pie, Donut and Stacked Bar charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.",
+  "version": "1.4.16",
+  "description": "The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar and Population Pyramid charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.",
   "main": "src/index.tsx",
   "files": [
     "src"
   ],
   "scripts": {
     "android": "react-native run-android",
+    "build": "tsc -p .",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
@@ -24,39 +25,58 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "@types/jest": "^26.0.23",
-    "@types/node": "^15.0.2",
-    "@types/react": "^17.0.5",
-    "@types/react-dom": "^17.0.3",
-    "@types/react-native": "^0.64.5",
-    "react-native-linear-gradient": "^2.5.6",
-    "react-native-svg": "^13.6.0",
-    "typescript": "^4.2.4"
+    "gifted-charts-core": "^0.1.13"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.8",
-    "@babel/runtime": "^7.14.8",
-    "@react-native-community/eslint-config": "^3.0.0",
-    "babel-jest": "^27.0.6",
-    "eslint": "^7.31.0",
-    "jest": "^27.0.6",
-    "metro-react-native-babel-preset": "^0.66.2",
-    "react-test-renderer": "17.0.1",
-    "ts-jest": "^27.1.4"
+    "@babel/core": "^7.22.5",
+    "@babel/runtime": "^7.22.5",
+    "@react-native-community/eslint-config": "^3.2.0",
+    "@types/jest": "^29.5.2",
+    "@types/node": "^20.3.3",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@types/react-native": "^0.72.2",
+    "babel-jest": "^29.5.0",
+    "eslint": "^8.44.0",
+    "jest": "^29.5.0",
+    "metro-react-native-babel-preset": "^0.76.7",
+    "react": "^18.2.0",
+    "react-native": "^0.73.2",
+    "react-native-linear-gradient": "^2.8.3",
+    "react-native-svg": "^14.1.0",
+    "react-test-renderer": "18.2.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": "*"
+    "react-native": "*",
+    "react-native-linear-gradient": "*",
+    "expo-linear-gradient": "*",
+    "react-native-svg": "*"
+  },
+  "peerDependenciesMeta": {
+    "react-native-linear-gradient": {
+      "optional": true
+    },
+    "expo-linear-gradient": {
+      "optional": true
+    }
   },
   "keywords": [
-    "react-native",
     "chart",
     "charts",
     "graph",
+    "data visualization",
     "bar",
     "pie",
     "donut",
     "area",
-    "line"
+    "line",
+    "population",
+    "pyramid",
+    "react",
+    "react native",
+    "react-native"
   ]
 }
