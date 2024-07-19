@@ -14,6 +14,7 @@ import {
   BarDefaults,
   StackedBarChartPropsType,
 } from 'gifted-charts-core';
+import Tooltip from '../Components/BarSpecificComponents/tooltip';
 
 if (Platform.OS === 'android') {
   UIManager.setLayoutAnimationEnabledExperimental &&
@@ -34,12 +35,9 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     xAxisTextNumberOfLines,
     xAxisLabelsVerticalShift,
     renderTooltip,
-    leftShiftForTooltip,
-    leftShiftForLastIndexTooltip,
     selectedIndex,
     setSelectedIndex,
     activeOpacity,
-    stackData,
     animationDuration = BarDefaults.animationDuration,
     barBorderWidth,
     barBorderColor,
@@ -51,6 +49,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     showValuesAsTopLabel,
     autoShiftLabelsForNegativeStacks = true,
     labelsDistanceFromXaxis = 0,
+    horizontal,
   } = props;
   const {
     cotainsNegative,
@@ -61,7 +60,6 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     borderTopRightRadius,
     borderBottomLeftRadius,
     borderBottomRightRadius,
-    leftSpacing,
     disablePress,
     totalHeight,
     height,
@@ -70,6 +68,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     getPosition,
     lowestBarPosition,
     getStackBorderRadii,
+    tooltipProps,
   } = useRenderStackBars(props);
 
   const renderLabel = (label: String, labelTextStyle: any) => {
@@ -85,10 +84,10 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
               : -labelsDistanceFromXaxis,
           },
           rotateLabel
-            ? props.horizontal
+            ? horizontal
               ? {transform: [{rotate: '330deg'}]}
               : {transform: [{rotate: '60deg'}]}
-            : props.horizontal
+            : horizontal
               ? {transform: [{rotate: '-90deg'}]}
               : {},
         ]}>
@@ -268,7 +267,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
                 alignItems: 'center',
               },
               cotainsNegative && {transform: [{translateY: totalHeight * 2}]},
-              props.horizontal &&
+              horizontal &&
                 !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
               item.topLabelContainerStyle,
             ]}>
@@ -331,19 +330,6 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
               }
             : null,
         ]}>
-        {/* {props.showVerticalLines && (
-          <View
-            style={{
-              zIndex: props.verticalLinesZIndex,
-              position: 'absolute',
-              height: (containerHeight || 200) + 15,
-              width: props.verticalLinesThickness,
-              bottom: 0,
-              left: (item.barWidth || props.barWidth || 30) / 2,
-              backgroundColor: props.verticalLinesColor,
-            }}
-          />
-        )} */}
         {(props.showXAxisIndices || item.showXAxisIndex) && (
           <View
             style={{
@@ -364,19 +350,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
         {renderLabel(label || '', labelTextStyle)}
       </View>
       {renderTooltip && selectedIndex === index && (
-        <View
-          style={{
-            position: 'absolute',
-            bottom: totalHeight + 60,
-            left:
-              index === stackData.length - 1
-                ? leftSpacing - leftShiftForLastIndexTooltip
-                : leftSpacing -
-                  (item.leftShiftForTooltip ?? leftShiftForTooltip ?? 0),
-            zIndex: 1000,
-          }}>
-          {renderTooltip(item, index)}
-        </View>
+        <Tooltip {...tooltipProps} />
       )}
     </>
   );

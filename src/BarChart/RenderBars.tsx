@@ -11,6 +11,7 @@ import {
   barDataItem,
   AxesAndRulesDefaults,
 } from 'gifted-charts-core';
+import Tooltip from '../Components/BarSpecificComponents/tooltip';
 
 const RenderBars = (props: RenderBarsPropsType) => {
   const {
@@ -57,6 +58,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
     stepValue,
     negativeStepHeight,
     negativeStepValue,
+    autoCenterTooltip,
   } = props;
 
   const heightFactor =
@@ -403,6 +405,20 @@ const RenderBars = (props: RenderBarsPropsType) => {
     );
   };
 
+  const tooltipProps = {
+    barHeight,
+    barWidth: item.barWidth || barWidth,
+    item,
+    index,
+    isLast: index === data.length - 1,
+    leftSpacing,
+    leftShiftForLastIndexTooltip,
+    leftShiftForTooltip: item.leftShiftForTooltip ?? leftShiftForTooltip ?? 0,
+    renderTooltip,
+    autoCenterTooltip,
+    horizontal,
+  };
+
   return (
     <>
       {pressDisabled ? (
@@ -443,19 +459,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
         </TouchableOpacity>
       )}
       {renderTooltip && selectedIndex === index && (
-        <View
-          style={{
-            position: 'absolute',
-            bottom: barHeight + 60,
-            left:
-              index === data.length - 1
-                ? leftSpacing - leftShiftForLastIndexTooltip
-                : leftSpacing -
-                  (item?.leftShiftForTooltip ?? leftShiftForTooltip ?? 0),
-            zIndex: 1000,
-          }}>
-          {renderTooltip(item, index)}
-        </View>
+        <Tooltip {...tooltipProps} />
       )}
     </>
   );

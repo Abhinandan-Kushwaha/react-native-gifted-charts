@@ -201,10 +201,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
   ) =>
     horizSections.map((sectionItems, index) => {
       let label = getLabelTextsForSecondaryYAxis(sectionItems.value, index);
-      if (
-        secondaryYAxisConfig.hideOrigin &&
-        index === secondaryHorizSections.length - 1
-      ) {
+      if (secondaryYAxisConfig.hideOrigin && index === 0) {
         label = '';
       }
       return (

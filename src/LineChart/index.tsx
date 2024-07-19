@@ -66,6 +66,7 @@ export const LineChart = (props: LineChartPropsType) => {
     arrow4Points,
     arrow5Points,
     secondaryArrowPoints,
+    pointerIndex,
     setPointerIndex,
     pointerX,
     setPointerX,
@@ -945,26 +946,43 @@ export const LineChart = (props: LineChartPropsType) => {
   const renderStripAndLabel = () => {
     let pointerItemLocal, pointerYLocal;
 
-    pointerItemLocal = [pointerItem];
+    pointerItemLocal = [
+      {...pointerItem, value: props.data?.[pointerIndex]?.value},
+    ];
     let arr = [pointerY];
     if (pointerY2 !== 0) {
       arr.push(pointerY2);
-      pointerItemLocal.push(pointerItem2);
+      pointerItemLocal.push({
+        ...pointerItem,
+        value: props.data2?.[pointerIndex]?.value,
+      });
     }
     if (pointerY3 !== 0) {
       arr.push(pointerY3);
-      pointerItemLocal.push(pointerItem3);
+      pointerItemLocal.push({
+        ...pointerItem,
+        value: props.data3?.[pointerIndex]?.value,
+      });
     }
     if (pointerY4 !== 0) {
       arr.push(pointerY4);
-      pointerItemLocal.push(pointerItem4);
+      pointerItemLocal.push({
+        ...pointerItem,
+        value: props.data4?.[pointerIndex]?.value,
+      });
     }
     if (pointerY5 !== 0) {
       arr.push(pointerY5);
-      pointerItemLocal.push(pointerItem5);
+      pointerItemLocal.push({
+        ...pointerItem,
+        value: props.data5?.[pointerIndex]?.value,
+      });
     }
     if (secondaryPointerY !== 0) {
-      pointerItemLocal.push(secondaryPointerItem);
+      pointerItemLocal.push({
+        ...pointerItem,
+        value: props.secondaryData?.[pointerIndex]?.value,
+      });
     }
     pointerYLocal = Math.min(...arr);
 
@@ -1105,7 +1123,7 @@ export const LineChart = (props: LineChartPropsType) => {
       lineSvgPropsOuter.strokeDasharray = strokeDashArray;
     }
     return (
-      <Svg>
+      <Svg onPress={props.onBackgroundPress}>
         {lineGradient && getLineGradientComponent()}
         {points.includes(SEGMENT_START) || points.includes(RANGE_ENTER) ? (
           ar.map((item, index) => {
@@ -1144,6 +1162,7 @@ export const LineChart = (props: LineChartPropsType) => {
           )}
         {isNthAreaChart && (
           <Path
+            onPress={props.onChartAreaPress}
             d={fillPoints}
             fill={
               props.areaGradientId
@@ -1380,11 +1399,12 @@ export const LineChart = (props: LineChartPropsType) => {
       if (dataSet[0].data[factor]) {
         const ysForDataSet = dataSet.map(set => {
           const item = set.data[factor];
-          const y =
-            containerHeight -
-            (item.value * containerHeight) / maxValue -
-            (pointerRadius || pointerHeight / 2) +
-            10;
+          const y = item
+            ? containerHeight -
+              (item.value * containerHeight) / maxValue -
+              (pointerRadius || pointerHeight / 2) +
+              10
+            : 0;
           return y;
         });
         setPointerYsForDataSet(ysForDataSet);
@@ -1725,11 +1745,12 @@ export const LineChart = (props: LineChartPropsType) => {
             if (dataSet[0].data[factor]) {
               const ysForDataSet = dataSet.map(set => {
                 const item = set.data[factor];
-                const y =
-                  containerHeight -
-                  (item.value * containerHeight) / maxValue -
-                  (pointerRadius || pointerHeight / 2) +
-                  10;
+                const y = item
+                  ? containerHeight -
+                    (item.value * containerHeight) / maxValue -
+                    (pointerRadius || pointerHeight / 2) +
+                    10
+                  : 0;
                 return y;
               });
               setPointerYsForDataSet(ysForDataSet);

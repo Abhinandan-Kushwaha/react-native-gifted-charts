@@ -1,3 +1,35 @@
+# 🎉 1.4.17
+
+## ✨ Features added-
+
+1. Added the prop `autoCenterTooltip` to auto-center the tooltip for Bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/713 <br />
+
+2. Added the prop `nestedScrollEnabled` to Bar and Line charts. It is useful when the chart is used inside a horizontal ScrollView as without this, the chart's scrolling is compromised. Thanks to **Guilherme Pellegrini Coelho** for his PR https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/640
+
+3. Added the props `onChartAreaPress` and `onBackgroundPress` for Line and Area charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/634
+
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- Line chart crashing when using `dataSet` and `pointerConfig` together. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/708
+
+2. Fixed the issue- Values in `pointerLabelComponent` are wrong when using `yAxisOffset`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/645
+
+3. Fixed the issue "A props object containing a "key" prop is being spread into JSX" (in react 18.3 onwards) See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/646
+
+4. Fixed the issue- Horizontal bar tooltip not rotated. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/672
+
+5. Fixed the issue- In secoundry Y-axis, hideOrigin doesn't work correctly (hides the top Y-label instead of bottom) See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/704
+
+6. Fixed the issue- LineChart does not recognize sectionColors parameter. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/715
+
+
+---
+
+---
+
+---
+
 # 🎉 1.4.16
 
 ## ✨ Features added-
