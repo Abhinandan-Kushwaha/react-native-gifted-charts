@@ -333,6 +333,7 @@ export const BarChart = (props: BarChartPropsType) => {
       return props.stackData.map((item, index) => {
         return (
           <RenderStackBars
+            key={index}
             stackData={props.stackData || []}
             isAnimated={isAnimated}
             animationDuration={animationDuration}
@@ -349,6 +350,7 @@ export const BarChart = (props: BarChartPropsType) => {
     } else {
       return data.map((item, index) => (
         <RenderBars
+          key={index}
           data={data}
           side={side}
           minHeight={props.minHeight ?? (isAnimated && !isThreeD ? 0.1 : 0)}

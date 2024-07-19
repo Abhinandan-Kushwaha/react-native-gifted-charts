@@ -31,6 +31,7 @@
 | disableScroll                 | boolean              | To disable horizontal scroll                                                                                   | false                         |
 | showScrollIndicator           | boolean              | To show horizontal scroll indicator                                                                            | false                         |
 | indicatorColor                | String               | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                | default                       |
+| nestedScrollEnabled           | boolean              | Useful when the chart is used inside a horizontal ScrollView (without this, the chart's scrolling is compromised) | false                      |
 | isAnimated                    | boolean              | To show animated Line or Area Chart. Animation occurs when the chart load for the first time                   | false                         |
 | animateOnDataChange           | boolean              | To show animation on change in data. A smooth transition takes place between the iold and new line             | false                         |
 | onDataChangeAnimationDuration | number               | Duration (milliseconds) in which the transition animation takes place on a change in data                      | 400                           |
@@ -50,6 +51,7 @@
 | stepChart5                    | boolean              | If set true, renders a step chart for 5th data set                                                             | stepChart                     |
 | edgePosition                  | EdgePosition         | Used only for stepCharts to specify the edge positions of the steps                                            | EdgePosition.AFTER_DATA_POINT |
 | onlyPositive                  | boolean              | when this prop is truthy, it converts negative values to 0                                                     | false                         |
+| onBackgroundPress             | Function             | Callback function called on pressing the chart body (outside of the are under chart in case of area charts)    | \_                            |
 
 ---
 
@@ -805,6 +807,7 @@ Here is the list of prop names changed in version `1.3.2`-
 | gradientDirection     | string     | Direction of the gradient (_'horizontal'_ or _'vertical'_)                                              | 'vertical'    |
 | areaGradientComponent | Function   | this prop defines the svg gradient that should be applied to the area (requires areaChart to be truthy) | null          |
 | areaGradientId        | string     | id of the <LinearGradient> (needed along with areaGradientComponent prop)                               | \_            |
+| onChartAreaPress      | Function   | Callback function called on pressing the chart area                                                     | \_            |
 
 ### Example of areaGradientComponent
 
