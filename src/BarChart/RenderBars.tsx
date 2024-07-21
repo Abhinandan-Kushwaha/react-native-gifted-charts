@@ -33,7 +33,9 @@ const RenderBars = (props: RenderBarsPropsType) => {
     animationDuration,
     autoShiftLabels,
     label,
+    secondaryLabel,
     labelTextStyle,
+    secondaryLabelTextStyle,
     xAxisTextNumberOfLines,
     xAxisLabelsVerticalShift,
     renderTooltip,
@@ -59,6 +61,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
     negativeStepHeight,
     negativeStepValue,
     autoCenterTooltip,
+    secondaryXAxis,
   } = props;
 
   const heightFactor =
@@ -91,7 +94,12 @@ const RenderBars = (props: RenderBarsPropsType) => {
       ? 0
       : item.barMarginBottom || props.barMarginBottom || 0;
 
-  const renderLabel = (label: String, labelTextStyle: any, value: number) => {
+  const renderLabel = (
+    top: boolean,
+    label: String,
+    labelTextStyle: any,
+    value: number,
+  ) => {
     return (
       <View
         style={[
@@ -104,12 +112,16 @@ const RenderBars = (props: RenderBarsPropsType) => {
             left: spacing / -2,
             position: 'absolute',
             height: props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
-            bottom:
-              (rotateLabel
-                ? -40
-                : -6 - xAxisTextNumberOfLines * 18 - xAxisLabelsVerticalShift) -
-              barMarginBottom -
-              labelsDistanceFromXaxis,
+            bottom: top
+              ? (containerHeight || 200) +
+                (secondaryXAxis?.labelsDistanceFromXaxis ?? 15)
+              : (rotateLabel
+                  ? -40
+                  : -6 -
+                    xAxisTextNumberOfLines * 18 -
+                    xAxisLabelsVerticalShift) -
+                barMarginBottom -
+                labelsDistanceFromXaxis,
           },
           rotateLabel
             ? horizontal
@@ -136,7 +148,21 @@ const RenderBars = (props: RenderBarsPropsType) => {
                   }
                 : {},
         ]}>
-        {item.labelComponent ? (
+        {top ? (
+          item.secondaryLabelComponent ? (
+            item.secondaryLabelComponent()
+          ) : (
+            <Text
+              style={[
+                {textAlign: 'center'},
+                rtl && horizontal && {transform: [{rotate: '180deg'}]},
+                labelTextStyle,
+              ]}
+              numberOfLines={xAxisTextNumberOfLines}>
+              {label}
+            </Text>
+          )
+        ) : item.labelComponent ? (
           item.labelComponent()
         ) : (
           <Text
@@ -146,7 +172,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
               labelTextStyle,
             ]}
             numberOfLines={xAxisTextNumberOfLines}>
-            {label || ''}
+            {label}
           </Text>
         )}
       </View>
@@ -154,6 +180,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
   };
 
   const renderAnimatedLabel = (
+    top: boolean,
     label: String,
     labelTextStyle: any,
     value: number,
@@ -170,11 +197,14 @@ const RenderBars = (props: RenderBarsPropsType) => {
             left: spacing / -2,
             position: 'absolute',
             height: props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
-            bottom:
-              (rotateLabel
-                ? -40
-                : -6 - xAxisTextNumberOfLines * 18 - xAxisLabelsVerticalShift) -
-              barMarginBottom,
+            bottom: top
+              ? (containerHeight || 200) +
+                (secondaryXAxis?.labelsDistanceFromXaxis ?? 15)
+              : (rotateLabel
+                  ? -40
+                  : -6 -
+                    xAxisTextNumberOfLines * 18 -
+                    xAxisLabelsVerticalShift) - barMarginBottom,
             opacity: appearingOpacity,
           },
           value < 0 && {transform: [{rotate: '180deg'}]},
@@ -197,7 +227,21 @@ const RenderBars = (props: RenderBarsPropsType) => {
                   }
                 : {},
         ]}>
-        {item.labelComponent ? (
+        {top ? (
+          item.secondaryLabelComponent ? (
+            item.secondaryLabelComponent()
+          ) : (
+            <Text
+              style={[
+                {textAlign: 'center'},
+                rtl && horizontal && {transform: [{rotate: '180deg'}]},
+                labelTextStyle,
+              ]}
+              numberOfLines={xAxisTextNumberOfLines}>
+              {label}
+            </Text>
+          )
+        ) : item.labelComponent ? (
           item.labelComponent()
         ) : (
           <Text
@@ -207,7 +251,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
               labelTextStyle,
             ]}
             numberOfLines={xAxisTextNumberOfLines}>
-            {label || ''}
+            {label}
           </Text>
         )}
       </Animated.View>
@@ -399,8 +443,23 @@ const RenderBars = (props: RenderBarsPropsType) => {
           animated2DWithGradient(true, true)
         )}
         {isAnimated
-          ? renderAnimatedLabel(label, labelTextStyle, item.value)
-          : renderLabel(label, labelTextStyle, item.value)}
+          ? renderAnimatedLabel(false, label, labelTextStyle, item.value)
+          : renderLabel(false, label, labelTextStyle, item.value)}
+        {secondaryXAxis
+          ? isAnimated
+            ? renderAnimatedLabel(
+                true,
+                secondaryLabel,
+                secondaryLabelTextStyle,
+                item.value,
+              )
+            : renderLabel(
+                true,
+                secondaryLabel,
+                secondaryLabelTextStyle,
+                item.value,
+              )
+          : null}
       </>
     );
   };

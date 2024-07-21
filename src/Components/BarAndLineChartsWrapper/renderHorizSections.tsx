@@ -62,6 +62,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     secondaryYAxis,
     onlyReferenceLines,
     renderReferenceLines,
+    secondaryXAxis,
   } = props;
 
   const {
@@ -183,7 +184,12 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
         style={[
           styles.leftPart,
           {
-            borderColor: yAxisColor,
+            borderLeftColor: yAxisColor,
+            borderRightColor: yAxisColor,
+            borderTopColor: secondaryXAxis?.color ?? xAxisColor,
+            borderTopWidth: secondaryXAxis
+              ? secondaryXAxis.thickness ?? xAxisThickness
+              : 0,
             backgroundColor: backgroundColor,
             width: (props.width || totalWidth - spacing) + endSpacing,
           },

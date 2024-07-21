@@ -1,3 +1,40 @@
+# 🎉 1.4.18
+
+## ✨ Features added-
+
+1. Added the prop `secondaryXAxis` to render an additional X axis at the top of the chart.
+
+The labels to be displayed along the secondary X-axis can be passed in these 2 ways-
+   1. Through the property named `secondaryLabel` in the data array
+   2. Through the property named `labelTexts` in the `secondaryXAxis` prop.
+
+The `secondaryXAxis` props accepts an object of the following type-
+```ts
+XAxisConfig {
+  thickness?: number
+  color?: ColorValue
+  labelsDistanceFromXaxis?: number
+  labelsHeight?: number
+  labelsTextStyle?: any
+  labelTexts?: string[]
+}
+```
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/642
+
+2. Added the properties `secondaryLabel`, `secondaryLabelComponent` and `secondaryLabelTextStyle` to the data items of Bar and Line charts.
+
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- Bar chart does not update on changing data values. (Only animated Bar charts used to update). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/643
+
+---
+
+---
+
+---
+
+
 # 🎉 1.4.17
 
 ## ✨ Features added-
