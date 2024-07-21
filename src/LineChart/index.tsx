@@ -313,6 +313,8 @@ export const LineChart = (props: LineChartPropsType) => {
     parentWidth: props.parentWidth ?? screenWidth,
   });
 
+  const {secondaryXAxis} = props;
+
   const widthValuesFromSet = useMemo(
     () => dataSet?.map(set => new Animated.Value(0)),
     [],
@@ -458,6 +460,7 @@ export const LineChart = (props: LineChartPropsType) => {
   ]);
 
   const renderLabel = (
+    top: boolean,
     index: number,
     label: String,
     labelTextStyle: any,
@@ -468,7 +471,11 @@ export const LineChart = (props: LineChartPropsType) => {
         style={[
           {
             position: 'absolute',
-            bottom: 54 - xAxisTextNumberOfLines * 18,
+            bottom: top
+              ? containerHeight +
+                60 +
+                (secondaryXAxis?.labelsDistanceFromXaxis ?? 15)
+              : 54 - xAxisTextNumberOfLines * 18,
             zIndex: 10,
             width: spacing + labelsExtraHeight,
             left:
@@ -485,7 +492,7 @@ export const LineChart = (props: LineChartPropsType) => {
           <Text
             style={[{textAlign: 'center'}, labelTextStyle]}
             numberOfLines={xAxisTextNumberOfLines}>
-            {label || ''}
+            {label}
           </Text>
         )}
       </View>
@@ -493,6 +500,7 @@ export const LineChart = (props: LineChartPropsType) => {
   };
 
   const renderAnimatedLabel = (
+    top: boolean,
     index: number,
     label: String,
     labelTextStyle: any,
@@ -506,7 +514,13 @@ export const LineChart = (props: LineChartPropsType) => {
               ? 40
               : props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
             position: 'absolute',
-            bottom: rotateLabel ? 10 : 54 - xAxisTextNumberOfLines * 18,
+            bottom: top
+              ? containerHeight +
+                60 +
+                (secondaryXAxis?.labelsDistanceFromXaxis ?? 15)
+              : rotateLabel
+                ? 10
+                : 54 - xAxisTextNumberOfLines * 18,
             zIndex: 10,
             width: spacing,
             left:
@@ -523,7 +537,7 @@ export const LineChart = (props: LineChartPropsType) => {
           <Text
             style={[{textAlign: 'center'}, labelTextStyle]}
             numberOfLines={xAxisTextNumberOfLines}>
-            {label || ''}
+            {label}
           </Text>
         )}
       </Animated.View>
@@ -2142,10 +2156,18 @@ export const LineChart = (props: LineChartPropsType) => {
           </View>
         ) : null}
         {(data0 ?? data).map((item: lineDataItem, index: number) => {
+          const secondaryLabel =
+            item.secondaryLabel ?? secondaryXAxis?.labelTexts?.[index] ?? '';
+          const secondaryLabelTextStyle =
+            item.secondaryLabelTextStyle ??
+            secondaryXAxis?.labelsTextStyle ??
+            item.labelTextStyle ??
+            props.xAxisLabelTextStyle;
           return (
             <View key={index}>
               {isAnimated
                 ? renderAnimatedLabel(
+                    false,
                     index,
                     item.label ||
                       (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
@@ -2155,6 +2177,7 @@ export const LineChart = (props: LineChartPropsType) => {
                     item.labelComponent,
                   )
                 : renderLabel(
+                    false,
                     index,
                     item.label ||
                       (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
@@ -2163,7 +2186,23 @@ export const LineChart = (props: LineChartPropsType) => {
                     item.labelTextStyle || props.xAxisLabelTextStyle,
                     item.labelComponent,
                   )}
-              {/* {renderLabel(index, item.label, item.labelTextStyle)} */}
+              {secondaryXAxis
+                ? isAnimated
+                  ? renderAnimatedLabel(
+                      true,
+                      index,
+                      secondaryLabel,
+                      secondaryLabelTextStyle,
+                      item.secondaryLabelComponent,
+                    )
+                  : renderLabel(
+                      true,
+                      index,
+                      secondaryLabel,
+                      secondaryLabelTextStyle,
+                      item.secondaryLabelComponent,
+                    )
+                : null}
             </View>
           );
         })}

@@ -2,56 +2,56 @@
 
 ### Basic props
 
-| Prop                          | Type                 | Description                                                                                                    | Default value                 |
-| ----------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| data                          | Array <lineDataItem> | An item object represents a point in the line chart. It is described in the next table.                        | \_                            |
-| data2                         | Array <lineDataItem> | Second set of dataPoint for the second line                                                                    | \_                            |
-| data3                         | Array <lineDataItem> | Third set of dataPoint for the third line                                                                      | \_                            |
-| data4                         | Array <lineDataItem> | Fourth set of dataPoint for the fourth line                                                                    | \_                            |
-| data5                         | Array <lineDataItem> | Fifth set of dataPoint for the third line                                                                      | \_                            |
-| dataSet                       | Array<DataSet>       | Array of data sets (used instead of using `data2`, `data3`, `data4` etc)                                       | \_                            |
-| width                         | number               | Width of the Bar chart                                                                                         | width of the parent           |
-| height                        | number               | Height of the Bar chart (excluding the bottom label)                                                           | 200                           |
-| overflowTop                   | number               | Extra space at the top of the chart to make room for dataPointText                                             | 0                             |
-| overflowBottom                | number               | Extra space at the bottom of the chart to make room for dataPoints or dataPointText                            | dataPointRadius               |
-| maxValue                      | number               | Maximum value shown in the Y axis                                                                              | 200                           |
-| mostNegativeValue             | number               | The most negative value shown in the Y axis (to be used only if the data set has negative values too)          | \_                            |
-| noOfSections                  | number               | Number of sections in the Y axis                                                                               | 10                            |
-| noOfSectionsBelowXAxis        | number               | Number of sections in the Y axis below X axis (in case the data set has negative values too)                   | 0                             |
-| stepValue                     | number               | Value of 1 step/section in the Y axis                                                                          | 20                            |
-| stepHeight                    | number               | Height of 1 step/section in the Y axis                                                                         | 20                            |
-| negativeStepValue             | number               | Value of 1 step/section in the Y axis for negative values (in the 4th quadrant)                                | stepValue                     |
-| negativeStepHeight            | number               | Height of 1 step/section in the Y axis for negative values (in the 4th quadrant)                               | stepHeight                    |
-| spacing                       | number               | Distance between 2 consecutive bars in the Bar chart                                                           | 50                            |
-| adjustToWidth                 | boolean              | When set to true, it auto computes the spacing value to fit the Line chart in the available width              | false                         |
-| backgroundColor               | ColorValue           | Background color of the Bar chart                                                                              | \_                            |
-| sectionColors                 | ColorValue           | Background color of the horizontal sections of the chart                                                       | backgroundColor               |
-| scrollref                     | any                  | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered            | React.useRef()                |
-| scrollToIndex                 | number               | scroll to a particular index on chart load                                                                     | \_                            |
-| disableScroll                 | boolean              | To disable horizontal scroll                                                                                   | false                         |
-| showScrollIndicator           | boolean              | To show horizontal scroll indicator                                                                            | false                         |
-| indicatorColor                | String               | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                | default                       |
-| nestedScrollEnabled           | boolean              | Useful when the chart is used inside a horizontal ScrollView (without this, the chart's scrolling is compromised) | false                      |
-| isAnimated                    | boolean              | To show animated Line or Area Chart. Animation occurs when the chart load for the first time                   | false                         |
-| animateOnDataChange           | boolean              | To show animation on change in data. A smooth transition takes place between the iold and new line             | false                         |
-| onDataChangeAnimationDuration | number               | Duration (milliseconds) in which the transition animation takes place on a change in data                      | 400                           |
-| onPress                       | Function             | The callback function that handles the press event. `item` and `index` are received as props                   | \_                            |
-| scrollToEnd                   | boolean              | When set to true, the chart automatically scrolls to the rightmost data point                                  | false                         |
-| scrollAnimation               | boolean              | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point | true                          |
-| scrollEventThrottle           | number               | (only for iOS) see https://reactnative.dev/docs/scrollview#scrolleventthrottle-ios                             | 0                             |
-| onScroll                      | Function             | callback function called when the chart is scrolled horizontally                                               | \_                            |
-| onMomentumScrollEnd           | Function             | callback function called when scroll is completed                                                              | \_                            |
-| initialSpacing                | number               | distance of the first data point from the Y axis                                                               | 20                            |
-| endSpacing                    | number               | distance/padding left at the end of the line chart                                                             | adjustWidth ? 0 : 20          |
-| stepChart                     | boolean              | If set true, renders a step chart                                                                              | false                         |
-| stepChart1                    | boolean              | If set true, renders a step chart for 1st data set                                                             | stepChart                     |
-| stepChart2                    | boolean              | If set true, renders a step chart for 2nd data set                                                             | stepChart                     |
-| stepChart3                    | boolean              | If set true, renders a step chart for 3rd data set                                                             | stepChart                     |
-| stepChart4                    | boolean              | If set true, renders a step chart for 4th data set                                                             | stepChart                     |
-| stepChart5                    | boolean              | If set true, renders a step chart for 5th data set                                                             | stepChart                     |
-| edgePosition                  | EdgePosition         | Used only for stepCharts to specify the edge positions of the steps                                            | EdgePosition.AFTER_DATA_POINT |
-| onlyPositive                  | boolean              | when this prop is truthy, it converts negative values to 0                                                     | false                         |
-| onBackgroundPress             | Function             | Callback function called on pressing the chart body (outside of the are under chart in case of area charts)    | \_                            |
+| Prop                          | Type                 | Description                                                                                                       | Default value                 |
+| ----------------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------- | ----------------------------- |
+| data                          | Array <lineDataItem> | An item object represents a point in the line chart. It is described in the next table.                           | \_                            |
+| data2                         | Array <lineDataItem> | Second set of dataPoint for the second line                                                                       | \_                            |
+| data3                         | Array <lineDataItem> | Third set of dataPoint for the third line                                                                         | \_                            |
+| data4                         | Array <lineDataItem> | Fourth set of dataPoint for the fourth line                                                                       | \_                            |
+| data5                         | Array <lineDataItem> | Fifth set of dataPoint for the third line                                                                         | \_                            |
+| dataSet                       | Array<DataSet>       | Array of data sets (used instead of using `data2`, `data3`, `data4` etc)                                          | \_                            |
+| width                         | number               | Width of the Bar chart                                                                                            | width of the parent           |
+| height                        | number               | Height of the Bar chart (excluding the bottom label)                                                              | 200                           |
+| overflowTop                   | number               | Extra space at the top of the chart to make room for dataPointText                                                | 0                             |
+| overflowBottom                | number               | Extra space at the bottom of the chart to make room for dataPoints or dataPointText                               | dataPointRadius               |
+| maxValue                      | number               | Maximum value shown in the Y axis                                                                                 | 200                           |
+| mostNegativeValue             | number               | The most negative value shown in the Y axis (to be used only if the data set has negative values too)             | \_                            |
+| noOfSections                  | number               | Number of sections in the Y axis                                                                                  | 10                            |
+| noOfSectionsBelowXAxis        | number               | Number of sections in the Y axis below X axis (in case the data set has negative values too)                      | 0                             |
+| stepValue                     | number               | Value of 1 step/section in the Y axis                                                                             | 20                            |
+| stepHeight                    | number               | Height of 1 step/section in the Y axis                                                                            | 20                            |
+| negativeStepValue             | number               | Value of 1 step/section in the Y axis for negative values (in the 4th quadrant)                                   | stepValue                     |
+| negativeStepHeight            | number               | Height of 1 step/section in the Y axis for negative values (in the 4th quadrant)                                  | stepHeight                    |
+| spacing                       | number               | Distance between 2 consecutive bars in the Bar chart                                                              | 50                            |
+| adjustToWidth                 | boolean              | When set to true, it auto computes the spacing value to fit the Line chart in the available width                 | false                         |
+| backgroundColor               | ColorValue           | Background color of the Bar chart                                                                                 | \_                            |
+| sectionColors                 | ColorValue           | Background color of the horizontal sections of the chart                                                          | backgroundColor               |
+| scrollref                     | any                  | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered               | React.useRef()                |
+| scrollToIndex                 | number               | scroll to a particular index on chart load                                                                        | \_                            |
+| disableScroll                 | boolean              | To disable horizontal scroll                                                                                      | false                         |
+| showScrollIndicator           | boolean              | To show horizontal scroll indicator                                                                               | false                         |
+| indicatorColor                | String               | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                   | default                       |
+| nestedScrollEnabled           | boolean              | Useful when the chart is used inside a horizontal ScrollView (without this, the chart's scrolling is compromised) | false                         |
+| isAnimated                    | boolean              | To show animated Line or Area Chart. Animation occurs when the chart load for the first time                      | false                         |
+| animateOnDataChange           | boolean              | To show animation on change in data. A smooth transition takes place between the iold and new line                | false                         |
+| onDataChangeAnimationDuration | number               | Duration (milliseconds) in which the transition animation takes place on a change in data                         | 400                           |
+| onPress                       | Function             | The callback function that handles the press event. `item` and `index` are received as props                      | \_                            |
+| scrollToEnd                   | boolean              | When set to true, the chart automatically scrolls to the rightmost data point                                     | false                         |
+| scrollAnimation               | boolean              | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point    | true                          |
+| scrollEventThrottle           | number               | (only for iOS) see https://reactnative.dev/docs/scrollview#scrolleventthrottle-ios                                | 0                             |
+| onScroll                      | Function             | callback function called when the chart is scrolled horizontally                                                  | \_                            |
+| onMomentumScrollEnd           | Function             | callback function called when scroll is completed                                                                 | \_                            |
+| initialSpacing                | number               | distance of the first data point from the Y axis                                                                  | 20                            |
+| endSpacing                    | number               | distance/padding left at the end of the line chart                                                                | adjustWidth ? 0 : 20          |
+| stepChart                     | boolean              | If set true, renders a step chart                                                                                 | false                         |
+| stepChart1                    | boolean              | If set true, renders a step chart for 1st data set                                                                | stepChart                     |
+| stepChart2                    | boolean              | If set true, renders a step chart for 2nd data set                                                                | stepChart                     |
+| stepChart3                    | boolean              | If set true, renders a step chart for 3rd data set                                                                | stepChart                     |
+| stepChart4                    | boolean              | If set true, renders a step chart for 4th data set                                                                | stepChart                     |
+| stepChart5                    | boolean              | If set true, renders a step chart for 5th data set                                                                | stepChart                     |
+| edgePosition                  | EdgePosition         | Used only for stepCharts to specify the edge positions of the steps                                               | EdgePosition.AFTER_DATA_POINT |
+| onlyPositive                  | boolean              | when this prop is truthy, it converts negative values to 0                                                        | false                         |
+| onBackgroundPress             | Function             | Callback function called on pressing the chart body (outside of the are under chart in case of area charts)       | \_                            |
 
 ---
 
@@ -126,6 +126,9 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | label                          | string     | Label text appearing under the X axis                                                                                                |
 | labelTextStyle                 | object     | Style object for the label text appearing under the X axis                                                                           |
 | labelComponent                 | Function   | custom label component appearing under the X axis                                                                                    |
+| secondaryLabel                 | string     | Label text appearing above the secondary X-axis (at the top of the chart)                                                            |
+| secondaryLabelComponent        | Component  | Custom label component appearing above the secondary X-axis (at the top of the chart)                                                |
+| secondaryLabelTextStyle        | object     | Style object for the label text of secondary X-axis (at the top of the chart)                                                        |
 | yAxisLabelText                 | string     | Y axis label text                                                                                                                    |
 | dataPointText                  | string     | Text appearing near the data points                                                                                                  |
 | textShiftX                     | number     | To shift the dataPointText text horizontally                                                                                         |
@@ -242,6 +245,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | secondaryYAxis               | secondaryYAxisType        | displays and controls the properties of the secondary Y axis on the right side                                    | null                         |
 | secondaryData                | Array of items            | the secondary data that will be rendered along the secondary Y axis                                               | undefined                    |
 | secondaryLineConfig          | secondaryLineConfigType   | properties of the secondary data line (secondaryLineConfigType is described below)                                | values of primary Line       |
+| secondaryXAxis               | XAxisConfig               | properties of the secondary X-axis (appearing at the top of the chart)                                            | values of the primary X-axis |
 
 **Note** If you are setting yAxisSide to 'right', make sure to specify the width of the chart, using the `width` prop
 
@@ -275,6 +279,18 @@ type referenceConfigType = {
   zIndex: number; // default 1
   resetPointerOnDataChange: boolean; // default true
 };
+```
+
+XAxisConfig has following properties-
+```ts
+type XAxisConfig {
+  thickness?: number
+  color?: ColorValue
+  labelsDistanceFromXaxis?: number
+  labelsHeight?: number
+  labelsTextStyle?: any
+  labelTexts?: string[]
+}
 ```
 
 ---
