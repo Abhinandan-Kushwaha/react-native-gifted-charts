@@ -139,6 +139,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
         {showYAxisIndices && index !== noOfSections ? (
           <View
             style={{
+              position: 'absolute',
               height: yAxisIndicesHeight,
               width: yAxisIndicesWidth,
               left:

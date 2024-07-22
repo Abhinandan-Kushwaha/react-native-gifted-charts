@@ -119,44 +119,45 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 
 ### Item description (lineDataItem)
 
-| Key                            | Value type | Description                                                                                                                          |
-| ------------------------------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| value                          | number     | Value of the item representing representing its position                                                                             |
-| onPress                        | function   | Function called on pressing the data point                                                                                           |
-| label                          | string     | Label text appearing under the X axis                                                                                                |
-| labelTextStyle                 | object     | Style object for the label text appearing under the X axis                                                                           |
-| labelComponent                 | Function   | custom label component appearing under the X axis                                                                                    |
-| secondaryLabel                 | string     | Label text appearing above the secondary X-axis (at the top of the chart)                                                            |
-| secondaryLabelComponent        | Component  | Custom label component appearing above the secondary X-axis (at the top of the chart)                                                |
-| secondaryLabelTextStyle        | object     | Style object for the label text of secondary X-axis (at the top of the chart)                                                        |
-| yAxisLabelText                 | string     | Y axis label text                                                                                                                    |
-| dataPointText                  | string     | Text appearing near the data points                                                                                                  |
-| textShiftX                     | number     | To shift the dataPointText text horizontally                                                                                         |
-| textShiftY                     | number     | To shift the dataPointText text vertically                                                                                           |
-| textColor                      | ColorValue | Color of the dataPointText                                                                                                           |
-| textFontSize                   | number     | Font size of the dataPointText                                                                                                       |
-| dataPointHeight                | number     | Height of the data point (when data point's shape is rectangular)                                                                    |
-| dataPointWidth                 | number     | Width of the data point (when data point's shape is rectangular)                                                                     |
-| dataPointRadius                | number     | Radius of the data point (when data points' shape is circular)                                                                       |
-| dataPointColor                 | ColorValue | Color of the data point                                                                                                              |
-| dataPointShape                 | string     | Shape of the data point (rectangular or circular) defaults to circular                                                               |
-| hideDataPoint                  | boolean    | To hide the data point                                                                                                               |
-| showVerticalLine               | boolean    | When set to true, a vertical line will be displayed along that data point                                                            |
-| verticalLineUptoDataPoint      | boolean    | When set to true, it sets the height of the vertical line upto the corresponding data point                                          |
-| verticalLineColor              | ColorValue | Color of the vertical Line displayed along the data point                                                                            |
-| verticalLineThickness          | number     | Thickness of the vertical Line displayed along the data point                                                                        |
-| dataPointLabelWidth            | number     | width of the label shown beside a data point                                                                                         |
-| dataPointLabelShiftX           | number     | horizontal shift of a label from its corresponding data point                                                                        |
-| dataPointLabelShiftY           | number     | vertical shift of a label from its corresponding data point                                                                          |
-| dataPointLabelComponent        | Function   | custom component rendered above a data point                                                                                         |
-| focusedDataPointLabelComponent | Function   | custom component rendered above a data point only when focused/selected (when the user presses)                                      |
-| showStrip                      | boolean    | To show a vertical strip along the data point (even if it's not focused/selected)                                                    |
-| stripHeight                    | number     | Height of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true  |
-| stripWidth                     | number     | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
-| stripColor                     | ColorValue | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
-| stripOpacity                   | number     | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true |
-| pointerShiftX                  | number     | Shifts the pointer for that item horizontally by given quantity (used only when pointerConfig prop is passed)                        |
-| pointerShiftY                  | number     | Shifts the pointer for that item vertically by given quantity (used only when pointerConfig prop is passed)                          |
+| Key                            | Value type    | Description                                                                                                                          |
+| ------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| value                          | number        | Value of the item representing representing its position                                                                             |
+| onPress                        | function      | Function called on pressing the data point                                                                                           |
+| label                          | string        | Label text appearing under the X axis                                                                                                |
+| labelTextStyle                 | object        | Style object for the label text appearing under the X axis                                                                           |
+| labelComponent                 | Function      | custom label component appearing under the X axis                                                                                    |
+| secondaryLabel                 | string        | Label text appearing above the secondary X-axis (at the top of the chart)                                                            |
+| secondaryLabelComponent        | Component     | Custom label component appearing above the secondary X-axis (at the top of the chart)                                                |
+| secondaryLabelTextStyle        | object        | Style object for the label text of secondary X-axis (at the top of the chart)                                                        |
+| yAxisLabelText                 | string        | Y axis label text                                                                                                                    |
+| dataPointText                  | string        | Text appearing near the data points                                                                                                  |
+| textShiftX                     | number        | To shift the dataPointText text horizontally                                                                                         |
+| textShiftY                     | number        | To shift the dataPointText text vertically                                                                                           |
+| textColor                      | ColorValue    | Color of the dataPointText                                                                                                           |
+| textFontSize                   | number        | Font size of the dataPointText                                                                                                       |
+| dataPointHeight                | number        | Height of the data point (when data point's shape is rectangular)                                                                    |
+| dataPointWidth                 | number        | Width of the data point (when data point's shape is rectangular)                                                                     |
+| dataPointRadius                | number        | Radius of the data point (when data points' shape is circular)                                                                       |
+| dataPointColor                 | ColorValue    | Color of the data point                                                                                                              |
+| dataPointShape                 | string        | Shape of the data point (rectangular or circular) defaults to circular                                                               |
+| hideDataPoint                  | boolean       | To hide the data point                                                                                                               |
+| showVerticalLine               | boolean       | When set to true, a vertical line will be displayed along that data point                                                            |
+| verticalLineUptoDataPoint      | boolean       | When set to true, it sets the height of the vertical line upto the corresponding data point                                          |
+| verticalLineColor              | ColorValue    | Color of the vertical Line displayed along the data point                                                                            |
+| verticalLineThickness          | number        | Thickness of the vertical Line displayed along the data point                                                                        |
+| dataPointLabelWidth            | number        | width of the label shown beside a data point                                                                                         |
+| dataPointLabelShiftX           | number        | horizontal shift of a label from its corresponding data point                                                                        |
+| dataPointLabelShiftY           | number        | vertical shift of a label from its corresponding data point                                                                          |
+| dataPointLabelComponent        | Function      | custom component rendered above a data point                                                                                         |
+| focusedDataPointLabelComponent | Function      | custom component rendered above a data point only when focused/selected (when the user presses)                                      |
+| showStrip                      | boolean       | To show a vertical strip along the data point (even if it's not focused/selected)                                                    |
+| stripHeight                    | number        | Height of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true  |
+| stripWidth                     | number        | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
+| stripColor                     | ColorValue    | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
+| stripOpacity                   | number        | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true |
+| stripStrokeDashArray           | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of the vertical strip                                                          |
+| pointerShiftX                  | number        | Shifts the pointer for that item horizontally by given quantity (used only when pointerConfig prop is passed)                        |
+| pointerShiftY                  | number        | Shifts the pointer for that item vertically by given quantity (used only when pointerConfig prop is passed)                          |
 
 **Alert**\
 When you are using the `dataPointLabelComponent`, make sure to provide the `dataPointsHeight` and `dataPointsWidth` values too (either in the corresponding item object, or directly as a props of the <LineChart> component). Otherwise the data points might appear shifted from their intended positions.
@@ -282,6 +283,7 @@ type referenceConfigType = {
 ```
 
 XAxisConfig has following properties-
+
 ```ts
 type XAxisConfig {
   thickness?: number
@@ -743,27 +745,29 @@ Line or Area charts can be made interactive by allowing users to press on the ch
 
 To achieve this the `focusEnabled` props must be set to true. In addition, use below props like `focusedDataPointShape`, `focusedDataPointColor`, `focusedDataPointRadius` to focus the pressed data point. The prop `onFocus` can be used to pass a function that will be called when a data point is focused.
 
-| Prop                      | Type       | Description                                                                                                                                   | Default value                             |
-| ------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
-| focusEnabled              | boolean    | If set true, allows users to press on the chart and focuses the nearest data point (focus event can be then handled using the `onFocus` prop) | false                                     |
-| onFocus                   | Function   | The callback function that handles the focus event. `item` and `index` are received as props                                                  | \_                                        |
-| focusedDataPointIndex     | number     | Index of the focused data point, used to set initially focused data point and to override the focus behaviour on onFocus                      | \_                                        |
-| showDataPointOnFocus      | boolean    | If set true, it shows the data point corresponding to the focused area of the chart                                                           | false                                     |
-| showStripOnFocus          | boolean    | If set true, it shows a vertical strip corresponding to the focused area of the chart                                                         | false                                     |
-| showTextOnFocus           | boolean    | If set true, it shows the data point text corresponding to the focused area of the chart                                                      | false                                     |
-| showDataPointLabelOnFocus | boolean    | If set true, it shows the data point corresponding to the focused area of the chart                                                           | false                                     |
-| stripHeight               | number     | Height of the vertical strip that becomes visible on pressing the corresponding area of the chart                                             | height of the data point                  |
-| stripWidth                | number     | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart                                              | 2                                         |
-| stripColor                | ColorValue | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart                                              | 'orange'                                  |
-| stripOpacity              | number     | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart                                            | (startOpacity+endOpacity)/2               |
-| unFocusOnPressOut         | boolean    | If set true, it unselects/unfocuses the focused/selected data point                                                                           | true                                      |
-| delayBeforeUnFocus        | number     | Delay (in milliseconds) between the release of the press and ghe unfocusing of the data point                                                 | 300                                       |
-| focusedDataPointShape     | String     | Shape of the data points when focused due to press event                                                                                      | item.dataPointsShape OR dataPointsShape   |
-| focusedDataPointWidth     | number     | Width of the data points when focused due to press event                                                                                      | item.dataPointsWidth OR dataPointsWidth   |
-| focusedDataPointHeight    | number     | Height of the data points when focused due to press event                                                                                     | item.dataPointsHeight OR dataPointsHeight |
-| focusedDataPointColor     | ColorValue | Color of the data points when focused due to press event                                                                                      | item.dataPointsColor OR dataPointsColor   |
-| focusedDataPointRadius    | number     | Radius of the data points when focused due to press event                                                                                     | item.dataPointsRadius OR dataPointsRadius |
-| focusedCustomDataPoint    | Function   | Custom data point when focused due to press event                                                                                             | item.customDataPoint OR customDataPoint   |
+| Prop                      | Type          | Description                                                                                                                                   | Default value                             |
+| ------------------------- | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| focusEnabled              | boolean       | If set true, allows users to press on the chart and focuses the nearest data point (focus event can be then handled using the `onFocus` prop) | false                                     |
+| onFocus                   | Function      | The callback function that handles the focus event. `item` and `index` are received as props                                                  | \_                                        |
+| focusedDataPointIndex     | number        | Index of the focused data point, used to set initially focused data point and to override the focus behaviour on onFocus                      | \_                                        |
+| showDataPointOnFocus      | boolean       | If set true, it shows the data point corresponding to the focused area of the chart                                                           | false                                     |
+| showStripOnFocus          | boolean       | If set true, it shows a vertical strip corresponding to the focused area of the chart                                                         | false                                     |
+| showTextOnFocus           | boolean       | If set true, it shows the data point text corresponding to the focused area of the chart                                                      | false                                     |
+| showDataPointLabelOnFocus | boolean       | If set true, it shows the data point corresponding to the focused area of the chart                                                           | false                                     |
+| stripHeight               | number        | Height of the vertical strip that becomes visible on pressing the corresponding area of the chart                                             | height of the data point                  |
+| stripWidth                | number        | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart                                              | 2                                         |
+| stripColor                | ColorValue    | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart                                              | 'orange'                                  |
+| stripOpacity              | number        | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart                                            | (startOpacity+endOpacity)/2               |
+| stripStrokeDashArray      | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of the vertical strip                                                                   | \_                                        |
+| stripStrokeDashArray      | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of the vertical strip                                                                   | \_                                        |
+| unFocusOnPressOut         | boolean       | If set true, it unselects/unfocuses the focused/selected data point                                                                           | true                                      |
+| delayBeforeUnFocus        | number        | Delay (in milliseconds) between the release of the press and ghe unfocusing of the data point                                                 | 300                                       |
+| focusedDataPointShape     | String        | Shape of the data points when focused due to press event                                                                                      | item.dataPointsShape OR dataPointsShape   |
+| focusedDataPointWidth     | number        | Width of the data points when focused due to press event                                                                                      | item.dataPointsWidth OR dataPointsWidth   |
+| focusedDataPointHeight    | number        | Height of the data points when focused due to press event                                                                                     | item.dataPointsHeight OR dataPointsHeight |
+| focusedDataPointColor     | ColorValue    | Color of the data points when focused due to press event                                                                                      | item.dataPointsColor OR dataPointsColor   |
+| focusedDataPointRadius    | number        | Radius of the data points when focused due to press event                                                                                     | item.dataPointsRadius OR dataPointsRadius |
+| focusedCustomDataPoint    | Function      | Custom data point when focused due to press event                                                                                             | item.customDataPoint OR customDataPoint   |
 
 #### Example of onFocus :
 
