@@ -299,6 +299,7 @@ export const LineChart = (props: LineChartPropsType) => {
     stripWidth,
     stripColor,
     stripOpacity,
+    stripStrokeDashArray,
     unFocusOnPressOut,
     delayBeforeUnFocus,
     containerHeightIncludingBelowXAxis,
@@ -661,8 +662,21 @@ export const LineChart = (props: LineChartPropsType) => {
       const currentStripHeight = item.stripHeight ?? stripHeight;
       const currentStripWidth = item.stripWidth ?? stripWidth;
       const currentStripOpacity = item.stripOpacity ?? stripOpacity;
+      const currentStripStrokeDashArray =
+        item.stripStrokeDashArray ?? stripStrokeDashArray ?? '';
       const currentStripColor = item.stripColor || stripColor;
       const position = I18nManager.isRTL ? 'right' : 'left';
+
+      const y1 = currentStripHeight
+        ? containerHeight - currentStripHeight + 8
+        : containerHeight -
+          dataPointsHeight / 2 +
+          14 -
+          (item.value * containerHeight) / maxValue;
+
+      const actualStripHeight =
+        currentStripHeight ||
+        (item.value * containerHeight) / maxValue - 2 + overflowTop;
 
       return (
         <Fragment key={index}>
@@ -694,23 +708,15 @@ export const LineChart = (props: LineChartPropsType) => {
           ) : null}
           {item.showStrip ||
           (focusEnabled && index === selectedIndex && showStripOnFocus) ? (
-            <Rect
-              x={initialSpacing + spacing * index - currentStripWidth / 2 - 1}
-              y={
-                currentStripHeight
-                  ? containerHeight - currentStripHeight + 8
-                  : containerHeight -
-                    dataPointsHeight / 2 +
-                    14 -
-                    (item.value * containerHeight) / maxValue
-              }
-              width={currentStripWidth}
-              height={
-                currentStripHeight ||
-                (item.value * containerHeight) / maxValue - 2 + overflowTop
-              }
+            <Line
+              x1={initialSpacing + spacing * index - currentStripWidth / 2 - 1}
+              y1={y1}
+              x2={initialSpacing + spacing * index - currentStripWidth / 2 - 1}
+              y2={y1 + actualStripHeight}
+              strokeWidth={currentStripWidth}
+              stroke={currentStripColor}
+              strokeDasharray={currentStripStrokeDashArray}
               opacity={currentStripOpacity}
-              fill={currentStripColor}
             />
           ) : null}
           {hideDataPoints ? null : (

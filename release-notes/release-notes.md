@@ -1,3 +1,21 @@
+# 🎉 1.4.19
+
+## ✨ Features added-
+
+1. Added the prop `stripStrokeDashArray` to support dotted and dashed vertical strips in Line and Area charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/611
+2. Added the properties `barBorderWidth` and `barBorderColor` to data items in Bar charts. Earlier these properties could only be passed directly as props. But now, they can be passed to individual data items as well. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/580
+
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- Y-axis indices are not properly aligned with rule lines. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/577
+
+---
+
+---
+
+---
+
 # 🎉 1.4.18
 
 ## ✨ Features added-
@@ -5,10 +23,12 @@
 1. Added the prop `secondaryXAxis` to render an additional X axis at the top of the chart.
 
 The labels to be displayed along the secondary X-axis can be passed in these 2 ways-
-   1. Through the property named `secondaryLabel` in the data array
-   2. Through the property named `labelTexts` in the `secondaryXAxis` prop.
+
+1.  Through the property named `secondaryLabel` in the data array
+2.  Through the property named `labelTexts` in the `secondaryXAxis` prop.
 
 The `secondaryXAxis` props accepts an object of the following type-
+
 ```ts
 XAxisConfig {
   thickness?: number
@@ -19,10 +39,10 @@ XAxisConfig {
   labelTexts?: string[]
 }
 ```
+
 See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/642
 
 2. Added the properties `secondaryLabel`, `secondaryLabelComponent` and `secondaryLabelTextStyle` to the data items of Bar and Line charts.
-
 
 ## 🐛 Bug fixes
 
@@ -34,7 +54,6 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/642
 
 ---
 
-
 # 🎉 1.4.17
 
 ## ✨ Features added-
@@ -44,7 +63,6 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/642
 2. Added the prop `nestedScrollEnabled` to Bar and Line charts. It is useful when the chart is used inside a horizontal ScrollView as without this, the chart's scrolling is compromised. Thanks to **Guilherme Pellegrini Coelho** for his PR https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/640
 
 3. Added the props `onChartAreaPress` and `onBackgroundPress` for Line and Area charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/634
-
 
 ## 🐛 Bug fixes
 
@@ -60,7 +78,6 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/642
 
 6. Fixed the issue- LineChart does not recognize sectionColors parameter. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/715
 
-
 ---
 
 ---
@@ -72,7 +89,6 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/642
 ## ✨ Features added-
 
 1. Added the prop `focusedPieIndex` to Pie charts used to set initially focused pie and to override the focus behaviour on `onPress`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/702
-
 
 ## 🐛 Bug fixes
 
@@ -88,7 +104,6 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/642
 
 ---
 
-
 # 🎉 1.4.15
 
 ## ✨ Features added-
@@ -96,7 +111,6 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/642
 1. Added the props `negativeStepValue` and `negativeStepHeight` to control the value and height of 1 step/section in the Y axis for negative values (in the 4th quadrant). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/686 (Supported in both- Bar and Line charts, but currently functional in Bar charts only)
 
 2. Added the prop `sectionColors` to set the background color of the horizontal sections of the chart. It is an array of ColorValues (or strings denoting colors). So, each section can have a different background color now. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/547
-
 
 ## 🐛 Bug fixes
 

@@ -239,6 +239,8 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | capThickness               | number     | Thickness of the bar cap                                                              |
 | capColor                   | ColorValue | Color of the bar cap                                                                  |
 | capRadius                  | number     | Border radius of the bar cap                                                          |
+| barBorderWidth             | number     | Border width of the bar                                                               |
+| barBorderColor             | ColorValue | Border color of the bar                                                               |
 | barBorderRadius            | number     | Border radius of the bar                                                              |
 | barBorderTopLeftRadius     | number     | Top left border radius of the bar                                                     |
 | barBorderTopRightRadius    | number     | Top right border radius of the bar                                                    |
