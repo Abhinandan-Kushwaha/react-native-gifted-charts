@@ -96,7 +96,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
 
   const renderLabel = (
     top: boolean,
-    label: String,
+    label: string,
     labelTextStyle: any,
     value: number,
   ) => {
@@ -134,19 +134,19 @@ const RenderBars = (props: RenderBarsPropsType) => {
                   ],
                 }
             : horizontal
-              ? {transform: [{rotate: '-90deg'}]}
-              : value < 0
-                ? {
-                    transform: [
-                      {rotate: '180deg'},
-                      {
-                        translateY: autoShiftLabels
-                          ? 0
-                          : 16.5 * xAxisTextNumberOfLines + 14,
-                      },
-                    ],
-                  }
-                : {},
+            ? {transform: [{rotate: '-90deg'}]}
+            : value < 0
+            ? {
+                transform: [
+                  {rotate: '180deg'},
+                  {
+                    translateY: autoShiftLabels
+                      ? 0
+                      : 16.5 * xAxisTextNumberOfLines + 14,
+                  },
+                ],
+              }
+            : {},
         ]}>
         {top ? (
           item.secondaryLabelComponent ? (
@@ -181,7 +181,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
 
   const renderAnimatedLabel = (
     top: boolean,
-    label: String,
+    label: string,
     labelTextStyle: any,
     value: number,
   ) => {
@@ -213,19 +213,19 @@ const RenderBars = (props: RenderBarsPropsType) => {
               ? {transform: [{rotate: '330deg'}]}
               : {transform: [{rotate: '60deg'}]}
             : horizontal
-              ? {transform: [{rotate: '-90deg'}]}
-              : value < 0
-                ? {
-                    transform: [
-                      {rotate: '180deg'},
-                      {
-                        translateY: autoShiftLabels
-                          ? 0
-                          : 16.5 * xAxisTextNumberOfLines + 14,
-                      },
-                    ],
-                  }
-                : {},
+            ? {transform: [{rotate: '-90deg'}]}
+            : value < 0
+            ? {
+                transform: [
+                  {rotate: '180deg'},
+                  {
+                    translateY: autoShiftLabels
+                      ? 0
+                      : 16.5 * xAxisTextNumberOfLines + 14,
+                  },
+                ],
+              }
+            : {},
         ]}>
         {top ? (
           item.secondaryLabelComponent ? (
@@ -354,15 +354,15 @@ const RenderBars = (props: RenderBarsPropsType) => {
           ],
         }
       : item.value < 0
-        ? {
-            transform: [
-              {
-                translateY: Math.abs(item.value) * heightFactor,
-              },
-              {rotateZ: '180deg'},
-            ],
-          }
-        : null,
+      ? {
+          transform: [
+            {
+              translateY: Math.abs(item.value) * heightFactor,
+            },
+            {rotateZ: '180deg'},
+          ],
+        }
+      : null,
     side !== 'right' && {zIndex: data.length - index},
   ];
 
@@ -496,22 +496,22 @@ const RenderBars = (props: RenderBarsPropsType) => {
             item.onPress
               ? item.onPress()
               : props.onPress
-                ? props.onPress(item, index)
-                : null;
+              ? props.onPress(item, index)
+              : null;
           }}
           onLongPress={() => {
             item.onLongPress
               ? item.onLongPress()
               : props.onLongPress
-                ? props.onLongPress(item, index)
-                : null;
+              ? props.onLongPress(item, index)
+              : null;
           }}
           onPressOut={() => {
             item.onPressOut
               ? item.onPressOut()
               : props.onPressOut
-                ? props.onPressOut(item, index)
-                : null;
+              ? props.onPressOut(item, index)
+              : null;
           }}
           style={barWrapperStyle}>
           {barContent()}
