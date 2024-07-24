@@ -1217,7 +1217,7 @@ export const LineChart = (props: LineChartPropsType) => {
             set.textFontSize ?? textFontSize1,
             set.startIndex ?? 0,
             set.endIndex ?? set.data.length - 1,
-            false,
+            set.isSecondary,
             showValuesAsDataPointsText,
           );
         }) ?? null}
