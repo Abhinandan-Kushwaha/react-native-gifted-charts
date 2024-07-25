@@ -85,6 +85,10 @@ type lineConfigType = {
   showArrow?: boolean;
   arrowConfig?: arrowType;
   isSecondary?: boolean;
+  focusEnabled?: boolean;
+  focusedDataPointColor?: ColorValue;
+  focusedDataPointRadius?: number;
+  focusedDataPointIndex?: number;
 };
 type arrowType = {
   length?: number;
@@ -140,6 +144,9 @@ defaultLineConfig = {
     showArrowBase: true,
   },
   isSecondary: false,
+  focusEnabled: false,
+  focusedDataPointColor: LineDefaults.focusedDataPointColor, // 'orange'
+  focusedDataPointRadius: LineDefaults.dataPointsRadius,
 };
 ```
 
@@ -365,6 +372,7 @@ type referenceConfigType = {
 ```
 
 XAxisConfig has following properties-
+
 ```ts
 type XAxisConfig {
   thickness?: number

@@ -4,8 +4,10 @@ import Svg, {Path} from 'react-native-svg';
 import {renderSpecificVerticalLines} from './renderSpecificVerticalLines';
 import {renderDataPoints} from './renderDataPoints';
 import {renderSpecificDataPoints} from './renderSpecificDataPoints';
+import {LineInBarChartPropsType} from 'gifted-charts-core';
+import {DataPointProps} from 'gifted-charts-core';
 
-const RenderLineInBarChart = (props: any) => {
+const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
   const {
     yAxisLabelWidth,
     initialSpacing,
@@ -22,11 +24,12 @@ const RenderLineInBarChart = (props: any) => {
     barWidth,
     labelsExtraHeight,
     xAxisLabelsVerticalShift,
+    selectedIndex,
   } = props;
 
   const firstBarWidth = data[0].barWidth ?? barWidth;
 
-  const dataPointsProps = {
+  const dataPointsProps: DataPointProps = {
     data,
     lineConfig,
     barWidth,
@@ -35,6 +38,7 @@ const RenderLineInBarChart = (props: any) => {
     firstBarWidth,
     yAxisLabelWidth,
     spacing,
+    selectedIndex,
   };
 
   const specificVerticalLinesProps = {
@@ -89,9 +93,9 @@ const RenderLineInBarChart = (props: any) => {
           {lineConfig.showArrow && (
             <Path
               d={arrowPoints}
-              fill={lineConfig.arrowConfig.fillColor}
-              stroke={lineConfig.arrowConfig.strokeColor}
-              strokeWidth={lineConfig.arrowConfig.strokeWidth}
+              fill={lineConfig.arrowConfig?.fillColor}
+              stroke={lineConfig.arrowConfig?.strokeColor}
+              strokeWidth={lineConfig.arrowConfig?.strokeWidth}
             />
           )}
         </Svg>
@@ -127,9 +131,9 @@ const RenderLineInBarChart = (props: any) => {
           {lineConfig.showArrow && (
             <Path
               d={arrowPoints}
-              fill={lineConfig.arrowConfig.fillColor}
-              stroke={lineConfig.arrowConfig.strokeColor}
-              strokeWidth={lineConfig.arrowConfig.strokeWidth}
+              fill={lineConfig.arrowConfig?.fillColor}
+              stroke={lineConfig.arrowConfig?.strokeColor}
+              strokeWidth={lineConfig.arrowConfig?.strokeWidth}
             />
           )}
         </Svg>

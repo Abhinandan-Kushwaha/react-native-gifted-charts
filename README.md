@@ -23,6 +23,8 @@ The exact same piece of code that you write to render charts in react-native, ca
 
 ## [Release notes 🎉](release-notes/release-notes.md)
 
+See the **[release changes by version here.](release-notes/release-notes.md)**
+
 
 <img src='/demos/bars.png' alt=''/>
 <img src='/demos/lineArea.png' alt=''/>

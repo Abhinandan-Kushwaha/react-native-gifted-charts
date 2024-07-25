@@ -1,10 +1,30 @@
+# 🎉 1.4.20
+
+## ✨ Features added-
+
+Added the following properties in the `lineConfig` prop for Bar charts (to control the line rendered inside Bar charts using the `showLine` prop) -
+
+```ts
+focusEnabled?: boolean;
+focusedDataPointColor?: ColorValue;
+focusedDataPointRadius?: number;
+focusedDataPointIndex?: number;
+```
+
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/729
+
+---
+
+---
+
+---
+
 # 🎉 1.4.19
 
 ## ✨ Features added-
 
 1. Added the prop `stripStrokeDashArray` to support dotted and dashed vertical strips in Line and Area charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/611
 2. Added the properties `barBorderWidth` and `barBorderColor` to data items in Bar charts. Earlier these properties could only be passed directly as props. But now, they can be passed to individual data items as well. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/580
-
 
 ## 🐛 Bug fixes
 

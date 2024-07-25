@@ -34,6 +34,7 @@ import {
   useLineChart,
   adjustToOffset,
   LineProperties,
+  LineDefaults,
 } from 'gifted-charts-core';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {StripAndLabel} from '../Components/common/StripAndLabel';
@@ -626,7 +627,9 @@ export const LineChart = (props: LineChartPropsType) => {
           item.dataPointHeight ||
           dataPtsHeight;
         dataPointsColor =
-          item.focusedDataPointColor || props.focusedDataPointColor || 'orange';
+          item.focusedDataPointColor ||
+          props.focusedDataPointColor ||
+          LineDefaults.focusedDataPointColor;
         dataPointsRadius =
           item.focusedDataPointRadius ||
           props.focusedDataPointRadius ||
