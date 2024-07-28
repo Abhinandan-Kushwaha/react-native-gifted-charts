@@ -15,7 +15,7 @@ import {
   bicolorLineDataItem,
   useLineChartBiColor,
 } from 'gifted-charts-core';
-import { screenWidth } from '../utils';
+import {screenWidth} from '../utils';
 
 export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
   const scrollRef = useRef();
@@ -82,7 +82,10 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
     unFocusOnPressOut,
     delayBeforeUnFocus,
     barAndLineChartsWrapperProps,
-  } = useLineChartBiColor({...props, parentWidth: props.parentWidth ?? screenWidth});
+  } = useLineChartBiColor({
+    ...props,
+    parentWidth: props.parentWidth ?? screenWidth,
+  });
 
   const labelsAppear = useCallback(() => {
     opacValue.setValue(0);
@@ -116,7 +119,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
 
   const renderLabel = (
     index: number,
-    label: String,
+    label: string,
     labelTextStyle: any,
     labelComponent?: Function,
   ) => {
@@ -151,7 +154,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
 
   const renderAnimatedLabel = (
     index: number,
-    label: String,
+    label: string,
     labelTextStyle: any,
     labelComponent?: Function,
   ) => {
@@ -361,8 +364,8 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
                     item.onPress
                       ? item.onPress(item, index)
                       : props.onPress
-                        ? props.onPress(item, index)
-                        : null;
+                      ? props.onPress(item, index)
+                      : null;
                   }}
                 />
               )}
@@ -385,8 +388,8 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
                     item.onPress
                       ? item.onPress(item, index)
                       : props.onPress
-                        ? props.onPress(item, index)
-                        : null;
+                      ? props.onPress(item, index)
+                      : null;
                   }}
                 />
               )}
@@ -412,8 +415,8 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
                       (item.dataPointLabelWidth
                         ? item.dataPointLabelWidth + 20
                         : props.dataPointLabelWidth
-                          ? props.dataPointLabelWidth + 20
-                          : 50) /
+                        ? props.dataPointLabelWidth + 20
+                        : 50) /
                         2 +
                       spacing * index,
                   },

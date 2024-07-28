@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {ColorValue} from 'react-native';
 import Svg, {G, Path} from 'react-native-svg';
-import { ruleTypes } from 'gifted-charts-core';
+import {ruleTypes} from 'gifted-charts-core';
 
 type ruleProps = {
   thickness: number;
   width: number;
-  color: ColorValue | String | any;
-  type: String;
+  color: ColorValue | string | any;
+  type: string;
   dashWidth: number;
   dashGap: number;
 };

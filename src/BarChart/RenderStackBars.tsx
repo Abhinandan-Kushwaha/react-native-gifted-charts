@@ -71,7 +71,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     tooltipProps,
   } = useRenderStackBars(props);
 
-  const renderLabel = (label: String, labelTextStyle: any) => {
+  const renderLabel = (label: string, labelTextStyle: any) => {
     return (
       <View
         style={[
@@ -88,8 +88,8 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
               ? {transform: [{rotate: '330deg'}]}
               : {transform: [{rotate: '60deg'}]}
             : horizontal
-              ? {transform: [{rotate: '-90deg'}]}
-              : {},
+            ? {transform: [{rotate: '-90deg'}]}
+            : {},
         ]}>
         {item.labelComponent ? (
           item.labelComponent()
