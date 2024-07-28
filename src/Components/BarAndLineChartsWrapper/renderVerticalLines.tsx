@@ -16,6 +16,7 @@ const RenderVerticalLines = (props: any) => {
     verticalLinesStrokeDashArray,
     verticalLinesShift,
     verticalLinesUptoDataPoint,
+    verticalLinesStrokeLinecap,
     xAxisThickness,
     labelsExtraHeight,
     containerHeight,
@@ -47,6 +48,12 @@ const RenderVerticalLines = (props: any) => {
   };
 
   const extendedContainerHeight = containerHeight + 10 + labelsExtraHeight;
+  const thickness = verticalLinesThickness || 2;
+  const heightAdjustmentDueToStrokeLinecap =
+    verticalLinesStrokeLinecap === 'round' ||
+    verticalLinesStrokeLinecap === 'square'
+      ? thickness / 2
+      : 0;
 
   return (
     <View
@@ -114,12 +121,17 @@ const RenderVerticalLines = (props: any) => {
             <Line
               key={index}
               x1={x}
-              y1={extendedContainerHeight - getHeightOfVerticalLine(index)}
+              y1={
+                extendedContainerHeight -
+                getHeightOfVerticalLine(index) +
+                heightAdjustmentDueToStrokeLinecap
+              }
               x2={x}
-              y2={extendedContainerHeight}
+              y2={extendedContainerHeight - heightAdjustmentDueToStrokeLinecap}
               stroke={verticalLinesColor || 'lightgray'}
               strokeWidth={verticalLinesThickness || 2}
               strokeDasharray={verticalLinesStrokeDashArray ?? ''}
+              strokeLinecap={verticalLinesStrokeLinecap}
             />
           );
         })}
