@@ -892,7 +892,7 @@ export const LineChart = (props: LineChartPropsType) => {
       let pointerItemLocal, pointerYLocal, pointerColorLocal;
       return dataSet?.map((set, index) => {
         const pIndex = barAndLineChartsWrapperProps.pointerIndex;
-        pointerItemLocal = set[pIndex];
+        pointerItemLocal = set.data[pIndex];
         pointerYLocal = pointerYsForDataSet[index];
         pointerColorLocal =
           pointerConfig?.pointerColorsForDataSet?.[index] ?? pointerColor;
