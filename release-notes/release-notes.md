@@ -17,6 +17,7 @@ The library now ships js binary obtained after compiling using babel. This shoul
 
 **Note:** Since we are now shipping compiled js, you may need to install the **[gifted-charts-core](https://www.npmjs.com/package/gifted-charts-core)** dependency.
 
+### PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/736
 ---
 
 ---
