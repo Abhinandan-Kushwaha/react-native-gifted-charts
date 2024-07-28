@@ -1,3 +1,28 @@
+# 🎉 1.4.21 Mega Release ⭐️
+
+## ✨ Features added-
+
+1. Added the prop `verticalLinesStrokeLinecap` to Bar and Line charts that takes the values `'butt'`, `'round'` and `'square'` (`'butt'` being the default). See the `stroke-linecap` property in svg.
+
+## 🔨 Refactor
+
+The library now ships js binary obtained after compiling using babel. This should fix all `typescript` issues like these-
+
+1. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/722
+2. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/691
+3. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/651
+4. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/625
+5. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/546
+6. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/473
+
+**Note:** Since we are now shipping compiled js, you may need to install the **[gifted-charts-core](https://www.npmjs.com/package/gifted-charts-core)** dependency.
+
+---
+
+---
+
+---
+
 # 🎉 1.4.20
 
 ## ✨ Features added-
