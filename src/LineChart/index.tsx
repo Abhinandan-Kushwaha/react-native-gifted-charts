@@ -55,7 +55,9 @@ export const LineChart = (props: LineChartPropsType) => {
 
   if (!initialData) {
     initialData = props.dataSet?.[0]?.data ?? props.data ?? [];
-    animations = initialData.map(item => new Animated.Value(item.value));
+    animations = initialData
+      .filter(item => item.value)
+      .map(item => new Animated.Value(item.value));
   }
 
   const {
