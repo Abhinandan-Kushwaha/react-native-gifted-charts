@@ -1,4 +1,3 @@
-import React from 'react';
 import {View} from 'react-native';
 import {PieChartMain} from './main';
 import {PieChartPropsType, pieColors, usePieChart} from 'gifted-charts-core';

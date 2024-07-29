@@ -516,15 +516,15 @@ export const LineChart = (props: LineChartPropsType) => {
           {
             height: rotateLabel
               ? 40
-              : props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
+              : (props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18),
             position: 'absolute',
             bottom: top
               ? containerHeight +
                 60 +
                 (secondaryXAxis?.labelsDistanceFromXaxis ?? 15)
               : rotateLabel
-              ? 10
-              : 54 - xAxisTextNumberOfLines * 18,
+                ? 10
+                : 54 - xAxisTextNumberOfLines * 18,
             zIndex: 10,
             width: spacing,
             left:
@@ -761,8 +761,8 @@ export const LineChart = (props: LineChartPropsType) => {
                         item.onPress
                           ? item.onPress(item, index)
                           : props.onPress
-                          ? props.onPress(item, index)
-                          : null;
+                            ? props.onPress(item, index)
+                            : null;
                       }}
                     />
                   )}
@@ -785,8 +785,8 @@ export const LineChart = (props: LineChartPropsType) => {
                         item.onPress
                           ? item.onPress(item, index)
                           : props.onPress
-                          ? props.onPress(item, index)
-                          : null;
+                            ? props.onPress(item, index)
+                            : null;
                       }}
                     />
                   )}
@@ -813,8 +813,8 @@ export const LineChart = (props: LineChartPropsType) => {
                           (item.dataPointLabelWidth
                             ? item.dataPointLabelWidth + 20
                             : props.dataPointLabelWidth
-                            ? props.dataPointLabelWidth + 20
-                            : 50) /
+                              ? props.dataPointLabelWidth + 20
+                              : 50) /
                             2 +
                           spacing * index,
                       },
@@ -865,7 +865,8 @@ export const LineChart = (props: LineChartPropsType) => {
             y1={extendedContainerHeight}
             x2={x}
             y2={
-              item.verticalLineUptoDataPoint ?? props.verticalLinesUptoDataPoint
+              (item.verticalLineUptoDataPoint ??
+              props.verticalLinesUptoDataPoint)
                 ? getY(item.value)
                 : -xAxisThickness
             }
@@ -1900,43 +1901,43 @@ export const LineChart = (props: LineChartPropsType) => {
               })
             : null
           : isAnimated
-          ? renderAnimatedLine(
-              zIndex1,
-              points,
-              animatedWidth,
-              thickness1,
-              color1,
-              fillPoints,
-              startFillColor1,
-              endFillColor1,
-              startOpacity1,
-              endOpacity1,
-              strokeDashArray1,
-              props.showArrow1 || props.showArrows,
-              arrow1Points,
-              arrowStrokeWidth1,
-              arrowStrokeColor1,
-              arrowFillColor1,
-              0,
-            )
-          : renderLine(
-              zIndex1,
-              points,
-              thickness1,
-              color1,
-              fillPoints,
-              startFillColor1,
-              endFillColor1,
-              startOpacity1,
-              endOpacity1,
-              strokeDashArray1,
-              props.showArrow1 || props.showArrows,
-              arrow1Points,
-              arrowStrokeWidth1,
-              arrowStrokeColor1,
-              arrowFillColor1,
-              0,
-            )}
+            ? renderAnimatedLine(
+                zIndex1,
+                points,
+                animatedWidth,
+                thickness1,
+                color1,
+                fillPoints,
+                startFillColor1,
+                endFillColor1,
+                startOpacity1,
+                endOpacity1,
+                strokeDashArray1,
+                props.showArrow1 || props.showArrows,
+                arrow1Points,
+                arrowStrokeWidth1,
+                arrowStrokeColor1,
+                arrowFillColor1,
+                0,
+              )
+            : renderLine(
+                zIndex1,
+                points,
+                thickness1,
+                color1,
+                fillPoints,
+                startFillColor1,
+                endFillColor1,
+                startOpacity1,
+                endOpacity1,
+                strokeDashArray1,
+                props.showArrow1 || props.showArrows,
+                arrow1Points,
+                arrowStrokeWidth1,
+                arrowStrokeColor1,
+                arrowFillColor1,
+                0,
+              )}
         {secondaryPoints
           ? isAnimated
             ? renderAnimatedLine(

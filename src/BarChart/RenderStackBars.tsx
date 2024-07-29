@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -52,7 +52,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     horizontal,
   } = props;
   const {
-    cotainsNegative,
+    containsNegativeValue,
     noAnimation,
     localBarInnerComponent,
     borderRadius,
@@ -88,8 +88,8 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
               ? {transform: [{rotate: '330deg'}]}
               : {transform: [{rotate: '60deg'}]}
             : horizontal
-            ? {transform: [{rotate: '-90deg'}]}
-            : {},
+              ? {transform: [{rotate: '-90deg'}]}
+              : {},
         ]}>
         {item.labelComponent ? (
           item.labelComponent()
@@ -258,7 +258,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
             style={[
               {
                 position: 'absolute',
-                top: cotainsNegative
+                top: containsNegativeValue
                   ? 0
                   : (item.barWidth || props.barWidth || 30) * -1,
                 height: item.barWidth || props.barWidth || 30,
@@ -266,7 +266,9 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               },
-              cotainsNegative && {transform: [{translateY: totalHeight * 2}]},
+              containsNegativeValue && {
+                transform: [{translateY: totalHeight * 2}],
+              },
               horizontal &&
                 !props.intactTopLabel && {transform: [{rotate: '270deg'}]},
               item.topLabelContainerStyle,
@@ -306,7 +308,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
       <View
         pointerEvents={
           props.pointerConfig
-            ? props.pointerConfig.pointerEvents ?? 'none'
+            ? (props.pointerConfig.pointerEvents ?? 'none')
             : 'auto'
         }
         style={[

@@ -364,8 +364,8 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
                     item.onPress
                       ? item.onPress(item, index)
                       : props.onPress
-                      ? props.onPress(item, index)
-                      : null;
+                        ? props.onPress(item, index)
+                        : null;
                   }}
                 />
               )}
@@ -388,8 +388,8 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
                     item.onPress
                       ? item.onPress(item, index)
                       : props.onPress
-                      ? props.onPress(item, index)
-                      : null;
+                        ? props.onPress(item, index)
+                        : null;
                   }}
                 />
               )}
@@ -415,8 +415,8 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
                       (item.dataPointLabelWidth
                         ? item.dataPointLabelWidth + 20
                         : props.dataPointLabelWidth
-                        ? props.dataPointLabelWidth + 20
-                        : 50) /
+                          ? props.dataPointLabelWidth + 20
+                          : 50) /
                         2 +
                       spacing * index,
                   },
