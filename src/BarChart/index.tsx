@@ -178,8 +178,8 @@ export const BarChart = (props: BarChartPropsType) => {
     if (pointerConfig) {
       return (
         <View
-          onStartShouldSetResponder={evt => (pointerConfig ? true : false)}
-          onMoveShouldSetResponder={evt => (pointerConfig ? true : false)}
+          onStartShouldSetResponder={() => !!pointerConfig}
+          onMoveShouldSetResponder={() => !!pointerConfig}
           onResponderGrant={evt => {
             if (!pointerConfig) return;
             setResponderStartTime(evt.timeStamp);
