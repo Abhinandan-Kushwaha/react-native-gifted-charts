@@ -1,4 +1,4 @@
-import React, {Fragment, useCallback, useEffect, useMemo, useRef} from 'react';
+import {Fragment, useCallback, useEffect, useMemo, useRef} from 'react';
 import {
   View,
   Animated,
@@ -45,7 +45,7 @@ let animations: Array<Animated.Value> = [];
 
 export const LineChart = (props: LineChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
-  const opacValue = useMemo(() => new Animated.Value(0), []);
+  const opacityValue = useMemo(() => new Animated.Value(0), []);
   const heightValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
   const widthValue2 = useMemo(() => new Animated.Value(0), []);
@@ -339,16 +339,16 @@ export const LineChart = (props: LineChartPropsType) => {
   }, [animateOnDataChange, data, onDataChangeAnimationDuration]);
 
   const labelsAppear = useCallback(() => {
-    opacValue.setValue(0);
-    Animated.timing(opacValue, {
+    opacityValue.setValue(0);
+    Animated.timing(opacityValue, {
       toValue: 1,
       duration: 500,
       easing: Easing.ease,
       useNativeDriver: false,
     }).start();
-  }, [opacValue]);
+  }, [opacityValue]);
 
-  const appearingOpacity = opacValue.interpolate({
+  const appearingOpacity = opacityValue.interpolate({
     inputRange: [0, 1],
     outputRange: [0, 1],
   });
