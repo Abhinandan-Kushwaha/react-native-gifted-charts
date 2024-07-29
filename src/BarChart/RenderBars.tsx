@@ -77,7 +77,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
   const {
     commonStyleForBar,
     barStyleWithBackground,
-    commonPropsFor2Dand3Dbars,
+    commonPropsFor2dAnd3dBars,
     isFocused,
     focusedBarConfig,
     localFrontColor,
@@ -337,7 +337,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
     {
       // overflow: 'visible',
       marginBottom: 60 + barMarginBottom + xAxisLabelsVerticalShift - 0.5,
-      width: commonPropsFor2Dand3Dbars.barWidth,
+      width: commonPropsFor2dAnd3dBars.barWidth,
       height: barHeight,
       marginRight: spacing,
     },
@@ -379,7 +379,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
       noAnimation: boolean,
     ) => (
       <Animated2DWithGradient
-        {...commonPropsFor2Dand3Dbars}
+        {...commonPropsFor2dAnd3dBars}
         animationDuration={animationDuration || 800}
         roundedBottom={props.roundedBottom || false}
         roundedTop={props.roundedTop || false}
@@ -417,7 +417,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
         )}
         {isBarBelowXaxisAndInvisible ? null : isThreeD ? (
           <AnimatedThreeDBar
-            {...commonPropsFor2Dand3Dbars}
+            {...commonPropsFor2dAnd3dBars}
             sideWidth={
               item.sideWidth ||
               props.sideWidth ||
