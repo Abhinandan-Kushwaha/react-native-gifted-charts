@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {View, LayoutAnimation, Platform, UIManager, Text} from 'react-native';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import Cap from '../Components/BarSpecificComponents/cap';
@@ -33,9 +33,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
     yAxisOffset,
   } = props;
   const [height, setHeight] = useState(noAnimation ? props.height : 0.2);
-  const [initialRender, setInitialRender] = useState(
-    noAnimation ? false : true,
-  );
+  const [initialRender, setInitialRender] = useState(!noAnimation);
 
   useEffect(() => {
     if (!noAnimation) {

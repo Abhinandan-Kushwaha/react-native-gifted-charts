@@ -1,4 +1,3 @@
-import React from 'react';
 import {View, TouchableOpacity, Animated, Text} from 'react-native';
 import AnimatedThreeDBar from '../Components/AnimatedThreeDBar';
 import Animated2DWithGradient from './Animated2DWithGradient';
@@ -77,7 +76,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
   const {
     commonStyleForBar,
     barStyleWithBackground,
-    commonPropsFor2Dand3Dbars,
+    commonPropsFor2dAnd3dBars,
     isFocused,
     focusedBarConfig,
     localFrontColor,
@@ -86,7 +85,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
   const itemOrPropsBarInnerComponent =
     item.barInnerComponent ?? props.barInnerComponent;
   const localBarInnerComponent = isFocused
-    ? focusedBarConfig?.barInnerComponent ?? itemOrPropsBarInnerComponent
+    ? (focusedBarConfig?.barInnerComponent ?? itemOrPropsBarInnerComponent)
     : itemOrPropsBarInnerComponent;
 
   const barMarginBottom =
@@ -134,19 +133,19 @@ const RenderBars = (props: RenderBarsPropsType) => {
                   ],
                 }
             : horizontal
-            ? {transform: [{rotate: '-90deg'}]}
-            : value < 0
-            ? {
-                transform: [
-                  {rotate: '180deg'},
-                  {
-                    translateY: autoShiftLabels
-                      ? 0
-                      : 16.5 * xAxisTextNumberOfLines + 14,
-                  },
-                ],
-              }
-            : {},
+              ? {transform: [{rotate: '-90deg'}]}
+              : value < 0
+                ? {
+                    transform: [
+                      {rotate: '180deg'},
+                      {
+                        translateY: autoShiftLabels
+                          ? 0
+                          : 16.5 * xAxisTextNumberOfLines + 14,
+                      },
+                    ],
+                  }
+                : {},
         ]}>
         {top ? (
           item.secondaryLabelComponent ? (
@@ -213,19 +212,19 @@ const RenderBars = (props: RenderBarsPropsType) => {
               ? {transform: [{rotate: '330deg'}]}
               : {transform: [{rotate: '60deg'}]}
             : horizontal
-            ? {transform: [{rotate: '-90deg'}]}
-            : value < 0
-            ? {
-                transform: [
-                  {rotate: '180deg'},
-                  {
-                    translateY: autoShiftLabels
-                      ? 0
-                      : 16.5 * xAxisTextNumberOfLines + 14,
-                  },
-                ],
-              }
-            : {},
+              ? {transform: [{rotate: '-90deg'}]}
+              : value < 0
+                ? {
+                    transform: [
+                      {rotate: '180deg'},
+                      {
+                        translateY: autoShiftLabels
+                          ? 0
+                          : 16.5 * xAxisTextNumberOfLines + 14,
+                      },
+                    ],
+                  }
+                : {},
         ]}>
         {top ? (
           item.secondaryLabelComponent ? (
@@ -275,7 +274,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
           end={{x: 0, y: 1}}
           colors={[
             isFocused
-              ? focusedBarConfig?.gradientColor ?? localGradientColor
+              ? (focusedBarConfig?.gradientColor ?? localGradientColor)
               : localGradientColor,
             localFrontColor,
           ]}>
@@ -337,7 +336,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
     {
       // overflow: 'visible',
       marginBottom: 60 + barMarginBottom + xAxisLabelsVerticalShift - 0.5,
-      width: commonPropsFor2Dand3Dbars.barWidth,
+      width: commonPropsFor2dAnd3dBars.barWidth,
       height: barHeight,
       marginRight: spacing,
     },
@@ -354,15 +353,15 @@ const RenderBars = (props: RenderBarsPropsType) => {
           ],
         }
       : item.value < 0
-      ? {
-          transform: [
-            {
-              translateY: Math.abs(item.value) * heightFactor,
-            },
-            {rotateZ: '180deg'},
-          ],
-        }
-      : null,
+        ? {
+            transform: [
+              {
+                translateY: Math.abs(item.value) * heightFactor,
+              },
+              {rotateZ: '180deg'},
+            ],
+          }
+        : null,
     side !== 'right' && {zIndex: data.length - index},
   ];
 
@@ -379,7 +378,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
       noAnimation: boolean,
     ) => (
       <Animated2DWithGradient
-        {...commonPropsFor2Dand3Dbars}
+        {...commonPropsFor2dAnd3dBars}
         animationDuration={animationDuration || 800}
         roundedBottom={props.roundedBottom || false}
         roundedTop={props.roundedTop || false}
@@ -417,7 +416,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
         )}
         {isBarBelowXaxisAndInvisible ? null : isThreeD ? (
           <AnimatedThreeDBar
-            {...commonPropsFor2Dand3Dbars}
+            {...commonPropsFor2dAnd3dBars}
             sideWidth={
               item.sideWidth ||
               props.sideWidth ||
@@ -496,22 +495,22 @@ const RenderBars = (props: RenderBarsPropsType) => {
             item.onPress
               ? item.onPress()
               : props.onPress
-              ? props.onPress(item, index)
-              : null;
+                ? props.onPress(item, index)
+                : null;
           }}
           onLongPress={() => {
             item.onLongPress
               ? item.onLongPress()
               : props.onLongPress
-              ? props.onLongPress(item, index)
-              : null;
+                ? props.onLongPress(item, index)
+                : null;
           }}
           onPressOut={() => {
             item.onPressOut
               ? item.onPressOut()
               : props.onPressOut
-              ? props.onPressOut(item, index)
-              : null;
+                ? props.onPressOut(item, index)
+                : null;
           }}
           style={barWrapperStyle}>
           {barContent()}

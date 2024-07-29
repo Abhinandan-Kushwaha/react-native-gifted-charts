@@ -21,7 +21,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
   const scrollRef = useRef();
   // const heightValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
-  const opacValue = useMemo(() => new Animated.Value(0), []);
+  const opacityValue = useMemo(() => new Animated.Value(0), []);
 
   const {
     pointsArray,
@@ -88,16 +88,16 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
   });
 
   const labelsAppear = useCallback(() => {
-    opacValue.setValue(0);
-    Animated.timing(opacValue, {
+    opacityValue.setValue(0);
+    Animated.timing(opacityValue, {
       toValue: 1,
       duration: 500,
       easing: Easing.ease,
       useNativeDriver: false,
     }).start();
-  }, [opacValue]);
+  }, [opacityValue]);
 
-  const appearingOpacity = opacValue.interpolate({
+  const appearingOpacity = opacityValue.interpolate({
     inputRange: [0, 1],
     outputRange: [0, 1],
   });
@@ -364,8 +364,8 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
                     item.onPress
                       ? item.onPress(item, index)
                       : props.onPress
-                      ? props.onPress(item, index)
-                      : null;
+                        ? props.onPress(item, index)
+                        : null;
                   }}
                 />
               )}
@@ -388,8 +388,8 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
                     item.onPress
                       ? item.onPress(item, index)
                       : props.onPress
-                      ? props.onPress(item, index)
-                      : null;
+                        ? props.onPress(item, index)
+                        : null;
                   }}
                 />
               )}
@@ -415,8 +415,8 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
                       (item.dataPointLabelWidth
                         ? item.dataPointLabelWidth + 20
                         : props.dataPointLabelWidth
-                        ? props.dataPointLabelWidth + 20
-                        : 50) /
+                          ? props.dataPointLabelWidth + 20
+                          : 50) /
                         2 +
                       spacing * index,
                   },

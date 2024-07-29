@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useRef} from 'react';
+import {useCallback, useEffect, useMemo, useRef} from 'react';
 import {Animated, Easing, View} from 'react-native';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
@@ -10,7 +10,7 @@ import {screenWidth} from '../utils';
 
 export const BarChart = (props: BarChartPropsType) => {
   const heightValue = useMemo(() => new Animated.Value(0), []);
-  const opacValue = useMemo(() => new Animated.Value(0), []);
+  const opacityValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
 
   const scrollRef = props.scrollRef ?? useRef(null);
@@ -91,19 +91,19 @@ export const BarChart = (props: BarChartPropsType) => {
     ...props,
     heightValue,
     widthValue,
-    opacValue,
+    opacityValue,
     parentWidth: props.parentWidth ?? screenWidth,
   });
 
   const labelsAppear = useCallback(() => {
-    opacValue.setValue(0);
-    Animated.timing(opacValue, {
+    opacityValue.setValue(0);
+    Animated.timing(opacityValue, {
       toValue: 1,
       duration: 500,
       easing: Easing.ease,
       useNativeDriver: false,
     }).start();
-  }, [opacValue]);
+  }, [opacityValue]);
 
   const decreaseWidth = useCallback(() => {
     widthValue.setValue(0);
@@ -178,8 +178,8 @@ export const BarChart = (props: BarChartPropsType) => {
     if (pointerConfig) {
       return (
         <View
-          onStartShouldSetResponder={evt => (pointerConfig ? true : false)}
-          onMoveShouldSetResponder={evt => (pointerConfig ? true : false)}
+          onStartShouldSetResponder={() => !!pointerConfig}
+          onMoveShouldSetResponder={() => !!pointerConfig}
           onResponderGrant={evt => {
             if (!pointerConfig) return;
             setResponderStartTime(evt.timeStamp);
