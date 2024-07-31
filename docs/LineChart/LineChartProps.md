@@ -33,7 +33,7 @@
 | indicatorColor                | String               | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                   | default                       |
 | nestedScrollEnabled           | boolean              | Useful when the chart is used inside a horizontal ScrollView (without this, the chart's scrolling is compromised) | false                         |
 | isAnimated                    | boolean              | To show animated Line or Area Chart. Animation occurs when the chart load for the first time                      | false                         |
-| animateOnDataChange           | boolean              | To show animation on change in data. A smooth transition takes place between the iold and new line                | false                         |
+| animateOnDataChange           | boolean              | To show animation on change in data. A smooth transition takes place between the old and new line                | false                         |
 | onDataChangeAnimationDuration | number               | Duration (milliseconds) in which the transition animation takes place on a change in data                         | 400                           |
 | onPress                       | Function             | The callback function that handles the press event. `item` and `index` are received as props                      | \_                            |
 | scrollToEnd                   | boolean              | When set to true, the chart automatically scrolls to the rightmost data point                                     | false                         |
@@ -718,7 +718,7 @@ The `strokeDashArray` property lets us render a dashed/dotted strip along the po
 
 #### pointerLabelComponent
 
-`pointerLabelComponent` is a function that returns the component to be rendered as a Label. It takes 2 parameters - 1. an array of items 2. secondaryDataItem. So, if there are multiple data arrays, the parameter `items` will have the data item corresponding to each data array. If the chart has secondaryData, the parameter `secondaryDataItem` will have the corresponding item from the secondaryData.
+`pointerLabelComponent` is a function that returns the component to be rendered as a Label. It takes 3 parameters - 1. an array of items 2. secondaryDataItem 3. pointerIndex. So, if there are multiple data arrays, the parameter `items` will have the data item corresponding to each data array. If the chart has secondaryData, the parameter `secondaryDataItem` will have the corresponding item from the secondaryData.
 
 **Note** If you have a Pressable / Touchable item in your `pointerLabelComponent`, then you should set `pointerEvents` to **'auto'** inside the pointerConfig object.
 

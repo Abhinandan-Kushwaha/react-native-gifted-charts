@@ -1,3 +1,25 @@
+# 🎉 1.4.23
+
+## ✨ Features added-
+
+1. Added `pointerIndex` to the parameter list of `pointerLabelComponent`. This will help conditionally format the pointerLabelComponent based on pointerIndex.<br />
+   `pointerLabelComponent` now accepts 3 parameters- `items`, `secondaryDataItem` and `pointerIndex`.
+   One use case would be to position the first and last pointerLabelComponents such that they don't overflow the chart area.<br />
+   See https://stackoverflow.com/questions/78472182/changer-pointerlable-style-on-a-certain-index-in-react-native-gifted-chart-linec
+
+2. Refactored the `animateOnDataChange` for Line and Area charts to make the animation smooth. `animateOnDataChange` is now suppported for curved charts as well! See https://stackoverflow.com/questions/78546970/react-native-gifted-charts-not-animating-on-data-change
+
+## 🔨 Refactor
+
+In [gifted-charts-core](https://github.com/Abhinandan-Kushwaha/gifted-charts-core), replaced `findLastIndex()` with `slice().reverse().findIndex()`.<br />
+See the issue- https://github.com/Abhinandan-Kushwaha/gifted-charts-core/issues/31 and its fix PR- https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/33
+
+---
+
+---
+
+---
+
 # 🎉 1.4.22 Mega Release ⭐️
 
 ## ✨ Features added-
@@ -18,6 +40,7 @@ The library now ships js binary obtained after compiling using babel. This shoul
 **Note:** Since we are now shipping compiled js, you may need to install the **[gifted-charts-core](https://www.npmjs.com/package/gifted-charts-core)** dependency.
 
 ### PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/736 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/737
+
 ---
 
 ---

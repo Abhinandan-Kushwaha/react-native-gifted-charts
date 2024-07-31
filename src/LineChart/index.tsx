@@ -5,12 +5,11 @@ import {
   Easing,
   Text,
   Dimensions,
-  Platform,
   ColorValue,
   I18nManager,
 } from 'react-native';
 import {styles} from './styles';
-import {screenWidth} from '../utils';
+import {screenWidth, usePrevious} from '../utils';
 import Svg, {
   Path,
   LinearGradient,
@@ -40,8 +39,7 @@ import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {StripAndLabel} from '../Components/common/StripAndLabel';
 import {Pointer} from '../Components/common/Pointer';
 
-let initialData: Array<lineDataItem> | null = null;
-let animations: Array<Animated.Value> = [];
+const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 export const LineChart = (props: LineChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
@@ -52,13 +50,6 @@ export const LineChart = (props: LineChartPropsType) => {
   const widthValue3 = useMemo(() => new Animated.Value(0), []);
   const widthValue4 = useMemo(() => new Animated.Value(0), []);
   const widthValue5 = useMemo(() => new Animated.Value(0), []);
-
-  if (!initialData) {
-    initialData = props.dataSet?.[0]?.data ?? props.data ?? [];
-    animations = initialData
-      .filter(item => item.value)
-      .map(item => new Animated.Value(item.value));
-  }
 
   const {
     scrollX,
@@ -313,7 +304,6 @@ export const LineChart = (props: LineChartPropsType) => {
     barAndLineChartsWrapperProps,
   } = useLineChart({
     ...props,
-    animations,
     parentWidth: props.parentWidth ?? screenWidth,
   });
 
@@ -324,19 +314,46 @@ export const LineChart = (props: LineChartPropsType) => {
     [],
   );
 
+  const animatedPoints = new Animated.Value(0);
+  const animatedFillPoints = new Animated.Value(0);
+  const oldPoints = usePrevious(points);
+  const oldFillPoints = usePrevious(fillPoints);
+
+  const animatedPath =
+    animateOnDataChange && points && oldPoints
+      ? animatedPoints.interpolate({
+          inputRange: [0, 1],
+          outputRange: [oldPoints, points],
+        })
+      : '';
+
+  const animatedFillPath =
+    animateOnDataChange && fillPoints && oldFillPoints
+      ? animatedFillPoints.interpolate({
+          inputRange: [0, 1],
+          outputRange: [oldFillPoints, fillPoints],
+        })
+      : '';
+
   useEffect(() => {
     if (animateOnDataChange) {
-      Animated.parallel(
-        animations.map((anItem, index) =>
-          Animated.timing(anItem, {
-            toValue: data[index]?.value ?? 0,
-            useNativeDriver: Platform.OS === 'ios', // if useNativeDriver is set to true, animateOnDataChange feature fails for Android, so setting it true only for iOS
-            duration: onDataChangeAnimationDuration,
-          }),
-        ),
-      ).start();
+      Animated.timing(animatedPoints, {
+        toValue: 1,
+        duration: onDataChangeAnimationDuration,
+        useNativeDriver: true,
+        easing: Easing.ease,
+      }).start();
+
+      if (props.areaChart || props.areaChart1) {
+        Animated.timing(animatedFillPoints, {
+          toValue: 1,
+          duration: onDataChangeAnimationDuration,
+          useNativeDriver: true,
+          easing: Easing.ease,
+        }).start();
+      }
     }
-  }, [animateOnDataChange, data, onDataChangeAnimationDuration]);
+  }, [animatedPoints]);
 
   const labelsAppear = useCallback(() => {
     opacityValue.setValue(0);
@@ -1037,6 +1054,10 @@ export const LineChart = (props: LineChartPropsType) => {
       secondaryPointerItem,
       scrollX,
       pointerEvents,
+      isBarChart: false,
+      pointerIndex,
+      width: totalWidth,
+      screenWidth,
     });
   };
 
@@ -1131,7 +1152,7 @@ export const LineChart = (props: LineChartPropsType) => {
       );
     }
     const lineSvgPropsOuter: LineSvgProps = {
-      d: points,
+      d: animateOnDataChange && animatedPath ? animatedPath : points,
       fill: 'none',
       stroke: lineGradient
         ? props.lineGradientId
@@ -1173,6 +1194,8 @@ export const LineChart = (props: LineChartPropsType) => {
             }
             return <Path key={index} {...lineSvgProps} />;
           })
+        ) : animateOnDataChange && animatedPath ? (
+          <AnimatedPath {...lineSvgPropsOuter} />
         ) : (
           <Path {...lineSvgPropsOuter} />
         )}
@@ -1186,19 +1209,33 @@ export const LineChart = (props: LineChartPropsType) => {
             startOpacity,
             endOpacity,
           )}
-        {isNthAreaChart && (
-          <Path
-            onPress={props.onChartAreaPress}
-            d={fillPoints}
-            fill={
-              props.areaGradientId
-                ? `url(#${props.areaGradientId})`
-                : `url(#Gradient)`
-            }
-            stroke={'transparent'}
-            strokeWidth={currentLineThickness || thickness}
-          />
-        )}
+        {isNthAreaChart ? (
+          animateOnDataChange && animatedFillPath ? (
+            <AnimatedPath
+              onPress={props.onChartAreaPress}
+              d={animatedFillPath}
+              fill={
+                props.areaGradientId
+                  ? `url(#${props.areaGradientId})`
+                  : `url(#Gradient)`
+              }
+              stroke={'transparent'}
+              strokeWidth={currentLineThickness || thickness}
+            />
+          ) : (
+            <Path
+              onPress={props.onChartAreaPress}
+              d={fillPoints}
+              fill={
+                props.areaGradientId
+                  ? `url(#${props.areaGradientId})`
+                  : `url(#Gradient)`
+              }
+              stroke={'transparent'}
+              strokeWidth={currentLineThickness || thickness}
+            />
+          )
+        ) : null}
 
         {/******************************************************************/}
 
