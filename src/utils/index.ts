@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import {Dimensions} from 'react-native';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -14,3 +15,11 @@ export const rnVersion =
   (!isNaN(lsb) ? lsb : 0);
 
 export const screenWidth = Dimensions.get('window').width;
+
+export function usePrevious(value:string) {
+  const ref = useRef('');
+  useEffect(() => {
+    ref.current = value; //assign the value of ref to the argument
+  },[value]); //this code will run when the value of 'value' changes
+  return ref.current; //in the end, return the current ref value.
+}

@@ -58,6 +58,7 @@ export const BarChart = (props: BarChartPropsType) => {
     data,
     barWidth,
     setPointerX,
+    pointerIndex,
     setPointerIndex,
     maxValue,
     responderStartTime,
@@ -171,6 +172,9 @@ export const BarChart = (props: BarChartPropsType) => {
       scrollX: 0,
       pointerEvents,
       isBarChart: true,
+      pointerIndex,
+      width: totalWidth,
+      screenWidth,
     });
   };
 

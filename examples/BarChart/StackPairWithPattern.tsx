@@ -1,7 +1,8 @@
 import React from 'react';
 import {StyleSheet, Text, Image} from 'react-native';
-import {BarChart, stackDataItem} from 'react-native-gifted-charts';
+import {BarChart} from '../../src/BarChart';
 import {Pattern, Rect} from 'react-native-svg';
+import { stackDataItem } from 'gifted-charts-core';
 
 const StackPairWithPattern: React.FC = () => {
   const SurfAndCons = [

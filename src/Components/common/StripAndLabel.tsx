@@ -1,9 +1,11 @@
-import React from 'react';
 import {View} from 'react-native';
 import Svg, {Line} from 'react-native-svg';
-import {getTopAndLeftForStripAndLabel} from 'gifted-charts-core';
+import {
+  StripAndLabelProps,
+  getTopAndLeftForStripAndLabel,
+} from 'gifted-charts-core';
 
-export const StripAndLabel = (props: any) => {
+export const StripAndLabel = (props: StripAndLabelProps) => {
   const {
     pointerX,
     pointerLabelWidth,
@@ -23,6 +25,7 @@ export const StripAndLabel = (props: any) => {
     secondaryPointerItem,
     pointerEvents,
     isBarChart,
+    pointerIndex,
   } = props;
 
   const {top, left} = getTopAndLeftForStripAndLabel(props);
@@ -90,7 +93,11 @@ export const StripAndLabel = (props: any) => {
               width: pointerLabelWidth,
             },
           ]}>
-          {pointerLabelComponent?.(pointerItemLocal, secondaryPointerItem)}
+          {pointerLabelComponent?.(
+            pointerItemLocal,
+            secondaryPointerItem,
+            pointerIndex,
+          )}
         </View>
       ) : null}
     </View>
