@@ -12,7 +12,7 @@
 
 2. Fixed the issue- Data points visible even if an area chart is hidded under some other area chart.
 
-3. Fixed the issue- Crash due to replacing `findLastIndex` with `slice().reverse().findIndex` in gifted-charts-core. I was reversing only the array and forgot to revrse the index. Thanks to **dumihi313** for his PR- https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/37
+3. Fixed the issue- Crash due to replacing `findLastIndex` with `slice().reverse().findIndex` in gifted-charts-core. I was reversing only the array and forgot to reverse the index. Thanks to **dumihi313** for his PR- https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/37
 
 ---
 
