@@ -77,7 +77,12 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
         style={[
           {
             width:
-              (item.stacks[0].barWidth || props.barWidth || 30) + spacing / 2,
+              (item.labelWidth ||
+                props.labelWidth ||
+                item.stacks[0].barWidth ||
+                props.barWidth ||
+                30) +
+              spacing / 2,
             position: 'absolute',
             bottom: autoShiftLabelsForNegativeStacks
               ? -6 - xAxisTextNumberOfLines * 18 + lowestBarPosition
