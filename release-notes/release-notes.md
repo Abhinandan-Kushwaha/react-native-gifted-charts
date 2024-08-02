@@ -1,3 +1,25 @@
+# 🎉 1.4.24
+
+## ✨ Features added-
+
+1. Line charts can now have data arrays of different lengths. This means that data, data2, data3 don't need to be of same length. Same applies to the sets of dataSet.
+
+2. Added the prop `labelWidth` to stacked Bar charts. Thanks to **Nathan Karmer** for his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/748
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- Datapoint in secondary lines are incorrect position in pointerConfig. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/749
+
+2. Fixed the issue- Data points visible even if an area chart is hidded under some other area chart.
+
+3. Fixed the issue- Crash due to replacing `findLastIndex` with `slice().reverse().findIndex` in gifted-charts-core. I was reversing only the array and forgot to revrse the index. Thanks to **dumihi313** for his PR- https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/37
+
+---
+
+---
+
+---
+
 # 🎉 1.4.23
 
 ## ✨ Features added-
