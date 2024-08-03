@@ -23,9 +23,12 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
     pointerConfig,
     pointerLabelComponent,
     secondaryPointerItem,
+    pointerItemsForSet,
+    secondaryPointerItemsForSet,
     pointerEvents,
     isBarChart,
     pointerIndex,
+    hasDataSet,
   } = props;
 
   const {top, left} = getTopAndLeftForStripAndLabel(props);
@@ -94,8 +97,8 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
             },
           ]}>
           {pointerLabelComponent?.(
-            pointerItemLocal,
-            secondaryPointerItem,
+            hasDataSet ? pointerItemsForSet : pointerItemLocal,
+            hasDataSet ? secondaryPointerItemsForSet : [secondaryPointerItem],
             pointerIndex,
           )}
         </View>

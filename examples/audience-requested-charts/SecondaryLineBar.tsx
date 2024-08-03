@@ -41,17 +41,17 @@ const SecondaryLineBar = () => {
         {value: 22},
         {value: 16},
       ]}
-      secondaryData={[{value: 20}]}
+      // secondaryData={[{value: 20},{value: 30},{value: 10}]}
       roundedTop
       roundedBottom
       frontColor={'black'}
       barWidth={15}
       spacing={10}
-      hideAxesAndRules
+      // hideAxesAndRules
       xAxisThickness={0}
       yAxisThickness={0}
       showLine
-    //   secondaryYAxis={{}}
+      secondaryYAxis
       lineConfig={{
         isSecondary: true,
         dataPointsWidth: 0,

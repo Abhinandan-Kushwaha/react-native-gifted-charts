@@ -34,6 +34,7 @@ import BarPairWithLine from './BarChart/BarPairWithLine';
 import AreaChartDynamicData from './LineChart/AreaChartDynamicData';
 import BiColorAreaChart from './LineChart/BiColorAreaChart';
 import SecondaryLineChart from './LineChart/SecondaryLineChart';
+import SecondaryLineChartFromDataSet from './LineChart/SecondaryLineChartFromDataSet';
 import PieWithZero from './PieChart/PieWithZero';
 import DataSetSteppedChart from './LineChart/DataSetSteppedChart';
 import Segmented from './LineChart/Segmented';
@@ -139,6 +140,9 @@ const Examples = () => {
         <Separator />
 
         <SecondaryLineChart />
+        <Separator />
+
+        <SecondaryLineChartFromDataSet />
         <Separator />
 
         <CaloriesBurnt />

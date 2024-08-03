@@ -7,6 +7,7 @@ import {
   Dimensions,
   ColorValue,
   I18nManager,
+  ViewStyle,
 } from 'react-native';
 import {styles} from './styles';
 import {screenWidth, usePrevious} from '../utils';
@@ -18,6 +19,8 @@ import Svg, {
   Rect,
   Text as CanvasText,
   Line,
+  ClipPath,
+  Use,
 } from 'react-native-svg';
 import {
   getSegmentedPathObjects,
@@ -90,6 +93,10 @@ export const LineChart = (props: LineChartPropsType) => {
     setSecondaryPointerY,
     secondaryPointerItem,
     setSecondaryPointerItem,
+    pointerItemsForSet,
+    setPointerItemsForSet,
+    secondaryPointerItemsForSet,
+    setSecondaryPointerItemsForSet,
     responderStartTime,
     setResponderStartTime,
     setResponderActive,
@@ -307,7 +314,7 @@ export const LineChart = (props: LineChartPropsType) => {
     parentWidth: props.parentWidth ?? screenWidth,
   });
 
-  const {secondaryXAxis} = props;
+  const {secondaryXAxis, intersectionAreaConfig} = props;
 
   const widthValuesFromSet = useMemo(
     () => dataSet?.map(set => new Animated.Value(0)),
@@ -479,6 +486,21 @@ export const LineChart = (props: LineChartPropsType) => {
     decreaseWidth5,
     labelsAppear,
   ]);
+
+  const svgWrapperViewStyle = {
+    position: 'absolute',
+    height:
+      containerHeightIncludingBelowXAxis +
+      (props.overflowBottom ?? dataPointsRadius1),
+    bottom:
+      60 +
+      xAxisLabelsVerticalShift +
+      labelsExtraHeight -
+      xAxisThickness -
+      (props.overflowBottom ?? dataPointsRadius1),
+    zIndex: 1,
+    transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
+  };
 
   const renderLabel = (
     top: boolean,
@@ -1021,12 +1043,6 @@ export const LineChart = (props: LineChartPropsType) => {
         value: props.data5?.[pointerIndex]?.value,
       });
     }
-    if (secondaryPointerY !== 0) {
-      pointerItemLocal.push({
-        ...pointerItem,
-        value: props.secondaryData?.[pointerIndex]?.value,
-      });
-    }
     pointerYLocal = Math.min(...arr);
 
     return StripAndLabel({
@@ -1044,6 +1060,9 @@ export const LineChart = (props: LineChartPropsType) => {
       pointerStripHeight,
       shiftPointerLabelY,
       pointerItemLocal,
+      secondaryPointerItem,
+      pointerItemsForSet,
+      secondaryPointerItemsForSet,
       showPointerStrip,
       pointerStripWidth,
       containerHeight,
@@ -1051,13 +1070,13 @@ export const LineChart = (props: LineChartPropsType) => {
       pointerStripColor,
       pointerConfig,
       pointerLabelComponent,
-      secondaryPointerItem,
       scrollX,
       pointerEvents,
       isBarChart: false,
       pointerIndex,
       width: totalWidth,
       screenWidth,
+      hasDataSet: !!dataSet,
     });
   };
 
@@ -1103,6 +1122,37 @@ export const LineChart = (props: LineChartPropsType) => {
           stopOpacity={endOpacity.toString()}
         />
       </LinearGradient>
+    );
+  };
+
+  const renderIntersection = () => {
+    return (
+      <View style={[svgWrapperViewStyle as ViewStyle, {width: totalWidth}]}>
+        <Svg>
+          {/* Define the pathe path1 & path2 */}
+          <Path id="path1" d={fillPoints} fill="none" stroke={'none'} />
+          <Path id="path2" d={fillPoints2} fill="none" stroke={'none'} />
+
+          <ClipPath id="clip">
+            <Use href="#path1" />
+          </ClipPath>
+
+          {/* Render the clipped Path */}
+          <Path
+            d={fillPoints2}
+            clipPath="url(#clip)"
+            fill={intersectionAreaConfig?.fillColor ?? 'white'}
+          />
+
+          {/* Render the Line1 again as its clipped portion gets hidden */}
+          <Path
+            d={points}
+            stroke={color1}
+            strokeWidth={thickness1 ?? thickness}
+            fill={'none'}
+          />
+        </Svg>
+      </View>
     );
   };
 
@@ -1373,19 +1423,27 @@ export const LineChart = (props: LineChartPropsType) => {
       }
     }
     if (dataSet?.length) {
-      if (dataSet[0].data[factor]) {
-        const ysForDataSet = dataSet.map(set => {
-          const item = set.data[factor];
-          const y = item
-            ? containerHeight -
-              (item.value * containerHeight) / maxValue -
-              (pointerRadius || pointerHeight / 2) +
-              10
-            : 0;
-          return y;
-        });
-        setPointerYsForDataSet(ysForDataSet);
-      }
+      const pointerItemsForSetLocal: lineDataItem[] = [];
+      const secondaryPointerItemsForSetLocal: lineDataItem[] = [];
+      const ysForDataSet = dataSet.map(set => {
+        const item = set.data[factor];
+        if (set.isSecondary) {
+          secondaryPointerItemsForSetLocal.push(item);
+        } else {
+          pointerItemsForSetLocal.push(item);
+        }
+        const y = item
+          ? containerHeight -
+            (item.value * containerHeight) /
+              (set.isSecondary ? secondaryMaxValue : maxValue) -
+            (pointerRadius || pointerHeight / 2) +
+            10
+          : 0;
+        return y;
+      });
+      setPointerItemsForSet(pointerItemsForSetLocal);
+      setSecondaryPointerItemsForSet(secondaryPointerItemsForSetLocal);
+      setPointerYsForDataSet(ysForDataSet);
     }
   };
 
@@ -1450,101 +1508,8 @@ export const LineChart = (props: LineChartPropsType) => {
             x > (props.width || Dimensions.get('window').width)
           )
             return;
-          let factor = (x - initialSpacing) / spacing;
-          factor = Math.round(factor);
-          factor = Math.min(factor, (data0 ?? data).length - 1);
-          factor = Math.max(factor, 0);
-          let z =
-            initialSpacing +
-            spacing * factor -
-            (pointerRadius || pointerWidth / 2) -
-            1;
-          let item, y;
-          setPointerX(z);
-          setPointerIndex(factor);
-          item = (data0 ?? data)[factor];
-          y =
-            containerHeight -
-            (item.value * containerHeight) / maxValue -
-            (pointerRadius || pointerHeight / 2) +
-            10;
-          setPointerY(y);
-          setPointerItem(item);
-          if (data2 && data2.length) {
-            item = data2[factor];
-            if (item) {
-              y =
-                containerHeight -
-                (item.value * containerHeight) / maxValue -
-                (pointerRadius || pointerHeight / 2) +
-                10;
-              setPointerY2(y);
-              setPointerItem2(item);
-            }
-          }
-          if (data3 && data3.length) {
-            item = data3[factor];
-            if (item) {
-              y =
-                containerHeight -
-                (item.value * containerHeight) / maxValue -
-                (pointerRadius || pointerHeight / 2) +
-                10;
-              setPointerY3(y);
-              setPointerItem3(item);
-            }
-          }
-          if (data4 && data4.length) {
-            item = data4[factor];
-            if (item) {
-              y =
-                containerHeight -
-                (item.value * containerHeight) / maxValue -
-                (pointerRadius || pointerHeight / 2) +
-                10;
-              setPointerY4(y);
-              setPointerItem4(item);
-            }
-          }
-          if (data5 && data5.length) {
-            item = data5[factor];
-            if (item) {
-              y =
-                containerHeight -
-                (item.value * containerHeight) / maxValue -
-                (pointerRadius || pointerHeight / 2) +
-                10;
-              setPointerY5(y);
-              setPointerItem5(item);
-            }
-          }
-          if (secondaryData?.length) {
-            item = secondaryData[factor];
-            if (item) {
-              y =
-                containerHeight -
-                (item.value * containerHeight) / secondaryMaxValue -
-                (pointerRadius || pointerHeight / 2) +
-                10;
-              setSecondaryPointerY(y);
-              // @ts-ignore
-              setSecondaryPointerItem(item);
-            }
-          }
-          if (dataSet?.length) {
-            const ysForDataSet = dataSet.map(set => {
-              const item = set.data[factor];
-              const y = item
-                ? containerHeight -
-                  (item.value * containerHeight) /
-                    (set.isSecondary ? secondaryMaxValue : maxValue) -
-                  (pointerRadius || pointerHeight / 2) +
-                  10
-                : 0;
-              return y;
-            });
-            setPointerYsForDataSet(ysForDataSet);
-          }
+
+          activatePointers(x);
         }}
         // onResponderReject={evt => {
         //   console.log('evt...reject.......',evt);
@@ -1566,21 +1531,7 @@ export const LineChart = (props: LineChartPropsType) => {
         //   setResponderActive(false);
         //   setTimeout(() => setPointerX(0), pointerVanishDelay);
         // }}
-        style={{
-          position: 'absolute',
-          height:
-            containerHeightIncludingBelowXAxis +
-            (props.overflowBottom ?? dataPointsRadius1),
-          bottom:
-            60 +
-            xAxisLabelsVerticalShift +
-            labelsExtraHeight -
-            xAxisThickness -
-            (props.overflowBottom ?? dataPointsRadius1),
-          zIndex: zIndex,
-          transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
-          width: totalWidth,
-        }}>
+        style={[svgWrapperViewStyle as ViewStyle, {width: totalWidth}]}>
         {lineSvgComponent(
           points,
           currentLineThickness,
@@ -1679,104 +1630,8 @@ export const LineChart = (props: LineChartPropsType) => {
             x > (props.width || Dimensions.get('window').width)
           )
             return;
-          let factor = (x - initialSpacing) / spacing;
-          factor = Math.round(factor);
-          factor = Math.min(factor, (data0 ?? data).length - 1);
-          factor = Math.max(factor, 0);
-          let z =
-            initialSpacing +
-            spacing * factor -
-            (pointerRadius || pointerWidth / 2) -
-            1;
-          let item, y;
-          setPointerX(z);
-          setPointerIndex(factor);
-          item = (data0 ?? data)[factor];
-          y =
-            containerHeight -
-            (item.value * containerHeight) / maxValue -
-            (pointerRadius || pointerHeight / 2) +
-            10;
-          setPointerY(y);
-          setPointerItem(item);
-          if (data2 && data2.length) {
-            item = data2[factor];
-            if (item) {
-              y =
-                containerHeight -
-                (item.value * containerHeight) / maxValue -
-                (pointerRadius || pointerHeight / 2) +
-                10;
-              setPointerY2(y);
-              setPointerItem2(item);
-            }
-          }
-          if (data3 && data3.length) {
-            item = data3[factor];
-            if (item) {
-              y =
-                containerHeight -
-                (item.value * containerHeight) / maxValue -
-                (pointerRadius || pointerHeight / 2) +
-                10;
-              setPointerY3(y);
-              setPointerItem3(item);
-            }
-          }
-          if (data4 && data4.length) {
-            item = data4[factor];
-            if (item) {
-              y =
-                containerHeight -
-                (item.value * containerHeight) / maxValue -
-                (pointerRadius || pointerHeight / 2) +
-                10;
-              setPointerY4(y);
-              setPointerItem4(item);
-            }
-          }
-          if (data5 && data5.length) {
-            item = data5[factor];
-            if (item) {
-              y =
-                containerHeight -
-                (item.value * containerHeight) / maxValue -
-                (pointerRadius || pointerHeight / 2) +
-                10;
-              setPointerY5(y);
-              setPointerItem5(item);
-            }
-          }
-          if (secondaryData?.length) {
-            item = secondaryData[factor];
-            if (item) {
-              y =
-                containerHeight -
-                (item.value * containerHeight) / secondaryMaxValue -
-                (pointerRadius || pointerHeight / 2) +
-                10;
 
-              setSecondaryPointerY(y);
-              // @ts-ignore
-              setSecondaryPointerItem(item);
-            }
-          }
-          if (dataSet?.length) {
-            if (dataSet[0].data[factor]) {
-              const ysForDataSet = dataSet.map(set => {
-                const item = set.data[factor];
-                const y = item
-                  ? containerHeight -
-                    (item.value * containerHeight) /
-                      (set.isSecondary ? secondaryMaxValue : maxValue) -
-                    (pointerRadius || pointerHeight / 2) +
-                    10
-                  : 0;
-                return y;
-              });
-              setPointerYsForDataSet(ysForDataSet);
-            }
-          }
+          activatePointers(x);
         }}
         // onResponderReject={evt => {
         //   console.log('evt...reject.......',evt);
@@ -1798,21 +1653,7 @@ export const LineChart = (props: LineChartPropsType) => {
         //   setResponderActive(false);
         //   setTimeout(() => setPointerX(0), pointerVanishDelay);
         // }}
-        style={{
-          position: 'absolute',
-          height:
-            containerHeightIncludingBelowXAxis +
-            (props.overflowBottom ?? dataPointsRadius1),
-          bottom:
-            60 +
-            xAxisLabelsVerticalShift +
-            labelsExtraHeight -
-            xAxisThickness -
-            (props.overflowBottom ?? dataPointsRadius1),
-          zIndex: zIndex,
-          transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
-          width: animatedWidth,
-        }}>
+        style={[svgWrapperViewStyle as ViewStyle, {width: animatedWidth}]}>
         {lineSvgComponent(
           points,
           currentLineThickness,
@@ -2342,6 +2183,10 @@ export const LineChart = (props: LineChartPropsType) => {
                 showValuesAsDataPointsText,
                 4,
               )
+          : null}
+        {intersectionAreaConfig &&
+        (props.areaChart || (props.areaChart1 && props.areaChart2))
+          ? renderIntersection()
           : null}
         {pointerX > 0 ? (
           <View
