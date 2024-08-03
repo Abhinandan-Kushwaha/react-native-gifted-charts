@@ -33,7 +33,7 @@
 | indicatorColor                | String               | (iOS only) The color of the scroll indicators - ('black', 'white' or 'default')                                   | default                       |
 | nestedScrollEnabled           | boolean              | Useful when the chart is used inside a horizontal ScrollView (without this, the chart's scrolling is compromised) | false                         |
 | isAnimated                    | boolean              | To show animated Line or Area Chart. Animation occurs when the chart load for the first time                      | false                         |
-| animateOnDataChange           | boolean              | To show animation on change in data. A smooth transition takes place between the old and new line                | false                         |
+| animateOnDataChange           | boolean              | To show animation on change in data. A smooth transition takes place between the old and new line                 | false                         |
 | onDataChangeAnimationDuration | number               | Duration (milliseconds) in which the transition animation takes place on a change in data                         | 400                           |
 | onPress                       | Function             | The callback function that handles the press event. `item` and `index` are received as props                      | \_                            |
 | scrollToEnd                   | boolean              | When set to true, the chart automatically scrolls to the rightmost data point                                     | false                         |
@@ -793,42 +793,53 @@ Here is the list of prop names changed in version `1.3.2`-
 
 ### Props for Area Chart
 
-| Prop                  | Type       | Description                                                                                             | Default value |
-| --------------------- | ---------- | ------------------------------------------------------------------------------------------------------- | ------------- |
-| areaChart             | boolean    | If set true, renders area chart instead of line chart                                                   | false         |
-| areaChart1            | boolean    | If set true, renders area chart for 1st data set instead of line chart                                  | areaChart     |
-| areaChart2            | boolean    | If set true, renders area chart for 2nd data set instead of line chart                                  | areaChart     |
-| areaChart3            | boolean    | If set true, renders area chart for 3rd data set instead of line chart                                  | areaChart     |
-| areaChart4            | boolean    | If set true, renders area chart for 4th data set instead of line chart                                  | areaChart     |
-| areaChart5            | boolean    | If set true, renders area chart for 5th data set instead of line chart                                  | areaChart     |
-| startFillColor        | ColorValue | Start gradient color for the area chart                                                                 | gray          |
-| endFillColor          | ColorValue | End gradient color for the area chart                                                                   | white         |
-| startOpacity          | number     | Start gradient opacity for the area chart                                                               | 1             |
-| endOpacity            | number     | End gradient opacity for the area chart                                                                 | 1             |
-| startFillColor1       | ColorValue | Start gradient color for the first dataset of the area chart                                            | gray          |
-| endFillColor1         | ColorValue | End gradient color for the first dataset of the area chart                                              | white         |
-| startOpacity1         | number     | Start gradient opacity for the first dataset of the area chart                                          | 1             |
-| endOpacity1           | number     | End gradient opacity for the first dataset of the area chart                                            | 1             |
-| startFillColor2       | ColorValue | Start gradient color for the second dataset of the area chart                                           | gray          |
-| endFillColor2         | ColorValue | End gradient color for the second dataset of the area chart                                             | white         |
-| startOpacity2         | number     | Start gradient color for the second dataset of the area chart                                           | 1             |
-| endOpacity2           | number     | End gradient opacity for the second dataset of the area chart                                           | 1             |
-| startFillColor3       | ColorValue | Start gradient color for the third dataset of the area chart                                            | gray          |
-| endFillColor3         | ColorValue | End gradient color for the third dataset of the area chart                                              | white         |
-| startOpacity3         | number     | Start gradient color for the third dataset of the area chart                                            | 1             |
-| endOpacity3           | number     | End gradient opacity for the third dataset of the area chart                                            | 1             |
-| startFillColor4       | ColorValue | Start gradient color for the fourth dataset of the area chart                                           | gray          |
-| endFillColor4         | ColorValue | End gradient color for the fourth dataset of the area chart                                             | white         |
-| startOpacity4         | number     | Start gradient color for the fourth dataset of the area chart                                           | 1             |
-| endOpacity4           | number     | End gradient opacity for the fourth dataset of the area chart                                           | 1             |
-| startFillColor5       | ColorValue | Start gradient color for the fifth dataset of the area chart                                            | gray          |
-| endFillColor5         | ColorValue | End gradient color for the fifth dataset of the area chart                                              | white         |
-| startOpacity5         | number     | Start gradient color for the fifth dataset of the area chart                                            | 1             |
-| endOpacity5           | number     | End gradient opacity for the fifth dataset of the area chart                                            | 1             |
-| gradientDirection     | string     | Direction of the gradient (_'horizontal'_ or _'vertical'_)                                              | 'vertical'    |
-| areaGradientComponent | Function   | this prop defines the svg gradient that should be applied to the area (requires areaChart to be truthy) | null          |
-| areaGradientId        | string     | id of the <LinearGradient> (needed along with areaGradientComponent prop)                               | \_            |
-| onChartAreaPress      | Function   | Callback function called on pressing the chart area                                                     | \_            |
+| Prop                   | Type                   | Description                                                                                             | Default value |
+| ---------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------- | ------------- |
+| areaChart              | boolean                | If set true, renders area chart instead of line chart                                                   | false         |
+| areaChart1             | boolean                | If set true, renders area chart for 1st data set instead of line chart                                  | areaChart     |
+| areaChart2             | boolean                | If set true, renders area chart for 2nd data set instead of line chart                                  | areaChart     |
+| areaChart3             | boolean                | If set true, renders area chart for 3rd data set instead of line chart                                  | areaChart     |
+| areaChart4             | boolean                | If set true, renders area chart for 4th data set instead of line chart                                  | areaChart     |
+| areaChart5             | boolean                | If set true, renders area chart for 5th data set instead of line chart                                  | areaChart     |
+| startFillColor         | ColorValue             | Start gradient color for the area chart                                                                 | gray          |
+| endFillColor           | ColorValue             | End gradient color for the area chart                                                                   | white         |
+| startOpacity           | number                 | Start gradient opacity for the area chart                                                               | 1             |
+| endOpacity             | number                 | End gradient opacity for the area chart                                                                 | 1             |
+| startFillColor1        | ColorValue             | Start gradient color for the first dataset of the area chart                                            | gray          |
+| endFillColor1          | ColorValue             | End gradient color for the first dataset of the area chart                                              | white         |
+| startOpacity1          | number                 | Start gradient opacity for the first dataset of the area chart                                          | 1             |
+| endOpacity1            | number                 | End gradient opacity for the first dataset of the area chart                                            | 1             |
+| startFillColor2        | ColorValue             | Start gradient color for the second dataset of the area chart                                           | gray          |
+| endFillColor2          | ColorValue             | End gradient color for the second dataset of the area chart                                             | white         |
+| startOpacity2          | number                 | Start gradient color for the second dataset of the area chart                                           | 1             |
+| endOpacity2            | number                 | End gradient opacity for the second dataset of the area chart                                           | 1             |
+| startFillColor3        | ColorValue             | Start gradient color for the third dataset of the area chart                                            | gray          |
+| endFillColor3          | ColorValue             | End gradient color for the third dataset of the area chart                                              | white         |
+| startOpacity3          | number                 | Start gradient color for the third dataset of the area chart                                            | 1             |
+| endOpacity3            | number                 | End gradient opacity for the third dataset of the area chart                                            | 1             |
+| startFillColor4        | ColorValue             | Start gradient color for the fourth dataset of the area chart                                           | gray          |
+| endFillColor4          | ColorValue             | End gradient color for the fourth dataset of the area chart                                             | white         |
+| startOpacity4          | number                 | Start gradient color for the fourth dataset of the area chart                                           | 1             |
+| endOpacity4            | number                 | End gradient opacity for the fourth dataset of the area chart                                           | 1             |
+| startFillColor5        | ColorValue             | Start gradient color for the fifth dataset of the area chart                                            | gray          |
+| endFillColor5          | ColorValue             | End gradient color for the fifth dataset of the area chart                                              | white         |
+| startOpacity5          | number                 | Start gradient color for the fifth dataset of the area chart                                            | 1             |
+| endOpacity5            | number                 | End gradient opacity for the fifth dataset of the area chart                                            | 1             |
+| gradientDirection      | string                 | Direction of the gradient (_'horizontal'_ or _'vertical'_)                                              | 'vertical'    |
+| areaGradientComponent  | Function               | this prop defines the svg gradient that should be applied to the area (requires areaChart to be truthy) | null          |
+| areaGradientId         | string                 | id of the <LinearGradient> (needed along with areaGradientComponent prop)                               | \_            |
+| onChartAreaPress       | Function               | Callback function called on pressing the chart area                                                     | \_            |
+| intersectionAreaConfig | IntersectionAreaConfig | Config object that defines properties for intersection area of data and data2 (1st & 2nd areas)         | \_            |
+
+### IntersectionAreaConfig
+
+See https://stackoverflow.com/questions/78435388/react-native-area-chart
+
+```ts
+type IntersectionAreaConfig {
+  fillColor: ColorValue // default: 'white'
+}
+```
 
 ### Example of areaGradientComponent
 

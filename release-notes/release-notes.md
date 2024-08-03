@@ -1,3 +1,23 @@
+# 🎉 1.4.25
+
+## ✨ Features added-
+
+Added the prop `intersectionAreaConfig` that defines properties for intersection area of data and data2 (1st & 2nd areas). See https://stackoverflow.com/questions/78435388/react-native-area-chart
+
+## 🐛 Bug fixes
+
+Fixed the issue- `pointerLabelComponent`'s second parameter (representing secondaryItem) is undefined. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/752
+
+## 🔨 Refactor
+
+Reused `activatePointers` function, thus removing many lines of repetitive code in the LineChart component.
+
+---
+
+---
+
+---
+
 # 🎉 1.4.24
 
 ## ✨ Features added-
