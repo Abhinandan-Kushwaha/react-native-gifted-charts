@@ -284,6 +284,7 @@ export const LineChart = (props: LineChartPropsType) => {
     activatePointersOnLongPress,
     activatePointersDelay,
     persistPointer,
+    hidePointers,
     hidePointer1,
     hidePointer2,
     hidePointer3,
@@ -309,6 +310,7 @@ export const LineChart = (props: LineChartPropsType) => {
     lineGradientStartColor,
     lineGradientEndColor,
     barAndLineChartsWrapperProps,
+    areaChart,
   } = useLineChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -928,11 +930,13 @@ export const LineChart = (props: LineChartPropsType) => {
   };
 
   const renderPointer = (lineNumber: number, isDataSet?: boolean) => {
+    if (hidePointers) return;
     if (isDataSet) {
       let pointerItemLocal, pointerYLocal, pointerColorLocal;
       return dataSet?.map((set, index) => {
         const pIndex = barAndLineChartsWrapperProps.pointerIndex;
         pointerItemLocal = set.data[pIndex];
+        if (set.hidePointers || pointerItemLocal?.hidePointer) return null;
         pointerYLocal = pointerYsForDataSet[index];
         pointerColorLocal =
           pointerConfig?.pointerColorsForDataSet?.[index] ?? pointerColor;
@@ -1189,7 +1193,9 @@ export const LineChart = (props: LineChartPropsType) => {
   ) => {
     if (!points) return null;
     const isCurved = points.includes('C');
-    const isNthAreaChart = getIsNthAreaChart(key ?? 0);
+    const isNthAreaChart = !!dataSet
+      ? (dataSet[Number(key)].areaChart ?? areaChart)
+      : getIsNthAreaChart(key ?? 0);
     let ar: LineProperties[] = [{d: '', color: '', strokeWidth: 0}];
     if (points.includes(RANGE_ENTER)) {
       ar = getRegionPathObjects(

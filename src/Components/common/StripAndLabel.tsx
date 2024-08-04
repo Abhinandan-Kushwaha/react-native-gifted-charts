@@ -33,6 +33,8 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
 
   const {top, left} = getTopAndLeftForStripAndLabel(props);
 
+  if (isNaN(top) || typeof top !== 'number') return null;
+
   return (
     <View
       style={{

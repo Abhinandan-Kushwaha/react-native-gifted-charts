@@ -42,8 +42,6 @@ const SecondaryLineChart = () => {
     return (
       <View style={{borderWidth:1}}>
         <LineChart
-          // data={d1}
-          // isAnimated
           dataSet={dataSet}
           maxValue={140}
           noOfSections={7}

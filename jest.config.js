@@ -7,4 +7,5 @@ module.exports = {
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!@ngrx|(?!deck.gl)|ng-dynamic)',
   ],
+  // setupFiles: ['./jestSetup.js'],
 };

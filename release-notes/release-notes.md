@@ -1,3 +1,22 @@
+# 🎉 1.4.26
+
+## ✨ Features added-
+
+Added the property `hidePointers` to the objects of the `dataSet` array. This will let us hide the pointers for individual sets.<br />
+Also, we can now add the property `hidePointer` inside individual data items of any dataSet.<br />
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/755
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- `areaChart` given in dataSet array of line chart doesn't work. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/758
+2. Fixed the issue- Crash when I click to datapoint doesn't have any value. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/757
+
+---
+
+---
+
+---
+
 # 🎉 1.4.25
 
 ## ✨ Features added-
