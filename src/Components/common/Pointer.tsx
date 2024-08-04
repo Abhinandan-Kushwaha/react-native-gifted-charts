@@ -12,6 +12,8 @@ export const Pointer = (props: any) => {
     pointerItemLocal,
     pointerColorLocal,
   } = props;
+  if (isNaN(pointerYLocal) || typeof pointerYLocal !== 'number') return null;
+  
   return (
     <View
       style={{
