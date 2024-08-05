@@ -8,13 +8,14 @@ import Svg, {
   RadialGradient,
   Stop,
   G,
+  Line,
 } from 'react-native-svg';
 import {
   getPieChartMainProps,
   PieChartMainProps,
   pieColors,
 } from 'gifted-charts-core';
-import { rnVersion } from '../utils';
+import {rnVersion} from '../utils';
 
 export const PieChartMain = (props: PieChartMainProps) => {
   const {
@@ -58,7 +59,9 @@ export const PieChartMain = (props: PieChartMainProps) => {
     mData,
     paddingHorizontal,
     paddingVertical,
-    extraRadiusForFocused,
+    extraRadius,
+    showExternalLabels,
+    getExternaLabelProperties,
   } = getPieChartMainProps(props);
 
   return (
@@ -68,37 +71,30 @@ export const PieChartMain = (props: PieChartMainProps) => {
         {
           backgroundColor: backgroundColor,
           height: semiCircle
-            ? (canvasHeight + paddingVertical) / 2 + extraRadiusForFocused
-            : canvasHeight + paddingVertical + extraRadiusForFocused * 2,
-          width: canvasWidth + paddingHorizontal + extraRadiusForFocused * 2,
+            ? (canvasHeight + paddingVertical) / 2 + extraRadius
+            : canvasHeight + paddingVertical + extraRadius * 2,
+          width: canvasWidth + paddingHorizontal + extraRadius * 2,
           overflow: 'hidden',
         },
         isThreeD && {transform: [{rotateX: tiltAngle}]},
       ]}>
       <Svg
         pointerEvents={rnVersion >= 720000 ? 'box-none' : 'auto'} // use 'box-none' react-native version 0.72 onwards
-        viewBox={`${strokeWidth / -2 + minShiftX - extraRadiusForFocused - paddingHorizontal / 2} ${
-          strokeWidth / -2 +
-          minShiftY -
-          extraRadiusForFocused -
-          paddingVertical / 2
+        viewBox={`${strokeWidth / -2 + minShiftX - extraRadius - paddingHorizontal / 2} ${
+          strokeWidth / -2 + minShiftY - extraRadius - paddingVertical / 2
         } ${
-          (radius + extraRadiusForFocused + strokeWidth) * 2 +
+          (radius + extraRadius + strokeWidth) * 2 +
           paddingHorizontal +
           horizAdjustment +
           (horizAdjustment ? strokeWidth : 0)
         } ${
-          (radius + extraRadiusForFocused + strokeWidth) * 2 +
+          (radius + extraRadius + strokeWidth) * 2 +
           paddingVertical +
           vertAdjustment +
           (vertAdjustment ? strokeWidth : 0)
         }`}
-        height={
-          (radius + extraRadiusForFocused) * 2 + strokeWidth + paddingVertical
-        }
-        width={
-          (radius + extraRadiusForFocused) * 2 + strokeWidth + paddingHorizontal
-        }>
+        height={(radius + extraRadius) * 2 + strokeWidth + paddingVertical}
+        width={(radius + extraRadius) * 2 + strokeWidth + paddingHorizontal}>
         <Defs>
           {data.map((item, index) => {
             return (
@@ -213,7 +209,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
           })
         )}
 
-        {(showText || showInnerComponent) &&
+        {(showText || showInnerComponent || showExternalLabels) &&
           data.map((item, index) => {
             const localPieInnerComponent =
               item.pieInnerComponent ?? props.pieInnerComponent;
@@ -259,9 +255,48 @@ export const PieChartMain = (props: PieChartMainProps) => {
               }
             }
 
+            const {
+              labelLineColor,
+              labelLineThickness,
+              labelComponentHeight,
+              inX,
+              inY,
+              outX,
+              outY,
+              finalX,
+              labelComponentX,
+              localExternalLabelComponent,
+            } = getExternaLabelProperties(item, mx, my, cx, cy);
+
             return (
               <React.Fragment key={index}>
-                {/* <Line x1={mx} x2={cx} y1={my} y2={cy} stroke="black" /> */}
+                {showExternalLabels ? (
+                  <G>
+                    <Line
+                      x1={inX}
+                      x2={outX}
+                      y1={inY}
+                      y2={outY}
+                      stroke={labelLineColor}
+                      strokeWidth={labelLineThickness}
+                    />
+                    <Line
+                      x1={outX}
+                      x2={finalX}
+                      y1={outY}
+                      y2={outY}
+                      stroke={labelLineColor}
+                      strokeWidth={labelLineThickness}
+                    />
+                    {localExternalLabelComponent ? (
+                      <G
+                        x={labelComponentX}
+                        y={outY + labelComponentHeight / 2}>
+                        {localExternalLabelComponent?.(item, index) ?? null}
+                      </G>
+                    ) : null}
+                  </G>
+                ) : null}
                 {showTextBackground ? (
                   <Circle
                     cx={x + (item.shiftTextBackgroundX ?? item.shiftTextX ?? 0)}
