@@ -1,4 +1,4 @@
-# 🎉 1.4.27
+# 🎉 1.4.28
 
 ## ✨ Features added-
 
@@ -27,6 +27,16 @@ type LabelLineConfig = {
 ## 🔨 Refactor
 
 Renamed the `extraRadiusForFocused` to `extraRadius` in Pie and Donut charts.
+
+---
+
+---
+
+---
+
+# 🎉 1.4.27
+
+Accidentally pushed with a minor bug. Don't use this version!! Use `1.4.28` or newer versions.
 
 ---
 
