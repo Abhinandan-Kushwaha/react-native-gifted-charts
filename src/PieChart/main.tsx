@@ -334,42 +334,44 @@ export const PieChartMain = (props: PieChartMainProps) => {
                     }}
                   />
                 ) : null}
-                <SvgText
-                  fill={
-                    item.textColor || textColor || pieColors[(index + 2) % 9]
-                  }
-                  fontSize={item.textSize || textSize}
-                  fontFamily={item.font || props.font}
-                  fontWeight={item.fontWeight || props.fontWeight}
-                  fontStyle={item.fontStyle || props.fontStyle || 'normal'}
-                  x={
-                    x +
-                    (item.shiftTextX || 0) -
-                    (item.textSize || textSize) / 1.8
-                  }
-                  y={y + (item.shiftTextY || 0)}
-                  onPress={() => {
-                    item.onLabelPress
-                      ? item.onLabelPress()
-                      : props.onLabelPress
-                        ? props.onLabelPress(item, index)
-                        : item.onPress
-                          ? item.onPress()
-                          : props.onPress
-                            ? props.onPress(item, index)
-                            : null;
-                    if (props.focusOnPress) {
-                      if (props.selectedIndex === index) {
-                        if (toggleFocusOnPress) {
-                          props.setSelectedIndex(-1);
-                        }
-                      } else {
-                        props.setSelectedIndex(index);
-                      }
+                {showText && (
+                  <SvgText
+                    fill={
+                      item.textColor || textColor || pieColors[(index + 2) % 9]
                     }
-                  }}>
-                  {item.text || (showValuesAsLabels ? item.value + '' : '')}
-                </SvgText>
+                    fontSize={item.textSize || textSize}
+                    fontFamily={item.font || props.font}
+                    fontWeight={item.fontWeight || props.fontWeight}
+                    fontStyle={item.fontStyle || props.fontStyle || 'normal'}
+                    x={
+                      x +
+                      (item.shiftTextX || 0) -
+                      (item.textSize || textSize) / 1.8
+                    }
+                    y={y + (item.shiftTextY || 0)}
+                    onPress={() => {
+                      item.onLabelPress
+                        ? item.onLabelPress()
+                        : props.onLabelPress
+                          ? props.onLabelPress(item, index)
+                          : item.onPress
+                            ? item.onPress()
+                            : props.onPress
+                              ? props.onPress(item, index)
+                              : null;
+                      if (props.focusOnPress) {
+                        if (props.selectedIndex === index) {
+                          if (toggleFocusOnPress) {
+                            props.setSelectedIndex(-1);
+                          }
+                        } else {
+                          props.setSelectedIndex(index);
+                        }
+                      }
+                    }}>
+                    {item.text || (showValuesAsLabels ? item.value + '' : '')}
+                  </SvgText>
+                )}
                 {localPieInnerComponent ? (
                   <G x={x} y={y}>
                     {localPieInnerComponent?.(item, index) ?? null}
