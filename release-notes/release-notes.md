@@ -1,3 +1,39 @@
+# 🎉 1.4.27
+
+## ✨ Features added-
+
+1. Added the prop `referenceLinesOverChartContent` to Line and Area charts (earlier available for Bar charts only). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/761
+
+2. Added support for external Labels in Pie and Donut charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/763 <br />
+   It uses the below props-
+   1. `showExternalLabels` (boolean)
+   2. `labelLineConfig` (object of LabelLineConfig type)
+   3. `externalLabelComponent` (svg component for label, a callback function with 2 parameters- item and index)
+
+The `labelLineConfig` prop is an object of `LabelLineConfig` type described below-
+
+```ts
+type LabelLineConfig = {
+  length?: number; // default 10
+  tailLength?: number; // default 8
+  color?: ColorValue; // default 'black'
+  thickness?: number; // default 1
+  labelComponentWidth?: number; // default 20
+  labelComponentHeight?: number; // default 10
+  labelComponentMargin?: number; // default 4
+};
+```
+
+## 🔨 Refactor
+
+Renamed the `extraRadiusForFocused` to `extraRadius` in Pie and Donut charts.
+
+---
+
+---
+
+---
+
 # 🎉 1.4.26
 
 ## ✨ Features added-

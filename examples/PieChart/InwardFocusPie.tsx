@@ -21,7 +21,7 @@ const InwardFocusPie = () => {
         data={pieData}
         focusOnPress
         inwardExtraLengthForFocused={70}
-        extraRadiusForFocused={0}
+        extraRadius={0}
       />
     </View>
   );
