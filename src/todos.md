@@ -1,7 +1,10 @@
 ## Features
 
 1. Scatter Chart - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/518
-2. Issue with eslint - tsc https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/222
+2. Split Bar chart - https://stackoverflow.com/questions/78027876/how-can-i-draw-the-split-the-chart-in-rn-project
+3. Radar chart - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/699
+4. Range Line chart - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/652
+5. Issue with eslint - tsc https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/222
 
 ## To-dos in documentation-
 
