@@ -233,7 +233,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
                 ) : null;
               })
           }
-          {renderChartContent()}
+          {renderChartContent(containerHeightIncludingBelowXAxis)}
         </Fragment>
       </ScrollView>
       {referenceLinesOverChartContent
