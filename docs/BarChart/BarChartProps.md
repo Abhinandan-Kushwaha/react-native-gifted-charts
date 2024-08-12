@@ -52,6 +52,9 @@
 | autoCenterTooltip            | boolean              | When set to true, automatically centers the tooltip                                                                                               | false               |
 | adjustToWidth                | boolean              | When set to true, it auto-computes the barWidth and spacing to fit the chart in the available width / parentWidth                                 | false               |
 | parentWidth                  | number               | The width of the parent View or the width that the chart should auto-fit into when `adjustToWidth` is true                                        | screenWidth         |
+| showValuesAsTopLabel         | boolean              | When set to true, shows the value as a label at the top of the bar                                                                                | false               |
+| topLabelContainerStyle       | object               | style of the top label container                                                                                                                  | \_                  |
+| topLabelTextStyle            | object               | text style for the top labels that appear at the top of bars                                                                                      | \_                  |
 
 #### lineConfig
 

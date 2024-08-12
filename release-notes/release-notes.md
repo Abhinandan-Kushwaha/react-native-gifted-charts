@@ -1,3 +1,37 @@
+# 🎉 1.4.29
+
+## ✨ Features added-
+
+1. The prop `topLabelTextStyle` now works for stacked Bar charts just like it used to work for simple Bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/446#issuecomment-2269078504
+
+2. Secondary Y axis with negative values in secondary data or dataSet with `isSecondary: true` sets are now supported. Independent height, stepHeight, stepValue, mostNegativeValue, noOfSectionsBelowXAxis for primary and secondary Y-axes below origin supported.
+
+## 🐛 Bug fixes
+
+Fixed the issue- Negative steps and values in in second y axis are incorrect position. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/775
+
+## 🔨 Refactor
+
+1. Removed unnecessary interpolation for animations in Line charts.
+
+2. Passed `containerHeightIncludingBelowXAxis` to the `renderChartContent` method from the `BarAndLineChartsWrapper` component. This will ensure a consistent value of containerHeightIncludingBelowXAxis.
+
+3. Updated the util (`maxAndMinUtil`) to compute the value of `minItem` in case of `roundToDigits:true` in gifted-charts-core.
+
+4. Moved the computation of below variables from `getHorizSectionVals` to `useBarAndLineChartsWrapper` in gifted-charts-core.
+
+   1. secondaryMaxItem
+   2. secondaryMinItem
+   3. secondaryStepValue
+   4. secondaryNegativeStepValue
+   5. secondaryNoOfSectionsBelowXAxis
+
+---
+
+---
+
+---
+
 # 🎉 1.4.28
 
 ## ✨ Features added-

@@ -279,7 +279,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
               item.topLabelContainerStyle,
             ]}>
             {showValuesAsTopLabel ? (
-              <Text style={item.topLabelTextStyle}>
+              <Text style={item.topLabelTextStyle ?? props.topLabelTextStyle}>
                 {item.stacks.reduce((acc, stack) => acc + stack.value, 0)}
               </Text>
             ) : (

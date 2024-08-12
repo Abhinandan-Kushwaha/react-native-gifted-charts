@@ -304,7 +304,6 @@ export const LineChart = (props: LineChartPropsType) => {
     stripStrokeDashArray,
     unFocusOnPressOut,
     delayBeforeUnFocus,
-    containerHeightIncludingBelowXAxis,
     lineGradient,
     lineGradientDirection,
     lineGradientStartColor,
@@ -382,7 +381,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const decreaseWidth = useCallback(() => {
     widthValue.setValue(0);
     Animated.timing(widthValue, {
-      toValue: 1,
+      toValue: totalWidth,
       duration: animationDuration,
       easing: Easing.linear,
       useNativeDriver: false,
@@ -392,7 +391,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const decreaseWidth2 = useCallback(() => {
     widthValue2.setValue(0);
     Animated.timing(widthValue2, {
-      toValue: 1,
+      toValue: totalWidth,
       duration: animationDuration,
       easing: Easing.linear,
       useNativeDriver: false,
@@ -402,7 +401,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const decreaseWidth3 = useCallback(() => {
     widthValue3.setValue(0);
     Animated.timing(widthValue3, {
-      toValue: 1,
+      toValue: totalWidth,
       duration: animationDuration,
       easing: Easing.linear,
       useNativeDriver: false,
@@ -412,7 +411,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const decreaseWidth4 = useCallback(() => {
     widthValue4.setValue(0);
     Animated.timing(widthValue4, {
-      toValue: 1,
+      toValue: totalWidth,
       duration: animationDuration,
       easing: Easing.linear,
       useNativeDriver: false,
@@ -422,7 +421,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const decreaseWidth5 = useCallback(() => {
     widthValue5.setValue(0);
     Animated.timing(widthValue5, {
-      toValue: 1,
+      toValue: totalWidth,
       duration: animationDuration,
       easing: Easing.linear,
       useNativeDriver: false,
@@ -434,7 +433,7 @@ export const LineChart = (props: LineChartPropsType) => {
       widthValuesFromSet?.[index]?.setValue(0);
       if (widthValuesFromSet?.[index]) {
         Animated.timing(widthValuesFromSet?.[index], {
-          toValue: 1,
+          toValue: totalWidth,
           duration: animationDuration,
           easing: Easing.linear,
           useNativeDriver: false,
@@ -491,11 +490,8 @@ export const LineChart = (props: LineChartPropsType) => {
 
   const svgWrapperViewStyle = {
     position: 'absolute',
-    height:
-      containerHeightIncludingBelowXAxis +
-      (props.overflowBottom ?? dataPointsRadius1),
     bottom:
-      60 +
+      62 +
       xAxisLabelsVerticalShift +
       labelsExtraHeight -
       xAxisThickness -
@@ -588,31 +584,6 @@ export const LineChart = (props: LineChartPropsType) => {
       </Animated.View>
     );
   };
-
-  const animatedWidth = widthValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, totalWidth],
-  });
-
-  const animatedWidth2 = widthValue2.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, totalWidth],
-  });
-
-  const animatedWidth3 = widthValue3.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, totalWidth],
-  });
-
-  const animatedWidth4 = widthValue4.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, totalWidth],
-  });
-
-  const animatedWidth5 = widthValue5.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0, totalWidth],
-  });
 
   const onStripPress = (item: any, index: number) => {
     if (props.focusedDataPointIndex === undefined || !props.onFocus) {
@@ -1454,6 +1425,7 @@ export const LineChart = (props: LineChartPropsType) => {
   };
 
   const renderLine = (
+    containerHeightIncludingBelowXAxis: number,
     zIndex: number,
     points: any,
     currentLineThickness: number | undefined,
@@ -1537,7 +1509,10 @@ export const LineChart = (props: LineChartPropsType) => {
         //   setResponderActive(false);
         //   setTimeout(() => setPointerX(0), pointerVanishDelay);
         // }}
-        style={[svgWrapperViewStyle as ViewStyle, {width: totalWidth}]}>
+        style={[
+          svgWrapperViewStyle as ViewStyle,
+          {width: totalWidth, height: containerHeightIncludingBelowXAxis},
+        ]}>
         {lineSvgComponent(
           points,
           currentLineThickness,
@@ -1574,6 +1549,7 @@ export const LineChart = (props: LineChartPropsType) => {
   };
 
   const renderAnimatedLine = (
+    containerHeightIncludingBelowXAxis: number,
     zIndex: number,
     points: any,
     animatedWidth: any,
@@ -1659,7 +1635,10 @@ export const LineChart = (props: LineChartPropsType) => {
         //   setResponderActive(false);
         //   setTimeout(() => setPointerX(0), pointerVanishDelay);
         // }}
-        style={[svgWrapperViewStyle as ViewStyle, {width: animatedWidth}]}>
+        style={[
+          svgWrapperViewStyle as ViewStyle,
+          {width: animatedWidth, height: containerHeightIncludingBelowXAxis},
+        ]}>
         {lineSvgComponent(
           points,
           currentLineThickness,
@@ -1708,7 +1687,7 @@ export const LineChart = (props: LineChartPropsType) => {
     },
   };
 
-  const renderChartContent = () => {
+  const renderChartContent = (containerHeightIncludingBelowXAxis: number) => {
     return (
       <>
         {dataSet
@@ -1716,9 +1695,10 @@ export const LineChart = (props: LineChartPropsType) => {
             ? dataSet.map((set, index) => {
                 if (isAnimated) {
                   return renderAnimatedLine(
+                    containerHeightIncludingBelowXAxis,
                     set.zIndex ?? zIndex1,
                     pointsFromSet[index],
-                    animatedWidth,
+                    widthValue,
                     set.thickness ?? thickness1,
                     set.color ?? color1,
                     fillPointsFromSet[index],
@@ -1750,6 +1730,7 @@ export const LineChart = (props: LineChartPropsType) => {
                   );
                 } else {
                   return renderLine(
+                    containerHeightIncludingBelowXAxis,
                     set.zIndex ?? zIndex1,
                     pointsFromSet[index],
                     set.thickness ?? thickness1,
@@ -1786,9 +1767,10 @@ export const LineChart = (props: LineChartPropsType) => {
             : null
           : isAnimated
             ? renderAnimatedLine(
+                containerHeightIncludingBelowXAxis,
                 zIndex1,
                 points,
-                animatedWidth,
+                widthValue,
                 thickness1,
                 color1,
                 fillPoints,
@@ -1819,6 +1801,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 0,
               )
             : renderLine(
+                containerHeightIncludingBelowXAxis,
                 zIndex1,
                 points,
                 thickness1,
@@ -1853,9 +1836,10 @@ export const LineChart = (props: LineChartPropsType) => {
         {secondaryPoints
           ? isAnimated
             ? renderAnimatedLine(
+                containerHeightIncludingBelowXAxis,
                 secondaryLineConfig.zIndex,
                 secondaryPoints,
-                animatedWidth,
+                widthValue,
                 secondaryLineConfig.thickness,
                 secondaryLineConfig.color,
                 secondaryFillPoints,
@@ -1886,6 +1870,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 6,
               )
             : renderLine(
+                containerHeightIncludingBelowXAxis,
                 secondaryLineConfig.zIndex,
                 secondaryPoints,
                 secondaryLineConfig.thickness,
@@ -1921,9 +1906,10 @@ export const LineChart = (props: LineChartPropsType) => {
         {points2
           ? isAnimated
             ? renderAnimatedLine(
+                containerHeightIncludingBelowXAxis,
                 zIndex2,
                 points2,
-                animatedWidth2,
+                widthValue2,
                 thickness2,
                 color2,
                 fillPoints2,
@@ -1954,6 +1940,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 1,
               )
             : renderLine(
+                containerHeightIncludingBelowXAxis,
                 zIndex2,
                 points2,
                 thickness2,
@@ -1989,9 +1976,10 @@ export const LineChart = (props: LineChartPropsType) => {
         {points3
           ? isAnimated
             ? renderAnimatedLine(
+                containerHeightIncludingBelowXAxis,
                 zIndex3,
                 points3,
-                animatedWidth3,
+                widthValue3,
                 thickness3,
                 color3,
                 fillPoints3,
@@ -2022,6 +2010,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 2,
               )
             : renderLine(
+                containerHeightIncludingBelowXAxis,
                 zIndex3,
                 points3,
                 thickness3,
@@ -2057,9 +2046,10 @@ export const LineChart = (props: LineChartPropsType) => {
         {points4
           ? isAnimated
             ? renderAnimatedLine(
+                containerHeightIncludingBelowXAxis,
                 zIndex4,
                 points4,
-                animatedWidth4,
+                widthValue4,
                 thickness4,
                 color4,
                 fillPoints4,
@@ -2090,6 +2080,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 3,
               )
             : renderLine(
+                containerHeightIncludingBelowXAxis,
                 zIndex4,
                 points4,
                 thickness4,
@@ -2125,9 +2116,10 @@ export const LineChart = (props: LineChartPropsType) => {
         {points5
           ? isAnimated
             ? renderAnimatedLine(
+                containerHeightIncludingBelowXAxis,
                 zIndex5,
                 points5,
-                animatedWidth5,
+                widthValue5,
                 thickness5,
                 color5,
                 fillPoints5,
@@ -2158,6 +2150,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 4,
               )
             : renderLine(
+                containerHeightIncludingBelowXAxis,
                 zIndex5,
                 points5,
                 thickness5,
@@ -2281,8 +2274,9 @@ export const LineChart = (props: LineChartPropsType) => {
   return (
     <BarAndLineChartsWrapper
       {...barAndLineChartsWrapperProps}
+      dataSet={props.dataSet}
       scrollRef={scrollRef}
-      animatedWidth={animatedWidth}
+      animatedWidth={widthValue}
       renderChartContent={renderChartContent}
       remainingScrollViewProps={remainingScrollViewProps}
     />
