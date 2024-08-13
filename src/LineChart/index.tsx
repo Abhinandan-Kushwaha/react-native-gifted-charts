@@ -1211,7 +1211,7 @@ export const LineChart = (props: LineChartPropsType) => {
       lineSvgPropsOuter.strokeDasharray = strokeDashArray;
     }
     return (
-      <Svg onPress={props.onBackgroundPress}>
+      <Svg style={{ overflow: 'visible' }} onPress={props.onBackgroundPress}>
         {lineGradient && getLineGradientComponent()}
         {points.includes(SEGMENT_START) || points.includes(RANGE_ENTER) ? (
           ar.map((item, index) => {
