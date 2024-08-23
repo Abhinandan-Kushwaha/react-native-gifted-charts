@@ -1,3 +1,17 @@
+# 🎉 1.4.30
+
+## ✨ Features added-
+
+`animateOnDataChange` now works evevn if the lehgth of data array is changed. Earlier it worked for data changes with same length and threw error on changing the length of data array.<br />
+See- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/791 <br/>
+This is solved by adding dummy points to the data having lesser number of points. Dummy points are added carefully using the `pointsWithPaddedRepititions` util function from gifted-charts-core.
+
+---
+
+---
+
+---
+
 # 🎉 1.4.29
 
 ## ✨ Features added-
