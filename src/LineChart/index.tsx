@@ -37,6 +37,7 @@ import {
   adjustToOffset,
   LineProperties,
   LineDefaults,
+  pointsWithPaddedRepititions,
 } from 'gifted-charts-core';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {StripAndLabel} from '../Components/common/StripAndLabel';
@@ -331,7 +332,7 @@ export const LineChart = (props: LineChartPropsType) => {
     animateOnDataChange && points && oldPoints
       ? animatedPoints.interpolate({
           inputRange: [0, 1],
-          outputRange: [oldPoints, points],
+          outputRange: pointsWithPaddedRepititions(oldPoints, points),
         })
       : '';
 
@@ -339,7 +340,7 @@ export const LineChart = (props: LineChartPropsType) => {
     animateOnDataChange && fillPoints && oldFillPoints
       ? animatedFillPoints.interpolate({
           inputRange: [0, 1],
-          outputRange: [oldFillPoints, fillPoints],
+          outputRange: pointsWithPaddedRepititions(oldFillPoints, fillPoints),
         })
       : '';
 
