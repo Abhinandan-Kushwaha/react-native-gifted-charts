@@ -121,6 +121,7 @@ export const PieChart = (props: PieChartPropsType) => {
               position: 'absolute',
               top: -extraRadius,
               left: -extraRadius,
+              zIndex: -1, // was not getting displayed in web (using Expo)
             }}>
             <PieChartMain
               {...props}

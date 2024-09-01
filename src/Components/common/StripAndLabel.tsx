@@ -29,6 +29,7 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
     isBarChart,
     pointerIndex,
     hasDataSet,
+    containsNegative,
   } = props;
 
   const {top, left} = getTopAndLeftForStripAndLabel(props);
@@ -51,16 +52,20 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
           style={{
             position: 'absolute',
             left: (pointerRadius || pointerWidth) - pointerStripWidth / 4,
-            top: pointerStripUptoDataPoint
-              ? pointerRadius || pointerStripHeight / 2
-              : -pointerYLocal + 8,
+            top: containsNegative
+              ? 0
+              : pointerStripUptoDataPoint
+                ? pointerRadius || pointerStripHeight / 2
+                : -pointerYLocal + 8,
             width: pointerStripWidth,
             height: pointerStripUptoDataPoint
-              ? containerHeight - pointerYLocal + 5 - xAxisThickness
-              : pointerStripHeight,
+              ? containerHeight - pointerYLocal + 10 - xAxisThickness
+              : pointerStripHeight + (containsNegative ? 10 : 0),
             marginTop: pointerStripUptoDataPoint
               ? 0
-              : containerHeight - pointerStripHeight,
+              : containsNegative
+                ? -pointerYLocal
+                : containerHeight - pointerStripHeight,
           }}>
           <Svg>
             <Line
@@ -76,8 +81,8 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
               x2={0}
               y2={
                 pointerStripUptoDataPoint
-                  ? containerHeight - pointerYLocal + 5 - xAxisThickness
-                  : pointerStripHeight
+                  ? containerHeight - pointerYLocal + 10 - xAxisThickness
+                  : pointerStripHeight + 10
               }
             />
           </Svg>

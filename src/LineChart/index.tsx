@@ -56,6 +56,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const widthValue5 = useMemo(() => new Animated.Value(0), []);
 
   const {
+    curveType,
     scrollX,
     setScrollX,
     arrow1Points,
@@ -305,12 +306,14 @@ export const LineChart = (props: LineChartPropsType) => {
     stripStrokeDashArray,
     unFocusOnPressOut,
     delayBeforeUnFocus,
+    containerHeightIncludingBelowXAxis = 0,
     lineGradient,
     lineGradientDirection,
     lineGradientStartColor,
     lineGradientEndColor,
     barAndLineChartsWrapperProps,
     areaChart,
+    mostNegativeValue,
   } = useLineChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -497,6 +500,7 @@ export const LineChart = (props: LineChartPropsType) => {
       labelsExtraHeight -
       xAxisThickness -
       (props.overflowBottom ?? dataPointsRadius1),
+    left: 0,
     zIndex: 1,
     transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
   };
@@ -1053,6 +1057,7 @@ export const LineChart = (props: LineChartPropsType) => {
       width: totalWidth,
       screenWidth,
       hasDataSet: !!dataSet,
+      containsNegative: mostNegativeValue < 0,
     });
   };
 
@@ -1164,7 +1169,7 @@ export const LineChart = (props: LineChartPropsType) => {
     showValuesAsDataPointsText: any,
   ) => {
     if (!points) return null;
-    const isCurved = points.includes('C');
+    const isCurved = points.includes('C') || points.includes('Q');
     const isNthAreaChart = !!dataSet
       ? (dataSet[Number(key)].areaChart ?? areaChart)
       : getIsNthAreaChart(key ?? 0);
@@ -1180,6 +1185,7 @@ export const LineChart = (props: LineChartPropsType) => {
         RANGE_ENTER,
         STOP,
         RANGE_EXIT,
+        curveType,
       );
     } else if (points.includes(SEGMENT_START)) {
       ar = getSegmentedPathObjects(
@@ -1191,6 +1197,7 @@ export const LineChart = (props: LineChartPropsType) => {
         isCurved,
         SEGMENT_START,
         SEGMENT_END,
+        curveType,
       );
     }
     const lineSvgPropsOuter: LineSvgProps = {
@@ -1212,7 +1219,13 @@ export const LineChart = (props: LineChartPropsType) => {
       lineSvgPropsOuter.strokeDasharray = strokeDashArray;
     }
     return (
-      <Svg onPress={props.onBackgroundPress}>
+      <Svg
+        height={
+          containerHeightIncludingBelowXAxis +
+          (props.overflowBottom ?? dataPointsRadius1)
+        }
+        width={totalWidth}
+        onPress={props.onBackgroundPress}>
         {lineGradient && getLineGradientComponent()}
         {points.includes(SEGMENT_START) || points.includes(RANGE_ENTER) ? (
           ar.map((item, index) => {
@@ -1261,7 +1274,7 @@ export const LineChart = (props: LineChartPropsType) => {
                   ? `url(#${props.areaGradientId})`
                   : `url(#Gradient)`
               }
-              stroke={'transparent'}
+              stroke={'none'}
               strokeWidth={currentLineThickness || thickness}
             />
           ) : (
@@ -1273,7 +1286,7 @@ export const LineChart = (props: LineChartPropsType) => {
                   ? `url(#${props.areaGradientId})`
                   : `url(#Gradient)`
               }
-              stroke={'transparent'}
+              stroke={'none'}
               strokeWidth={currentLineThickness || thickness}
             />
           )
@@ -1512,7 +1525,10 @@ export const LineChart = (props: LineChartPropsType) => {
         // }}
         style={[
           svgWrapperViewStyle as ViewStyle,
-          {width: totalWidth, height: containerHeightIncludingBelowXAxis},
+          {
+            width: totalWidth,
+            height: containerHeightIncludingBelowXAxis,
+          },
         ]}>
         {lineSvgComponent(
           points,

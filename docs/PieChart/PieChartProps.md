@@ -87,6 +87,7 @@ type LabelLineConfig = {
   labelComponentWidth?: number; // default 20
   labelComponentHeight?: number; // default 10
   labelComponentMargin?: number; // default 4
+  avoidOverlappingOfLabels?: boolean; // default true
 };
 ```
 

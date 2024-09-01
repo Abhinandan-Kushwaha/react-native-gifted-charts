@@ -64,7 +64,6 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
   };
 
   const renderAnimatedLine = () => {
-    // console.log('animatedWidth is-------->', animatedWidth);
     return (
       <Animated.View
         pointerEvents="none"
