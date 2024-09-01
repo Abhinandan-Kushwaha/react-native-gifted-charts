@@ -64,6 +64,9 @@ export const PieChartMain = (props: PieChartMainProps) => {
     getExternaLabelProperties,
   } = getPieChartMainProps(props);
 
+  let prevSide = 'right';
+  let prevLabelComponentX = 0;
+
   return (
     <View
       pointerEvents="box-none"
@@ -188,7 +191,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
                       ? `url(#grad${index})`
                       : item.color || pieColors[index % 9]
                 }
-                onPress={() => {
+                onPressIn={() => {
                   if (item.onPress) {
                     item.onPress();
                   } else if (props.onPress) {
@@ -265,8 +268,20 @@ export const PieChartMain = (props: PieChartMainProps) => {
               outY,
               finalX,
               labelComponentX,
+              labelComponentY,
               localExternalLabelComponent,
-            } = getExternaLabelProperties(item, mx, my, cx, cy);
+              isRightHalf,
+            } = getExternaLabelProperties(
+              item,
+              mx,
+              my,
+              cx,
+              cy,
+              prevSide,
+              prevLabelComponentX,
+            );
+            prevSide = isRightHalf ? 'right' : 'left';
+            prevLabelComponentX = labelComponentX;
 
             return (
               <React.Fragment key={index}>
@@ -291,7 +306,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
                     {localExternalLabelComponent ? (
                       <G
                         x={labelComponentX}
-                        y={outY + labelComponentHeight / 2}>
+                        y={labelComponentY + labelComponentHeight / 2}>
                         {localExternalLabelComponent?.(item, index) ?? null}
                       </G>
                     ) : null}

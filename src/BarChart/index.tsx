@@ -175,6 +175,7 @@ export const BarChart = (props: BarChartPropsType) => {
       pointerIndex,
       width: totalWidth,
       screenWidth,
+      containsNegative: false,
     });
   };
 

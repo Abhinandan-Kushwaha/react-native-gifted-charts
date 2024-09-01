@@ -1,3 +1,26 @@
+# 🎉 1.4.31
+
+## ✨ Features added-
+
+1. Pointer lines will now be displayed in both positive and negative values of the Line and Area charts (1st and 4th quadrant). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/799
+
+2. Added the property `avoidOverlappingOfLabels` to the prop `labelLineConfig` for Pie and donut charts. The default being true, it auto shifts overlapping external labels in Pie charts rendered using `showExternalLabels` and `externalLabelComponent`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/801
+**Note:** Only the labels overlapping near the poles (at the top and bottom) will be auto-shifted. Auto-shifting can be disabled by setting `avoidOverlappingOfLabels: false` inside the `labelLineConfig` object.
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- Vertical lines displayed using the `showVerticalLines` prop are incomplete in Bar and Line charts when run on web (using Expo). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/794
+
+2. Fixed the issue- Line chart is shifted up and some data cannot be displayed (on web using Expo). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/778
+
+3. Fixed the issue- Focused section always getting the color of the 1st section on web (using Expo) See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/800#issuecomment-2313079219
+
+---
+
+---
+
+---
+
 # 🎉 1.4.30
 
 ## ✨ Features added-

@@ -61,10 +61,11 @@ const RenderVerticalLines = (props: any) => {
         position: 'absolute',
         height: extendedContainerHeight,
         bottom: 60 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
+        left: 0,
         width: totalWidth,
         zIndex: verticalLinesZIndex || -1,
       }}>
-      <Svg>
+      <Svg height={containerHeightIncludingBelowXAxis} width={totalWidth}>
         {verticalLinesAr.map((item: any, index: number) => {
           let totalSpacing = initialSpacing;
           if (verticalLinesSpacing) {
