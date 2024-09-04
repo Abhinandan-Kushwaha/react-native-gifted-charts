@@ -16,7 +16,7 @@ const BarBackgroundPattern = (props: any) => {
           : barBackgroundPatternFromProps()}
       </Defs>
       <Rect
-        stroke="transparent"
+        stroke="none"
         x="1"
         y="1"
         width="100%"

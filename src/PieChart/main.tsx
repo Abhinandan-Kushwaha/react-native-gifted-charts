@@ -66,6 +66,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
 
   let prevSide = 'right';
   let prevLabelComponentX = 0;
+  let wasFirstItemOnPole = false;
 
   return (
     <View
@@ -279,9 +280,12 @@ export const PieChartMain = (props: PieChartMainProps) => {
               cy,
               prevSide,
               prevLabelComponentX,
+              index === data.length - 1, // isLast
+              wasFirstItemOnPole,
             );
             prevSide = isRightHalf ? 'right' : 'left';
             prevLabelComponentX = labelComponentX;
+            if (index === 0) wasFirstItemOnPole = labelComponentY !== outY;
 
             return (
               <React.Fragment key={index}>

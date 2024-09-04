@@ -205,7 +205,7 @@ const AnimatedThreeDBar = (props: animatedBarPropTypes) => {
               <Svg>
                 <Defs>{barBackgroundPattern()}</Defs>
                 <Rect
-                  stroke="transparent"
+                  stroke="none"
                   x="1"
                   y="1"
                   width={barWidth || 30}

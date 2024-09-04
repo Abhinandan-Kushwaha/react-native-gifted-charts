@@ -32,7 +32,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
     barStyleWithBackground,
     yAxisOffset,
   } = props;
-  const [height, setHeight] = useState(noAnimation ? props.height : 0.2);
+  const [height, setHeight] = useState(noAnimation ? props.height : 0.4); // if animation fails, increase this constant value of 0.4
   const [initialRender, setInitialRender] = useState(!noAnimation);
 
   useEffect(() => {
@@ -144,7 +144,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
                     : barBackgroundPattern?.()}
                 </Defs>
                 <Rect
-                  stroke="transparent"
+                  stroke="none"
                   x="1"
                   y="1"
                   width={item.barWidth || props.barWidth || 30}

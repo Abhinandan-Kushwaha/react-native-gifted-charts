@@ -25,6 +25,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     labelsExtraHeight,
     xAxisLabelsVerticalShift,
     selectedIndex,
+    containerHeightIncludingBelowXAxis
   } = props;
 
   const firstBarWidth = data[0].barWidth ?? barWidth;
@@ -108,7 +109,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
         pointerEvents="none"
         style={{
           position: 'absolute',
-          height: containerHeight + 10 + labelsExtraHeight,
+          height: containerHeightIncludingBelowXAxis + labelsExtraHeight,
           left: 6 - yAxisLabelWidth,
           bottom: 50 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
           width: totalWidth,
