@@ -243,7 +243,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
                   : barBackgroundPattern?.()}
               </Defs>
               <Rect
-                stroke="transparent"
+                stroke="none"
                 x="1"
                 y="1"
                 width="100%"
@@ -301,7 +301,6 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
           bottom: 0,
           height: height,
           width: '100%',
-          overflow: 'hidden',
         }}>
         {static2DSimple()}
       </View>
