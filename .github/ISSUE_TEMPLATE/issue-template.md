@@ -6,19 +6,29 @@ labels: ''
 assignees: ''
 
 ---
+**Describe the bug**
+A clear and concise description of what the bug is.
 
-### For faster issue resolution, follow [me](https://github.com/Abhinandan-Kushwaha) on Github <img alt="followers" title="Follow me on Github" src="https://img.shields.io/github/followers/Abhinandan-Kushwaha?color=236ad3&style=for-the-badge&logo=github&label=Follow"/>
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+4. See error
 
-### Before adding an issue-
+**Code**
+Please share the code that you used to render the chart. Also share the data supplied to the chart.
+I should be able to run your code in a fresh new react-native project. Consider replacing variables like themes, colors etc with constant values before posting it here.
 
-1. Go through the [docs](https://gifted-charts.web.app/)
-2. Go through the [closed issues](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues?q=is%3Aissue+is%3Aclosed)
-3. If you have a doubt or a suggestion, consider posting it on [discussions](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions)
-4. While filing an issue, follow me on Github for faster response.
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-### Add below details while filing a bug or an issue-
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
 
-1. Consider adding your code along with data.
-2. I should be able to run your code in a fresh new react-native project. Consider replacing variables like themes, colors etc with constant values before posting it here.
-3. Consider adding a screenshot.
-4. Provide details of the library versions and the device and OS used.
+ - Device: [e.g. iPhone6]
+ - OS: [e.g. iOS8.1]
+ - Version of the library being used [e.g. 1.2.17]
+
+**Additional context**
+Add any other context about the problem here.
+
