@@ -1,0 +1,98 @@
+name: Bug report
+description: Report an issue with react-native-gifted-charts here.
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+
+        ### Consider [following me on Github](https://github.com/Abhinandan-Kushwaha) for a faster issue resolution. Your support keeps me motivated.
+
+        Before you proceed:
+        - Go through the [docs](https://gifted-charts.web.app/)
+        - Go through the [props tables](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/docs.md)
+        - Make sure to check whether there are [similar issues](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues?q=is%3Aissue+is%3Aclosed) in the repository
+        - If you have have a doubt or a suggestion, consider posting on the [Discussions](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions) page
+  - type: markdown
+    attributes:
+      value: |
+        ## Required information
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Please provide a clear, concise and descriptive explanation of what the bug is. Include screenshots or a video if needed. Tell us what were you expecting to happen instead of what is happening now.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Provide a detailed list of steps that reproduce the issue.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+
+  - type: input
+    id: repro
+    attributes:
+      label: Snack or a link to a repository
+      description: |
+        Please provide a Snack (https://snack.expo.io/) or a link to a repository on GitHub under your username that reproduces the issue.
+        Here are some tips for providing a minimal example: https://stackoverflow.com/help/mcve.
+        Issues without a reproduction are likely to stale.
+      placeholder: Link to a Snack or a GitHub repository
+    validations:
+      required: false
+
+  - type: input
+    id: react-native-gifted-charts-version
+    attributes:
+      label: version of react-native-gifted-charts
+      description: What version of react-native-svg are you using?
+      placeholder: 1.4.32
+    validations:
+      required: true
+
+  - type: input
+    id: react-native-version
+    attributes:
+      label: React Native version
+      description: What version of react-native are you using?
+      placeholder: 0.73.1
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platforms
+    attributes:
+      label: Platforms
+      description: On what platform your application is running on?
+      multiple: true
+      options:
+        - Android
+        - iOS
+        - Web
+    validations:
+      required: true
+
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Additional information
+        Providing as much information as possible greatly helps us with reproducing the issues.
+
+  - type: dropdown
+    id: workflow
+    attributes:
+      label: Workflow
+      description: How is your application managed?
+      options:
+        - React Native
+        - Expo Go
+        - Expo Dev Client
