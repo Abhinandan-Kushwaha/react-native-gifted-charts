@@ -1,3 +1,17 @@
+# 🎉 1.4.33
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- Secondary Y-axis labels misaligned for negative part (4th quadrant) and `yAxisLabelTexts` not working properly in the Secondary Y-axis. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/814#issuecomment-2330782150
+
+2. Fixed the issue- app crashes with interpolateMissingValues=false and areaChart=true. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/805
+
+---
+
+---
+
+---
+
 # 🎉 1.4.32
 
 ## 🐛 Bug fixes
