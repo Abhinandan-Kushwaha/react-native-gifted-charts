@@ -1265,7 +1265,10 @@ export const LineChart = (props: LineChartPropsType) => {
             endOpacity,
           )}
         {isNthAreaChart ? (
-          animateOnDataChange && animatedFillPath ? (
+          props.interpolateMissingValues === false &&
+          propsData.some(
+            (item: any) => isNaN(item.value), // if we have a null/undefined value in data & interpolation is disabled, then don't render area
+          ) ? null : animateOnDataChange && animatedFillPath ? (
             <AnimatedPath
               onPress={props.onChartAreaPress}
               d={animatedFillPath}
