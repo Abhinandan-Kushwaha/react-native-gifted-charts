@@ -499,7 +499,10 @@ If some data items have `null` or `undefined` values, their values get auto-assi
 | ------------------------------ | ------- | --------------------------------------------------------------------------------------------------- | ------------- |
 | interpolateMissingValues       | boolean | auto-assigns values to data items that have nullish (`null` or `undefined`) values by interpolation | true          |
 | showDataPointsForMissingValues | boolean | data points are hidden by default for interpolated values, to show them, use this props             | false         |
+| extrapolateMissingValues       | boolean | auto-assigns values to data items that have nullish values in the start and end of chart            | true          |
 | onlyPositive                   | boolean | when this prop is truthy, it converts negative values to 0 (possibly obtained by interpolation)     | false         |
+
+**Note:** `extrapolateMissingValues` will NOT work if `interpolateMissingValues` is set to false. Extrapolation will work only if interpolation is enabled.
 
 #### Interpolation strategy
 
@@ -510,8 +513,8 @@ otherwise<br />
 If a value is nullish, we look at the previous and next numeric values.
 
 1. If we have both, we find the slope between them and compute the missing values.
-2. If we don't have any numeric values ahead, but we have numeric values in the previous section, we find the slope between the last two numeric values in the previous section and compute the remaining values.
-3. If we don't have any numeric values in the previous section, but we have numeric values ahead, we find the slope between the next two numeric values in the ahead section and compute the remaining values.
+2. If we don't have any numeric values ahead, but we have numeric values in the previous section, we find the slope between the last two numeric values in the previous section and compute the remaining values. This will not work if `extrapolateMissingValues` is set to false.
+3. If we don't have any numeric values in the previous section, but we have numeric values ahead, we find the slope between the next two numeric values in the ahead section and compute the remaining values. This will not work if `extrapolateMissingValues` is set to false.
 
 ---
 
