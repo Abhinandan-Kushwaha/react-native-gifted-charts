@@ -153,7 +153,7 @@ export const PieChartPro = (props: PieChartPropsType) => {
               const borderColor =
                 item.strokeColor ??
                 props.strokeColor ??
-                (borderWidth ? 'black' : 'transparent');
+                (borderWidth ? 'black' : 'none');
               const strokeDashArrayLocal =
                 item.strokeDashArray ?? strokeDashArray;
               return (
@@ -163,7 +163,7 @@ export const PieChartPro = (props: PieChartPropsType) => {
                   d={isAnimated ? animatedPaths[index] : dFinal[index]}
                   fill={
                     ring
-                      ? 'transparent'
+                      ? 'none'
                       : showGradient
                         ? `url(#grad${index})`
                         : data[index].color || pieColors[index % 9]

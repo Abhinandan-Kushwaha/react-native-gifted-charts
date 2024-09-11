@@ -59,7 +59,7 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
                 : -pointerYLocal + 8,
             width: pointerStripWidth,
             height: pointerStripUptoDataPoint
-              ? containerHeight - pointerYLocal + 10 - xAxisThickness
+              ? containerHeight - pointerYLocal + 4 - xAxisThickness
               : pointerStripHeight + (containsNegative ? 10 : 0),
             marginTop: pointerStripUptoDataPoint
               ? 0
@@ -81,7 +81,7 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
               x2={0}
               y2={
                 pointerStripUptoDataPoint
-                  ? containerHeight - pointerYLocal + 10 - xAxisThickness
+                  ? containerHeight - pointerYLocal + 4 - xAxisThickness
                   : pointerStripHeight + 10
               }
             />

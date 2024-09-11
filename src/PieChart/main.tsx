@@ -187,7 +187,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
                 }
                 fill={
                   props.selectedIndex === index || item.peripheral
-                    ? 'transparent'
+                    ? 'none'
                     : showGradient
                       ? `url(#grad${index})`
                       : item.color || pieColors[index % 9]

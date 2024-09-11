@@ -1,3 +1,26 @@
+# 🎉 1.4.34
+
+## ✨ Features added-
+
+1. Added the prop `extrapolateMissingValues` to Line and Area charts to enable/disable the extrapolation of nullish values at the start and end of the chart. The default value of `extrapolateMissingValues` is true. <br />
+Note that extrapolation will not work if `interpolateMissingValues` is set to false. Extrapolation works only if interpolation is enabled. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/821
+
+2. Added the feature to auto scale the Y-axis and auto compute the value of `roundToDigits` based on the range of values in the data or dataSet. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/825
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- "Y-Axis is not showing the labels correctly if we use the prop `yAxisLabelTexts` and have only one Y-axis (primary or secondary) with a negative value." See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/814#issuecomment-2337412896
+
+2. Fixed the issue- "null value in pointerLabelComponent inside pointerConfig". The pointer label was having undefined value for a few milliseconds after unfocus. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/752
+
+3. Fixed the issue- Data line is being rendered a little below the x-axis. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/824#discussioncomment-10600782
+
+---
+
+---
+
+---
+
 # 🎉 1.4.33
 
 ## 🐛 Bug fixes
