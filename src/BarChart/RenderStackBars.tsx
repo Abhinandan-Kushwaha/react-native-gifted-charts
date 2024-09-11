@@ -247,7 +247,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
                 x="1"
                 y="1"
                 width="100%"
-                height="100%"
+                height={totalHeight}
                 fill={`url(#${item.patternId || patternId})`}
               />
             </Svg>

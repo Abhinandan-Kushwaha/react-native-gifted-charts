@@ -572,7 +572,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
                       ? 'url(#Gradient)'
                       : 'url(#GradientNegative)'
                   }
-                  stroke={'transparent'}
+                  stroke={'none'}
                   strokeWidth={currentLineThickness || thickness}
                 />
               );

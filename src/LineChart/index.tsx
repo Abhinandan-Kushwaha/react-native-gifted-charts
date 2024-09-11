@@ -495,7 +495,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const svgWrapperViewStyle = {
     position: 'absolute',
     bottom:
-      62 +
+      63 +
       xAxisLabelsVerticalShift +
       labelsExtraHeight -
       xAxisThickness -
@@ -650,9 +650,9 @@ export const LineChart = (props: LineChartPropsType) => {
           props.focusedDataPointColor ||
           LineDefaults.focusedDataPointColor;
         dataPointsRadius =
-          item.focusedDataPointRadius ||
-          props.focusedDataPointRadius ||
-          item.dataPointRadius ||
+          item.focusedDataPointRadius ??
+          props.focusedDataPointRadius ??
+          item.dataPointRadius ??
           dataPtsRadius;
         if (showTextOnFocus) {
           text = item.dataPointText;
@@ -669,7 +669,7 @@ export const LineChart = (props: LineChartPropsType) => {
         dataPointsWidth = item.dataPointWidth || dataPtsWidth;
         dataPointsHeight = item.dataPointHeight || dataPtsHeight;
         dataPointsColor = item.dataPointColor || dataPtsColor;
-        dataPointsRadius = item.dataPointRadius || dataPtsRadius;
+        dataPointsRadius = item.dataPointRadius ?? dataPtsRadius;
         if (showTextOnFocus) {
           text = '';
         }
@@ -1512,7 +1512,7 @@ export const LineChart = (props: LineChartPropsType) => {
         onResponderEnd={evt => {
           // console.log('evt...end.......',evt);
           setResponderStartTime(0);
-          setPointerIndex(-1);
+          // setPointerIndex(-1);
           setResponderActive(false);
           if (!persistPointer)
             setTimeout(() => setPointerX(0), pointerVanishDelay);
@@ -1641,7 +1641,7 @@ export const LineChart = (props: LineChartPropsType) => {
         onResponderEnd={evt => {
           // console.log('evt...end.......',evt);
           setResponderStartTime(0);
-          setPointerIndex(-1);
+          // setPointerIndex(-1);
           setResponderActive(false);
           if (!persistPointer)
             setTimeout(() => setPointerX(0), pointerVanishDelay);
