@@ -1,3 +1,20 @@
+# 🎉 1.4.35
+
+## ✨ Features added-
+
+1. Added support for secondary Bars using the property `isSecondary: true` inside the objects of data array. Available in both Bar and Stacked bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/828 <br />
+Also, **removed** the redundant `secondaryData` prop from Bar charts.
+
+2. Auto-compute the params for the secondary Y-axis based on the secondary data range. Applicable for both Bar and Line/Area charts.
+
+These features were implemented with a considerable amount of refactor which I hope will fix several issues related to secondary data and negative secondary Y axis.
+
+---
+
+---
+
+---
+
 # 🎉 1.4.34
 
 ## ✨ Features added-
