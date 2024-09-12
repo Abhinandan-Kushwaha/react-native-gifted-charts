@@ -16,6 +16,7 @@ export const renderDataPoints = (props: DataPointProps) => {
     yAxisLabelWidth,
     spacing,
     selectedIndex,
+    yAxisOffset,
   } = props;
   return data.map((item: any, index: number) => {
     if (
@@ -85,6 +86,7 @@ export const renderDataPoints = (props: DataPointProps) => {
                 lineConfig.shiftY,
                 containerHeight,
                 maxValue,
+                yAxisOffset,
               ) -
               lineConfig.dataPointsHeight / 2
             }
@@ -112,6 +114,7 @@ export const renderDataPoints = (props: DataPointProps) => {
                   lineConfig.shiftY,
                   containerHeight,
                   maxValue,
+                  yAxisOffset,
                 ) -
                 lineConfig.dataPointsHeight / 2 +
                 (item.textShiftY || lineConfig.textShiftY || 0)
@@ -138,6 +141,7 @@ export const renderDataPoints = (props: DataPointProps) => {
             lineConfig.shiftY,
             containerHeight,
             maxValue,
+            yAxisOffset,
           )}
           r={dataPointRadius}
           fill={dataPointColor}
@@ -162,6 +166,7 @@ export const renderDataPoints = (props: DataPointProps) => {
                 lineConfig.shiftY,
                 containerHeight,
                 maxValue,
+                yAxisOffset,
               ) -
               lineConfig.dataPointsHeight / 2 +
               (item.textShiftY || lineConfig.textShiftY || 0)

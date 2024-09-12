@@ -12,6 +12,7 @@ export const renderSpecificDataPoints = (props: any) => {
     spacing,
     containerHeight,
     maxValue,
+    yAxisOffset,
   } = props;
   return data.map((item: any, index: number) => {
     const currentBarWidth = item.barWidth || barWidth || 30;
@@ -28,6 +29,7 @@ export const renderSpecificDataPoints = (props: any) => {
       lineConfig.shiftY,
       containerHeight,
       maxValue,
+      yAxisOffset,
     );
     if (item.showDataPoint) {
       if (item.dataPointShape === 'rectangular') {
