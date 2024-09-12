@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
+  Image,
 } from 'react-native';
 
 import SimpleBlueBars from './BarChart/SimpleBlueBars';
@@ -46,21 +47,28 @@ import InwardFocusPie from './PieChart/InwardFocusPie';
 import BothSideFocusPie from './PieChart/BothSideFocusPie';
 import PopulationChart from './LineChart/PopulationChart';
 import StackPairWithPattern from './BarChart/StackPairWithPattern';
+import {
+  BarAndStackCriticalCharts,
+  LineAndAreaCriticalCharts,
+  LineChartsWithDataSetCritical,
+  PieAndDonutCriticalCharts,
+} from './criticalReview';
 
 const Examples = () => {
   const [selectedFooterButton, setSelectedFooterButton] = useState(0);
+  const [isCritical, setIsCritical] = useState(false);
 
   const Header = () => {
     const getTitle = () => {
       switch (selectedFooterButton) {
         case 0:
-          return 'Bar and Stacked Bar Charts';
+          return 'Bar & Stacked Bar Charts';
         case 1:
-          return 'Line and Area Charts';
+          return 'Line & Area Charts';
         case 2:
-          return 'Line Charts with DataSet and Step';
+          return 'Line with DataSet & Step';
         case 3:
-          return 'Pie and Donut Charts';
+          return 'Pie & Donut Charts';
       }
     };
     return (
@@ -208,6 +216,19 @@ const Examples = () => {
     );
   };
 
+  const SelectedIndexCriticalCharts = () => {
+    switch (selectedFooterButton) {
+      case 0:
+        return <BarAndStackCriticalCharts />;
+      case 1:
+        return <LineAndAreaCriticalCharts />;
+      case 2:
+        return <LineChartsWithDataSetCritical />;
+      case 3:
+        return <PieAndDonutCriticalCharts />;
+    }
+  };
+
   const SelectedIndexCharts = () => {
     switch (selectedFooterButton) {
       case 0:
@@ -221,7 +242,15 @@ const Examples = () => {
     }
   };
 
-  const Body = () => {
+  const renderCriticalCharts = () => {
+    return (
+      <ScrollView style={styles.body}>
+        <SelectedIndexCriticalCharts />
+      </ScrollView>
+    );
+  };
+
+  const renderNonCriticalCharts = () => {
     return (
       <ScrollView style={styles.body}>
         <SelectedIndexCharts />
@@ -302,8 +331,23 @@ const Examples = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <TouchableOpacity
+        style={[
+          styles.eyeContainer,
+          {backgroundColor: isCritical ? '#00ffe9' : 'lightgray'},
+        ]}
+        onPress={() => setIsCritical(critical => !critical)}>
+        <Image
+          source={require('./assets/eye.png')}
+          style={{
+            height: 34,
+            width: 34,
+            tintColor: isCritical ? 'purple' : 'black',
+          }}
+        />
+      </TouchableOpacity>
       <Header />
-      <Body />
+      {isCritical ? renderCriticalCharts() : renderNonCriticalCharts()}
       <Footer />
     </SafeAreaView>
   );
@@ -311,6 +355,20 @@ const Examples = () => {
 
 const styles = StyleSheet.create({
   container: {flex: 1, alignItems: 'center', backgroundColor: '#f5f5ff'},
+  eyeContainer: {
+    position: 'absolute',
+    left: 2,
+    top: 6,
+    height: 40,
+    width: 48,
+    borderRadius: 22,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderLeftWidth: 0.5,
+    borderRightWidth: 0.5,
+    borderBottomWidth: 0.5,
+    borderTopWidth: 6,
+  },
   header: {
     marginBottom: 10,
     backgroundColor: '#334',

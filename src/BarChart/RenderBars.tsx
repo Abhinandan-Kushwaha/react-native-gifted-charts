@@ -61,10 +61,19 @@ const RenderBars = (props: RenderBarsPropsType) => {
     negativeStepValue,
     autoCenterTooltip,
     secondaryXAxis,
+    secondaryStepHeight,
+    secondaryStepValue,
+    secondaryNegativeStepHeight,
+    secondaryNegativeStepValue,
+    secondaryNoOfSectionsBelowXAxis,
   } = props;
 
-  const heightFactor =
-    item.value < 0
+  const heightFactor = item.isSecondary
+    ? item.value < 0
+      ? (secondaryNegativeStepHeight ?? secondaryStepHeight) /
+        (secondaryNegativeStepValue ?? secondaryStepValue)
+      : secondaryStepHeight / secondaryStepValue
+    : item.value < 0
       ? negativeStepHeight / negativeStepValue
       : stepHeight / stepValue;
 
@@ -339,29 +348,16 @@ const RenderBars = (props: RenderBarsPropsType) => {
       width: commonPropsFor2dAnd3dBars.barWidth,
       height: barHeight,
       marginRight: spacing,
+      transform: [
+        {
+          translateY:
+            (containerHeight || 200) -
+            (barHeight - 10 + xAxisLabelsVerticalShift) +
+            (item.value < 0 ? Math.abs(item.value) * heightFactor : 0),
+        },
+        {rotateZ: item.value < 0 ? '180deg' : '0deg'},
+      ],
     },
-
-    pointerConfig
-      ? {
-          transform: [
-            {
-              translateY:
-                (containerHeight || 200) -
-                (barHeight - 10 + xAxisLabelsVerticalShift) +
-                (item.value < 0 ? Math.abs(item.value) * heightFactor : 0),
-            },
-          ],
-        }
-      : item.value < 0
-        ? {
-            transform: [
-              {
-                translateY: Math.abs(item.value) * heightFactor,
-              },
-              {rotateZ: '180deg'},
-            ],
-          }
-        : null,
     side !== 'right' && {zIndex: data.length - index},
   ];
 
@@ -372,7 +368,8 @@ const RenderBars = (props: RenderBarsPropsType) => {
 
   const barContent = () => {
     const isBarBelowXaxisAndInvisible =
-      item.value < 0 && !noOfSectionsBelowXAxis;
+      item.value < 0 &&
+      !(noOfSectionsBelowXAxis || secondaryNoOfSectionsBelowXAxis);
     const animated2DWithGradient = (
       noGradient: boolean,
       noAnimation: boolean,

@@ -50,6 +50,10 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     autoShiftLabelsForNegativeStacks = true,
     labelsDistanceFromXaxis = 0,
     horizontal,
+    secondaryStepHeight,
+    secondaryStepValue,
+    secondaryNegativeStepHeight,
+    secondaryNegativeStepValue,
   } = props;
   const {
     containsNegativeValue,
@@ -69,7 +73,13 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     lowestBarPosition,
     getStackBorderRadii,
     tooltipProps,
-  } = useRenderStackBars(props);
+  } = useRenderStackBars({
+    ...props,
+    secondaryStepHeight,
+    secondaryStepValue,
+    secondaryNegativeStepHeight,
+    secondaryNegativeStepValue,
+  });
 
   const renderLabel = (label: string, labelTextStyle: any) => {
     return (
@@ -322,19 +332,14 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
             width: item.stacks[0].barWidth || props.barWidth || 30,
             height: totalHeight,
             marginRight: spacing,
+            transform: [
+              {
+                translateY:
+                  (containerHeight || 200) -
+                  (totalHeight - 10 + xAxisLabelsVerticalShift),
+              },
+            ],
           },
-
-          props.pointerConfig
-            ? {
-                transform: [
-                  {
-                    translateY:
-                      (containerHeight || 200) -
-                      (totalHeight - 10 + xAxisLabelsVerticalShift),
-                  },
-                ],
-              }
-            : null,
         ]}>
         {(props.showXAxisIndices || item.showXAxisIndex) && (
           <View

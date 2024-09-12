@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useMemo, useRef} from 'react';
-import {Animated, Easing, View} from 'react-native';
+import {Animated, Easing, View, ViewStyle} from 'react-native';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
@@ -179,6 +179,15 @@ export const BarChart = (props: BarChartPropsType) => {
     });
   };
 
+  const contentContainerStyle: ViewStyle = {
+    position: 'absolute',
+    height: containerHeightIncludingBelowXAxis,
+    bottom: 60,
+    paddingLeft: initialSpacing,
+    width: totalWidth,
+    flexDirection: 'row',
+  };
+
   const renderChartContent = () => {
     if (pointerConfig) {
       return (
@@ -280,14 +289,7 @@ export const BarChart = (props: BarChartPropsType) => {
               setTimeout(() => setPointerX(0), pointerVanishDelay);
           }}
           onResponderTerminationRequest={evt => false}
-          style={{
-            position: 'absolute',
-            height: containerHeightIncludingBelowXAxis,
-            bottom: 60,
-            paddingLeft: initialSpacing,
-            width: totalWidth,
-            flexDirection: 'row',
-          }}>
+          style={contentContainerStyle}>
           {pointerX > 0 && stripBehindBars ? (
             <View
               pointerEvents={pointerEvents ?? 'none'}
@@ -329,7 +331,7 @@ export const BarChart = (props: BarChartPropsType) => {
         </View>
       );
     } else {
-      return renderChart();
+      return <View style={contentContainerStyle}>{renderChart()}</View>;
     }
   };
 
