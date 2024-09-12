@@ -1,3 +1,13 @@
+# 🎉 1.4.36
+
+Fixed the issue- "secondary Y-axis offset is not getting considered in the Line chart rendered inside Bar chart using `showLine` and `lineConfig = {{ isSecondary: true }}`."
+
+---
+
+---
+
+---
+
 # 🎉 1.4.35
 
 ## ✨ Features added-

@@ -25,7 +25,8 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     labelsExtraHeight,
     xAxisLabelsVerticalShift,
     selectedIndex,
-    containerHeightIncludingBelowXAxis
+    containerHeightIncludingBelowXAxis,
+    yAxisOffset,
   } = props;
 
   const firstBarWidth = data[0].barWidth ?? barWidth;
@@ -40,6 +41,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     yAxisLabelWidth,
     spacing,
     selectedIndex,
+    yAxisOffset,
   };
 
   const specificVerticalLinesProps = {
@@ -62,6 +64,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     spacing,
     containerHeight,
     maxValue,
+    yAxisOffset
   };
 
   const renderAnimatedLine = () => {
