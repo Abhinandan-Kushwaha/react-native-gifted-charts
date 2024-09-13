@@ -1,3 +1,13 @@
+# 🎉 1.4.38
+
+Fixed the issue- "Line chart inside Bar chart misaligned if data contains -ve values"
+
+---
+
+---
+
+---
+
 # 🎉 1.4.37
 
 ### 🐛 Bug fixes
@@ -27,7 +37,7 @@ Fixed the issue- "secondary Y-axis offset is not getting considered in the Line 
 ## ✨ Features added-
 
 1. Added support for secondary Bars using the property `isSecondary: true` inside the objects of data array. Available in both Bar and Stacked bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/828 <br />
-Also, **removed** the redundant `secondaryData` prop from Bar charts.
+   Also, **removed** the redundant `secondaryData` prop from Bar charts.
 
 2. Auto-compute the params for the secondary Y-axis based on the secondary data range. Applicable for both Bar and Line/Area charts.
 
@@ -44,7 +54,7 @@ These features were implemented with a considerable amount of refactor which I h
 ## ✨ Features added-
 
 1. Added the prop `extrapolateMissingValues` to Line and Area charts to enable/disable the extrapolation of nullish values at the start and end of the chart. The default value of `extrapolateMissingValues` is true. <br />
-Note that extrapolation will not work if `interpolateMissingValues` is set to false. Extrapolation works only if interpolation is enabled. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/821
+   Note that extrapolation will not work if `interpolateMissingValues` is set to false. Extrapolation works only if interpolation is enabled. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/821
 
 2. Added the feature to auto scale the Y-axis and auto compute the value of `roundToDigits` based on the range of values in the data or dataSet. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/825
 

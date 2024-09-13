@@ -64,7 +64,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     spacing,
     containerHeight,
     maxValue,
-    yAxisOffset
+    yAxisOffset,
   };
 
   const renderAnimatedLine = () => {
@@ -73,7 +73,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
         pointerEvents="none"
         style={{
           position: 'absolute',
-          height: containerHeight + 10,
+          height: containerHeightIncludingBelowXAxis + labelsExtraHeight,
           left: 6 - yAxisLabelWidth,
           bottom: 50 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
