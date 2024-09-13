@@ -1,3 +1,17 @@
+# 🎉 1.4.37
+
+### 🐛 Bug fixes
+
+1. Fixed the issue- "Line charts crashing with error `Cannot read property 'isSecondary' of null`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/831
+
+2. Fixed the issue- "Animations not working for Line charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/833"
+
+---
+
+---
+
+---
+
 # 🎉 1.4.36
 
 Fixed the issue- "secondary Y-axis offset is not getting considered in the Line chart rendered inside Bar chart using `showLine` and `lineConfig = {{ isSecondary: true }}`."
