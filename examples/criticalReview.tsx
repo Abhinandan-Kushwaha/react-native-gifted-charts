@@ -65,13 +65,13 @@ const BarWithSecondaryLineAndSecondaryYAxisOffset = () => {
   ];
 
   const lData = [
-    {value: 0, dataPointText: '0', textColor: 'red'},
-    {value: 0.2, dataPointText: '0.2', textColor: 'red'},
-    {value: 0.4, dataPointText: '0.4', textColor: 'red'},
-    {value: -0.06, dataPointText: '-0.06', textColor: 'red'},
-    {value: 0.5, dataPointText: '0.5', textColor: 'red'},
-    {value: -0.14, dataPointText: '-0.14', textColor: 'red'},
-    {value: 0.65, dataPointText: '0.65', textColor: 'red'},
+    {value: 0, dataPointText: '0'},
+    {value: 0.2, dataPointText: '0.2'},
+    {value: 0.4, dataPointText: '0.4'},
+    {value: -0.06, dataPointText: '-0.06', textShiftY: 16},
+    {value: 0.5, dataPointText: '0.5'},
+    {value: -0.14, dataPointText: '-0.14', textShiftY: 16},
+    {value: 0.65, dataPointText: '0.65', textShiftX: -16},
   ];
 
   return (
@@ -80,10 +80,18 @@ const BarWithSecondaryLineAndSecondaryYAxisOffset = () => {
         data={dd2}
         barWidth={15}
         spacing={15}
+        isAnimated
         frontColor={'rgba(50,100,50,0.5)'}
         showLine
         lineData={lData}
-        lineConfig={{isSecondary: true, spacing: 15}}
+        lineConfig={{
+          isSecondary: true,
+          spacing: 15,
+          textColor: 'red',
+          textFontSize: 13,
+          textShiftY: -10,
+          textShiftX: -8,
+        }}
         secondaryYAxis={{
           yAxisOffset: 0.14,
           noOfSectionsBelowXAxis: 5,
@@ -174,7 +182,7 @@ export const LineAndAreaCriticalCharts = () => {
 
   return (
     <View>
-      <LineChart data={data1} {...commonLineProps} />
+      <LineChart isAnimated data={data1} {...commonLineProps} />
       <Separator />
 
       <LineChart data={data2} {...commonLineProps} />

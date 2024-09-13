@@ -1224,7 +1224,7 @@ export const LineChart = (props: LineChartPropsType) => {
           containerHeightIncludingBelowXAxis +
           (props.overflowBottom ?? dataPointsRadius1)
         }
-        width={totalWidth}
+        // width={widthValue}
         onPress={props.onBackgroundPress}>
         {lineGradient && getLineGradientComponent()}
         {points.includes(SEGMENT_START) || points.includes(RANGE_ENTER) ? (
