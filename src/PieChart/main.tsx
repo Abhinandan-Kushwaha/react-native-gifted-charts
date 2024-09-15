@@ -75,12 +75,11 @@ export const PieChartMain = (props: PieChartMainProps) => {
   let wasFirstItemOnPole = false;
 
   const onPressHandler = (e: GestureResponderEvent) => {
-    const rad = radius;
     let {locationX: x, locationY: y} = e.nativeEvent;
     x -= extraRadius;
     y -= extraRadius;
     const r = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
-    if (r > rad) return;
+    if (r > radius) return;
     const a = Math.atan2(y - cy, x - cx);
 
     for (let index = 0; index < data.length; index++) {
