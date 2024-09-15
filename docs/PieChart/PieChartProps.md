@@ -15,7 +15,7 @@
 | inwardExtraLengthForFocused | number               | Extra length of focused Pie section towards the center (only for donut charts)                            | 0                                              |
 | sectionAutoFocus            | boolean              | In case you don't want focusOnPress but want a particular section to autofocus, this prop will be needed  | false                                          |
 | focusedPieIndex             | number               | index of the initially focused Pie, works only when focusOnPress is true                                  | -1                                             |
-| onLabelPress                | Function             | Callback function called on press of a Label (takes item and index as parameter)                          | onPress OR null                                |
+| onLabelPress (removed)      | Function             | Callback function called on press of a Label (takes item and index as parameter)                          | onPress OR null                                |
 | tiltAngle                   | Angle in deg         | The angle by which the chart should be tilted                                                             | '55deg' for 3D charts, otherwise 0             |
 | shadow                      | boolean              | Shadow to the Pie chart, when set to true, it enhances the 3D effect                                      | false                                          |
 | shadowColor                 | ColorValue           | Color of the shadow                                                                                       | lightgray                                      |
@@ -117,7 +117,7 @@ type LabelLineConfig = {
 | textBackgroundRadius   | number            | Radius for the background of the text label                                                                             |
 | labelPosition          | string            | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid'                |
 | onPress                | Function          | Callback function called on press of Pie sections (takes item and index as parameter)                                   |
-| onLabelPress           | Function          | Callback function called on press of a Label (takes item and index as parameter)                                        |
+| onLabelPress (removed) | Function          | Callback function called on press of a Label (takes item and index as parameter)                                        |
 | strokeWidth            | number            | Stroke (line) width for the Pie chart and its section                                                                   |
 | strokeColor            | ColorValue        | Stroke (line) color                                                                                                     |
 | focused                | boolean           | When set to true, the section for that item is focused, sectionAutoFocus must be set true in order to use this property |

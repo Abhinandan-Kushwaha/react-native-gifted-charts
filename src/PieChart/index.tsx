@@ -143,7 +143,7 @@ export const PieChart = (props: PieChartPropsType) => {
                 },
                 {
                   value: total - props.data[selectedIndex].value,
-                  onPress: () => alert('black'),
+                  // onPress: () => alert('black'),
                   peripheral: true,
                   strokeWidth: 0,
                 },
