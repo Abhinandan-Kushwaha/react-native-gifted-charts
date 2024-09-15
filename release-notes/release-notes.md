@@ -1,3 +1,21 @@
+# 🎉 1.4.37
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- "onPress pressing/focusing wrong Pie section". It fixes these issues-
+   1. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/832
+   2. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/297
+   3. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/812 <br/>
+   As a part of this fix, removed `onLabelPress` which is still there in types, but will not be functional. Will try to restore it in future.
+
+2. Fixed the issue- "Line charts crash if data is an empty array." See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/707
+
+---
+
+---
+
+---
+
 # 🎉 1.4.38
 
 Fixed the issue- "Line chart inside Bar chart misaligned if data contains -ve values"
