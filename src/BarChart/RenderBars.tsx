@@ -127,9 +127,13 @@ const RenderBars = (props: RenderBarsPropsType) => {
                   ? -40
                   : -6 -
                     xAxisTextNumberOfLines * 18 -
-                    xAxisLabelsVerticalShift) -
+                    (value < 0
+                      ? -xAxisLabelsVerticalShift
+                      : xAxisLabelsVerticalShift)) -
                 barMarginBottom -
-                labelsDistanceFromXaxis,
+                (value < 0 && !autoShiftLabels
+                  ? -labelsDistanceFromXaxis
+                  : labelsDistanceFromXaxis),
           },
           rotateLabel
             ? horizontal
@@ -150,7 +154,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
                       {
                         translateY: autoShiftLabels
                           ? 0
-                          : 16.5 * xAxisTextNumberOfLines + 14,
+                          : 16.5 * xAxisTextNumberOfLines + 12,
                       },
                     ],
                   }

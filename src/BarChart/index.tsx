@@ -182,7 +182,7 @@ export const BarChart = (props: BarChartPropsType) => {
   const contentContainerStyle: ViewStyle = {
     position: 'absolute',
     height: containerHeightIncludingBelowXAxis,
-    bottom: 60,
+    bottom: 60 + labelsExtraHeight,
     paddingLeft: initialSpacing,
     width: totalWidth,
     flexDirection: 'row',
@@ -297,7 +297,7 @@ export const BarChart = (props: BarChartPropsType) => {
                 position: 'absolute',
                 height:
                   extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
-                bottom: xAxisLabelsVerticalShift + labelsExtraHeight,
+                bottom: xAxisLabelsVerticalShift,
                 width: totalWidth,
               }}>
               {renderStripAndLabel(null)}
@@ -311,7 +311,7 @@ export const BarChart = (props: BarChartPropsType) => {
                 position: 'absolute',
                 height:
                   extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
-                bottom: xAxisLabelsVerticalShift + labelsExtraHeight,
+                bottom: xAxisLabelsVerticalShift,
                 width: totalWidth,
                 zIndex: 20,
               }}>
