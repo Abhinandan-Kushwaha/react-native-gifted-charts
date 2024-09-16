@@ -336,7 +336,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | xAxisTextNumberOfLines         | number                        | Number of lines for x axis label text                                                                          | 1                            |
 | xAxisLabelsHeight              | number                        | Height of X axis labels container                                                                              | xAxisTextNumberOfLines \* 18 |
 | xAxisLabelsVerticalShift       | number                        | prop to adjust the vertical position of X axis labels (move X axis labels up or down)                          | 0                            |
-| labelsExtraHeight              | number                        | used to display large rotated labels on X-axis (use this only when using the **rotateLabel** prop)             | 0                            |
+| labelsExtraHeight              | number                        | used to display large rotated labels on X-axis (useful when using the **rotateLabel** prop)                    | 0                            |
 | secondaryYAxis                 | secondaryYAxisType            | displays and controls the properties of the secondary Y axis on the right side                                 | null                         |
 | secondaryData                  | Array of items                | the secondary data that will be rendered along the secondary Y axis                                            | undefined                    |
 | secondaryXAxis                 | XAxisConfig                   | properties of the secondary X-axis (appearing at the top of the chart)                                         | values of the primary X-axis |

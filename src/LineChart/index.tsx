@@ -2287,6 +2287,26 @@ export const LineChart = (props: LineChartPropsType) => {
             </View>
           );
         })}
+        {pointerConfig?.dynamicLegendComponent && pointerX > 0 ? (
+          <View
+            style={[
+              {position: 'absolute'},
+              pointerConfig.dynamicLegendContainerStyle,
+            ]}>
+            {pointerConfig.dynamicLegendComponent(
+              dataSet
+                ? pointerItemsForSet
+                : [
+                    pointerItem,
+                    pointerItem2,
+                    pointerItem3,
+                    pointerItem4,
+                    pointerItem5,
+                  ].filter(item => !!item),
+              pointerIndex,
+            )}
+          </View>
+        ) : null}
       </>
     );
   };

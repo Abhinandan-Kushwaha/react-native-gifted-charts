@@ -710,6 +710,8 @@ type Pointer = {
   strokeDashArray?: Array<number>;
   barTouchable?: boolean; //default : false (only applicable to bar charts having pointerConfig)
   pointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto'; // default: "none
+  dynamicLegendComponent?: Function; // default null
+  dynamicLegendContainerStyle?: Style object; // default null
 };
 ```
 
@@ -743,6 +745,16 @@ When the chart is released, it returns the index -1.<br/>
 #### pointerColorsForDataSet
 
 When using pointers with dataSet, you can set pointer colors on each data line using the pointerColorsForDataSet which is an array of color values.
+
+#### dynamicLegendComponent
+
+`dynamicLegendComponent` is a property inside the **pointerConfig** prop, very similar to `pointerLabelComponent`, the only difference is that it is stationary whereas _pointerLabelComponent_ moves as the pointer moves. You can set the position of the `dynamicLegendComponent` using the **`dynamicLegendContainerStyle`** property in the _pointerConfig_ <br /> <br />
+You are supposed to assign a callback function to `dynamicLegendComponent`. The callback function receives 2 parameters-
+1. Array of currently selected items (in case you are rendering a single line, the array will have a single item)
+2. Index of the selected item.
+<br />
+
+**Note:** The legend component appears only as long as the pointer remains remains on the screen. To make the dynamic legend remain persistently on the screen, you can set the `persistPointer` property to true. The `initialPointerIndex` property can also be useful.
 
 ### onFocus and strip related props
 

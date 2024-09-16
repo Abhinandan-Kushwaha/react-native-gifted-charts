@@ -1,3 +1,30 @@
+# 🎉 1.4.40
+
+## ✨ Features added-
+
+Added the properties `dynamicLegendComponent` and `dynamicLegendContainerStyle` inside the **_pointerConfig_** object. <br />
+<br />
+
+**dynamicLegendComponent** is a property inside the **pointerConfig** prop, very similar to `pointerLabelComponent`, the only difference is that it is stationary whereas _pointerLabelComponent_ moves as the pointer moves. You can set the position of the _dynamicLegendComponent_ using the **`dynamicLegendContainerStyle`** property inside _pointerConfig_ <br /> <br />
+You are supposed to assign a callback function to **dynamicLegendComponent**. The callback function receives 2 parameters-
+   1. Array of currently selected items (in case you are rendering a single line, the array will have a single item)
+   2. Index of the selected item.
+<br />
+
+**Note:** The legend component appears only as long as the pointer remains remains on the screen. To make the dynamic legend remain persistently on the screen, you can set the `persistPointer` property to true. The `initialPointerIndex` property can also be useful.
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- `autoShiftLabels` not working properly. See https://gifted-charts.web.app/barchart/#xAxisShift
+
+2. Fixed the issue- "Bar alignment issue when using the `labelsExtraHeight` prop." See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/839
+
+---
+
+---
+
+---
+
 # 🎉 1.4.39
 
 ## 🐛 Bug fixes
