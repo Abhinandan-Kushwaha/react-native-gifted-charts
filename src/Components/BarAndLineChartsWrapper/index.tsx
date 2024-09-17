@@ -102,7 +102,10 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         50 -
         overflowTop,
       marginTop: trimYAxisAtTop ? containerHeight / 20 : 0,
-      marginBottom: (xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18) - 55, //This is to not let the Things that should be rendered below the chart overlap with it
+      marginBottom:
+        (xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18) -
+        55 -
+        xAxisLabelsVerticalShift, //This is to not let the Things that should be rendered below the chart overlap with it
     },
   });
 
