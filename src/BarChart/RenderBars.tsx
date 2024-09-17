@@ -208,7 +208,12 @@ const RenderBars = (props: RenderBarsPropsType) => {
                 barWidth) + spacing,
             left: spacing / -2,
             position: 'absolute',
-            height: props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
+            height:
+              props.xAxisLabelsHeight ??
+              xAxisTextNumberOfLines * 18 -
+                (value < 0
+                  ? -xAxisLabelsVerticalShift
+                  : xAxisLabelsVerticalShift),
             bottom: top
               ? (containerHeight || 200) +
                 (secondaryXAxis?.labelsDistanceFromXaxis ?? 15)
@@ -233,7 +238,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
                       {
                         translateY: autoShiftLabels
                           ? 0
-                          : 16.5 * xAxisTextNumberOfLines + 14,
+                          : 16.5 * xAxisTextNumberOfLines + 12,
                       },
                     ],
                   }
