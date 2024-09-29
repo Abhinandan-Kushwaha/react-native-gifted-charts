@@ -1,3 +1,14 @@
+## 🎉 1.4.43
+
+1. Added `onLeftPress` and `onRightPress` props to Population charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/855
+2. Fix BarChart crash when maxValue is 0. Thanks to [sakisdog](https://github.com/sakisdog) for the PR- https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/55
+
+---
+
+---
+
+---
+
 # 🎉 1.4.42
 
 ## ✨ Features added-

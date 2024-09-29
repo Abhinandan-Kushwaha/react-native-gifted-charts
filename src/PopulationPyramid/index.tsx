@@ -319,6 +319,7 @@ export const PopulationPyramid = (props: PopulationPyramidPropsType) => {
                 fill={item.leftBarColor ?? leftBarColor}
                 stroke={item.leftBarBorderColor ?? leftBarBorderColor}
                 strokeWidth={leftBorderWidth}
+                onPress={() => props.onLeftPress?.(item, index)}
               />
               <ClipPath id={'cp-left' + index}>
                 <Rect {...leftBarCommonProps} />
@@ -384,6 +385,7 @@ export const PopulationPyramid = (props: PopulationPyramidPropsType) => {
                 fill={item.rightBarColor ?? rightBarColor}
                 stroke={item.rightBarBorderColor ?? rightBarBorderColor}
                 strokeWidth={rightBorderWidth}
+                onPress={() => props.onRightPress?.(item, index)}
               />
               <ClipPath id={'cp-right' + index}>
                 <Rect {...rightBarCommonProps} />
