@@ -107,6 +107,8 @@
 | barBorderRadius              | number                     | boder radius of the bars                                                                                         | 0                        |
 | leftBarBorderRadius          | number                     | boder width of the bars displayed in the left half of the pyramid                                                | 0                        |
 | rightBarBorderRadius         | number                     | boder width of the bars displayed in the right half of the pyramid                                               | 0                        |
+| onLeftPress                  | (item, index) => void      | Callback function called when a left bar is pressed. Takes 2 params- item and index.                             | \_                       |
+| onRightPress                 | (item, index) => void      | Callback function called when a right bar is pressed. Takes 2 params- item and index.                            | \_                       |
 | allCornersRounded            | boolean                    | when set to true, border radius will apply to all the four corners of the bars, else applied only on outer edges | false                    |
 | showSurplus                  | boolean                    | shows surplus values on the edges in highlighted colors (extra width of the bigger bar is highlighted )          | false                    |
 | showSurplusLeft              | boolean                    | shows surplus values on the left edges in highlighted colors (extra width of the bigger bar is highlighted )     | \_                       |
