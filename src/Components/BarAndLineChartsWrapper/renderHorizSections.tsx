@@ -90,6 +90,9 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
   const negativeSectionsCountDiffPrimaryVsSecondary =
     secondaryHorizSectionsBelow.length - horizSectionsBelow.length;
 
+  const isLineChart = chartType === chartTypes.LINE;
+  const isLineBiColor = chartType === chartTypes.LINE_BI_COLOR;
+
   const renderAxesAndRules = (index: number) => {
     const invertedIndex = horizSections.length - index - 1;
     return (
@@ -380,10 +383,6 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
             {
               marginLeft: yAxisThickness,
             },
-            showBorder && {
-              borderRightWidth: yAxisThickness,
-              borderColor: yAxisColor,
-            },
             {
               height:
                 index === 0
@@ -393,6 +392,25 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
             },
             index === 0 && {marginTop: -localNegativeStepHeight / 2},
           ]}
+        />
+        <View
+          style={{
+            position: 'absolute',
+            top: index === 0 ? -localNegativeStepHeight / 2 : 0,
+            left:
+              yAxisSide === yAxisSides.RIGHT
+                ? width
+                  ? width + 19
+                  : totalWidth -
+                    (isLineChart ? 31 : isLineBiColor ? spacing - 19 : 1)
+                : yAxisLabelWidth,
+            borderRightWidth: yAxisThickness,
+            borderColor: yAxisColor,
+            height:
+              index === 0
+                ? localNegativeStepHeight * 1.5
+                : localNegativeStepHeight,
+          }}
         />
         <View style={[styles.leftPart, {backgroundColor: backgroundColor}]}>
           {hideRules ? null : (
@@ -415,10 +433,10 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
   };
 
   const leftShiftForRIghtYaxis =
-    (width ? width + 20 : totalWidth) +
+    (width ? width + (isLineChart ? 50 : 20) : totalWidth) +
     yAxisLabelWidth / 2 +
     endSpacing -
-    (chartType === chartTypes.BAR ? 40 : 60);
+    (isLineChart ? 70 : 40);
 
   return (
     <>
@@ -590,7 +608,11 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                               : negativeStepHeight,
                         },
                         yAxisSide === yAxisSides.RIGHT && {
-                          left: (width ?? totalWidth) + yAxisLabelWidth,
+                          left:
+                            (width
+                              ? width - 15
+                              : totalWidth - (isLineChart ? 65 : 35)) +
+                            yAxisLabelWidth,
                         },
                         yAxisLabelContainerStyle,
                       ]}>
