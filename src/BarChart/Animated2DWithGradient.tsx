@@ -14,7 +14,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
   const {
     barBackgroundPattern,
     patternId,
-    barWidth,
+    barWidth: bWidth,
     barStyle,
     item,
     index,
@@ -34,6 +34,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
   } = props;
   const [height, setHeight] = useState(noAnimation ? props.height : 0.4); // if animation fails, increase this constant value of 0.4
   const [initialRender, setInitialRender] = useState(!noAnimation);
+  const [barWidth, setBarWidth] = useState(item.barWidth ?? bWidth); // setting width in state for animation purpose
 
   useEffect(() => {
     if (!noAnimation) {
@@ -44,8 +45,9 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
       }
     } else {
       setHeight(props.height);
+      setBarWidth(item.barWidth ?? bWidth);
     }
-  }, [props.height]);
+  }, [props.height, bWidth, item.barWidth]);
 
   const elevate = () => {
     LayoutAnimation.configureNext({
@@ -53,6 +55,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
       update: {type: 'linear', property: 'scaleXY'},
     });
     setHeight(props.height);
+    setBarWidth(item.barWidth ?? bWidth);
   };
 
   const layoutAppear = () => {
@@ -72,7 +75,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
           style={{
             position: 'absolute',
             bottom: 0,
-            width: '100%',
+            width: barWidth,
             overflow: 'hidden',
             height:
               (noAnimation
@@ -147,7 +150,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
                   stroke="none"
                   x="1"
                   y="1"
-                  width={item.barWidth || props.barWidth || 30}
+                  width={item.barWidth || barWidth || 30}
                   height={noAnimation ? Math.abs(height) : height}
                   fill={`url(#${item.patternId || patternId})`}
                 />

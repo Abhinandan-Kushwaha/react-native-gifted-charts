@@ -1,3 +1,24 @@
+# 🎉 1.4.42
+
+## ✨ Features added-
+
+1. Added 185 screenshot tests to avoid regressions and make the library pixel perfect. See https://abhinandan-kushwaha.github.io/TestingCharts/ss-test/test.html
+2. Added animation to bar charts when the width of bar changes, earlier animation worked only on height change.
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- Crash on passing empty data to Bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/851
+2. Fixed the issue- Line & area charts with `pointerConfig` blink when `animateOnDataChange` is true. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/849
+3. Fixed the issue- `animateOnDataChange` does not work when yAxisOffset is set. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/853
+4. Fixed the issue- Right side y-Axis not working in `<LineChartBiColor>`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/847
+5. Fixed all issues with yAxisSide='right' and secondary Y-axis alignment. Wrote thorough screenshot tests relates to Axes and labels.
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.41
 
 Fixed the x-axis alignment issue for animated gradient Bar charts when using `xAxisLabelsVerticalShift`. Also fixed the extra space at bottom when using `xAxisLabelsVerticalShift`.<br />

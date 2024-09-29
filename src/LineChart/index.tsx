@@ -332,7 +332,7 @@ export const LineChart = (props: LineChartPropsType) => {
   const oldFillPoints = usePrevious(fillPoints);
 
   const animatedPath =
-    animateOnDataChange && points && oldPoints
+    animateOnDataChange && points && oldPoints && points !== oldPoints
       ? animatedPoints.interpolate({
           inputRange: [0, 1],
           outputRange: pointsWithPaddedRepititions(oldPoints, points),
@@ -340,7 +340,10 @@ export const LineChart = (props: LineChartPropsType) => {
       : '';
 
   const animatedFillPath =
-    animateOnDataChange && fillPoints && oldFillPoints
+    animateOnDataChange &&
+    fillPoints &&
+    oldFillPoints &&
+    fillPoints !== oldFillPoints
       ? animatedFillPoints.interpolate({
           inputRange: [0, 1],
           outputRange: pointsWithPaddedRepititions(oldFillPoints, fillPoints),
