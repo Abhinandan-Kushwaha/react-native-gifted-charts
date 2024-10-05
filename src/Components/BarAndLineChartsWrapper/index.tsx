@@ -196,6 +196,7 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
                 initialSpacing +
                 ((barWidth ?? 0) + spacing) * scrollToIndex -
                 spacing,
+              animated: scrollAnimation
             });
           }
         }}
