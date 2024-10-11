@@ -10,6 +10,8 @@
 
 1. Fixed the issue- "yAxisOffset does not work with stackData". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/862
 2. Fixed the issue- `zIndex` not working for Lines/Curves of the Line/Area charts.
+3. Used scrollAnimation when scrolling to a given index using the `scrollToIndex` prop. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/859<br />
+   Thanks to [dannybit](https://github.com/dannybit) for his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/860
 
 ---
 
