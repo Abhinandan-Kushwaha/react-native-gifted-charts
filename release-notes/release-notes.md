@@ -2,7 +2,7 @@
 
 ## ✨ Features added-
 
-1. Added support for different spacing for each line in Line?Area charts. Added the props `spacing1`, `spacing2`, `spacing3`... See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/858
+1. Added support for different spacing for each line in Line/Area charts. Added the props `spacing1`, `spacing2`, `spacing3`... See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/858
 2. Added support for different spacing for each data point in a line in Line/Area charts. Added the `spacing` property inside the objects of the `data` and `dataSet` arrays.
 3. Added the tooltip feature in Pie/Donut charts using the `showTooltip` prop.
 
