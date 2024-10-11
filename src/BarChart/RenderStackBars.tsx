@@ -25,6 +25,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
   const {
     barBackgroundPattern,
     patternId,
+    stackData,
     item,
     index,
     containerHeight,
@@ -290,7 +291,10 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
             ]}>
             {showValuesAsTopLabel ? (
               <Text style={item.topLabelTextStyle ?? props.topLabelTextStyle}>
-                {item.stacks.reduce((acc, stack) => acc + stack.value, 0)}
+                {stackData[index].stacks.reduce(
+                  (acc, stack) => acc + stack.value,
+                  0,
+                )}
               </Text>
             ) : (
               item.topLabelComponent?.()

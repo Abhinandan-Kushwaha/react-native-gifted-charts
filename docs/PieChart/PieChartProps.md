@@ -33,6 +33,8 @@
 | textBackgroundColor         | ColorValue           | Background color for the label texts                                                                      | white                                          |
 | textBackgroundRadius        | number               | Radius for the background of the text labels                                                              | textSize                                       |
 | showValuesAsLabels          | boolean              | When set to true, the values of the Pie sections are displayed as labels                                  | false                                          |
+| showTooltip                 | boolean              | When set to true, displays a tooltip on pressing                                                          | false                                          |
+| showValuesAsTooltipText     | boolean              | When set to true, the values of the Pie sections are displayed as tooltips (on pressing)                  | true                                           |
 | centerLabelComponent        | Function             | Component to be rendered at the center of the Pie chart                                                   | \_                                             |
 | semiCircle                  | boolean              | When set to true, renders the Pie Chart in a semi-circle. donut semiCircle charts look like a speed-meter | false                                          |
 | labelsPosition              | string               | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid'  | 'outward' for donut and semicircle, else 'mid' |
@@ -42,6 +44,34 @@
 | showExternalLabels          | boolean              | To show labels for each Pie section outside the chart towards left or right based on its position         | false                                          |
 | labelLineConfig             | LabelLineConfig      | Object to configure the properties (like length, color, tailLength etc.) of external label's line         | \_                                             |
 | externalLabelComponent      | Function             | Component to be rendered as external labels for each Pie section                                          | \_                                             |
+
+### Tooltip
+
+When `showTooltip` is set to true, a tooltip appears on pressing any Pie section. The text inside the tooltip can be set using the `tooltipText` property in the data array. If `tooltipText` is not found, then the value of the `text` in the data array is rendered as tooltip text. If `text` is also not found then the numeric value of the Pie section is displayed as the tooltip text.
+
+The styling of the tooltip text is controlled by the same props that control the style of the label text. These props include-
+
+1. textColor
+2. textSize
+3. fontStyle
+4. fontWeight
+5. font (for fontFamily)
+
+Other props related to tooltip and their default values-
+
+```js
+PieTooltipDefaults = {
+  tooltipWidth: undefined, // takes the width of the tooltip text
+  persistTooltip: false,
+  tooltipDuration: 1000,
+  tooltipVerticalShift: 30,
+  tooltipHorizontalShift: 20,
+  showValuesAsTooltipText: true,
+  tooltipTextNoOfLines: 3,
+  tooltipBackgroundColor: 'rgba(20,20,20,0.8)',
+  tooltipBorderRadius: 4,
+};
+```
 
 #### initialAngle
 
@@ -115,7 +145,9 @@ type LabelLineConfig = {
 | font                   | string            | Font family of the text - 'Arial', 'Cursive', 'Comic Sans MS' etc                                                       |
 | textBackgroundColor    | ColorValue        | Background color for the label text                                                                                     |
 | textBackgroundRadius   | number            | Radius for the background of the text label                                                                             |
-| labelPosition          | string            | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid'                |
+| labelPosition          | LabelsPosition    | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid'                |
+| tooltipText            | string            | Tooltip text for the sections (if omitted, then 'text' will serve as the tooltip text)                                  |
+| tooltipComponent       | Function          | Custom tooltip component for the sections (callback function that accepts index as a parameter)                         |
 | onPress                | Function          | Callback function called on press of Pie sections (takes item and index as parameter)                                   |
 | onLabelPress (removed) | Function          | Callback function called on press of a Label (takes item and index as parameter)                                        |
 | strokeWidth            | number            | Stroke (line) width for the Pie chart and its section                                                                   |
@@ -123,7 +155,7 @@ type LabelLineConfig = {
 | focused                | boolean           | When set to true, the section for that item is focused, sectionAutoFocus must be set true in order to use this property |
 | pieInnerComponent      | () => svg element | Svg element to be rendered inside the Pie like a label (position controlled by 'labelsPosition' )                       |
 | labelLineConfig        | LabelLineConfig   | Object to configure the properties (like length, color, tailLength etc.) of external label's line                       |
-| externalLabelComponent | Function          | Component to be rendered as external label for the Pie section                                                         |
+| externalLabelComponent | Function          | Component to be rendered as external label for the Pie section                                                          |
 
 **Note** If we pass `shiftTextX`, the background will also shift (because the library assigns a default value of shiftTextBackgroundX = shiftTextX). This can be _overridden_ by manually passing **shiftTextBackgroundX**. Same applies to `shiftTextBackgroundY`
 
