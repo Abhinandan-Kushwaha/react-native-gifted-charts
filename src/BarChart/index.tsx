@@ -96,6 +96,8 @@ export const BarChart = (props: BarChartPropsType) => {
     parentWidth: props.parentWidth ?? screenWidth,
   });
 
+  const {stackData} = barAndLineChartsWrapperProps;
+
   const labelsAppear = useCallback(() => {
     opacityValue.setValue(0);
     Animated.timing(opacityValue, {
@@ -220,7 +222,7 @@ export const BarChart = (props: BarChartPropsType) => {
             setPointerIndex(factor);
 
             let item, y;
-            item = (props.stackData ?? data)[factor];
+            item = (stackData ?? data)[factor];
             let stackSum = 0;
             if ('stacks' in item) {
               stackSum = item.stacks.reduce(
@@ -255,7 +257,7 @@ export const BarChart = (props: BarChartPropsType) => {
             let factor =
               (x - initialSpacing - barWidth / 2) / (spacing + barWidth);
             factor = Math.round(factor);
-            factor = Math.min(factor, (props.stackData ?? data).length - 1);
+            factor = Math.min(factor, (stackData ?? data).length - 1);
             factor = Math.max(factor, 0);
             let z =
               initialSpacing +
@@ -265,7 +267,7 @@ export const BarChart = (props: BarChartPropsType) => {
             let item, y;
             setPointerX(z);
             setPointerIndex(factor);
-            item = (props.stackData ?? data)[factor];
+            item = (stackData ?? data)[factor];
             let stackSum = 0;
             if ('stacks' in item) {
               item.stacks?.reduce(
@@ -336,8 +338,8 @@ export const BarChart = (props: BarChartPropsType) => {
   };
 
   const renderChart = () => {
-    if (props.stackData) {
-      return props.stackData.map((item, index) => {
+    if (stackData) {
+      return stackData.map((item, index) => {
         return (
           <RenderStackBars
             key={index}

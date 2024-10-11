@@ -22,7 +22,7 @@
 | stepHeight                    | number               | Height of 1 step/section in the Y axis                                                                            | 20                            |
 | negativeStepValue             | number               | Value of 1 step/section in the Y axis for negative values (in the 4th quadrant)                                   | stepValue                     |
 | negativeStepHeight            | number               | Height of 1 step/section in the Y axis for negative values (in the 4th quadrant)                                  | stepHeight                    |
-| spacing                       | number               | Distance between 2 consecutive bars in the Bar chart                                                              | 50                            |
+| spacing                       | number               | Distance between 2 consecutive points in the Line chart                                                           | 50                            |
 | adjustToWidth                 | boolean              | When set to true, it auto computes the spacing value to fit the Line chart in the available width                 | false                         |
 | backgroundColor               | ColorValue           | Background color of the Bar chart                                                                                 | \_                            |
 | sectionColors                 | ColorValue           | Background color of the horizontal sections of the chart                                                          | backgroundColor               |
@@ -136,6 +136,7 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | textShiftY                     | number        | To shift the dataPointText text vertically                                                                                           |
 | textColor                      | ColorValue    | Color of the dataPointText                                                                                                           |
 | textFontSize                   | number        | Font size of the dataPointText                                                                                                       |
+| spacing                        | number        | Distance between 2 consecutive points in the Line chart                                                                              |
 | dataPointHeight                | number        | Height of the data point (when data point's shape is rectangular)                                                                    |
 | dataPointWidth                 | number        | Width of the data point (when data point's shape is rectangular)                                                                     |
 | dataPointRadius                | number        | Radius of the data point (when data points' shape is circular)                                                                       |
@@ -381,6 +382,7 @@ type secondaryLineConfigType = {
   textColor?: string;
   showArrow?: boolean;
   arrowConfig?: arrowConfigType;
+  spacing?: number;
 };
 ```
 
@@ -414,6 +416,11 @@ All the properties of **secondaryLineConfig** are optional. Properties not provi
 | thickness3             | number             | Thickness of the lines joining the third set of data points                                                 | thickness (from props)       |
 | thickness4             | number             | Thickness of the lines joining the fourth set of data points                                                | thickness (from props)       |
 | thickness5             | number             | Thickness of the lines joining the fifth set of data points                                                 | thickness (from props)       |
+| spacing1               | number             | Distance between 2 consecutive points in the first line                                                     | spacing (from props)         |
+| spacing2               | number             | Distance between 2 consecutive points in the second line                                                    | spacing (from props)         |
+| spacing3               | number             | Distance between 2 consecutive points in the third line                                                     | spacing (from props)         |
+| spacing4               | number             | Distance between 2 consecutive points in the fourth line                                                    | spacing (from props)         |
+| spacing5               | number             | Distance between 2 consecutive points in the fifth line                                                     | spacing (from props)         |
 | zIndex1                | number             | zIndex of the lines joining the first set of data points                                                    | 0                            |
 | zIndex2                | number             | zIndex of the lines joining the second set of data points                                                   | 0                            |
 | zIndex3                | number             | zIndex of the lines joining the third set of data points                                                    | 0                            |
@@ -750,9 +757,10 @@ When using pointers with dataSet, you can set pointer colors on each data line u
 
 `dynamicLegendComponent` is a property inside the **pointerConfig** prop, very similar to `pointerLabelComponent`, the only difference is that it is stationary whereas _pointerLabelComponent_ moves as the pointer moves. You can set the position of the `dynamicLegendComponent` using the **`dynamicLegendContainerStyle`** property in the _pointerConfig_ <br /> <br />
 You are supposed to assign a callback function to `dynamicLegendComponent`. The callback function receives 2 parameters-
+
 1. Array of currently selected items (in case you are rendering a single line, the array will have a single item)
 2. Index of the selected item.
-<br />
+   <br />
 
 **Note:** The legend component appears only as long as the pointer remains remains on the screen. To make the dynamic legend remain persistently on the screen, you can set the `persistPointer` property to true. The `initialPointerIndex` property can also be useful.
 

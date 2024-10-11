@@ -1,3 +1,22 @@
+# 🎉 1.4.42
+
+## ✨ Features added-
+
+1. Added support for different spacing for each line in Line?Area charts. Added the props `spacing1`, `spacing2`, `spacing3`... See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/858
+2. Added support for different spacing for each data point in a line in Line/Area charts. Added the `spacing` property inside the objects of the `data` and `dataSet` arrays.
+3. Added the tooltip feature in Pie/Donut charts using the `showTooltip` prop.
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- "yAxisOffset does not work with stackData". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/862
+2. Fixed the issue- `zIndex` not working for Lines/Curves of the Line/Area charts.
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.43
 
 1. Added `onLeftPress` and `onRightPress` props to Population charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/855

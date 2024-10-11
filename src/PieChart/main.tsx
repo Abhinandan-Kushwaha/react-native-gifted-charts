@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   GestureResponderEvent,
   TouchableWithoutFeedback,
   View,
+  Text,
+  TextStyle,
 } from 'react-native';
 import Svg, {
   Path,
@@ -41,6 +43,16 @@ export const PieChartMain = (props: PieChartMainProps) => {
     strokeWidth,
     strokeColor,
     innerRadius,
+    showTooltip,
+    tooltipWidth,
+    tooltipComponent,
+    tooltipVerticalShift,
+    tooltipHorizontalShift,
+    tooltipTextNoOfLines,
+    tooltipBackgroundColor,
+    tooltipBorderRadius,
+    tooltipSelectedIndex,
+    getTooltipText,
     showText,
     textColor,
     textSize,
@@ -51,7 +63,6 @@ export const PieChartMain = (props: PieChartMainProps) => {
     showValuesAsLabels,
     showGradient,
     gradientCenterColor,
-    toggleFocusOnPress,
     minShiftX,
     minShiftY,
     total,
@@ -59,7 +70,6 @@ export const PieChartMain = (props: PieChartMainProps) => {
     vertAdjustment,
     cx,
     cy,
-    pData,
     mData,
     paddingHorizontal,
     paddingVertical,
@@ -68,16 +78,24 @@ export const PieChartMain = (props: PieChartMainProps) => {
     getExternaLabelProperties,
     coordinates,
     onPressed,
+    font,
+    fontWeight,
+    fontStyle,
   } = getPieChartMainProps(props);
 
   let prevSide = 'right';
   let prevLabelComponentX = 0;
   let wasFirstItemOnPole = false;
 
+  const [touchX, setTouchX] = useState(0);
+  const [touchY, setTouchY] = useState(0);
+
   const onPressHandler = (e: GestureResponderEvent) => {
     let {locationX: x, locationY: y} = e.nativeEvent;
     x -= extraRadius;
     y -= extraRadius;
+    setTouchX(x);
+    setTouchY(y);
     const r = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
     if (r > radius) return;
     const a = Math.atan2(y - cy, x - cx);
@@ -368,9 +386,9 @@ export const PieChartMain = (props: PieChartMainProps) => {
                         pieColors[(index + 2) % 9]
                       }
                       fontSize={item.textSize || textSize}
-                      fontFamily={item.font || props.font}
-                      fontWeight={item.fontWeight || props.fontWeight}
-                      fontStyle={item.fontStyle || props.fontStyle || 'normal'}
+                      fontFamily={item.font || font}
+                      fontWeight={item.fontWeight || fontWeight}
+                      fontStyle={item.fontStyle || fontStyle || 'normal'}
                       x={
                         x +
                         (item.shiftTextX || 0) -
@@ -423,6 +441,60 @@ export const PieChartMain = (props: PieChartMainProps) => {
               zIndex: -1,
             }}
           />
+        ) : null}
+        {showTooltip && tooltipSelectedIndex !== -1 ? (
+          <View
+            style={{
+              position: 'absolute',
+              left:
+                touchX > (radius + extraRadius) * 1.5
+                  ? props.tooltipHorizontalShift
+                    ? touchX - tooltipHorizontalShift
+                    : touchX -
+                      (tooltipWidth ??
+                        getTooltipText(tooltipSelectedIndex).length * 10)
+                  : touchX - tooltipHorizontalShift,
+              top:
+                touchY < 30
+                  ? props.tooltipVerticalShift
+                    ? touchY - tooltipVerticalShift
+                    : touchY
+                  : touchY - tooltipVerticalShift,
+            }}>
+            {data[tooltipSelectedIndex].tooltipComponent ? (
+              data[tooltipSelectedIndex].tooltipComponent?.()
+            ) : tooltipComponent ? (
+              tooltipComponent(tooltipSelectedIndex)
+            ) : (
+              <View
+                style={{
+                  backgroundColor: tooltipBackgroundColor,
+                  borderRadius: tooltipBorderRadius,
+                  paddingHorizontal: 8,
+                  paddingBottom: 8,
+                  paddingTop: 4,
+                  width: tooltipWidth,
+                }}>
+                <Text
+                  numberOfLines={tooltipTextNoOfLines}
+                  style={
+                    {
+                      color:
+                        data[tooltipSelectedIndex].textColor ||
+                        textColor ||
+                        'white',
+                      textAlign: 'center',
+                      fontSize: textSize,
+                      fontFamily: font,
+                      fontWeight,
+                      fontStyle,
+                    } as TextStyle
+                  }>
+                  {getTooltipText(tooltipSelectedIndex)}
+                </Text>
+              </View>
+            )}
+          </View>
         ) : null}
       </View>
     </TouchableWithoutFeedback>
