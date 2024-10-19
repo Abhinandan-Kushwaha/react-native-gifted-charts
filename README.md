@@ -50,7 +50,7 @@ See the **[release changes by version here.](release-notes/release-notes.md)**
   </tr>
   <tr>
   <td><img src='/demos/pyrLarge.png' alt='' height=280 width=260/></td>
-  <td><img src='/demos/popnPyramidLabelled.png' alt='' height=280 width=300/></td>
+  <td><img src='/demos/ppnLabelled.png' alt='' height=280 width=300/></td>
   </tr>
 </table>
 
