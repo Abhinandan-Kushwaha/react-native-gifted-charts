@@ -1,5 +1,15 @@
 # react-native-gifted-charts
-
+<p align="center">
+  <a href="https://gifted-charts.web.app">
+    <img src="/demos/favicon.png" height="auto" width="26" height="26" />
+  </a> &nbsp; &nbsp;
+  <a href="https://www.npmjs.com/package/react-native-gifted-charts">
+    <img src="/demos/npmIcon.png" height="auto" width="28" height="28" />
+  </a> &nbsp; &nbsp;
+  <a href="https://discord.gg/fnpcvzhe">
+    <img src="/demos/discord.png" height="auto" width="30" height="30" />
+  </a>
+</p>
 The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar and Population Pyramid charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
 
 ### Yet another chart library? Why?
