@@ -135,7 +135,7 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 
 Test strategy and cases are discussed here- [TESTS.md](./TESTS.md) <br />
 Pixel perfection is assured using [react-native-screenshot-test](https://www.npmjs.com/package/react-native-screenshot-test). <br/>
-200+ screenshot tests have been written. See the [Reports here](https://abhinandan-kushwaha.github.io/TestingCharts/ss-test/test.html).
+300+ screenshot tests have been written. See the [Reports here](https://abhinandan-kushwaha.github.io/TestingCharts/ss-test/test.html).
 
 Screenshot tests are written in a separate repo named [TestingCharts](https://github.com/Abhinandan-Kushwaha/TestingCharts)
 
