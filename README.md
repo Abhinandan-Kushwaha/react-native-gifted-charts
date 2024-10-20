@@ -49,8 +49,12 @@ See the **[release changes by version here.](release-notes/release-notes.md)**
     <td><img src='/demos/pielabbelled.svg' alt='' height=280 width=270/></td>
   </tr>
   <tr>
-  <td><img src='/demos/pyrLarge.png' alt='' height=280 width=260/></td>
-  <td><img src='/demos/ppnLabelled.png' alt='' height=280 width=300/></td>
+    <td><img src='/demos/pyrLarge.png' alt='' height=280 width=260/></td>
+    <td><img src='/demos/ppnLabelled.png' alt='' height=280 width=300/></td>
+  </tr>
+  <tr>
+    <td><img src='/demos/crossHair.gif' alt='' height=280 /></td>
+    <td><img src='/demos/pieExt.png' alt='' height=180 width=400 /></td>
   </tr>
 </table>
 
