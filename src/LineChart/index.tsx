@@ -504,12 +504,7 @@ export const LineChart = (props: LineChartPropsType) => {
 
   const svgWrapperViewStyle = {
     position: 'absolute',
-    bottom:
-      63 +
-      xAxisLabelsVerticalShift +
-      labelsExtraHeight -
-      xAxisThickness -
-      (props.overflowBottom ?? dataPointsRadius1),
+    bottom: 62 + xAxisLabelsVerticalShift + labelsExtraHeight - xAxisThickness,
     left: 0,
     zIndex: 1,
     transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
@@ -1069,9 +1064,13 @@ export const LineChart = (props: LineChartPropsType) => {
       isBarChart: false,
       pointerIndex,
       width: totalWidth,
-      screenWidth,
+      screenWidth:
+        props.width ??
+        Math.min(totalWidth, props.parentWidth ?? screenWidth) -
+          yAxisLabelWidth,
       hasDataSet: !!dataSet,
       containsNegative: mostNegativeValue < 0,
+      horizontalStripConfig: pointerConfig?.horizontalStripConfig,
     });
   };
 

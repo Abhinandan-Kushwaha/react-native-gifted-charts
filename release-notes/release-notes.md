@@ -1,4 +1,23 @@
-# 🎉 1.4.42
+# 🎉 1.4.45
+
+## ✨ Features added-
+
+1. Added the property `horizontalStripConfig` inside the `pointerConfig` to create **crosshair** effect.
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- "PieChart is not displayed if there is a huge difference between several values". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/874
+2. Fixed the issue- "App crashes when extrapolateMissingValue is set to false and only the last value is defined". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/871
+3. Fixed the issue- Population pyramid chart with a mid axis has misaligned X-axis labels.
+4. Fixed the issue- Line chart's line is misaligned if dataPointsRadius is large.
+
+---
+
+---
+
+---
+
+# 🎉 1.4.44
 
 ## ✨ Features added-
 
