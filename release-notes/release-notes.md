@@ -1,3 +1,13 @@
+## 🎉 1.4.46
+
+Added the prop named `stripOverDataPoints` to Line charts. If set true, the vertical strip appears over the data points, else it appears beneath the data points. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/877
+
+---
+
+---
+
+---
+
 # 🎉 1.4.45
 
 ## ✨ Features added-

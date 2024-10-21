@@ -45,18 +45,14 @@ See the **[release changes by version here.](release-notes/release-notes.md)**
   </tr>
   
   <tr>
+    <td><img src='/demos/crossHair.gif' alt='' height=280 /></td>
     <td><img src='/demos/movingBars.gif' alt='' width=270 height=300/></td>
-    <td><img src='/demos/pielabbelled.svg' alt='' height=280 width=270/></td>
-  </tr>
   <tr>
     <td><img src='/demos/pyrLarge.png' alt='' height=280 width=260/></td>
     <td><img src='/demos/ppnLabelled.png' alt='' height=280 width=300/></td>
   </tr>
-  <tr>
-    <td><img src='/demos/crossHair.gif' alt='' height=280 /></td>
-    <td><img src='/demos/pieExt.png' alt='' height=180 width=400 /></td>
-  </tr>
 </table>
+<img src='/demos/pieExt.png' alt='' height=280 />
 
 ---
 
@@ -139,7 +135,7 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 
 Test strategy and cases are discussed here- [TESTS.md](./TESTS.md) <br />
 Pixel perfection is assured using [react-native-screenshot-test](https://www.npmjs.com/package/react-native-screenshot-test). <br/>
-300+ screenshot tests have been written. See the [Reports here](https://abhinandan-kushwaha.github.io/TestingCharts/ss-test/test.html).
+220+ screenshot tests have been written. See the [Reports here](https://abhinandan-kushwaha.github.io/TestingCharts/ss-test/test.html).
 
 Screenshot tests are written in a separate repo named [TestingCharts](https://github.com/Abhinandan-Kushwaha/TestingCharts)
 
