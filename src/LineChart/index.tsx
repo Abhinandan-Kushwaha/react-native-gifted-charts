@@ -304,6 +304,7 @@ export const LineChart = (props: LineChartPropsType) => {
     focusEnabled,
     showDataPointOnFocus,
     showStripOnFocus,
+    stripOverDataPoints,
     showTextOnFocus,
     showDataPointLabelOnFocus,
     stripHeight,
@@ -620,6 +621,7 @@ export const LineChart = (props: LineChartPropsType) => {
     isSecondary: any,
     showValuesAsDataPointsText: any,
     spacingArray: number[],
+    key: number,
   ) => {
     const getYOrSecondaryY = isSecondary ? getSecondaryY : getY;
     return dataForRender.map((item: lineDataItem, index: number) => {
@@ -686,26 +688,7 @@ export const LineChart = (props: LineChartPropsType) => {
       if (showValuesAsDataPointsText) {
         text = originalDataFromProps[index].value;
       }
-
-      const currentStripHeight = item.stripHeight ?? stripHeight;
-      const currentStripWidth = item.stripWidth ?? stripWidth;
-      const currentStripOpacity = item.stripOpacity ?? stripOpacity;
-      const currentStripStrokeDashArray =
-        item.stripStrokeDashArray ?? stripStrokeDashArray ?? '';
-      const currentStripColor = item.stripColor || stripColor;
       const position = I18nManager.isRTL ? 'right' : 'left';
-
-      const y1 = currentStripHeight
-        ? containerHeight - currentStripHeight + 8
-        : containerHeight -
-          dataPointsHeight / 2 +
-          14 -
-          (item.value * containerHeight) / maxValue;
-
-      const actualStripHeight =
-        currentStripHeight ||
-        (item.value * containerHeight) / maxValue - 2 + overflowTop;
-
       return (
         <Fragment key={index}>
           {focusEnabled ? (
@@ -734,19 +717,7 @@ export const LineChart = (props: LineChartPropsType) => {
               )}
             </>
           ) : null}
-          {item.showStrip ||
-          (focusEnabled && index === selectedIndex && showStripOnFocus) ? (
-            <Line
-              x1={initialSpacing + spacing * index - currentStripWidth / 2 - 1}
-              y1={y1}
-              x2={initialSpacing + spacing * index - currentStripWidth / 2 - 1}
-              y2={y1 + actualStripHeight}
-              strokeWidth={currentStripWidth}
-              stroke={currentStripColor}
-              strokeDasharray={currentStripStrokeDashArray}
-              opacity={currentStripOpacity}
-            />
-          ) : null}
+          {renderStrips(item, index, key)}
           {hideDataPoints ? null : (
             <>
               {customDataPoint ? (
@@ -1341,6 +1312,7 @@ export const LineChart = (props: LineChartPropsType) => {
           isSecondary,
           showValuesAsDataPointsText,
           spacingArray,
+          key,
         )}
         {showArrow && (
           <Path
@@ -1750,9 +1722,80 @@ export const LineChart = (props: LineChartPropsType) => {
     },
   };
 
+  const renderStrips = (item: lineDataItem, index: number, ind: number) => {
+    if (item.showStrip || index === selectedIndex) {
+      const currentStripHeight = item.stripHeight ?? stripHeight;
+      const currentStripWidth = item.stripWidth ?? stripWidth;
+      const currentStripOpacity = item.stripOpacity ?? stripOpacity;
+      const currentStripStrokeDashArray =
+        item.stripStrokeDashArray ?? stripStrokeDashArray ?? '';
+      const currentStripColor = item.stripColor || stripColor;
+
+      const y1 = currentStripHeight
+        ? containerHeight - currentStripHeight + 8
+        : containerHeight -
+          (item.dataPointHeight ?? dataPointsHeight1) / 2 +
+          14 -
+          (item.value * containerHeight) / maxValue;
+
+      const actualStripHeight =
+        currentStripHeight ||
+        (item.value * containerHeight) / maxValue - 2 + overflowTop;
+      return (
+        <Line
+          key={'strip' + (ind * 10000 + index)}
+          x1={initialSpacing + spacing * index - currentStripWidth / 2 - 1}
+          y1={y1}
+          x2={initialSpacing + spacing * index - currentStripWidth / 2 - 1}
+          y2={y1 + actualStripHeight}
+          strokeWidth={currentStripWidth}
+          stroke={currentStripColor}
+          strokeDasharray={currentStripStrokeDashArray}
+          opacity={currentStripOpacity}
+        />
+      );
+    }
+    return null;
+  };
+
   const renderChartContent = (containerHeightIncludingBelowXAxis: number) => {
     return (
       <>
+        {focusEnabled && showStripOnFocus && selectedIndex !== -1 ? ( // render focus strips separately (so that it's rendered below the data points unless specified otherwise)
+          <View
+            pointerEvents="none"
+            style={[
+              svgWrapperViewStyle as ViewStyle,
+              {
+                width: totalWidth,
+                height: containerHeightIncludingBelowXAxis,
+                zIndex: stripOverDataPoints ? 10000 : -1,
+              },
+            ]}>
+            <Svg
+              height={
+                containerHeightIncludingBelowXAxis +
+                (props.overflowBottom ?? dataPointsRadius1)
+              }>
+              {dataSet && pointsFromSet.length
+                ? dataSet.map((set, ind) => {
+                    return set.data.map((item, index) =>
+                      renderStrips(item, index, ind),
+                    );
+                  })
+                : props.data?.map((item, index) =>
+                    renderStrips(item, index, 0),
+                  )}
+              {props.data2?.map((item, index) => renderStrips(item, index, 1))}
+              {props.data3?.map((item, index) => renderStrips(item, index, 2))}
+              {props.data4?.map((item, index) => renderStrips(item, index, 3))}
+              {props.data5?.map((item, index) => renderStrips(item, index, 4))}
+              {props.secondaryData?.map((item, index) =>
+                renderStrips(item, index, 5),
+              )}
+            </Svg>
+          </View>
+        ) : null}
         {dataSet
           ? pointsFromSet.length
             ? dataSet.map((set, index) => {
