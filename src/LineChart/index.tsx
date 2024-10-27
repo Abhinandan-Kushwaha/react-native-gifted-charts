@@ -300,6 +300,7 @@ export const LineChart = (props: LineChartPropsType) => {
     cumulativeSpacingSecondary,
     cumulativeSpacingForSet,
     hideSecondaryPointer,
+    hidePointerDataPointForMissingValues,
     pointerEvents,
     focusEnabled,
     showDataPointOnFocus,
@@ -322,6 +323,7 @@ export const LineChart = (props: LineChartPropsType) => {
     barAndLineChartsWrapperProps,
     areaChart,
     mostNegativeValue,
+    strips,
   } = useLineChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -717,7 +719,7 @@ export const LineChart = (props: LineChartPropsType) => {
               )}
             </>
           ) : null}
-          {renderStrips(item, index, key)}
+          {/* {renderStrips(item, index, key)} // handled with strips coming from geifted-charts-core */}
           {hideDataPoints ? null : (
             <>
               {customDataPoint ? (
@@ -893,6 +895,11 @@ export const LineChart = (props: LineChartPropsType) => {
         const pIndex = barAndLineChartsWrapperProps.pointerIndex;
         pointerItemLocal = set.data[pIndex];
         if (set.hidePointers || pointerItemLocal?.hidePointer) return null;
+        if (
+          hidePointerDataPointForMissingValues &&
+          typeof pointerItemLocal.value !== 'number'
+        )
+          return null;
         pointerYLocal = pointerYsForDataSet[index];
         pointerColorLocal =
           pointerConfig?.pointerColorsForDataSet?.[index] ?? pointerColor;
@@ -955,6 +962,11 @@ export const LineChart = (props: LineChartPropsType) => {
         break;
     }
     if (!pointerYLocal) return;
+    if (
+      hidePointerDataPointForMissingValues &&
+      typeof props.data?.[pointerIndex]?.value !== 'number'
+    )
+      return null;
 
     return Pointer({
       pointerX,
@@ -1004,6 +1016,12 @@ export const LineChart = (props: LineChartPropsType) => {
       });
     }
     pointerYLocal = Math.min(...arr);
+
+    if (
+      pointerConfig?.hidePointerForMissingValues &&
+      typeof pointerItemLocal[0].value !== 'number'
+    )
+      return null;
 
     return StripAndLabel({
       autoAdjustPointerLabelPosition,
@@ -1744,10 +1762,10 @@ export const LineChart = (props: LineChartPropsType) => {
       return (
         <Line
           key={'strip' + (ind * 10000 + index)}
-          x1={initialSpacing + spacing * index - currentStripWidth / 2 - 1}
+          x1={initialSpacing + spacing * index}
           y1={y1}
-          x2={initialSpacing + spacing * index - currentStripWidth / 2 - 1}
-          y2={y1 + actualStripHeight}
+          x2={initialSpacing + spacing * index}
+          y2={y1 + actualStripHeight + 2}
           strokeWidth={currentStripWidth}
           stroke={currentStripColor}
           strokeDasharray={currentStripStrokeDashArray}
@@ -1761,7 +1779,8 @@ export const LineChart = (props: LineChartPropsType) => {
   const renderChartContent = (containerHeightIncludingBelowXAxis: number) => {
     return (
       <>
-        {focusEnabled && showStripOnFocus && selectedIndex !== -1 ? ( // render focus strips separately (so that it's rendered below the data points unless specified otherwise)
+        {Object.keys(strips).length > 0 ||
+        (focusEnabled && showStripOnFocus && selectedIndex !== -1) ? ( // render focus strips separately (so that it's rendered below the data points unless specified otherwise)
           <View
             pointerEvents="none"
             style={[
@@ -1777,22 +1796,40 @@ export const LineChart = (props: LineChartPropsType) => {
                 containerHeightIncludingBelowXAxis +
                 (props.overflowBottom ?? dataPointsRadius1)
               }>
-              {dataSet && pointsFromSet.length
-                ? dataSet.map((set, ind) => {
-                    return set.data.map((item, index) =>
-                      renderStrips(item, index, ind),
-                    );
-                  })
-                : props.data?.map((item, index) =>
-                    renderStrips(item, index, 0),
+              {Object.keys(strips).map((stripKey: any) => {
+                return Object.keys(strips[stripKey]).map((ind: any) => {
+                  const {item, index, key} = strips[stripKey][ind];
+                  return renderStrips(item, index, key);
+                });
+              })}
+              {focusEnabled && showStripOnFocus && selectedIndex !== -1 ? (
+                <>
+                  {dataSet && pointsFromSet.length
+                    ? dataSet.map((set, ind) => {
+                        return set.data.map((item, index) =>
+                          renderStrips(item, index, ind),
+                        );
+                      })
+                    : props.data?.map((item, index) =>
+                        renderStrips(item, index, 0),
+                      )}
+                  {props.data2?.map((item, index) =>
+                    renderStrips(item, index, 1),
                   )}
-              {props.data2?.map((item, index) => renderStrips(item, index, 1))}
-              {props.data3?.map((item, index) => renderStrips(item, index, 2))}
-              {props.data4?.map((item, index) => renderStrips(item, index, 3))}
-              {props.data5?.map((item, index) => renderStrips(item, index, 4))}
-              {props.secondaryData?.map((item, index) =>
-                renderStrips(item, index, 5),
-              )}
+                  {props.data3?.map((item, index) =>
+                    renderStrips(item, index, 2),
+                  )}
+                  {props.data4?.map((item, index) =>
+                    renderStrips(item, index, 3),
+                  )}
+                  {props.data5?.map((item, index) =>
+                    renderStrips(item, index, 4),
+                  )}
+                  {props.secondaryData?.map((item, index) =>
+                    renderStrips(item, index, 5),
+                  )}
+                </>
+              ) : null}
             </Svg>
           </View>
         ) : null}
