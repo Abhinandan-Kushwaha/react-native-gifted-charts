@@ -720,20 +720,22 @@ type Pointer = {
   dynamicLegendComponent?: Function; // default null
   dynamicLegendContainerStyle?: Style object; // default null
   horizontalStripConfig?: HorizontalStripConfig; // config for horizontal strip used for crosshair
+  hidePointerForMissingValues?: boolean; // false
+  hidePointerDataPointForMissingValues?: boolean; // unless explicitly specified, takes the value of hidePointerForMissingValues
 };
 ```
 
 ```ts
 type HorizontalStripConfig = {
-  thickness?: number // default: pointerStripWidth
-  length?: number // default: width of the chart
-  color?: ColorValue // default: pointerStripColor
-  strokeDashArray?: number[] // default: pointerConfig.strokeDashArray
-  horizontalStripUptoDataPoint?: boolean // default: false
-  labelComponent?: Function // default: null
-  labelComponentHeight?: number // default: 30
-  labelComponentWidth?: number
-}
+  thickness?: number; // default: pointerStripWidth
+  length?: number; // default: width of the chart
+  color?: ColorValue; // default: pointerStripColor
+  strokeDashArray?: number[]; // default: pointerConfig.strokeDashArray
+  horizontalStripUptoDataPoint?: boolean; // default: false
+  labelComponent?: Function; // default: null
+  labelComponentHeight?: number; // default: 30
+  labelComponentWidth?: number;
+};
 ```
 
 The above properties can be understood with this labelled diagram-

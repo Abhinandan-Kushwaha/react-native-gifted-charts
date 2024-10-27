@@ -1,3 +1,19 @@
+# 🎉 1.4.47
+
+## ✨ Features added-
+
+1. Added the properties `hidePointerForMissingValues` and `hidePointerDataPointForMissingValues` to the **PointerConfig** object. In case there are data items with missing/undefined/null values the library interpolates those values. But if you don't want the pointer to be displayed for such values, you can set the `hidePointerForMissingValues` property to true. Its default value is false. When `hidePointerForMissingValues` is set to true, `hidePointerDataPointForMissingValues` automatically becomes true, unless otherwise specified. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/881
+
+## 🐛 Bug fixes
+
+1. The vertical strips shown by using the `showStrip` property were always shown over the data points, but now they will be shown beneath the data points. This behaviour can be reversed by using the `showStripOnFocus` prop.
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.46
 
 Added the prop named `stripOverDataPoints` to Line charts. If set true, the vertical strip appears over the data points, else it appears beneath the data points. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/877
