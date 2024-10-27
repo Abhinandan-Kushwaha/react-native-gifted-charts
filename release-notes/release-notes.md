@@ -6,7 +6,7 @@
 
 ## 🐛 Bug fixes
 
-1. The vertical strips shown by using the `showStrip` property were always shown over the data points, but now they will be shown beneath the data points. This behaviour can be reversed by using the `showStripOnFocus` prop.
+1. The vertical strips shown by using the `showStrip` property were always shown over the data points, but now they will be shown beneath the data points. This behaviour can be reversed by using the `stripOverDataPoints` prop.
 
 ---
 
