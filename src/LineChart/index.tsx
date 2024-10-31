@@ -1537,7 +1537,7 @@ export const LineChart = (props: LineChartPropsType) => {
         onResponderEnd={evt => {
           // console.log('evt...end.......',evt);
           setResponderStartTime(0);
-          // setPointerIndex(-1);
+          setPointerIndex(-1);
           setResponderActive(false);
           if (!persistPointer)
             setTimeout(() => setPointerX(0), pointerVanishDelay);
@@ -1669,7 +1669,7 @@ export const LineChart = (props: LineChartPropsType) => {
         onResponderEnd={evt => {
           // console.log('evt...end.......',evt);
           setResponderStartTime(0);
-          // setPointerIndex(-1);
+          setPointerIndex(-1);
           setResponderActive(false);
           if (!persistPointer)
             setTimeout(() => setPointerX(0), pointerVanishDelay);
