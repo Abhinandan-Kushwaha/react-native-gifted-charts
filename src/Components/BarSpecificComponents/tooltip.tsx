@@ -48,8 +48,7 @@ const Tooltip = (props: TooltipProps) => {
       onLayout={event => {
         if (!autoCenterTooltip) return;
         const {width} = event.nativeEvent.layout;
-        const shift = (width - barWidth) / 2;
-        if (shift > 0) setLeftShiftTooltipForCentering(shift);
+        setLeftShiftTooltipForCentering((width - barWidth) / 2);
       }}>
       {renderTooltip?.(item, index)}
     </View>
