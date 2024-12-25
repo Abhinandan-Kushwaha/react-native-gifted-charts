@@ -22,7 +22,6 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
     animationDuration,
     noGradient,
     noAnimation,
-    barMarginBottom,
     barInnerComponent,
     intactTopLabel,
     showValuesAsTopLabel,
@@ -77,19 +76,17 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
             bottom: 0,
             width: barWidth,
             overflow: 'hidden',
-            height:
-              (noAnimation
-                ? Math.max(props.minHeight, Math.abs(height))
-                : height) - (barMarginBottom || 0),
+            height: noAnimation
+              ? Math.max(props.minHeight, Math.abs(height))
+              : height,
           }}>
           <View
             style={[
               {
                 width: '100%',
-                height:
-                  (noAnimation
-                    ? Math.max(props.minHeight, Math.abs(height))
-                    : height) - (barMarginBottom || 0),
+                height: noAnimation
+                  ? Math.max(props.minHeight, Math.abs(height))
+                  : height,
               },
               item.barStyle || barStyle,
             ]}>

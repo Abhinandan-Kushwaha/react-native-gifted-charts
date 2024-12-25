@@ -1,3 +1,52 @@
+# 🎉 1.4.48
+
+## ✨ Features added-
+
+1. Added support for `barMarginBottom` to stacked bar charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/126#issuecomment-2475778997
+2. Added the prop `customBackground` to Bar, Line, Area charts. `customBackground` is an object with following keys (All of which are optional). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/790
+
+#### CustomBackground
+
+```ts
+type CustomBackground = {
+  color?: ColorValue
+  component?: Function
+  horizontalShift?: number
+  verticalShift?: number
+  height?: number
+  width?: number
+  widthAdjustment?: number
+}
+```
+
+3. Added the props- `focusTogether` and `focusProximity` to Line and Area charts to control the focus behaviour. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/910 
+4. BarChart lineConfig with strokeDashArray support. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/927
+5. Added the property `resetPointerIndexOnRelease` inside `pointerConfig` to set pointerIndex to -1 upon releasing the pointer. Default value is `false`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/854
+6. Added the property `activatePointersInstantlyOnTouch` inside `pointerConfig` whose default value is `true`. When set to false, the pointer will be activated not instantly after touch, but on dragging after touch. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/934
+
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- `barMarginBottom` not working for Bar charts.
+2. Fixed issue with X-axis label position in stacked bar charts with negative values.
+3. Some fix about vertical lines in Line charts.
+4. Fixed the issue- "LineChart - Strip and Points not showing beyond x index 0 for DataSet". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/911
+5. Fixed the issue- "hidePointer doesn't work". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/932
+6. Fixed the issue- "Custom Data Point in wrong position with non-uniform spacing on data in LineChart" Seehttps://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/923
+7. Fixed the issue- "extrapolateMissingValues not working with dataSet". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/916
+8. Fixed the issue- "The first property setting of BarChart/LineChart RulesConfigArray does not take effect". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/893
+9. Fixed the issue- "areaChart2, areaChart3, areaChart4... props not working". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/892
+10. Fixed the issue- "overflowTop parameter behaviour & verticalLinesHeight". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/884
+11. Fixed the issue- "Text formatting for labels not working for the focused Pie". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/886
+12. Fixed the issue- "PieChart focused Pie label styling does not work properly". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/886
+13. Fixed the issue- "Custom data points are not shown on web". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/889
+
+---
+
+---
+
+---
+
 # 🎉 1.4.47
 
 ## ✨ Features added-

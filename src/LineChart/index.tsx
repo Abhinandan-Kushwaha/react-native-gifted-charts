@@ -1,4 +1,11 @@
-import {Fragment, useCallback, useEffect, useMemo, useRef} from 'react';
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   View,
   Animated,
@@ -21,6 +28,7 @@ import Svg, {
   Line,
   ClipPath,
   Use,
+  ForeignObject,
 } from 'react-native-svg';
 import {
   getSegmentedPathObjects,
@@ -284,8 +292,10 @@ export const LineChart = (props: LineChartPropsType) => {
     autoAdjustPointerLabelPosition,
     pointerVanishDelay,
     activatePointersOnLongPress,
+    activatePointersInstantlyOnTouch,
     activatePointersDelay,
     persistPointer,
+    resetPointerIndexOnRelease,
     hidePointers,
     hidePointer1,
     hidePointer2,
@@ -324,10 +334,17 @@ export const LineChart = (props: LineChartPropsType) => {
     areaChart,
     mostNegativeValue,
     strips,
+    lastLineNumber,
+    focusTogether,
+    focusProximity,
   } = useLineChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
   });
+
+  const svgHeight =
+    containerHeightIncludingBelowXAxis +
+    (props.overflowBottom ?? dataPointsRadius1);
 
   const {secondaryXAxis, intersectionAreaConfig} = props;
 
@@ -507,7 +524,7 @@ export const LineChart = (props: LineChartPropsType) => {
 
   const svgWrapperViewStyle = {
     position: 'absolute',
-    bottom: 62 + xAxisLabelsVerticalShift + labelsExtraHeight - xAxisThickness,
+    bottom: 61 + xAxisLabelsVerticalShift + labelsExtraHeight - xAxisThickness,
     left: 0,
     zIndex: 1,
     transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
@@ -607,6 +624,8 @@ export const LineChart = (props: LineChartPropsType) => {
     }
   };
 
+  const [selectedLineNumber, setSelectedLineNumber] = useState(-1);
+
   const renderDataPoints = (
     hideDataPoints: any,
     dataForRender: any,
@@ -639,7 +658,10 @@ export const LineChart = (props: LineChartPropsType) => {
         text,
         customDataPoint,
         dataPointLabelComponent;
-      if (index === selectedIndex) {
+      if (
+        index === selectedIndex &&
+        (focusTogether || key === selectedLineNumber)
+      ) {
         dataPointsShape =
           item.focusedDataPointShape ||
           props.focusedDataPointShape ||
@@ -693,11 +715,153 @@ export const LineChart = (props: LineChartPropsType) => {
       const position = I18nManager.isRTL ? 'right' : 'left';
       return (
         <Fragment key={index}>
-          {focusEnabled ? (
+          {focusEnabled ||
+          (pointerConfig && activatePointersInstantlyOnTouch) ? (
             <>
-              {unFocusOnPressOut ? ( // remove strip on onFocus
+              {key === lastLineNumber - 1 ? (
                 <Rect
-                  onPressIn={() => onStripPress(item, index)}
+                  x={initialSpacing + (spacing * index - spacing / 2)}
+                  y={8}
+                  width={spacing}
+                  height={containerHeight - 0}
+                  fill={'none'}
+                  onPressIn={evt => {
+                    if (pointerConfig && activatePointersInstantlyOnTouch) {
+                      activatePointers(0, index);
+                    }
+                    if (focusEnabled) {
+                      const locationY = evt.nativeEvent.locationY; // Note that we have another property named pageY which can be useful
+                      let lineNumber = 0;
+                      if (dataSet) {
+                        let minDistance = Infinity;
+                        dataSet.forEach((setItem, setIndex) => {
+                          const distance = Math.abs(
+                            getY(setItem.data[index]?.value) - locationY,
+                          );
+                          if (distance < minDistance) {
+                            minDistance = distance;
+                            lineNumber = setIndex + 1;
+                          }
+                        });
+                      } else {
+                        let distance1,
+                          distance2,
+                          distance3,
+                          distance4,
+                          distance5,
+                          distance6;
+                        let minDistance = Infinity;
+                        if (typeof data[index]?.value === 'number') {
+                          distance1 = Math.abs(
+                            getY(data[index]?.value) - locationY,
+                          );
+                          minDistance = distance1;
+                          if (distance1 < focusProximity) lineNumber = 1;
+                        }
+
+                        if (typeof data2[index]?.value === 'number') {
+                          distance2 = Math.abs(
+                            getY(data2[index]?.value) - locationY,
+                          );
+                          if (
+                            minDistance > distance2 &&
+                            distance2 < focusProximity
+                          ) {
+                            minDistance = distance2;
+                            lineNumber = 2;
+                          }
+                        }
+
+                        if (typeof data3[index]?.value === 'number') {
+                          distance3 = Math.abs(
+                            getY(data3[index]?.value) - locationY,
+                          );
+                          if (
+                            minDistance > distance3 &&
+                            distance3 < focusProximity
+                          ) {
+                            minDistance = distance3;
+                            lineNumber = 3;
+                          }
+                        }
+
+                        if (typeof data4[index]?.value === 'number') {
+                          distance4 = Math.abs(
+                            getY(data4[index]?.value) - locationY,
+                          );
+                          if (
+                            minDistance > distance4 &&
+                            distance4 < focusProximity
+                          ) {
+                            minDistance = distance4;
+                            lineNumber = 4;
+                          }
+                        }
+
+                        if (typeof data5[index]?.value === 'number') {
+                          distance5 = Math.abs(
+                            getY(data5[index]?.value) - locationY,
+                          );
+                          if (
+                            minDistance > distance5 &&
+                            distance5 < focusProximity
+                          ) {
+                            minDistance = distance5;
+                            lineNumber = 5;
+                          }
+                        }
+
+                        if (typeof secondaryData[index]?.value === 'number') {
+                          distance6 = Math.abs(
+                            getY(secondaryData[index]?.value) - locationY,
+                          );
+                          if (
+                            minDistance > distance6 &&
+                            distance6 < focusProximity
+                          ) {
+                            minDistance = distance6;
+                            lineNumber = 6666;
+                          }
+                        }
+                      }
+
+                      setSelectedLineNumber(lineNumber - 1);
+
+                      if (lineNumber) {
+                        onStripPress(item, index);
+                      }
+                    }
+                  }}
+                  // This is to fix the blinking of pointer on "initial drag after press"
+                  // onResponderTerminationRequest={(evt)=>{
+                  //   setTerminationRequested(true)
+                  //   return true
+                  // }}
+                  onPressOut={() => {
+                    if (pointerConfig && activatePointersInstantlyOnTouch) {
+                      // if(terminationRequested) {
+                      //   setTerminationRequested(false) // This is to fix the blinking of pointer on "initial drag after press"
+                      //   return
+                      // }
+                      if (resetPointerIndexOnRelease) setPointerIndex(-1);
+                      if (!persistPointer)
+                        setTimeout(() => setPointerX(0), pointerVanishDelay);
+                    }
+                    if (focusEnabled && unFocusOnPressOut) {
+                      setTimeout(
+                        () => setSelectedIndex(-1),
+                        delayBeforeUnFocus,
+                      );
+                    }
+                  }}
+                />
+              ) : null}
+              {/* {unFocusOnPressOut ? ( // remove strip on onFocus
+                <Rect
+                  onPressIn={(evt) => {
+                    const locationY = evt.nativeEvent.locationY
+                    onStripPress(item, index)
+                  }}
                   onPressOut={() =>
                     setTimeout(() => setSelectedIndex(-1), delayBeforeUnFocus)
                   }
@@ -716,27 +880,24 @@ export const LineChart = (props: LineChartPropsType) => {
                   height={containerHeight}
                   fill={'none'}
                 />
-              )}
+              )} */}
             </>
           ) : null}
           {/* {renderStrips(item, index, key)} // handled with strips coming from geifted-charts-core */}
           {hideDataPoints ? null : (
             <>
               {customDataPoint ? (
-                <View
-                  style={[
-                    styles.customDataPointContainer,
-                    {
-                      height: dataPointsHeight,
-                      width: dataPointsWidth,
-                      top: getYOrSecondaryY(item.value),
-                      [position]:
-                        initialSpacing - dataPointsWidth + spacing * index,
-                      transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
-                    },
-                  ]}>
+                <ForeignObject
+                  height={svgHeight}
+                  width={totalWidth}
+                  x={
+                    initialSpacing -
+                    dataPointsWidth / 2 +
+                    (spacingArray[index - 1] ?? 0)
+                  }
+                  y={getYOrSecondaryY(item.value) - dataPointsHeight / 2}>
                   {customDataPoint(item, index)}
-                </View>
+                </ForeignObject>
               ) : null}
               {dataPointsShape === 'rectangular' ? (
                 <Fragment key={index}>
@@ -816,7 +977,8 @@ export const LineChart = (props: LineChartPropsType) => {
                       },
                     ]}>
                     {showDataPointLabelOnFocus
-                      ? index === selectedIndex
+                      ? index === selectedIndex &&
+                        (focusTogether || key == selectedLineNumber)
                         ? dataPointLabelComponent()
                         : null
                       : dataPointLabelComponent()}
@@ -864,10 +1026,14 @@ export const LineChart = (props: LineChartPropsType) => {
             y1={extendedContainerHeight}
             x2={x}
             y2={
-              (item.verticalLineUptoDataPoint ??
-              props.verticalLinesUptoDataPoint)
-                ? getY(item.value)
-                : -xAxisThickness
+              item.verticalLineHeight
+                ? extendedContainerHeight - item.verticalLineHeight
+                : props.verticalLinesHeight
+                  ? extendedContainerHeight - props.verticalLinesHeight
+                  : (item.verticalLineUptoDataPoint ??
+                      props.verticalLinesUptoDataPoint)
+                    ? getY(item.value)
+                    : -xAxisThickness
             }
             stroke={
               item.verticalLineColor || props.verticalLinesColor || 'lightgray'
@@ -924,8 +1090,8 @@ export const LineChart = (props: LineChartPropsType) => {
     if (lineNumber === 3 && hidePointer3) return;
     if (lineNumber === 4 && hidePointer4) return;
     if (lineNumber === 5 && hidePointer5) return;
-    // 6 is for secondaryData
-    if (lineNumber === 6 && hideSecondaryPointer) return;
+    // 6666 is for secondaryData
+    if (lineNumber === 6666 && hideSecondaryPointer) return;
 
     let pointerItemLocal, pointerYLocal, pointerColorLocal;
     switch (lineNumber) {
@@ -954,7 +1120,7 @@ export const LineChart = (props: LineChartPropsType) => {
         pointerYLocal = pointerY5;
         pointerColorLocal = pointerConfig?.pointer5Color || pointerColor;
         break;
-      case 6:
+      case 6666:
         pointerItemLocal = secondaryPointerItem;
         pointerYLocal = secondaryPointerY;
         pointerColorLocal =
@@ -1223,10 +1389,7 @@ export const LineChart = (props: LineChartPropsType) => {
     }
     return (
       <Svg
-        height={
-          containerHeightIncludingBelowXAxis +
-          (props.overflowBottom ?? dataPointsRadius1)
-        }
+        height={svgHeight}
         // width={widthValue}
         onPress={props.onBackgroundPress}>
         {lineGradient && getLineGradientComponent()}
@@ -1359,29 +1522,38 @@ export const LineChart = (props: LineChartPropsType) => {
   //   return i-1;
   // }
 
-  const activatePointers = (x: number) => {
-    let factor = (x - initialSpacing) / spacing; // getClosestValueFromSpacingArray(cumulativeSpacing1,x-initialSpacing)
-    factor = Math.round(factor);
-    factor = Math.min(factor, (data0 ?? data).length - 1);
-    factor = Math.max(factor, 0);
-    let z =
-      getX(cumulativeSpacing1, factor) -
-      (pointerRadius || pointerWidth / 2) -
-      1;
-    setPointerX(z);
-    setPointerIndex(factor);
+  const activatePointers = (x: number, index?: number) => {
+    let factor = index ?? -1;
+    if (typeof index !== 'number') {
+      factor = (x - initialSpacing) / spacing; // getClosestValueFromSpacingArray(cumulativeSpacing1,x-initialSpacing)
+      factor = Math.round(factor);
+      factor = Math.min(factor, (data0 ?? data).length - 1);
+      factor = index ?? Math.max(factor, 0);
+      // if(factor === pointerIndex) return; // This is to fix the blinking of pointer on "initial drag after press"
+    }
     let item, y;
     item = (data0 ?? data)[factor];
-    y =
-      containerHeight -
-      (item.value * containerHeight) / maxValue -
-      (pointerRadius || pointerHeight / 2) +
-      10;
-    setPointerY(y);
-    setPointerItem(item);
+    if (!item.hidePointer) {
+      let z =
+        getX(
+          dataSet?.length ? cumulativeSpacingForSet[0] : cumulativeSpacing1,
+          factor,
+        ) -
+        (pointerRadius || pointerWidth / 2) -
+        1;
+      setPointerX(z);
+      setPointerIndex(factor);
+      y =
+        containerHeight -
+        (item.value * containerHeight) / maxValue -
+        (pointerRadius || pointerHeight / 2) +
+        10;
+      setPointerY(y);
+      setPointerItem(item);
+    }
     if (data2 && data2.length) {
       item = data2[factor];
-      if (item) {
+      if (item && !item.hidePointer) {
         y =
           containerHeight -
           (item.value * containerHeight) / maxValue -
@@ -1393,7 +1565,7 @@ export const LineChart = (props: LineChartPropsType) => {
     }
     if (data3 && data3.length) {
       item = data3[factor];
-      if (item) {
+      if (item && !item.hidePointer) {
         y =
           containerHeight -
           (item.value * containerHeight) / maxValue -
@@ -1405,7 +1577,7 @@ export const LineChart = (props: LineChartPropsType) => {
     }
     if (data4 && data4.length) {
       item = data4[factor];
-      if (item) {
+      if (item && !item.hidePointer) {
         y =
           containerHeight -
           (item.value * containerHeight) / maxValue -
@@ -1417,7 +1589,7 @@ export const LineChart = (props: LineChartPropsType) => {
     }
     if (data5 && data5.length) {
       item = data5[factor];
-      if (item) {
+      if (item && !item.hidePointer) {
         y =
           containerHeight -
           (item.value * containerHeight) / maxValue -
@@ -1535,9 +1707,8 @@ export const LineChart = (props: LineChartPropsType) => {
         //   console.log('evt...reject.......',evt);
         // }}
         onResponderEnd={evt => {
-          // console.log('evt...end.......',evt);
           setResponderStartTime(0);
-          setPointerIndex(-1);
+          if (resetPointerIndexOnRelease) setPointerIndex(-1);
           setResponderActive(false);
           if (!persistPointer)
             setTimeout(() => setPointerX(0), pointerVanishDelay);
@@ -1669,7 +1840,7 @@ export const LineChart = (props: LineChartPropsType) => {
         onResponderEnd={evt => {
           // console.log('evt...end.......',evt);
           setResponderStartTime(0);
-          setPointerIndex(-1);
+          if (resetPointerIndexOnRelease) setPointerIndex(-1);
           setResponderActive(false);
           if (!persistPointer)
             setTimeout(() => setPointerX(0), pointerVanishDelay);
@@ -2015,7 +2186,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 true,
                 secondaryLineConfig.showValuesAsDataPointsText,
                 cumulativeSpacingSecondary,
-                6,
+                6666,
               )
             : renderLine(
                 containerHeightIncludingBelowXAxis,
@@ -2049,7 +2220,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 true,
                 secondaryLineConfig.showValuesAsDataPointsText,
                 cumulativeSpacingSecondary,
-                6,
+                6666,
               )
           : null}
         {points2
@@ -2367,7 +2538,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 {points3 ? renderPointer(3) : null}
                 {points4 ? renderPointer(4) : null}
                 {points5 ? renderPointer(5) : null}
-                {secondaryPoints ? renderPointer(6) : null}
+                {secondaryPoints ? renderPointer(6666) : null}
                 {stripOverPointer && renderStripAndLabel()}
               </>
             )}

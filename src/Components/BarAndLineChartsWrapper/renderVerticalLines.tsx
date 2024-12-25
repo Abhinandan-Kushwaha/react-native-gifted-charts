@@ -59,7 +59,7 @@ const RenderVerticalLines = (props: any) => {
     <View
       style={{
         position: 'absolute',
-        height: extendedContainerHeight,
+        height: containerHeightIncludingBelowXAxis,
         bottom: 60 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
         left: 0,
         width: totalWidth,
@@ -128,7 +128,7 @@ const RenderVerticalLines = (props: any) => {
                 heightAdjustmentDueToStrokeLinecap
               }
               x2={x}
-              y2={extendedContainerHeight - heightAdjustmentDueToStrokeLinecap}
+              y2={containerHeightIncludingBelowXAxis - heightAdjustmentDueToStrokeLinecap}
               stroke={verticalLinesColor || 'lightgray'}
               strokeWidth={verticalLinesThickness || 2}
               strokeDasharray={verticalLinesStrokeDashArray ?? ''}

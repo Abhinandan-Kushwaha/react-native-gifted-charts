@@ -127,19 +127,20 @@ export const PieChart = (props: PieChartPropsType) => {
               {...props}
               data={[
                 {
-                  value: props.data[selectedIndex].value,
-                  text: props.data[selectedIndex].text,
-                  color:
-                    props.data[selectedIndex].color ||
-                    pieColors[selectedIndex % 9],
-                  strokeColor:
-                    props.data[selectedIndex].strokeColor || undefined,
-                  strokeWidth:
-                    props.data[selectedIndex].strokeWidth || undefined,
-                  gradientCenterColor:
-                    props.data[selectedIndex].gradientCenterColor || undefined,
-                  shiftTextX: props.data[selectedIndex].shiftTextX || undefined,
-                  shiftTextY: props.data[selectedIndex].shiftTextY || undefined,
+                  ...props.data[selectedIndex],
+                  // value: props.data[selectedIndex].value,
+                  // text: props.data[selectedIndex].text,
+                  // color:
+                  //   props.data[selectedIndex].color ||
+                  //   pieColors[selectedIndex % 9],
+                  // strokeColor:
+                  //   props.data[selectedIndex].strokeColor || undefined,
+                  // strokeWidth:
+                  //   props.data[selectedIndex].strokeWidth || undefined,
+                  // gradientCenterColor:
+                  //   props.data[selectedIndex].gradientCenterColor || undefined,
+                  // shiftTextX: props.data[selectedIndex].shiftTextX || undefined,
+                  // shiftTextY: props.data[selectedIndex].shiftTextY || undefined,
                 },
                 {
                   value: total - props.data[selectedIndex].value,

@@ -26,6 +26,7 @@
 | adjustToWidth                 | boolean              | When set to true, it auto computes the spacing value to fit the Line chart in the available width                 | false                         |
 | backgroundColor               | ColorValue           | Background color of the Bar chart                                                                                 | \_                            |
 | sectionColors                 | ColorValue           | Background color of the horizontal sections of the chart                                                          | backgroundColor               |
+| customBackground              | CustomBackground     | An object used to set a custom background component (See the properties of this object below)                     | \_                            |
 | scrollref                     | any                  | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered               | React.useRef()                |
 | scrollToIndex                 | number               | scroll to a particular index on chart load                                                                        | \_                            |
 | disableScroll                 | boolean              | To disable horizontal scroll                                                                                      | false                         |
@@ -99,6 +100,20 @@ type DataSet = {
   isSecondary?: boolean;
   hidePointers?: boolean;
 };
+```
+
+#### CustomBackground
+
+```ts
+type CustomBackground = {
+  color?: ColorValue
+  component?: Function
+  horizontalShift?: number
+  verticalShift?: number
+  height?: number
+  width?: number
+  widthAdjustment?: number
+}
 ```
 
 **Alert!**\
@@ -666,6 +681,8 @@ The default value of `showArrowBase` is true. To fill the arrow with `fillColor`
 1. **item** (object in the data array at the index of the data point)
 2. **index** (index of the data point)
 
+**Note** When using `customDataPoint`, make sure to pass the custom point's height and using the props- `dataPointsHeight` and `dataPointsWidth`. Not passing these props might result in an improper alignment of the custom data points.
+
 ---
 
 ## pointerConfig
@@ -704,10 +721,12 @@ type Pointer = {
   autoAdjustPointerLabelPosition?: boolean; // default: false
   pointerVanishDelay?: number; // default: 150
   activatePointersOnLongPress?: boolean; // default: false
+  activatePointersInstantlyOnTouch?: boolean; // default: true
   activatePointersDelay?: number; // default: 150
   initialPointerIndex?: number; // default -1
   initialPointerAppearDelay?: number; // if isAnimated, then animationDuration, else 0
   persistPointer?: boolean; // false
+  resetPointerIndexOnRelease?: boolean; // false
   hidePointer1?: boolean; // default: false
   hidePointer2?: boolean; // default: false
   hidePointer3?: boolean; // default: false
@@ -812,6 +831,8 @@ To achieve this the `focusEnabled` props must be set to true. In addition, use b
 | focusedDataPointColor     | ColorValue    | Color of the data points when focused due to press event                                                                                      | item.dataPointsColor OR dataPointsColor   |
 | focusedDataPointRadius    | number        | Radius of the data points when focused due to press event                                                                                     | item.dataPointsRadius OR dataPointsRadius |
 | focusedCustomDataPoint    | Function      | Custom data point when focused due to press event                                                                                             | item.customDataPoint OR customDataPoint   |
+| focusTogether             | boolean       | In case of multi-line charts, Unless `focusTogether` is set to `false`, all the data points at the focused index get focused together         | true |
+| focusProximity            | number        | Sets the distance from a data point upto which a press event should result in focusing that data point                                        | Infinity |
 
 #### Example of onFocus :
 
@@ -820,6 +841,8 @@ onFocus={(item, index) => {
     Alert.alert(item.value)
 }}
 ```
+
+**Read more about `focus` here- [Focusing](../dev/LineChart//Focusing.md)**
 
 **_Note_** Some props have been renamed in version `1.3.2`
 Here is the list of prop names changed in version `1.3.2`-

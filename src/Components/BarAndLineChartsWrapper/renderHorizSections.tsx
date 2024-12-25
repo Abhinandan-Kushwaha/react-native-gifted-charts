@@ -63,6 +63,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
     onlyReferenceLines,
     renderReferenceLines,
     secondaryXAxis,
+    customBackground,
   } = props;
 
   const {
@@ -95,6 +96,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
 
   const renderAxesAndRules = (index: number) => {
     const invertedIndex = horizSections.length - index - 1;
+    const rulesConfigArrayLocal = rulesConfigArray[invertedIndex - 1];
     return (
       <View
         style={[
@@ -130,17 +132,15 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
           <Rule
             config={{
               thickness:
-                rulesConfigArray[invertedIndex]?.rulesThickness ??
-                rulesThickness,
-              color: rulesConfigArray[invertedIndex]?.rulesColor ?? rulesColor,
+                rulesConfigArrayLocal?.rulesThickness ?? rulesThickness,
+              color: rulesConfigArrayLocal?.rulesColor ?? rulesColor,
               width:
-                rulesConfigArray[invertedIndex]?.rulesLength ??
+                rulesConfigArrayLocal?.rulesLength ??
                 rulesLength ??
                 (props.width || totalWidth - spacing) + endSpacing,
-              dashWidth:
-                rulesConfigArray[invertedIndex]?.dashWidth ?? dashWidth,
-              dashGap: rulesConfigArray[invertedIndex]?.dashGap ?? dashGap,
-              type: rulesConfigArray[invertedIndex]?.rulesType ?? rulesType,
+              dashWidth: rulesConfigArrayLocal?.dashWidth ?? dashWidth,
+              dashGap: rulesConfigArrayLocal?.dashGap ?? dashGap,
+              type: rulesConfigArrayLocal?.rulesType ?? rulesType,
             }}
           />
         )}
@@ -457,6 +457,27 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
             marginTop: stepHeight / -2,
           }}>
           <View style={{width: (width ?? totalWidth) + endSpacing}}>
+            {customBackground ? (
+              <View
+                style={{
+                  position: 'absolute',
+                  backgroundColor: customBackground.color,
+                  width:
+                    customBackground.width ??
+                    (width ?? totalWidth) +
+                      endSpacing -
+                      9 +
+                      (customBackground.widthAdjustment ?? 0),
+                  height: customBackground.height ?? '100%',
+                  left:
+                    yAxisLabelWidth + (customBackground.horizontalShift ?? 0),
+                  top: customBackground.verticalShift ?? 0,
+                }}>
+                {customBackground.component
+                  ? customBackground.component()
+                  : null}
+              </View>
+            ) : null}
             {yAxisExtraHeightAtTop ? renderExtraHeightOfYAxisAtTop() : null}
             {horizSections.map((sectionItems, index) => {
               return (

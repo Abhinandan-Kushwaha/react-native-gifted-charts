@@ -55,6 +55,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     secondaryStepValue,
     secondaryNegativeStepHeight,
     secondaryNegativeStepValue,
+    barMarginBottom,
   } = props;
   const {
     containsNegativeValue,
@@ -96,8 +97,10 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
               spacing / 2,
             position: 'absolute',
             bottom: autoShiftLabelsForNegativeStacks
-              ? -6 - xAxisTextNumberOfLines * 18 + lowestBarPosition
-              : -labelsDistanceFromXaxis,
+              ? containsNegativeValue
+                ? -0
+                : -6 - xAxisTextNumberOfLines * 18
+              : -labelsDistanceFromXaxis - 6 - xAxisTextNumberOfLines * 18,
           },
           rotateLabel
             ? horizontal
@@ -142,6 +145,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
   };
 
   const static2DSimple = () => {
+    let remainingBarMarginBottom = barMarginBottom;
     return (
       <>
         <TouchableOpacity
@@ -195,14 +199,28 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
                 stackBorderBottomRightRadius ??
                 stackBorderRadius,
               overflow: lowestBarPosition ? 'visible' : 'hidden',
+              // bottom: barMarginBottom
             },
           ]}>
           {item.stacks.map((stackItem, index) => {
             const borderRadii = getStackBorderRadii(item, index);
-            const barHeight = getBarHeight(
-              stackItem.value,
-              stackItem.marginBottom,
+
+            // compute marginBottom here
+
+            let barHeight = getBarHeight(stackItem.value, 0);
+
+            const marginBottom = Math.max(
+              stackItem.marginBottom ?? 0,
+              remainingBarMarginBottom,
             );
+            const deductedMargin = Math.min(barHeight, marginBottom);
+
+            remainingBarMarginBottom = Math.max(
+              0,
+              remainingBarMarginBottom - deductedMargin,
+            );
+
+            barHeight -= deductedMargin;
 
             return (
               <TouchableOpacity
@@ -212,7 +230,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
                 disabled={disablePress || !stackItem.onPress}
                 style={{
                   position: 'absolute',
-                  bottom: getPosition(index) + (stackItem.marginBottom || 0),
+                  bottom: getPosition(index, barHeight) + deductedMargin,
                   width: '100%',
                   height: barHeight,
                   backgroundColor:

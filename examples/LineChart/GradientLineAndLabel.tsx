@@ -79,6 +79,8 @@ const GradientLineAndLabel = () => {
         customDataPoint={item => {
           return customDataPointComp(item.value);
         }}
+        dataPointsHeight={16}
+        dataPointsWidth={16}
       />
     </View>
   );

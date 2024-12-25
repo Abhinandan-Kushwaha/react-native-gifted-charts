@@ -380,7 +380,6 @@ export const BarChart = (props: BarChartPropsType) => {
           capColor={props.capColor}
           capRadius={props.capRadius}
           autoShiftLabels={autoShiftLabels}
-          barMarginBottom={props.barMarginBottom}
           barStyle={props.barStyle}
           {...getPropsCommonForBarAndStack(item, index)}
         />
