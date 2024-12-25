@@ -66,6 +66,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
     secondaryNegativeStepHeight,
     secondaryNegativeStepValue,
     secondaryNoOfSectionsBelowXAxis,
+    barMarginBottom = 0,
   } = props;
 
   const heightFactor = item.isSecondary
@@ -96,11 +97,6 @@ const RenderBars = (props: RenderBarsPropsType) => {
   const localBarInnerComponent = isFocused
     ? (focusedBarConfig?.barInnerComponent ?? itemOrPropsBarInnerComponent)
     : itemOrPropsBarInnerComponent;
-
-  const barMarginBottom =
-    item.barMarginBottom === 0
-      ? 0
-      : item.barMarginBottom || props.barMarginBottom || 0;
 
   const renderLabel = (
     top: boolean,
@@ -281,74 +277,74 @@ const RenderBars = (props: RenderBarsPropsType) => {
       (data[i].spacing ?? propSpacing) + (data[i].barWidth || barWidth);
   }
 
-  const static2DWithGradient = (item: barDataItem) => {
-    const localGradientColor =
-      item.gradientColor || props.gradientColor || 'white';
-    return (
-      <>
-        <LinearGradient
-          style={commonStyleForBar}
-          start={{x: 0, y: 0}}
-          end={{x: 0, y: 1}}
-          colors={[
-            isFocused
-              ? (focusedBarConfig?.gradientColor ?? localGradientColor)
-              : localGradientColor,
-            localFrontColor,
-          ]}>
-          {props.cappedBars && item.value ? (
-            <Cap
-              capThicknessFromItem={item.capThickness}
-              capThicknessFromProps={props.capThickness}
-              capColorFromItem={item.capColor}
-              capColorFromProps={props.capColor}
-              capRadiusFromItem={item.capRadius}
-              capRadiusFromProps={props.capRadius}
-            />
-          ) : null}
-        </LinearGradient>
-        {(item.barBackgroundPattern || props.barBackgroundPattern) && (
-          <BarBackgroundPattern
-            barBackgroundPatternFromItem={item.barBackgroundPattern}
-            barBackgroundPatternFromProps={props.barBackgroundPattern}
-            patternIdFromItem={item.patternId}
-            patternIdFromProps={props.patternId}
-          />
-        )}
-        {(item.topLabelComponent || showValuesAsTopLabel) && (
-          <View
-            style={[
-              {
-                position: 'absolute',
-                top: (item.barWidth || barWidth) * -1,
-                height: item.barWidth || barWidth,
-                width: item.barWidth || barWidth,
-                justifyContent:
-                  (horizontal && !intactTopLabel) || item.value < 0
-                    ? 'center'
-                    : 'flex-end',
-                alignItems: 'center',
-              },
-              item.value < 0 && {transform: [{rotate: '180deg'}]},
-              horizontal &&
-                !intactTopLabel && {transform: [{rotate: '270deg'}]},
-              topLabelContainerStyle ?? item.topLabelContainerStyle,
-            ]}>
-            {showValuesAsTopLabel ? (
-              <Text style={topLabelTextStyle}>{item.value + yAxisOffset}</Text>
-            ) : (
-              item.topLabelComponent?.()
-            )}
-          </View>
-        )}
-        {localBarInnerComponent ? (
-          <View style={{height: '100%', width: '100%'}}>
-            {localBarInnerComponent(item, index)}
-          </View>
-        ) : null}
-      </>
-    );
-  };
+  // const static2DWithGradient = (item: barDataItem) => {
+  //   const localGradientColor =
+  //     item.gradientColor || props.gradientColor || 'white';
+  //   return (
+  //     <>
+  //       <LinearGradient
+  //         style={commonStyleForBar}
+  //         start={{x: 0, y: 0}}
+  //         end={{x: 0, y: 1}}
+  //         colors={[
+  //           isFocused
+  //             ? (focusedBarConfig?.gradientColor ?? localGradientColor)
+  //             : localGradientColor,
+  //           localFrontColor,
+  //         ]}>
+  //         {props.cappedBars && item.value ? (
+  //           <Cap
+  //             capThicknessFromItem={item.capThickness}
+  //             capThicknessFromProps={props.capThickness}
+  //             capColorFromItem={item.capColor}
+  //             capColorFromProps={props.capColor}
+  //             capRadiusFromItem={item.capRadius}
+  //             capRadiusFromProps={props.capRadius}
+  //           />
+  //         ) : null}
+  //       </LinearGradient>
+  //       {(item.barBackgroundPattern || props.barBackgroundPattern) && (
+  //         <BarBackgroundPattern
+  //           barBackgroundPatternFromItem={item.barBackgroundPattern}
+  //           barBackgroundPatternFromProps={props.barBackgroundPattern}
+  //           patternIdFromItem={item.patternId}
+  //           patternIdFromProps={props.patternId}
+  //         />
+  //       )}
+  //       {(item.topLabelComponent || showValuesAsTopLabel) && (
+  //         <View
+  //           style={[
+  //             {
+  //               position: 'absolute',
+  //               top: (item.barWidth || barWidth) * -1,
+  //               height: item.barWidth || barWidth,
+  //               width: item.barWidth || barWidth,
+  //               justifyContent:
+  //                 (horizontal && !intactTopLabel) || item.value < 0
+  //                   ? 'center'
+  //                   : 'flex-end',
+  //               alignItems: 'center',
+  //             },
+  //             item.value < 0 && {transform: [{rotate: '180deg'}]},
+  //             horizontal &&
+  //               !intactTopLabel && {transform: [{rotate: '270deg'}]},
+  //             topLabelContainerStyle ?? item.topLabelContainerStyle,
+  //           ]}>
+  //           {showValuesAsTopLabel ? (
+  //             <Text style={topLabelTextStyle}>{item.value + yAxisOffset}</Text>
+  //           ) : (
+  //             item.topLabelComponent?.()
+  //           )}
+  //         </View>
+  //       )}
+  //       {localBarInnerComponent ? (
+  //         <View style={{height: '100%', width: '100%'}}>
+  //           {localBarInnerComponent(item, index)}
+  //         </View>
+  //       ) : null}
+  //     </>
+  //   );
+  // };
 
   const barWrapperStyle = [
     {
@@ -440,7 +436,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
           isAnimated ? (
             animated2DWithGradient(false, false)
           ) : (
-            static2DWithGradient(item)
+            animated2DWithGradient(false, true)
           )
         ) : isAnimated ? (
           animated2DWithGradient(true, false)

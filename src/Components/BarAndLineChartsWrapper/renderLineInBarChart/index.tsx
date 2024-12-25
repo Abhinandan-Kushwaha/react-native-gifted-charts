@@ -86,6 +86,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
             fill="none"
             stroke={lineConfig.color}
             strokeWidth={lineConfig.thickness}
+            strokeDasharray={lineConfig.strokeDashArray}
           />
 
           {renderSpecificVerticalLines(specificVerticalLinesProps)}
@@ -125,6 +126,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
             fill="none"
             stroke={lineConfig.color}
             strokeWidth={lineConfig.thickness}
+            strokeDasharray={lineConfig.strokeDashArray}
           />
           {renderSpecificVerticalLines(specificVerticalLinesProps)}
 

@@ -27,6 +27,7 @@
 | spacing                      | number               | Distance between 2 consecutive bars in the Bar chart                                                                                              | 20                  |
 | backgroundColor              | ColorValue           | Background color of the Bar chart                                                                                                                 | \_                  |
 | sectionColors                | ColorValue           | Background color of the horizontal sections of the chart                                                                                          | backgroundColor     |
+| customBackground             | CustomBackground     | An object used to set a custom background component (See the properties of this object below)                                                     | \_                  |
 | scrollref                    | any                  | ref object that can be used to control the horizontal ScrollView inside which the chart is rendered                                               | React.useRef()      |
 | scrollToIndex                | number               | scroll to a particular index on chart load                                                                                                        | \_                  |
 | disableScroll                | boolean              | To disable horizontal scroll                                                                                                                      | false               |
@@ -168,6 +169,20 @@ type FocusedBarConfig = {
   opacity?: number;
   barInnerComponent?: (item?: barDataItem, index?: number) => ReactNode;
 };
+```
+
+#### CustomBackground
+
+```ts
+type CustomBackground = {
+  color?: ColorValue
+  component?: Function
+  horizontalShift?: number
+  verticalShift?: number
+  height?: number
+  width?: number
+  widthAdjustment?: number
+}
 ```
 
 ---
