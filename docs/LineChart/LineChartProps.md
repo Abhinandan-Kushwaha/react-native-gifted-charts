@@ -768,7 +768,12 @@ The `strokeDashArray` property lets us render a dashed/dotted strip along the po
 
 #### pointerLabelComponent
 
-`pointerLabelComponent` is a function that returns the component to be rendered as a Label. It takes 3 parameters - 1. an array of items 2. secondaryDataItem 3. pointerIndex. So, if there are multiple data arrays, the parameter `items` will have the data item corresponding to each data array. If the chart has secondaryData, the parameter `secondaryDataItem` will have the corresponding item from the secondaryData.
+`pointerLabelComponent` is a function that returns the component to be rendered as a Label. It takes 3 parameters - 
+1. an array of items
+2. secondaryDataItem
+3. pointerIndex
+
+So, if there are multiple data arrays, the parameter `items` will have the data item corresponding to each data array. If the chart has secondaryData, the parameter `secondaryDataItem` will have the corresponding item from the secondaryData.
 
 **Note** If you have a Pressable / Touchable item in your `pointerLabelComponent`, then you should set `pointerEvents` to **'auto'** inside the pointerConfig object.
 
