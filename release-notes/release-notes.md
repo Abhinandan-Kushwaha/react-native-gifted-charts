@@ -1,3 +1,37 @@
+## 🎉 1.4.49
+
+### ✨ Features added-
+
+1. Added the prop `renderDataPointsAfterAnimationEnds` to Line/Area charts to render the data points after the animation has ended. This flag can be helpful if `onPress` does not work in case of multi-line animated charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/921
+
+### 🐛 Bug fixes
+
+1. Fixed the issue- "getPointerProps starts from 0 index, regardless of where you press and drag on the LineChart". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/937
+2. Fixed the issue- "Unable to use multi onPress in LineChart". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/921 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/570
+3. Fixed the issue- "LineChart 1st data point does not show pointer label if initialSpacing={0}". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/925
+
+## 🔨 Refactor
+
+Made the `value` property of data items optional for Bar and Line/Area charts. Added null safety types for internal calculations, while the `<BarChart>` and `<LineChart>` components exposed by the library will be capable of accepting null/undefined values as data items, internally it will be conerted to respective nullSafe type after handling the null values (by interpolatio or replacing with 0).
+Below are the exposed types and their corresponding null afe types-
+
+| Chart Type               | Type of `data` prop | Corresponding null safe type |
+| ------------------------ | ------------------- | -----------------------------|
+| BarChart                 | barDataItem[]       | barDataItemNullSafe[]        |
+| LineChart                | lineDataItem[]      | lineDataItemNullSafe[]       |
+| LineChart with `dataSet` | DataSet[]           | DataSetNullSafe[]            |
+
+This refactor fixes the below type-related issues-
+
+1. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/787
+2. https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/781
+
+---
+
+---
+
+---
+
 # 🎉 1.4.48
 
 ## ✨ Features added-
@@ -32,7 +66,7 @@ type CustomBackground = {
 3. Some fix about vertical lines in Line charts.
 4. Fixed the issue- "LineChart - Strip and Points not showing beyond x index 0 for DataSet". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/911
 5. Fixed the issue- "hidePointer doesn't work". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/932
-6. Fixed the issue- "Custom Data Point in wrong position with non-uniform spacing on data in LineChart" Seehttps://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/923
+6. Fixed the issue- "Custom Data Point in wrong position with non-uniform spacing on data in LineChart" See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/923
 7. Fixed the issue- "extrapolateMissingValues not working with dataSet". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/916
 8. Fixed the issue- "The first property setting of BarChart/LineChart RulesConfigArray does not take effect". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/893
 9. Fixed the issue- "areaChart2, areaChart3, areaChart4... props not working". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/892

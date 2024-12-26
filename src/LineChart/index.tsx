@@ -46,6 +46,7 @@ import {
   LineProperties,
   LineDefaults,
   pointsWithPaddedRepititions,
+  lineDataItemNullSafe,
 } from 'gifted-charts-core';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
 import {StripAndLabel} from '../Components/common/StripAndLabel';
@@ -140,6 +141,7 @@ export const LineChart = (props: LineChartPropsType) => {
     animationDuration,
     onDataChangeAnimationDuration,
     animateTogether,
+    renderDataPointsAfterAnimationEnds,
     animateOnDataChange,
     startIndex1,
     startIndex2,
@@ -645,7 +647,7 @@ export const LineChart = (props: LineChartPropsType) => {
     key: number,
   ) => {
     const getYOrSecondaryY = isSecondary ? getSecondaryY : getY;
-    return dataForRender.map((item: lineDataItem, index: number) => {
+    return dataForRender.map((item: lineDataItemNullSafe, index: number) => {
       if (index < startIndex || index > endIndex) return null;
       if (item.hideDataPoint) {
         return null;
@@ -712,6 +714,7 @@ export const LineChart = (props: LineChartPropsType) => {
       if (showValuesAsDataPointsText) {
         text = originalDataFromProps[index].value;
       }
+
       return (
         <Fragment key={index}>
           {focusEnabled ? (
@@ -995,7 +998,7 @@ export const LineChart = (props: LineChartPropsType) => {
     dataForRender: any,
     spacingArray: number[],
   ) => {
-    return dataForRender.map((item: lineDataItem, index: number) => {
+    return dataForRender.map((item: lineDataItemNullSafe, index: number) => {
       if (item.showVerticalLine) {
         const x = getX(spacingArray, index);
         return (
@@ -1284,6 +1287,171 @@ export const LineChart = (props: LineChartPropsType) => {
     );
   };
 
+  const renderDataPointsForEachLine = () => {
+    if (dataSet && pointsFromSet.length) {
+      return (
+        <>
+          {dataSet.map((set, index) => {
+            const {
+              hideDataPoints,
+              data,
+              dataPointsShape,
+              dataPointsWidth,
+              dataPointsHeight,
+              dataPointsColor,
+              dataPointsRadius,
+              textColor,
+              textFontSize,
+              startIndex,
+              endIndex,
+              isSecondary,
+            } = set;
+            return renderDataPoints(
+              hideDataPoints ?? hideDataPoints1,
+              data,
+              adjustToOffset(data, -(props.yAxisOffset ?? 0)),
+              dataPointsShape ?? dataPointsShape1,
+              dataPointsWidth ?? dataPointsWidth1,
+              dataPointsHeight ?? dataPointsHeight1,
+              dataPointsColor ?? dataPointsColor1,
+              dataPointsRadius ?? dataPointsRadius1,
+              textColor ?? textColor1,
+              textFontSize ?? textFontSize1,
+              startIndex ?? 0,
+              endIndex ?? set.data.length - 1,
+              isSecondary,
+              showValuesAsDataPointsText,
+              cumulativeSpacingForSet[index],
+              index,
+            );
+          })}
+        </>
+      );
+    }
+    return (
+      <>
+        {renderDataPoints(
+          hideDataPoints1,
+          data,
+          props.data,
+          dataPointsShape1,
+          dataPointsWidth1,
+          dataPointsHeight1,
+          dataPointsColor1,
+          dataPointsRadius1,
+          textColor1,
+          textFontSize1,
+          startIndex1,
+          endIndex1,
+          false,
+          showValuesAsDataPointsText,
+          cumulativeSpacing1,
+          0,
+        )}
+        {points2
+          ? renderDataPoints(
+              hideDataPoints2,
+              data2,
+              props.data2,
+              dataPointsShape2,
+              dataPointsWidth2,
+              dataPointsHeight2,
+              dataPointsColor2,
+              dataPointsRadius2,
+              textColor2,
+              textFontSize2,
+              startIndex2,
+              endIndex2,
+              false,
+              showValuesAsDataPointsText,
+              cumulativeSpacing2,
+              1,
+            )
+          : null}
+        {points3
+          ? renderDataPoints(
+              hideDataPoints3,
+              data3,
+              props.data3,
+              dataPointsShape3,
+              dataPointsWidth3,
+              dataPointsHeight3,
+              dataPointsColor3,
+              dataPointsRadius3,
+              textColor3,
+              textFontSize3,
+              startIndex3,
+              endIndex3,
+              false,
+              showValuesAsDataPointsText,
+              cumulativeSpacing3,
+              2,
+            )
+          : null}
+        {points4
+          ? renderDataPoints(
+              hideDataPoints4,
+              data4,
+              props.data4,
+              dataPointsShape4,
+              dataPointsWidth4,
+              dataPointsHeight4,
+              dataPointsColor4,
+              dataPointsRadius4,
+              textColor4,
+              textFontSize4,
+              startIndex4,
+              endIndex4,
+              false,
+              showValuesAsDataPointsText,
+              cumulativeSpacing4,
+              3,
+            )
+          : null}
+        {points5
+          ? renderDataPoints(
+              hideDataPoints5,
+              data5,
+              props.data5,
+              dataPointsShape5,
+              dataPointsWidth5,
+              dataPointsHeight5,
+              dataPointsColor5,
+              dataPointsRadius5,
+              textColor5,
+              textFontSize5,
+              startIndex5,
+              endIndex5,
+              false,
+              showValuesAsDataPointsText,
+              cumulativeSpacing5,
+              4,
+            )
+          : null}
+        {secondaryPoints
+          ? renderDataPoints(
+              secondaryLineConfig.hideDataPoints,
+              secondaryData,
+              props.secondaryData,
+              secondaryLineConfig.dataPointsShape,
+              secondaryLineConfig.dataPointsWidth,
+              secondaryLineConfig.dataPointsHeight,
+              secondaryLineConfig.dataPointsColor,
+              secondaryLineConfig.dataPointsRadius,
+              secondaryLineConfig.textColor,
+              secondaryLineConfig.textFontSize,
+              secondaryLineConfig.startIndex,
+              secondaryLineConfig.endIndex,
+              true,
+              secondaryLineConfig.showValuesAsDataPointsText,
+              cumulativeSpacingSecondary,
+              6666,
+            )
+          : null}
+      </>
+    );
+  };
+
   const lineSvgComponent = (
     points: any,
     currentLineThickness: number | undefined,
@@ -1455,25 +1623,29 @@ export const LineChart = (props: LineChartPropsType) => {
           ),
         ) ?? null}
 
-        {/***  !!! Here it's done 5 times intentionally, trying to make it to only 1 breaks things !!!  ***/}
-        {renderDataPoints(
-          hideDataPoints,
-          data,
-          propsData,
-          dataPointsShape,
-          dataPointsWidth,
-          dataPointsHeight,
-          dataPointsColor,
-          dataPointsRadius,
-          textColor,
-          textFontSize,
-          startIndex,
-          endIndex,
-          isSecondary,
-          showValuesAsDataPointsText,
-          spacingArray,
-          key,
-        )}
+        {/***  !!! Here it's done 5 times intentionally, so that onPress works for each line !!!  ***/}
+        {isAnimated && !renderDataPointsAfterAnimationEnds // in this condition onPress won't work properly in case of multi-line, so it's suggested to use either renderDataPointsAfterAnimationEnds prop if you want to use onPress for data points
+          ? renderDataPoints(
+              hideDataPoints,
+              data,
+              propsData,
+              dataPointsShape,
+              dataPointsWidth,
+              dataPointsHeight,
+              dataPointsColor,
+              dataPointsRadius,
+              textColor,
+              textFontSize,
+              startIndex,
+              endIndex,
+              isSecondary,
+              showValuesAsDataPointsText,
+              spacingArray,
+              key,
+            )
+          : key === lastLineNumber - 1
+            ? renderDataPointsForEachLine()
+            : null}
         {showArrow && (
           <Path
             d={arrowPoints}
@@ -1516,7 +1688,7 @@ export const LineChart = (props: LineChartPropsType) => {
         ) -
         (pointerRadius || pointerWidth / 2) -
         1;
-      setPointerX(z);
+      setPointerX(Math.max(0.1, z)); // 0.1 is to avoid pointer going out of the chart, See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/925
       setPointerIndex(factor);
       y =
         containerHeight -
@@ -1905,11 +2077,11 @@ export const LineChart = (props: LineChartPropsType) => {
         : containerHeight -
           (item.dataPointHeight ?? dataPointsHeight1) / 2 +
           14 -
-          (item.value * containerHeight) / maxValue;
+          ((item.value ?? 0) * containerHeight) / maxValue;
 
       const actualStripHeight =
         currentStripHeight ||
-        (item.value * containerHeight) / maxValue - 2 + overflowTop;
+        ((item.value ?? 0) * containerHeight) / maxValue - 2 + overflowTop;
       return (
         <Line
           key={'strip' + (ind * 10000 + index)}
@@ -2602,7 +2774,7 @@ export const LineChart = (props: LineChartPropsType) => {
   return (
     <BarAndLineChartsWrapper
       {...barAndLineChartsWrapperProps}
-      dataSet={props.dataSet}
+      dataSet={dataSet}
       scrollRef={scrollRef}
       animatedWidth={widthValue}
       renderChartContent={renderChartContent}
