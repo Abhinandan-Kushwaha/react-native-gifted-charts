@@ -712,11 +712,9 @@ export const LineChart = (props: LineChartPropsType) => {
       if (showValuesAsDataPointsText) {
         text = originalDataFromProps[index].value;
       }
-      const position = I18nManager.isRTL ? 'right' : 'left';
       return (
         <Fragment key={index}>
-          {focusEnabled ||
-          (pointerConfig && activatePointersInstantlyOnTouch) ? (
+          {focusEnabled ? (
             <>
               {key === lastLineNumber - 1 ? (
                 <Rect
@@ -726,128 +724,109 @@ export const LineChart = (props: LineChartPropsType) => {
                   height={containerHeight - 0}
                   fill={'none'}
                   onPressIn={evt => {
-                    if (pointerConfig && activatePointersInstantlyOnTouch) {
-                      activatePointers(0, index);
+                    const locationY = evt.nativeEvent.locationY; // Note that we have another property named pageY which can be useful
+                    let lineNumber = 0;
+                    if (dataSet) {
+                      let minDistance = Infinity;
+                      dataSet.forEach((setItem, setIndex) => {
+                        const distance = Math.abs(
+                          getY(setItem.data[index]?.value) - locationY,
+                        );
+                        if (distance < minDistance) {
+                          minDistance = distance;
+                          lineNumber = setIndex + 1;
+                        }
+                      });
+                    } else {
+                      let distance1,
+                        distance2,
+                        distance3,
+                        distance4,
+                        distance5,
+                        distance6;
+                      let minDistance = Infinity;
+                      if (typeof data[index]?.value === 'number') {
+                        distance1 = Math.abs(
+                          getY(data[index]?.value) - locationY,
+                        );
+                        minDistance = distance1;
+                        if (distance1 < focusProximity) lineNumber = 1;
+                      }
+
+                      if (typeof data2[index]?.value === 'number') {
+                        distance2 = Math.abs(
+                          getY(data2[index]?.value) - locationY,
+                        );
+                        if (
+                          minDistance > distance2 &&
+                          distance2 < focusProximity
+                        ) {
+                          minDistance = distance2;
+                          lineNumber = 2;
+                        }
+                      }
+
+                      if (typeof data3[index]?.value === 'number') {
+                        distance3 = Math.abs(
+                          getY(data3[index]?.value) - locationY,
+                        );
+                        if (
+                          minDistance > distance3 &&
+                          distance3 < focusProximity
+                        ) {
+                          minDistance = distance3;
+                          lineNumber = 3;
+                        }
+                      }
+
+                      if (typeof data4[index]?.value === 'number') {
+                        distance4 = Math.abs(
+                          getY(data4[index]?.value) - locationY,
+                        );
+                        if (
+                          minDistance > distance4 &&
+                          distance4 < focusProximity
+                        ) {
+                          minDistance = distance4;
+                          lineNumber = 4;
+                        }
+                      }
+
+                      if (typeof data5[index]?.value === 'number') {
+                        distance5 = Math.abs(
+                          getY(data5[index]?.value) - locationY,
+                        );
+                        if (
+                          minDistance > distance5 &&
+                          distance5 < focusProximity
+                        ) {
+                          minDistance = distance5;
+                          lineNumber = 5;
+                        }
+                      }
+
+                      if (typeof secondaryData[index]?.value === 'number') {
+                        distance6 = Math.abs(
+                          getY(secondaryData[index]?.value) - locationY,
+                        );
+                        if (
+                          minDistance > distance6 &&
+                          distance6 < focusProximity
+                        ) {
+                          minDistance = distance6;
+                          lineNumber = 6666;
+                        }
+                      }
                     }
-                    if (focusEnabled) {
-                      const locationY = evt.nativeEvent.locationY; // Note that we have another property named pageY which can be useful
-                      let lineNumber = 0;
-                      if (dataSet) {
-                        let minDistance = Infinity;
-                        dataSet.forEach((setItem, setIndex) => {
-                          const distance = Math.abs(
-                            getY(setItem.data[index]?.value) - locationY,
-                          );
-                          if (distance < minDistance) {
-                            minDistance = distance;
-                            lineNumber = setIndex + 1;
-                          }
-                        });
-                      } else {
-                        let distance1,
-                          distance2,
-                          distance3,
-                          distance4,
-                          distance5,
-                          distance6;
-                        let minDistance = Infinity;
-                        if (typeof data[index]?.value === 'number') {
-                          distance1 = Math.abs(
-                            getY(data[index]?.value) - locationY,
-                          );
-                          minDistance = distance1;
-                          if (distance1 < focusProximity) lineNumber = 1;
-                        }
 
-                        if (typeof data2[index]?.value === 'number') {
-                          distance2 = Math.abs(
-                            getY(data2[index]?.value) - locationY,
-                          );
-                          if (
-                            minDistance > distance2 &&
-                            distance2 < focusProximity
-                          ) {
-                            minDistance = distance2;
-                            lineNumber = 2;
-                          }
-                        }
+                    setSelectedLineNumber(lineNumber - 1);
 
-                        if (typeof data3[index]?.value === 'number') {
-                          distance3 = Math.abs(
-                            getY(data3[index]?.value) - locationY,
-                          );
-                          if (
-                            minDistance > distance3 &&
-                            distance3 < focusProximity
-                          ) {
-                            minDistance = distance3;
-                            lineNumber = 3;
-                          }
-                        }
-
-                        if (typeof data4[index]?.value === 'number') {
-                          distance4 = Math.abs(
-                            getY(data4[index]?.value) - locationY,
-                          );
-                          if (
-                            minDistance > distance4 &&
-                            distance4 < focusProximity
-                          ) {
-                            minDistance = distance4;
-                            lineNumber = 4;
-                          }
-                        }
-
-                        if (typeof data5[index]?.value === 'number') {
-                          distance5 = Math.abs(
-                            getY(data5[index]?.value) - locationY,
-                          );
-                          if (
-                            minDistance > distance5 &&
-                            distance5 < focusProximity
-                          ) {
-                            minDistance = distance5;
-                            lineNumber = 5;
-                          }
-                        }
-
-                        if (typeof secondaryData[index]?.value === 'number') {
-                          distance6 = Math.abs(
-                            getY(secondaryData[index]?.value) - locationY,
-                          );
-                          if (
-                            minDistance > distance6 &&
-                            distance6 < focusProximity
-                          ) {
-                            minDistance = distance6;
-                            lineNumber = 6666;
-                          }
-                        }
-                      }
-
-                      setSelectedLineNumber(lineNumber - 1);
-
-                      if (lineNumber) {
-                        onStripPress(item, index);
-                      }
+                    if (lineNumber) {
+                      onStripPress(item, index);
                     }
                   }}
-                  // This is to fix the blinking of pointer on "initial drag after press"
-                  // onResponderTerminationRequest={(evt)=>{
-                  //   setTerminationRequested(true)
-                  //   return true
-                  // }}
                   onPressOut={() => {
-                    if (pointerConfig && activatePointersInstantlyOnTouch) {
-                      // if(terminationRequested) {
-                      //   setTerminationRequested(false) // This is to fix the blinking of pointer on "initial drag after press"
-                      //   return
-                      // }
-                      if (resetPointerIndexOnRelease) setPointerIndex(-1);
-                      if (!persistPointer)
-                        setTimeout(() => setPointerX(0), pointerVanishDelay);
-                    }
-                    if (focusEnabled && unFocusOnPressOut) {
+                    if (unFocusOnPressOut) {
                       setTimeout(
                         () => setSelectedIndex(-1),
                         delayBeforeUnFocus,
@@ -1522,15 +1501,11 @@ export const LineChart = (props: LineChartPropsType) => {
   //   return i-1;
   // }
 
-  const activatePointers = (x: number, index?: number) => {
-    let factor = index ?? -1;
-    if (typeof index !== 'number') {
-      factor = (x - initialSpacing) / spacing; // getClosestValueFromSpacingArray(cumulativeSpacing1,x-initialSpacing)
-      factor = Math.round(factor);
-      factor = Math.min(factor, (data0 ?? data).length - 1);
-      factor = index ?? Math.max(factor, 0);
-      // if(factor === pointerIndex) return; // This is to fix the blinking of pointer on "initial drag after press"
-    }
+  const activatePointers = (x: number) => {
+    let factor = (x - initialSpacing) / spacing; // getClosestValueFromSpacingArray(cumulativeSpacing1,x-initialSpacing)
+    factor = Math.round(factor);
+    factor = Math.min(factor, (data0 ?? data).length - 1);
+    factor = Math.max(factor, 0);
     let item, y;
     item = (data0 ?? data)[factor];
     if (!item.hidePointer) {
@@ -1675,6 +1650,9 @@ export const LineChart = (props: LineChartPropsType) => {
       <View
         key={key ?? 0}
         onMoveShouldSetResponder={evt => (pointerConfig ? true : false)}
+        onStartShouldSetResponder={evt =>
+          pointerConfig && activatePointersInstantlyOnTouch ? true : false
+        }
         onResponderGrant={evt => {
           if (!pointerConfig) return;
           setResponderStartTime(evt.timeStamp);
@@ -1804,8 +1782,10 @@ export const LineChart = (props: LineChartPropsType) => {
     return (
       <Animated.View
         key={key ?? 0}
-        onStartShouldSetResponder={evt => (pointerConfig ? true : false)}
         onMoveShouldSetResponder={evt => (pointerConfig ? true : false)}
+        onStartShouldSetResponder={evt =>
+          pointerConfig && activatePointersInstantlyOnTouch ? true : false
+        }
         onResponderGrant={evt => {
           if (!pointerConfig) return;
           setResponderStartTime(evt.timeStamp);
