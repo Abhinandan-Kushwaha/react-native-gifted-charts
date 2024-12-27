@@ -1,39 +1,56 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="25.0.3">
   <diagram name="Page-1" id="KipZ_lJH65PFV8J-NzIS">
-    <mxGraphModel>
+    <mxGraphModel dx="1242" dy="819" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="2" value="gifted-charts-core" style="rounded=1;arcSize=40;strokeWidth=2" vertex="1" parent="1">
-          <mxGeometry x="157" y="8" width="160" height="49" as="geometry" />
+        <UserObject label="" link="https://www.npmjs.com/package/gifted-charts-core" linkTarget="_blank" id="2">
+          <mxCell style="rounded=1;arcSize=40;strokeWidth=5;fontStyle=1;fontSize=20;glass=0;shadow=0;fillColor=#dae8fc;strokeColor=#6c8ebf;gradientColor=#7ea6e0;" parent="1" vertex="1">
+            <mxGeometry x="230" y="10" width="410" height="220" as="geometry" />
+          </mxCell>
+        </UserObject>
+        <mxCell id="3" value="react-native-gifted-charts" style="rounded=1;arcSize=40;strokeWidth=2" parent="1" vertex="1">
+          <mxGeometry x="60" y="362" width="216" height="49" as="geometry" />
         </mxCell>
-        <mxCell id="3" value="react-native-gifted-charts" style="rounded=1;arcSize=40;strokeWidth=2" vertex="1" parent="1">
-          <mxGeometry x="8" y="107" width="216" height="49" as="geometry" />
+        <mxCell id="4" value="react-gifted-charts" style="rounded=1;arcSize=40;strokeWidth=2" parent="1" vertex="1">
+          <mxGeometry x="610" y="362" width="166" height="49" as="geometry" />
         </mxCell>
-        <mxCell id="4" value="react-gifted-charts" style="rounded=1;arcSize=40;strokeWidth=2" vertex="1" parent="1">
-          <mxGeometry x="274" y="107" width="166" height="49" as="geometry" />
+        <mxCell id="5" value="react" style="rounded=1;arcSize=40;strokeWidth=2" parent="1" vertex="1">
+          <mxGeometry x="134" y="460" width="68" height="49" as="geometry" />
         </mxCell>
-        <mxCell id="5" value="react" style="rounded=1;arcSize=40;strokeWidth=2" vertex="1" parent="1">
-          <mxGeometry x="82" y="205" width="68" height="49" as="geometry" />
-        </mxCell>
-        <mxCell id="6" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.13;exitY=0.99;entryX=0.5;entryY=-0.01;" edge="1" parent="1" source="2" target="3">
+        <mxCell id="6" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.13;exitY=0.99;entryX=0.5;entryY=-0.01;" parent="1" source="2" target="3" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="116" y="82" />
+              <mxPoint x="306" y="184" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="7" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.87;exitY=0.99;entryX=0.5;entryY=-0.01;" edge="1" parent="1" source="2" target="4">
+        <mxCell id="7" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.87;exitY=0.99;entryX=0.5;entryY=-0.01;" parent="1" source="2" target="4" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="357" y="82" />
+              <mxPoint x="547" y="184" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="8" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.98;entryX=0.5;entryY=0;" edge="1" parent="1" source="3" target="5">
+        <mxCell id="8" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.98;entryX=0.5;entryY=0;" parent="1" source="3" target="5" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="jZuNDdmWMTMBZUonKXr9-8" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;types&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fillColor=#FFCCCC;glass=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="160" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jZuNDdmWMTMBZUonKXr9-9" value="&lt;span style=&quot;font-size: 16px;&quot;&gt;raect-logic&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fillColor=#dae8fc;strokeColor=#6c8ebf;glass=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="160" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jZuNDdmWMTMBZUonKXr9-10" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;maths&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;glass=1;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="510" y="160" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jZuNDdmWMTMBZUonKXr9-11" value="&lt;font style=&quot;font-size: 15px;&quot;&gt;common code shared between react-native-gifted-charts and react-gifted-charts&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="240" y="80" width="380" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="jZuNDdmWMTMBZUonKXr9-12" value="&lt;span style=&quot;text-wrap-mode: nowrap;&quot;&gt;gifted-charts-core&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;glass=1;shadow=1;fillColor=none;strokeColor=none;fontStyle=1;fontSize=24;textShadow=0;fontColor=#330000;" vertex="1" parent="1">
+          <mxGeometry x="315" y="30" width="240" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
