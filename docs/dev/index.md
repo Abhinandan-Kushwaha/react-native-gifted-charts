@@ -15,7 +15,7 @@ It contains mathematical logic and type definitions for gifted-charts.
 
 ### Why a separate library to handle maths and types?
 
-To answer this, let me walk through the origin and evolution of react-native-gifted-charts. <br /> <br />
+To answer this, let me walk you through the origin and evolution of react-native-gifted-charts. <br /> <br />
 Gifted Charts originated as an experimental proof of concept (POC) aimed at crafting charts for React Native with specific features that were not viable using contemporary libraries. The library garnered praise from the developer community for its simplicity and extensive customization capabilities. The influx of feature requests and suggestions from enthusiastic developers contributed to the library's evolution into one of the most robust charting tools in React Native. <br />
 
 Soon, the community expressed a clear desire to extend the library's compatibility to ReactJS for web applications, marking the inception of the next chapter: [react-gifted-charts](https://github.com/Abhinandan-Kushwaha/react-gifted-charts).
