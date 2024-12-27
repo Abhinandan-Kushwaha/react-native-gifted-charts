@@ -1,7 +1,7 @@
 ## Introduction
 
 ```
-Never lose your simplicity, it will make you powerful in the long run.
+Simplicity is the key to elegance.
 ```
 
 Gifted-charts is popular mainly because it offers great charting power in a **simple** and **intuitive** manner. The components exposed by the library are just like any React-native element accepting props for customisation.<br />
