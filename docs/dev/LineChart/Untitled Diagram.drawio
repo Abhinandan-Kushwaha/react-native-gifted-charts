@@ -1,46 +1,77 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="25.0.3">
   <diagram name="Page-1" id="Hofu2dIybcHO47qxcGxK">
-    <mxGraphModel>
+    <mxGraphModel dx="1553" dy="1024" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="2" value="BarAndLineChartsWrapper" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="8" y="8" width="247" height="49" as="geometry" />
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-18" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e3c800;fontColor=#000000;strokeColor=#000000;strokeWidth=4;" vertex="1" parent="1">
+          <mxGeometry x="14" y="10" width="800" height="1150" as="geometry" />
         </mxCell>
-        <mxCell id="3" value="renderChartContent" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="30" y="107" width="204" height="49" as="geometry" />
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-21" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;&lt;b&gt;BarAndLineChartsWrapper&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=#EDEDED;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="16" y="10" width="794" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="4" value="renderLine" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="63" y="205" width="138" height="49" as="geometry" />
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-40" value="&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;It renders the axes and rules (background of the chart)&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;gradientColor=#ffd966;strokeColor=#000000;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="48" y="100" width="730" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="5" value="lineSvgComponent" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="36" y="304" width="192" height="49" as="geometry" />
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-41" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;renderHorizSections&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=#EDEDED;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="48" y="100" width="730" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="6" value="Svg&amp;amp" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="50" y="402" width="162" height="49" as="geometry" />
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-44" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#000000;gradientColor=#ffd966;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="48" y="260" width="730" height="880" as="geometry" />
         </mxCell>
-        <mxCell id="7" value="DataPoints" style="whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
-          <mxGeometry x="305" y="8" width="136" height="49" as="geometry" />
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-52" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;renderChartContent&lt;/b&gt;&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=#EDEDED;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="48" y="260" width="730" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="8" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=-0.01;" edge="1" parent="1" source="2" target="3">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points" />
-          </mxGeometry>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-54" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;&amp;lt;ScrollView&amp;gt;&lt;/b&gt;&lt;/font&gt;&lt;div&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;(horizontal)&lt;/font&gt;&lt;/div&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="48" y="330" width="140" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="9" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.98;entryX=0.5;entryY=0;" edge="1" parent="1" source="3" target="4">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points" />
-          </mxGeometry>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-55" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="1">
+          <mxGeometry x="204" y="480" width="345" height="240" as="geometry" />
         </mxCell>
-        <mxCell id="10" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.99;entryX=0.5;entryY=-0.01;" edge="1" parent="1" source="4" target="5">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points" />
-          </mxGeometry>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-56" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;renderLine&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=#EDEDED;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="204" y="480" width="345" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="11" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5;exitY=0.98;entryX=0.5;entryY=0;" edge="1" parent="1" source="5" target="6">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points" />
-          </mxGeometry>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-57" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;Same as renderLine, but called if the animated prop is true&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="1">
+          <mxGeometry x="568" y="480" width="185" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-58" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;renderAnimatedLine&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=#EDEDED;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="568" y="480" width="185" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-59" value="&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;Here we have the &amp;lt;Svg&amp;gt; which renders the actual line or curve and&amp;nbsp;&lt;/font&gt;&lt;span style=&quot;background-color: initial; font-size: 16px;&quot;&gt;the data points.&lt;/span&gt;&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#EDE6FF;strokeColor=#56517e;" vertex="1" parent="1">
+          <mxGeometry x="231.5" y="550" width="290" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-60" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;lineSvgComponent&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=#EDEDED;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="231.5" y="550" width="290" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-61" value="&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;div&gt;&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;Vertical lines are rendered inside scrollview so that they scroll when the chart is scrolled horizontally&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="1">
+          <mxGeometry x="204" y="330" width="554" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-62" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;renderVerticalLines&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=#EDEDED;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="204" y="330" width="554" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-63" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="1">
+          <mxGeometry x="204" y="870" width="554" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-64" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;renderPointer&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=#EDEDED;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="204" y="870" width="554" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-65" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="1">
+          <mxGeometry x="204" y="740" width="554" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-66" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;renderStripAndLabel&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=#EDEDED;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="204" y="740" width="554" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-69" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="1">
+          <mxGeometry x="204" y="1000" width="256" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-70" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;renderLabel&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=#EDEDED;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="204" y="1000" width="256" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-71" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#b1ddf0;strokeColor=#10739e;" vertex="1" parent="1">
+          <mxGeometry x="497" y="1000" width="256" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="R1VTG5b1p_OsUZKaVzUe-72" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;renderAnimatedLabel&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;gradientColor=#EDEDED;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="497" y="1000" width="256" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
