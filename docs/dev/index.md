@@ -6,7 +6,7 @@ Never lose your simplicity, it will make you powerful in the long run.
 
 Gifted-charts is popular mainly because it offers great charting power in a **simple** and **intuitive** manner. The components exposed by the library are just like any React-native element accepting props for customisation.<br />
 
-It is a refined fusion of native UI elements and SVG, harnessing seamless animations and interactions from native components while employing SVG for chart rendering.
+It has a refined fusion of native UI elements and SVG, harnessing seamless animations and interactions from native components while employing SVG for chart rendering.
 Complex charts with enormous features and interactions can be build using this library with great ease.
 
 ## [Gifted charts core](https://github.com/Abhinandan-Kushwaha/gifted-charts-core)
