@@ -4,7 +4,8 @@ Pull requests are most welcome!
 
 ### Instructions
 
-1. Please clone the repo and then create a new branch. </br>
+1. Go through the [dev docs](docs/dev/index.md) to understand the architecture of the library.
+2. Clone the repo and then create a new branch. </br>
 
 The name of the new branch should follow this naming convention - </br>
 1. For a new feature- **feat/feature-name**
