@@ -16,16 +16,16 @@ The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar and Popul
 
 **_To bring Life to your data_**
 
-1. Plenty of features with minimal code
-2. Apply animations to your charts on load and on value change, just by adding a prop
-3. Smooth animations implemented using LayoutAnimation
-4. Clickable and scrollable
-5. Three-D and gradient effects
-6. Fully customizable (see the [props](docs/docs.md))
-7. Detailed [documentation](https://gifted-charts.web.app/) with examples
-8. Support for **_combined_** Bar and Line charts
-9. Tested to be pixel perfect using [react-native-screenshot-test](https://www.npmjs.com/package/react-native-screenshot-test). See [the screenshot tests here](https://abhinandan-kushwaha.github.io/TestingCharts/ss-test/test.html)
-10. Detailed and illustrated [dev docs](docs/dev/index.md) that explain the architecture and working of the library
+* Plenty of features with minimal code
+* Apply animations to your charts on load and on value change, just by adding a prop
+* Smooth animations implemented using LayoutAnimation
+* Clickable and scrollable
+* Three-D and gradient effects
+* Fully customizable (see the [props](docs/doc*md))
+* Detailed [documentation](https://gifted-chart*web.app/) with examples
+* Support for **_combined_** Bar and Line charts
+* Tested to be pixel perfect using [react-native-screenshot-test](https://www.npmjs.com/package/react-native-screenshot-test). See [the screenshot tests here](https://abhinandan-kushwaha.github.io/TestingCharts/ss-test/test.html)
+* Detailed and illustrated [dev docs](docs/dev/index.md) that explain the architecture and working of the library
 
 The web counterpart of this library is public now. Try out our new reactJS library- [react-gifted-charts](https://www.npmjs.com/package/react-gifted-charts) <br />
 The exact same piece of code that you write to render charts in react-native, can be used to render charts in reactJS using this library!
@@ -76,7 +76,8 @@ Please note that `react-native-svg` and `react-native-linear-gradient`/`expo-lin
 
 # Docs
 
-[Documentation and gallery](https://gifted-charts.web.app/)
+* [Documentation and gallery](https://gifted-charts.web.app/) <br />
+* [Architecture and working (dev docs)](docs/dev/index.md)
 
 ## Usage
 
@@ -108,10 +109,10 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 
 ## Props tables
 
-**[1. BarChart, Horizontal BarChart and Stacked Bar Chart props](docs/BarChart/BarChartProps.md)** \
-**[2. LineChart and AreaChart props](docs/LineChart/LineChartProps.md)** \
-**[3. PieChart and DonutChart props](docs/PieChart/PieChartProps.md)** \
-**[4. Population Pyramid props](docs/PopulationPyramid/PopulationPyramid.md)**
+**1. [BarChart, Horizontal BarChart and Stacked Bar Chart props](docs/BarChart/BarChartProps.md)** \
+**2. [LineChart and AreaChart props](docs/LineChart/LineChartProps.md)** \
+**3. [PieChart and DonutChart props](docs/PieChart/PieChartProps.md)** \
+**4. [Population Pyramid props](docs/PopulationPyramid/PopulationPyramid.md)**
 
 ## Contributing
 
@@ -134,11 +135,10 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 
 ## Test cases
 
-Test strategy and cases are discussed here- [TESTS.md](./TESTS.md) <br />
-Pixel perfection is assured using [react-native-screenshot-test](https://www.npmjs.com/package/react-native-screenshot-test). <br/>
-220+ screenshot tests have been written. See the [Reports here](https://abhinandan-kushwaha.github.io/TestingCharts/ss-test/test.html).
-
-Screenshot tests are written in a separate repo named [TestingCharts](https://github.com/Abhinandan-Kushwaha/TestingCharts)
+* Test strategy and cases are discussed here- [TESTS.md](./TESTS.md) <br />
+* Pixel perfection is assured using [react-native-screenshot-test](https://www.npmjs.com/package/react-native-screenshot-test). <br/>
+* 220+ screenshot tests have been written. See the [Reports here](https://abhinandan-kushwaha.github.io/TestingCharts/ss-test/test.html).
+* Screenshot tests are written in a separate repo named [TestingCharts](https://github.com/Abhinandan-Kushwaha/TestingCharts)
 
 ## License
 
