@@ -1,3 +1,22 @@
+## 🎉 1.4.50
+
+### 🐛 Bug fixes
+
+1. Fixed issue with **tooltips** in Bar and Stacked Bar charts.
+2. Fixed issue with `customDataPoint`, `dataPointLabelComponent` and `focusedDataPointLabelComponent` in Line/Area charts and enhanced the **focus** related functionality.
+
+### 🔨 Refactor
+
+1. Moved **tooltip** related logic to _gifted-charts-core_
+2. Moved **focus** related logic for Line/Area charts to _gifted-charts-core_
+3. Exported a few more types from _gifted-charts-core_ and exposed them from _react-native-gifted-charts_
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.49
 
 ### ✨ Features added-
@@ -16,7 +35,7 @@ Made the `value` property of data items optional for Bar and Line/Area charts. A
 Below are the exposed types and their corresponding null afe types-
 
 | Chart Type               | Type of `data` prop | Corresponding null safe type |
-| ------------------------ | ------------------- | -----------------------------|
+| ------------------------ | ------------------- | ---------------------------- |
 | BarChart                 | barDataItem[]       | barDataItemNullSafe[]        |
 | LineChart                | lineDataItem[]      | lineDataItemNullSafe[]       |
 | LineChart with `dataSet` | DataSet[]           | DataSetNullSafe[]            |
@@ -43,21 +62,20 @@ This refactor fixes the below type-related issues-
 
 ```ts
 type CustomBackground = {
-  color?: ColorValue
-  component?: Function
-  horizontalShift?: number
-  verticalShift?: number
-  height?: number
-  width?: number
-  widthAdjustment?: number
-}
+  color?: ColorValue;
+  component?: Function;
+  horizontalShift?: number;
+  verticalShift?: number;
+  height?: number;
+  width?: number;
+  widthAdjustment?: number;
+};
 ```
 
-3. Added the props- `focusTogether` and `focusProximity` to Line and Area charts to control the focus behaviour. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/910 
+3. Added the props- `focusTogether` and `focusProximity` to Line and Area charts to control the focus behaviour. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/910
 4. BarChart lineConfig with strokeDashArray support. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/927
 5. Added the property `resetPointerIndexOnRelease` inside `pointerConfig` to set pointerIndex to -1 upon releasing the pointer. Default value is `false`. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/854
 6. Added the property `activatePointersInstantlyOnTouch` inside `pointerConfig` whose default value is `true`. When set to false, the pointer will be activated not instantly after touch, but on dragging after touch. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/934
-
 
 ## 🐛 Bug fixes
 

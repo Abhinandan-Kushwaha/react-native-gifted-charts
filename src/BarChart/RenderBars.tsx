@@ -1,14 +1,10 @@
 import {View, TouchableOpacity, Animated, Text} from 'react-native';
 import AnimatedThreeDBar from '../Components/AnimatedThreeDBar';
 import Animated2DWithGradient from './Animated2DWithGradient';
-import Cap from '../Components/BarSpecificComponents/cap';
-import BarBackgroundPattern from '../Components/BarSpecificComponents/barBackgroundPattern';
-import LinearGradient from '../Components/common/LinearGradient';
 import {
   getPropsForAnimated2DWithGradient,
   RenderBarsPropsType,
-  barDataItem,
-  AxesAndRulesDefaults,
+  useRenderBars,
 } from 'gifted-charts-core';
 import Tooltip from '../Components/BarSpecificComponents/tooltip';
 
@@ -20,7 +16,6 @@ const RenderBars = (props: RenderBarsPropsType) => {
     maxValue,
     minHeight,
     spacing,
-    propSpacing,
     side,
     data,
     barBorderWidth,
@@ -38,50 +33,20 @@ const RenderBars = (props: RenderBarsPropsType) => {
     xAxisTextNumberOfLines,
     xAxisLabelsVerticalShift,
     renderTooltip,
-    leftShiftForTooltip,
-    leftShiftForLastIndexTooltip,
-    initialSpacing,
     selectedIndex,
     setSelectedIndex,
-    xAxisThickness = AxesAndRulesDefaults.xAxisThickness,
     horizontal,
     rtl,
-    intactTopLabel,
-    showValuesAsTopLabel,
-    topLabelContainerStyle,
-    topLabelTextStyle,
     pointerConfig,
     noOfSectionsBelowXAxis,
-    yAxisOffset,
     barWidth,
     labelsDistanceFromXaxis = 0,
-    stepHeight,
-    stepValue,
-    negativeStepHeight,
-    negativeStepValue,
-    autoCenterTooltip,
     secondaryXAxis,
-    secondaryStepHeight,
-    secondaryStepValue,
-    secondaryNegativeStepHeight,
-    secondaryNegativeStepValue,
     secondaryNoOfSectionsBelowXAxis,
     barMarginBottom = 0,
   } = props;
 
-  const heightFactor = item.isSecondary
-    ? item.value < 0
-      ? (secondaryNegativeStepHeight ?? secondaryStepHeight) /
-        (secondaryNegativeStepValue ?? secondaryStepValue)
-      : secondaryStepHeight / secondaryStepValue
-    : item.value < 0
-      ? negativeStepHeight / negativeStepValue
-      : stepHeight / stepValue;
-
-  const barHeight = Math.max(
-    minHeight,
-    Math.abs(item.value) * heightFactor - xAxisThickness,
-  );
+  const {heightFactor, barHeight, tooltipProps} = useRenderBars(props);
 
   const {
     commonStyleForBar,
@@ -271,81 +236,6 @@ const RenderBars = (props: RenderBarsPropsType) => {
     );
   };
 
-  let leftSpacing = initialSpacing;
-  for (let i = 0; i < index; i++) {
-    leftSpacing +=
-      (data[i].spacing ?? propSpacing) + (data[i].barWidth || barWidth);
-  }
-
-  // const static2DWithGradient = (item: barDataItem) => {
-  //   const localGradientColor =
-  //     item.gradientColor || props.gradientColor || 'white';
-  //   return (
-  //     <>
-  //       <LinearGradient
-  //         style={commonStyleForBar}
-  //         start={{x: 0, y: 0}}
-  //         end={{x: 0, y: 1}}
-  //         colors={[
-  //           isFocused
-  //             ? (focusedBarConfig?.gradientColor ?? localGradientColor)
-  //             : localGradientColor,
-  //           localFrontColor,
-  //         ]}>
-  //         {props.cappedBars && item.value ? (
-  //           <Cap
-  //             capThicknessFromItem={item.capThickness}
-  //             capThicknessFromProps={props.capThickness}
-  //             capColorFromItem={item.capColor}
-  //             capColorFromProps={props.capColor}
-  //             capRadiusFromItem={item.capRadius}
-  //             capRadiusFromProps={props.capRadius}
-  //           />
-  //         ) : null}
-  //       </LinearGradient>
-  //       {(item.barBackgroundPattern || props.barBackgroundPattern) && (
-  //         <BarBackgroundPattern
-  //           barBackgroundPatternFromItem={item.barBackgroundPattern}
-  //           barBackgroundPatternFromProps={props.barBackgroundPattern}
-  //           patternIdFromItem={item.patternId}
-  //           patternIdFromProps={props.patternId}
-  //         />
-  //       )}
-  //       {(item.topLabelComponent || showValuesAsTopLabel) && (
-  //         <View
-  //           style={[
-  //             {
-  //               position: 'absolute',
-  //               top: (item.barWidth || barWidth) * -1,
-  //               height: item.barWidth || barWidth,
-  //               width: item.barWidth || barWidth,
-  //               justifyContent:
-  //                 (horizontal && !intactTopLabel) || item.value < 0
-  //                   ? 'center'
-  //                   : 'flex-end',
-  //               alignItems: 'center',
-  //             },
-  //             item.value < 0 && {transform: [{rotate: '180deg'}]},
-  //             horizontal &&
-  //               !intactTopLabel && {transform: [{rotate: '270deg'}]},
-  //             topLabelContainerStyle ?? item.topLabelContainerStyle,
-  //           ]}>
-  //           {showValuesAsTopLabel ? (
-  //             <Text style={topLabelTextStyle}>{item.value + yAxisOffset}</Text>
-  //           ) : (
-  //             item.topLabelComponent?.()
-  //           )}
-  //         </View>
-  //       )}
-  //       {localBarInnerComponent ? (
-  //         <View style={{height: '100%', width: '100%'}}>
-  //           {localBarInnerComponent(item, index)}
-  //         </View>
-  //       ) : null}
-  //     </>
-  //   );
-  // };
-
   const barWrapperStyle = [
     {
       // overflow: 'visible',
@@ -463,20 +353,6 @@ const RenderBars = (props: RenderBarsPropsType) => {
           : null}
       </>
     );
-  };
-
-  const tooltipProps = {
-    barHeight,
-    barWidth: item.barWidth || barWidth,
-    item,
-    index,
-    isLast: index === data.length - 1,
-    leftSpacing,
-    leftShiftForLastIndexTooltip,
-    leftShiftForTooltip: item.leftShiftForTooltip ?? leftShiftForTooltip ?? 0,
-    renderTooltip,
-    autoCenterTooltip,
-    horizontal,
   };
 
   return (

@@ -1,23 +1,9 @@
-import React, {useState} from 'react';
+import {TooltipProps} from 'gifted-charts-core/dist/utils/types';
+import {useState} from 'react';
 import {View} from 'react-native';
-
-interface TooltipProps {
-  barHeight: number;
-  barWidth: number;
-  item: any;
-  index: number;
-  isLast: boolean;
-  leftSpacing: number;
-  leftShiftForLastIndexTooltip: number;
-  leftShiftForTooltip: number;
-  renderTooltip?: Function;
-  autoCenterTooltip?: boolean;
-  horizontal?: boolean;
-}
 
 const Tooltip = (props: TooltipProps) => {
   const {
-    barHeight,
     barWidth,
     item,
     index,
@@ -28,6 +14,7 @@ const Tooltip = (props: TooltipProps) => {
     renderTooltip,
     autoCenterTooltip,
     horizontal,
+    bottom,
   } = props;
 
   const [leftShiftTooltipForCentering, setLeftShiftTooltipForCentering] =
@@ -37,7 +24,7 @@ const Tooltip = (props: TooltipProps) => {
     <View
       style={{
         position: 'absolute',
-        bottom: barHeight + 60,
+        bottom,
         left:
           leftSpacing -
           (isLast ? leftShiftForLastIndexTooltip : leftShiftForTooltip) -

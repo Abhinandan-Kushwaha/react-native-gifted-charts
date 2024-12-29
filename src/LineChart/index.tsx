@@ -325,8 +325,6 @@ export const LineChart = (props: LineChartPropsType) => {
     stripColor,
     stripOpacity,
     stripStrokeDashArray,
-    unFocusOnPressOut,
-    delayBeforeUnFocus,
     containerHeightIncludingBelowXAxis = 0,
     lineGradient,
     lineGradientDirection,
@@ -338,7 +336,9 @@ export const LineChart = (props: LineChartPropsType) => {
     strips,
     lastLineNumber,
     focusTogether,
-    focusProximity,
+    selectedLineNumber,
+    handleFocus,
+    handleUnFocus,
   } = useLineChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -626,7 +626,7 @@ export const LineChart = (props: LineChartPropsType) => {
     }
   };
 
-  const [selectedLineNumber, setSelectedLineNumber] = useState(-1);
+  // const [selectedLineNumber, setSelectedLineNumber] = useState(-1);
 
   const renderDataPoints = (
     hideDataPoints: any,
@@ -715,6 +715,12 @@ export const LineChart = (props: LineChartPropsType) => {
         text = originalDataFromProps[index].value;
       }
 
+      const dataPointLabelWidth = item.dataPointLabelWidth
+        ? item.dataPointLabelWidth
+        : props.dataPointLabelWidth
+          ? props.dataPointLabelWidth
+          : 30;
+
       return (
         <Fragment key={index}>
           {focusEnabled ? (
@@ -728,114 +734,9 @@ export const LineChart = (props: LineChartPropsType) => {
                   fill={'none'}
                   onPressIn={evt => {
                     const locationY = evt.nativeEvent.locationY; // Note that we have another property named pageY which can be useful
-                    let lineNumber = 0;
-                    if (dataSet) {
-                      let minDistance = Infinity;
-                      dataSet.forEach((setItem, setIndex) => {
-                        const distance = Math.abs(
-                          getY(setItem.data[index]?.value) - locationY,
-                        );
-                        if (distance < minDistance) {
-                          minDistance = distance;
-                          lineNumber = setIndex + 1;
-                        }
-                      });
-                    } else {
-                      let distance1,
-                        distance2,
-                        distance3,
-                        distance4,
-                        distance5,
-                        distance6;
-                      let minDistance = Infinity;
-                      if (typeof data[index]?.value === 'number') {
-                        distance1 = Math.abs(
-                          getY(data[index]?.value) - locationY,
-                        );
-                        minDistance = distance1;
-                        if (distance1 < focusProximity) lineNumber = 1;
-                      }
-
-                      if (typeof data2[index]?.value === 'number') {
-                        distance2 = Math.abs(
-                          getY(data2[index]?.value) - locationY,
-                        );
-                        if (
-                          minDistance > distance2 &&
-                          distance2 < focusProximity
-                        ) {
-                          minDistance = distance2;
-                          lineNumber = 2;
-                        }
-                      }
-
-                      if (typeof data3[index]?.value === 'number') {
-                        distance3 = Math.abs(
-                          getY(data3[index]?.value) - locationY,
-                        );
-                        if (
-                          minDistance > distance3 &&
-                          distance3 < focusProximity
-                        ) {
-                          minDistance = distance3;
-                          lineNumber = 3;
-                        }
-                      }
-
-                      if (typeof data4[index]?.value === 'number') {
-                        distance4 = Math.abs(
-                          getY(data4[index]?.value) - locationY,
-                        );
-                        if (
-                          minDistance > distance4 &&
-                          distance4 < focusProximity
-                        ) {
-                          minDistance = distance4;
-                          lineNumber = 4;
-                        }
-                      }
-
-                      if (typeof data5[index]?.value === 'number') {
-                        distance5 = Math.abs(
-                          getY(data5[index]?.value) - locationY,
-                        );
-                        if (
-                          minDistance > distance5 &&
-                          distance5 < focusProximity
-                        ) {
-                          minDistance = distance5;
-                          lineNumber = 5;
-                        }
-                      }
-
-                      if (typeof secondaryData[index]?.value === 'number') {
-                        distance6 = Math.abs(
-                          getY(secondaryData[index]?.value) - locationY,
-                        );
-                        if (
-                          minDistance > distance6 &&
-                          distance6 < focusProximity
-                        ) {
-                          minDistance = distance6;
-                          lineNumber = 6666;
-                        }
-                      }
-                    }
-
-                    setSelectedLineNumber(lineNumber - 1);
-
-                    if (lineNumber) {
-                      onStripPress(item, index);
-                    }
+                    handleFocus(index, item, locationY, onStripPress);
                   }}
-                  onPressOut={() => {
-                    if (unFocusOnPressOut) {
-                      setTimeout(
-                        () => setSelectedIndex(-1),
-                        delayBeforeUnFocus,
-                      );
-                    }
-                  }}
+                  onPressOut={handleUnFocus}
                 />
               ) : null}
               {/* {unFocusOnPressOut ? ( // remove strip on onFocus
@@ -901,7 +802,14 @@ export const LineChart = (props: LineChartPropsType) => {
                           ? item.onPress(item, index)
                           : props.onPress
                             ? props.onPress(item, index)
-                            : null;
+                            : focusEnabled
+                              ? handleFocus(index, item, 0, onStripPress)
+                              : null;
+                      }}
+                      onPressOut={() => {
+                        if (!item.onPress && !props.onPress && focusEnabled) {
+                          handleUnFocus();
+                        }
                       }}
                     />
                   )}
@@ -925,7 +833,14 @@ export const LineChart = (props: LineChartPropsType) => {
                           ? item.onPress(item, index)
                           : props.onPress
                             ? props.onPress(item, index)
-                            : null;
+                            : focusEnabled
+                              ? handleFocus(index, item, 0, onStripPress)
+                              : null;
+                      }}
+                      onPressOut={() => {
+                        if (!item.onPress && !props.onPress && focusEnabled) {
+                          handleUnFocus();
+                        }
                       }}
                     />
                   )}
@@ -933,38 +848,31 @@ export const LineChart = (props: LineChartPropsType) => {
               )}
               {dataPointLabelComponent ? (
                 !showTextOnFocus || index === selectedIndex ? (
-                  <View
-                    style={[
-                      styles.customDataPointContainer,
-                      {
-                        zIndex: index === selectedIndex ? 1000 : 0,
-                        top:
-                          containerHeight +
-                          (item.dataPointLabelShiftY ||
-                            props.dataPointLabelShiftY ||
-                            0) -
-                          (item.value * containerHeight) / maxValue,
-                        left:
-                          initialSpacing +
-                          (item.dataPointLabelShiftX ||
-                            props.dataPointLabelShiftX ||
-                            0) -
-                          (item.dataPointLabelWidth
-                            ? item.dataPointLabelWidth + 20
-                            : props.dataPointLabelWidth
-                              ? props.dataPointLabelWidth + 20
-                              : 50) /
-                            2 +
-                          spacing * index,
-                      },
-                    ]}>
+                  <ForeignObject
+                    height={svgHeight}
+                    width={totalWidth}
+                    x={
+                      initialSpacing +
+                      (item.dataPointLabelShiftX ||
+                        props.dataPointLabelShiftX ||
+                        0) -
+                      dataPointLabelWidth / 2 +
+                      spacing * index
+                    }
+                    y={
+                      containerHeight +
+                      (item.dataPointLabelShiftY ||
+                        props.dataPointLabelShiftY ||
+                        0) -
+                      (item.value * containerHeight) / maxValue
+                    }>
                     {showDataPointLabelOnFocus
                       ? index === selectedIndex &&
                         (focusTogether || key == selectedLineNumber)
                         ? dataPointLabelComponent()
                         : null
                       : dataPointLabelComponent()}
-                  </View>
+                  </ForeignObject>
                 ) : null
               ) : text || item.dataPointText ? (
                 !showTextOnFocus || index === selectedIndex ? (
