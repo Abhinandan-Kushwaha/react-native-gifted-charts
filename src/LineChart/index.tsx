@@ -869,9 +869,9 @@ export const LineChart = (props: LineChartPropsType) => {
                     {showDataPointLabelOnFocus
                       ? index === selectedIndex &&
                         (focusTogether || key == selectedLineNumber)
-                        ? dataPointLabelComponent()
+                        ? dataPointLabelComponent(item, index) // not pushed in latest release
                         : null
-                      : dataPointLabelComponent()}
+                      : dataPointLabelComponent(item, index)}
                   </ForeignObject>
                 ) : null
               ) : text || item.dataPointText ? (
