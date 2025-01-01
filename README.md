@@ -113,7 +113,7 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 **2. [LineChart and AreaChart props](docs/LineChart/LineChartProps.md)** \
 **3. [PieChart and DonutChart props](docs/PieChart/PieChartProps.md)** \
 **4. [Population Pyramid props](docs/PopulationPyramid/PopulationPyramid.md)** \
-**5. [RadarChart props](docs/radarChart/RadarChartProps.md)**
+**5. [RadarChart props](docs/RadarChart/RadarChartProps.md)**
 
 ## Contributing
 
