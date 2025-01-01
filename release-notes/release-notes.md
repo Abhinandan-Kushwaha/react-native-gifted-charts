@@ -2,7 +2,7 @@
 
 ## ✨ Features added-
 
-Added support for **Radar charts** using `<RadarChart>` component. See [Radar chart props]()
+Added support for **Radar charts** using `<RadarChart>` component. See [Radar chart props](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/RadarChart/RadarChartProps.md)
 
 ---
 
