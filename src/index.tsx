@@ -4,6 +4,7 @@ export {PieChartPro} from './PieChartPro';
 export {LineChart} from './LineChart';
 export {LineChartBicolor} from './LineChart/LineChartBicolor';
 export {PopulationPyramid} from './PopulationPyramid';
+export {RadarChart} from './RadarChart';
 
 export {
   type barDataItem,
@@ -45,4 +46,9 @@ export {
   type IntersectionAreaConfig,
   type LabelLineConfig,
   type TooltipProps,
+  type RadarChartProps,
+  type PolygonConfig,
+  type GridConfig,
+  type GridSectionConfig,
+  type AsterLinesConfig,
 } from 'gifted-charts-core';

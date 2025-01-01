@@ -1,3 +1,15 @@
+# 🎉 1.4.51
+
+## ✨ Features added-
+
+Added support for **Radar charts** using `<RadarChart>` component. See [Radar chart props]()
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.50
 
 ### 🐛 Bug fixes
