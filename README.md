@@ -48,7 +48,7 @@ See the **[release changes by version here.](release-notes/release-notes.md)**
     <td><img src='/demos/crossHair.gif' alt='' height=280 /></td>
     <td><img src='/demos/movingBars.gif' alt='' width=270 height=300/></td>
   <tr>
-    <td><img src='/demos/radar.png' alt='' height=280 width=260/></td>
+    <td><img src='/demos/radar.png' alt='' height=280 width=320/></td>
     <td><img src='/demos/ppnLabelled.png' alt='' height=280 width=300/></td>
   </tr>
 </table>
