@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import Svg, {
   Line,
   Polygon,
@@ -58,8 +58,6 @@ export const RadarChart = (props: RadarChartProps) => {
     hideAsterLines,
     getGridLevelProps,
   } = useRadarChart(props);
-
-  // return <View><Text>Hello</Text></View>
 
   return (
     <View style={{justifyContent: 'center', alignItems: 'center'}}>
