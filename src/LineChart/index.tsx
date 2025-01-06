@@ -850,7 +850,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 !showTextOnFocus || index === selectedIndex ? (
                   <ForeignObject
                     height={svgHeight}
-                    width={totalWidth}
+                    width={dataPointLabelWidth}
                     x={
                       initialSpacing +
                       (item.dataPointLabelShiftX ||

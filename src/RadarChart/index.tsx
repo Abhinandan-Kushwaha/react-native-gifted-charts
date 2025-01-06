@@ -1,5 +1,5 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, {Fragment} from 'react';
+import {Text, View} from 'react-native';
 import Svg, {
   Line,
   Polygon,
@@ -17,6 +17,7 @@ import {RadarChartProps, useRadarChart} from 'gifted-charts-core';
 export const RadarChart = (props: RadarChartProps) => {
   const {
     data,
+    dataSet,
     center,
     radius,
     chartSize,
@@ -24,9 +25,10 @@ export const RadarChart = (props: RadarChartProps) => {
     labels,
     labelConfigArray,
     labelsPositionOffset,
-    dataLabelConfigArray,
+    dataLabelsConfigArray,
     maxValue,
     dataLabels,
+    dataLabelsArray,
     gridSections,
     gridFill,
     fontSize,
@@ -35,13 +37,7 @@ export const RadarChart = (props: RadarChartProps) => {
     alignmentBaseline,
     fontWeight,
     fontFamily,
-    dataLabelsFontSize,
-    dataLabelsColor,
-    dataLabelsTextAnchor,
-    dataLabelsAlignmentBaseline,
     dataLabelsPositionOffset,
-    dataLabelsFontWeight,
-    dataLabelsFontFamily,
     polygonStroke,
     polygonStrokeWidth,
     polygonStrokeDashArray,
@@ -53,8 +49,9 @@ export const RadarChart = (props: RadarChartProps) => {
     asterLinesStroke,
     asterLinesStrokeWidth,
     asterLinesStrokeDashArray,
-    points,
     polygonPoints,
+    polygonPointsArray,
+    polygonConfigArray,
     angleStep,
     circular,
     hideGrid,
@@ -62,32 +59,62 @@ export const RadarChart = (props: RadarChartProps) => {
     getGridLevelProps,
   } = useRadarChart(props);
 
+  // return <View><Text>Hello</Text></View>
+
   return (
     <View style={{justifyContent: 'center', alignItems: 'center'}}>
       <Svg height={chartSize} width={chartSize}>
-        <Defs>
-          <RadialGradient
-            key={'polygon'}
-            id={'polygon'}
-            cx={center}
-            cy={center}
-            rx={radius}
-            ry={radius}
-            fx="50%"
-            fy="50%"
-            gradientUnits="userSpaceOnUse">
-            <Stop
-              offset="0%"
-              stopColor={polygonGradientColor}
-              stopOpacity={polygonGradientOpacity}
-            />
-            <Stop
-              offset="100%"
-              stopColor={polygonFill}
-              stopOpacity={polygonOpacity}
-            />
-          </RadialGradient>
-        </Defs>
+        {polygonConfigArray?.length ? (
+          polygonConfigArray.map((polygonConfigItem, index) => {
+            const {fill, gradientColor, opacity, gradientOpacity} =
+              polygonConfigItem;
+            return (
+              <Defs>
+                <RadialGradient
+                  key={`polygon-${index}`}
+                  id={`polygon-${index}`}
+                  cx={center}
+                  cy={center}
+                  rx={radius}
+                  ry={radius}
+                  fx="50%"
+                  fy="50%"
+                  gradientUnits="userSpaceOnUse">
+                  <Stop
+                    offset="0%"
+                    stopColor={gradientColor}
+                    stopOpacity={gradientOpacity}
+                  />
+                  <Stop offset="100%" stopColor={fill} stopOpacity={opacity} />
+                </RadialGradient>
+              </Defs>
+            );
+          })
+        ) : polygonShowGradient ? (
+          <Defs>
+            <RadialGradient
+              key={'polygon'}
+              id={'polygon'}
+              cx={center}
+              cy={center}
+              rx={radius}
+              ry={radius}
+              fx="50%"
+              fy="50%"
+              gradientUnits="userSpaceOnUse">
+              <Stop
+                offset="0%"
+                stopColor={polygonGradientColor}
+                stopOpacity={polygonGradientOpacity}
+              />
+              <Stop
+                offset="100%"
+                stopColor={polygonFill}
+                stopOpacity={polygonOpacity}
+              />
+            </RadialGradient>
+          </Defs>
+        ) : null}
 
         {hideGrid
           ? null
@@ -107,7 +134,7 @@ export const RadarChart = (props: RadarChartProps) => {
               } = getGridLevelProps(l, ind);
 
               return (
-                <>
+                <Fragment key={`fragment-${level}`}>
                   <Defs>
                     <RadialGradient
                       key={level + ''}
@@ -156,57 +183,108 @@ export const RadarChart = (props: RadarChartProps) => {
                       }
                     />
                   )}
-                </>
+                </Fragment>
               );
             })}
 
         {/* Draw the data polygon */}
-        <Polygon
-          points={polygonPoints}
-          fill={polygonShowGradient ? 'url(#polygon)' : polygonFill}
-          stroke={polygonStroke}
-          strokeWidth={polygonStrokeWidth}
-          strokeDasharray={polygonStrokeDashArray}
-          opacity={polygonOpacity}
-        />
+        {dataSet ? (
+          polygonConfigArray?.map((item, index) => {
+            const polygonPoints = polygonPointsArray[index];
+            const {
+              stroke,
+              strokeWidth,
+              strokeDashArray,
+              fill,
+              showGradient,
+              opacity,
+            } = item;
 
-        {dataLabels?.length ? (
+            return (
+              <Polygon
+                key={`polygon-${index}`}
+                points={polygonPoints}
+                fill={showGradient ? 'url(#polygon)' : fill}
+                stroke={stroke}
+                strokeWidth={strokeWidth}
+                strokeDasharray={strokeDashArray}
+                opacity={opacity}
+              />
+            );
+          })
+        ) : (
+          <Polygon
+            points={polygonPoints}
+            fill={polygonShowGradient ? 'url(#polygon)' : polygonFill}
+            stroke={polygonStroke}
+            strokeWidth={polygonStrokeWidth}
+            strokeDasharray={polygonStrokeDashArray}
+            opacity={polygonOpacity}
+          />
+        )}
+
+        {dataSet?.length && dataLabelsArray?.length ? (
+          dataLabelsArray?.map((labels, index) => {
+            const dataItem = dataSet[index];
+            return labels?.map((label, labelIndex) => {
+              const {x, y} = polarToCartesian(
+                labelIndex * angleStep,
+                dataItem[labelIndex] + dataLabelsPositionOffset,
+              );
+              const {
+                fontSize: dataLabelsFontSize,
+                stroke: dataLabelsColor,
+                textAnchor: dataLabelsTextAnchor,
+                alignmentBaseline: dataLabelsAlignmentBaseline,
+                fontWeight: dataLabelsFontWeight,
+                fontFamily: dataLabelsFontFamily,
+              } = dataLabelsConfigArray?.[labelIndex] ?? {};
+              return (
+                <SvgText
+                  key={`data-label-${index}-${labelIndex}`}
+                  x={x}
+                  y={y}
+                  fontSize={dataLabelsFontSize}
+                  fill={dataLabelsColor}
+                  fontWeight={dataLabelsFontWeight}
+                  fontFamily={dataLabelsFontFamily}
+                  textAnchor={(dataLabelsTextAnchor as TextAnchor) ?? 'middle'}
+                  alignmentBaseline={
+                    (dataLabelsAlignmentBaseline as AlignmentBaseline) ??
+                    'middle'
+                  }>
+                  {label}
+                </SvgText>
+              );
+            });
+          })
+        ) : dataLabels?.length ? (
           <SvgText>
             {dataLabels.map((label, index) => {
               const {x, y} = polarToCartesian(
                 index * angleStep,
                 data[index] + dataLabelsPositionOffset,
               );
-              const dataLabelsFontSizeLocal =
-                dataLabelConfigArray?.[index]?.fontSize ?? dataLabelsFontSize;
-              const dataLabelsFontWeightLocal =
-                dataLabelConfigArray?.[index]?.fontWeight ??
-                dataLabelsFontWeight;
-              const dataLabelsFontFamilyLocal =
-                dataLabelConfigArray?.[index]?.fontFamily ??
-                dataLabelsFontFamily;
-              const dataLabelsColorLocal =
-                dataLabelConfigArray?.[index]?.stroke ?? dataLabelsColor;
-              const dataLabelsTextAnchorLocal =
-                dataLabelConfigArray?.[index]?.textAnchor ??
-                dataLabelsTextAnchor;
-              const dataLabelsAlignmentBaselineLocal =
-                dataLabelConfigArray?.[index]?.alignmentBaseline ??
-                dataLabelsAlignmentBaseline;
+              const {
+                fontSize: dataLabelsFontSize,
+                stroke: dataLabelsColor,
+                textAnchor: dataLabelsTextAnchor,
+                alignmentBaseline: dataLabelsAlignmentBaseline,
+                fontWeight: dataLabelsFontWeight,
+                fontFamily: dataLabelsFontFamily,
+              } = dataLabelsConfigArray?.[index] ?? {};
               return (
                 <SvgText
                   key={`data-label-${index}`}
                   x={x}
                   y={y}
-                  fontSize={dataLabelsFontSizeLocal}
-                  fill={dataLabelsColorLocal}
-                  fontWeight={dataLabelsFontWeightLocal}
-                  fontFamily={dataLabelsFontFamilyLocal}
-                  textAnchor={
-                    (dataLabelsTextAnchorLocal as TextAnchor) ?? 'middle'
-                  }
+                  fontSize={dataLabelsFontSize}
+                  fill={dataLabelsColor}
+                  fontWeight={dataLabelsFontWeight}
+                  fontFamily={dataLabelsFontFamily}
+                  textAnchor={(dataLabelsTextAnchor as TextAnchor) ?? 'middle'}
                   alignmentBaseline={
-                    (dataLabelsAlignmentBaselineLocal as AlignmentBaseline) ??
+                    (dataLabelsAlignmentBaseline as AlignmentBaseline) ??
                     'middle'
                   }>
                   {label}

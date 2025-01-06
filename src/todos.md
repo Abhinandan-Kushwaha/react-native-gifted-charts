@@ -2,9 +2,11 @@
 
 1. Scatter Chart - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/518
 2. Split Bar chart - https://stackoverflow.com/questions/78027876/how-can-i-draw-the-split-the-chart-in-rn-project
-3. Radar chart - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/699
 4. Range Line chart - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/652
-5. Issue with eslint - tsc https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/222
+
+## Known Issues
+
+1. When using `adjustToWidth` along with `showLine` in Bar charts, the line gets shifted on adding a second chart on the screen.
 
 ## To-dos in documentation-
 
@@ -23,5 +25,5 @@
 
 ## Architecture Enhancement
 
-1. Make it compliant with React js
-2. Write Snapshot tests for more example charts (snapshot tests for some charts are already written)
+1. ~~Make it compliant with React js~~ **DONE**
+2. ~~Write Screenshott tests for more example charts (snapshot tests for some charts are already written)~~ **DONE**
