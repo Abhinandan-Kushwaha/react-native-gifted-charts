@@ -1,3 +1,13 @@
+## 🎉 1.4.53
+
+Upgraded `gifted-charts-core` version to `0.1.55`, had accidentally pushed the previous version with faulty version `0.1.54` of `gifted-charts-core`
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.52
 
 ### ✨ Features added-
