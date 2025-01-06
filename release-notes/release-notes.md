@@ -1,3 +1,26 @@
+## 🎉 1.4.52
+
+### ✨ Features added-
+
+1. Added support for multi-radar charts using the prop `dataSet` in place of `data`. **dataSet** is a 2D array while **data** is 1D. Added the below props to the `<RadarChart>` component-
+
+- dataLabelsArray
+- polygonConfigArray
+- dataLabelsConfigSet
+
+### 🐛 Bug fixes
+
+1. Fixed the issue - "Line Chart with line segments doesn't work when enabling `stepChart`". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/950
+2. Fixed the dataPointLabelComponent width issue. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/955
+3. Fixed the issue - "LineChart - Strip not showing after certain x datapoints, using data prop" Thanks to [Lucas Brumatti](https://github.com/lucasBruma) for his PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/954
+4. Fixed the issue- "ExtrapolateMissingValues bug depending on line direction". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/953
+
+---
+
+---
+
+---
+
 # 🎉 1.4.51
 
 ## ✨ Features added-
