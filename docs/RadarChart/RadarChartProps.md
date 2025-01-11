@@ -23,6 +23,9 @@
 | dataLabelsConfig         | LabelConfig      |             |               |
 | labelsPositionOffset     | number           |             | 5             |
 | dataLabelsPositionOffset | number           |             | 5             |
+| isAnimated               | boolean          |             | false         |
+| animationDuration        | number           |             | 800           |
+| animateTogether          | boolean          |             | false         |
 
 ### GridConfig
 
@@ -80,6 +83,8 @@ type PolygonConfig = {
   showGradient?: boolean;
   opacity?: number;
   gradientOpacity?: number;
+  isAnimated?: boolean;
+  animationDuration?: number;
 };
 ```
 

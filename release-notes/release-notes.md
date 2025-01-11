@@ -1,3 +1,31 @@
+## 🎉 1.4.54
+
+### ✨ Features added-
+
+1. Added `strokeLinecap` to Line charts to support `'butt' | 'square' | 'round'` linecaps. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/961 <br />
+   Following props have been added-
+
+- strokeLinecap
+- strokeLinecap1
+- strokeLinecap2
+- strokeLinecap3
+- strokeLinecap4
+- strokeLinecap5
+- Added the `strokeLinecap` property in `secondaryLineConfig` and in the items of `dataSet` array
+
+2. Added support for animation in `Radar` charts. Following props have been added-
+
+- isAnimated
+- animationDuration (default 800)
+- animateTogether (default false)
+- Added the `isAnimated` and `animationDuration` properties in the objects of `polygonConfigArray`
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.53
 
 Upgraded `gifted-charts-core` version to `0.1.55`, had accidentally pushed the previous version with faulty version `0.1.54` of `gifted-charts-core`

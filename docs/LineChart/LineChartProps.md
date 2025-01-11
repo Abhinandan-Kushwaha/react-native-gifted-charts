@@ -272,7 +272,11 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 **Note** If you are setting yAxisSide to yAxisSide.RIGHT, make sure to specify the width of the chart, using the `width` prop
 
 ```ts
-type RuleType = 'solid' | 'dashed' | 'dotted';
+type RuleType = 'solid' | 'dashed' | 'dotted'; // can be imported from gifted-charts-core
+```
+
+```ts
+type Linecap = 'butt' | 'square' | 'round'; // can be imported from gifted-charts-core
 ```
 
 ```ts
@@ -381,6 +385,7 @@ type secondaryLineConfigType = {
   thickness?: number;
   zIndex1?: number;
   strokeDashArray?: Array<number>;
+  strokeLinecap?: Linecap;
   startIndex?: number;
   endIndex?: number;
   hideDataPoints?: boolean;
@@ -448,6 +453,12 @@ All the properties of **secondaryLineConfig** are optional. Properties not provi
 | strokeDashArray3       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line3. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
 | strokeDashArray4       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line4. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
 | strokeDashArray5       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line5. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeLinecap          | Linecap            | Linecap of the lines (see `stroke-linecap` in svg)                                                          | butt                         |
+| strokeLinecap1         | Linecap            | Linecap of the first line (see `stroke-linecap` in svg)                                                     | strokeLinecap (from props)   |
+| strokeLinecap2         | Linecap            | Linecap of the second line (see `stroke-linecap` in svg)                                                    | strokeLinecap (from props)   |
+| strokeLinecap3         | Linecap            | Linecap of the third line (see `stroke-linecap` in svg)                                                     | strokeLinecap (from props)   |
+| strokeLinecap4         | Linecap            | Linecap of the fourth line (see `stroke-linecap` in svg)                                                    | strokeLinecap (from props)   |
+| strokeLinecap5         | Linecap            | Linecap of the fifth line (see `stroke-linecap` in svg)                                                     | strokeLinecap (from props)   |
 | lineSegments           | Array<LineSegment> | Array of objects used to customize segments (parts) of line                                                 | \_                           |
 | lineSegments2          | Array<LineSegment> | Array of objects used to customize segments (parts) of line2                                                | \_                           |
 | lineSegments3          | Array<LineSegment> | Array of objects used to customize segments (parts) of line3                                                | \_                           |

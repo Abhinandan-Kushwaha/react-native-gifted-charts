@@ -1,5 +1,5 @@
-import React, {Fragment} from 'react';
-import {View} from 'react-native';
+import {Fragment, useEffect} from 'react';
+import {Animated, View} from 'react-native';
 import Svg, {
   Line,
   Polygon,
@@ -46,18 +46,93 @@ export const RadarChart = (props: RadarChartProps) => {
     polygonShowGradient,
     polygonOpacity,
     polygonGradientOpacity,
+    polygonIsAnimated,
+    polygonAnimationDuration,
     asterLinesStroke,
     asterLinesStrokeWidth,
     asterLinesStrokeDashArray,
     polygonPoints,
+    initialPolygonPoints,
     polygonPointsArray,
+    initialPolygonPointsArray,
     polygonConfigArray,
     angleStep,
     circular,
     hideGrid,
     hideAsterLines,
     getGridLevelProps,
+    animateTogether,
   } = useRadarChart(props);
+
+  const initialPolygonPointsAr = initialPolygonPoints.split(' ');
+  const finalPolygonPointsAr = polygonPoints.split(' ');
+
+  const AnimatedPolygon = Animated.createAnimatedComponent(Polygon);
+
+  const animatedValues = data.map(_ => new Animated.Value(0));
+  const animatedPaths = data.map((_, index) =>
+    animatedValues[index]?.interpolate({
+      inputRange: [0, 1],
+      outputRange: [initialPolygonPointsAr[index], finalPolygonPointsAr[index]],
+    }),
+  );
+
+  useEffect(() => {
+    if (dataSet?.length) return;
+    animatedValues.forEach(animatedValue =>
+      Animated.timing(animatedValue, {
+        toValue: 1,
+        duration: polygonAnimationDuration,
+        useNativeDriver: false,
+      }).start(),
+    );
+  }, [data]);
+
+  /******************************************************************************************/
+  /*********************        Animation handling for dataSet         *********************/
+
+  let animatedValuesForSet: Animated.Value[][] = [];
+  let animatedPathsForSet: any[] = [];
+
+  if (dataSet?.length) {
+    polygonConfigArray?.forEach((_, index) => {
+      const set = dataSet[index];
+      const initialPolygonPointsAr =
+        initialPolygonPointsArray[index].split(' ');
+      const finalPolygonPointsAr = polygonPointsArray[index].split(' ');
+
+      const animatedValues = set.map((_: any) => new Animated.Value(0));
+      animatedValuesForSet.push(animatedValues);
+      const animatedPaths = set.map((i: any, ind: number) =>
+        animatedValues[ind].interpolate({
+          inputRange: [0, 1],
+          outputRange: [initialPolygonPointsAr[ind], finalPolygonPointsAr[ind]],
+        }),
+      );
+      animatedPathsForSet.push(animatedPaths);
+    });
+  }
+
+  useEffect(() => {
+    if (!dataSet?.length) return;
+    animatedValuesForSet?.forEach((animatedValues, index) => {
+      setTimeout(
+        () => {
+          animatedValues?.forEach(animatedValue =>
+            Animated.timing(animatedValue, {
+              toValue: 1,
+              duration: polygonAnimationDuration,
+              useNativeDriver: false,
+            }).start(),
+          );
+        },
+        animateTogether ? 0 : index * polygonAnimationDuration,
+      );
+    });
+  });
+
+  /******************************************************************************************/
+  /******************************************************************************************/
 
   return (
     <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -67,7 +142,7 @@ export const RadarChart = (props: RadarChartProps) => {
             const {fill, gradientColor, opacity, gradientOpacity} =
               polygonConfigItem;
             return (
-              <Defs>
+              <Defs key={`defs-${index}`}>
                 <RadialGradient
                   key={`polygon-${index}`}
                   id={`polygon-${index}`}
@@ -189,6 +264,7 @@ export const RadarChart = (props: RadarChartProps) => {
         {dataSet ? (
           polygonConfigArray?.map((item, index) => {
             const polygonPoints = polygonPointsArray[index];
+            const animatedPolygonPoints = animatedPathsForSet[index];
             const {
               stroke,
               strokeWidth,
@@ -196,12 +272,13 @@ export const RadarChart = (props: RadarChartProps) => {
               fill,
               showGradient,
               opacity,
+              isAnimated = polygonIsAnimated,
             } = item;
 
             return (
-              <Polygon
+              <AnimatedPolygon
                 key={`polygon-${index}`}
-                points={polygonPoints}
+                points={isAnimated ? animatedPolygonPoints : polygonPoints}
                 fill={showGradient ? 'url(#polygon)' : fill}
                 stroke={stroke}
                 strokeWidth={strokeWidth}
@@ -211,8 +288,8 @@ export const RadarChart = (props: RadarChartProps) => {
             );
           })
         ) : (
-          <Polygon
-            points={polygonPoints}
+          <AnimatedPolygon
+            points={polygonIsAnimated ? animatedPaths : polygonPoints}
             fill={polygonShowGradient ? 'url(#polygon)' : polygonFill}
             stroke={polygonStroke}
             strokeWidth={polygonStrokeWidth}
