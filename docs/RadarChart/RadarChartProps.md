@@ -1,31 +1,30 @@
 # Radar Chart Props
 
-| Prop                     | Type             | Description | Default value |
-| ------------------------ | ---------------- | ----------- | ------------- |
-| circular                 | boolean          |             | false         |
-| gridConfig               | GridConfig       |             |               |
-| data                     | number[]         |             | []            |
-| maxValue                 | number           |             | 4             |
-| noOfSections             | number           |             |               |
-| chartSize                | number           |             |               |
-| labelConfig              | LabelConfig      |             |               |
-| labelConfigArray         | LabelConfig[]    |             |               |
-| labels                   | string[]         |             |               |
-| dataLabels               | string[]         |             |               |
-| dataLabelConfig          | LabelConfig      |             |               |
-| dataLabelConfigArray     | LabelConfig[]    |             |               |
-| showdataValuesAsLabels   | boolean          |             |               |
-| polygonConfig            | PolygonConfig    |             |               |
-| asterLinesConfig         | AsterLinesConfig |             |               |
-| hideAsterLines           | boolean          |             |               |
-| hideGrid                 | boolean          |             |               |
-| hideLabels               | boolean          |             |               |
-| dataLabelsConfig         | LabelConfig      |             |               |
-| labelsPositionOffset     | number           |             | 5             |
-| dataLabelsPositionOffset | number           |             | 5             |
-| isAnimated               | boolean          |             | false         |
-| animationDuration        | number           |             | 800           |
-| animateTogether          | boolean          |             | false         |
+| Prop                     | Type             | Description                                                                      | Default value |
+| ------------------------ | ---------------- | -------------------------------------------------------------------------------- | ------------- |
+| circular                 | boolean          |                                                                                  | false         |
+| gridConfig               | GridConfig       |                                                                                  |               |
+| data                     | number[]         |                                                                                  | []            |
+| maxValue                 | number           | maximum data value that the radar chart can render                               | max(...data)  |
+| noOfSections             | number           | number of cocentric polygons/circle that depict the number of levels in the grid | 4             |
+| chartSize                | number           | size of the chart                                                                | 300           |
+| labelConfig              | LabelConfig      |                                                                                  |               |
+| labelConfigArray         | LabelConfig[]    |                                                                                  |               |
+| labels                   | string[]         |                                                                                  |               |
+| dataLabels               | string[]         | label texts at the polygon vertices                                              |               |
+| dataLabelsConfigArray    | LabelConfig[]    |                                                                                  |               |
+| showdataValuesAsLabels   | boolean          |                                                                                  |               |
+| polygonConfig            | PolygonConfig    |                                                                                  |               |
+| asterLinesConfig         | AsterLinesConfig |                                                                                  |               |
+| hideAsterLines           | boolean          |                                                                                  |               |
+| hideGrid                 | boolean          |                                                                                  |               |
+| hideLabels               | boolean          |                                                                                  |               |
+| dataLabelsConfig         | LabelConfig      |                                                                                  |               |
+| labelsPositionOffset     | number           |                                                                                  | 5             |
+| dataLabelsPositionOffset | number           |                                                                                  | 5             |
+| isAnimated               | boolean          |                                                                                  | false         |
+| animationDuration        | number           |                                                                                  | 800           |
+| animateTogether          | boolean          |                                                                                  | false         |
 
 ### GridConfig
 
@@ -83,6 +82,7 @@ type PolygonConfig = {
   showGradient?: boolean;
   opacity?: number;
   gradientOpacity?: number;
+  showDataValuesAsLabels?: boolean;
   isAnimated?: boolean;
   animationDuration?: number;
 };
