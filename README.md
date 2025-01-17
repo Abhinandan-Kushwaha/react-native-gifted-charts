@@ -23,7 +23,7 @@ The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar, Populati
 - Clickable and scrollable
 - Three-D and gradient effects
 - Fully customizable (see the [props](docs/docs.md))
-- Detailed [documentation](https://gifted-chart*web.app/) with examples
+- Detailed [documentation](https://gifted-charts.web.app/) with examples
 - Support for **_combined_** Bar and Line charts
 - Tested to be pixel perfect using [react-native-screenshot-test](https://www.npmjs.com/package/react-native-screenshot-test). See [the screenshot tests here](https://abhinandan-kushwaha.github.io/TestingCharts/ss-test/test.html)
 - Detailed and illustrated [dev docs](docs/dev/index.md) that explain the architecture and working of the library
