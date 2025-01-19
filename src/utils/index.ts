@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
-import {Dimensions} from 'react-native';
+import {useEffect, useRef} from 'react';
+import {Dimensions, Platform} from 'react-native';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const versionString = require('react-native/package.json').version;
@@ -16,10 +16,12 @@ export const rnVersion =
 
 export const screenWidth = Dimensions.get('window').width;
 
-export function usePrevious(value:string) {
+export function usePrevious(value: string) {
   const ref = useRef('');
   useEffect(() => {
     ref.current = value; //assign the value of ref to the argument
-  },[value]); //this code will run when the value of 'value' changes
+  }, [value]); //this code will run when the value of 'value' changes
   return ref.current; //in the end, return the current ref value.
 }
+
+export const isWebApp = Platform.OS === 'web';

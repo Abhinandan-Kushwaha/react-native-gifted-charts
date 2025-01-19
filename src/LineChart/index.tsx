@@ -1,11 +1,4 @@
-import {
-  Fragment,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import {Fragment, useCallback, useEffect, useMemo, useRef} from 'react';
 import {
   View,
   Animated,
@@ -16,7 +9,6 @@ import {
   I18nManager,
   ViewStyle,
 } from 'react-native';
-import {styles} from './styles';
 import {screenWidth, usePrevious} from '../utils';
 import Svg, {
   Path,
@@ -58,7 +50,7 @@ const AnimatedPath = Animated.createAnimatedComponent(Path);
 export const LineChart = (props: LineChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
   const opacityValue = useMemo(() => new Animated.Value(0), []);
-  const heightValue = useMemo(() => new Animated.Value(0), []);
+  // const heightValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
   const widthValue2 = useMemo(() => new Animated.Value(0), []);
   const widthValue3 = useMemo(() => new Animated.Value(0), []);
@@ -1739,6 +1731,10 @@ export const LineChart = (props: LineChartPropsType) => {
     return (
       <View
         key={key ?? 0}
+        onPointerEnter={() => pointerConfig?.onPointerEnter?.()}
+        onPointerLeave={() => pointerConfig?.onPointerLeave?.()}
+        onTouchStart={() => pointerConfig?.onTouchStart?.()}
+        onTouchEnd={() => pointerConfig?.onTouchEnd?.()}
         onMoveShouldSetResponder={evt => (pointerConfig ? true : false)}
         onStartShouldSetResponder={evt =>
           pointerConfig && activatePointersInstantlyOnTouch ? true : false
@@ -1751,6 +1747,7 @@ export const LineChart = (props: LineChartPropsType) => {
           }
           let x = evt.nativeEvent.locationX;
           activatePointers(x);
+          pointerConfig.onResponderGrant?.();
         }}
         onResponderMove={evt => {
           if (!pointerConfig) return;
@@ -1770,6 +1767,7 @@ export const LineChart = (props: LineChartPropsType) => {
             return;
 
           activatePointers(x);
+          pointerConfig?.onResponderMove?.();
         }}
         // onResponderReject={evt => {
         //   console.log('evt...reject.......',evt);
@@ -1780,6 +1778,7 @@ export const LineChart = (props: LineChartPropsType) => {
           setResponderActive(false);
           if (!persistPointer)
             setTimeout(() => setPointerX(0), pointerVanishDelay);
+          pointerConfig?.onResponderEnd?.();
         }}
         onResponderTerminationRequest={evt => false}
         // onResponderTerminate={evt => {
@@ -1874,6 +1873,8 @@ export const LineChart = (props: LineChartPropsType) => {
     return (
       <Animated.View
         key={key ?? 0}
+        onPointerEnter={() => pointerConfig?.onPointerEnter?.()}
+        onPointerLeave={() => pointerConfig?.onPointerLeave?.()}
         onMoveShouldSetResponder={evt => (pointerConfig ? true : false)}
         onStartShouldSetResponder={evt =>
           pointerConfig && activatePointersInstantlyOnTouch ? true : false
@@ -1886,6 +1887,7 @@ export const LineChart = (props: LineChartPropsType) => {
           }
           let x = evt.nativeEvent.locationX;
           activatePointers(x);
+          pointerConfig.onResponderGrant?.();
         }}
         onResponderMove={evt => {
           if (!pointerConfig) return;
@@ -1905,6 +1907,7 @@ export const LineChart = (props: LineChartPropsType) => {
             return;
 
           activatePointers(x);
+          pointerConfig?.onResponderMove?.();
         }}
         // onResponderReject={evt => {
         //   console.log('evt...reject.......',evt);
@@ -1916,6 +1919,7 @@ export const LineChart = (props: LineChartPropsType) => {
           setResponderActive(false);
           if (!persistPointer)
             setTimeout(() => setPointerX(0), pointerVanishDelay);
+          pointerConfig?.onResponderEnd?.();
         }}
         onResponderTerminationRequest={evt => false}
         // onResponderTerminate={evt => {
@@ -2714,6 +2718,7 @@ export const LineChart = (props: LineChartPropsType) => {
       animatedWidth={widthValue}
       renderChartContent={renderChartContent}
       remainingScrollViewProps={remainingScrollViewProps}
+      nestedScrollEnabled={props.nestedScrollEnabled}
     />
   );
 };

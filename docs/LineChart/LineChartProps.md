@@ -753,6 +753,13 @@ type Pointer = {
   horizontalStripConfig?: HorizontalStripConfig; // config for horizontal strip used for crosshair
   hidePointerForMissingValues?: boolean; // false
   hidePointerDataPointForMissingValues?: boolean; // unless explicitly specified, takes the value of hidePointerForMissingValues
+  onTouchStart?: Function
+  onTouchEnd?: Function
+  onResponderGrant?: Function
+  onResponderMove?: Function
+  onResponderEnd?: Function
+  onPointerEnter?: Function
+  onPointerLeave?: Function
 };
 ```
 
