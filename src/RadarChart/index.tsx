@@ -59,6 +59,7 @@ export const RadarChart = (props: RadarChartProps) => {
     angleStep,
     circular,
     hideGrid,
+    hideLabels,
     hideAsterLines,
     getGridLevelProps,
     animateTogether,
@@ -390,39 +391,43 @@ export const RadarChart = (props: RadarChartProps) => {
             })}
 
         {/* Draw category labels */}
-        {labels.map((category, index) => {
-          const angle = index * angleStep;
-          const {x, y} = polarToCartesian(
-            angle,
-            maxValue + labelsPositionOffset,
-          ); // Offset for label position
-          const fontSizeLocal = labelConfigArray?.[index]?.fontSize ?? fontSize;
-          const fontWeightLocal =
-            labelConfigArray?.[index]?.fontWeight ?? fontWeight;
-          const fontFamilyLocal =
-            labelConfigArray?.[index]?.fontFamily ?? fontFamily;
-          const colorLocal = labelConfigArray?.[index]?.stroke ?? stroke;
-          const textAnchorLocal =
-            labelConfigArray?.[index]?.textAnchor ?? textAnchor;
-          const alignmentBaselineLocal =
-            labelConfigArray?.[index]?.alignmentBaseline ?? alignmentBaseline;
-          return (
-            <SvgText
-              key={`label-${index}`}
-              x={x}
-              y={y}
-              fontSize={fontSizeLocal}
-              fontWeight={fontWeightLocal}
-              fontFamily={fontFamilyLocal}
-              fill={colorLocal}
-              textAnchor={(textAnchorLocal as TextAnchor) ?? 'middle'}
-              alignmentBaseline={
-                (alignmentBaselineLocal as AlignmentBaseline) ?? 'middle'
-              }>
-              {category}
-            </SvgText>
-          );
-        })}
+        {hideLabels
+          ? null
+          : labels.map((category, index) => {
+              const angle = index * angleStep;
+              const {x, y} = polarToCartesian(
+                angle,
+                maxValue + labelsPositionOffset,
+              ); // Offset for label position
+              const fontSizeLocal =
+                labelConfigArray?.[index]?.fontSize ?? fontSize;
+              const fontWeightLocal =
+                labelConfigArray?.[index]?.fontWeight ?? fontWeight;
+              const fontFamilyLocal =
+                labelConfigArray?.[index]?.fontFamily ?? fontFamily;
+              const colorLocal = labelConfigArray?.[index]?.stroke ?? stroke;
+              const textAnchorLocal =
+                labelConfigArray?.[index]?.textAnchor ?? textAnchor;
+              const alignmentBaselineLocal =
+                labelConfigArray?.[index]?.alignmentBaseline ??
+                alignmentBaseline;
+              return (
+                <SvgText
+                  key={`label-${index}`}
+                  x={x}
+                  y={y}
+                  fontSize={fontSizeLocal}
+                  fontWeight={fontWeightLocal}
+                  fontFamily={fontFamilyLocal}
+                  fill={colorLocal}
+                  textAnchor={(textAnchorLocal as TextAnchor) ?? 'middle'}
+                  alignmentBaseline={
+                    (alignmentBaselineLocal as AlignmentBaseline) ?? 'middle'
+                  }>
+                  {category}
+                </SvgText>
+              );
+            })}
       </Svg>
     </View>
   );

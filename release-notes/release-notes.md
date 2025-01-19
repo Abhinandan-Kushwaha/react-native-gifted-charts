@@ -1,3 +1,29 @@
+## 🎉 1.4.55
+
+### ✨ Features added-
+
+1. Added the below properties to the `pointerConfig` prop in Line/Area charts, all of which are callback functions. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/968
+
+- onTouchStart
+- onTouchEnd
+- onResponderGrant
+- onResponderMove
+- onResponderEnd
+- onPointerEnter
+- onPointerLeave
+
+### 🐛 Bug fixes
+
+1. Fixed the issue - Pie chart onPress, focusOnPress event is not working on expo web. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/969 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/800
+
+2. Fixed the issue- Unable to use the Gifted Charts Pointer within a React Native Tab View (using `onTouchStart` and `onTouchEnd` in the **pointerConfig** object). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/968
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.54
 
 ### ✨ Features added-

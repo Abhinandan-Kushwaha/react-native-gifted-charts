@@ -1,6 +1,7 @@
-import {Platform, View} from 'react-native';
+import {View} from 'react-native';
 import {PieChartMain} from './main';
-import {PieChartPropsType, pieColors, usePieChart} from 'gifted-charts-core';
+import {PieChartPropsType, usePieChart} from 'gifted-charts-core';
+import {isWebApp} from '../utils';
 
 export const PieChart = (props: PieChartPropsType) => {
   const {
@@ -121,7 +122,7 @@ export const PieChart = (props: PieChartPropsType) => {
               position: 'absolute',
               top: -extraRadius,
               left: -extraRadius,
-              zIndex: Platform.OS === 'web' ? -1 : 0, // was not getting displayed in web (using Expo)
+              zIndex: isWebApp ? -1 : 0, // was not getting displayed in web (using Expo)
             }}>
             <PieChartMain
               {...props}

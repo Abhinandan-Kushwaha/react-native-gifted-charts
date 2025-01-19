@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  GestureResponderEvent,
-  TouchableWithoutFeedback,
-  View,
-  Text,
-  TextStyle,
-} from 'react-native';
+import {TouchableWithoutFeedback, View, Text, TextStyle} from 'react-native';
 import Svg, {
   Path,
   Circle,
@@ -21,7 +15,7 @@ import {
   PieChartMainProps,
   pieColors,
 } from 'gifted-charts-core';
-import {rnVersion} from '../utils';
+import {isWebApp, rnVersion} from '../utils';
 
 export const PieChartMain = (props: PieChartMainProps) => {
   const {
@@ -90,8 +84,16 @@ export const PieChartMain = (props: PieChartMainProps) => {
   const [touchX, setTouchX] = useState(0);
   const [touchY, setTouchY] = useState(0);
 
-  const onPressHandler = (e: GestureResponderEvent) => {
-    let {locationX: x, locationY: y} = e.nativeEvent;
+  const onPressHandler = (e: any) => {
+    let x = 0,
+      y = 0;
+    if (isWebApp) {
+      x = e.clientX;
+      y = e.clientY;
+    } else {
+      x = e.nativeEvent.locationX;
+      y = e.nativeEvent.locationY;
+    }
     x -= extraRadius;
     y -= extraRadius;
     setTouchX(x);
