@@ -56,6 +56,12 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     secondaryNegativeStepHeight,
     secondaryNegativeStepValue,
     barMarginBottom,
+    highlightEnabled,
+    highlightedBarIndex,
+    lowlightOpacity,
+    stackHighlightEnabled,
+    selectedStackIndex,
+    setSelectedStackIndex,
   } = props;
   const {
     containsNegativeValue,
@@ -149,7 +155,9 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     return (
       <>
         <TouchableOpacity
-          disabled={disablePress}
+          disabled={
+            disablePress || (stackHighlightEnabled && !highlightEnabled)
+          }
           activeOpacity={activeOpacity}
           onPress={() => {
             setSelectedIndex(index);
@@ -225,10 +233,24 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
             return (
               <TouchableOpacity
                 key={index}
-                onPress={stackItem.onPress}
+                onPress={(e: any) => {
+                  if (stackHighlightEnabled) {
+                    setSelectedStackIndex(index);
+                  }
+                  stackItem.onPress?.(e);
+                }}
                 activeOpacity={activeOpacity}
-                disabled={disablePress || !stackItem.onPress}
+                disabled={
+                  disablePress ||
+                  highlightEnabled ||
+                  (!stackHighlightEnabled && !stackItem.onPress)
+                }
                 style={{
+                  opacity: stackHighlightEnabled
+                    ? selectedStackIndex === index || selectedStackIndex === -1
+                      ? 1
+                      : lowlightOpacity
+                    : 1,
                   position: 'absolute',
                   bottom: getPosition(index, barHeight) + deductedMargin,
                   width: '100%',
@@ -350,6 +372,13 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
         style={[
           {
             // overflow: 'visible',
+            opacity: highlightEnabled
+              ? highlightedBarIndex === -1
+                ? 1
+                : highlightedBarIndex === index
+                  ? 1
+                  : lowlightOpacity
+              : 1,
             marginBottom: 60 + xAxisLabelsVerticalShift,
             width: item.stacks[0].barWidth || props.barWidth || 30,
             height: totalHeight,

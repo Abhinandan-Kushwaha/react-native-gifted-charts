@@ -1,3 +1,43 @@
+# 🎉 1.4.56
+
+## ✨ Features added-
+
+### 1. Highlight
+
+<img src='../demos/stackHighlight.gif' alt=''/>
+
+Added the feature to highlight a particular Bar, Bar-section (in stacked Bar chart) or Line in Bar charts using the below props-
+
+- highlightEnabled
+- highlightedBarIndex
+- lowlightOpacity
+- stackHighlightEnabled
+- highlightedStackIndex
+
+The above chart is rendered using the `stackHighlightEnabled` and `highlightedStackIndex` props.
+
+#### 2. Added the below props to Bar charts (earlier available only for Line charts)-
+
+- onTouchStart
+- onTouchEnd
+- onResponderGrant
+- onResponderMove
+- onResponderEnd
+- onPointerEnter
+- onPointerLeave
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- "Dataset Lines rendering incorrectly when lengths don't match". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/975
+2. Fixed the issue- "`onPress` for Pie charts on web not working on large screens. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/969#issuecomment-2601506090
+3. Fixed the issue- "onFocus callback always receives last line". Thanks to [brimby](https://github.com/brimby) for his PR https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73
+4. Fixed the issue- "`focusProximity` not working for `dataSets`." See https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73#issuecomment-2614202997
+---
+
+---
+
+---
+
 ## 🎉 1.4.55
 
 ### ✨ Features added-
@@ -38,6 +78,7 @@
 - strokeLinecap4
 - strokeLinecap5
 - Added the `strokeLinecap` property in `secondaryLineConfig` and in the items of `dataSet` array
+  [Title](https://www.guvi.in/courses/marathi/programming/python/)
 
 2. Added support for animation in `Radar` charts. Following props have been added-
 
