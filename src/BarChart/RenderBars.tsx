@@ -44,6 +44,9 @@ const RenderBars = (props: RenderBarsPropsType) => {
     secondaryXAxis,
     secondaryNoOfSectionsBelowXAxis,
     barMarginBottom = 0,
+    highlightEnabled,
+    highlightedBarIndex,
+    lowlightOpacity,
   } = props;
 
   const {heightFactor, barHeight, tooltipProps} = useRenderBars(props);
@@ -239,6 +242,13 @@ const RenderBars = (props: RenderBarsPropsType) => {
   const barWrapperStyle = [
     {
       // overflow: 'visible',
+      opacity: highlightEnabled
+        ? highlightedBarIndex === -1
+          ? 1
+          : highlightedBarIndex === index
+            ? 1
+            : lowlightOpacity
+        : 1,
       marginBottom: 60 + barMarginBottom + xAxisLabelsVerticalShift - 0.5,
       width: commonPropsFor2dAnd3dBars.barWidth,
       height: barHeight,
@@ -365,7 +375,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
         <TouchableOpacity
           activeOpacity={props.activeOpacity || 0.2}
           onPress={() => {
-            if (renderTooltip || props.focusBarOnPress) {
+            if (renderTooltip || props.focusBarOnPress || highlightEnabled) {
               if (props.focusedBarIndex === undefined || !props.onPress) {
                 setSelectedIndex(index);
               }

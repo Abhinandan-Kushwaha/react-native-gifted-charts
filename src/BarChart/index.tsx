@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useMemo, useRef} from 'react';
-import {Animated, Easing, View, ViewStyle} from 'react-native';
+import {Animated, Easing, Pressable, View, ViewStyle} from 'react-native';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
@@ -76,7 +76,10 @@ export const BarChart = (props: BarChartPropsType) => {
     labelsExtraHeight,
     stripOverPointer,
     pointerLabelComponent,
+    selectedIndex,
     setSelectedIndex,
+    selectedStackIndex,
+    setSelectedStackIndex,
     isAnimated,
     animationDuration,
     side,
@@ -190,14 +193,49 @@ export const BarChart = (props: BarChartPropsType) => {
     flexDirection: 'row',
   };
 
+  const activatePointer = (x: number) => {
+    let factor = (x - initialSpacing - barWidth / 2) / (spacing + barWidth);
+    factor = Math.round(factor);
+    factor = Math.min(factor, data.length - 1);
+    factor = Math.max(factor, 0);
+    let z =
+      initialSpacing +
+      (spacing + barWidth) * factor -
+      (pointerRadius || pointerWidth / 2) +
+      barWidth / 2;
+    setPointerX(z);
+    setPointerIndex(factor);
+
+    let item, y;
+    item = (stackData ?? data)[factor];
+    let stackSum = 0;
+    if ('stacks' in item) {
+      stackSum = item.stacks.reduce(
+        (acc: number, stack: any) => acc + (stack.value ?? 0),
+        0,
+      );
+    }
+    y =
+      containerHeight -
+      ((stackSum ?? item.value) * containerHeight) / maxValue -
+      (pointerRadius || pointerHeight / 2) +
+      10;
+    setPointerY(y);
+    setPointerItem(item);
+    pointerConfig?.onResponderGrant?.();
+  };
+
   const renderChartContent = () => {
     if (pointerConfig) {
       return (
         <View
+          onPointerEnter={() => pointerConfig?.onPointerEnter?.()}
+          onPointerLeave={() => pointerConfig?.onPointerLeave?.()}
+          onTouchStart={() => pointerConfig?.onTouchStart?.()}
+          onTouchEnd={() => pointerConfig?.onTouchEnd?.()}
           onStartShouldSetResponder={() => !!pointerConfig}
           onMoveShouldSetResponder={() => !!pointerConfig}
           onResponderGrant={evt => {
-            if (!pointerConfig) return;
             setResponderStartTime(evt.timeStamp);
             if (activatePointersOnLongPress) {
               return;
@@ -208,38 +246,8 @@ export const BarChart = (props: BarChartPropsType) => {
               x > (props.width || screenWidth)
             )
               return;
-            let factor =
-              (x - initialSpacing - barWidth / 2) / (spacing + barWidth);
-            factor = Math.round(factor);
-            factor = Math.min(factor, data.length - 1);
-            factor = Math.max(factor, 0);
-            let z =
-              initialSpacing +
-              (spacing + barWidth) * factor -
-              (pointerRadius || pointerWidth / 2) +
-              barWidth / 2;
-            setPointerX(z);
-            setPointerIndex(factor);
-
-            let item, y;
-            item = (stackData ?? data)[factor];
-            let stackSum = 0;
-            if ('stacks' in item) {
-              stackSum = item.stacks.reduce(
-                (acc: number, stack: any) => acc + (stack.value ?? 0),
-                0,
-              );
-            }
-            y =
-              containerHeight -
-              ((stackSum ?? item.value) * containerHeight) / maxValue -
-              (pointerRadius || pointerHeight / 2) +
-              10;
-            setPointerY(y);
-            setPointerItem(item);
           }}
           onResponderMove={evt => {
-            if (!pointerConfig) return;
             if (
               activatePointersOnLongPress &&
               evt.timeStamp - responderStartTime < activatePointersDelay
@@ -254,34 +262,7 @@ export const BarChart = (props: BarChartPropsType) => {
               x > (props.width || screenWidth)
             )
               return;
-            let factor =
-              (x - initialSpacing - barWidth / 2) / (spacing + barWidth);
-            factor = Math.round(factor);
-            factor = Math.min(factor, (stackData ?? data).length - 1);
-            factor = Math.max(factor, 0);
-            let z =
-              initialSpacing +
-              (spacing + barWidth) * factor -
-              (pointerRadius || pointerWidth / 2) +
-              barWidth / 2;
-            let item, y;
-            setPointerX(z);
-            setPointerIndex(factor);
-            item = (stackData ?? data)[factor];
-            let stackSum = 0;
-            if ('stacks' in item) {
-              item.stacks?.reduce(
-                (acc: number, stack: any) => acc + (stack.value ?? 0),
-                0,
-              );
-            }
-            y =
-              containerHeight -
-              ((stackSum ?? item.value) * containerHeight) / maxValue -
-              (pointerRadius || pointerHeight / 2) +
-              10;
-            setPointerY(y);
-            setPointerItem(item);
+            activatePointer(x);
           }}
           onResponderEnd={evt => {
             setResponderStartTime(0);
@@ -289,6 +270,7 @@ export const BarChart = (props: BarChartPropsType) => {
             setResponderActive(false);
             if (!persistPointer)
               setTimeout(() => setPointerX(0), pointerVanishDelay);
+            pointerConfig?.onResponderEnd?.();
           }}
           onResponderTerminationRequest={evt => false}
           style={contentContainerStyle}>
@@ -333,7 +315,20 @@ export const BarChart = (props: BarChartPropsType) => {
         </View>
       );
     } else {
-      return <View style={contentContainerStyle}>{renderChart()}</View>;
+      return (
+        <Pressable
+          style={contentContainerStyle}
+          onPress={() => {
+            if (props.highlightEnabled && selectedIndex !== -1)
+              setSelectedIndex(-1);
+            if (props.stackHighlightEnabled && selectedStackIndex !== -1) {
+              setSelectedStackIndex(-1);
+              // props.setHighlightedStackIndex?.(-1)
+            }
+          }}>
+          {renderChart()}
+        </Pressable>
+      );
     }
   };
 
@@ -352,6 +347,9 @@ export const BarChart = (props: BarChartPropsType) => {
             stackBorderBottomLeftRadius={props.stackBorderBottomLeftRadius}
             stackBorderBottomRightRadius={props.stackBorderBottomRightRadius}
             autoShiftLabelsForNegativeStacks={autoShiftLabelsForNegativeStacks}
+            selectedStackIndex={selectedStackIndex}
+            setSelectedStackIndex={setSelectedStackIndex}
+            // highlightedStackIndex={props.highlightedStackIndex??-1}
             {...getPropsCommonForBarAndStack(item, index)}
           />
         );

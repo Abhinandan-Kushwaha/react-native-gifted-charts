@@ -27,9 +27,16 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     selectedIndex,
     containerHeightIncludingBelowXAxis,
     yAxisOffset,
+    highlightEnabled,
+    lowlightOpacity,
   } = props;
 
   const firstBarWidth = data[0].barWidth ?? barWidth;
+  const opacity = highlightEnabled
+    ? selectedIndex === -1
+      ? 1
+      : lowlightOpacity
+    : 1;
 
   const dataPointsProps: DataPointProps = {
     data,
@@ -42,6 +49,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     spacing,
     selectedIndex,
     yAxisOffset,
+    opacity,
   };
 
   const specificVerticalLinesProps = {
@@ -84,6 +92,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
           <Path
             d={points}
             fill="none"
+            opacity={opacity}
             stroke={lineConfig.color}
             strokeWidth={lineConfig.thickness}
             strokeDasharray={lineConfig.strokeDashArray}
@@ -124,6 +133,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
           <Path
             d={points}
             fill="none"
+            opacity={opacity}
             stroke={lineConfig.color}
             strokeWidth={lineConfig.thickness}
             strokeDasharray={lineConfig.strokeDashArray}

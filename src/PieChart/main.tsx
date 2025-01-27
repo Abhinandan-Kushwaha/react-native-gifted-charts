@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TouchableWithoutFeedback, View, Text, TextStyle} from 'react-native';
+import {Pressable, View, Text, TextStyle} from 'react-native';
 import Svg, {
   Path,
   Circle,
@@ -83,13 +83,15 @@ export const PieChartMain = (props: PieChartMainProps) => {
 
   const [touchX, setTouchX] = useState(0);
   const [touchY, setTouchY] = useState(0);
+  const [top, setTop] = useState(0);
+  const [left, setLeft] = useState(0);
 
   const onPressHandler = (e: any) => {
     let x = 0,
       y = 0;
     if (isWebApp) {
-      x = e.clientX;
-      y = e.clientY;
+      x = e.clientX - left;
+      y = e.clientY - top;
     } else {
       x = e.nativeEvent.locationX;
       y = e.nativeEvent.locationY;
@@ -124,9 +126,14 @@ export const PieChartMain = (props: PieChartMainProps) => {
   };
 
   return (
-    <TouchableWithoutFeedback onPress={onPressHandler}>
+    <Pressable onPress={onPressHandler}>
       <View
         pointerEvents="box-only"
+        onLayout={(e: any) => {
+          if (!isWebApp) return;
+          setTop(e.nativeEvent.layout.top);
+          setLeft(e.nativeEvent.layout.left);
+        }}
         style={[
           {
             backgroundColor,
@@ -499,6 +506,6 @@ export const PieChartMain = (props: PieChartMainProps) => {
           </View>
         ) : null}
       </View>
-    </TouchableWithoutFeedback>
+    </Pressable>
   );
 };

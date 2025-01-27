@@ -56,6 +56,9 @@
 | showValuesAsTopLabel         | boolean              | When set to true, shows the value as a label at the top of the bar                                                                                | false               |
 | topLabelContainerStyle       | object               | style of the top label container                                                                                                                  | \_                  |
 | topLabelTextStyle            | object               | text style for the top labels that appear at the top of bars                                                                                      | \_                  |
+| highlightEnabled             | boolean              | used to highlight a particular Bar on press, by decreasing the opacity of the remaining (setting them to lowlightOpacity)                         | false               |
+| lowlightOpacity              | number               | the opacity of the un-highlighted bars when one of them is highlighted                                                                            | 0.3                 |
+| highlightedBarIndex          | number               | the index of the highlighted bar                                                                                                                  | -1                  |
 
 #### lineConfig
 
@@ -175,14 +178,14 @@ type FocusedBarConfig = {
 
 ```ts
 type CustomBackground = {
-  color?: ColorValue
-  component?: Function
-  horizontalShift?: number
-  verticalShift?: number
-  height?: number
-  width?: number
-  widthAdjustment?: number
-}
+  color?: ColorValue;
+  component?: Function;
+  horizontalShift?: number;
+  verticalShift?: number;
+  height?: number;
+  width?: number;
+  widthAdjustment?: number;
+};
 ```
 
 ---
@@ -588,6 +591,8 @@ The value corresponding to the stacks key is an array of objects, each object re
 | stackBorderBottomLeftRadius      | number                | Bottom left border radius of the bottom bar of the stack                                                                  |
 | stackBorderBottomRightRadius     | number                | Bottom right border radius of the bottom bar of the stack                                                                 |
 | autoShiftLabelsForNegativeStacks | boolean               | Whether the x axis labels should auto shift to a position below the bar, if the bar is under x-axis due to negative value |
+| stackHighlightEnabled            | boolean               | used to highlight a section of the Bar from each stack on press                                                           |
+| highlightedStackIndex               | number                | index of the selected section (state variable)                                                                            |
 
 **Note** The `frontColor` prop is replaced by `color` prop in Stacked Bar charts.
 

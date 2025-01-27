@@ -17,6 +17,7 @@ export const renderDataPoints = (props: DataPointProps) => {
     spacing,
     selectedIndex,
     yAxisOffset,
+    opacity,
   } = props;
   return data.map((item: any, index: number) => {
     if (
@@ -48,6 +49,7 @@ export const renderDataPoints = (props: DataPointProps) => {
           style={[
             styles.customDataPointContainer,
             {
+              opacity,
               height: lineConfig.dataPointsHeight,
               width: lineConfig.dataPointsWidth,
               top:
@@ -93,10 +95,12 @@ export const renderDataPoints = (props: DataPointProps) => {
             width={lineConfig.dataPointsWidth}
             height={lineConfig.dataPointsHeight}
             fill={dataPointColor}
+            opacity={opacity}
           />
           {item.dataPointText && (
             <CanvasText
               fill={item.textColor || lineConfig.textColor}
+              opacity={opacity}
               fontSize={item.textFontSize || lineConfig.textFontSize}
               x={
                 getXForLineInBar(
@@ -145,10 +149,12 @@ export const renderDataPoints = (props: DataPointProps) => {
           )}
           r={dataPointRadius}
           fill={dataPointColor}
+          opacity={opacity}
         />
         {item.dataPointText && (
           <CanvasText
             fill={item.textColor || lineConfig.textColor}
+            opacity={opacity}
             fontSize={item.textFontSize || lineConfig.textFontSize}
             x={
               getXForLineInBar(
