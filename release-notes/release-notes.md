@@ -78,7 +78,6 @@ The above chart is rendered using the `stackHighlightEnabled` and `highlightedSt
 - strokeLinecap4
 - strokeLinecap5
 - Added the `strokeLinecap` property in `secondaryLineConfig` and in the items of `dataSet` array
-  [Title](https://www.guvi.in/courses/marathi/programming/python/)
 
 2. Added support for animation in `Radar` charts. Following props have been added-
 
