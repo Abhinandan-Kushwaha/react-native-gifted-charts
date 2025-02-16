@@ -44,6 +44,9 @@
 | showExternalLabels          | boolean              | To show labels for each Pie section outside the chart towards left or right based on its position         | false                                          |
 | labelLineConfig             | LabelLineConfig      | Object to configure the properties (like length, color, tailLength etc.) of external label's line         | \_                                             |
 | externalLabelComponent      | Function             | Component to be rendered as external labels for each Pie section                                          | \_                                             |
+| edgesPressable              | boolean              | used with `focusOnPress`, to make the extra length of the focused slice pressable (more details below)    | false                                          |
+
+**edgesPressable**: Ususally the entire slice of the Pie chart is pressable, but when a slice is foused, it becomes larger. In that case the extra length of the slice protruding out of the chart is unpressable. To make that extra length also pressable, we can use the `edgesPressable` prop. If `edgesPressable` is set to true, the edges of the pie will be pressable, but you may need to press twice for focus- once for unfocusing the already focused pie and then for focusing the new pie
 
 ### Tooltip
 

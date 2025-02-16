@@ -1,3 +1,26 @@
+# 🎉 1.4.57
+
+## ✨ Features added-
+
+1. Added the prop `edgesPressable` to Pie charts. Ususally the entire slice of the Pie chart is pressable, but when a slice is foused, it becomes larger. In that case the extra length of the slice protruding out of the chart is unpressable. To make that extra length also pressable, we can use the `edgesPressable` prop. If `edgesPressable` is set to true, the edges of the pie will be pressable, but you may need to press twice for focus- once for unfocusing the already focused pie and then for focusing the new pie. This prop was added after fixing the issue- "Can't select other Pie slices by just one press event". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/
+
+## 🐛 Bug fixes
+
+1. Fixed the iussue- "Pointer and strip not showing immediately on bar press". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1002
+
+2. Fixed the issue- "LineChart 1st data point shows pointer label on the most top side of the datapoint if initial data value is 0". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1003
+
+3. Fixed the issue- "`dynamicLegendComponent` doesn't show actual values from data when used with `yAxisOffset`". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1000#discussioncomment-12208608 
+
+4. Fixed the issue- "donut PieChart not showing tooltip correctly". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/983
+
+
+---
+
+---
+
+---
+
 # 🎉 1.4.56
 
 ## ✨ Features added-
