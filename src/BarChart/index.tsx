@@ -237,7 +237,10 @@ export const BarChart = (props: BarChartPropsType) => {
           onMoveShouldSetResponder={() => !!pointerConfig}
           onResponderGrant={evt => {
             setResponderStartTime(evt.timeStamp);
-            if (activatePointersOnLongPress) {
+            if (
+              activatePointersOnLongPress ||
+              !pointerConfig?.activatePointersInstantlyOnTouch
+            ) {
               return;
             }
             let x = evt.nativeEvent.locationX;
@@ -246,6 +249,8 @@ export const BarChart = (props: BarChartPropsType) => {
               x > (props.width || screenWidth)
             )
               return;
+            setResponderActive(true);
+            activatePointer(x);
           }}
           onResponderMove={evt => {
             if (

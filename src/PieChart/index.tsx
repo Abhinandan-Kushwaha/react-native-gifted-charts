@@ -1,7 +1,8 @@
-import {View} from 'react-native';
+import {View, Text, TextStyle} from 'react-native';
 import {PieChartMain} from './main';
 import {PieChartPropsType, usePieChart} from 'gifted-charts-core';
 import {isWebApp} from '../utils';
+import {useState} from 'react';
 
 export const PieChart = (props: PieChartPropsType) => {
   const {
@@ -27,7 +28,27 @@ export const PieChart = (props: PieChartPropsType) => {
     isDataShifted,
     paddingHorizontal,
     paddingVertical,
+    data,
+    showTooltip,
+    tooltipHorizontalShift,
+    tooltipVerticalShift,
+    tooltipComponent,
+    getTooltipText,
+    tooltipBackgroundColor,
+    tooltipBorderRadius,
+    tooltipWidth,
+    tooltipTextNoOfLines,
+    textColor,
+    textSize,
+    font,
+    fontWeight,
+    fontStyle,
+    tooltipSelectedIndex,
+    setTooltipSelectedIndex,
   } = usePieChart(props);
+
+  const [touchX, setTouchX] = useState(0);
+  const [touchY, setTouchY] = useState(0);
 
   const renderInnerCircle = (
     innerRadius: number,
@@ -90,6 +111,63 @@ export const PieChart = (props: PieChartPropsType) => {
     return null;
   };
 
+  const renderTooltip = () => {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          left:
+            touchX > (radius + extraRadius) * 1.5
+              ? props.tooltipHorizontalShift
+                ? touchX - tooltipHorizontalShift
+                : touchX -
+                  (tooltipWidth ??
+                    getTooltipText(tooltipSelectedIndex).length * 10)
+              : touchX - tooltipHorizontalShift,
+          top:
+            touchY < 30
+              ? props.tooltipVerticalShift
+                ? touchY - tooltipVerticalShift
+                : touchY
+              : touchY - tooltipVerticalShift,
+        }}>
+        {data[tooltipSelectedIndex].tooltipComponent ? (
+          data[tooltipSelectedIndex].tooltipComponent?.()
+        ) : tooltipComponent ? (
+          tooltipComponent(tooltipSelectedIndex)
+        ) : (
+          <View
+            style={{
+              backgroundColor: tooltipBackgroundColor,
+              borderRadius: tooltipBorderRadius,
+              paddingHorizontal: 8,
+              paddingBottom: 8,
+              paddingTop: 4,
+              width: tooltipWidth,
+            }}>
+            <Text
+              numberOfLines={tooltipTextNoOfLines}
+              style={
+                {
+                  color:
+                    data[tooltipSelectedIndex].textColor ||
+                    textColor ||
+                    'white',
+                  textAlign: 'center',
+                  fontSize: textSize,
+                  fontFamily: font,
+                  fontWeight,
+                  fontStyle,
+                } as TextStyle
+              }>
+              {getTooltipText(tooltipSelectedIndex)}
+            </Text>
+          </View>
+        )}
+      </View>
+    );
+  };
+
   if (!total) return null;
 
   return (
@@ -104,7 +182,10 @@ export const PieChart = (props: PieChartPropsType) => {
       <View style={{position: 'absolute'}}>
         <PieChartMain
           {...props}
-          selectedIndex={selectedIndex}
+          setTouchX={setTouchX}
+          setTouchY={setTouchY}
+          tooltipSelectedIndex={tooltipSelectedIndex}
+          setTooltipSelectedIndex={setTooltipSelectedIndex}
           setSelectedIndex={setSelectedIndex}
           paddingHorizontal={paddingHorizontal}
           paddingVertical={paddingVertical}
@@ -126,26 +207,16 @@ export const PieChart = (props: PieChartPropsType) => {
             }}>
             <PieChartMain
               {...props}
+              setTouchX={setTouchX}
+              setTouchY={setTouchY}
+              tooltipSelectedIndex={tooltipSelectedIndex}
+              setTooltipSelectedIndex={setTooltipSelectedIndex}
               data={[
                 {
                   ...props.data[selectedIndex],
-                  // value: props.data[selectedIndex].value,
-                  // text: props.data[selectedIndex].text,
-                  // color:
-                  //   props.data[selectedIndex].color ||
-                  //   pieColors[selectedIndex % 9],
-                  // strokeColor:
-                  //   props.data[selectedIndex].strokeColor || undefined,
-                  // strokeWidth:
-                  //   props.data[selectedIndex].strokeWidth || undefined,
-                  // gradientCenterColor:
-                  //   props.data[selectedIndex].gradientCenterColor || undefined,
-                  // shiftTextX: props.data[selectedIndex].shiftTextX || undefined,
-                  // shiftTextY: props.data[selectedIndex].shiftTextY || undefined,
                 },
                 {
                   value: total - props.data[selectedIndex].value,
-                  // onPress: () => alert('black'),
                   peripheral: true,
                   strokeWidth: 0,
                 },
@@ -165,6 +236,7 @@ export const PieChart = (props: PieChartPropsType) => {
         innerRadius - inwardExtraLengthForFocused,
         inwardExtraLengthForFocused ? 0 : innerCircleBorderWidth,
       )}
+      {showTooltip && tooltipSelectedIndex !== -1 ? renderTooltip() : null}
     </View>
   );
 };

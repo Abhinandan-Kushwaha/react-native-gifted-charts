@@ -95,8 +95,8 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
                   horizontalStripConfig.thickness ?? pointerStripWidth
                 }
                 strokeDasharray={
-                  pointerConfig?.horizontalStripConfig?.strokeDashArray ??
-                  pointerConfig?.strokeDashArray
+                  (pointerConfig?.horizontalStripConfig?.strokeDashArray ??
+                  pointerConfig?.strokeDashArray)
                     ? pointerConfig?.strokeDashArray
                     : ''
                 }

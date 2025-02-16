@@ -337,6 +337,8 @@ export const LineChart = (props: LineChartPropsType) => {
     selectedLineNumber,
     handleFocus,
     handleUnFocus,
+    stepValue,
+    pointerItemLocal,
   } = useLineChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -1035,39 +1037,20 @@ export const LineChart = (props: LineChartPropsType) => {
   };
 
   const renderStripAndLabel = () => {
-    let pointerItemLocal, pointerYLocal;
+    let pointerYLocal;
 
-    pointerItemLocal = [
-      {...pointerItem, value: props.data?.[pointerIndex]?.value},
-    ];
     let arr = [pointerY];
     if (pointerY2 !== 0) {
       arr.push(pointerY2);
-      pointerItemLocal.push({
-        ...pointerItem,
-        value: props.data2?.[pointerIndex]?.value,
-      });
     }
     if (pointerY3 !== 0) {
       arr.push(pointerY3);
-      pointerItemLocal.push({
-        ...pointerItem,
-        value: props.data3?.[pointerIndex]?.value,
-      });
     }
     if (pointerY4 !== 0) {
       arr.push(pointerY4);
-      pointerItemLocal.push({
-        ...pointerItem,
-        value: props.data4?.[pointerIndex]?.value,
-      });
     }
     if (pointerY5 !== 0) {
       arr.push(pointerY5);
-      pointerItemLocal.push({
-        ...pointerItem,
-        value: props.data5?.[pointerIndex]?.value,
-      });
     }
     pointerYLocal = Math.min(...arr);
 
@@ -2693,15 +2676,7 @@ export const LineChart = (props: LineChartPropsType) => {
               pointerConfig.dynamicLegendContainerStyle,
             ]}>
             {pointerConfig.dynamicLegendComponent(
-              dataSet
-                ? pointerItemsForSet
-                : [
-                    pointerItem,
-                    pointerItem2,
-                    pointerItem3,
-                    pointerItem4,
-                    pointerItem5,
-                  ].filter(item => !!item),
+              pointerItemLocal,
               pointerIndex,
             )}
           </View>

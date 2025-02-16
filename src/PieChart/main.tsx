@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Pressable, View, Text, TextStyle} from 'react-native';
+import {Pressable, View} from 'react-native';
 import Svg, {
   Path,
   Circle,
@@ -37,16 +37,6 @@ export const PieChartMain = (props: PieChartMainProps) => {
     strokeWidth,
     strokeColor,
     innerRadius,
-    showTooltip,
-    tooltipWidth,
-    tooltipComponent,
-    tooltipVerticalShift,
-    tooltipHorizontalShift,
-    tooltipTextNoOfLines,
-    tooltipBackgroundColor,
-    tooltipBorderRadius,
-    tooltipSelectedIndex,
-    getTooltipText,
     showText,
     textColor,
     textSize,
@@ -75,14 +65,15 @@ export const PieChartMain = (props: PieChartMainProps) => {
     font,
     fontWeight,
     fontStyle,
+    edgesPressable,
   } = getPieChartMainProps(props);
+
+  const{setTouchX,setTouchY} = props;
 
   let prevSide = 'right';
   let prevLabelComponentX = 0;
   let wasFirstItemOnPole = false;
 
-  const [touchX, setTouchX] = useState(0);
-  const [touchY, setTouchY] = useState(0);
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(0);
 
@@ -126,7 +117,9 @@ export const PieChartMain = (props: PieChartMainProps) => {
   };
 
   return (
-    <Pressable onPress={onPressHandler}>
+    <Pressable
+      onPress={onPressHandler}
+      pointerEvents={isBiggerPie && !edgesPressable ? 'none' : 'auto'}>
       <View
         pointerEvents="box-only"
         onLayout={(e: any) => {
@@ -200,13 +193,6 @@ export const PieChartMain = (props: PieChartMainProps) => {
                     ? `url(#grad${0})`
                     : data[0].color || pieColors[0 % 9]
                 }
-                // onPress={() => {
-                //   data[0].onPress
-                //     ? data[0].onPress()
-                //     : props.onPress
-                //       ? props.onPress(data[0], 0)
-                //       : null;
-                // }}
               />
             </>
           ) : (
@@ -365,26 +351,6 @@ export const PieChartMain = (props: PieChartMainProps) => {
                         textSize
                       }
                       fill={item.textBackgroundColor || textBackgroundColor}
-                      // onPress={() => {
-                      //   item.onLabelPress
-                      //     ? item.onLabelPress()
-                      //     : props.onLabelPress
-                      //       ? props.onLabelPress(item, index)
-                      //       : item.onPress
-                      //         ? item.onPress()
-                      //         : props.onPress
-                      //           ? props.onPress(item, index)
-                      //           : null;
-                      //   if (props.focusOnPress) {
-                      //     if (props.selectedIndex === index) {
-                      //       if (toggleFocusOnPress) {
-                      //         props.setSelectedIndex(-1);
-                      //       }
-                      //     } else {
-                      //       props.setSelectedIndex(index);
-                      //     }
-                      //   }
-                      // }}
                     />
                   ) : null}
                   {showText && (
@@ -404,26 +370,6 @@ export const PieChartMain = (props: PieChartMainProps) => {
                         (item.textSize || textSize) / 1.8
                       }
                       y={y + (item.shiftTextY || 0)}
-                      // onPress={() => {
-                      //   item.onLabelPress
-                      //     ? item.onLabelPress()
-                      //     : props.onLabelPress
-                      //       ? props.onLabelPress(item, index)
-                      //       : item.onPress
-                      //         ? item.onPress()
-                      //         : props.onPress
-                      //           ? props.onPress(item, index)
-                      //           : null;
-                      //   if (props.focusOnPress) {
-                      //     if (props.selectedIndex === index) {
-                      //       if (toggleFocusOnPress) {
-                      //         props.setSelectedIndex(-1);
-                      //       }
-                      //     } else {
-                      //       props.setSelectedIndex(index);
-                      //     }
-                      //   }
-                      // }}
                     >
                       {item.text || (showValuesAsLabels ? item.value + '' : '')}
                     </SvgText>
@@ -450,60 +396,6 @@ export const PieChartMain = (props: PieChartMainProps) => {
               zIndex: -1,
             }}
           />
-        ) : null}
-        {showTooltip && tooltipSelectedIndex !== -1 ? (
-          <View
-            style={{
-              position: 'absolute',
-              left:
-                touchX > (radius + extraRadius) * 1.5
-                  ? props.tooltipHorizontalShift
-                    ? touchX - tooltipHorizontalShift
-                    : touchX -
-                      (tooltipWidth ??
-                        getTooltipText(tooltipSelectedIndex).length * 10)
-                  : touchX - tooltipHorizontalShift,
-              top:
-                touchY < 30
-                  ? props.tooltipVerticalShift
-                    ? touchY - tooltipVerticalShift
-                    : touchY
-                  : touchY - tooltipVerticalShift,
-            }}>
-            {data[tooltipSelectedIndex].tooltipComponent ? (
-              data[tooltipSelectedIndex].tooltipComponent?.()
-            ) : tooltipComponent ? (
-              tooltipComponent(tooltipSelectedIndex)
-            ) : (
-              <View
-                style={{
-                  backgroundColor: tooltipBackgroundColor,
-                  borderRadius: tooltipBorderRadius,
-                  paddingHorizontal: 8,
-                  paddingBottom: 8,
-                  paddingTop: 4,
-                  width: tooltipWidth,
-                }}>
-                <Text
-                  numberOfLines={tooltipTextNoOfLines}
-                  style={
-                    {
-                      color:
-                        data[tooltipSelectedIndex].textColor ||
-                        textColor ||
-                        'white',
-                      textAlign: 'center',
-                      fontSize: textSize,
-                      fontFamily: font,
-                      fontWeight,
-                      fontStyle,
-                    } as TextStyle
-                  }>
-                  {getTooltipText(tooltipSelectedIndex)}
-                </Text>
-              </View>
-            )}
-          </View>
         ) : null}
       </View>
     </Pressable>
