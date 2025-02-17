@@ -2,7 +2,7 @@
 
 ## ✨ Features added-
 
-1. Added the prop `edgesPressable` to Pie charts. Ususally the entire slice of the Pie chart is pressable, but when a slice is foused, it becomes larger. In that case the extra length of the slice protruding out of the chart is unpressable. To make that extra length also pressable, we can use the `edgesPressable` prop. If `edgesPressable` is set to true, the edges of the pie will be pressable, but you may need to press twice for focus- once for unfocusing the already focused pie and then for focusing the new pie. This prop was added after fixing the issue- "Can't select other Pie slices by just one press event". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/
+1. Added the prop `edgesPressable` to Pie charts. Ususally the entire slice of the Pie chart is pressable, but when a slice is foused, it becomes larger. In that case the extra length of the slice protruding out of the chart is unpressable. To make that extra length also pressable, we can use the `edgesPressable` prop. If `edgesPressable` is set to true, the edges of the pie will be pressable, but you may need to press twice for focus- once for unfocusing the already focused pie and then for focusing the new pie. This prop was added after fixing the issue- "Can't select other Pie slices by just one press event". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/994.
 
 ## 🐛 Bug fixes
 
