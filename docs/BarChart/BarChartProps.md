@@ -354,6 +354,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | xAxisTextNumberOfLines         | number                        | Number of lines for x axis label text                                                                          | 1                            |
 | xAxisLabelsHeight              | number                        | Height of X axis labels container                                                                              | xAxisTextNumberOfLines \* 18 |
 | xAxisLabelsVerticalShift       | number                        | prop to adjust the vertical position of X axis labels (move X axis labels up or down)                          | 0                            |
+| xAxisLabelsAtBottom            | boolean                       | places the x-axis labels at bottom of the chart, useful in charts involving -ve values (4th quadrant)          | false                        |
 | labelsExtraHeight              | number                        | used to display large rotated labels on X-axis (useful when using the **rotateLabel** prop)                    | 0                            |
 | secondaryYAxis                 | secondaryYAxisType            | displays and controls the properties of the secondary Y axis on the right side                                 | null                         |
 | secondaryData                  | Array of items                | the secondary data that will be rendered along the secondary Y axis                                            | undefined                    |

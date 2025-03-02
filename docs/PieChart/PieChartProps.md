@@ -35,7 +35,7 @@
 | showValuesAsLabels          | boolean              | When set to true, the values of the Pie sections are displayed as labels                                  | false                                          |
 | showTooltip                 | boolean              | When set to true, displays a tooltip on pressing                                                          | false                                          |
 | showValuesAsTooltipText     | boolean              | When set to true, the values of the Pie sections are displayed as tooltips (on pressing)                  | true                                           |
-| centerLabelComponent        | Function             | Component to be rendered at the center of the Pie chart                                                   | \_                                             |
+| centerLabelComponent        | Function             | Component to be rendered at the center of the Pie chart receives `selectedIndex` as parameter             | \_                                             |
 | semiCircle                  | boolean              | When set to true, renders the Pie Chart in a semi-circle. donut semiCircle charts look like a speed-meter | false                                          |
 | labelsPosition              | string               | Tells where inside the Pie sections should the labels be shown- 'onBorder', 'outward', 'inward' or 'mid'  | 'outward' for donut and semicircle, else 'mid' |
 | pieInnerComponent           | () => svg element    | Svg element to be rendered inside each Pie like a label (position controlled by 'labelsPosition' )        | \_                                             |

@@ -7,7 +7,7 @@
   <a href="https://www.npmjs.com/package/react-native-gifted-charts">
     <img src="/demos/npmIcon.png" height="auto" width="28" height="28" />
   </a> &nbsp; &nbsp;
-  <a href="https://discord.gg/ptdwsw48">
+  <a href="https://discord.gg/FBbu9duJxs">
     <img src="/demos/discord.png" height="auto" width="30" height="30" />
   </a>
 </p>

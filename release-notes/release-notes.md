@@ -1,3 +1,24 @@
+# 🎉 1.4.58
+
+## ✨ Features added-
+
+1. In Donut charts, the `centerLabelComponent` callback now accepts index parameter. Initially index is -1. On pressing any pie slice, it is set to the pressed slice's index. This fixes- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/994#issuecomment-2662597863
+2. Added the props `focusedDataPointLabelComponent` and `dataPointLabelComponent` to LineCharts. Eearlier configurable only inside the data array, now it can be passed directly as a prop.
+3. Added the prop `xAxisLabelsAtBottom` to Bar, Stacked bar, line and Area charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1015#issuecomment-2680863441
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- "Pie charts showing log `showTooltip-----> undefined`" See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1020
+2. Fixed the issue- "Pressing on the X-axis label not triggering the respective tooltip in Stack Bar chart". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1010
+3. Fixed the issue- "Pointer jumping when spacing is less and user scrolls at the left end of the chart towards Y-axis". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/410
+4. Fixed the issue - "`xAxisLabelsVerticalShift` does not work with Line and Area charts".
+
+---
+
+---
+
+---
+
 # 🎉 1.4.57
 
 ## ✨ Features added-
@@ -10,10 +31,9 @@
 
 2. Fixed the issue- "LineChart 1st data point shows pointer label on the most top side of the datapoint if initial data value is 0". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1003
 
-3. Fixed the issue- "`dynamicLegendComponent` doesn't show actual values from data when used with `yAxisOffset`". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1000#discussioncomment-12208608 
+3. Fixed the issue- "`dynamicLegendComponent` doesn't show actual values from data when used with `yAxisOffset`". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1000#discussioncomment-12208608
 
 4. Fixed the issue- "donut PieChart not showing tooltip correctly". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/983
-
 
 ---
 
@@ -55,6 +75,7 @@ The above chart is rendered using the `stackHighlightEnabled` and `highlightedSt
 2. Fixed the issue- "`onPress` for Pie charts on web not working on large screens. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/969#issuecomment-2601506090
 3. Fixed the issue- "onFocus callback always receives last line". Thanks to [brimby](https://github.com/brimby) for his PR https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73
 4. Fixed the issue- "`focusProximity` not working for `dataSets`." See https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73#issuecomment-2614202997
+
 ---
 
 ---

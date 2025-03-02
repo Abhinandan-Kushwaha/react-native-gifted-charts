@@ -697,7 +697,10 @@ export const LineChart = (props: LineChartPropsType) => {
           item.customDataPoint ||
           props.customDataPoint;
         dataPointLabelComponent =
-          item.focusedDataPointLabelComponent || item.dataPointLabelComponent;
+          item.focusedDataPointLabelComponent ||
+          item.dataPointLabelComponent ||
+          props.focusedDataPointLabelComponent ||
+          props.dataPointLabelComponent;
       } else {
         dataPointsShape = item.dataPointShape || dataPtsShape;
         dataPointsWidth = item.dataPointWidth || dataPtsWidth;
@@ -708,7 +711,8 @@ export const LineChart = (props: LineChartPropsType) => {
           text = '';
         }
         customDataPoint = item.customDataPoint || props.customDataPoint;
-        dataPointLabelComponent = item.dataPointLabelComponent;
+        dataPointLabelComponent =
+          item.dataPointLabelComponent || props.dataPointLabelComponent;
       }
 
       if (showValuesAsDataPointsText) {
@@ -1566,7 +1570,7 @@ export const LineChart = (props: LineChartPropsType) => {
   // }
 
   const activatePointers = (x: number) => {
-    let factor = (x - initialSpacing) / spacing; // getClosestValueFromSpacingArray(cumulativeSpacing1,x-initialSpacing)
+    let factor = (x - initialSpacing) / (props.spacing1 ?? spacing); // getClosestValueFromSpacingArray(cumulativeSpacing1,x-initialSpacing)
     factor = Math.round(factor);
     factor = Math.min(factor, (data0 ?? data).length - 1);
     factor = Math.max(factor, 0);
@@ -1743,12 +1747,13 @@ export const LineChart = (props: LineChartPropsType) => {
             setResponderActive(true);
           }
           let x = evt.nativeEvent.locationX;
+          let px = evt.nativeEvent.pageX;
+          if (yAxisLabelWidth != -1 && x == px) return; // if locationX and pageX are equal, it means pointer has gone out of the chart, but this is not the case when yAxisLabelWidth is -1
           if (
             !activatePointersOnLongPress &&
             x > (props.width || Dimensions.get('window').width)
           )
             return;
-
           activatePointers(x);
           pointerConfig?.onResponderMove?.();
         }}
