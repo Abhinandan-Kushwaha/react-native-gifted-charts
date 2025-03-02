@@ -91,7 +91,31 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
 
   const renderLabel = (label: string, labelTextStyle: any) => {
     return (
-      <View
+      <TouchableOpacity
+        disabled={disablePress || (stackHighlightEnabled && !highlightEnabled)}
+        activeOpacity={activeOpacity}
+        onPress={() => {
+          setSelectedIndex(index);
+          if (item.onPress) {
+            item.onPress();
+          } else if (props.onPress) {
+            props.onPress(item, index);
+          }
+        }}
+        onLongPress={() => {
+          if (item.onLongPress) {
+            item.onLongPress();
+          } else if (props.onLongPress) {
+            props.onLongPress(item, index);
+          }
+        }}
+        onPressOut={() => {
+          if (item.onPressOut) {
+            item.onPressOut();
+          } else if (props.onPressOut) {
+            props.onPressOut(item, index);
+          }
+        }}
         style={[
           {
             width:
@@ -102,11 +126,12 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
                 30) +
               spacing / 2,
             position: 'absolute',
-            bottom: autoShiftLabelsForNegativeStacks
-              ? containsNegativeValue
-                ? -0
-                : -6 - xAxisTextNumberOfLines * 18
-              : -labelsDistanceFromXaxis - 6 - xAxisTextNumberOfLines * 18,
+            bottom:
+              !labelsDistanceFromXaxis && autoShiftLabelsForNegativeStacks
+                ? containsNegativeValue
+                  ? -0
+                  : -6 - xAxisTextNumberOfLines * 18
+                : -labelsDistanceFromXaxis - 6 - xAxisTextNumberOfLines * 18,
           },
           rotateLabel
             ? horizontal
@@ -123,7 +148,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
             {label || ''}
           </Text>
         )}
-      </View>
+      </TouchableOpacity>
     );
   };
 

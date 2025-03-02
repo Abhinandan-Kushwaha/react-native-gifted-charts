@@ -103,7 +103,7 @@ export const PieChart = (props: PieChartPropsType) => {
               },
           ]}>
           <View style={{marginTop: semiCircle ? -0.5 * innerRadius : 0}}>
-            {props.centerLabelComponent ? props.centerLabelComponent() : null}
+            {props.centerLabelComponent ? props.centerLabelComponent(selectedIndex) : null}
           </View>
         </View>
       );
