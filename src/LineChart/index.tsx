@@ -922,7 +922,7 @@ export const LineChart = (props: LineChartPropsType) => {
                         </View>
                       );
                     } catch (error) {
-                      console.error("dataPointLabelComponent渲染错误:", error);
+                      console.error("dataPointLabelComponent rendering error:", error);
                       return null;
                     }
                   })()
