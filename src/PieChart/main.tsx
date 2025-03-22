@@ -233,6 +233,8 @@ export const PieChartMain = (props: PieChartMainProps) => {
             data.map((item, index) => {
               const localPieInnerComponent =
                 item.pieInnerComponent ?? props.pieInnerComponent;
+              const pieInnerComponentHeight = props.pieInnerComponentHeight ?? 0
+              const pieInnerComponentWidth = props.pieInnerComponentWidth ?? 0
               if (isBiggerPie && index) return null;
               if (!props.data[index].value) return null;
               let mx =
@@ -375,7 +377,10 @@ export const PieChartMain = (props: PieChartMainProps) => {
                     </SvgText>
                   )}
                   {localPieInnerComponent ? (
-                    <G x={x} y={y}>
+                    <G 
+                      x={x - pieInnerComponentHeight / 2} 
+                      y={y - pieInnerComponentWidth / 2}
+                    >
                       {localPieInnerComponent?.(item, index) ?? null}
                     </G>
                   ) : null}
