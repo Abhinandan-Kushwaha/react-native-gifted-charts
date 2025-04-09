@@ -59,6 +59,9 @@
 | highlightEnabled             | boolean              | used to highlight a particular Bar on press, by decreasing the opacity of the remaining (setting them to lowlightOpacity)                         | false               |
 | lowlightOpacity              | number               | the opacity of the un-highlighted bars when one of them is highlighted                                                                            | 0.3                 |
 | highlightedBarIndex          | number               | the index of the highlighted bar                                                                                                                  | -1                  |
+| onBackgroundPress            | Function             | Callback function called on pressing the chart body (outside of the bars). Helps ufocus/unselect after focusing/selecting a Bar                   | \_                  |
+
+**Note:** `onBackgroundPress` will not work if pointer feature is used in the chart (using the `pointerConfig` prop.)
 
 #### lineConfig
 
@@ -593,7 +596,7 @@ The value corresponding to the stacks key is an array of objects, each object re
 | stackBorderBottomRightRadius     | number                | Bottom right border radius of the bottom bar of the stack                                                                 |
 | autoShiftLabelsForNegativeStacks | boolean               | Whether the x axis labels should auto shift to a position below the bar, if the bar is under x-axis due to negative value |
 | stackHighlightEnabled            | boolean               | used to highlight a section of the Bar from each stack on press                                                           |
-| highlightedStackIndex               | number                | index of the selected section (state variable)                                                                            |
+| highlightedStackIndex            | number                | index of the selected section (state variable)                                                                            |
 
 **Note** The `frontColor` prop is replaced by `color` prop in Stacked Bar charts.
 

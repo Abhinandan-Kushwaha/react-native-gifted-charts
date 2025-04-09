@@ -899,6 +899,8 @@ export const LineChart = (props: LineChartPropsType) => {
                   </CanvasText>
                 ) : null
               ) : null}
+              {/* Workaround to fix the issue - focusedCustomDataPoint not rendering for focused data, (when bot customDataPoint and focusedCustomDataPoint are used together)*/}
+              {index === selectedIndex ? <Text>{''}</Text> : null}
             </>
           )}
         </Fragment>
@@ -974,6 +976,7 @@ export const LineChart = (props: LineChartPropsType) => {
               pointerWidth,
               pointerItemLocal,
               pointerColorLocal,
+              pointerIndex: pIndex,
             })}
           </Fragment>
         );
@@ -1037,6 +1040,7 @@ export const LineChart = (props: LineChartPropsType) => {
       pointerWidth,
       pointerItemLocal,
       pointerColorLocal,
+      pointerIndex,
     });
   };
 

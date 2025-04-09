@@ -10,6 +10,7 @@ export const Pointer = (props: any) => {
     pointerWidth,
     pointerItemLocal,
     pointerColorLocal,
+    pointerIndex,
   } = props;
   if (isNaN(pointerYLocal) || typeof pointerYLocal !== 'number') return null;
 
@@ -21,7 +22,7 @@ export const Pointer = (props: any) => {
         top: pointerYLocal - 4,
       }}>
       {pointerComponent ? (
-        pointerComponent()
+        pointerComponent(pointerItemLocal, pointerIndex)
       ) : (
         <View
           style={{
