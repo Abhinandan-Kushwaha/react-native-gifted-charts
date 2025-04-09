@@ -330,6 +330,7 @@ export const BarChart = (props: BarChartPropsType) => {
               setSelectedStackIndex(-1);
               // props.setHighlightedStackIndex?.(-1)
             }
+            props.onBackgroundPress?.();
           }}>
           {renderChart()}
         </Pressable>

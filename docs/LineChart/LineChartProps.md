@@ -721,7 +721,7 @@ type Pointer = {
   pointer4Color?: ColorValue; // default: 'red'
   pointer5Color?: ColorValue; // default: 'red'
   secondaryPointerColor?: ColorValue; // default: 'red'
-  pointerComponent?: Function; // default: null
+  pointerComponent?: Function; // callback function that takes 2 parameters- item,index.  default: null
   showPointerStrip?: boolean; // default: true
   pointerStripWidth?: number; // default: containerHeight
   pointerStripHeight?: number; // default: 1

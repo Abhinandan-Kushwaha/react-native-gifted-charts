@@ -1,3 +1,25 @@
+## 🎉 1.4.59
+
+## ✨ Features added-
+
+1. Added the prop `onBackgroundPress` to Bar and Stacked Bar charts. This will help ufocus/unselect after focusing/selecting a Bar. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1057#discussioncomment-12746091 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/634#issuecomment-2782249676
+
+2. Added the params- `item` and `index` to the `pointerComponent` property of the `pointerConfig` prop. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1055
+
+### 🐛 Bug fixes
+
+1. Fixed the issue - Line chart with curveType quadratic crashes if `animateOnDataChange` is true and the changed data is of a different length. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/984 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1026#issuecomment-2700094459
+
+2. Fixed the issue - `focusedCustomDataPoint` not rendering for focused data, (when both customDataPoint and focusedCustomDataPoint are used together)
+
+3. Made the props `pieInnerComponentHeight` and `pieInnerComponentWidth` functional. Earlier they were defined but were not effective. Thanks to [Benjamin Beau](http://github.com/benjamin-beau) fro his PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1045
+
+---
+
+---
+
+---
+
 # 🎉 1.4.58
 
 ## ✨ Features added-
