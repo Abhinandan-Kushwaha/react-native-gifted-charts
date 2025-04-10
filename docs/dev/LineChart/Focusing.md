@@ -10,7 +10,7 @@ A focused data point can have a different color, shape and size using the props 
 
 When `focusEnabled` prop is `true`, on pressing anywhere on the chart body, the data point nearest to the pressed point gets focused. We can also set the distance from a data point upto which a press event should result in focusing that data point using the prop `focusProximity`.
 
-The data point remained in focused state till a given duration using the `delayBeforeUnFocus` prop which takes the focus duration in milliseconds, the default value being 300.
+The data point remains in focused state till a given duration using the `delayBeforeUnFocus` prop which takes the focus duration in milliseconds, the default value being 300.
 To let the focus events to persist forever, the `unFocusOnPressOut` prop can be set to `false`, the default value being true.
 
 ## Multi-line scenario
