@@ -36,7 +36,7 @@
 | isAnimated                         | boolean              | To show animated Line or Area Chart. Animation occurs when the chart load for the first time                               | false                         |
 | animateOnDataChange                | boolean              | To show animation on change in data. A smooth transition takes place between the old and new line                          | false                         |
 | onDataChangeAnimationDuration      | number               | Duration (milliseconds) in which the transition animation takes place on a change in data                                  | 400                           |
-| renderDataPointsAfterAnimationEnds | boolean              | to render the data points after the animation has ended. Should be used if `onPress` is used in multi-line animated charts | false                         |
+| renderDataPointsAfterAnimationEnds | boolean              | to render the data points after the animation has ended. use if `onPress` or focusedDataPoint is used in multi-line animated charts (see note below) | false                         |
 | onPress                            | Function             | The callback function that handles the press event. `item` and `index` are received as props                               | \_                            |
 | scrollToEnd                        | boolean              | When set to true, the chart automatically scrolls to the rightmost data point                                              | false                         |
 | scrollAnimation                    | boolean              | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point             | true                          |
@@ -56,6 +56,12 @@
 | onBackgroundPress                  | Function             | Callback function called on pressing the chart body (outside of the are under chart in case of area charts)                | \_                            |
 
 ---
+
+#### When to use `renderDataPointsAfterAnimationEnds`
+`renderDataPointsAfterAnimationEnds` is useful _only_ for **animated multiline** in below 2 scenarios-
+1. If you are using `onPress`.
+2. If you are using `focusedDataPointLabelComponent`. In animated multiline charts, the focused label component might appear beneath some lines (while it is supposed to be rendered above every line/curve).
+To fix this layering issue, `renderDataPointsAfterAnimationEnds` can be useful. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1060#issuecomment-2792527440 
 
 ```ts
 enum EdgePosition {
