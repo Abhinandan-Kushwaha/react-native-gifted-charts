@@ -227,6 +227,8 @@ Added support for **Radar charts** using `<RadarChart>` component. See [Radar ch
 ### ✨ Features added-
 
 1. Added the prop `renderDataPointsAfterAnimationEnds` to Line/Area charts to render the data points after the animation has ended. This flag can be helpful if `onPress` does not work in case of multi-line animated charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/921
+This prop is also useful if you are using `focusedDataPointLabelComponent` in **animated multiline ** charts. In animated multiline charts, the focused label component might appear beneath some lines (while it is supposed to be rendered above every line/curve).
+To fix this layering issue, `focusedDataPointLabelComponent` can be useful. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1060#issuecomment-2792527440 
 
 ### 🐛 Bug fixes
 
