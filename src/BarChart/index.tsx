@@ -398,6 +398,7 @@ export const BarChart = (props: BarChartPropsType) => {
       renderChartContent={renderChartContent}
       remainingScrollViewProps={remainingScrollViewProps}
       nestedScrollEnabled={props.nestedScrollEnabled}
+      onScrollEndDrag={props.onScrollEndDrag}
     />
   );
 };

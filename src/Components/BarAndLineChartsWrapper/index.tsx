@@ -1,5 +1,5 @@
 import React, {Fragment, useEffect} from 'react';
-import {View, ScrollView, StyleSheet, I18nManager} from 'react-native';
+import {View, ScrollView, StyleSheet, I18nManager, NativeScrollEvent} from 'react-native';
 import {renderHorizSections} from './renderHorizSections';
 import RenderLineInBarChart from './renderLineInBarChart';
 import RenderVerticalLines from './renderVerticalLines';
@@ -9,6 +9,14 @@ import {
   BarAndLineChartsWrapperTypes,
   useBarAndLineChartsWrapper,
 } from 'gifted-charts-core';
+
+const isCloseToRight = ({ layoutMeasurement, contentOffset, contentSize }: NativeScrollEvent, endReachedOffset:number) => {
+  return layoutMeasurement.width + contentOffset.x >= contentSize.width - endReachedOffset;
+};
+
+const isCloseToLeft = ({ layoutMeasurement, contentOffset, contentSize }: NativeScrollEvent, endReachedOffset:number) => {
+  return layoutMeasurement.width + contentOffset.x <= contentSize.width - endReachedOffset;
+};
 
 const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
   const {
@@ -52,7 +60,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
 
     onEndReached,
     onStartReached,
+    endReachedOffset,
     onMomentumScrollEnd,
+    onScrollEndDrag,
     nestedScrollEnabled,
     extraWidthDueToDataPoint = 0, // extraWidthDueToDataPoint will be receved from props onlhy in case of LineCharts, for other charts it will be undefined and will default to 0
   } = props;
@@ -128,6 +138,19 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
       <ScrollView
         onScrollBeginDrag={() => {
           setCanMomentum(true);
+        }}
+        onScrollEndDrag={(evt) =>{
+          let direction = 0;
+
+          if (isCloseToLeft(evt.nativeEvent, endReachedOffset)) {
+            direction = -1
+          } else if (isCloseToRight(evt.nativeEvent, endReachedOffset)) {
+            direction = 1
+          }
+
+          if(onScrollEndDrag) {
+            onScrollEndDrag(evt, direction as -1|1)
+          }
         }}
         nestedScrollEnabled={nestedScrollEnabled}
         onMomentumScrollEnd={({nativeEvent}) => {
