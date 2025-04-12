@@ -330,7 +330,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | referenceLinesOverChartContent | boolean                       | used to render the reference lines over the rest of the chart content.                                         | true                         |
 | showVerticalLines              | boolean                       | To show vertical lines                                                                                         | false                        |
 | verticalLinesColor             | ColorValue                    | Color of the vertical lines                                                                                    | lightgray                    |
-| verticallinesThickness         | number                        | Thickness of the vertical lines                                                                                | 1                            |
+| verticalLinesThickness         | number                        | Thickness of the vertical lines                                                                                | 1                            |
 | verticalLinesHeight            | number                        | Height of the vertical lines                                                                                   | chart height                 |
 | verticalLinesStrokeDashArray   | Array<number>                 | Array of 2 numbers denoting the dashWidth and dashGap of the lines. Used to render dashed/dotted vertical line | ''                           |
 | verticalLinesShift             | number                        | vertical lines are aligned with bars. Shift them left or right using +ve or -ve value of verticalLinesShift    | 0                            |
