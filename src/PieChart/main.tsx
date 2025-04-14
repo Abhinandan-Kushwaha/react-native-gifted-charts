@@ -222,7 +222,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
                       ? 'none'
                       : showGradient
                         ? `url(#grad${index})`
-                        : item.color || pieColors[index % 9]
+                        : item.color || pieColors[isBiggerPie ? props.selectedIndex ?? 0 % 9 : index % 9]
                   }
                 />
               );
