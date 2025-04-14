@@ -218,7 +218,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
                         : item.strokeWidth || strokeWidth
                   }
                   fill={
-                    props.selectedIndex === index || item.peripheral
+                    item.peripheral
                       ? 'none'
                       : showGradient
                         ? `url(#grad${index})`
