@@ -111,7 +111,7 @@ The above chart is rendered using the `stackHighlightEnabled` and `highlightedSt
 
 1. Fixed the issue- "Dataset Lines rendering incorrectly when lengths don't match". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/975
 2. Fixed the issue- "`onPress` for Pie charts on web not working on large screens. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/969#issuecomment-2601506090
-3. Fixed the issue- "onFocus callback always receives last line". Thanks to [brimby](https://github.com/brimby) https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1068
+3. Fixed the issue- "onFocus callback always receives last line". Thanks to [brimby](https://github.com/brimby) for his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1068
 https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73
 4. Fixed the issue- "`focusProximity` not working for `dataSets`." See https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73#issuecomment-2614202997
 
