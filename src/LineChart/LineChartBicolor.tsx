@@ -740,6 +740,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
       remainingScrollViewProps={{
         onScroll: (ev: any) => props.onScroll?.(ev),
         bounces: props.bounces,
+        overScrollMode: props.overScrollMode ?? 'auto',
       }}
     />
   );
