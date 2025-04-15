@@ -1978,6 +1978,8 @@ export const LineChart = (props: LineChartPropsType) => {
         setScrollX(ev.nativeEvent.contentOffset.x);
       }
     },
+    bounces: props.bounces,
+    overScrollMode: props.overScrollMode ?? 'auto',
   };
 
   const renderStrips = (item: lineDataItem, index: number, ind: number) => {
