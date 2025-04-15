@@ -1,3 +1,19 @@
+## 🎉 1.4.60
+
+### ✨ Features added-
+
+1. Added the prop `onScrollEndDrag` to Bar (and stacked bar), Line and Area charts. Thanks to [Shubham Pawar](https://github.com/shubham-cpp) for his PR https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1068 <br /> issue link- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1067
+
+2. Added the props `bounces` and `overScrollMode` to Bar (and stacked bar), Line and Area charts. These props will help control the bouncing effect on iOS and Android respectively. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1073
+<br />
+To know more about `bounces` and `overScrollMode`, please go through the official react-native docs here- https://reactnative.dev/docs/scrollview#bounces-ios and https://reactnative.dev/docs/scrollview#overscrollmode-android
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.59
 
 ## ✨ Features added-
@@ -95,7 +111,8 @@ The above chart is rendered using the `stackHighlightEnabled` and `highlightedSt
 
 1. Fixed the issue- "Dataset Lines rendering incorrectly when lengths don't match". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/975
 2. Fixed the issue- "`onPress` for Pie charts on web not working on large screens. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/969#issuecomment-2601506090
-3. Fixed the issue- "onFocus callback always receives last line". Thanks to [brimby](https://github.com/brimby) for his PR https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73
+3. Fixed the issue- "onFocus callback always receives last line". Thanks to [brimby](https://github.com/brimby) https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1068
+https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73
 4. Fixed the issue- "`focusProximity` not working for `dataSets`." See https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73#issuecomment-2614202997
 
 ---

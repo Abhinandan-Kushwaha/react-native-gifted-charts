@@ -21,6 +21,8 @@ export const BarChart = (props: BarChartPropsType) => {
         setSelectedIndex(-1);
       }
     },
+    bounces: props.bounces,
+    overScrollMode: props.overScrollMode ?? 'auto',
   };
 
   const {
