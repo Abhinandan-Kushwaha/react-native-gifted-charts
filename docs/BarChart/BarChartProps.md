@@ -643,6 +643,7 @@ A single stack item can be depicted as-
 | gradientColor           | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient |
 | barWidth                | number     | Width of the bar                                                       |
 | showXAxisIndex          | boolean    | show small graduation at the X axis for the corresponding stack        |
+| innerBarComponent       | () => ReactNode | Renders a component inside a section of a stack |
 
 ```
 
