@@ -33,7 +33,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
 
   const firstBarWidth = data[0].barWidth ?? barWidth;
   const opacity = highlightEnabled
-    ? selectedIndex.includes(-1)
+    ? selectedIndex.includes?.(-1)
       ? 1
       : lowlightOpacity
     : 1;

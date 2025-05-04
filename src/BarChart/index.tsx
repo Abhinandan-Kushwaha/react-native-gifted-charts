@@ -326,7 +326,7 @@ export const BarChart = (props: BarChartPropsType) => {
         <Pressable
           style={contentContainerStyle}
           onPress={() => {
-            if (props.highlightEnabled && !selectedIndex.includes(-1))
+            if (props.highlightEnabled && !selectedIndex.includes?.(-1))
               setSelectedIndex([-1]);
             if (props.stackHighlightEnabled && selectedStackIndex !== -1) {
               setSelectedStackIndex(-1);
