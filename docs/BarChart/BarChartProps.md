@@ -14,7 +14,7 @@
 | onPressOut                   | Function                  | Callback function called on press out of a Bar (takes item and index as parameter)                                                                | null                |
 | focusBarOnPress              | boolean                   | used to focus a bar on press by applying styles defined in focusedBarConfig                                                                       | false               |
 | focusedBarConfig             | FocusedBarConfig          | styles for the focused bar including color, width, opacity, borderRadius etc                                                                      | \_                  |
-| focusedBarIndex              | number                    | index of the initially focused bar, works only when focusBarOnPress is true                                                                       | -1                  |
+| focusedBarIndex              | number|number[]                    | index(or indices) of the initially focused bar(s), works only when focusBarOnPress is true                                                                       | -1                  |
 | maxValue                     | number                    | Maximum value shown in the Y axis                                                                                                                 | 200                 |
 | yAxisOffset                  | number                    | Starting (minimum) value in the Y axis (value at the origin)                                                                                      | 0                   |
 | mostNegativeValue            | number                    | The most negative value shown in the Y axis (to be used only if the data set has negative values too)                                             | \_                  |
@@ -61,7 +61,7 @@
 | topLabelTextStyle            | object                    | text style for the top labels that appear at the top of bars                                                                                      | \_                  |
 | highlightEnabled             | boolean                   | used to highlight a particular Bar on press, by decreasing the opacity of the remaining (setting them to lowlightOpacity)                         | false               |
 | lowlightOpacity              | number                    | the opacity of the un-highlighted bars when one of them is highlighted                                                                            | 0.3                 |
-| highlightedBarIndex          | number                    | the index of the highlighted bar                                                                                                                  | -1                  |
+| highlightedBarIndex          | number|number[]                    | the index(or indices) of the highlighted bar(s)                                                                                                                  | -1                  |
 | onBackgroundPress            | Function                  | Callback function called on pressing the chart body (outside of the bars). Helps ufocus/unselect after focusing/selecting a Bar                   | \_                  |
 
 **Note:** `onBackgroundPress` will not work if pointer feature is used in the chart (using the `pointerConfig` prop.)
