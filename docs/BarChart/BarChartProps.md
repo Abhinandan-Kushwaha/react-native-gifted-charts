@@ -14,7 +14,7 @@
 | onPressOut                   | Function                  | Callback function called on press out of a Bar (takes item and index as parameter)                                                                | null                |
 | focusBarOnPress              | boolean                   | used to focus a bar on press by applying styles defined in focusedBarConfig                                                                       | false               |
 | focusedBarConfig             | FocusedBarConfig          | styles for the focused bar including color, width, opacity, borderRadius etc                                                                      | \_                  |
-| focusedBarIndex              | number|number[]                    | index(or indices) of the initially focused bar(s), works only when focusBarOnPress is true                                                                       | -1                  |
+| focusedBarIndex              | number \| number[]        | index(or indices) of the initially focused bar(s), works only when focusBarOnPress is true                                                        | -1                  |
 | maxValue                     | number                    | Maximum value shown in the Y axis                                                                                                                 | 200                 |
 | yAxisOffset                  | number                    | Starting (minimum) value in the Y axis (value at the origin)                                                                                      | 0                   |
 | mostNegativeValue            | number                    | The most negative value shown in the Y axis (to be used only if the data set has negative values too)                                             | \_                  |
@@ -61,7 +61,7 @@
 | topLabelTextStyle            | object                    | text style for the top labels that appear at the top of bars                                                                                      | \_                  |
 | highlightEnabled             | boolean                   | used to highlight a particular Bar on press, by decreasing the opacity of the remaining (setting them to lowlightOpacity)                         | false               |
 | lowlightOpacity              | number                    | the opacity of the un-highlighted bars when one of them is highlighted                                                                            | 0.3                 |
-| highlightedBarIndex          | number|number[]                    | the index(or indices) of the highlighted bar(s)                                                                                                                  | -1                  |
+| highlightedBarIndex          | number \| number[]        | the index(or indices) of the highlighted bar(s)                                                                                                   | -1                  |
 | onBackgroundPress            | Function                  | Callback function called on pressing the chart body (outside of the bars). Helps ufocus/unselect after focusing/selecting a Bar                   | \_                  |
 
 **Note:** `onBackgroundPress` will not work if pointer feature is used in the chart (using the `pointerConfig` prop.)
@@ -626,24 +626,24 @@ A single stack item can be depicted as-
 
 ### Stack item description
 
-| Key                     | Value type | Description                                                            |
-| ----------------------- | ---------- | ---------------------------------------------------------------------- |
-| value                   | number     | Value of the item representing height of the stack item                |
-| color                   | ColorValue | Color of the stack item                                                |
-| onPress                 | function   | Function called on pressing the stack item                             |
-| onLongPress             | function   | Function called on long pressing the stack item                        |
-| onPressOut              | Function   | Callback function called on press out of a bar                         |
-| marginBottom            | number     | margin below a particular stack section                                |
-| barBorderRadius         | number     | Border radius of a stack section                                       |
-| borderTopLeftRadius     | number     | borderTopLeftRadius for a stack section                                |
-| borderTopRightRadius    | number     | borderTopRightRadius for a stack section                               |
-| borderBottomLeftRadius  | number     | borderBottomLeftRadius for a stack section                             |
-| borderBottomRightRadius | number     | borderBottomRightRadius for a stack section                            |
-| showGradient            | boolean    | Prop to enable linear gradient for the bar color, defaults to false    |
-| gradientColor           | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient |
-| barWidth                | number     | Width of the bar                                                       |
-| showXAxisIndex          | boolean    | show small graduation at the X axis for the corresponding stack        |
-| innerBarComponent       | () => ReactNode | Renders a component inside a section of a stack |
+| Key                     | Value type      | Description                                                            |
+| ----------------------- | --------------- | ---------------------------------------------------------------------- |
+| value                   | number          | Value of the item representing height of the stack item                |
+| color                   | ColorValue      | Color of the stack item                                                |
+| onPress                 | function        | Function called on pressing the stack item                             |
+| onLongPress             | function        | Function called on long pressing the stack item                        |
+| onPressOut              | Function        | Callback function called on press out of a bar                         |
+| marginBottom            | number          | margin below a particular stack section                                |
+| barBorderRadius         | number          | Border radius of a stack section                                       |
+| borderTopLeftRadius     | number          | borderTopLeftRadius for a stack section                                |
+| borderTopRightRadius    | number          | borderTopRightRadius for a stack section                               |
+| borderBottomLeftRadius  | number          | borderBottomLeftRadius for a stack section                             |
+| borderBottomRightRadius | number          | borderBottomRightRadius for a stack section                            |
+| showGradient            | boolean         | Prop to enable linear gradient for the bar color, defaults to false    |
+| gradientColor           | ColorValue      | Along with frontColor, this prop constitutes the 2 colors for gradient |
+| barWidth                | number          | Width of the bar                                                       |
+| showXAxisIndex          | boolean         | show small graduation at the X axis for the corresponding stack        |
+| innerBarComponent       | () => ReactNode | Renders a component inside a section of a stack                        |
 
 ```
 

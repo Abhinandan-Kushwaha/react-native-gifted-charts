@@ -1,3 +1,15 @@
+## 🎉 1.4.61
+
+Added support for multi-focus and multi-highlight in Bar charts. `focusedBarIndex` and `highlightedBarIndex` now accept `number` as well as `array of numbers`. This allows multiple bars to be focused or highlighted at the same time.<br />
+See- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1083 <br />
+Tons of thanks to [Shubham Pawar](https://github.com/shubham-cpp) for his PRs- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1084 and https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/83
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.60
 
 ### ✨ Features added-
