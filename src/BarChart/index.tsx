@@ -18,7 +18,7 @@ export const BarChart = (props: BarChartPropsType) => {
     onScroll: (ev: any) => props.onScroll?.(ev),
     onTouchStart: (evt: any) => {
       if (props.renderTooltip) {
-        setSelectedIndex(-1);
+        setSelectedIndex([-1]);
       }
     },
     bounces: props.bounces,
@@ -326,8 +326,8 @@ export const BarChart = (props: BarChartPropsType) => {
         <Pressable
           style={contentContainerStyle}
           onPress={() => {
-            if (props.highlightEnabled && selectedIndex !== -1)
-              setSelectedIndex(-1);
+            if (props.highlightEnabled && !selectedIndex.includes(-1))
+              setSelectedIndex([-1]);
             if (props.stackHighlightEnabled && selectedStackIndex !== -1) {
               setSelectedStackIndex(-1);
               // props.setHighlightedStackIndex?.(-1)
@@ -343,6 +343,7 @@ export const BarChart = (props: BarChartPropsType) => {
   const renderChart = () => {
     if (stackData) {
       return stackData.map((item, index) => {
+        const {selectedIndex,...stackRestProps} = getPropsCommonForBarAndStack(item,index)
         return (
           <RenderStackBars
             key={index}
@@ -358,7 +359,8 @@ export const BarChart = (props: BarChartPropsType) => {
             selectedStackIndex={selectedStackIndex}
             setSelectedStackIndex={setSelectedStackIndex}
             // highlightedStackIndex={props.highlightedStackIndex??-1}
-            {...getPropsCommonForBarAndStack(item, index)}
+            selectedIndex={selectedIndex[0]}
+            {...stackRestProps}
           />
         );
       });
