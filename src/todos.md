@@ -1,8 +1,9 @@
 ## Features
 
-1. Scatter Chart - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/518
-2. Split Bar chart - https://stackoverflow.com/questions/78027876/how-can-i-draw-the-split-the-chart-in-rn-project
-4. Range Line chart - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/652
+1. Single tooltip (or focusedDataPointLabelComponent to be precise) displaying values of all lines- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1091#discussioncomment-13175298
+2. Scatter Chart - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/518
+4. Split Bar chart - https://stackoverflow.com/questions/78027876/how-can-i-draw-the-split-the-chart-in-rn-project
+5. Range Line chart - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/652
 
 ## Known Issues
 
