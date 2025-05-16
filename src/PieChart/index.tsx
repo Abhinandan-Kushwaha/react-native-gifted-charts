@@ -186,6 +186,7 @@ export const PieChart = (props: PieChartPropsType) => {
           setTouchY={setTouchY}
           tooltipSelectedIndex={tooltipSelectedIndex}
           setTooltipSelectedIndex={setTooltipSelectedIndex}
+          selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
           paddingHorizontal={paddingHorizontal}
           paddingVertical={paddingVertical}
@@ -225,6 +226,7 @@ export const PieChart = (props: PieChartPropsType) => {
               initialAngle={startAngle}
               innerRadius={props.innerRadius || radius / 2.5}
               isBiggerPie
+              selectedIndex={selectedIndex}
               setSelectedIndex={setSelectedIndex}
               paddingHorizontal={paddingHorizontal}
               paddingVertical={paddingVertical}
