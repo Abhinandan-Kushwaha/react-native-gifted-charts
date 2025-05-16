@@ -15,7 +15,7 @@ To let the focus events to persist forever, the `unFocusOnPressOut` prop can be 
 
 ## Multi-line scenario
 
-When more than one lines are rendered using `dataSet` or `data2`, `data3`... or `secondaryData`, then a press event selects the neares data point's index and sets that index as focused. This results in focusing the data points at that index from each data array. This means all the vertically aligned points will be focused simultaneously. To disable this behaviour, and focus only one point at a a time, we can set the `focusTogether` prop to `false`, default being true.
+When more than one lines are rendered using `dataSet` or `data2`, `data3`... or `secondaryData`, then a press event selects the nearest data point's index and sets that index as focused. This results in focusing the data points at that index from each data array. This means all the vertically aligned points will be focused simultaneously. To disable this behaviour, and focus only one point at a a time, we can set the `focusTogether` prop to `false`, default being true.
 
 ### How does focus work
 
