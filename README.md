@@ -73,10 +73,12 @@ npx expo install react-native-gifted-charts expo-linear-gradient react-native-sv
 Please note that `react-native-svg` and `react-native-linear-gradient`/`expo-linear-gradient` are needed for the library to work, so make sure they are installed in your project. <br />
 **[gifted-charts-core](https://www.npmjs.com/package/gifted-charts-core)** contains the mathematical and logical utilities used by this library.
 
-# Docs
+# 📚 Docs & Demos 🎦
 
 - [Documentation and gallery](https://gifted-charts.web.app/) <br />
 - [Architecture and working (dev docs)](docs/dev/index.md)
+- [Demo repo and snacks list](https://github.com/Abhinandan-Kushwaha/GiftedChartsDemo?tab=readme-ov-file#gifted-charts-demo)
+- [Demo app on Play Store](https://play.google.com/store/apps/details?id=com.giftedcharts.demo)
 
 ## Usage
 
@@ -115,7 +117,7 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 **4. [Population Pyramid props](docs/PopulationPyramid/PopulationPyramid.md)** \
 **5. [RadarChart props](docs/RadarChart/RadarChartProps.md)**
 
-## Contributing
+## 🤝 Contributing
 
 This project exists thanks to all the people who contribute.
 
@@ -132,14 +134,19 @@ Sometimes people report issues which don't exist, or request for features which 
 
 See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
 
-[To do list](./src/todos.md)
+📝 [To do list](./src/todos.md)
 
-## Test cases
+## 🧐 Test cases
 
 - Test strategy and cases are discussed here- [TESTS.md](./TESTS.md) <br />
 - Pixel perfection is assured using [react-native-screenshot-test](https://www.npmjs.com/package/react-native-screenshot-test). <br/>
 - 220+ screenshot tests have been written. See the [Reports here](https://abhinandan-kushwaha.github.io/TestingCharts/ss-test/test.html).
 - Screenshot tests are written in a separate repo named [TestingCharts](https://github.com/Abhinandan-Kushwaha/TestingCharts)
+
+## 🏆 Showcase
+
+Showcase your dashing charts on [Expo snack](https://snack.expo.dev/) and list them on the [Demo app repo](https://github.com/Abhinandan-Kushwaha/GiftedChartsDemo?tab=readme-ov-file#gifted-charts-demo).<br />
+Your snack might get published in the [Demo app on Play Store!](https://play.google.com/store/apps/details?id=com.giftedcharts.demo)
 
 ## License
 
