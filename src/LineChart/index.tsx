@@ -774,17 +774,49 @@ export const LineChart = (props: LineChartPropsType) => {
           {hideDataPoints ? null : (
             <>
               {customDataPoint ? (
-                <ForeignObject
-                  height={svgHeight}
-                  width={totalWidth}
-                  x={
-                    initialSpacing -
-                    dataPointsWidth / 2 +
-                    (spacingArray[index - 1] ?? 0)
+                (() => {
+                  try {
+                    // Calculate absolute position
+                    const xPos = initialSpacing - dataPointsWidth / 2 + 
+                      (spacingArray[index - 1] ?? 0);
+                    const yPos = getYOrSecondaryY(item.value) - dataPointsHeight / 2;
+                    
+                    // If item.value is not a valid number, return null without calling customDataPoint
+                    if (typeof item.value !== 'number' || isNaN(item.value)) {
+                      console.warn("LineChart invalid data point value:", item.value, "index:", index);
+                      return null;
+                    }
+                    
+                    // Use React Native View
+                    const customPointWrapperStyle = {
+                      position: 'absolute',
+                      left: xPos,
+                      top: yPos,
+                      zIndex: 10,
+                      width: dataPointsWidth,
+                      height: dataPointsHeight
+                    };
+                    
+                    // Execute custom data point rendering
+                    const result = customDataPoint(item, index);
+                    
+                    // If result is invalid, use default rendering
+                    if (!result) {
+                      console.warn("customDataPoint returned invalid result");
+                      return null;
+                    }
+                    
+                    // Wrap in View for rendering
+                    return (
+                      <View style={customPointWrapperStyle}>
+                        {result}
+                      </View>
+                    );
+                  } catch (error) {
+                    console.error("customDataPoint rendering error:", error);
+                    return null;
                   }
-                  y={getYOrSecondaryY(item.value) - dataPointsHeight / 2}>
-                  {customDataPoint(item, index)}
-                </ForeignObject>
+                })()
               ) : null}
               {dataPointsShape === 'rectangular' ? (
                 <Fragment key={index}>
@@ -852,31 +884,48 @@ export const LineChart = (props: LineChartPropsType) => {
               )}
               {dataPointLabelComponent ? (
                 !showTextOnFocus || index === selectedIndex ? (
-                  <ForeignObject
-                    height={svgHeight}
-                    width={dataPointLabelWidth}
-                    x={
-                      initialSpacing +
-                      (item.dataPointLabelShiftX ||
-                        props.dataPointLabelShiftX ||
-                        0) -
-                      dataPointLabelWidth / 2 +
-                      spacing * index
+                  (() => {
+                    try {
+                      const xPos = initialSpacing +
+                        (item.dataPointLabelShiftX ||
+                          props.dataPointLabelShiftX ||
+                          0) -
+                        dataPointLabelWidth / 2 +
+                        spacing * index;
+                        
+                      const yPos = containerHeight +
+                        (item.dataPointLabelShiftY ||
+                          props.dataPointLabelShiftY ||
+                          0) -
+                        (item.value * containerHeight) / maxValue;
+                      
+                      const labelWrapperStyle = {
+                        position: 'absolute',
+                        left: xPos,
+                        top: yPos,
+                        width: dataPointLabelWidth,
+                        zIndex: 10
+                      };
+                      
+                      const labelContent = showDataPointLabelOnFocus
+                        ? index === selectedIndex &&
+                          (focusTogether || key == selectedLineNumber)
+                          ? dataPointLabelComponent(item, index)
+                          : null
+                        : dataPointLabelComponent(item, index);
+                        
+                      if (!labelContent) return null;
+                      
+                      return (
+                        <View style={labelWrapperStyle}>
+                          {labelContent}
+                        </View>
+                      );
+                    } catch (error) {
+                      console.error("dataPointLabelComponent rendering error:", error);
+                      return null;
                     }
-                    y={
-                      containerHeight +
-                      (item.dataPointLabelShiftY ||
-                        props.dataPointLabelShiftY ||
-                        0) -
-                      (item.value * containerHeight) / maxValue
-                    }>
-                    {showDataPointLabelOnFocus
-                      ? index === selectedIndex &&
-                        (focusTogether || key == selectedLineNumber)
-                        ? dataPointLabelComponent(item, index) // not pushed in latest release
-                        : null
-                      : dataPointLabelComponent(item, index)}
-                  </ForeignObject>
+                  })()
                 ) : null
               ) : text || item.dataPointText ? (
                 !showTextOnFocus || index === selectedIndex ? (
