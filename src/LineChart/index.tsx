@@ -30,6 +30,7 @@ import {
   SEGMENT_END,
   SEGMENT_START,
   STOP,
+  svgPath,
   LineChartPropsType,
   lineDataItem,
   LineSvgProps,
@@ -1153,6 +1154,65 @@ export const LineChart = (props: LineChartPropsType) => {
     );
   };
 
+  const getSpreadAreaPath = (
+    spreadAreaData: {lower: number; upper: number}[],
+    getX: (spacingArray: number[], index: number) => number,
+    getY: (val: number) => number,
+    spacingArray: number[],
+    curvature?: number,
+    curveType?: any,
+  ) => {
+    if (!spreadAreaData || spreadAreaData.length === 0) return '';
+
+    // Generate points arrays for upper and lower bounds
+    const upperPoints = spreadAreaData.map((point, index) => [
+      getX(spacingArray, index),
+      getY(point.upper),
+    ]);
+
+    const lowerPoints = spreadAreaData.map((point, index) => [
+      getX(spacingArray, index),
+      getY(point.lower),
+    ]);
+
+    // Use curve interpolation if curveType is specified
+    if (curveType !== undefined && curveType !== 0) {
+      const topPath = svgPath(upperPoints, curveType, props.curvature);
+      // Reverse the lower points for the path and create curved path
+      const reversedLowerPoints = lowerPoints.slice().reverse();
+      const bottomPath = svgPath(
+        reversedLowerPoints,
+        curveType,
+        props.curvature,
+      );
+      // Remove the initial 'M' from bottomPath and prepend 'L' to connect it
+      const bottomPathConnected = bottomPath.replace(/^M/, 'L');
+      return `${topPath} ${bottomPathConnected} Z`;
+    } else {
+      // Fallback to straight lines for compatibility
+      const topPath = spreadAreaData
+        .map(
+          (point, index) =>
+            `L ${getX(spacingArray, index)} ${getY(point.upper)}`,
+        )
+        .join(' ')
+        .replace(/^L/, 'M');
+
+      const bottomPath = spreadAreaData
+        .slice()
+        .reverse()
+        .map(
+          (point, index) =>
+            `L ${getX(spacingArray, spreadAreaData.length - 1 - index)} ${getY(
+              point.lower,
+            )}`,
+        )
+        .join(' ');
+
+      return `${topPath} ${bottomPath} Z`;
+    }
+  };
+
   const renderIntersection = () => {
     return (
       <View style={[svgWrapperViewStyle as ViewStyle, {width: totalWidth}]}>
@@ -1387,6 +1447,12 @@ export const LineChart = (props: LineChartPropsType) => {
     const isNthAreaChart = !!dataSet
       ? (dataSet[Number(key)].areaChart ?? areaChart)
       : getIsNthAreaChart(key ?? 0);
+
+    // Add support for spread area data from props
+    const spreadAreaData = props.spreadAreaData;
+    const spreadAreaColor = props.spreadAreaColor;
+    const spreadAreaOpacity = props.spreadAreaOpacity;
+
     let ar: LineProperties[] = [{d: '', color: '', strokeWidth: 0}];
     if (points.includes(RANGE_ENTER)) {
       ar = getRegionPathObjects(
@@ -1507,6 +1573,22 @@ export const LineChart = (props: LineChartPropsType) => {
             />
           )
         ) : null}
+
+        {spreadAreaData && (
+          <Path
+            d={getSpreadAreaPath(
+              spreadAreaData,
+              getX,
+              getY,
+              spacingArray,
+              props.curvature,
+              curveType,
+            )}
+            fill={spreadAreaColor || 'rgba(0,0,255,0.2)'}
+            stroke="none"
+            opacity={spreadAreaOpacity ?? 0.3}
+          />
+        )}
 
         {/******************************************************************/}
 
