@@ -937,6 +937,9 @@ Here is the list of prop names changed in version `1.3.2`-
 | areaGradientId         | string                 | id of the <LinearGradient> (needed along with areaGradientComponent prop)                               | \_            |
 | onChartAreaPress       | Function               | Callback function called on pressing the chart area                                                     | \_            |
 | intersectionAreaConfig | IntersectionAreaConfig | Config object that defines properties for intersection area of data and data2 (1st & 2nd areas)         | \_            |
+| spreadAreaData         | Array<{lower: number; upper: number}> | Array of objects defining lower and upper bounds for each data point to create a spread/band area | \_            |
+| spreadAreaColor        | ColorValue             | Color of the spread area/band                                                                           | 'lightgray'   |
+| spreadAreaOpacity      | number                 | Opacity of the spread area/band                                                                         | 0.3           |
 
 ### IntersectionAreaConfig
 
@@ -947,7 +950,3 @@ type IntersectionAreaConfig {
   fillColor: ColorValue // default: 'white'
 }
 ```
-
-### Example of areaGradientComponent
-
-Same as [example of lineGradientComponent](https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/LineChart/LineChartProps.md#an-example-of-linegradientcomponent)
