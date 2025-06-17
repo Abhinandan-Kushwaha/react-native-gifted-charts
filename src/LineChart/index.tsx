@@ -1129,12 +1129,13 @@ export const LineChart = (props: LineChartPropsType) => {
     endFillColor: string,
     startOpacity: number,
     endOpacity: number,
+    gradientId?: string,
   ) => {
     return props.areaGradientComponent ? (
       props.areaGradientComponent()
     ) : (
       <LinearGradient
-        id="Gradient"
+        id={gradientId || 'Gradient'}
         x1="0"
         y1="0"
         x2={gradientDirection === 'horizontal' ? '1' : '0'}
@@ -1384,6 +1385,7 @@ export const LineChart = (props: LineChartPropsType) => {
   ) => {
     if (!points) return null;
     const isCurved = points.includes('C') || points.includes('Q');
+    const uniqueId = `Gradient-line-${key}`;
     const isNthAreaChart = !!dataSet
       ? (dataSet[Number(key)].areaChart ?? areaChart)
       : getIsNthAreaChart(key ?? 0);
@@ -1476,6 +1478,7 @@ export const LineChart = (props: LineChartPropsType) => {
             endFillColor,
             startOpacity,
             endOpacity,
+            uniqueId,
           )}
         {isNthAreaChart ? (
           props.interpolateMissingValues === false &&
@@ -1488,7 +1491,7 @@ export const LineChart = (props: LineChartPropsType) => {
               fill={
                 props.areaGradientId
                   ? `url(#${props.areaGradientId})`
-                  : `url(#Gradient)`
+                  : `url(#${uniqueId})`
               }
               stroke={'none'}
               strokeWidth={currentLineThickness || thickness}
@@ -1500,7 +1503,7 @@ export const LineChart = (props: LineChartPropsType) => {
               fill={
                 props.areaGradientId
                   ? `url(#${props.areaGradientId})`
-                  : `url(#Gradient)`
+                  : `url(#${uniqueId})`
               }
               stroke={'none'}
               strokeWidth={currentLineThickness || thickness}
