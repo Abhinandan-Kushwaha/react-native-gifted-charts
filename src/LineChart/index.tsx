@@ -1157,7 +1157,6 @@ export const LineChart = (props: LineChartPropsType) => {
   const getClipRange = (
     startIndex: number,
     endIndex: number,
-    spacing: number,
     clipRangeId: string,
   ) => {
     const startX = startIndex * spacing;
@@ -1499,7 +1498,7 @@ export const LineChart = (props: LineChartPropsType) => {
           )}
         {isNthAreaChart &&
           (startIndex !== 0 || endIndex !== data.length - 1) &&
-          getClipRange(startIndex, endIndex, spacing, clipRangeId)}
+          getClipRange(startIndex, endIndex, clipRangeId)}
         {isNthAreaChart ? (
           props.interpolateMissingValues === false &&
           propsData.some(
