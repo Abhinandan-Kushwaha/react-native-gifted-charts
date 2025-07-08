@@ -21,6 +21,7 @@ import Svg, {
   ClipPath,
   Use,
   ForeignObject,
+  Defs,
 } from 'react-native-svg';
 import {
   getSegmentedPathObjects,
@@ -1130,12 +1131,13 @@ export const LineChart = (props: LineChartPropsType) => {
     endFillColor: string,
     startOpacity: number,
     endOpacity: number,
+    gradientId?: string,
   ) => {
     return props.areaGradientComponent ? (
       props.areaGradientComponent()
     ) : (
       <LinearGradient
-        id="Gradient"
+        id={gradientId || 'Gradient'}
         x1="0"
         y1="0"
         x2={gradientDirection === 'horizontal' ? '1' : '0'}
@@ -1211,6 +1213,22 @@ export const LineChart = (props: LineChartPropsType) => {
 
       return `${topPath} ${bottomPath} Z`;
     }
+ 
+  const getClipRange = (
+    startIndex: number,
+    endIndex: number,
+    clipRangeId: string,
+  ) => {
+    const startX = startIndex * spacing;
+    const endX = endIndex * spacing;
+    const clipWidth = endX - startX + initialSpacing;
+    return (
+      <Defs>
+        <ClipPath id={clipRangeId}>
+          <Rect x={startX} y={0} width={clipWidth} height="100%" />
+        </ClipPath>
+      </Defs>
+    );
   };
 
   const renderIntersection = () => {
@@ -1444,6 +1462,8 @@ export const LineChart = (props: LineChartPropsType) => {
   ) => {
     if (!points) return null;
     const isCurved = points.includes('C') || points.includes('Q');
+    const clipRangeId = `Clip-range-${key}`;
+    const uniqueId = `Gradient-line-${key}`;
     const isNthAreaChart = !!dataSet
       ? (dataSet[Number(key)].areaChart ?? areaChart)
       : getIsNthAreaChart(key ?? 0);
@@ -1542,7 +1562,11 @@ export const LineChart = (props: LineChartPropsType) => {
             endFillColor,
             startOpacity,
             endOpacity,
+            uniqueId,
           )}
+        {isNthAreaChart &&
+          (startIndex !== 0 || endIndex !== data.length - 1) &&
+          getClipRange(startIndex, endIndex, clipRangeId)}
         {isNthAreaChart ? (
           props.interpolateMissingValues === false &&
           propsData.some(
@@ -1554,8 +1578,9 @@ export const LineChart = (props: LineChartPropsType) => {
               fill={
                 props.areaGradientId
                   ? `url(#${props.areaGradientId})`
-                  : `url(#Gradient)`
+                  : `url(#${uniqueId})`
               }
+              clipPath={`url(#${clipRangeId})`}
               stroke={'none'}
               strokeWidth={currentLineThickness || thickness}
             />
@@ -1566,8 +1591,9 @@ export const LineChart = (props: LineChartPropsType) => {
               fill={
                 props.areaGradientId
                   ? `url(#${props.areaGradientId})`
-                  : `url(#Gradient)`
+                  : `url(#${uniqueId})`
               }
+              clipPath={`url(#${clipRangeId})`}
               stroke={'none'}
               strokeWidth={currentLineThickness || thickness}
             />
