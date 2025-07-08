@@ -57,8 +57,8 @@
 | adjustToWidth                | boolean                   | When set to true, it auto-computes the barWidth and spacing to fit the chart in the available width / parentWidth                                 | false               |
 | parentWidth                  | number                    | The width of the parent View or the width that the chart should auto-fit into when `adjustToWidth` is true                                        | screenWidth         |
 | showValuesAsTopLabel         | boolean                   | When set to true, shows the value as a label at the top of the bar                                                                                | false               |
-| topLabelContainerStyle       | object                    | style of the top label container                                                                                                                  | \_                  |
-| topLabelTextStyle            | object                    | text style for the top labels that appear at the top of bars                                                                                      | \_                  |
+| topLabelContainerStyle       | StyleProp<ViewStyle>                    | style of the top label container                                                                                                                  | \_                  |
+| topLabelTextStyle            | StyleProp<TextStyle>                    | text style for the top labels that appear at the top of bars                                                                                      | \_                  |
 | highlightEnabled             | boolean                   | used to highlight a particular Bar on press, by decreasing the opacity of the remaining (setting them to lowlightOpacity)                         | false               |
 | lowlightOpacity              | number                    | the opacity of the un-highlighted bars when one of them is highlighted                                                                            | 0.3                 |
 | highlightedBarIndex          | number \| number[]        | the index(or indices) of the highlighted bar(s)                                                                                                   | -1                  |
@@ -258,19 +258,19 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | sideColor                  | ColorValue | Color of the side view of the bar, only for 3 D                                       |
 | sideWidth                  | number     | Width of the side view of the bar, only for 3 D                                       |
 | topColor                   | ColorValue | Color of the top view of the bar, only for 3 D                                        |
-| barStyle                   | object     | style object for the Bars                                                             |
+| barStyle                   | StyleProp<ViewStyle>     | style object for the Bars                                                             |
 | showGradient               | boolean    | Prop to enable linear gradient for the bar color, defaults to false                   |
 | gradientColor              | ColorValue | Along with frontColor, this prop constitutes the 2 colors for gradient                |
 | label                      | string     | Label text appearing below the bar (under the X axis)                                 |
 | labelWidth                 | number     | Width of the Label text appearing below the bar (under the X axis)                    |
-| labelTextStyle             | object     | Style object for the label text appearing below the bar                               |
+| labelTextStyle             | StyleProp<TextStyle>     | Style object for the label text appearing below the bar                               |
 | labelComponent             | Component  | Custom label component appearing below the bar                                        |
 | secondaryLabel             | string     | Label text appearing above the secondary X-axis (at the top of the chart)             |
 | secondaryLabelComponent    | Component  | Custom label component appearing above the secondary X-axis (at the top of the chart) |
-| secondaryLabelTextStyle    | object     | Style object for the label text of secondary X-axis (at the top of the chart)         |
+| secondaryLabelTextStyle    | StyleProp<TextStyle>     | Style object for the label text of secondary X-axis (at the top of the chart)         |
 | labelsDistanceFromXaxis    | number     | Distance of the X Axis label from the X axis                                          |
 | topLabelComponent          | Component  | Custom component appearing above the bar                                              |
-| topLabelContainerStyle     | object     | Style object for the container of the custom component appearing above the bar        |
+| topLabelContainerStyle     | StyleProp<ViewStyle>     | Style object for the container of the custom component appearing above the bar        |
 | cappedBars                 | boolean    | To show caps on the top of bar                                                        |
 | capThickness               | number     | Thickness of the bar cap                                                              |
 | capColor                   | ColorValue | Color of the bar cap                                                                  |
@@ -303,9 +303,9 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | yAxisExtraHeight               | number                        | Extra length of Y axis at the top                                                                              | (height / 20)                |
 | xAxisType                      | RuleType                      | solid or dotted/dashed                                                                                         | solid                        |
 | yAxisLabelWidth                | number                        | Width of the Y axis Label container                                                                            | 35                           |
-| yAxisTextStyle                 | object                        | Style object for the Y axis text style                                                                         | \_                           |
+| yAxisTextStyle                 | StyleProp<TextStyle>                        | Style object for the Y axis text style                                                                         | \_                           |
 | yAxisTextNumberOfLines         | number                        | Number of lines for y axis label text                                                                          | 1                            |
-| yAxisLabelContainerStyle       | object                        | Style object for the Y axis label container                                                                    | \_                           |
+| yAxisLabelContainerStyle       | StyleProp<ViewStyle>                        | Style object for the Y axis label container                                                                    | \_                           |
 | trimYAxisAtTop                 | boolean                       | Removes the extra length of the Y axis from the top                                                            | false                        |
 | horizontalRulesStyle           | object                        | Style object for the horizontal rules container                                                                | \_                           |
 | showFractionalValues           | boolean                       | Allow fractional values for the Y axis label                                                                   | false                        |
@@ -353,7 +353,7 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | yAxisIndicesColor              | ColorValue                    | Color of the pointers on the X axis                                                                            | black                        |
 | yAxisLabelTexts                | Array<string>                 | Array of label texts to be displayed along y axis                                                              | null                         |
 | xAxisLabelTexts                | Array<string>                 | Array of label texts to be displayed below x axis                                                              | null                         |
-| xAxisLabelTextStyle            | object                        | Style of label texts to be displayed below x axis                                                              | null                         |
+| xAxisLabelTextStyle            | StyleProp<TextStyle>          | Style of label texts to be displayed below x axis                                                              | null                         |
 | rotateLabel                    | boolean                       | To rotate the X axis labels (by 60deg)                                                                         | false                        |
 | hideAxesAndRules               | boolean                       | To hide axes, rules, labels altogether                                                                         | false                        |
 | hideOrigin                     | boolean                       | To hide the y Axis label at origin (i.e. 0)                                                                    | false                        |
@@ -396,7 +396,7 @@ type referenceConfigType = {
   dashWidth: number;
   dashGap: number;
   labelText: String;
-  labelTextStyle: object;
+  labelTextStyle: StyleProp<TextStyle>;
   zIndex: number;
   stripBehindBars: boolean;
 };
@@ -410,7 +410,7 @@ type XAxisConfig {
   color?: ColorValue
   labelsDistanceFromXaxis?: number
   labelsHeight?: number
-  labelsTextStyle?: any
+  labelsTextStyle?: StyleProp<TextStyle>
   labelTexts?: string[]
 }
 ```
@@ -439,9 +439,9 @@ type secondaryYAxisType = {
   yAxisOffset?: number,
   yAxisThickness?: number,
   yAxisColor?: ColorValue,
-  yAxisLabelContainerStyle?: any,
+  yAxisLabelContainerStyle?: StyleProp<ViewStyle>,
   yAxisLabelTexts: Array<string> | undefined,
-  yAxisTextStyle?: any,
+  yAxisTextStyle?: StyleProp<TextStyle>,
   yAxisTextNumberOfLines?: number,
   yAxisLabelWidth?: number,
   hideYAxisText?: boolean,
@@ -459,7 +459,7 @@ All the properties are optional. If you don't set a property in the **secondaryY
 | Prop                       | Type       | Description                                                                | Default value                    |
 | -------------------------- | ---------- | -------------------------------------------------------------------------- | -------------------------------- |
 | barWidth                   | number     | Width of the bar                                                           | 30                               |
-| barStyle                   | object     | style object for the Bars                                                  | \_                               |
+| barStyle                   | StyleProp<ViewStyle>     | style object for the Bars                                                  | \_                               |
 | isThreeD                   | boolean    | Prop to render 3 dimensional bars                                          | false                            |
 | frontColor                 | ColorValue | Color of the bar                                                           | 'black' for 2D, '#C0CA3A' for 3D |
 | sideColor                  | ColorValue | Color of the side view of the bar, only for 3 D                            | '#887A24'                        |

@@ -154,11 +154,11 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | value                          | number        | Value of the item representing representing its position                                                                             |
 | onPress                        | function      | Function called on pressing the data point                                                                                           |
 | label                          | string        | Label text appearing under the X axis                                                                                                |
-| labelTextStyle                 | object        | Style object for the label text appearing under the X axis                                                                           |
+| labelTextStyle                 | StyleProp<TextStyle>        | Style object for the label text appearing under the X axis                                                                           |
 | labelComponent                 | Function      | custom label component appearing under the X axis                                                                                    |
 | secondaryLabel                 | string        | Label text appearing above the secondary X-axis (at the top of the chart)                                                            |
 | secondaryLabelComponent        | Component     | Custom label component appearing above the secondary X-axis (at the top of the chart)                                                |
-| secondaryLabelTextStyle        | object        | Style object for the label text of secondary X-axis (at the top of the chart)                                                        |
+| secondaryLabelTextStyle        | StyleProp<TextStyle>        | Style object for the label text of secondary X-axis (at the top of the chart)                                                        |
 | yAxisLabelText                 | string        | Y axis label text                                                                                                                    |
 | dataPointText                  | string        | Text appearing near the data points                                                                                                  |
 | textShiftX                     | number        | To shift the dataPointText text horizontally                                                                                         |
@@ -217,9 +217,9 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | yAxisColor                     | ColorValue                    | Y axis color                                                                                                      | black                        |
 | yAxisThickness                 | number                        | Y axis thickness                                                                                                  | 1                            |
 | yAxisLabelWidth                | number                        | Width of the Y axis Label container                                                                               | 35                           |
-| yAxisTextStyle                 | object                        | Style object for the Y axis text style                                                                            | \_                           |
+| yAxisTextStyle                 | StyleProp<TextStyle>                        | Style object for the Y axis text style                                                                            | \_                           |
 | yAxisTextNumberOfLines         | number                        | Number of lines for y axis label text                                                                             | 1                            |
-| yAxisLabelContainerStyle       | object                        | Style object for the Y axis label container                                                                       | \_                           |
+| yAxisLabelContainerStyle       | StyleProp<ViewStyle>                        | Style object for the Y axis label container                                                                       | \_                           |
 | trimYAxisAtTop                 | boolean                       | Removes the extra length of the Y axis from the top                                                               | false                        |
 | yAxisExtraHeight               | number                        | Extra length of Y axis at the top                                                                                 | (height / 20)                |
 | yAxisOffset                    | number                        | Starting value on Y Axis                                                                                          | 0                            |
@@ -271,7 +271,7 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | yAxisIndicesColor              | boolean                       | To hide axes, rules, labels altogether                                                                            | false                        |
 | yAxisLabelTexts                | Array<string>                 | Array of label texts to be displayed along y axis                                                                 | null                         |
 | xAxisLabelTexts                | Array<string>                 | Array of label texts to be displayed below x axis                                                                 | null                         |
-| xAxisLabelTextStyle            | object                        | Style of label texts to be displayed below x axis                                                                 | null                         |
+| xAxisLabelTextStyle            | StyleProp<TextStyle>          | Style of label texts to be displayed below x axis                                                                 | null                         |
 | xAxisTextNumberOfLines         | number                        | Number of lines for x axis label text                                                                             | 1                            |
 | xAxisLabelsHeight              | number                        | Height of X axis labels container                                                                                 | xAxisTextNumberOfLines \* 18 |
 | xAxisLabelsVerticalShift       | number                        | prop to adjust the vertical position of X axis labels (move X axis labels up or down)                             | 0                            |
@@ -315,7 +315,7 @@ type referenceConfigType = {
   dashWidth: number;
   dashGap: number;
   labelText: String;
-  labelTextStyle: object;
+  labelTextStyle: StyleProp<TextStyle>;
   zIndex: number; // default 1
   resetPointerOnDataChange: boolean; // default true
 };
@@ -329,7 +329,7 @@ type XAxisConfig {
   color?: ColorValue
   labelsDistanceFromXaxis?: number
   labelsHeight?: number
-  labelsTextStyle?: any
+  labelsTextStyle?: StyleProp<TextStyle>
   labelTexts?: string[]
 }
 ```
@@ -359,9 +359,9 @@ type secondaryYAxisType = {
   yAxisOffset?: number;
   yAxisThickness?: number;
   yAxisColor?: ColorValue;
-  yAxisLabelContainerStyle?: any;
+  yAxisLabelContainerStyle?: StyleProp<ViewStyle>;
   yAxisLabelTexts: Array<string> | undefined;
-  yAxisTextStyle?: any;
+  yAxisTextStyle?: StyleProp<TextStyle>;
   yAxisTextNumberOfLines?: number;
   yAxisLabelWidth?: number;
   hideYAxisText?: boolean;
@@ -765,7 +765,7 @@ type Pointer = {
   barTouchable?: boolean; //default : false (only applicable to bar charts having pointerConfig)
   pointerEvents?: 'box-none' | 'none' | 'box-only' | 'auto'; // default: "none
   dynamicLegendComponent?: Function; // default null
-  dynamicLegendContainerStyle?: Style object; // default null
+  dynamicLegendContainerStyle?: StyleProp<ViewStyle>; // default null
   horizontalStripConfig?: HorizontalStripConfig; // config for horizontal strip used for crosshair
   hidePointerForMissingValues?: boolean; // false
   hidePointerDataPointForMissingValues?: boolean; // unless explicitly specified, takes the value of hidePointerForMissingValues
