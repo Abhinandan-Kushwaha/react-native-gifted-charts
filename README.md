@@ -10,7 +10,7 @@
   <a href="https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts">
     <img src="/demos/gitLogo.png" height="auto" width="28" height="28" />
   </a> &nbsp; &nbsp; &nbsp;
-  <a href="https://stackoverflow.com/questions/tagged/react-native-gifted-charts">
+  <a href="https://stackoverflow.com/questions/tagged/react-native-gifted-charts?tab=Newest">
     <img src="/demos/stackOverflow.png" height="auto" width="28" height="28" />
   </a> &nbsp; &nbsp; &nbsp;
   <a href="https://discord.gg/FBbu9duJxs">
