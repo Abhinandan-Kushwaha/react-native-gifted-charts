@@ -1,3 +1,34 @@
+# 🎉 1.4.62
+
+## ✨ Features added-
+
+1. Added support for spread (or ranged) area chart using the props `spreadAreaData`, `spreadAreaColor` and `spreadAreaOpacity`. Thanks to [Sadat Taseen](https://github.com/sttaseen) for his PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1104 <br />
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1093 <br />
+See this Stackoverflow question- https://stackoverflow.com/questions/65683564/fusioncharts-area-range-graph-with-line
+
+<img src= 'https://i.sstatic.net/8KDbF.png' height=200 />
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- `endIndex` `startIndex` not working properly for area chart gradient. <br />
+Thanks to [Anna Conti](https://github.com/94Conti) for her PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1110 <br />
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1105
+
+2. Added uniqueId for LineChart area gradient to fix issue in web - multiple color gradients. <br />
+Thanks to [Anna Conti](https://github.com/94Conti) for her PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1108
+
+3. Removed background pattern margin (of 1 px). <br />
+Thanks to [Christoph](https://github.com/christophby) for his PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1113
+
+4. Changed the default value of `labelsPositionOffset` from 5 to 0 (in gifted-charts-core), to fix the issue - "RadarChart labels don't work on small numbers". <br />
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1094 
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.61
 
 Added support for multi-focus and multi-highlight in Bar charts. `focusedBarIndex` and `highlightedBarIndex` now accept `number` as well as `array of numbers`. This allows multiple bars to be focused or highlighted at the same time.<br />

@@ -901,7 +901,7 @@ export const LineChart = (props: LineChartPropsType) => {
                   </CanvasText>
                 ) : null
               ) : null}
-              {/* Workaround to fix the issue - focusedCustomDataPoint not rendering for focused data, (when bot customDataPoint and focusedCustomDataPoint are used together)*/}
+              {/* Workaround to fix the issue - focusedCustomDataPoint not rendering for focused data, (when both customDataPoint and focusedCustomDataPoint are used together)*/}
               {index === selectedIndex ? <Text>{''}</Text> : null}
             </>
           )}
@@ -1213,15 +1213,16 @@ export const LineChart = (props: LineChartPropsType) => {
 
       return `${topPath} ${bottomPath} Z`;
     }
+  }
  
   const getClipRange = (
     startIndex: number,
     endIndex: number,
     clipRangeId: string,
   ) => {
-    const startX = startIndex * spacing;
-    const endX = endIndex * spacing;
-    const clipWidth = endX - startX + initialSpacing;
+    const startX = startIndex * spacing + initialSpacing;
+    const endX = endIndex * spacing + initialSpacing;
+    const clipWidth = endX - startX;
     return (
       <Defs>
         <ClipPath id={clipRangeId}>
