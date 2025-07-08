@@ -320,8 +320,8 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
               </Defs>
               <Rect
                 stroke="none"
-                x="1"
-                y="1"
+                x="0"
+                y="0"
                 width="100%"
                 height={totalHeight}
                 fill={`url(#${item.patternId || patternId})`}
