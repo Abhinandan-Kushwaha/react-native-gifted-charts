@@ -196,9 +196,10 @@ export const BarChart = (props: BarChartPropsType) => {
   };
 
   const activatePointer = (x: number) => {
+    const chartData = stackData ?? data;
     let factor = (x - initialSpacing - barWidth / 2) / (spacing + barWidth);
     factor = Math.round(factor);
-    factor = Math.min(factor, data.length - 1);
+    factor = Math.min(factor, chartData.length - 1);
     factor = Math.max(factor, 0);
     let z =
       initialSpacing +
@@ -209,7 +210,7 @@ export const BarChart = (props: BarChartPropsType) => {
     setPointerIndex(factor);
 
     let item, y;
-    item = (stackData ?? data)[factor];
+    item = chartData[factor];
     let stackSum = 0;
     if ('stacks' in item) {
       stackSum = item.stacks.reduce(
@@ -343,7 +344,11 @@ export const BarChart = (props: BarChartPropsType) => {
   const renderChart = () => {
     if (stackData) {
       return stackData.map((item, index) => {
-        const {selectedIndex,...stackRestProps} = getPropsCommonForBarAndStack(item,index)
+        const {selectedIndex, ...stackRestProps} = getPropsCommonForBarAndStack(
+          item,
+          index,
+        );
+
         return (
           <RenderStackBars
             key={index}
