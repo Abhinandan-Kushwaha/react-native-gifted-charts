@@ -1,3 +1,28 @@
+## 🎉 1.4.63
+
+### 🐛 Bug fixes
+
+1. Fixed the issue- "pointerConfig and pointerLabelComponent doesn't work properly with Stacked Bar Chart". <br />
+Thanks to [Anna Conti](https://github.com/94Conti) for her PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1123 <br />
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1117
+
+2. Fixed the issue- "`trimYAxisAtTop` not working for LineChartBicolor. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1125
+
+3. Added `yAxisExtraHeightAtTop` to LineChartBiColor (earlier it was available only to Bar and Line charts).
+
+### 🔨 Refactor
+
+Added types to **style** related props. Thanks to [Seyed Mostafa Hasani](https://github.com/seyedmostafahasani) for his PRs-
+- https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/87
+- https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/89
+- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1119
+
+---
+
+---
+
+---
+
 # 🎉 1.4.62
 
 ## ✨ Features added-
