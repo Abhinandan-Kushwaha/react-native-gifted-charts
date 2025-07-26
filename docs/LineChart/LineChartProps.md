@@ -539,7 +539,7 @@ type LineSegment = {
 
 ## Interpolation
 
-If some data items have `null` or `undefined` values, their values get auto-assigned by the library. This is done by interpolating. To stop this, set `interpolateMissingValues={false}`. When you set `interpolateMissingValues` to false, the nullish values will not rendered, thus the line (or curve) will be broken into parts.
+If some data items have `null` or `undefined` values, their values get auto-assigned by the library. This is done by interpolating. To stop this, set `interpolateMissingValues={false}`. When you set `interpolateMissingValues` to false, the nullish values will not be rendered, thus the line (or curve) will be broken into parts.
 
 **Interpolation related props**
 
