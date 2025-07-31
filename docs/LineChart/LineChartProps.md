@@ -719,7 +719,7 @@ pointerConfig is an object, when passed as a prop, creates a magical effect. It 
 
 <img src='../../demos/scrollLine.gif' alt='' height=400 width=500/>
 
-To enable such kind of csroll effect, just pass the prop pointerConfig.
+To enable such kind of scroll effect, just pass the prop pointerConfig.
 The pointerConfig object has following fields-
 
 ```ts
