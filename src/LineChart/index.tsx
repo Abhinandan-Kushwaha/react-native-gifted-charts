@@ -784,6 +784,15 @@ export const LineChart = (props: LineChartPropsType) => {
                     dataPointsWidth / 2 +
                     (spacingArray[index - 1] ?? 0)
                   }
+                  onPress={() => {
+                    item.onPress
+                      ? item.onPress(item, index)
+                      : props.onPress
+                        ? props.onPress(item, index)
+                        : focusEnabled
+                          ? handleFocus(index, item, 0, onStripPress)
+                          : null;
+                  }}
                   y={getYOrSecondaryY(item.value) - dataPointsHeight / 2}>
                   {customDataPoint(item, index)}
                 </ForeignObject>
