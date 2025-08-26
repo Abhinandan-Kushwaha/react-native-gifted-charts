@@ -1,3 +1,20 @@
+## 🎉 1.4.64
+
+### 🐛 Bug fixes
+
+1. Fixed the issue- "Pie - Donut inner view absorbs onPress events on pie". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1131
+
+2. Fixed the issue- "PieChart does not render when all values are zero". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1137
+
+3. Fixed the issue- "`negativeStepValue` does not reflect". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1107
+
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.63
 
 ### 🐛 Bug fixes
@@ -27,7 +44,7 @@ Added types to **style** related props. Thanks to [Seyed Mostafa Hasani](https:/
 
 ## ✨ Features added-
 
-1. Added support for spread (or ranged) area chart using the props `spreadAreaData`, `spreadAreaColor` and `spreadAreaOpacity`. Thanks to [Sadat Taseen](https://github.com/sttaseen) for his PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1104 <br />
+   1. Added support for spread (or ranged) area chart using the props `spreadAreaData`, `spreadAreaColor` and `spreadAreaOpacity`. Thanks to [Sadat Taseen](https://github.com/sttaseen) and [TirelessDev](https://github.com/TirelessDev) for their PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1104 <br />
 See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1093 <br />
 See this Stackoverflow question- https://stackoverflow.com/questions/65683564/fusioncharts-area-range-graph-with-line
 

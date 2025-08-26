@@ -101,9 +101,10 @@ export const PieChart = (props: PieChartPropsType) => {
                 borderRightWidth: 0.5,
                 borderRightColor: innerCircleColor,
               },
-          ]}>
+          ]}
+          pointerEvents="box-none">
           <View style={{marginTop: semiCircle ? -0.5 * innerRadius : 0}}>
-            {props.centerLabelComponent ? props.centerLabelComponent(selectedIndex) : null}
+            {props.centerLabelComponent?.(selectedIndex) ?? null}
           </View>
         </View>
       );
@@ -168,7 +169,7 @@ export const PieChart = (props: PieChartPropsType) => {
     );
   };
 
-  if (!total) return null;
+  // if (!total) return null;
 
   return (
     <View
