@@ -92,7 +92,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
     setTouchX(x);
     setTouchY(y);
     const r = Math.sqrt((x - cx) ** 2 + (y - cy) ** 2);
-    if (r > radius) return;
+    if (r > radius || (donut && r < innerRadius)) return;
     const a = Math.atan2(y - cy, x - cx);
 
     for (let index = 0; index < data.length; index++) {
@@ -182,7 +182,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
               );
             })}
           </Defs>
-          {data.length === 1 ? (
+          {(data.length === 1 || !total) ? (
             <>
               <Circle
                 cx={cx}

@@ -523,6 +523,12 @@ lineGradientComponent={()=>{
 }}
 ```
 
+**Note**
+By default the gradient colors start and end within the range of the line displayed in the chart. <br />
+If you want the gradient colors to start and end along the full length of the Y-axis, then you need to use the property `gradientUnits="userSpaceOnUse"` inside the `<LinearGradient>` tag. <br />
+And also make sure to give x1, y1, x2 and y2 values as `"0%"` or `"100%"` instead of simply giving numerical `'0'` and `'1'`. <br />
+See issue- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/251#issuecomment-3222828003
+
 ### LineSegment
 
 ```ts

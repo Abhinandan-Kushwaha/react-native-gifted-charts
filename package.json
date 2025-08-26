@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-charts",
-  "version": "1.4.63",
+  "version": "1.4.64",
   "description": "The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar, Population Pyramid and Radar charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.",
   "main": "dist/index.js",
   "files": [
@@ -26,7 +26,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "dependencies": {
-    "gifted-charts-core": "0.1.65"
+    "gifted-charts-core": "0.1.66"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.8",
