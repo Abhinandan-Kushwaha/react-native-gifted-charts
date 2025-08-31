@@ -426,7 +426,7 @@ export const RadarChart = (props: RadarChartProps) => {
                     (alignmentBaselineLocal as AlignmentBaseline) ?? 'middle'
                   }>
                   {category.split('\n').map((line, idx) => (
-                    <TSpan key={idx} x={x} dy={idx === 0 ? 0 : 14}>
+                    <TSpan key={idx} x={x} dy={idx === 0 ? 0 : fontSizeLocal}>
                       {line}
                     </TSpan>
                   ))}
