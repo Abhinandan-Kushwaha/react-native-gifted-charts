@@ -53,6 +53,7 @@ import {
   LineChartsWithDataSetCritical,
   PieAndDonutCriticalCharts,
 } from './criticalReview';
+import MultipleLineLabel from './RadarChart/MultipleLineLabel';
 
 const Examples = () => {
   const [selectedFooterButton, setSelectedFooterButton] = useState(0);
@@ -69,6 +70,8 @@ const Examples = () => {
           return 'Line with DataSet & Step';
         case 3:
           return 'Pie & Donut Charts';
+        case 4:
+          return 'Radar Chart';
       }
     };
     return (
@@ -216,6 +219,14 @@ const Examples = () => {
     );
   };
 
+  const RedarCharts = () => {
+    return (
+      <View>
+        <MultipleLineLabel />
+      </View>
+    );
+  };
+
   const SelectedIndexCriticalCharts = () => {
     switch (selectedFooterButton) {
       case 0:
@@ -226,6 +237,8 @@ const Examples = () => {
         return <LineChartsWithDataSetCritical />;
       case 3:
         return <PieAndDonutCriticalCharts />;
+      case 4:
+        return <RedarCharts />;
     }
   };
 
@@ -239,6 +252,8 @@ const Examples = () => {
         return <LineChartsWithDataSet />;
       case 3:
         return <PieAndDonutCharts />;
+      case 4:
+        return <RedarCharts />;
     }
   };
 
@@ -323,6 +338,21 @@ const Examples = () => {
             onPress={() => setSelectedFooterButton(3)}>
             <Text>Pie</Text>
             <Text>Donut</Text>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={[
+            styles.footerButtonContainer,
+            selectedFooterButton === 4 ? {marginTop: -12} : null,
+          ]}>
+          {selectedFooterButton === 4 ? (
+            <View style={styles.connector} />
+          ) : null}
+          <TouchableOpacity
+            style={footerButtonStyle(4)}
+            onPress={() => setSelectedFooterButton(4)}>
+            <Text>Radar</Text>
+            <Text>Chart</Text>
           </TouchableOpacity>
         </View>
       </View>
