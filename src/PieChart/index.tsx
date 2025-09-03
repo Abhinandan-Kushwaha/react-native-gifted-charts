@@ -215,20 +215,11 @@ export const PieChart = (props: PieChartPropsType) => {
                 setTouchY={setTouchY}
                 tooltipSelectedIndex={tooltipSelectedIndex}
                 setTooltipSelectedIndex={setTooltipSelectedIndex}
-                data={[
-                  {
-                    ...props.data[selectedIndex],
-                    color: props.showGradient
-                      ? `url(#grad${selectedIndex})`
-                      : props.data[selectedIndex].color ||
-                        pieColors[selectedIndex % 9],
-                  },
-                  {
-                    value: total - props.data[selectedIndex].value,
-                    peripheral: true,
-                    strokeWidth: 0,
-                  },
-                ]}
+                data={props.data.map((section, index) => ({
+                  ...section,
+                  strokeWidth: index === selectedIndex ? undefined : section.strokeWidth,
+                  peripheral: index !== selectedIndex,
+                }))}
                 radius={radius + extraRadius}
                 initialAngle={startAngle}
                 innerRadius={props.innerRadius || radius / 2.5}

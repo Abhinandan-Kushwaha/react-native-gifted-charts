@@ -198,7 +198,6 @@ export const PieChartMain = (props: PieChartMainProps) => {
           ) : (
             data.map((item, index) => {
               const {sx, sy, ax, ay} = coordinates[index];
-              if (isBiggerPie && index) return null;
               return (
                 <Path
                   key={index + 'a'}
@@ -237,7 +236,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
                 props.pieInnerComponentHeight ?? 0;
               const pieInnerComponentWidth = props.pieInnerComponentWidth ?? 0;
               if (isBiggerPie && index) return null;
-              if (!props.data[index].value) return null;
+              if (isBiggerPie && index !== props.selectedIndex) return null;
               let mx =
                 cx * (1 + Math.sin(2 * pi * mData[index] + initialAngle));
               let my =
