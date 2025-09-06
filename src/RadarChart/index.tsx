@@ -10,6 +10,7 @@ import Svg, {
   Stop,
   TextAnchor,
   AlignmentBaseline,
+  TSpan,
 } from 'react-native-svg';
 
 import {RadarChartProps, useRadarChart} from 'gifted-charts-core';
@@ -424,7 +425,11 @@ export const RadarChart = (props: RadarChartProps) => {
                   alignmentBaseline={
                     (alignmentBaselineLocal as AlignmentBaseline) ?? 'middle'
                   }>
-                  {category}
+                  {category.split('\n').map((line, idx) => (
+                    <TSpan key={idx} x={x} dy={idx === 0 ? 0 : fontSizeLocal}>
+                      {line}
+                    </TSpan>
+                  ))}
                 </SvgText>
               );
             })}
