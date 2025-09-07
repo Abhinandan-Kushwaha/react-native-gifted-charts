@@ -234,6 +234,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
                 item.pieInnerComponent ?? props.pieInnerComponent;
               const pieInnerComponentHeight = props.pieInnerComponentHeight ?? 0
               const pieInnerComponentWidth = props.pieInnerComponentWidth ?? 0
+              if (isBiggerPie && index) return null;
               if (!props.data[index].value) return null;
               let mx =
                 cx * (1 + Math.sin(2 * pi * mData[index] + initialAngle));
