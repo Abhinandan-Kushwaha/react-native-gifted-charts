@@ -1,7 +1,12 @@
 import React, {Fragment, useEffect} from 'react';
-import {View, ScrollView, StyleSheet, I18nManager, NativeScrollEvent} from 'react-native';
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  I18nManager,
+  NativeScrollEvent,
+} from 'react-native';
 import {renderHorizSections} from './renderHorizSections';
-import RenderLineInBarChart from './renderLineInBarChart';
 import RenderVerticalLines from './renderVerticalLines';
 import {
   chartTypes,
@@ -10,12 +15,24 @@ import {
   useBarAndLineChartsWrapper,
 } from 'gifted-charts-core';
 
-const isCloseToRight = ({ layoutMeasurement, contentOffset, contentSize }: NativeScrollEvent, endReachedOffset:number) => {
-  return layoutMeasurement.width + contentOffset.x >= contentSize.width - endReachedOffset;
+const isCloseToRight = (
+  {layoutMeasurement, contentOffset, contentSize}: NativeScrollEvent,
+  endReachedOffset: number,
+) => {
+  return (
+    layoutMeasurement.width + contentOffset.x >=
+    contentSize.width - endReachedOffset
+  );
 };
 
-const isCloseToLeft = ({ layoutMeasurement, contentOffset, contentSize }: NativeScrollEvent, endReachedOffset:number) => {
-  return layoutMeasurement.width + contentOffset.x <= contentSize.width - endReachedOffset;
+const isCloseToLeft = (
+  {layoutMeasurement, contentOffset, contentSize}: NativeScrollEvent,
+  endReachedOffset: number,
+) => {
+  return (
+    layoutMeasurement.width + contentOffset.x <=
+    contentSize.width - endReachedOffset
+  );
 };
 
 const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
@@ -40,8 +57,6 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     scrollAnimation,
     indicatorColor,
     spacing,
-    showLine,
-    points2,
     renderChartContent,
     remainingScrollViewProps,
     endSpacing,
@@ -88,8 +103,6 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
     yAxisSide,
     showVerticalLines,
     verticalLinesProps,
-    lineInBarChartProps,
-    lineInBarChartProps2,
   } = useBarAndLineChartsWrapper({...props, isRTL: I18nManager.isRTL});
 
   useEffect(() => {
@@ -139,17 +152,17 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
         onScrollBeginDrag={() => {
           setCanMomentum(true);
         }}
-        onScrollEndDrag={(evt) =>{
+        onScrollEndDrag={evt => {
           let direction = 0;
 
           if (isCloseToLeft(evt.nativeEvent, endReachedOffset)) {
-            direction = -1
+            direction = -1;
           } else if (isCloseToRight(evt.nativeEvent, endReachedOffset)) {
-            direction = 1
+            direction = 1;
           }
 
-          if(onScrollEndDrag) {
-            onScrollEndDrag(evt, direction as -1|1)
+          if (onScrollEndDrag) {
+            onScrollEndDrag(evt, direction as -1 | 1);
           }
         }}
         nestedScrollEnabled={nestedScrollEnabled}
@@ -229,16 +242,6 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
             <RenderVerticalLines {...verticalLinesProps} />
           ) : null}
           {
-            // Only For Bar Charts-
-            showLine ? <RenderLineInBarChart {...lineInBarChartProps} /> : null
-          }
-          {
-            // Only For Bar Charts-
-            showLine && points2?.length ? (
-              <RenderLineInBarChart {...lineInBarChartProps2} />
-            ) : null
-          }
-          {
             // Only For Line Charts-
             chartType === chartTypes.LINE &&
               data.map((item: any, index: number) => {
@@ -266,6 +269,8 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
       {referenceLinesOverChartContent
         ? renderHorizSections({...horizSectionProps, onlyReferenceLines: true})
         : null}
+      {horizSectionProps.floatingYAxisLabels &&
+        renderHorizSections({...horizSectionProps, onlyLabels: true})}
     </View>
   );
 };

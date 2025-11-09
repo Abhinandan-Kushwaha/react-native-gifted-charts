@@ -1,12 +1,5 @@
-import {useEffect} from 'react';
-import {
-  View,
-  TouchableOpacity,
-  Text,
-  LayoutAnimation,
-  Platform,
-  UIManager,
-} from 'react-native';
+import {useEffect, useRef} from 'react';
+import {View, TouchableOpacity, Text, Animated} from 'react-native';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import LinearGradient from '../Components/common/LinearGradient';
 import {
@@ -15,11 +8,6 @@ import {
   StackedBarChartPropsType,
 } from 'gifted-charts-core';
 import Tooltip from '../Components/BarSpecificComponents/tooltip';
-
-if (Platform.OS === 'android') {
-  UIManager.setLayoutAnimationEnabledExperimental &&
-    UIManager.setLayoutAnimationEnabledExperimental(true);
-}
 
 const RenderStackBars = (props: StackedBarChartPropsType) => {
   const {
@@ -152,28 +140,20 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     );
   };
 
+  const animatedHeight = useRef(new Animated.Value(0)).current;
+  const elevate = () => {
+    Animated.timing(animatedHeight, {
+      toValue: totalHeight,
+      duration: animationDuration,
+      useNativeDriver: false,
+    }).start();
+  };
+
   useEffect(() => {
     if (!noAnimation) {
-      layoutAppear();
+      elevate();
     }
-  }, [totalHeight]);
-
-  const elevate = () => {
-    LayoutAnimation.configureNext({
-      duration: animationDuration,
-      update: {type: 'linear', property: 'scaleXY'},
-    });
-    setHeight(totalHeight);
-  };
-
-  const layoutAppear = () => {
-    LayoutAnimation.configureNext({
-      duration: Platform.OS == 'ios' ? animationDuration : 20,
-      create: {type: 'linear', property: 'opacity'},
-      update: {type: 'linear', property: 'scaleXY'},
-    });
-    setTimeout(() => elevate(), Platform.OS == 'ios' ? 10 : 100);
-  };
+  }, []);
 
   const static2DSimple = () => {
     let remainingBarMarginBottom = barMarginBottom;
@@ -374,15 +354,15 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     return noAnimation ? (
       static2DSimple()
     ) : (
-      <View
+      <Animated.View
         style={{
           position: 'absolute',
           bottom: 0,
-          height: height,
+          height: animatedHeight,
           width: '100%',
         }}>
         {static2DSimple()}
-      </View>
+      </Animated.View>
     );
   };
 

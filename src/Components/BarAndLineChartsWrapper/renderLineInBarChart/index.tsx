@@ -124,7 +124,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
           position: 'absolute',
           height: containerHeightIncludingBelowXAxis + labelsExtraHeight,
           left: 6 - yAxisLabelWidth,
-          bottom: 50 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
+          bottom: -10 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
           width: totalWidth,
           zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'rgba(200,150,150,0.1)'

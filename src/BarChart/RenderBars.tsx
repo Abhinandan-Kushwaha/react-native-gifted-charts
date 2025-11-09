@@ -8,10 +8,10 @@ import {
 } from 'gifted-charts-core';
 import Tooltip from '../Components/BarSpecificComponents/tooltip';
 
-const isIndexSelected = (values: number|number[], idx: number) => {
-  if(Array.isArray(values)) return values.includes(idx)
-  return values === idx
-}
+const isIndexSelected = (values: number | number[], idx: number) => {
+  if (Array.isArray(values)) return values.includes(idx);
+  return values === idx;
+};
 
 const RenderBars = (props: RenderBarsPropsType) => {
   const {
@@ -247,10 +247,10 @@ const RenderBars = (props: RenderBarsPropsType) => {
   const barWrapperStyle = [
     {
       // overflow: 'visible',
-      opacity: highlightEnabled ?
-          isIndexSelected(highlightedBarIndex, -1)
-          ? 1 :
-            isIndexSelected(highlightedBarIndex, index)
+      opacity: highlightEnabled
+        ? isIndexSelected(highlightedBarIndex, -1)
+          ? 1
+          : isIndexSelected(highlightedBarIndex, index)
             ? 1
             : lowlightOpacity
         : 1,
@@ -336,6 +336,7 @@ const RenderBars = (props: RenderBarsPropsType) => {
             isAnimated={isAnimated}
             animationDuration={animationDuration || 800}
             selectedIndex={selectedIndex}
+            containerHeight={containerHeight || 200}
           />
         ) : item.showGradient || props.showGradient ? (
           isAnimated ? (

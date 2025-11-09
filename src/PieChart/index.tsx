@@ -1,6 +1,6 @@
 import {View, Text, TextStyle} from 'react-native';
 import {PieChartMain} from './main';
-import {PieChartPropsType, usePieChart} from 'gifted-charts-core';
+import {PieChartPropsType, pieColors, usePieChart} from 'gifted-charts-core';
 import {isWebApp} from '../utils';
 import {useState} from 'react';
 
@@ -215,6 +215,10 @@ export const PieChart = (props: PieChartPropsType) => {
               data={[
                 {
                   ...props.data[selectedIndex],
+                  color: props.showGradient
+                    ? `url(#grad${selectedIndex})`
+                    : props.data[selectedIndex].color ||
+                      pieColors[selectedIndex % 9],
                 },
                 {
                   value: total - props.data[selectedIndex].value,
