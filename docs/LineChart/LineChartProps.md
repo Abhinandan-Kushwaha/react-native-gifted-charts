@@ -282,6 +282,8 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | secondaryData                  | Array of items                | the secondary data that will be rendered along the secondary Y axis                                               | undefined                    |
 | secondaryLineConfig            | secondaryLineConfigType       | properties of the secondary data line (secondaryLineConfigType is described below)                                | values of primary Line       |
 | secondaryXAxis                 | XAxisConfig                   | properties of the secondary X-axis (appearing at the top of the chart)                                            | values of the primary X-axis |
+| allowFontScaling               | boolean                       | to toggle fontScaling for X and Y-axis label texts                                                                | true                         |
+| floatingYAxisLabels            | boolean                       | to render the Y-axis labels above the chart content                                                               | false                        |
 
 **Note** If you are setting yAxisSide to yAxisSide.RIGHT, make sure to specify the width of the chart, using the `width` prop
 

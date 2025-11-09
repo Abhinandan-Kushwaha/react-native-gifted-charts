@@ -82,6 +82,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
     unFocusOnPressOut,
     delayBeforeUnFocus,
     barAndLineChartsWrapperProps,
+    allowFontScaling,
   } = useLineChartBiColor({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -144,6 +145,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
         ) : (
           <Text
             style={labelTextStyle || {textAlign: 'center'}}
+            allowFontScaling={allowFontScaling}
             numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}
           </Text>
@@ -180,6 +182,7 @@ export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
           labelComponent()
         ) : (
           <Text
+            allowFontScaling={allowFontScaling}
             style={labelTextStyle || {textAlign: 'center'}}
             numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}

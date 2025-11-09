@@ -28,7 +28,7 @@ The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar, Populati
 
 - Plenty of features with minimal code
 - Apply animations to your charts on load and on value change, just by adding a prop
-- Smooth animations implemented using LayoutAnimation
+- Smooth animations implemented using the `Animated` API (no external library used for animations)
 - Clickable and scrollable
 - Three-D and gradient effects
 - Fully customizable (see the [props](docs/docs.md))

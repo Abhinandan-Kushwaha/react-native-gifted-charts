@@ -1,3 +1,41 @@
+# 🎉 1.4.65 Major release
+
+## ✨ Features added-
+
+1. Added the prop `floatingYAxisLabels` to Bar, Stacked Bar and Line charts that allows us to render the Y-axis labels above the chart content. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1158#issuecomment-3415689673
+
+2. Added the prop `allowFontScaling` to Bar, Stacked Bar and Line charts to toggle fontScaling for X and Y-axis label texts. Default value is true. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1161
+
+## 🐛 Bug fixes
+
+1. Fixed the issue- "Line chart crashes when using `lineSegments` with color codes having upper case letters" See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1146
+
+2. Fixed the issue- "Focused Pie color is always 'cyan' if colors are not provided in data."
+
+3. Fixed the issue- "Step chart not following secondary Y-axis". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1168
+
+4. Fixed the issue- "BarChart tooltip (pointerLabelComponent) appears behind line" See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1169 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/928
+
+5. Fixed the issue- "LineChart - Alignment of x-axis labels after set initialSpacing". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1052
+
+## 🔨 Refactor
+
+1. Replaced `LayoutAnimation` with the `Animated` API because LayoutAnimation was not working properly with expo. This solves several animation  related issues like-
+   - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1021
+   - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1140
+   - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1160
+
+2. LineChart inside BarChart is now rendered directly in the `BarChart/index.tsx` file instead of `BarAndLineChartsWrapper`. This ensures that the different parts in the BarChart are stacked in the right order- Bars -> Line -> Tooltip -> pointerLabelComponent. (This order can still be modified using the `lineBehindBars` prop). This fixes issues like-
+   - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/928
+   - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1169
+
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.64
 
 ### 🐛 Bug fixes

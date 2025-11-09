@@ -341,6 +341,7 @@ export const LineChart = (props: LineChartPropsType) => {
     handleUnFocus,
     stepValue,
     pointerItemLocal,
+    allowFontScaling,
   } = useLineChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -553,10 +554,7 @@ export const LineChart = (props: LineChartPropsType) => {
               : 54 - xAxisTextNumberOfLines * 18,
             zIndex: 10,
             width: spacing + labelsExtraHeight,
-            left:
-              index === 0 && initialSpacing < 10
-                ? initialSpacing / 2 + spacing * index - spacing / 2 + 4
-                : initialSpacing / 2 + spacing * index - spacing / 2 - 10,
+            left: spacing * index - spacing / 2,
             height: props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
@@ -566,6 +564,7 @@ export const LineChart = (props: LineChartPropsType) => {
         ) : (
           <Text
             style={[{textAlign: 'center'}, labelTextStyle]}
+            allowFontScaling={allowFontScaling}
             numberOfLines={xAxisTextNumberOfLines}>
             {label}
           </Text>
@@ -598,10 +597,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 : 54 - xAxisTextNumberOfLines * 18,
             zIndex: 10,
             width: spacing,
-            left:
-              index === 0 && initialSpacing < 10
-                ? initialSpacing / 2 + spacing * index - spacing / 2 + 4
-                : initialSpacing / 2 + spacing * index - spacing / 2 - 10,
+            left: spacing * index - spacing / 2,
             opacity: appearingOpacity,
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
@@ -610,6 +606,7 @@ export const LineChart = (props: LineChartPropsType) => {
           labelComponent()
         ) : (
           <Text
+            allowFontScaling={allowFontScaling}
             style={[{textAlign: 'center'}, labelTextStyle]}
             numberOfLines={xAxisTextNumberOfLines}>
             {label}
@@ -1213,8 +1210,8 @@ export const LineChart = (props: LineChartPropsType) => {
 
       return `${topPath} ${bottomPath} Z`;
     }
-  }
- 
+  };
+
   const getClipRange = (
     startIndex: number,
     endIndex: number,

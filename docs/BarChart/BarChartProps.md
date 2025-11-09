@@ -367,6 +367,8 @@ The properties of this line chart can be controlled using the `lineConfig` prop 
 | secondaryYAxis                 | secondaryYAxisType            | displays and controls the properties of the secondary Y axis on the right side                                 | null                         |
 | secondaryData                  | Array of items                | the secondary data that will be rendered along the secondary Y axis                                            | undefined                    |
 | secondaryXAxis                 | XAxisConfig                   | properties of the secondary X-axis (appearing at the top of the chart)                                         | values of the primary X-axis |
+| allowFontScaling               | boolean                       | to toggle fontScaling for X and Y-axis label texts                                                             | true                         |
+| floatingYAxisLabels            | boolean                       | to render the Y-axis labels above the chart content                                                            | false                        |
 
 **Note** If you are setting yAxisSide to 'right', make sure to specify the width of the chart, using the `width` prop.
 

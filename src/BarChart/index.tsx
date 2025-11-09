@@ -1,12 +1,24 @@
 import {useCallback, useEffect, useMemo, useRef} from 'react';
-import {Animated, Easing, Pressable, View, ViewStyle} from 'react-native';
+import {
+  Animated,
+  Easing,
+  I18nManager,
+  Pressable,
+  View,
+  ViewStyle,
+} from 'react-native';
 import RenderBars from './RenderBars';
 import RenderStackBars from './RenderStackBars';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
-import {BarChartPropsType, useBarChart} from 'gifted-charts-core';
+import {
+  BarChartPropsType,
+  useBarAndLineChartsWrapper,
+  useBarChart,
+} from 'gifted-charts-core';
 import {StripAndLabel} from '../Components/common/StripAndLabel';
 import {Pointer} from '../Components/common/Pointer';
 import {screenWidth} from '../utils';
+import RenderLineInBarChart from '../Components/BarAndLineChartsWrapper/renderLineInBarChart';
 
 export const BarChart = (props: BarChartPropsType) => {
   const heightValue = useMemo(() => new Animated.Value(0), []);
@@ -93,6 +105,8 @@ export const BarChart = (props: BarChartPropsType) => {
     getPropsCommonForBarAndStack,
     barAndLineChartsWrapperProps,
     autoShiftLabelsForNegativeStacks,
+    showLine,
+    points2,
   } = useBarChart({
     ...props,
     heightValue,
@@ -100,6 +114,12 @@ export const BarChart = (props: BarChartPropsType) => {
     opacityValue,
     parentWidth: props.parentWidth ?? screenWidth,
   });
+
+  const {lineInBarChartProps, lineInBarChartProps2} =
+    useBarAndLineChartsWrapper({
+      ...barAndLineChartsWrapperProps,
+      isRTL: I18nManager.isRTL,
+    });
 
   const {stackData} = barAndLineChartsWrapperProps;
 
@@ -296,6 +316,16 @@ export const BarChart = (props: BarChartPropsType) => {
             </View>
           ) : null}
           {renderChart()}
+          {
+            // Only For Bar Charts-
+            showLine ? <RenderLineInBarChart {...lineInBarChartProps} /> : null
+          }
+          {
+            // Only For Bar Charts-
+            showLine && points2?.length ? (
+              <RenderLineInBarChart {...lineInBarChartProps2} />
+            ) : null
+          }
           {pointerX > 0 ? (
             <View
               pointerEvents={pointerEvents ?? 'none'}
@@ -305,7 +335,7 @@ export const BarChart = (props: BarChartPropsType) => {
                   extendedContainerHeight + noOfSectionsBelowXAxis * stepHeight,
                 bottom: xAxisLabelsVerticalShift,
                 width: totalWidth,
-                zIndex: 20,
+                zIndex: 200000,
               }}>
               {!stripOverPointer &&
                 !stripBehindBars &&
