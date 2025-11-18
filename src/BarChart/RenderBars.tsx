@@ -263,7 +263,9 @@ const RenderBars = (props: RenderBarsPropsType) => {
           translateY:
             (containerHeight || 200) -
             (barHeight - 10 + xAxisLabelsVerticalShift) +
-            (item.value < 0 ? Math.abs(item.value) * heightFactor : 0),
+            (item.value < 0
+              ? Math.max(minHeight, Math.abs(item.value) * heightFactor)
+              : 0),
         },
         {rotateZ: item.value < 0 ? '180deg' : '0deg'},
       ],

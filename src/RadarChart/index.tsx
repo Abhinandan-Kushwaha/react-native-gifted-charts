@@ -64,6 +64,7 @@ export const RadarChart = (props: RadarChartProps) => {
     hideAsterLines,
     getGridLevelProps,
     animateTogether,
+    startAngle,
   } = useRadarChart(props);
 
   const initialPolygonPointsAr = initialPolygonPoints.split(' ');
@@ -375,7 +376,7 @@ export const RadarChart = (props: RadarChartProps) => {
         {hideAsterLines
           ? null
           : labels.map((_, index) => {
-              const angle = index * angleStep;
+              const angle = index * angleStep + startAngle;
               const {x, y} = polarToCartesian(angle, maxValue);
               return (
                 <Line
@@ -395,7 +396,7 @@ export const RadarChart = (props: RadarChartProps) => {
         {hideLabels
           ? null
           : labels.map((category, index) => {
-              const angle = index * angleStep;
+              const angle = index * angleStep + startAngle;
               const {x, y} = polarToCartesian(
                 angle,
                 maxValue + labelsPositionOffset,
