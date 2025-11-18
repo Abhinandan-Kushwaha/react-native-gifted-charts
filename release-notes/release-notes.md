@@ -1,5 +1,28 @@
-# 🎉 1.4.65 Major release
+## 🎉 1.4.66
 
+### ✨ Features added-
+
+1. Added the props `startAngle` and `isClockWise` to Radar chart. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1173
+
+### 🐛 Bug fixes
+
+1. Fixed the issue- "Unable to show line on Combined Bar and Line chart". See https://stackoverflow.com/questions/79822900/unable-to-show-line-on-combined-bar-and-line-chart-on-react-native-gifted-charts
+
+2. Fixed the issue- "`minHeight` for the BarChart is not working for negative values". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1174
+
+3. Fixed the issue- "LIneChart - React crashes if dataset changes from from empty to have items". Thanks to [Sondre Lucas Follesø](https://github.com/sondreluc) for his PR - https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/94
+
+4. Fixed the issue- "PopulationPyramid X-axis labels are clipped when using xAxisLabelShiftY". Thanks to [sky603629](https://github.com/sky603629) for his suggestion. See sky603629
+
+
+---
+
+---
+
+---
+
+# 🎉 1.4.65 Major release
+**Note:** [An issue with combined Line in Bar chart](https://stackoverflow.com/questions/79822900/unable-to-show-line-on-combined-bar-and-line-chart-on-react-native-gifted-charts) is identified in this release. Please use the newer releases to avoid this issue.  
 ## ✨ Features added-
 
 1. Added the prop `floatingYAxisLabels` to Bar, Stacked Bar and Line charts that allows us to render the Y-axis labels above the chart content. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1158#issuecomment-3415689673

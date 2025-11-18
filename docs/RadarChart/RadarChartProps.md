@@ -25,6 +25,8 @@
 | isAnimated               | boolean          |                                                                                  | false         |
 | animationDuration        | number           |                                                                                  | 800           |
 | animateTogether          | boolean          |                                                                                  | false         |
+| startAngle               | number           | Angle in degrees from the horizontal (X-axis) for the first item                 | 0             |
+| isClockWise              | boolean          | Whether the angles move in clockwise direction (default is anti-clock)           | false         | 
 
 ### GridConfig
 

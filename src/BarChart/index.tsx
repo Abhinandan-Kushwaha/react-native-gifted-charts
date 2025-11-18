@@ -366,6 +366,16 @@ export const BarChart = (props: BarChartPropsType) => {
             props.onBackgroundPress?.();
           }}>
           {renderChart()}
+          {
+            // Only For Bar Charts-
+            showLine ? <RenderLineInBarChart {...lineInBarChartProps} /> : null
+          }
+          {
+            // Only For Bar Charts-
+            showLine && points2?.length ? (
+              <RenderLineInBarChart {...lineInBarChartProps2} />
+            ) : null
+          }
         </Pressable>
       );
     }
