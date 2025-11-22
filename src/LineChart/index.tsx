@@ -22,6 +22,7 @@ import Svg, {
   Use,
   ForeignObject,
   Defs,
+  Mask,
 } from 'react-native-svg';
 import {
   getSegmentedPathObjects,
@@ -48,6 +49,7 @@ import {StripAndLabel} from '../Components/common/StripAndLabel';
 import {Pointer} from '../Components/common/Pointer';
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
+const AnimatedRect = Animated.createAnimatedComponent(Rect);
 
 export const LineChart = (props: LineChartPropsType) => {
   const scrollRef = props.scrollRef ?? useRef(null);
@@ -342,6 +344,7 @@ export const LineChart = (props: LineChartPropsType) => {
     stepValue,
     pointerItemLocal,
     allowFontScaling,
+    colors,
   } = useLineChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -1229,6 +1232,27 @@ export const LineChart = (props: LineChartPropsType) => {
     );
   };
 
+  const getColorBackRects = () => {
+    return colors?.map(colorItem => {
+      const key = JSON.stringify(colorItem);
+      const {from, to, color} = colorItem;
+      const y = getY(from);
+      const height = getY(to) - getY(from);
+      const rectProps = {
+        x: 0,
+        y,
+        height,
+        fill: color,
+        mask: 'url(#pathMask)',
+      };
+      return isAnimated ? (
+        <AnimatedRect {...rectProps} key={key} width={widthValue} />
+      ) : (
+        <Rect {...rectProps} key={key} width={'100%'} />
+      );
+    });
+  };
+
   const renderIntersection = () => {
     return (
       <View style={[svgWrapperViewStyle as ViewStyle, {width: totalWidth}]}>
@@ -1548,9 +1572,16 @@ export const LineChart = (props: LineChartPropsType) => {
           })
         ) : animateOnDataChange && animatedPath ? (
           <AnimatedPath {...lineSvgPropsOuter} />
+        ) : colors ? (
+          <Defs>
+            <Mask id="pathMask">
+              <Path {...lineSvgPropsOuter} stroke={colors ? 'white' : color} />
+            </Mask>
+          </Defs>
         ) : (
           <Path {...lineSvgPropsOuter} />
         )}
+        {colors && getColorBackRects()}
 
         {/***********************      For Area Chart        ************/}
 

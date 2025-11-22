@@ -37,6 +37,7 @@
 | animateOnDataChange                | boolean                   | To show animation on change in data. A smooth transition takes place between the old and new line                                                    | false                         |
 | onDataChangeAnimationDuration      | number                    | Duration (milliseconds) in which the transition animation takes place on a change in data                                                            | 400                           |
 | renderDataPointsAfterAnimationEnds | boolean                   | to render the data points after the animation has ended. use if `onPress` or focusedDataPoint is used in multi-line animated charts (see note below) | false                         |
+| animateTogether                    | boolean                   | whether all the lines animated together, or one by one                                                                                               | false                         |
 | onPress                            | Function                  | The callback function that handles the press event. `item` and `index` are received as props                                                         | \_                            |
 | scrollToEnd                        | boolean                   | When set to true, the chart automatically scrolls to the rightmost data point                                                                        | false                         |
 | scrollAnimation                    | boolean                   | When set to true, scroll animation is visible when the chart automatically scrolls to the rightmost data point                                       | true                          |
@@ -59,6 +60,7 @@
 | onBackgroundPress                  | Function                  | Callback function called on pressing the chart body (outside of the are under chart in case of area charts)                                          | \_                            |
 
 **Note (onScrollEndDrag) :** the `direction` can be `-1`(indicating scroll end to left hand side) or `1`(indicating scrol end to right hand side). You can customise the `endReachedOffset` to determine the offset from "end"
+**Note 2** `animateTogether` whose default value is _false_ is overrided to _true_ if the `colors` prop is used.
 
 ---
 
@@ -149,47 +151,47 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 
 ### Item description (lineDataItem)
 
-| Key                            | Value type    | Description                                                                                                                          |
-| ------------------------------ | ------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| value                          | number        | Value of the item representing representing its position                                                                             |
-| onPress                        | function      | Function called on pressing the data point                                                                                           |
-| label                          | string        | Label text appearing under the X axis                                                                                                |
-| labelTextStyle                 | StyleProp<TextStyle>        | Style object for the label text appearing under the X axis                                                                           |
-| labelComponent                 | Function      | custom label component appearing under the X axis                                                                                    |
-| secondaryLabel                 | string        | Label text appearing above the secondary X-axis (at the top of the chart)                                                            |
-| secondaryLabelComponent        | Component     | Custom label component appearing above the secondary X-axis (at the top of the chart)                                                |
-| secondaryLabelTextStyle        | StyleProp<TextStyle>        | Style object for the label text of secondary X-axis (at the top of the chart)                                                        |
-| yAxisLabelText                 | string        | Y axis label text                                                                                                                    |
-| dataPointText                  | string        | Text appearing near the data points                                                                                                  |
-| textShiftX                     | number        | To shift the dataPointText text horizontally                                                                                         |
-| textShiftY                     | number        | To shift the dataPointText text vertically                                                                                           |
-| textColor                      | ColorValue    | Color of the dataPointText                                                                                                           |
-| textFontSize                   | number        | Font size of the dataPointText                                                                                                       |
-| spacing                        | number        | Distance between 2 consecutive points in the Line chart                                                                              |
-| dataPointHeight                | number        | Height of the data point (when data point's shape is rectangular)                                                                    |
-| dataPointWidth                 | number        | Width of the data point (when data point's shape is rectangular)                                                                     |
-| dataPointRadius                | number        | Radius of the data point (when data points' shape is circular)                                                                       |
-| dataPointColor                 | ColorValue    | Color of the data point                                                                                                              |
-| dataPointShape                 | string        | Shape of the data point (rectangular or circular) defaults to circular                                                               |
-| hideDataPoint                  | boolean       | To hide the data point                                                                                                               |
-| showVerticalLine               | boolean       | When set to true, a vertical line will be displayed along that data point                                                            |
-| verticalLineUptoDataPoint      | boolean       | When set to true, it sets the height of the vertical line upto the corresponding data point                                          |
-| verticalLineColor              | ColorValue    | Color of the vertical Line displayed along the data point                                                                            |
-| verticalLineThickness          | number        | Thickness of the vertical Line displayed along the data point                                                                        |
-| dataPointLabelWidth            | number        | width of the label shown beside a data point                                                                                         |
-| dataPointLabelShiftX           | number        | horizontal shift of a label from its corresponding data point                                                                        |
-| dataPointLabelShiftY           | number        | vertical shift of a label from its corresponding data point                                                                          |
-| dataPointLabelComponent        | Function      | custom component rendered above a data point                                                                                         |
-| focusedDataPointLabelComponent | Function      | custom component rendered above a data point only when focused/selected (when the user presses)                                      |
-| showStrip                      | boolean       | To show a vertical strip along the data point (even if it's not focused/selected)                                                    |
-| stripHeight                    | number        | Height of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true  |
-| stripWidth                     | number        | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
-| stripColor                     | ColorValue    | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
-| stripOpacity                   | number        | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true |
-| stripStrokeDashArray           | Array<number> | Array of 2 numbers denoting the dashWidth and dashGap of the vertical strip                                                          |
-| pointerShiftX                  | number        | Shifts the pointer for that item horizontally by given quantity (used only when pointerConfig prop is passed)                        |
-| pointerShiftY                  | number        | Shifts the pointer for that item vertically by given quantity (used only when pointerConfig prop is passed)                          |
-| hidePointer                    | boolean       | Used to hide the pointer for current item                                                                                            |
+| Key                            | Value type           | Description                                                                                                                          |
+| ------------------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| value                          | number               | Value of the item representing representing its position                                                                             |
+| onPress                        | function             | Function called on pressing the data point                                                                                           |
+| label                          | string               | Label text appearing under the X axis                                                                                                |
+| labelTextStyle                 | StyleProp<TextStyle> | Style object for the label text appearing under the X axis                                                                           |
+| labelComponent                 | Function             | custom label component appearing under the X axis                                                                                    |
+| secondaryLabel                 | string               | Label text appearing above the secondary X-axis (at the top of the chart)                                                            |
+| secondaryLabelComponent        | Component            | Custom label component appearing above the secondary X-axis (at the top of the chart)                                                |
+| secondaryLabelTextStyle        | StyleProp<TextStyle> | Style object for the label text of secondary X-axis (at the top of the chart)                                                        |
+| yAxisLabelText                 | string               | Y axis label text                                                                                                                    |
+| dataPointText                  | string               | Text appearing near the data points                                                                                                  |
+| textShiftX                     | number               | To shift the dataPointText text horizontally                                                                                         |
+| textShiftY                     | number               | To shift the dataPointText text vertically                                                                                           |
+| textColor                      | ColorValue           | Color of the dataPointText                                                                                                           |
+| textFontSize                   | number               | Font size of the dataPointText                                                                                                       |
+| spacing                        | number               | Distance between 2 consecutive points in the Line chart                                                                              |
+| dataPointHeight                | number               | Height of the data point (when data point's shape is rectangular)                                                                    |
+| dataPointWidth                 | number               | Width of the data point (when data point's shape is rectangular)                                                                     |
+| dataPointRadius                | number               | Radius of the data point (when data points' shape is circular)                                                                       |
+| dataPointColor                 | ColorValue           | Color of the data point                                                                                                              |
+| dataPointShape                 | string               | Shape of the data point (rectangular or circular) defaults to circular                                                               |
+| hideDataPoint                  | boolean              | To hide the data point                                                                                                               |
+| showVerticalLine               | boolean              | When set to true, a vertical line will be displayed along that data point                                                            |
+| verticalLineUptoDataPoint      | boolean              | When set to true, it sets the height of the vertical line upto the corresponding data point                                          |
+| verticalLineColor              | ColorValue           | Color of the vertical Line displayed along the data point                                                                            |
+| verticalLineThickness          | number               | Thickness of the vertical Line displayed along the data point                                                                        |
+| dataPointLabelWidth            | number               | width of the label shown beside a data point                                                                                         |
+| dataPointLabelShiftX           | number               | horizontal shift of a label from its corresponding data point                                                                        |
+| dataPointLabelShiftY           | number               | vertical shift of a label from its corresponding data point                                                                          |
+| dataPointLabelComponent        | Function             | custom component rendered above a data point                                                                                         |
+| focusedDataPointLabelComponent | Function             | custom component rendered above a data point only when focused/selected (when the user presses)                                      |
+| showStrip                      | boolean              | To show a vertical strip along the data point (even if it's not focused/selected)                                                    |
+| stripHeight                    | number               | Height of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true  |
+| stripWidth                     | number               | Width of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
+| stripColor                     | ColorValue           | Color of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true   |
+| stripOpacity                   | number               | Opacity of the vertical strip that becomes visible on pressing the corresponding area of the chart, or when showStrip is set to true |
+| stripStrokeDashArray           | Array<number>        | Array of 2 numbers denoting the dashWidth and dashGap of the vertical strip                                                          |
+| pointerShiftX                  | number               | Shifts the pointer for that item horizontally by given quantity (used only when pointerConfig prop is passed)                        |
+| pointerShiftY                  | number               | Shifts the pointer for that item vertically by given quantity (used only when pointerConfig prop is passed)                          |
+| hidePointer                    | boolean              | Used to hide the pointer for current item                                                                                            |
 
 **Alert**\
 When you are using the `dataPointLabelComponent`, make sure to provide the `dataPointsHeight` and `dataPointsWidth` values too (either in the corresponding item object, or directly as a props of the <LineChart> component). Otherwise the data points might appear shifted from their intended positions.
@@ -217,9 +219,9 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | yAxisColor                     | ColorValue                    | Y axis color                                                                                                      | black                        |
 | yAxisThickness                 | number                        | Y axis thickness                                                                                                  | 1                            |
 | yAxisLabelWidth                | number                        | Width of the Y axis Label container                                                                               | 35                           |
-| yAxisTextStyle                 | StyleProp<TextStyle>                        | Style object for the Y axis text style                                                                            | \_                           |
+| yAxisTextStyle                 | StyleProp<TextStyle>          | Style object for the Y axis text style                                                                            | \_                           |
 | yAxisTextNumberOfLines         | number                        | Number of lines for y axis label text                                                                             | 1                            |
-| yAxisLabelContainerStyle       | StyleProp<ViewStyle>                        | Style object for the Y axis label container                                                                       | \_                           |
+| yAxisLabelContainerStyle       | StyleProp<ViewStyle>          | Style object for the Y axis label container                                                                       | \_                           |
 | trimYAxisAtTop                 | boolean                       | Removes the extra length of the Y axis from the top                                                               | false                        |
 | yAxisExtraHeight               | number                        | Extra length of Y axis at the top                                                                                 | (height / 20)                |
 | yAxisOffset                    | number                        | Starting value on Y Axis                                                                                          | 0                            |
@@ -436,69 +438,89 @@ All the properties of **secondaryLineConfig** are optional. Properties not provi
 
 ### Line related props
 
-| Prop                   | Type               | Description                                                                                                 | Default value                |
-| ---------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| curved                 | boolean            | To show curved line joining the data points                                                                 | false                        |
-| curvature              | number             | A number between 0 to 1 that controls the curvature of the cubic bezier curve                               | 0.2                          |
-| curveType              | CurveType          | Type of the curve- cubic or quadratic                                                                       | CurveType.CUBIC              |
-| color                  | ColorValue         | Color of the lines joining the data points                                                                  | black                        |
-| color1                 | ColorValue         | Color of the lines joining the first set of data points                                                     | color (from props)           |
-| color2                 | ColorValue         | Color of the lines joining the second set of data points                                                    | color (from props)           |
-| color3                 | ColorValue         | Color of the lines joining the third set of data points                                                     | color (from props)           |
-| color4                 | ColorValue         | Color of the lines joining the fourth set of data points                                                    | color (from props)           |
-| color5                 | ColorValue         | Color of the lines joining the fifth set of data points                                                     | color (from props)           |
-| thickness              | number             | Thickness of the lines joining the data points                                                              | 2                            |
-| thickness1             | number             | Thickness of the lines joining the first set of data points                                                 | thickness (from props)       |
-| thickness2             | number             | Thickness of the lines joining the second set of data points                                                | thickness (from props)       |
-| thickness3             | number             | Thickness of the lines joining the third set of data points                                                 | thickness (from props)       |
-| thickness4             | number             | Thickness of the lines joining the fourth set of data points                                                | thickness (from props)       |
-| thickness5             | number             | Thickness of the lines joining the fifth set of data points                                                 | thickness (from props)       |
-| spacing1               | number             | Distance between 2 consecutive points in the first line                                                     | spacing (from props)         |
-| spacing2               | number             | Distance between 2 consecutive points in the second line                                                    | spacing (from props)         |
-| spacing3               | number             | Distance between 2 consecutive points in the third line                                                     | spacing (from props)         |
-| spacing4               | number             | Distance between 2 consecutive points in the fourth line                                                    | spacing (from props)         |
-| spacing5               | number             | Distance between 2 consecutive points in the fifth line                                                     | spacing (from props)         |
-| zIndex1                | number             | zIndex of the lines joining the first set of data points                                                    | 0                            |
-| zIndex2                | number             | zIndex of the lines joining the second set of data points                                                   | 0                            |
-| zIndex3                | number             | zIndex of the lines joining the third set of data points                                                    | 0                            |
-| zIndex4                | number             | zIndex of the lines joining the fourth set of data points                                                   | 0                            |
-| zIndex5                | number             | zIndex of the lines joining the fifth set of data points                                                    | 0                            |
-| strokeDashArray        | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of the lines. Used to render dashed/dotted line chart | undefined                    |
-| strokeDashArray1       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line1. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray2       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line2. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray3       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line3. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray4       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line4. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeDashArray5       | Array<number>      | Array of 2 numbers denoting the dashWidth and dashGap of line5. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
-| strokeLinecap          | Linecap            | Linecap of the lines (see `stroke-linecap` in svg)                                                          | butt                         |
-| strokeLinecap1         | Linecap            | Linecap of the first line (see `stroke-linecap` in svg)                                                     | strokeLinecap (from props)   |
-| strokeLinecap2         | Linecap            | Linecap of the second line (see `stroke-linecap` in svg)                                                    | strokeLinecap (from props)   |
-| strokeLinecap3         | Linecap            | Linecap of the third line (see `stroke-linecap` in svg)                                                     | strokeLinecap (from props)   |
-| strokeLinecap4         | Linecap            | Linecap of the fourth line (see `stroke-linecap` in svg)                                                    | strokeLinecap (from props)   |
-| strokeLinecap5         | Linecap            | Linecap of the fifth line (see `stroke-linecap` in svg)                                                     | strokeLinecap (from props)   |
-| lineSegments           | Array<LineSegment> | Array of objects used to customize segments (parts) of line                                                 | \_                           |
-| lineSegments2          | Array<LineSegment> | Array of objects used to customize segments (parts) of line2                                                | \_                           |
-| lineSegments3          | Array<LineSegment> | Array of objects used to customize segments (parts) of line3                                                | \_                           |
-| lineSegments4          | Array<LineSegment> | Array of objects used to customize segments (parts) of line4                                                | \_                           |
-| lineSegments5          | Array<LineSegment> | Array of objects used to customize segments (parts) of line5                                                | \_                           |
-| highlightedRange       | HighlightedRange   | renders the parts of lines lying in a given data range with a different style (color, thickness,type)       | \_                           |
-| startIndex             | number             | Start index for data line (used to display data lines having breaks)                                        | 0                            |
-| startIndex1            | number             | Start index for data line 1 (used to display data lines having breaks)                                      | 0                            |
-| startIndex2            | number             | Start index for data line 2 (used to display data lines having breaks)                                      | 0                            |
-| startIndex3            | number             | Start index for data line 3 (used to display data lines having breaks)                                      | 0                            |
-| startIndex4            | number             | Start index for data line 4 (used to display data lines having breaks)                                      | 0                            |
-| startIndex5            | number             | Start index for data line 5 (used to display data lines having breaks)                                      | 0                            |
-| endIndex               | number             | End index for data line (used to display data lines having breaks)                                          | data.length -1               |
-| endIndex1              | number             | End index for data line 1 (used to display data lines having breaks)                                        | data1.length -1              |
-| endIndex2              | number             | End index for data line 2 (used to display data lines having breaks)                                        | data2.length -1              |
-| endIndex3              | number             | End index for data line 3 (used to display data lines having breaks)                                        | data3.length -1              |
-| endIndex4              | number             | End index for data line 4 (used to display data lines having breaks)                                        | data4.length -1              |
-| endIndex5              | number             | End index for data line 5 (used to display data lines having breaks)                                        | data5.length -1              |
-| lineGradient           | boolean            | this prop is used to render the line with a gradient blend of colors                                        | false                        |
-| lineGradientComponent  | Function           | this prop defines the svg gradient that should be applied to the line (requires lineGradient to be truthy)  | null                         |
-| lineGradientId         | string             | id of the <LinearGradient> (needed along with lineGradientComponent prop)                                   | \_                           |
-| lineGradientDirection  | string             | 'vertical'/'horizontal'                                                                                     | 'vertical'                   |
-| lineGradientStartColor | string             | Start gradient color for the line (requires lineGradient to be truthy)                                      | 'lightgreen'                 |
-| lineGradientEndColor   | string             | End gradient color for the line (requires lineGradient to be truthy)                                        |                              |
+| Prop                   | Type                | Description                                                                                                 | Default value                |
+| ---------------------- | ------------------- | ----------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| curved                 | boolean             | To show curved line joining the data points                                                                 | false                        |
+| curvature              | number              | A number between 0 to 1 that controls the curvature of the cubic bezier curve                               | 0.2                          |
+| curveType              | CurveType           | Type of the curve- cubic or quadratic                                                                       | CurveType.CUBIC              |
+| color                  | ColorValue          | Color of the lines joining the data points                                                                  | black                        |
+| color1                 | ColorValue          | Color of the lines joining the first set of data points                                                     | color (from props)           |
+| color2                 | ColorValue          | Color of the lines joining the second set of data points                                                    | color (from props)           |
+| color3                 | ColorValue          | Color of the lines joining the third set of data points                                                     | color (from props)           |
+| color4                 | ColorValue          | Color of the lines joining the fourth set of data points                                                    | color (from props)           |
+| color5                 | ColorValue          | Color of the lines joining the fifth set of data points                                                     | color (from props)           |
+| colors                 | Array<ColorFromToY> | To color the portions of lines in the given Y values ranges                                                  | undefined                    |
+| thickness              | number              | Thickness of the lines joining the data points                                                              | 2                            |
+| thickness1             | number              | Thickness of the lines joining the first set of data points                                                 | thickness (from props)       |
+| thickness2             | number              | Thickness of the lines joining the second set of data points                                                | thickness (from props)       |
+| thickness3             | number              | Thickness of the lines joining the third set of data points                                                 | thickness (from props)       |
+| thickness4             | number              | Thickness of the lines joining the fourth set of data points                                                | thickness (from props)       |
+| thickness5             | number              | Thickness of the lines joining the fifth set of data points                                                 | thickness (from props)       |
+| spacing1               | number              | Distance between 2 consecutive points in the first line                                                     | spacing (from props)         |
+| spacing2               | number              | Distance between 2 consecutive points in the second line                                                    | spacing (from props)         |
+| spacing3               | number              | Distance between 2 consecutive points in the third line                                                     | spacing (from props)         |
+| spacing4               | number              | Distance between 2 consecutive points in the fourth line                                                    | spacing (from props)         |
+| spacing5               | number              | Distance between 2 consecutive points in the fifth line                                                     | spacing (from props)         |
+| zIndex1                | number              | zIndex of the lines joining the first set of data points                                                    | 0                            |
+| zIndex2                | number              | zIndex of the lines joining the second set of data points                                                   | 0                            |
+| zIndex3                | number              | zIndex of the lines joining the third set of data points                                                    | 0                            |
+| zIndex4                | number              | zIndex of the lines joining the fourth set of data points                                                   | 0                            |
+| zIndex5                | number              | zIndex of the lines joining the fifth set of data points                                                    | 0                            |
+| strokeDashArray        | Array<number>       | Array of 2 numbers denoting the dashWidth and dashGap of the lines. Used to render dashed/dotted line chart | undefined                    |
+| strokeDashArray1       | Array<number>       | Array of 2 numbers denoting the dashWidth and dashGap of line1. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray2       | Array<number>       | Array of 2 numbers denoting the dashWidth and dashGap of line2. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray3       | Array<number>       | Array of 2 numbers denoting the dashWidth and dashGap of line3. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray4       | Array<number>       | Array of 2 numbers denoting the dashWidth and dashGap of line4. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeDashArray5       | Array<number>       | Array of 2 numbers denoting the dashWidth and dashGap of line5. Used to render dashed/dotted line chart     | undefined OR strokeDashArray |
+| strokeLinecap          | Linecap             | Linecap of the lines (see `stroke-linecap` in svg)                                                          | butt                         |
+| strokeLinecap1         | Linecap             | Linecap of the first line (see `stroke-linecap` in svg)                                                     | strokeLinecap (from props)   |
+| strokeLinecap2         | Linecap             | Linecap of the second line (see `stroke-linecap` in svg)                                                    | strokeLinecap (from props)   |
+| strokeLinecap3         | Linecap             | Linecap of the third line (see `stroke-linecap` in svg)                                                     | strokeLinecap (from props)   |
+| strokeLinecap4         | Linecap             | Linecap of the fourth line (see `stroke-linecap` in svg)                                                    | strokeLinecap (from props)   |
+| strokeLinecap5         | Linecap             | Linecap of the fifth line (see `stroke-linecap` in svg)                                                     | strokeLinecap (from props)   |
+| lineSegments           | Array<LineSegment>  | Array of objects used to customize segments (parts) of line                                                 | \_                           |
+| lineSegments2          | Array<LineSegment>  | Array of objects used to customize segments (parts) of line2                                                | \_                           |
+| lineSegments3          | Array<LineSegment>  | Array of objects used to customize segments (parts) of line3                                                | \_                           |
+| lineSegments4          | Array<LineSegment>  | Array of objects used to customize segments (parts) of line4                                                | \_                           |
+| lineSegments5          | Array<LineSegment>  | Array of objects used to customize segments (parts) of line5                                                | \_                           |
+| highlightedRange       | HighlightedRange    | renders the parts of lines lying in a given data range with a different style (color, thickness,type)       | \_                           |
+| startIndex             | number              | Start index for data line (used to display data lines having breaks)                                        | 0                            |
+| startIndex1            | number              | Start index for data line 1 (used to display data lines having breaks)                                      | 0                            |
+| startIndex2            | number              | Start index for data line 2 (used to display data lines having breaks)                                      | 0                            |
+| startIndex3            | number              | Start index for data line 3 (used to display data lines having breaks)                                      | 0                            |
+| startIndex4            | number              | Start index for data line 4 (used to display data lines having breaks)                                      | 0                            |
+| startIndex5            | number              | Start index for data line 5 (used to display data lines having breaks)                                      | 0                            |
+| endIndex               | number              | End index for data line (used to display data lines having breaks)                                          | data.length -1               |
+| endIndex1              | number              | End index for data line 1 (used to display data lines having breaks)                                        | data1.length -1              |
+| endIndex2              | number              | End index for data line 2 (used to display data lines having breaks)                                        | data2.length -1              |
+| endIndex3              | number              | End index for data line 3 (used to display data lines having breaks)                                        | data3.length -1              |
+| endIndex4              | number              | End index for data line 4 (used to display data lines having breaks)                                        | data4.length -1              |
+| endIndex5              | number              | End index for data line 5 (used to display data lines having breaks)                                        | data5.length -1              |
+| lineGradient           | boolean             | this prop is used to render the line with a gradient blend of colors                                        | false                        |
+| lineGradientComponent  | Function            | this prop defines the svg gradient that should be applied to the line (requires lineGradient to be truthy)  | null                         |
+| lineGradientId         | string              | id of the <LinearGradient> (needed along with lineGradientComponent prop)                                   | \_                           |
+| lineGradientDirection  | string              | 'vertical'/'horizontal'                                                                                     | 'vertical'                   |
+| lineGradientStartColor | string              | Start gradient color for the line (requires lineGradient to be truthy)                                      | 'lightgreen'                 |
+| lineGradientEndColor   | string              | End gradient color for the line (requires lineGradient to be truthy)                                        |                              |
+
+### colors
+
+The `colors` prop is an array of objects of type `ColorFromToY` described below-
+
+```js
+type ColorFromToY = {
+  from: number
+  to: number
+  color: ColorValue
+}
+```
+
+<img src="../../demos/multiColorY.png" alt="multiColorY" height=250 />
+<br /><br />
+
+**Note:** `animateTogether` whose default value is _false_ is overrided to _true_ if the `colors` prop is used. This overrides even the value of `animateTogether` passed as a prop (to _true_)
+
+---
 
 ### An example of lineGradientComponent
 
@@ -777,13 +799,13 @@ type Pointer = {
   horizontalStripConfig?: HorizontalStripConfig; // config for horizontal strip used for crosshair
   hidePointerForMissingValues?: boolean; // false
   hidePointerDataPointForMissingValues?: boolean; // unless explicitly specified, takes the value of hidePointerForMissingValues
-  onTouchStart?: Function
-  onTouchEnd?: Function
-  onResponderGrant?: Function
-  onResponderMove?: Function
-  onResponderEnd?: Function
-  onPointerEnter?: Function
-  onPointerLeave?: Function
+  onTouchStart?: Function;
+  onTouchEnd?: Function;
+  onResponderGrant?: Function;
+  onResponderMove?: Function;
+  onResponderEnd?: Function;
+  onPointerEnter?: Function;
+  onPointerLeave?: Function;
 };
 ```
 
@@ -908,46 +930,46 @@ Here is the list of prop names changed in version `1.3.2`-
 
 ### Props for Area Chart
 
-| Prop                   | Type                   | Description                                                                                             | Default value |
-| ---------------------- | ---------------------- | ------------------------------------------------------------------------------------------------------- | ------------- |
-| areaChart              | boolean                | If set true, renders area chart instead of line chart                                                   | false         |
-| areaChart1             | boolean                | If set true, renders area chart for 1st data set instead of line chart                                  | areaChart     |
-| areaChart2             | boolean                | If set true, renders area chart for 2nd data set instead of line chart                                  | areaChart     |
-| areaChart3             | boolean                | If set true, renders area chart for 3rd data set instead of line chart                                  | areaChart     |
-| areaChart4             | boolean                | If set true, renders area chart for 4th data set instead of line chart                                  | areaChart     |
-| areaChart5             | boolean                | If set true, renders area chart for 5th data set instead of line chart                                  | areaChart     |
-| startFillColor         | ColorValue             | Start gradient color for the area chart                                                                 | gray          |
-| endFillColor           | ColorValue             | End gradient color for the area chart                                                                   | white         |
-| startOpacity           | number                 | Start gradient opacity for the area chart                                                               | 1             |
-| endOpacity             | number                 | End gradient opacity for the area chart                                                                 | 1             |
-| startFillColor1        | ColorValue             | Start gradient color for the first dataset of the area chart                                            | gray          |
-| endFillColor1          | ColorValue             | End gradient color for the first dataset of the area chart                                              | white         |
-| startOpacity1          | number                 | Start gradient opacity for the first dataset of the area chart                                          | 1             |
-| endOpacity1            | number                 | End gradient opacity for the first dataset of the area chart                                            | 1             |
-| startFillColor2        | ColorValue             | Start gradient color for the second dataset of the area chart                                           | gray          |
-| endFillColor2          | ColorValue             | End gradient color for the second dataset of the area chart                                             | white         |
-| startOpacity2          | number                 | Start gradient color for the second dataset of the area chart                                           | 1             |
-| endOpacity2            | number                 | End gradient opacity for the second dataset of the area chart                                           | 1             |
-| startFillColor3        | ColorValue             | Start gradient color for the third dataset of the area chart                                            | gray          |
-| endFillColor3          | ColorValue             | End gradient color for the third dataset of the area chart                                              | white         |
-| startOpacity3          | number                 | Start gradient color for the third dataset of the area chart                                            | 1             |
-| endOpacity3            | number                 | End gradient opacity for the third dataset of the area chart                                            | 1             |
-| startFillColor4        | ColorValue             | Start gradient color for the fourth dataset of the area chart                                           | gray          |
-| endFillColor4          | ColorValue             | End gradient color for the fourth dataset of the area chart                                             | white         |
-| startOpacity4          | number                 | Start gradient color for the fourth dataset of the area chart                                           | 1             |
-| endOpacity4            | number                 | End gradient opacity for the fourth dataset of the area chart                                           | 1             |
-| startFillColor5        | ColorValue             | Start gradient color for the fifth dataset of the area chart                                            | gray          |
-| endFillColor5          | ColorValue             | End gradient color for the fifth dataset of the area chart                                              | white         |
-| startOpacity5          | number                 | Start gradient color for the fifth dataset of the area chart                                            | 1             |
-| endOpacity5            | number                 | End gradient opacity for the fifth dataset of the area chart                                            | 1             |
-| gradientDirection      | string                 | Direction of the gradient (_'horizontal'_ or _'vertical'_)                                              | 'vertical'    |
-| areaGradientComponent  | Function               | this prop defines the svg gradient that should be applied to the area (requires areaChart to be truthy) | null          |
-| areaGradientId         | string                 | id of the <LinearGradient> (needed along with areaGradientComponent prop)                               | \_            |
-| onChartAreaPress       | Function               | Callback function called on pressing the chart area                                                     | \_            |
-| intersectionAreaConfig | IntersectionAreaConfig | Config object that defines properties for intersection area of data and data2 (1st & 2nd areas)         | \_            |
-| spreadAreaData         | Array<{lower: number; upper: number}> | Array of objects defining lower and upper bounds for each data point to create a spread/band area | \_            |
-| spreadAreaColor        | ColorValue             | Color of the spread area/band                                                                           | 'lightgray'   |
-| spreadAreaOpacity      | number                 | Opacity of the spread area/band                                                                         | 0.3           |
+| Prop                   | Type                                  | Description                                                                                             | Default value |
+| ---------------------- | ------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------- |
+| areaChart              | boolean                               | If set true, renders area chart instead of line chart                                                   | false         |
+| areaChart1             | boolean                               | If set true, renders area chart for 1st data set instead of line chart                                  | areaChart     |
+| areaChart2             | boolean                               | If set true, renders area chart for 2nd data set instead of line chart                                  | areaChart     |
+| areaChart3             | boolean                               | If set true, renders area chart for 3rd data set instead of line chart                                  | areaChart     |
+| areaChart4             | boolean                               | If set true, renders area chart for 4th data set instead of line chart                                  | areaChart     |
+| areaChart5             | boolean                               | If set true, renders area chart for 5th data set instead of line chart                                  | areaChart     |
+| startFillColor         | ColorValue                            | Start gradient color for the area chart                                                                 | gray          |
+| endFillColor           | ColorValue                            | End gradient color for the area chart                                                                   | white         |
+| startOpacity           | number                                | Start gradient opacity for the area chart                                                               | 1             |
+| endOpacity             | number                                | End gradient opacity for the area chart                                                                 | 1             |
+| startFillColor1        | ColorValue                            | Start gradient color for the first dataset of the area chart                                            | gray          |
+| endFillColor1          | ColorValue                            | End gradient color for the first dataset of the area chart                                              | white         |
+| startOpacity1          | number                                | Start gradient opacity for the first dataset of the area chart                                          | 1             |
+| endOpacity1            | number                                | End gradient opacity for the first dataset of the area chart                                            | 1             |
+| startFillColor2        | ColorValue                            | Start gradient color for the second dataset of the area chart                                           | gray          |
+| endFillColor2          | ColorValue                            | End gradient color for the second dataset of the area chart                                             | white         |
+| startOpacity2          | number                                | Start gradient color for the second dataset of the area chart                                           | 1             |
+| endOpacity2            | number                                | End gradient opacity for the second dataset of the area chart                                           | 1             |
+| startFillColor3        | ColorValue                            | Start gradient color for the third dataset of the area chart                                            | gray          |
+| endFillColor3          | ColorValue                            | End gradient color for the third dataset of the area chart                                              | white         |
+| startOpacity3          | number                                | Start gradient color for the third dataset of the area chart                                            | 1             |
+| endOpacity3            | number                                | End gradient opacity for the third dataset of the area chart                                            | 1             |
+| startFillColor4        | ColorValue                            | Start gradient color for the fourth dataset of the area chart                                           | gray          |
+| endFillColor4          | ColorValue                            | End gradient color for the fourth dataset of the area chart                                             | white         |
+| startOpacity4          | number                                | Start gradient color for the fourth dataset of the area chart                                           | 1             |
+| endOpacity4            | number                                | End gradient opacity for the fourth dataset of the area chart                                           | 1             |
+| startFillColor5        | ColorValue                            | Start gradient color for the fifth dataset of the area chart                                            | gray          |
+| endFillColor5          | ColorValue                            | End gradient color for the fifth dataset of the area chart                                              | white         |
+| startOpacity5          | number                                | Start gradient color for the fifth dataset of the area chart                                            | 1             |
+| endOpacity5            | number                                | End gradient opacity for the fifth dataset of the area chart                                            | 1             |
+| gradientDirection      | string                                | Direction of the gradient (_'horizontal'_ or _'vertical'_)                                              | 'vertical'    |
+| areaGradientComponent  | Function                              | this prop defines the svg gradient that should be applied to the area (requires areaChart to be truthy) | null          |
+| areaGradientId         | string                                | id of the <LinearGradient> (needed along with areaGradientComponent prop)                               | \_            |
+| onChartAreaPress       | Function                              | Callback function called on pressing the chart area                                                     | \_            |
+| intersectionAreaConfig | IntersectionAreaConfig                | Config object that defines properties for intersection area of data and data2 (1st & 2nd areas)         | \_            |
+| spreadAreaData         | Array<{lower: number; upper: number}> | Array of objects defining lower and upper bounds for each data point to create a spread/band area       | \_            |
+| spreadAreaColor        | ColorValue                            | Color of the spread area/band                                                                           | 'lightgray'   |
+| spreadAreaOpacity      | number                                | Opacity of the spread area/band                                                                         | 0.3           |
 
 ### IntersectionAreaConfig
 
