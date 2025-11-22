@@ -1,3 +1,36 @@
+## 🎉 1.4.67
+
+### ✨ Features added-
+
+1. Added the feature "Multicolor line chart based on y-axis value range". Added a new prop named `colors`, which accepts an array of objects of type `ColorFromToY` described below-
+
+```js
+type ColorFromToY = {
+  from: number
+  to: number
+  color: ColorValue
+}
+```
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1165 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1179
+
+<img src="../demos/multiColorY.png" alt="multiColorY" height=300 />
+
+### 🐛 Bug fixes
+
+1. Fixed the issue- "BarChart tooltip appears behind line". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1177 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1169#issuecomment-3562482868
+
+2. Fixed the issue- "using `negativeStepValue` shows -ve values also as +ve for Line charts". This bug was introduced in version `1.4.64`. See https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/93/files#r2553125329
+
+3. Fixed the issue in Bar Charts- "using a -ve value for the `negativeStepValue` prop hides the -ve bars".
+
+
+---
+
+---
+
+---
+
+
 ## 🎉 1.4.66
 
 ### ✨ Features added-
