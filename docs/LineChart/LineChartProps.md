@@ -192,6 +192,15 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 | pointerShiftX                  | number               | Shifts the pointer for that item horizontally by given quantity (used only when pointerConfig prop is passed)                        |
 | pointerShiftY                  | number               | Shifts the pointer for that item vertically by given quantity (used only when pointerConfig prop is passed)                          |
 | hidePointer                    | boolean              | Used to hide the pointer for current item                                                                                            |
+| showVerticalLine               | boolean              | To show vertical line                                                                                                                |
+| verticalLineThickness          | number               | Thickness of the vertical line                                                                                                       |
+| verticalLineHeight             | number               | Height of the vertical line                                                                                                          |
+| verticalLineColor              | ColorValue           | Color of the vertical line                                                                                                           |
+| verticalLineStrokeDashArray    | number[]             | Array of 2 numbers denoting the dashWidth and dashGap of the line to render dashed/dotted vertical line                              |
+| verticalLineShift              | number               | vertical lines are aligned with bars. Shift them left or right using +ve or -ve value of verticalLinesShift                          |
+| verticalLineZIndex             | number               | Z index of the vertical line                                                                                                         |
+| verticalLineSpacing            | number               | Distance between consecutive vertical lines                                                                                          |
+| verticalLineStrokeLinecap      | Linecap              | Linecap of the vertical line (see `stroke-linecap` in svg)                                                                           |
 
 **Alert**\
 When you are using the `dataPointLabelComponent`, make sure to provide the `dataPointsHeight` and `dataPointsWidth` values too (either in the corresponding item object, or directly as a props of the <LineChart> component). Otherwise the data points might appear shifted from their intended positions.
@@ -449,7 +458,7 @@ All the properties of **secondaryLineConfig** are optional. Properties not provi
 | color3                 | ColorValue          | Color of the lines joining the third set of data points                                                     | color (from props)           |
 | color4                 | ColorValue          | Color of the lines joining the fourth set of data points                                                    | color (from props)           |
 | color5                 | ColorValue          | Color of the lines joining the fifth set of data points                                                     | color (from props)           |
-| colors                 | Array<ColorFromToY> | To color the portions of lines in the given Y values ranges                                                  | undefined                    |
+| colors                 | Array<ColorFromToY> | To color the portions of lines in the given Y values ranges                                                 | undefined                    |
 | thickness              | number              | Thickness of the lines joining the data points                                                              | 2                            |
 | thickness1             | number              | Thickness of the lines joining the first set of data points                                                 | thickness (from props)       |
 | thickness2             | number              | Thickness of the lines joining the second set of data points                                                | thickness (from props)       |

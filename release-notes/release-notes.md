@@ -1,3 +1,29 @@
+### 🎉 1.4.68
+
+Added the below properties to the data items of Bar, Stacked Bar and Line and Area charts-
+
+```js
+showVerticalLine?: boolean
+verticalLineThickness?: number
+verticalLineHeight?: number
+verticalLineColor?: ColorValue
+verticalLineStrokeDashArray?: number[]
+verticalLineShift?: number
+verticalLineZIndex?: number
+verticalLineSpacing?: number
+verticalLineStrokeLinecap?: Linecap
+```
+
+These can be used to control the properties of individual vertical lines of each data item. <br />
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1181
+
+---
+
+---
+
+---
+
+
 ## 🎉 1.4.67
 
 ### ✨ Features added-

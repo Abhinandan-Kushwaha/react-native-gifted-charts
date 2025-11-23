@@ -5,6 +5,7 @@ import {Line, Svg} from 'react-native-svg';
 
 const RenderVerticalLines = (props: any) => {
   const {
+    showVerticalLines, // this is the value passed by user (note that it's not the effective value that is computed by traversing through the data array and finding any item for which showVerticalLines is true)
     verticalLinesAr,
     verticalLinesSpacing,
     spacing,
@@ -109,17 +110,56 @@ const RenderVerticalLines = (props: any) => {
             }
           }
 
+          if (!showVerticalLines && !item.showVerticalLine) {
+            return null;
+          }
+
+          const verticalLinesShiftLocal =
+            chartType === chartTypes.BAR
+              ? (item.verticalLineShift ?? verticalLinesShift)
+              : verticalLinesShift;
+
           const x =
-            verticalLinesShift +
+            verticalLinesShiftLocal +
             1 +
-            (chartType === chartTypes.BAR
+            (chartType === chartTypes.BAR // This logic exists because we have renderSpecificVerticalLines in Line Charts which I would love to deprecate at the earliest, because that functionality gets handled here elegantly
               ? totalSpacing - 1
               : verticalLinesSpacing
                 ? verticalLinesSpacing * (index + 1)
                 : index * spacing + (initialSpacing - 2));
 
+          const lineProps =
+            chartType === chartTypes.BAR // This logic exists because we have renderSpecificVerticalLines in Line Charts which I would love to deprecate at the earliest, because that functionality gets handled here elegantly
+              ? {
+                  y2:
+                    containerHeightIncludingBelowXAxis -
+                    heightAdjustmentDueToStrokeLinecap,
+                  stroke:
+                    (item.verticalLineColor ?? verticalLinesColor) ||
+                    'lightgray',
+                  strokeWidth:
+                    (item.verticalLineThickness ?? verticalLinesThickness) || 2,
+                  strokeDasharray:
+                    item.verticalLineStrokeDashArray ??
+                    verticalLinesStrokeDashArray ??
+                    '',
+                  strokeLinecap:
+                    item.verticalLineStrokeLinecap ??
+                    verticalLinesStrokeLinecap,
+                }
+              : {
+                  y2:
+                    containerHeightIncludingBelowXAxis -
+                    heightAdjustmentDueToStrokeLinecap,
+                  stroke: verticalLinesColor || 'lightgray',
+                  strokeWidth: verticalLinesThickness || 2,
+                  strokeDasharray: verticalLinesStrokeDashArray ?? '',
+                  strokeLinecap: verticalLinesStrokeLinecap,
+                };
+
           return (
             <Line
+              {...lineProps}
               key={index}
               x1={x}
               y1={
@@ -128,11 +168,6 @@ const RenderVerticalLines = (props: any) => {
                 heightAdjustmentDueToStrokeLinecap
               }
               x2={x}
-              y2={containerHeightIncludingBelowXAxis - heightAdjustmentDueToStrokeLinecap}
-              stroke={verticalLinesColor || 'lightgray'}
-              strokeWidth={verticalLinesThickness || 2}
-              strokeDasharray={verticalLinesStrokeDashArray ?? ''}
-              strokeLinecap={verticalLinesStrokeLinecap}
             />
           );
         })}
