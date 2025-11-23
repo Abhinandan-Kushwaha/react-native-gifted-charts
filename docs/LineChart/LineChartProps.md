@@ -571,7 +571,9 @@ type LineSegment = {
 
 ### Different ways to multi-color
 
-There are multiple ways to apply different colors to the lines-
+We have props like `color`, `color1`, `color2` etc to apply different colors to different lines. We can also add the `color` property inside the `dataSet`. <br /><br />
+But what if we want different colors in the same line? For that, again, we have multiple ways-
+
 - colors
 - lineGradientComponent
 - lineSegments
@@ -584,7 +586,7 @@ All of these serve different purposes, and have been explained above. Let's unde
 3. `lineSegments` prop is used to change color as well as other properties (like _thickness_, _strokeDashArray_, _curvature_ etc) between the given indices. The change is discrete and in horizontal direction.
 4. `highlightedRange` prop is used to change color as well as other properties (like _thickness_, _strokeDashArray_, _curvature_ etc) to a part of the line lying between the given values. The change in color is discrete and in vertical direction.
 
-
+---
 
 ## Interpolation
 
