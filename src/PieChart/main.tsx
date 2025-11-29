@@ -68,7 +68,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
     edgesPressable,
   } = getPieChartMainProps(props);
 
-  const{setTouchX,setTouchY} = props;
+  const {setTouchX, setTouchY} = props;
 
   let prevSide = 'right';
   let prevLabelComponentX = 0;
@@ -182,7 +182,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
               );
             })}
           </Defs>
-          {(data.length === 1 || !total) ? (
+          {data.length === 1 || !total ? (
             <>
               <Circle
                 cx={cx}
@@ -191,7 +191,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
                 fill={
                   showGradient
                     ? `url(#grad${0})`
-                    : data[0].color || pieColors[0 % 9]
+                    : data[0]?.color || pieColors[0 % 9]
                 }
               />
             </>
@@ -233,8 +233,9 @@ export const PieChartMain = (props: PieChartMainProps) => {
             data.map((item, index) => {
               const localPieInnerComponent =
                 item.pieInnerComponent ?? props.pieInnerComponent;
-              const pieInnerComponentHeight = props.pieInnerComponentHeight ?? 0
-              const pieInnerComponentWidth = props.pieInnerComponentWidth ?? 0
+              const pieInnerComponentHeight =
+                props.pieInnerComponentHeight ?? 0;
+              const pieInnerComponentWidth = props.pieInnerComponentWidth ?? 0;
               if (isBiggerPie && index) return null;
               if (!props.data[index].value) return null;
               let mx =
@@ -371,16 +372,14 @@ export const PieChartMain = (props: PieChartMainProps) => {
                         (item.shiftTextX || 0) -
                         (item.textSize || textSize) / 1.8
                       }
-                      y={y + (item.shiftTextY || 0)}
-                    >
+                      y={y + (item.shiftTextY || 0)}>
                       {item.text || (showValuesAsLabels ? item.value + '' : '')}
                     </SvgText>
                   )}
                   {localPieInnerComponent ? (
-                    <G 
-                      x={x - pieInnerComponentHeight / 2} 
-                      y={y - pieInnerComponentWidth / 2}
-                    >
+                    <G
+                      x={x - pieInnerComponentHeight / 2}
+                      y={y - pieInnerComponentWidth / 2}>
                       {localPieInnerComponent?.(item, index) ?? null}
                     </G>
                   ) : null}

@@ -89,6 +89,7 @@ type lineConfigType = {
   dataPointsHeight?: number;
   dataPointsColor?: ColorValue | String | any;
   dataPointsRadius?: number;
+  dataPointLabelComponent?: (item: lineDataItem, index: number) => ReactNode;
   textColor?: ColorValue | String | any;
   textFontSize?: number;
   textShiftX?: number;
@@ -104,6 +105,7 @@ type lineConfigType = {
   focusedDataPointColor?: ColorValue;
   focusedDataPointRadius?: number;
   focusedDataPointIndex?: number;
+  showDataPointLabelOnFocus?: boolean
 };
 type arrowType = {
   length?: number;
@@ -162,6 +164,7 @@ defaultLineConfig = {
   focusEnabled: false,
   focusedDataPointColor: LineDefaults.focusedDataPointColor, // 'orange'
   focusedDataPointRadius: LineDefaults.dataPointsRadius,
+  showDataPointLabelOnFocus: false,
 };
 ```
 

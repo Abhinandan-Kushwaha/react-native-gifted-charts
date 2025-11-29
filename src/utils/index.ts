@@ -25,3 +25,4 @@ export function usePrevious(value: string) {
 }
 
 export const isWebApp = Platform.OS === 'web';
+export const isIos = Platform.OS === 'ios';

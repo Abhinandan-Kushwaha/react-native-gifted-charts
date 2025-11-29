@@ -5,6 +5,7 @@ import {isWebApp} from '../utils';
 import {useState} from 'react';
 
 export const PieChart = (props: PieChartPropsType) => {
+  if (!props.data) return null;
   const {
     radius,
     extraRadius,
@@ -168,8 +169,6 @@ export const PieChart = (props: PieChartPropsType) => {
       </View>
     );
   };
-
-  // if (!total) return null;
 
   return (
     <View

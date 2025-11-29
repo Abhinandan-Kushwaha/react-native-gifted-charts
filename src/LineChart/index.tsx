@@ -9,7 +9,7 @@ import {
   I18nManager,
   ViewStyle,
 } from 'react-native';
-import {screenWidth, usePrevious} from '../utils';
+import {isWebApp, screenWidth, usePrevious} from '../utils';
 import Svg, {
   Path,
   LinearGradient,
@@ -776,17 +776,34 @@ export const LineChart = (props: LineChartPropsType) => {
           {hideDataPoints ? null : (
             <>
               {customDataPoint ? (
-                <ForeignObject
-                  height={svgHeight}
-                  width={totalWidth}
-                  x={
-                    initialSpacing -
-                    dataPointsWidth / 2 +
-                    (spacingArray[index - 1] ?? 0)
-                  }
-                  y={getYOrSecondaryY(item.value) - dataPointsHeight / 2}>
-                  {customDataPoint(item, index)}
-                </ForeignObject>
+                isWebApp ? (
+                  <ForeignObject
+                    height={svgHeight}
+                    width={totalWidth}
+                    x={
+                      initialSpacing -
+                      dataPointsWidth / 2 +
+                      (spacingArray[index - 1] ?? 0)
+                    }
+                    y={getYOrSecondaryY(item.value) - dataPointsHeight / 2}>
+                    {customDataPoint(item, index)}
+                  </ForeignObject>
+                ) : (
+                  <Animated.View
+                    style={{
+                      position: 'absolute',
+                      // height: svgHeight,
+                      // width: totalWidth,
+                      left:
+                        initialSpacing -
+                        dataPointsWidth / 2 +
+                        (spacingArray[index - 1] ?? 0),
+                      top: getYOrSecondaryY(item.value) - dataPointsHeight / 2,
+                      opacity: isAnimated ? appearingOpacity : 1,
+                    }}>
+                    {customDataPoint(item, index)}
+                  </Animated.View>
+                )
               ) : null}
               {dataPointsShape === 'rectangular' ? (
                 <Fragment key={index}>
@@ -854,31 +871,60 @@ export const LineChart = (props: LineChartPropsType) => {
               )}
               {dataPointLabelComponent ? (
                 !showTextOnFocus || index === selectedIndex ? (
-                  <ForeignObject
-                    height={svgHeight}
-                    width={dataPointLabelWidth}
-                    x={
-                      initialSpacing +
-                      (item.dataPointLabelShiftX ||
-                        props.dataPointLabelShiftX ||
-                        0) -
-                      dataPointLabelWidth / 2 +
-                      spacing * index
-                    }
-                    y={
-                      containerHeight +
-                      (item.dataPointLabelShiftY ||
-                        props.dataPointLabelShiftY ||
-                        0) -
-                      (item.value * containerHeight) / maxValue
-                    }>
-                    {showDataPointLabelOnFocus
-                      ? index === selectedIndex &&
-                        (focusTogether || key == selectedLineNumber)
-                        ? dataPointLabelComponent(item, index) // not pushed in latest release
-                        : null
-                      : dataPointLabelComponent(item, index)}
-                  </ForeignObject>
+                  isWebApp ? (
+                    <ForeignObject
+                      height={svgHeight}
+                      width={dataPointLabelWidth}
+                      x={
+                        initialSpacing +
+                        (item.dataPointLabelShiftX ||
+                          props.dataPointLabelShiftX ||
+                          0) -
+                        dataPointLabelWidth / 2 +
+                        spacing * index
+                      }
+                      y={
+                        containerHeight +
+                        (item.dataPointLabelShiftY ||
+                          props.dataPointLabelShiftY ||
+                          0) -
+                        (item.value * containerHeight) / maxValue
+                      }>
+                      {showDataPointLabelOnFocus
+                        ? index === selectedIndex &&
+                          (focusTogether || key == selectedLineNumber)
+                          ? dataPointLabelComponent(item, index) // not pushed in latest release
+                          : null
+                        : dataPointLabelComponent(item, index)}
+                    </ForeignObject>
+                  ) : (
+                    <View
+                      style={{
+                        position: 'absolute',
+                        height: svgHeight,
+                        width: dataPointLabelWidth,
+                        left:
+                          initialSpacing +
+                          (item.dataPointLabelShiftX ||
+                            props.dataPointLabelShiftX ||
+                            0) -
+                          dataPointLabelWidth / 2 +
+                          spacing * index,
+                        top:
+                          containerHeight +
+                          (item.dataPointLabelShiftY ||
+                            props.dataPointLabelShiftY ||
+                            0) -
+                          (item.value * containerHeight) / maxValue,
+                      }}>
+                      {showDataPointLabelOnFocus
+                        ? index === selectedIndex &&
+                          (focusTogether || key == selectedLineNumber)
+                          ? dataPointLabelComponent(item, index) // not pushed in latest release
+                          : null
+                        : dataPointLabelComponent(item, index)}
+                    </View>
+                  )
                 ) : null
               ) : text || item.dataPointText ? (
                 !showTextOnFocus || index === selectedIndex ? (
