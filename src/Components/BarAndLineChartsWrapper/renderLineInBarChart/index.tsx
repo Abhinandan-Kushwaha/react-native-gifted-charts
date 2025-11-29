@@ -6,6 +6,7 @@ import {renderDataPoints} from './renderDataPoints';
 import {renderSpecificDataPoints} from './renderSpecificDataPoints';
 import {LineInBarChartPropsType} from 'gifted-charts-core';
 import {DataPointProps} from 'gifted-charts-core';
+import {isIos} from '../../../utils';
 
 const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
   const {
@@ -38,6 +39,8 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
       : lowlightOpacity
     : 1;
 
+  const svgHeight = containerHeightIncludingBelowXAxis + labelsExtraHeight;
+
   const dataPointsProps: DataPointProps = {
     data,
     lineConfig,
@@ -50,6 +53,8 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     selectedIndex: selectedIndex[0],
     yAxisOffset,
     opacity,
+    svgHeight,
+    totalWidth,
   };
 
   const specificVerticalLinesProps = {
@@ -78,17 +83,17 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
   const renderAnimatedLine = () => {
     return (
       <Animated.View
-        pointerEvents="none"
+        pointerEvents={isIos ? 'none' : 'box-none'} // in iOS box-none doesn't work as expected
         style={{
           position: 'absolute',
-          height: containerHeightIncludingBelowXAxis + labelsExtraHeight,
+          height: svgHeight,
           left: 6 - yAxisLabelWidth,
           bottom: 50 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
           zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'wheat',
         }}>
-        <Svg>
+        <Svg pointerEvents={isIos ? 'none' : 'box-none'}>
           <Path
             d={points}
             fill="none"
@@ -119,7 +124,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
   const renderLine = () => {
     return (
       <View
-        pointerEvents="none"
+        pointerEvents={isIos ? 'none' : 'box-none'} // in iOS box-none doesn't work as expected
         style={{
           position: 'absolute',
           height: containerHeightIncludingBelowXAxis + labelsExtraHeight,
@@ -129,7 +134,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
           zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'rgba(200,150,150,0.1)'
         }}>
-        <Svg>
+        <Svg pointerEvents={isIos ? 'none' : 'box-none'}>
           <Path
             d={points}
             fill="none"

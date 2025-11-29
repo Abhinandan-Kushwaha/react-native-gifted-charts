@@ -1,3 +1,35 @@
+## 🎉 1.4.69
+
+### ✨ Features added-
+
+1. Added support for tooltip *(dataPointLabelComponent)* for Line chart inside Bar chart, using the properties `dataPointLabelComponent` and `showDataPointLabelOnFocus` inside the **`lineConfig`** prop. _dataPointLabelComponent_ is a callback function with 2 params- item and index. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1185
+
+### 🐛 Bug fixes
+
+1. Fixed the issue - "customDataPoint property breaks the app after updating to Expo SDK 52 and React Native 0.76". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/995 <br />
+See the refactor below.
+
+2. Fixed the issue - "Reduce of empty array with no initial value in piechart". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/169
+
+3. Fixed the issue- "dynamicLegendComponent passes empty array when used with dataSet". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1184
+
+4. Fixed the issue - "App crash when nullish data is passed to PieChart". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1150
+
+5. Fixed the issue - "customDataPoint Animation not working in 1.4.63". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1141
+
+
+### 🔨 Refactor
+
+In Line chart, for `customDataPoint` and `dataPointLabelComponent`, used `<ForeignObject>` only for web, and used regular `View` in case of Android and iOS. This change was needed because *ForeignObject* from **react-native-svg** is known to have issues on Android and iOS. This fixes https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/995. <br />
+Also see https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1035
+
+
+---
+
+---
+
+---
+
 ### 🎉 1.4.68
 
 Added the below properties to the data items of Bar, Stacked Bar and Line and Area charts-
@@ -23,7 +55,6 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussion
 
 ---
 
-
 ## 🎉 1.4.67
 
 ### ✨ Features added-
@@ -37,6 +68,7 @@ type ColorFromToY = {
   color: ColorValue
 }
 ```
+
 See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1165 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1179
 
 <img src="../demos/multiColorY.png" alt="multiColorY" height=300 />
@@ -49,13 +81,11 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussion
 
 3. Fixed the issue in Bar Charts- "using a -ve value for the `negativeStepValue` prop hides the -ve bars".
 
-
 ---
 
 ---
 
 ---
-
 
 ## 🎉 1.4.66
 
@@ -73,7 +103,6 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussion
 
 4. Fixed the issue- "PopulationPyramid X-axis labels are clipped when using xAxisLabelShiftY". Thanks to [sky603629](https://github.com/sky603629) for his suggestion. See sky603629
 
-
 ---
 
 ---
@@ -81,7 +110,9 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussion
 ---
 
 # 🎉 1.4.65 Major release
-**Note:** [An issue with combined Line in Bar chart](https://stackoverflow.com/questions/79822900/unable-to-show-line-on-combined-bar-and-line-chart-on-react-native-gifted-charts) is identified in this release. Please use the newer releases to avoid this issue.  
+
+**Note:** [An issue with combined Line in Bar chart](https://stackoverflow.com/questions/79822900/unable-to-show-line-on-combined-bar-and-line-chart-on-react-native-gifted-charts) is identified in this release. Please use the newer releases to avoid this issue.
+
 ## ✨ Features added-
 
 1. Added the prop `floatingYAxisLabels` to Bar, Stacked Bar and Line charts that allows us to render the Y-axis labels above the chart content. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1158#issuecomment-3415689673
@@ -102,7 +133,8 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussion
 
 ## 🔨 Refactor
 
-1. Replaced `LayoutAnimation` with the `Animated` API because LayoutAnimation was not working properly with expo. This solves several animation  related issues like-
+1. Replaced `LayoutAnimation` with the `Animated` API because LayoutAnimation was not working properly with expo. This solves several animation related issues like-
+
    - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1021
    - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1140
    - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1160
@@ -110,7 +142,6 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussion
 2. LineChart inside BarChart is now rendered directly in the `BarChart/index.tsx` file instead of `BarAndLineChartsWrapper`. This ensures that the different parts in the BarChart are stacked in the right order- Bars -> Line -> Tooltip -> pointerLabelComponent. (This order can still be modified using the `lineBehindBars` prop). This fixes issues like-
    - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/928
    - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1169
-
 
 ---
 
@@ -128,7 +159,6 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussion
 
 3. Fixed the issue- "`negativeStepValue` does not reflect". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1107
 
-
 ---
 
 ---
@@ -140,8 +170,8 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussion
 ### 🐛 Bug fixes
 
 1. Fixed the issue- "pointerConfig and pointerLabelComponent doesn't work properly with Stacked Bar Chart". <br />
-Thanks to [Anna Conti](https://github.com/94Conti) for her PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1123 <br />
-See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1117
+   Thanks to [Anna Conti](https://github.com/94Conti) for her PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1123 <br />
+   See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1117
 
 2. Fixed the issue- "`trimYAxisAtTop` not working for LineChartBicolor. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1125
 
@@ -150,6 +180,7 @@ See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/111
 ### 🔨 Refactor
 
 Added types to **style** related props. Thanks to [Seyed Mostafa Hasani](https://github.com/seyedmostafahasani) for his PRs-
+
 - https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/87
 - https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/89
 - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1119
@@ -164,26 +195,26 @@ Added types to **style** related props. Thanks to [Seyed Mostafa Hasani](https:/
 
 ## ✨ Features added-
 
-   1. Added support for spread (or ranged) area chart using the props `spreadAreaData`, `spreadAreaColor` and `spreadAreaOpacity`. Thanks to [Sadat Taseen](https://github.com/sttaseen) and [TirelessDev](https://github.com/TirelessDev) for their PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1104 <br />
-See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1093 <br />
-See this Stackoverflow question- https://stackoverflow.com/questions/65683564/fusioncharts-area-range-graph-with-line
+1.  Added support for spread (or ranged) area chart using the props `spreadAreaData`, `spreadAreaColor` and `spreadAreaOpacity`. Thanks to [Sadat Taseen](https://github.com/sttaseen) and [TirelessDev](https://github.com/TirelessDev) for their PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1104 <br />
+    See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1093 <br />
+    See this Stackoverflow question- https://stackoverflow.com/questions/65683564/fusioncharts-area-range-graph-with-line
 
 <img src= 'https://i.sstatic.net/8KDbF.png' height=200 />
 
 ## 🐛 Bug fixes
 
 1. Fixed the issue- `endIndex` `startIndex` not working properly for area chart gradient. <br />
-Thanks to [Anna Conti](https://github.com/94Conti) for her PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1110 <br />
-See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1105
+   Thanks to [Anna Conti](https://github.com/94Conti) for her PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1110 <br />
+   See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1105
 
 2. Added uniqueId for LineChart area gradient to fix issue in web - multiple color gradients. <br />
-Thanks to [Anna Conti](https://github.com/94Conti) for her PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1108
+   Thanks to [Anna Conti](https://github.com/94Conti) for her PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1108
 
 3. Removed background pattern margin (of 1 px). <br />
-Thanks to [Christoph](https://github.com/christophby) for his PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1113
+   Thanks to [Christoph](https://github.com/christophby) for his PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1113
 
 4. Changed the default value of `labelsPositionOffset` from 5 to 0 (in gifted-charts-core), to fix the issue - "RadarChart labels don't work on small numbers". <br />
-See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1094 
+   See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1094
 
 ---
 
@@ -210,8 +241,8 @@ Tons of thanks to [Shubham Pawar](https://github.com/shubham-cpp) for his PRs- h
 1. Added the prop `onScrollEndDrag` to Bar (and stacked bar), Line and Area charts. Thanks to [Shubham Pawar](https://github.com/shubham-cpp) for his PR https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1068 <br /> issue link- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1067
 
 2. Added the props `bounces` and `overScrollMode` to Bar (and stacked bar), Line and Area charts. These props will help control the bouncing effect on iOS and Android respectively. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1073
-<br />
-To know more about `bounces` and `overScrollMode`, please go through the official react-native docs here- https://reactnative.dev/docs/scrollview#bounces-ios and https://reactnative.dev/docs/scrollview#overscrollmode-android
+   <br />
+   To know more about `bounces` and `overScrollMode`, please go through the official react-native docs here- https://reactnative.dev/docs/scrollview#bounces-ios and https://reactnative.dev/docs/scrollview#overscrollmode-android
 
 ---
 
@@ -317,7 +348,7 @@ The above chart is rendered using the `stackHighlightEnabled` and `highlightedSt
 1. Fixed the issue- "Dataset Lines rendering incorrectly when lengths don't match". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/975
 2. Fixed the issue- "`onPress` for Pie charts on web not working on large screens. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/969#issuecomment-2601506090
 3. Fixed the issue- "onFocus callback always receives last line". Thanks to [brimby](https://github.com/brimby) for his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1068
-https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73
+   https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73
 4. Fixed the issue- "`focusProximity` not working for `dataSets`." See https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/73#issuecomment-2614202997
 
 ---
@@ -449,8 +480,8 @@ Added support for **Radar charts** using `<RadarChart>` component. See [Radar ch
 ### ✨ Features added-
 
 1. Added the prop `renderDataPointsAfterAnimationEnds` to Line/Area charts to render the data points after the animation has ended. This flag can be helpful if `onPress` does not work in case of multi-line animated charts. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/921 <br /><br/>
-This prop is also useful if you are using `focusedDataPointLabelComponent` in **animated multiline** charts. In animated multiline charts, the focused label component might appear beneath some lines (while it is supposed to be rendered above every line/curve).
-To fix this layering issue, `renderDataPointsAfterAnimationEnds` can be useful. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1060#issuecomment-2792527440 
+   This prop is also useful if you are using `focusedDataPointLabelComponent` in **animated multiline** charts. In animated multiline charts, the focused label component might appear beneath some lines (while it is supposed to be rendered above every line/curve).
+   To fix this layering issue, `renderDataPointsAfterAnimationEnds` can be useful. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1060#issuecomment-2792527440
 
 ### 🐛 Bug fixes
 
