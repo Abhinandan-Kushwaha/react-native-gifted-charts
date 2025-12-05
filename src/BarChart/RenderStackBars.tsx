@@ -83,7 +83,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
         disabled={disablePress || (stackHighlightEnabled && !highlightEnabled)}
         activeOpacity={activeOpacity}
         onPress={() => {
-          setSelectedIndex(index);
+          setSelectedIndex([index]);
           if (item.onPress) {
             item.onPress();
           } else if (props.onPress) {
@@ -165,7 +165,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
           }
           activeOpacity={activeOpacity}
           onPress={() => {
-            setSelectedIndex(index);
+            setSelectedIndex([index]);
             if (item.onPress) {
               item.onPress();
             } else if (props.onPress) {
