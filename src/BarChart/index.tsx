@@ -39,6 +39,7 @@ export const BarChart = (props: BarChartPropsType) => {
 
   const {
     lineConfig,
+    lineConfig2,
     hidePointer1,
     pointerItem,
     pointerY,
@@ -362,6 +363,12 @@ export const BarChart = (props: BarChartPropsType) => {
             if (props.stackHighlightEnabled && selectedStackIndex !== -1) {
               setSelectedStackIndex(-1);
               // props.setHighlightedStackIndex?.(-1)
+            }
+            if (lineConfig.focusEnabled) {
+              lineConfig.setFocusedDataPointIndex(-1);
+            }
+            if (lineConfig2.focusEnabled) {
+              lineConfig2.setFocusedDataPointIndex(-1);
             }
             props.onBackgroundPress?.();
           }}>

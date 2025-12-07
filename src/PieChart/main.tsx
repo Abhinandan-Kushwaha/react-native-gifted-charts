@@ -361,7 +361,7 @@ export const PieChartMain = (props: PieChartMainProps) => {
                       fill={
                         item.textColor ||
                         textColor ||
-                        pieColors[(index + 2) % 9]
+                        'black'
                       }
                       fontSize={item.textSize || textSize}
                       fontFamily={item.font || font}

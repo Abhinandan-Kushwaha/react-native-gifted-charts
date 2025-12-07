@@ -1,3 +1,41 @@
+## 🎉 1.4.70
+
+### ✨ Features added-
+
+1. Made the Pie and donut charts rotatable using the `rotatable` prop.
+<div>
+   <span>
+      <img src="../demos/rotatePie.gif" alt="rotatePie" height=300 />
+   </span>
+   <span>
+      <img src="../demos/rotate3D.gif" alt="rotate3D" height=300 />
+   </span>
+</div>
+
+### 🐛 Bug fixes
+
+1. Fixed the issue- "Line chart inside Bar and Stacked Bar charts, if set to `isSecondary`, does not follow stepValue, noOfSections provided in `secondaryYAxis`". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1187
+
+2. Fixed the issue- "Error: Cannot read property 'hidePointer' of undefined" on empty LineChart". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1152
+
+3. Fixed the issue- "Selecting a stack bar does not currently work, as `setSelectedIndex` is wrongly setting a number instead of an array." Thanks to [Louis Zawadzki](https://github.com/louiszawadzki) for his PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1189
+
+4. Fixed- "functionality issue for `toggleFocusOnPress` prop and incorrect color issue for `focusOnPress` prop in PieChart component". Thanks to [Sri Harsha D V](https://github.com/HASH-0021) for his PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1072. <br />
+This fixes- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1087
+
+5. Fixed the issue- "`focusedPieIndex` not working."
+
+### 🔨 Refactor
+
+1. Changed the default Pie and donut colors from bright colors like cyan, orange, purple etc to different shades of gray. Also set the the default text color in Pie and donut charts to black.
+
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.69
 
 ### ✨ Features added-

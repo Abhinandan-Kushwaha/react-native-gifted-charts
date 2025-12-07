@@ -3,6 +3,7 @@ import {PieChartMain} from './main';
 import {PieChartPropsType, pieColors, usePieChart} from 'gifted-charts-core';
 import {isWebApp} from '../utils';
 import {useState} from 'react';
+import {RotatablePie} from '../Components/Rotatable';
 
 export const PieChart = (props: PieChartPropsType) => {
   if (!props.data) return null;
@@ -46,6 +47,7 @@ export const PieChart = (props: PieChartPropsType) => {
     fontStyle,
     tooltipSelectedIndex,
     setTooltipSelectedIndex,
+    rotatable,
   } = usePieChart(props);
 
   const [touchX, setTouchX] = useState(0);
@@ -170,79 +172,92 @@ export const PieChart = (props: PieChartPropsType) => {
     );
   };
 
-  return (
-    <View
-      style={{
-        height:
-          (radius + extraRadius + paddingVertical / 2) *
-          (props.semiCircle ? 1 : 2),
-        width: (radius + extraRadius + paddingHorizontal / 2) * 2,
-        overflow: 'hidden',
-      }}>
-      <View style={{position: 'absolute'}}>
-        <PieChartMain
-          {...props}
-          setTouchX={setTouchX}
-          setTouchY={setTouchY}
-          tooltipSelectedIndex={tooltipSelectedIndex}
-          setTooltipSelectedIndex={setTooltipSelectedIndex}
-          selectedIndex={selectedIndex}
-          setSelectedIndex={setSelectedIndex}
-          paddingHorizontal={paddingHorizontal}
-          paddingVertical={paddingVertical}
-          extraRadius={extraRadius}
-        />
-      </View>
-      {renderInnerCircle(innerRadius, innerCircleBorderWidth)}
-      {props.data.length > 1 &&
-        props.data[selectedIndex] && // don't forget to add this one so there are no errors when the data is empty / updating
-        (props.focusOnPress || props.sectionAutoFocus) &&
-        selectedIndex !== -1 && (
-          <View
-            pointerEvents="box-none"
-            style={{
-              position: 'absolute',
-              top: -extraRadius,
-              left: -extraRadius,
-              zIndex: isWebApp ? -1 : 0, // was not getting displayed in web (using Expo)
-            }}>
-            <PieChartMain
-              {...props}
-              setTouchX={setTouchX}
-              setTouchY={setTouchY}
-              tooltipSelectedIndex={tooltipSelectedIndex}
-              setTooltipSelectedIndex={setTooltipSelectedIndex}
-              data={[
-                {
-                  ...props.data[selectedIndex],
-                  color: props.showGradient
-                    ? `url(#grad${selectedIndex})`
-                    : props.data[selectedIndex].color ||
-                      pieColors[selectedIndex % 9],
-                },
-                {
-                  value: total - props.data[selectedIndex].value,
-                  peripheral: true,
-                  strokeWidth: 0,
-                },
-              ]}
-              radius={radius + extraRadius}
-              initialAngle={startAngle}
-              innerRadius={props.innerRadius || radius / 2.5}
-              isBiggerPie
-              selectedIndex={selectedIndex}
-              setSelectedIndex={setSelectedIndex}
-              paddingHorizontal={paddingHorizontal}
-              paddingVertical={paddingVertical}
-              extraRadius={extraRadius}
-            />
-          </View>
+  const PieChartBody = () => {
+    return (
+      <View
+        style={{
+          height:
+            (radius + extraRadius + paddingVertical / 2) *
+            (props.semiCircle ? 1 : 2),
+          width: (radius + extraRadius + paddingHorizontal / 2) * 2,
+          overflow: 'hidden',
+        }}>
+        <View style={{position: 'absolute'}}>
+          <PieChartMain
+            {...props}
+            setTouchX={setTouchX}
+            setTouchY={setTouchY}
+            tooltipSelectedIndex={tooltipSelectedIndex}
+            setTooltipSelectedIndex={setTooltipSelectedIndex}
+            selectedIndex={selectedIndex}
+            setSelectedIndex={setSelectedIndex}
+            paddingHorizontal={paddingHorizontal}
+            paddingVertical={paddingVertical}
+            extraRadius={extraRadius}
+          />
+        </View>
+        {renderInnerCircle(innerRadius, innerCircleBorderWidth)}
+        {props.data.length > 1 &&
+          props.data[selectedIndex] && // don't forget to add this one so there are no errors when the data is empty / updating
+          (props.focusOnPress || props.sectionAutoFocus) &&
+          selectedIndex !== -1 && (
+            <View
+              pointerEvents="box-none"
+              style={{
+                position: 'absolute',
+                top: -extraRadius,
+                left: -extraRadius,
+                zIndex: isWebApp ? -1 : 0, // was not getting displayed in web (using Expo)
+              }}>
+              <PieChartMain
+                {...props}
+                setTouchX={setTouchX}
+                setTouchY={setTouchY}
+                tooltipSelectedIndex={tooltipSelectedIndex}
+                setTooltipSelectedIndex={setTooltipSelectedIndex}
+                data={[
+                  {
+                    ...props.data[selectedIndex],
+                    color: props.showGradient
+                      ? `url(#grad${selectedIndex})`
+                      : props.data[selectedIndex].color ||
+                        pieColors[selectedIndex % 9],
+                  },
+                  {
+                    value: total - props.data[selectedIndex].value,
+                    peripheral: true,
+                    strokeWidth: 0,
+                  },
+                ]}
+                radius={radius + extraRadius}
+                initialAngle={startAngle}
+                innerRadius={props.innerRadius || radius / 2.5}
+                isBiggerPie
+                selectedIndex={selectedIndex}
+                setSelectedIndex={setSelectedIndex}
+                paddingHorizontal={paddingHorizontal}
+                paddingVertical={paddingVertical}
+                extraRadius={extraRadius}
+              />
+            </View>
+          )}
+        {renderInnerCircle(
+          innerRadius - inwardExtraLengthForFocused,
+          inwardExtraLengthForFocused ? 0 : innerCircleBorderWidth,
         )}
-      {renderInnerCircle(
-        innerRadius - inwardExtraLengthForFocused,
-        inwardExtraLengthForFocused ? 0 : innerCircleBorderWidth,
-      )}
-      {showTooltip && tooltipSelectedIndex !== -1 ? renderTooltip() : null}
-    </View>
-  );
+        {showTooltip && tooltipSelectedIndex !== -1 ? renderTooltip() : null}
+      </View>
+    );
+  };
+
+  if (rotatable && !semiCircle) {
+    return (
+      <RotatablePie
+        children={[<PieChartBody key="PieChartBody" />]}
+        initialAngle={startAngle}
+        size={radius * 2}
+      />
+    );
+  }
+  return <PieChartBody />;
 };

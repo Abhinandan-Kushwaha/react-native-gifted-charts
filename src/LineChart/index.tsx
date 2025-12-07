@@ -1902,6 +1902,7 @@ export const LineChart = (props: LineChartPropsType) => {
     spacingArray: number[],
     key?: number,
   ) => {
+    if (!points) return null;
     return (
       <View
         key={key ?? 0}
@@ -2045,6 +2046,7 @@ export const LineChart = (props: LineChartPropsType) => {
     spacingArray: number[],
     key?: number,
   ) => {
+    if (!points) return null;
     return (
       <Animated.View
         key={key ?? 0}

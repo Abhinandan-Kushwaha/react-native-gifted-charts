@@ -33,10 +33,8 @@ export const renderDataPoints = (props: DataPointProps) => {
     dataPointLabelComponent,
     showDataPointLabelOnFocus,
     focusedDataPointIndex,
+    setFocusedDataPointIndex,
   } = lineConfig;
-  const [selectedDataPointIndex, setSelectedDataPointIndex] = useState(
-    focusedDataPointIndex ?? -1,
-  );
 
   return (
     <>
@@ -52,12 +50,12 @@ export const renderDataPoints = (props: DataPointProps) => {
         const customDataPoint =
           item.customDataPoint || lineConfig.customDataPoint;
         const dataPointColor =
-          lineConfig.focusEnabled && index === selectedDataPointIndex
+          lineConfig.focusEnabled && index === focusedDataPointIndex
             ? lineConfig.focusedDataPointColor
             : lineConfig.dataPointsColor;
 
         const dataPointRadius =
-          lineConfig.focusEnabled && index === selectedDataPointIndex
+          lineConfig.focusEnabled && index === focusedDataPointIndex
             ? lineConfig.focusedDataPointRadius
             : lineConfig.dataPointsRadius;
         const value =
@@ -106,7 +104,7 @@ export const renderDataPoints = (props: DataPointProps) => {
                 },
               ]}
               onPress={() => {
-                if (focusEnabled) setSelectedDataPointIndex(index);
+                if (focusEnabled) setFocusedDataPointIndex(index);
               }}>
               {customDataPoint(item, index)}
             </TouchableOpacity>
@@ -123,7 +121,7 @@ export const renderDataPoints = (props: DataPointProps) => {
                 fill={dataPointColor}
                 opacity={opacity}
                 onPress={() => {
-                  if (focusEnabled) setSelectedDataPointIndex(index);
+                  if (focusEnabled) setFocusedDataPointIndex(index);
                 }}
               />
               {item.dataPointText && (
@@ -152,7 +150,7 @@ export const renderDataPoints = (props: DataPointProps) => {
               fill={dataPointColor}
               opacity={opacity}
               onPress={() => {
-                if (focusEnabled) setSelectedDataPointIndex(index);
+                if (focusEnabled) setFocusedDataPointIndex(index);
               }}
             />
             {item.dataPointText && (
@@ -213,7 +211,7 @@ export const renderDataPoints = (props: DataPointProps) => {
                   y={y - 24}
                   key={index + '.' + value + 'label'}>
                   {showDataPointLabelOnFocus
-                    ? selectedDataPointIndex === index
+                    ? focusedDataPointIndex === index
                       ? dataPointLabelComponent?.(item, index)
                       : null
                     : dataPointLabelComponent?.(item, index)}
@@ -225,7 +223,7 @@ export const renderDataPoints = (props: DataPointProps) => {
                 style={{top: y - 24, left: x - 12, position: 'absolute'}}
                 key={index + '.' + value + 'label'}>
                 {showDataPointLabelOnFocus
-                  ? selectedDataPointIndex === index
+                  ? focusedDataPointIndex === index
                     ? dataPointLabelComponent?.(item, index)
                     : null
                   : dataPointLabelComponent?.(item, index)}
