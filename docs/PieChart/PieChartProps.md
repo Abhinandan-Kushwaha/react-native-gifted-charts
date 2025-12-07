@@ -178,6 +178,4 @@ type LabelLineConfig = {
 | shiftInnerCenterY      | number     | Shifts the inner ring vertically to enhance the 3D effect         | 0                                    |
 | tilt                   | number     | The factor (between 0 annd 1) by which the chart should be tilted | if threeD then 0.5 else 1            |
 
-## Animation and Curved paths
-
-Animation and curved paths are supported in **`<PieChartPro>`** component. It receives all the above props (same as the **`<PieChart>`** component)
+**Note:** **`<PieChartPro>`** is no longer maintained. Avoid using it at the moment.
