@@ -41,6 +41,9 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
 
   const svgHeight = containerHeightIncludingBelowXAxis + labelsExtraHeight;
 
+  const svgHeightProp = isWebApp ? svgHeight : undefined;
+  const svgWidthProp = isWebApp ? totalWidth : undefined;
+
   const dataPointsProps: DataPointProps = {
     data,
     lineConfig,
@@ -95,8 +98,8 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
         }}>
         <Svg
           pointerEvents={isIos ? 'none' : 'box-none'}
-          height={isWebApp ? svgHeight : undefined}
-          width={isWebApp ? animatedWidth : undefined}>
+          height={svgHeightProp}
+          width={svgWidthProp}>
           <Path
             d={points}
             fill="none"
@@ -139,8 +142,8 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
         }}>
         <Svg
           pointerEvents={isIos ? 'none' : 'box-none'}
-          height={isWebApp ? svgHeight : undefined}
-          width={isWebApp ? totalWidth : undefined}>
+          height={svgHeightProp}
+          width={svgWidthProp}>
           <Path
             d={points}
             fill="none"
