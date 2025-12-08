@@ -6,7 +6,7 @@ import {renderDataPoints} from './renderDataPoints';
 import {renderSpecificDataPoints} from './renderSpecificDataPoints';
 import {LineInBarChartPropsType} from 'gifted-charts-core';
 import {DataPointProps} from 'gifted-charts-core';
-import {isIos} from '../../../utils';
+import {isIos, isWebApp} from '../../../utils';
 
 const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
   const {
@@ -95,8 +95,8 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
         }}>
         <Svg
           pointerEvents={isIos ? 'none' : 'box-none'}
-          height={svgHeight}
-          width={totalWidth}>
+          height={isWebApp ? svgHeight : undefined}
+          width={isWebApp ? animatedWidth : undefined}>
           <Path
             d={points}
             fill="none"
@@ -139,8 +139,8 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
         }}>
         <Svg
           pointerEvents={isIos ? 'none' : 'box-none'}
-          height={containerHeightIncludingBelowXAxis + labelsExtraHeight}
-          width={totalWidth}>
+          height={isWebApp ? svgHeight : undefined}
+          width={isWebApp ? totalWidth : undefined}>
           <Path
             d={points}
             fill="none"
