@@ -83,6 +83,8 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
   };
 
   const renderAnimatedLine = () => {
+    const bottomOffset = isWebApp ? -10 : 50;
+
     return (
       <Animated.View
         pointerEvents={isIos ? 'none' : 'box-none'} // in iOS box-none doesn't work as expected
@@ -90,7 +92,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
           position: 'absolute',
           height: svgHeight,
           left: 6 - yAxisLabelWidth,
-          bottom: 50 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
+          bottom: bottomOffset + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
           zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'wheat',
