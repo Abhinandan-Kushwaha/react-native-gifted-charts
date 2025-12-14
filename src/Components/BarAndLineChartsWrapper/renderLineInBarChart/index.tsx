@@ -83,6 +83,8 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
   };
 
   const renderAnimatedLine = () => {
+    const bottomOffset = isWebApp ? -10 : 50;
+
     return (
       <Animated.View
         pointerEvents={isIos ? 'none' : 'box-none'} // in iOS box-none doesn't work as expected
@@ -90,15 +92,12 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
           position: 'absolute',
           height: svgHeight,
           left: 6 - yAxisLabelWidth,
-          bottom: 50 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
+          bottom: bottomOffset + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
           zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'wheat',
         }}>
-        <Svg
-          pointerEvents={isIos ? 'none' : 'box-none'}
-          height={svgHeightProp}
-          width={isWebApp ? animatedWidth : undefined}>
+        <Svg pointerEvents={isIos ? 'none' : 'box-none'} height={svgHeightProp}>
           <Path
             d={points}
             fill="none"
@@ -139,10 +138,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
           zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'rgba(200,150,150,0.1)'
         }}>
-        <Svg
-          pointerEvents={isIos ? 'none' : 'box-none'}
-          height={svgHeightProp}
-          width={isWebApp ? totalWidth : undefined}>
+        <Svg pointerEvents={isIos ? 'none' : 'box-none'} height={svgHeightProp}>
           <Path
             d={points}
             fill="none"
