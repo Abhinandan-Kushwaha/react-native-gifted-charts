@@ -1,3 +1,27 @@
+## 🎉 1.4.71
+
+### ✨ Features added-
+
+1. Added the prop- `chartContainerProps` to Radar chart. It is used to set height, width, shiftX, shiftY, backgroundColor of the radar chart's container. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1013
+
+chartContainerProps is an object of `RadarChartContainerProps` type, as defined below-
+
+```ts
+type RadarChartContainerProps = {
+  height?: number; // default: chartSize
+  width?: number; // default: chartSize
+  shiftX?: number; // default: 0
+  shiftY?: number; // default: 0
+  backgroundColor?: ColorValue; // default: 'transparent'
+};
+```
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.70
 
 ### ✨ Features added-
