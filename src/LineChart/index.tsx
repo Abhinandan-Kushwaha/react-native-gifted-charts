@@ -347,6 +347,7 @@ export const LineChart = (props: LineChartPropsType) => {
     colors,
   } = useLineChart({
     ...props,
+    lineGradient: props.lineGradient ?? (props.areaChart ? false : undefined),
     parentWidth: props.parentWidth ?? screenWidth,
   });
 
@@ -1279,7 +1280,7 @@ export const LineChart = (props: LineChartPropsType) => {
   };
 
   const getColorBackRects = () => {
-    return colors?.map(colorItem => {
+    return colors?.map((colorItem: { from: any; to: any; color: any; }) => {
       const key = JSON.stringify(colorItem);
       const {from, to, color} = colorItem;
       const y = getY(from);
