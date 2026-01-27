@@ -1,4 +1,4 @@
-## 🎉 1.4.72
+## 🎉 1.4.71
 
 ### ✨ Features added-
 
@@ -17,27 +17,7 @@ Example-
 The props of Bubble chart are similar to those of Line chart. The `r` in the data array is analagous to `dataPointRadius` in the Line chart.
 See the props table here- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/BubbleChart/BubbleChartProps.md
 
-### 🐛 Bug fixes
-
-1. Fixed the issue- "Combined Bar and Line chart, Line chart shifts upward on React Native if isAnimated is true". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1205
-
-2. Fixed the "Line chart coloring issue" for area charts, where gradient is unexpectedly applied to line. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1080
-
-3. FIxed the issue- "X-axis labels misalignment when using adjustToWidth and parentWidth in Stacked Bar Chart". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1203
-
-4. Fixed the issue- "In Line/Area charts verticalLineHeight not set correctly on data item level". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1202
-
----
-
----
-
----
-
-## 🎉 1.4.71
-
-### ✨ Features added-
-
-1. Added the prop- `chartContainerProps` to Radar chart. It is used to set height, width, shiftX, shiftY, backgroundColor of the radar chart's container. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1013
+2. Added the prop- `chartContainerProps` to Radar chart. It is used to set height, width, shiftX, shiftY, backgroundColor of the radar chart's container. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1013
 
 chartContainerProps is an object of `RadarChartContainerProps` type, as defined below-
 
@@ -50,6 +30,16 @@ type RadarChartContainerProps = {
   backgroundColor?: ColorValue; // default: 'transparent'
 };
 ```
+
+### 🐛 Bug fixes
+
+1. Fixed the issue- "Combined Bar and Line chart, Line chart shifts upward on React Native if isAnimated is true". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1205
+
+2. Fixed the "Line chart coloring issue" for area charts, where gradient is unexpectedly applied to line. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1080
+
+3. FIxed the issue- "X-axis labels misalignment when using adjustToWidth and parentWidth in Stacked Bar Chart". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1203
+
+4. Fixed the issue- "In Line/Area charts verticalLineHeight not set correctly on data item level". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1202
 
 ---
 
