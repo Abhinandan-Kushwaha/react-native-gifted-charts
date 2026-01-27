@@ -90,7 +90,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
           position: 'absolute',
           height: svgHeight,
           left: 6 - yAxisLabelWidth,
-          bottom: 50 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
+          bottom: -10 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
           width: animatedWidth,
           zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'wheat',
@@ -132,7 +132,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
         pointerEvents={isIos ? 'none' : 'box-none'} // in iOS box-none doesn't work as expected
         style={{
           position: 'absolute',
-          height: containerHeightIncludingBelowXAxis + labelsExtraHeight,
+          height: svgHeight,
           left: 6 - yAxisLabelWidth,
           bottom: -10 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
           width: totalWidth,

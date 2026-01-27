@@ -38,12 +38,13 @@ const RenderVerticalLines = (props: any) => {
           (data[index].value * containerHeight) / maxValue - xAxisThickness
         );
       } else {
-        return verticalLinesHeight ?? 0;
+        return data?.[index]?.verticalLineHeight ?? verticalLinesHeight ?? 0;
       }
     } else {
       return (
-        verticalLinesHeight ||
-        containerHeightIncludingBelowXAxis - xAxisThickness
+        data?.[index]?.verticalLineHeight ??
+        (verticalLinesHeight ||
+          containerHeightIncludingBelowXAxis - xAxisThickness)
       );
     }
   };
@@ -121,7 +122,7 @@ const RenderVerticalLines = (props: any) => {
 
           const x =
             verticalLinesShiftLocal +
-            1 +
+            2 +
             (chartType === chartTypes.BAR // This logic exists because we have renderSpecificVerticalLines in Line Charts which I would love to deprecate at the earliest, because that functionality gets handled here elegantly
               ? totalSpacing - 1
               : verticalLinesSpacing

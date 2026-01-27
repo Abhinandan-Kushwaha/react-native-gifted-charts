@@ -5,6 +5,7 @@ export {LineChart} from './LineChart';
 export {LineChartBicolor} from './LineChart/LineChartBicolor';
 export {PopulationPyramid} from './PopulationPyramid';
 export {RadarChart} from './RadarChart';
+export {BubbleChart} from './BubbleChart';
 
 export {
   type barDataItem,
@@ -47,6 +48,7 @@ export {
   type LabelLineConfig,
   type TooltipProps,
   type RadarChartProps,
+  type BubbleChartPropsType,
   type PolygonConfig,
   type GridConfig,
   type GridSectionConfig,
