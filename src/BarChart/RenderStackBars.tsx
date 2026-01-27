@@ -20,6 +20,7 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
     spacing,
     rotateLabel,
     label,
+    rtl,
     labelTextStyle,
     xAxisTextNumberOfLines,
     xAxisLabelsVerticalShift,
@@ -111,8 +112,8 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
                 props.labelWidth ||
                 item.stacks[0].barWidth ||
                 props.barWidth ||
-                30) +
-              spacing / 2,
+                30) + spacing,
+            left: spacing / -2,
             position: 'absolute',
             bottom:
               !labelsDistanceFromXaxis && autoShiftLabelsForNegativeStacks
@@ -132,7 +133,13 @@ const RenderStackBars = (props: StackedBarChartPropsType) => {
         {item.labelComponent ? (
           item.labelComponent()
         ) : (
-          <Text style={[labelTextStyle]} numberOfLines={xAxisTextNumberOfLines}>
+          <Text
+            style={[
+              {textAlign: 'center'},
+              rtl && horizontal && {transform: [{rotate: '180deg'}]},
+              labelTextStyle,
+            ]}
+            numberOfLines={xAxisTextNumberOfLines}>
             {label || ''}
           </Text>
         )}

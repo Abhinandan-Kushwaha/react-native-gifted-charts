@@ -1495,6 +1495,90 @@ export const LineChart = (props: LineChartPropsType) => {
     );
   };
 
+  const areaComponent = (
+    isNthAreaChart: boolean | undefined,
+    startFillColor: string,
+    endFillColor: string,
+    startOpacity: number,
+    endOpacity: number,
+    uniqueId: string,
+    fillPoints: any,
+    startIndex: number,
+    endIndex: number,
+    propsData: any,
+    clipRangeId: string,
+    currentLineThickness: number | undefined,
+    spreadAreaData: {lower: number; upper: number}[] | undefined,
+    spacingArray: number[],
+    spreadAreaColor: ColorValue | undefined,
+    spreadAreaOpacity: number | undefined,
+  ) => {
+    // For Area Chart
+    return (
+      <>
+        {isNthAreaChart &&
+          getAreaGradientComponent(
+            startFillColor,
+            endFillColor,
+            startOpacity,
+            endOpacity,
+            uniqueId,
+          )}
+        {isNthAreaChart &&
+          (startIndex !== 0 || endIndex !== data.length - 1) &&
+          getClipRange(startIndex, endIndex, clipRangeId)}
+        {isNthAreaChart ? (
+          props.interpolateMissingValues === false &&
+          propsData.some(
+            (item: any) => isNaN(item.value), // if we have a null/undefined value in data & interpolation is disabled, then don't render area
+          ) ? null : animateOnDataChange && animatedFillPath ? (
+            <AnimatedPath
+              onPress={props.onChartAreaPress}
+              d={animatedFillPath}
+              fill={
+                props.areaGradientId
+                  ? `url(#${props.areaGradientId})`
+                  : `url(#${uniqueId})`
+              }
+              clipPath={`url(#${clipRangeId})`}
+              stroke={'none'}
+              strokeWidth={currentLineThickness || thickness}
+            />
+          ) : (
+            <Path
+              onPress={props.onChartAreaPress}
+              d={fillPoints}
+              fill={
+                props.areaGradientId
+                  ? `url(#${props.areaGradientId})`
+                  : `url(#${uniqueId})`
+              }
+              clipPath={`url(#${clipRangeId})`}
+              stroke={'none'}
+              strokeWidth={currentLineThickness || thickness}
+            />
+          )
+        ) : null}
+
+        {spreadAreaData && (
+          <Path
+            d={getSpreadAreaPath(
+              spreadAreaData,
+              getX,
+              getY,
+              spacingArray,
+              props.curvature,
+              curveType,
+            )}
+            fill={spreadAreaColor || 'rgba(0,0,255,0.2)'}
+            stroke="none"
+            opacity={spreadAreaOpacity ?? 0.3}
+          />
+        )}
+      </>
+    );
+  };
+
   const lineSvgComponent = (
     points: any,
     currentLineThickness: number | undefined,
@@ -1592,6 +1676,24 @@ export const LineChart = (props: LineChartPropsType) => {
         height={svgHeight}
         // width={widthValue}
         onPress={props.onBackgroundPress}>
+        {areaComponent(
+          isNthAreaChart,
+          startFillColor,
+          endFillColor,
+          startOpacity,
+          endOpacity,
+          uniqueId,
+          fillPoints,
+          startIndex,
+          endIndex,
+          propsData,
+          clipRangeId,
+          currentLineThickness,
+          spreadAreaData,
+          spacingArray,
+          spreadAreaColor,
+          spreadAreaOpacity,
+        )}
         {lineGradient && getLineGradientComponent()}
         {points.includes(SEGMENT_START) || points.includes(RANGE_ENTER) ? (
           ar.map((item, index) => {
@@ -1628,70 +1730,6 @@ export const LineChart = (props: LineChartPropsType) => {
           <Path {...lineSvgPropsOuter} />
         )}
         {colors && getColorBackRects()}
-
-        {/***********************      For Area Chart        ************/}
-
-        {isNthAreaChart &&
-          getAreaGradientComponent(
-            startFillColor,
-            endFillColor,
-            startOpacity,
-            endOpacity,
-            uniqueId,
-          )}
-        {isNthAreaChart &&
-          (startIndex !== 0 || endIndex !== data.length - 1) &&
-          getClipRange(startIndex, endIndex, clipRangeId)}
-        {isNthAreaChart ? (
-          props.interpolateMissingValues === false &&
-          propsData.some(
-            (item: any) => isNaN(item.value), // if we have a null/undefined value in data & interpolation is disabled, then don't render area
-          ) ? null : animateOnDataChange && animatedFillPath ? (
-            <AnimatedPath
-              onPress={props.onChartAreaPress}
-              d={animatedFillPath}
-              fill={
-                props.areaGradientId
-                  ? `url(#${props.areaGradientId})`
-                  : `url(#${uniqueId})`
-              }
-              clipPath={`url(#${clipRangeId})`}
-              stroke={'none'}
-              strokeWidth={currentLineThickness || thickness}
-            />
-          ) : (
-            <Path
-              onPress={props.onChartAreaPress}
-              d={fillPoints}
-              fill={
-                props.areaGradientId
-                  ? `url(#${props.areaGradientId})`
-                  : `url(#${uniqueId})`
-              }
-              clipPath={`url(#${clipRangeId})`}
-              stroke={'none'}
-              strokeWidth={currentLineThickness || thickness}
-            />
-          )
-        ) : null}
-
-        {spreadAreaData && (
-          <Path
-            d={getSpreadAreaPath(
-              spreadAreaData,
-              getX,
-              getY,
-              spacingArray,
-              props.curvature,
-              curveType,
-            )}
-            fill={spreadAreaColor || 'rgba(0,0,255,0.2)'}
-            stroke="none"
-            opacity={spreadAreaOpacity ?? 0.3}
-          />
-        )}
-
-        {/******************************************************************/}
 
         {renderSpecificVerticalLines(data, cumulativeSpacing1)}
         {renderSpecificVerticalLines(data2, cumulativeSpacing2)}
@@ -1740,21 +1778,6 @@ export const LineChart = (props: LineChartPropsType) => {
       </Svg>
     );
   };
-
-  // const getClosestValueFromSpacingArray = (spacingArray:number[],x:number):number => {
-  //   let dif=0,prevDif=0,i;
-  //   for(i=0;i<spacingArray.length;i++){
-  //     dif = Math.abs(spacingArray[i]-x)
-
-  //     if(prevDif!=0 && prevDif<dif){
-  //       break;
-  //     }
-
-  //     prevDif = dif;
-  //   }
-
-  //   return i-1;
-  // }
 
   const activatePointers = (x: number) => {
     let factor = (x - initialSpacing) / (props.spacing1 ?? spacing); // getClosestValueFromSpacingArray(cumulativeSpacing1,x-initialSpacing)

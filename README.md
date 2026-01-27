@@ -20,7 +20,7 @@
     <img src="/demos/redditLogo.png" height="auto" width="32" height="32" />
   </a>
 </p>
-The most loved library for Bar, Line, Area, Pie, Donut, Stacked Bar, Population Pyramid and Radar charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
+The most loved library for Bar, Line, Area, Pie, Donut, Stacked Bar, Population Pyramid, Radar and Bubble charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
 
 ### Yet another chart library? Why?
 
@@ -94,7 +94,7 @@ Please note that `react-native-svg` and `react-native-linear-gradient`/`expo-lin
 The simplest usage of various types of charts can be done as below-
 
 ```js
-import { BarChart, LineChart, PieChart, PopulationPyramid, RadarChart } from "react-native-gifted-charts";
+import { BarChart, LineChart, PieChart, PopulationPyramid, RadarChart, BubbleChart } from "react-native-gifted-charts";
 
 // ...
 const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
@@ -104,6 +104,10 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 <PieChart data = {data} />
 <PopulationPyramid data = {[{left:10,right:12}, {left:9,right:8}]} />
 <RadarChart data = {[50, 80, 90, 70]} />
+<BubbleChart data = {
+  {x: 20, y: 4, r: 10},
+  {x: 40, y: 6, r: 20},
+} />
 
 // For Horizontal Bar chart, just add the prop horizontal to the <BarChart/> component
 
@@ -124,7 +128,8 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 **2. [LineChart and AreaChart props](docs/LineChart/LineChartProps.md)** \
 **3. [PieChart and DonutChart props](docs/PieChart/PieChartProps.md)** \
 **4. [Population Pyramid props](docs/PopulationPyramid/PopulationPyramid.md)** \
-**5. [RadarChart props](docs/RadarChart/RadarChartProps.md)**
+**5. [RadarChart props](docs/RadarChart/RadarChartProps.md)** \
+**6. [BubbleChart props](docs/BubbleChart/BubbleChartProps.md)**
 
 ## 🤝 Contributing
 
