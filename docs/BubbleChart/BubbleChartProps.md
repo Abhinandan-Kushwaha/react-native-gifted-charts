@@ -13,16 +13,26 @@ Document might be inaccurate. Expect fast revisions/changes.
 | width             | number           | Width of the Bubble chart.                                                                              | width of the parent |
 | height            | number           | Height of the Bubble chart (excluding X‑axis labels).                                                   | 200                 |
 | opacity           | number           | Opacity of the bubbles                                                                                  | 0.8                 |
-| mostNegativeValue | number           | Most negative Y value shown on the Y axis (when your data has negative values).                         | \_                  |
-| noOfSections      | number           | Number of sections in the Y axis (above X axis).                                                        | 10                  |
-| stepValue         | number           | Value represented by a single section of the Y axis.                                                    | 20                  |
-| stepHeight        | number           | Height (in px) of one section of the Y axis.                                                            | 20                  |
-| negativeStepValue | number           | Value of one section of the Y axis for negative values.                                                 | stepValue           |
+| yNoOfSections     | number           | Number of sections in the Y axis (above X axis).                                                        | 10                  |
+| ySectionColors    | ColorValue[]     | Background colors of the horizontal sections of the chart.                                              | backgroundColor     |
+| maxY              | number           | Maximum Y value shown on the Y axis.                                                                   | 200                 |
+| mostNegativeY     | number           | Most negative Y value shown on the Y axis (when your data has negative values).                        | \_                  |
+| yStepHeight       | number           | Height (in px) of one section of the Y axis.                                                             | 20                  |
+| yStepValue        | number           | Value represented by a single section of the Y axis.                                                    | 20                  |
+| yNegativeStepValue | number          | Value of one section of the Y axis for negative values.                                                | yStepValue          |
+| showFractionalYAxis | boolean        | When true, allows fractional values on the Y axis.                                                      | false               |
+| yRoundToDigits    | number           | Number of decimal digits to which Y axis values are rounded.                                            | 1                   |
+| xNoOfSections     | number           | Number of sections in the X axis.                                                                        | \_                  |
+| maxX              | number           | Maximum X value shown on the X axis.                                                                   | \_                  |
+| mostNegativeX     | number           | Most negative X value shown on the X axis (when your data has negative values).                         | \_                  |
+| xStepHeight       | number           | Height (in px) of one section of the X axis.                                                            | \_                  |
+| xStepValue        | number           | Value represented by a single section of the X axis.                                                    | \_                  |
+| showFractionalXAxis | boolean        | When true, allows fractional values on the X axis.                                                      | false               |
+| xRoundToDigits    | number           | Number of decimal digits to which X axis values are rounded.                                            | 1                   |
 | spacing           | number           | Horizontal distance between 2 consecutive bubbles.                                                      | 50                  |
 | initialSpacing    | number           | Distance of the first bubble from the Y axis.                                                           | 20                  |
 | endSpacing        | number           | Padding/distance added at the end of the chart after the last bubble.                                   | 20                  |
 | backgroundColor   | ColorValue       | Background color of the chart.                                                                          | \_                  |
-| sectionColors     | ColorValue[]     | Background colors of the horizontal sections of the chart.                                              | backgroundColor     |
 | customBackground  | CustomBackground | Object used to set a custom background component.                                                       | \_                  |
 | parentWidth       | number           | Explicit width of the parent container (helps with layout/calculations).                                | \_                  |
 | onlyPositive      | boolean          | When true, converts negative values to 0 while plotting.                                                | false               |
@@ -86,8 +96,8 @@ Document might be inaccurate. Expect fast revisions/changes.
 | yAxisTextStyle                 | StyleProp<TextStyle>      | Style object for the Y axis label text.                                                       | \_                           |
 | yAxisTextNumberOfLines         | number                    | Maximum number of lines for each Y axis label.                                                | 1                            |
 | xAxisTextNumberOfLines         | number                    | Maximum number of lines for each X axis label.                                                | 1                            |
-| showFractionalValues           | boolean                   | When true, allows fractional values on the Y axis.                                            | false                        |
-| roundToDigits                  | number                    | Number of decimal digits to which Y axis values are rounded.                                  | 1                            |
+| showFractionalYAxis            | boolean                   | When true, allows fractional values on the Y axis.                                            | false                        |
+| yRoundToDigits                 | number                    | Number of decimal digits to which Y axis values are rounded.                                  | 1                            |
 | yAxisLabelWidth                | number                    | Width of the Y axis label container.                                                          | 35                           |
 | hideYAxisText                  | boolean                   | Hides all Y axis labels when true.                                                            | false                        |
 | floatingYAxisLabels            | boolean                   | Renders Y‑axis labels above chart content instead of beside the axis.                         | false                        |
@@ -144,6 +154,7 @@ Document might be inaccurate. Expect fast revisions/changes.
 | rotateLabel                    | boolean                   | Rotates X axis labels by 60 degrees when true.                                                | false                        |
 | secondaryXAxis                 | XAxisConfig               | Configuration of a secondary X‑axis (typically at the top).                                   | values of primary X‑axis     |
 | formatYLabel                   | (label: string) => string | Callback that receives and returns a formatted Y axis label.                                  | \_                           |
+| formatXLabel                   | (label: string) => string | Callback that receives and returns a formatted X axis label.                                  | \_                           |
 
 **Note** If you are setting `yAxisSide` to `yAxisSide.RIGHT`, make sure to specify the width of the chart using the `width` prop.
 
@@ -203,17 +214,51 @@ Document might be inaccurate. Expect fast revisions/changes.
 | showValuesAsDataPointsText     | boolean                     | Shows the `y` value of each bubble as text near the bubble.                        | false            |
 | borderWidth                    | number                      | Border width around the chart area.                                                | 0                |
 | borderColor                    | ColorValue                  | Border color around the chart area.                                                | 'transparent'    |
+| borderOpacity                 | number                      | Opacity of the border around the chart area.                                       | opacity         |
+
+---
+
+### Regression line props
+
+| Prop                | Type                  | Description                                                                                    | Default value |
+| ------------------- | --------------------- | ---------------------------------------------------------------------------------------------- | ------------- |
+| showRegressionLine  | boolean               | Shows a regression line calculated from the data points using weighted regression.             | false         |
+| regressionLineConfig | RegressionLineConfig  | Configuration object for the regression line (color, opacity, thickness, strokeDashArray).     | \_            |
+
+**RegressionLineConfig** has the following properties:
+
+```ts
+type RegressionLineConfig = {
+  color?: ColorValue;
+  opacity?: number;
+  thickness?: number;
+  strokeDashArray?: number[];
+  isAnimated?: boolean;
+  animationDuration?: number;
+};
+```
+
+| Property          | Type      | Description                                                          | Default value |
+| ----------------- | --------- | -------------------------------------------------------------------- | ------------- |
+| color             | ColorValue | Color of the regression line.                                       | 'red'         |
+| opacity           | number    | Opacity of the regression line.                                      | 1             |
+| thickness         | number    | Thickness (stroke width) of the regression line.                    | 2             |
+| strokeDashArray   | number[]  | Array of numbers for dashed line pattern (e.g., `[5, 5]`).           | undefined     |
+| isAnimated        | boolean   | When true, animates the regression line drawing.                     | false         |
+| animationDuration | number    | Duration (in milliseconds) for the regression line animation.         | 800           |
 
 ---
 
 ### Text / labels related props
 
-| Prop         | Type   | Description                                                  | Default value |
-| ------------ | ------ | ------------------------------------------------------------ | ------------- |
-| textFontSize | number | Font size of data point text (for example when showing `y`). | 10            |
-| textColor    | string | Color of the data point text.                                | 'black'       |
-| textShiftX   | number | Horizontal shift applied to data point text.                 | 0             |
-| textShiftY   | number | Vertical shift applied to data point text.                   | 0             |
+| Prop         | Type      | Description                                                  | Default value |
+| ------------ | --------- | ------------------------------------------------------------ | ------------- |
+| textFontSize | number    | Font size of data point text (for example when showing `y`). | 10            |
+| textColor    | string    | Color of the data point text.                                | 'black'       |
+| textFontFamily | string  | Font family of the data point text.                           | \_            |
+| textFontWeight | FontWeight | Font weight of the data point text.                          | \_            |
+| textShiftX   | number    | Horizontal shift applied to data point text.                 | 0             |
+| textShiftY   | number    | Vertical shift applied to data point text.                   | 0             |
 
 ---
 
@@ -272,23 +317,48 @@ type CustomBackground = {
 };
 ```
 
+```ts
+type RegressionLineConfig = {
+  color?: ColorValue;
+  opacity?: number;
+  thickness?: number;
+  strokeDashArray?: number[];
+};
+```
+
+```ts
+type Linecap = 'butt' | 'square' | 'round'; // can be imported from gifted-charts-core
+```
+
 ---
 
-### Alert – relation between `maxValue`, `noOfSections` and `stepValue`
+### Alert – relation between Y axis props
 
-These props are correlated:
+These Y axis props are correlated:
 
-1. `maxValue`
-2. `noOfSections`
-3. `stepValue`
+1. `maxY`
+2. `yNoOfSections`
+3. `yStepValue`
 
 They must follow the relation:
 
 ```ts
-maxValue = noOfSections * stepValue;
+maxY = yNoOfSections * yStepValue;
 ```
 
 So, all three should be used together. Using any 1 or 2 of them without the third may produce absurd results.
+
+Similarly, for X axis:
+
+1. `maxX`
+2. `xNoOfSections`
+3. `xStepValue`
+
+They must follow the relation:
+
+```ts
+maxX = xNoOfSections * xStepValue;
+```
 
 ---
 
@@ -299,6 +369,8 @@ Each element of the `data` array is a `bubbleDataItem`:
 ```ts
 export interface bubbleDataItem {
   y: number;
+  x?: number;
+  r?: number;
   label?: string;
   labelComponent?: Function;
   labelTextStyle?: StyleProp<TextStyle>;
@@ -310,11 +382,12 @@ export interface bubbleDataItem {
   textShiftY?: number;
   textColor?: string;
   textFontSize?: number;
+  textFontFamily?: string;
+  textFontWeight?: FontWeight;
   spacing?: number;
   hideDataPoint?: boolean;
   dataPointHeight?: number;
   dataPointWidth?: number;
-  r?: number;
   dataPointColor?: string;
   dataPointShape?: string;
   customDataPoint?: Function;
@@ -353,9 +426,9 @@ export interface bubbleDataItem {
   onMouseLeave?: Function;
   showXAxisIndex?: boolean;
   hidePointer?: boolean;
-  x?: number;
   borderWidth?: number;
   borderColor?: ColorValue;
+  borderOpacity?: number;
   opacity?: number;
 }
 ```
@@ -374,6 +447,8 @@ export interface bubbleDataItem {
 | textShiftY                     | number               | Vertical shift applied to `dataPointText`.                                         |
 | textColor                      | string               | Color of `dataPointText`.                                                          |
 | textFontSize                   | number               | Font size of `dataPointText`.                                                      |
+| textFontFamily                 | string               | Font family of `dataPointText`.                                                    |
+| textFontWeight                 | FontWeight           | Font weight of `dataPointText`.                                                    |
 | spacing                        | number               | Distance between this bubble and the next bubble.                                  |
 | hideDataPoint                  | boolean              | Hides this bubble while keeping other ones visible.                                |
 | dataPointHeight                | number               | Height of this bubble when rectangular.                                            |
@@ -417,10 +492,42 @@ export interface bubbleDataItem {
 | onMouseLeave                   | Function             | Web‑only mouse‑leave handler.                                                      |
 | showXAxisIndex                 | boolean              | Shows an X‑axis index marker for this bubble only.                                 |
 | hidePointer                    | boolean              | Hides the pointer for this bubble when using pointer configuration.                |
-| x                              | number               | Custom X‑position override for this bubble.                                        |
+| x                              | number               | Custom X value (in data space) for this bubble. When provided, the X position is calculated as `x * xScale`. When not provided, the position is auto-calculated based on the bubble's index and total width, accounting for the bubble's radius. | \_ |
 | borderWidth                    | number               | Border width around this individual bubble.                                        |
 | borderColor                    | ColorValue           | Border color around this individual bubble.                                        |
+| borderOpacity                 | number               | Opacity of the border around this individual bubble.                               |
 | opacity                        | number               | Opacity of this individual bubble.                                                 |
 
 **Alert**\
 When you are using the `dataPointLabelComponent`, make sure to provide appropriate `dataPointsHeight` and `dataPointsWidth` values (either on the item itself or directly as props on `<BubbleChart>`). Otherwise the labels might appear shifted from their intended positions.
+
+---
+
+### X and Y Coordinate Positioning
+
+The BubbleChart uses a coordinate system where:
+
+- **Y coordinate**: Always required. The `y` value represents the vertical position in data space and is converted to screen coordinates using the `getY()` function based on `maxY`, `containerHeight`, and other Y-axis configuration.
+
+- **X coordinate**: Optional. The X positioning works as follows:
+  - **If `x` is provided**: The bubble's X position is calculated as `x * xScale`, where `xScale` is the scaling factor that converts data space X values to screen coordinates.
+  - **If `x` is not provided**: The X position is auto-calculated based on the bubble's index, evenly distributing bubbles across the chart width while accounting for the bubble's radius to prevent overflow.
+
+The `getX()` function implementation:
+
+```ts
+const getX = (index: number): number => {
+  const val =
+    props.data?.[index].x !== undefined
+      ? (props.data?.[index].x ?? 0) * xScale
+      : Math.min(
+          totalWidth - (props.data?.[index].r ?? BubbleDefaults.bubblesRadius),
+          ((index + 1) * totalWidth) / (props.data?.length ?? 1)
+        );
+  return val;
+};
+```
+
+This allows you to either:
+1. **Use explicit X values**: Provide `x` values in your data for precise positioning (useful for scatter plots or when you need specific X coordinates).
+2. **Use automatic spacing**: Omit `x` values to let the chart automatically space bubbles evenly across the available width.

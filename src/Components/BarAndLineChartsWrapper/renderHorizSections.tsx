@@ -96,6 +96,9 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
   const isLineChart = chartType === chartTypes.LINE;
   const isLineBiColor = chartType === chartTypes.LINE_BI_COLOR;
 
+  const chartWiseTotalWidth =
+    chartType === chartTypes.BUBBLE ? totalWidth : totalWidth - spacing;
+
   const renderAxesAndRules = (index: number) => {
     const invertedIndex = horizSections.length - index - 1;
     const rulesConfigArrayLocal = rulesConfigArray[invertedIndex - 1];
@@ -110,7 +113,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
           {
             borderColor: yAxisColor,
             backgroundColor: sectionColors?.[invertedIndex] ?? backgroundColor,
-            width: (props.width || totalWidth - spacing) + endSpacing,
+            width: (props.width || chartWiseTotalWidth) + endSpacing,
           },
           !index ? {height: stepHeight / 2, marginTop: stepHeight / 2} : null,
           yAxisSide === yAxisSides.RIGHT
@@ -124,7 +127,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
               color: xAxisColor,
               width:
                 xAxisLength ||
-                (props.width || totalWidth - spacing) + endSpacing,
+                (props.width || chartWiseTotalWidth) + endSpacing,
               dashWidth: dashWidth,
               dashGap: dashGap,
               type: xAxisType,
@@ -139,7 +142,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
               width:
                 rulesConfigArrayLocal?.rulesLength ??
                 rulesLength ??
-                (props.width || totalWidth - spacing) + endSpacing,
+                (props.width || chartWiseTotalWidth) + endSpacing,
               dashWidth: rulesConfigArrayLocal?.dashWidth ?? dashWidth,
               dashGap: rulesConfigArrayLocal?.dashGap ?? dashGap,
               type: rulesConfigArrayLocal?.rulesType ?? rulesType,
@@ -202,7 +205,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
               ? (secondaryXAxis.thickness ?? xAxisThickness)
               : 0,
             backgroundColor: backgroundColor,
-            width: (props.width || totalWidth - spacing) + endSpacing,
+            width: (props.width || chartWiseTotalWidth) + endSpacing,
           },
           yAxisSide === yAxisSides.RIGHT
             ? {borderRightWidth: yAxisThickness}
@@ -426,7 +429,7 @@ export const renderHorizSections = (props: horizSectionPropTypes) => {
                 color: rulesColor,
                 width:
                   rulesLength ||
-                  (props.width || totalWidth - spacing) + endSpacing,
+                  (props.width || chartWiseTotalWidth) + endSpacing,
                 dashWidth: dashWidth,
                 dashGap: dashGap,
                 type: rulesType,

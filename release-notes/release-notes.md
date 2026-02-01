@@ -1,3 +1,14 @@
+## 🎉 1.4.72
+
+Made Bubble Charts production ready! <br />
+See the props table here- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/BubbleChart/BubbleChartProps.md
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.71
 
 ### ✨ Features added-

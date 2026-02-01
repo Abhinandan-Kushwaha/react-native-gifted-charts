@@ -1,6 +1,6 @@
 import {
   BubbleChartPropsType,
-  LineDefaults,
+  BubbleDefaults,
   useBubbleChart,
 } from 'gifted-charts-core';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
@@ -13,19 +13,13 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {
-  Circle,
-  ForeignObject,
-  Rect,
-  Svg,
-  Text as CanvasText,
-} from 'react-native-svg';
-import {lineDataItemNullSafe} from 'gifted-charts-core';
+import {Circle, ForeignObject, Rect, Svg, Line} from 'react-native-svg';
 import {isWebApp, screenWidth} from '../utils';
 import {bubbleDataItem} from 'gifted-charts-core';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 const AnimatedRect = Animated.createAnimatedComponent(Rect);
+const AnimatedLine = Animated.createAnimatedComponent(Line);
 
 export const BubbleChart = (props: BubbleChartPropsType) => {
   const opacityValue = useMemo(() => new Animated.Value(0), []);
@@ -52,20 +46,19 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     handleFocus,
     handleUnFocus,
     isAnimated,
-    showDataPointOnFocus,
-    showDataPointLabelOnFocus,
-    dataPointsShape,
-    dataPointsWidth,
-    dataPointsHeight,
-    dataPointsColor,
-    dataPointsRadius,
-    textColor,
-    textFontSize,
+    showBubbleOnFocus,
+    showBubbleLabelOnFocus,
+    bubblesShape,
+    bubblesWidth,
+    bubblesHeight,
+    bubblesColor,
+    bubblesRadius,
+    labelFontSize,
+    labelTextStyle,
     startIndex,
     endIndex,
-    showValuesAsDataPointsText,
-    cumulativeSpacing,
-    hideDataPoints,
+    showValuesAsBubbleLabels,
+    hideBubbles,
     xAxisLabelsVerticalShift,
     labelsExtraHeight,
     xAxisThickness,
@@ -75,23 +68,21 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     borderColor,
     borderWidth,
     opacity,
+    xAxisLabelTexts,
+    showRegressionLine,
+    regressionLineX1,
+    regressionLineY1,
+    regressionLineX2,
+    regressionLineY2,
+    regressionLineConfig,
   } = useBubbleChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
   });
-  const radiiValues = useMemo(
-    () => (props.data ?? []).map(_ => new Animated.Value(0)),
-    [],
-  );
 
-  const pointsHeightValues = useMemo(
-    () => (props.data ?? []).map(_ => new Animated.Value(0)),
-    [],
-  );
-  const pointsWidthValues = useMemo(
-    () => (props.data ?? []).map(_ => new Animated.Value(0)),
-    [],
-  );
+  const progress = useRef(new Animated.Value(0)).current;
+  const AnimatedRegressionLineX = useRef(new Animated.Value(0)).current;
+  const AnimatedRegressionLineY = useRef(new Animated.Value(0)).current;
 
   const scrollRef = props.scrollRef ?? useRef(null);
   const widthValue = useMemo(() => new Animated.Value(0), []);
@@ -101,24 +92,33 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     outputRange: [0, 1],
   });
 
-  const growingRadii = radiiValues.map((r, i) =>
-    r.interpolate({
+  // const appearRegressionLine = RegressionLine.interpolate({
+  //   inputRange:[0,1],
+  //   outputRange:[regressionLineX1,regressionLineX2]
+  // })
+
+  const growingRadii = useMemo(
+    () =>
+      (props.data ?? []).map(item =>
+        progress.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, item.r ?? bubblesRadius],
+        }),
+      ),
+    [props.data, progress],
+  );
+
+  const growingHeight = (props.data ?? []).map((_, i) =>
+    progress.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, props.data?.[i].r ?? dataPointsRadius],
+      outputRange: [0, props.data?.[i].bubbleHeight ?? bubblesHeight],
     }),
   );
 
-  const growingHeight = pointsHeightValues.map((h, i) =>
-    h.interpolate({
+  const growingWidth = (props.data ?? []).map((_, i) =>
+    progress.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, props.data?.[i].dataPointHeight ?? dataPointsHeight],
-    }),
-  );
-
-  const growingWidth = pointsHeightValues.map((w, i) =>
-    w.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, props.data?.[i].dataPointWidth ?? dataPointsWidth],
+      outputRange: [0, props.data?.[i].bubbleWidth ?? bubblesWidth],
     }),
   );
 
@@ -126,6 +126,26 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     inputRange: [0, 1],
     outputRange: [0, opacity],
   });
+
+  const drawRegressionLine = useCallback(() => {
+    if (!regressionLineConfig.isAnimated) return;
+    AnimatedRegressionLineX.setValue(regressionLineX1);
+    AnimatedRegressionLineY.setValue(regressionLineY1);
+    Animated.parallel([
+      Animated.timing(AnimatedRegressionLineX, {
+        toValue: regressionLineX2,
+        duration: regressionLineConfig.animationDuration,
+        easing: Easing.linear,
+        useNativeDriver: false, // SVG props
+      }),
+      Animated.timing(AnimatedRegressionLineY, {
+        toValue: regressionLineY2,
+        duration: regressionLineConfig.animationDuration,
+        easing: Easing.linear,
+        useNativeDriver: false, // SVG props
+      }),
+    ]).start();
+  }, [regressionLineConfig]);
 
   const decreaseWidth = useCallback(() => {
     widthValue.setValue(0);
@@ -148,42 +168,28 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
   }, [opacityValue]);
 
   const radiiGrow = useCallback(() => {
-    radiiValues.forEach(radiusValue => {
-      radiusValue.setValue(0);
-      Animated.timing(radiusValue, {
-        toValue: 1,
-        duration: animationDuration,
-        easing: Easing.ease,
-        useNativeDriver: false,
-      }).start();
-    });
-  }, [radiiValues]);
+    if (bubblesShape === 'rectangular') return;
+    progress.setValue(0);
 
-  const dataPointsHeightsGrow = useCallback(() => {
-    pointsHeightValues.forEach(h => {
-      h.setValue(0);
-      Animated.timing(h, {
-        toValue: 1,
-        duration: animationDuration,
-        easing: Easing.ease,
-        useNativeDriver: false,
-      }).start();
-    });
-  }, [pointsHeightValues]);
+    Animated.timing(progress, {
+      toValue: 1,
+      duration: animationDuration,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: false,
+    }).start();
+  }, [progress, animationDuration]);
 
-  const dataPointsWidthsGrow = useCallback(() => {
-    pointsWidthValues.forEach(w => {
-      w.setValue(0);
-      Animated.timing(w, {
-        toValue: 1,
-        duration: animationDuration,
-        easing: Easing.ease,
-        useNativeDriver: false,
-      }).start();
-    });
-  }, [pointsWidthValues]);
+  const bubblesHeightsWidthsGrow = useCallback(() => {
+    if (bubblesShape !== 'rectangular') return;
+    progress.setValue(0);
 
-  // const dataPointsHeightGrow
+    Animated.timing(progress, {
+      toValue: 1,
+      duration: animationDuration,
+      easing: Easing.out(Easing.cubic),
+      useNativeDriver: false,
+    }).start();
+  }, [progress, animationDuration]);
 
   const dataPointsAppear = useCallback(() => {
     pointsOpacityValue.setValue(0);
@@ -199,34 +205,31 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     if (isAnimated) {
       decreaseWidth();
       labelsAppear();
-      radiiGrow();
       dataPointsAppear();
-      if (dataPointsShape === 'rectangular') {
-        dataPointsHeightsGrow();
-        dataPointsWidthsGrow();
+      if (bubblesShape === 'rectangular') {
+        bubblesHeightsWidthsGrow();
+      } else {
+        radiiGrow();
       }
     }
-  }, [isAnimated, dataPointsShape]);
+    if (regressionLineConfig.isAnimated) {
+      drawRegressionLine();
+    }
+  }, [isAnimated, bubblesShape]);
 
   const svgHeight =
     containerHeightIncludingBelowXAxis + (props.overflowBottom ?? 0);
 
-  const onStripPress = (item: any, index: number) => {
-    if (props.focusedDataPointIndex === undefined || !props.onFocus) {
-      setSelectedIndex(index);
-    }
-    if (props.onFocus) {
-      props.onFocus(item, index);
-    }
-  };
+  // const onStripPress = (item: any, index: number) => {
+  //   if (props.focusedBubbleIndex === undefined || !props.onFocus) {
+  //     setSelectedIndex(index);
+  //   }
+  //   if (props.onFocus) {
+  //     props.onFocus(item, index);
+  //   }
+  // };
 
-  const renderLabel = (
-    top: boolean,
-    index: number,
-    label: string,
-    labelTextStyle: any,
-    labelComponent: Function | undefined,
-  ) => {
+  const renderLabel = (top: boolean, index: number, label: string) => {
     return (
       <View
         style={[
@@ -236,7 +239,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
               ? containerHeight +
                 60 +
                 (secondaryXAxis?.labelsDistanceFromXaxis ?? 15)
-              : -xAxisTextNumberOfLines * 18,
+              : -xAxisTextNumberOfLines * 18 - (containerHeight - 200) / 20,
             zIndex: 10,
             width: spacing + labelsExtraHeight,
             left: initialSpacing + spacing * index - spacing / 2,
@@ -244,27 +247,17 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
         ]}>
-        {labelComponent ? (
-          labelComponent()
-        ) : (
-          <Text
-            style={[{textAlign: 'center'}, labelTextStyle]}
-            allowFontScaling={allowFontScaling}
-            numberOfLines={xAxisTextNumberOfLines}>
-            {label}
-          </Text>
-        )}
+        <Text
+          style={{textAlign: 'center'}}
+          allowFontScaling={allowFontScaling}
+          numberOfLines={xAxisTextNumberOfLines}>
+          {label}
+        </Text>
       </View>
     );
   };
 
-  const renderAnimatedLabel = (
-    top: boolean,
-    index: number,
-    label: string,
-    labelTextStyle: any,
-    labelComponent: Function | undefined,
-  ) => {
+  const renderAnimatedLabel = (top: boolean, index: number, label: string) => {
     return (
       <Animated.View
         style={[
@@ -287,116 +280,122 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
         ]}>
-        {labelComponent ? (
-          labelComponent()
-        ) : (
-          <Text
-            allowFontScaling={allowFontScaling}
-            style={[{textAlign: 'center'}, labelTextStyle]}
-            numberOfLines={xAxisTextNumberOfLines}>
-            {label}
-          </Text>
-        )}
+        <Text
+          allowFontScaling={allowFontScaling}
+          style={{textAlign: 'center'}}
+          numberOfLines={xAxisTextNumberOfLines}>
+          {label}
+        </Text>
       </Animated.View>
     );
   };
 
   const renderDataPoints = (
-    hideDataPoints: any,
+    hideBubbles: any,
     dataForRender: any,
     originalDataFromProps: any,
-    dataPtsShape: any,
-    dataPtsWidth: any,
-    dataPtsHeight: any,
-    dataPtsColor: any,
-    dataPtsRadius: any,
-    textColor: any,
-    textFontSize: any,
+    bubsShape: any,
+    bubsWidth: any,
+    bubsHeight: any,
+    bubsColor: any,
+    bubsRadius: any,
+    labelFontSize: any,
+    // textColor: any,
+    // textFontSize: any,
+    // textFontFamily: any,
+    // textFontWeight: any,
     startIndex: any,
     endIndex: any,
     isSecondary: any,
     showValuesAsDataPointsText: any,
-    spacingArray: number[],
     key: number,
   ) => {
     const getYOrSecondaryY = getY; //isSecondary ? getSecondaryY : getY;
     return dataForRender.map((item: bubbleDataItem, index: number) => {
       if (index < startIndex || index > endIndex) return null;
-      if (item.hideDataPoint) {
+      if (item.hideBubble) {
         return null;
       }
-      let dataPointsShape,
-        dataPointsWidth,
-        dataPointsHeight,
+      let bubblesShape,
+        bubblesWidth,
+        bubblesHeight,
         dataPointsColor,
-        dataPointsRadius,
+        bubblesRadius,
         text,
-        customDataPoint,
-        dataPointLabelComponent;
+        customBubble,
+        labelComponent;
       if (
         index === selectedIndex &&
         (focusTogether || key === selectedLineNumber)
       ) {
-        dataPointsShape =
-          item.focusedDataPointShape ||
-          props.focusedDataPointShape ||
-          item.dataPointShape ||
-          dataPtsShape;
-        dataPointsWidth =
-          item.focusedDataPointWidth ||
-          props.focusedDataPointWidth ||
-          item.dataPointWidth ||
-          dataPtsWidth;
-        dataPointsHeight =
-          item.focusedDataPointHeight ||
-          props.focusedDataPointHeight ||
-          item.dataPointHeight ||
-          dataPtsHeight;
+        bubblesShape =
+          item.focusedBubbleShape ||
+          props.focusedBubbleShape ||
+          item.bubbleShape ||
+          bubsShape;
+        bubblesWidth =
+          item.focusedBubbleWidth ||
+          props.focusedBubbleWidth ||
+          item.bubbleWidth ||
+          bubsWidth;
+        bubblesHeight =
+          item.focusedBubbleHeight ||
+          props.focusedBubbleHeight ||
+          item.bubbleHeight ||
+          bubsHeight;
         dataPointsColor =
-          item.focusedDataPointColor ||
-          props.focusedDataPointColor ||
-          LineDefaults.focusedDataPointColor;
-        dataPointsRadius =
-          item.focusedDataPointRadius ??
-          props.focusedDataPointRadius ??
+          item.focusedBubbleColor ||
+          props.focusedBubbleColor ||
+          BubbleDefaults.focusedBubbleColor;
+        bubblesRadius =
+          item.focusedBubbleRadius ??
+          props.focusedBubbleRadius ??
           item.r ??
-          dataPtsRadius;
+          bubsRadius;
         if (showTextOnFocus) {
-          text = item.dataPointText;
+          text = item.label;
         }
-        customDataPoint =
-          item.focusedCustomDataPoint ||
-          props.focusedCustomDataPoint ||
-          item.customDataPoint ||
-          props.customDataPoint;
-        dataPointLabelComponent =
-          item.focusedDataPointLabelComponent ||
-          item.dataPointLabelComponent ||
-          props.focusedDataPointLabelComponent ||
-          props.dataPointLabelComponent;
+        customBubble =
+          item.focusedCustomBubble ||
+          props.focusedCustomBubble ||
+          item.customBubble ||
+          props.customBubble;
+        labelComponent =
+          item.focusedLabelComponent ||
+          item.labelComponent ||
+          props.focusedLabelComponent ||
+          props.labelComponent;
       } else {
-        dataPointsShape = item.dataPointShape || dataPtsShape;
-        dataPointsWidth = item.dataPointWidth || dataPtsWidth;
-        dataPointsHeight = item.dataPointHeight || dataPtsHeight;
-        dataPointsColor = item.dataPointColor || dataPtsColor;
-        dataPointsRadius = item.r ?? dataPtsRadius;
+        bubblesShape = item.bubbleShape || bubsShape;
+        bubblesWidth = item.bubbleWidth || bubsWidth;
+        bubblesHeight = item.bubbleHeight || bubsHeight;
+        dataPointsColor = item.bubbleColor || bubsColor;
+        bubblesRadius = item.r ?? bubsRadius;
         if (showTextOnFocus) {
           text = '';
         }
-        customDataPoint = item.customDataPoint || props.customDataPoint;
-        dataPointLabelComponent =
-          item.dataPointLabelComponent || props.dataPointLabelComponent;
+        customBubble = item.customBubble || props.customBubble;
+        labelComponent = item.labelComponent || props.labelComponent;
       }
 
       if (showValuesAsDataPointsText) {
         text = originalDataFromProps[index].y;
       }
 
-      const dataPointLabelWidth = item.dataPointLabelWidth
-        ? item.dataPointLabelWidth
-        : props.dataPointLabelWidth
-          ? props.dataPointLabelWidth
+      const labelWidth = item.labelWidth
+        ? item.labelWidth
+        : props.labelWidth
+          ? props.labelWidth
           : 30;
+
+      const textLabel =
+        !showTextOnFocus && !showValuesAsDataPointsText
+          ? item.label
+          : text.toString();
+      const textStyle = (item.labelTextStyle ?? labelTextStyle ?? {}) as any;
+      const fontSize =
+        textStyle.fontSize || item.labelFontSize || labelFontSize;
+      const defaultFontSize = 14;
 
       return (
         <Fragment key={index}>
@@ -449,20 +448,16 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
             </>
           ) : null}
           {/* {renderStrips(item, index, key)} // handled with strips coming from geifted-charts-core */}
-          {hideDataPoints ? null : (
+          {hideBubbles ? null : (
             <>
-              {customDataPoint ? (
+              {customBubble ? (
                 isWebApp ? (
                   <ForeignObject
                     height={svgHeight}
                     width={totalWidth}
-                    x={
-                      initialSpacing -
-                      dataPointsWidth / 2 +
-                      (spacingArray[index - 1] ?? 0)
-                    }
-                    y={getYOrSecondaryY(item.y) - dataPointsHeight / 2}>
-                    {customDataPoint(item, index)}
+                    x={getX(index)}
+                    y={getYOrSecondaryY(item.y) - bubblesHeight / 2}>
+                    {customBubble(item, index)}
                   </ForeignObject>
                 ) : (
                   <Animated.View
@@ -470,34 +465,36 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                       position: 'absolute',
                       // height: svgHeight,
                       // width: totalWidth,
-                      left:
-                        initialSpacing -
-                        dataPointsWidth / 2 +
-                        (spacingArray[index - 1] ?? 0),
-                      top: getYOrSecondaryY(item.y) - dataPointsHeight / 2,
+                      left: getX(index) - bubblesWidth / 2,
+                      top: getYOrSecondaryY(item.y) - bubblesHeight / 2,
                       opacity: isAnimated ? appearingOpacity : 1,
                     }}>
-                    {customDataPoint(item, index)}
+                    {customBubble(item, index)}
                   </Animated.View>
                 )
               ) : null}
-              {dataPointsShape === 'rectangular' ? (
+              {bubblesShape === 'rectangular' ? (
                 <Fragment key={index}>
-                  {customDataPoint ? null : (
+                  {customBubble ? null : (
                     <AnimatedRect
-                      x={getX(spacingArray, index) - dataPointsWidth / 2}
-                      y={getYOrSecondaryY(item.y) - dataPointsHeight / 2}
-                      width={isAnimated ? growingWidth[index] : dataPointsWidth}
-                      height={
-                        isAnimated ? growingHeight[index] : dataPointsHeight
-                      }
+                      x={getX(index) - bubblesWidth / 2}
+                      y={getYOrSecondaryY(item.y) - bubblesHeight / 2}
+                      width={isAnimated ? growingWidth[index] : bubblesWidth}
+                      height={isAnimated ? growingHeight[index] : bubblesHeight}
                       opacity={isAnimated ? appearingDataPoints : opacity}
                       fill={
-                        showDataPointOnFocus
+                        showBubbleOnFocus
                           ? index === selectedIndex
                             ? dataPointsColor
                             : 'none'
                           : dataPointsColor
+                      }
+                      stroke={item.borderColor ?? borderColor}
+                      strokeWidth={item.borderWidth ?? borderWidth}
+                      strokeOpacity={
+                        item.borderOpacity ??
+                        props.borderOpacity ??
+                        (isAnimated ? appearingDataPoints : opacity)
                       }
                       onPress={() => {
                         item.onPress
@@ -523,13 +520,13 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                 </Fragment>
               ) : (
                 <Fragment key={index}>
-                  {customDataPoint ? null : (
+                  {customBubble ? null : (
                     <AnimatedCircle
-                      cx={getX(spacingArray, index)} // <-- here
+                      cx={getX(index)} // <-- here
                       cy={getYOrSecondaryY(item.y)}
-                      r={isAnimated ? growingRadii[index] : dataPointsRadius}
+                      r={isAnimated ? growingRadii[index] : bubblesRadius}
                       fill={
-                        showDataPointOnFocus
+                        showBubbleOnFocus
                           ? index === selectedIndex
                             ? dataPointsColor
                             : 'none'
@@ -538,6 +535,11 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                       opacity={isAnimated ? appearingDataPoints : opacity}
                       stroke={item.borderColor ?? borderColor}
                       strokeWidth={item.borderWidth ?? borderWidth}
+                      strokeOpacity={
+                        item.borderOpacity ??
+                        props.borderOpacity ??
+                        (isAnimated ? appearingDataPoints : opacity)
+                      }
                       onPress={() => {
                         item.onPress
                           ? item.onPress(item, index)
@@ -561,85 +563,82 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                   )}
                 </Fragment>
               )}
-              {dataPointLabelComponent ? (
+              {labelComponent ? (
                 !showTextOnFocus || index === selectedIndex ? (
                   isWebApp ? (
                     <ForeignObject
                       height={svgHeight}
-                      width={dataPointLabelWidth}
+                      width={labelWidth}
                       x={
                         initialSpacing +
-                        (item.dataPointLabelShiftX ||
-                          props.dataPointLabelShiftX ||
-                          0) -
-                        dataPointLabelWidth / 2 +
+                        (item.labelShiftX || props.labelShiftX || 0) -
+                        labelWidth / 2 +
                         spacing * index
                       }
                       y={
                         containerHeight +
-                        (item.dataPointLabelShiftY ||
-                          props.dataPointLabelShiftY ||
-                          0) -
+                        (item.labelShiftY || props.labelShiftY || 0) -
                         (item.y * containerHeight) / maxValue
                       }>
-                      {showDataPointLabelOnFocus
+                      {showBubbleLabelOnFocus
                         ? index === selectedIndex &&
                           (focusTogether || key == selectedLineNumber)
-                          ? dataPointLabelComponent(item, index) // not pushed in latest release
+                          ? labelComponent(item, index) // not pushed in latest release
                           : null
-                        : dataPointLabelComponent(item, index)}
+                        : labelComponent(item, index)}
                     </ForeignObject>
                   ) : (
-                    <View
+                    <Animated.View
                       style={{
                         position: 'absolute',
                         height: svgHeight,
-                        width: dataPointLabelWidth,
+                        width: labelWidth,
                         left:
-                          initialSpacing +
-                          (item.dataPointLabelShiftX ||
-                            props.dataPointLabelShiftX ||
-                            0) -
-                          dataPointLabelWidth / 2 +
-                          spacing * index,
+                          getX(index) -
+                          defaultFontSize / 2 +
+                          (item.labelShiftX || props.labelShiftX || 0),
                         top:
-                          containerHeight +
-                          (item.dataPointLabelShiftY ||
-                            props.dataPointLabelShiftY ||
-                            0) -
-                          (item.y * containerHeight) / maxValue,
+                          getYOrSecondaryY(item.y) -
+                          defaultFontSize / 1.5 +
+                          (item.labelShiftY || props.labelShiftY || 0),
+                        opacity: isAnimated ? appearingDataPoints : 1,
                       }}>
-                      {showDataPointLabelOnFocus
+                      {showBubbleLabelOnFocus
                         ? index === selectedIndex &&
                           (focusTogether || key == selectedLineNumber)
-                          ? dataPointLabelComponent(item, index) // not pushed in latest release
+                          ? labelComponent(item, index) // not pushed in latest release
                           : null
-                        : dataPointLabelComponent(item, index)}
-                    </View>
+                        : labelComponent(item, index)}
+                    </Animated.View>
                   )
                 ) : null
-              ) : text || item.dataPointText ? (
+              ) : textLabel ? (
                 !showTextOnFocus || index === selectedIndex ? (
-                  <CanvasText
-                    fill={item.textColor || textColor}
-                    fontSize={item.textFontSize || textFontSize}
-                    x={
-                      getX(spacingArray, index) -
-                      dataPointsWidth +
-                      (item.textShiftX || props.textShiftX || 0)
-                    }
-                    y={
-                      getYOrSecondaryY(item.y) -
-                      dataPointsHeight / 2 +
-                      (item.textShiftY || props.textShiftY || 0)
-                    }>
-                    {!showTextOnFocus && !showValuesAsDataPointsText
-                      ? item.dataPointText
-                      : text}
-                  </CanvasText>
+                  <Animated.Text
+                    style={{
+                      ...textStyle,
+                      position: 'absolute',
+                      left:
+                        getX(index) -
+                        Math.min(
+                          bubblesRadius,
+                          (textLabel.length * fontSize) / 3,
+                        ) +
+                        (item.labelShiftX || props.labelShiftX || 0),
+                      top:
+                        getYOrSecondaryY(item.y) -
+                        fontSize / 1.5 +
+                        (item.labelShiftY || props.labelShiftY || 0),
+                      fontSize,
+                      opacity: isAnimated
+                        ? appearingDataPoints
+                        : (textStyle.opacity ?? 1),
+                    }}>
+                    {textLabel}
+                  </Animated.Text>
                 ) : null
               ) : null}
-              {/* Workaround to fix the issue - focusedCustomDataPoint not rendering for focused data, (when both customDataPoint and focusedCustomDataPoint are used together)*/}
+              {/* Workaround to fix the issue - focusedCustomBubble not rendering for focused data, (when both customBubble and focusedCustomBubble are used together)*/}
               {index === selectedIndex ? <Text>{''}</Text> : null}
             </>
           )}
@@ -671,72 +670,65 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
           width={totalWidth}
           onPress={props.onBackgroundPress}>
           {renderDataPoints(
-            hideDataPoints,
+            hideBubbles,
             props.data,
             props.data,
-            dataPointsShape,
-            dataPointsWidth,
-            dataPointsHeight,
-            dataPointsColor,
-            dataPointsRadius,
-            textColor,
-            textFontSize,
+            bubblesShape,
+            bubblesWidth,
+            bubblesHeight,
+            bubblesColor,
+            bubblesRadius,
+            labelFontSize,
+            // textColor,
+            // textFontSize,
+            // textFontFamily,
+            // textFontWeight,
             startIndex,
             endIndex,
             false,
-            showValuesAsDataPointsText,
-            cumulativeSpacing,
+            showValuesAsBubbleLabels,
             0,
           )}
+          {showRegressionLine && (
+            <AnimatedLine
+              x1={regressionLineX1}
+              y1={regressionLineY1}
+              x2={
+                regressionLineConfig.isAnimated
+                  ? AnimatedRegressionLineX
+                  : regressionLineX2
+              }
+              y2={
+                regressionLineConfig.isAnimated
+                  ? AnimatedRegressionLineY
+                  : regressionLineY2
+              }
+              stroke={regressionLineConfig.color}
+              strokeOpacity={regressionLineConfig.opacity}
+              strokeWidth={regressionLineConfig.thickness}
+              strokeDasharray={regressionLineConfig.strokeDashArray}
+            />
+          )}
         </Svg>
-        {props.data?.map((item: bubbleDataItem, index: number) => {
-          const secondaryLabel =
-            item.secondaryLabel ?? secondaryXAxis?.labelTexts?.[index] ?? '';
-          const secondaryLabelTextStyle =
-            item.secondaryLabelTextStyle ??
-            secondaryXAxis?.labelsTextStyle ??
-            item.labelTextStyle ??
-            props.xAxisLabelTextStyle;
+        {xAxisLabelTexts?.map((label: string, index: number) => {
           return (
             <View key={index}>
               {isAnimated
-                ? renderAnimatedLabel(
-                    false,
-                    index,
-                    item.label ||
-                      (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
-                        ? props.xAxisLabelTexts[index]
-                        : ''),
-                    item.labelTextStyle || props.xAxisLabelTextStyle,
-                    item.labelComponent,
-                  )
-                : renderLabel(
-                    false,
-                    index,
-                    item.label ||
-                      (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
-                        ? props.xAxisLabelTexts[index]
-                        : ''),
-                    item.labelTextStyle || props.xAxisLabelTextStyle,
-                    item.labelComponent,
-                  )}
-              {secondaryXAxis
+                ? renderAnimatedLabel(false, index, label)
+                : renderLabel(false, index, label)}
+              {/* {secondaryXAxis
                 ? isAnimated
                   ? renderAnimatedLabel(
                       true,
                       index,
-                      secondaryLabel,
-                      secondaryLabelTextStyle,
-                      item.secondaryLabelComponent,
+                      label
                     )
                   : renderLabel(
                       true,
                       index,
-                      secondaryLabel,
-                      secondaryLabelTextStyle,
-                      item.secondaryLabelComponent,
+                      label
                     )
-                : null}
+                : null} */}
             </View>
           );
         })}
