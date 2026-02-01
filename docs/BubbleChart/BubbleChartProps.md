@@ -1,57 +1,58 @@
 # Bubble Chart props
 
 ## \[WIP\] Development of Bubble chart is in progress.
+
 Document might be inaccurate. Expect fast revisions/changes.
 
-**Note:** The props of Bubble chart are similar to those of Line chart. The `r` in the data array is analagous to `dataPointRadius` in the Line chart.
+**Note:** The props of Bubble chart are similar to those of Line chart. The `r` in the data array is analagous to `bubbleRadius` in the Line chart.
 
 ### Basic props
 
-| Prop              | Type             | Description                                                                                             | Default value       |
-| ----------------- | ---------------- | ------------------------------------------------------------------------------------------------------- | ------------------- |
-| data              | bubbleDataItem[] | Array of items representing bubbles on the chart. Each item is described in the `bubbleDataItem` table. | \_                  |
-| width             | number           | Width of the Bubble chart.                                                                              | width of the parent |
-| height            | number           | Height of the Bubble chart (excluding X‑axis labels).                                                   | 200                 |
-| opacity           | number           | Opacity of the bubbles                                                                                  | 0.8                 |
-| yNoOfSections     | number           | Number of sections in the Y axis (above X axis).                                                        | 10                  |
-| ySectionColors    | ColorValue[]     | Background colors of the horizontal sections of the chart.                                              | backgroundColor     |
-| maxY              | number           | Maximum Y value shown on the Y axis.                                                                   | 200                 |
-| mostNegativeY     | number           | Most negative Y value shown on the Y axis (when your data has negative values).                        | \_                  |
-| yStepHeight       | number           | Height (in px) of one section of the Y axis.                                                             | 20                  |
-| yStepValue        | number           | Value represented by a single section of the Y axis.                                                    | 20                  |
-| yNegativeStepValue | number          | Value of one section of the Y axis for negative values.                                                | yStepValue          |
-| showFractionalYAxis | boolean        | When true, allows fractional values on the Y axis.                                                      | false               |
-| yRoundToDigits    | number           | Number of decimal digits to which Y axis values are rounded.                                            | 1                   |
-| xNoOfSections     | number           | Number of sections in the X axis.                                                                        | \_                  |
-| maxX              | number           | Maximum X value shown on the X axis.                                                                   | \_                  |
-| mostNegativeX     | number           | Most negative X value shown on the X axis (when your data has negative values).                         | \_                  |
-| xStepHeight       | number           | Height (in px) of one section of the X axis.                                                            | \_                  |
-| xStepValue        | number           | Value represented by a single section of the X axis.                                                    | \_                  |
-| showFractionalXAxis | boolean        | When true, allows fractional values on the X axis.                                                      | false               |
-| xRoundToDigits    | number           | Number of decimal digits to which X axis values are rounded.                                            | 1                   |
-| spacing           | number           | Horizontal distance between 2 consecutive bubbles.                                                      | 50                  |
-| initialSpacing    | number           | Distance of the first bubble from the Y axis.                                                           | 20                  |
-| endSpacing        | number           | Padding/distance added at the end of the chart after the last bubble.                                   | 20                  |
-| backgroundColor   | ColorValue       | Background color of the chart.                                                                          | \_                  |
-| customBackground  | CustomBackground | Object used to set a custom background component.                                                       | \_                  |
-| parentWidth       | number           | Explicit width of the parent container (helps with layout/calculations).                                | \_                  |
-| onlyPositive      | boolean          | When true, converts negative values to 0 while plotting.                                                | false               |
-| labelsExtraHeight | number           | Extra height reserved for X‑axis labels.                                                                | 0                   |
-| adjustToWidth     | boolean          | Auto‑computes `spacing` to fit the chart in the available width.                                        | false               |
+| Prop                | Type             | Description                                                                                             | Default value       |
+| ------------------- | ---------------- | ------------------------------------------------------------------------------------------------------- | ------------------- |
+| data                | bubbleDataItem[] | Array of items representing bubbles on the chart. Each item is described in the `bubbleDataItem` table. | \_                  |
+| width               | number           | Width of the Bubble chart.                                                                              | width of the parent |
+| height              | number           | Height of the Bubble chart (excluding X‑axis labels).                                                   | 200                 |
+| opacity             | number           | Opacity of the bubbles                                                                                  | 0.8                 |
+| yNoOfSections       | number           | Number of sections in the Y axis (above X axis).                                                        | 10                  |
+| ySectionColors      | ColorValue[]     | Background colors of the horizontal sections of the chart.                                              | backgroundColor     |
+| maxY                | number           | Maximum Y value shown on the Y axis.                                                                    | 200                 |
+| mostNegativeY       | number           | Most negative Y value shown on the Y axis (when your data has negative values).                         | \_                  |
+| yStepHeight         | number           | Height (in px) of one section of the Y axis.                                                            | 20                  |
+| yStepValue          | number           | Value represented by a single section of the Y axis.                                                    | 20                  |
+| yNegativeStepValue  | number           | Value of one section of the Y axis for negative values.                                                 | yStepValue          |
+| showFractionalYAxis | boolean          | When true, allows fractional values on the Y axis.                                                      | false               |
+| yRoundToDigits      | number           | Number of decimal digits to which Y axis values are rounded.                                            | 1                   |
+| xNoOfSections       | number           | Number of sections in the X axis.                                                                       | \_                  |
+| maxX                | number           | Maximum X value shown on the X axis.                                                                    | \_                  |
+| mostNegativeX       | number           | Most negative X value shown on the X axis (when your data has negative values).                         | \_                  |
+| xStepHeight         | number           | Height (in px) of one section of the X axis.                                                            | \_                  |
+| xStepValue          | number           | Value represented by a single section of the X axis.                                                    | \_                  |
+| showFractionalXAxis | boolean          | When true, allows fractional values on the X axis.                                                      | false               |
+| xRoundToDigits      | number           | Number of decimal digits to which X axis values are rounded.                                            | 1                   |
+| spacing             | number           | Horizontal distance between 2 consecutive bubbles.                                                      | 50                  |
+| initialSpacing      | number           | Distance of the first bubble from the Y axis.                                                           | 20                  |
+| endSpacing          | number           | Padding/distance added at the end of the chart after the last bubble.                                   | 20                  |
+| backgroundColor     | ColorValue       | Background color of the chart.                                                                          | \_                  |
+| customBackground    | CustomBackground | Object used to set a custom background component.                                                       | \_                  |
+| parentWidth         | number           | Explicit width of the parent container (helps with layout/calculations).                                | \_                  |
+| onlyPositive        | boolean          | When true, converts negative values to 0 while plotting.                                                | false               |
+| labelsExtraHeight   | number           | Extra height reserved for X‑axis labels.                                                                | 0                   |
+| adjustToWidth       | boolean          | Auto‑computes `spacing` to fit the chart in the available width.                                        | false               |
 
 ---
 
 ### Animation and rendering
 
-| Prop                               | Type    | Description                                                                                                                | Default value |
-| ---------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| isAnimated                         | boolean | Enables initial load animation of the bubbles.                                                                             | false         |
-| animateOnDataChange                | boolean | Animates smoothly when the `data` array changes.                                                                           | false         |
-| animationDuration                  | number  | Duration (in ms) for initial load animation.                                                                               | 800           |
-| onDataChangeAnimationDuration      | number  | Duration (in ms) for data‑change animation.                                                                                | 400           |
-| animationEasing                    | any     | Easing function/identifier used for bubble animations.                                                                     | \_            |
-| animateTogether                    | boolean | Whether all animated elements animate together or sequentially.                                                            | false         |
-| renderDataPointsAfterAnimationEnds | boolean | Renders data‑point related elements only after animation has ended (useful when combining focus / labels with animations). | false         |
+| Prop                            | Type    | Description                                                                                                            | Default value |
+| ------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------- | ------------- |
+| isAnimated                      | boolean | Enables initial load animation of the bubbles.                                                                         | false         |
+| animateOnDataChange             | boolean | Animates smoothly when the `data` array changes.                                                                       | false         |
+| animationDuration               | number  | Duration (in ms) for initial load animation.                                                                           | 800           |
+| onDataChangeAnimationDuration   | number  | Duration (in ms) for data‑change animation.                                                                            | 400           |
+| animationEasing                 | any     | Easing function/identifier used for bubble animations.                                                                 | \_            |
+| animateTogether                 | boolean | Whether all animated elements animate together or sequentially.                                                        | false         |
+| renderBubblesAfterAnimationEnds | boolean | Renders bubble related elements only after animation has ended (useful when combining focus / labels with animations). | false         |
 
 ---
 
@@ -122,7 +123,7 @@ Document might be inaccurate. Expect fast revisions/changes.
 | referenceLine3Position         | number                    | Y position of reference line 3.                                                               | containerHeight / 2          |
 | referenceLinesOverChartContent | boolean                   | Renders reference lines over the chart content instead of below it.                           | true                         |
 | showVerticalLines              | boolean                   | Shows vertical grid lines when true.                                                          | false                        |
-| verticalLinesUptoDataPoint     | boolean                   | When true, vertical lines extend only up to the corresponding data point.                     | false                        |
+| verticalLinesUptoBubble        | boolean                   | When true, vertical lines extend only up to the corresponding bubble.                         | false                        |
 | verticalLinesThickness         | number                    | Thickness of the vertical lines.                                                              | 1                            |
 | verticalLinesHeight            | number                    | Height of the vertical lines.                                                                 | chart height                 |
 | verticalLinesColor             | ColorValue                | Color of the vertical lines.                                                                  | lightgray                    |
@@ -162,68 +163,68 @@ Document might be inaccurate. Expect fast revisions/changes.
 
 ### Focus / interaction / tooltip related props
 
-| Prop                           | Type                           | Description                                                              | Default value |
-| ------------------------------ | ------------------------------ | ------------------------------------------------------------------------ | ------------- |
-| focusEnabled                   | boolean                        | Enables focus/selection behaviour on bubbles.                            | false         |
-| focusTogether                  | boolean                        | When true, multiple related points are focused together.                 | false         |
-| focusProximity                 | number                         | Distance (in px) within which a touch will focus the nearest bubble.     | 20            |
-| onFocus                        | Function                       | Callback called when a bubble gets focused. Receives `item` and `index`. | \_            |
-| showDataPointOnFocus           | boolean                        | Shows a bubble even if hidden, when it is focused.                       | false         |
-| showStripOnFocus               | boolean                        | Shows a vertical strip for the focused bubble.                           | false         |
-| stripOverDataPoints            | boolean                        | Renders the focus strip over the data points instead of behind them.     | false         |
-| showTextOnFocus                | boolean                        | Shows text for the focused bubble.                                       | false         |
-| showDataPointLabelOnFocus      | boolean                        | Shows the label component/text for the focused bubble only.              | false         |
-| stripHeight                    | number                         | Height of the focus strip.                                               | chart height  |
-| stripWidth                     | number                         | Width of the focus strip.                                                | 2             |
-| stripColor                     | ColorValue \| string \| any    | Color of the focus strip.                                                | lightgray     |
-| stripOpacity                   | number                         | Opacity of the focus strip.                                              | 0.7           |
-| stripStrokeDashArray           | number[]                       | `[dashWidth, dashGap]` configuration for dashed focus strip.             | []            |
-| onPress                        | Function                       | Callback called when the user presses on a bubble or chart area.         | \_            |
-| unFocusOnPressOut              | boolean                        | When true, focused bubble is unfocused on press‑out.                     | true          |
-| delayBeforeUnFocus             | number                         | Delay (ms) before un‑focusing after press‑out.                           | 150           |
-| focusedDataPointIndex          | number                         | Index of the bubble that should be focused initially.                    | \_            |
-| onChartAreaPress               | (event: GestureResponderEvent) | Called when the user presses on the chart area.                          | \_            |
-| onBackgroundPress              | (event: GestureResponderEvent) | Called when the user presses on the area outside chart content.          | \_            |
-| renderTooltip                  | Function                       | Custom tooltip renderer for primary data.                                | \_            |
-| renderTooltipSecondary         | Function                       | Custom tooltip renderer when using secondary data / axis.                | \_            |
-| dataPointLabelComponent        | Function                       | Custom label component rendered above a bubble.                          | \_            |
-| focusedDataPointLabelComponent | Function                       | Custom label component rendered above a bubble only when focused.        | \_            |
+| Prop                   | Type                           | Description                                                              | Default value |
+| ---------------------- | ------------------------------ | ------------------------------------------------------------------------ | ------------- |
+| focusEnabled           | boolean                        | Enables focus/selection behaviour on bubbles.                            | false         |
+| focusTogether          | boolean                        | When true, multiple related points are focused together.                 | false         |
+| focusProximity         | number                         | Distance (in px) within which a touch will focus the nearest bubble.     | 20            |
+| onFocus                | Function                       | Callback called when a bubble gets focused. Receives `item` and `index`. | \_            |
+| showBubbleOnFocus      | boolean                        | Shows a bubble even if hidden, when it is focused.                       | false         |
+| showStripOnFocus       | boolean                        | Shows a vertical strip for the focused bubble.                           | false         |
+| stripOverBubbles       | boolean                        | Renders the focus strip over the bubbles instead of behind them.         | false         |
+| showTextOnFocus        | boolean                        | Shows text for the focused bubble.                                       | false         |
+| showBubbleLabelOnFocus | boolean                        | Shows the label component/text for the focused bubble only.              | false         |
+| stripHeight            | number                         | Height of the focus strip.                                               | chart height  |
+| stripWidth             | number                         | Width of the focus strip.                                                | 2             |
+| stripColor             | ColorValue \| string \| any    | Color of the focus strip.                                                | lightgray     |
+| stripOpacity           | number                         | Opacity of the focus strip.                                              | 0.7           |
+| stripStrokeDashArray   | number[]                       | `[dashWidth, dashGap]` configuration for dashed focus strip.             | []            |
+| onPress                | Function                       | Callback called when the user presses on a bubble or chart area.         | \_            |
+| unFocusOnPressOut      | boolean                        | When true, focused bubble is unfocused on press‑out.                     | true          |
+| delayBeforeUnFocus     | number                         | Delay (ms) before un‑focusing after press‑out.                           | 150           |
+| focusedBubbleIndex     | number                         | Index of the bubble that should be focused initially.                    | \_            |
+| onChartAreaPress       | (event: GestureResponderEvent) | Called when the user presses on the chart area.                          | \_            |
+| onBackgroundPress      | (event: GestureResponderEvent) | Called when the user presses on the area outside chart content.          | \_            |
+| renderTooltip          | Function                       | Custom tooltip renderer for primary data.                                | \_            |
+| renderTooltipSecondary | Function                       | Custom tooltip renderer when using secondary data / axis.                | \_            |
+| labelComponent         | Function                       | Custom label component rendered above a bubble.                          | \_            |
+| focusedLabelComponent  | Function                       | Custom label component rendered above a bubble only when focused.        | \_            |
 
 ---
 
-### Data point / bubble appearance props
+### Bubble appearance props
 
-| Prop                           | Type                        | Description                                                                        | Default value    |
-| ------------------------------ | --------------------------- | ---------------------------------------------------------------------------------- | ---------------- |
-| hideDataPoints                 | boolean                     | Hides all bubbles when true (they can still be used for touch / focus).            | false            |
-| dataPointsHeight               | number                      | Height of the bubble when its shape is rectangular.                                | 6                |
-| dataPointsWidth                | number                      | Width of the bubble when its shape is rectangular.                                 | 6                |
-| dataPointsRadius               | number                      | Radius of the bubble when its shape is circular.                                   | 3                |
-| dataPointsColor                | string                      | Default color of bubbles.                                                          | 'black'          |
-| dataPointsShape                | string                      | Shape of bubbles (`'circle'`, `'rect'`, custom values handled in custom renderer). | 'circle'         |
-| customDataPoint                | Function                    | Custom bubble renderer for all items.                                              | \_               |
-| focusedDataPointShape          | string                      | Shape of currently focused bubble.                                                 | dataPointsShape  |
-| focusedDataPointWidth          | number                      | Width of the focused bubble when rectangular.                                      | dataPointsWidth  |
-| focusedDataPointHeight         | number                      | Height of the focused bubble when rectangular.                                     | dataPointsHeight |
-| focusedDataPointColor          | ColorValue \| string \| any | Color of the focused bubble.                                                       | dataPointsColor  |
-| focusedDataPointRadius         | number                      | Radius of focused bubble when circular.                                            | dataPointsRadius |
-| focusedCustomDataPoint         | Function                    | Custom renderer for the focused bubble only.                                       | \_               |
-| dataPointLabelWidth            | number                      | Width of the label displayed near a bubble.                                        | 40               |
-| dataPointLabelShiftX           | number                      | Horizontal shift of the data point label relative to the bubble.                   | 0                |
-| dataPointLabelShiftY           | number                      | Vertical shift of the data point label relative to the bubble.                     | 0                |
-| showValuesAsDataPointsText     | boolean                     | Shows the `y` value of each bubble as text near the bubble.                        | false            |
-| borderWidth                    | number                      | Border width around the chart area.                                                | 0                |
-| borderColor                    | ColorValue                  | Border color around the chart area.                                                | 'transparent'    |
-| borderOpacity                 | number                      | Opacity of the border around the chart area.                                       | opacity         |
+| Prop                     | Type                        | Description                                                                        | Default value |
+| ------------------------ | --------------------------- | ---------------------------------------------------------------------------------- | ------------- |
+| hideBubbles              | boolean                     | Hides all bubbles when true (they can still be used for touch / focus).            | false         |
+| bubblesHeight            | number                      | Height of the bubble when its shape is rectangular.                                | 6             |
+| bubblesWidth             | number                      | Width of the bubble when its shape is rectangular.                                 | 6             |
+| bubblesRadius            | number                      | Radius of the bubble when its shape is circular.                                   | 3             |
+| bubblesColor             | string                      | Default color of bubbles.                                                          | 'black'       |
+| bubblesShape             | string                      | Shape of bubbles (`'circle'`, `'rect'`, custom values handled in custom renderer). | 'circle'      |
+| customBubble             | Function                    | Custom bubble renderer for all items.                                              | \_            |
+| focusedBubbleShape       | string                      | Shape of currently focused bubble.                                                 | bubblesShape  |
+| focusedBubbleWidth       | number                      | Width of the focused bubble when rectangular.                                      | bubblesWidth  |
+| focusedBubbleHeight      | number                      | Height of the focused bubble when rectangular.                                     | bubblesHeight |
+| focusedBubbleColor       | ColorValue \| string \| any | Color of the focused bubble.                                                       | bubblesColor  |
+| focusedBubbleRadius      | number                      | Radius of focused bubble when circular.                                            | bubblesRadius |
+| focusedCustomBubble      | Function                    | Custom renderer for the focused bubble only.                                       | \_            |
+| labelWidth               | number                      | Width of the label displayed near a bubble.                                        | 40            |
+| labelShiftX              | number                      | Horizontal shift of the bubble label relative to the bubble.                       | 0             |
+| labelShiftY              | number                      | Vertical shift of the bubble label relative to the bubble.                         | 0             |
+| showValuesAsBubbleLabels | boolean                     | Shows the `y` value of each bubble as text near the bubble.                        | false         |
+| borderWidth              | number                      | Border width around the chart area.                                                | 0             |
+| borderColor              | ColorValue                  | Border color around the chart area.                                                | 'transparent' |
+| borderOpacity            | number                      | Opacity of the border around the chart area.                                       | opacity       |
 
 ---
 
 ### Regression line props
 
-| Prop                | Type                  | Description                                                                                    | Default value |
-| ------------------- | --------------------- | ---------------------------------------------------------------------------------------------- | ------------- |
-| showRegressionLine  | boolean               | Shows a regression line calculated from the data points using weighted regression.             | false         |
-| regressionLineConfig | RegressionLineConfig  | Configuration object for the regression line (color, opacity, thickness, strokeDashArray).     | \_            |
+| Prop                 | Type                 | Description                                                                                | Default value |
+| -------------------- | -------------------- | ------------------------------------------------------------------------------------------ | ------------- |
+| showRegressionLine   | boolean              | Shows a regression line calculated from the bubbles using weighted regression.             | false         |
+| regressionLineConfig | RegressionLineConfig | Configuration object for the regression line (color, opacity, thickness, strokeDashArray). | \_            |
 
 **RegressionLineConfig** has the following properties:
 
@@ -238,27 +239,27 @@ type RegressionLineConfig = {
 };
 ```
 
-| Property          | Type      | Description                                                          | Default value |
-| ----------------- | --------- | -------------------------------------------------------------------- | ------------- |
-| color             | ColorValue | Color of the regression line.                                       | 'red'         |
-| opacity           | number    | Opacity of the regression line.                                      | 1             |
-| thickness         | number    | Thickness (stroke width) of the regression line.                    | 2             |
-| strokeDashArray   | number[]  | Array of numbers for dashed line pattern (e.g., `[5, 5]`).           | undefined     |
-| isAnimated        | boolean   | When true, animates the regression line drawing.                     | false         |
-| animationDuration | number    | Duration (in milliseconds) for the regression line animation.         | 800           |
+| Property          | Type       | Description                                                   | Default value |
+| ----------------- | ---------- | ------------------------------------------------------------- | ------------- |
+| color             | ColorValue | Color of the regression line.                                 | 'red'         |
+| opacity           | number     | Opacity of the regression line.                               | 1             |
+| thickness         | number     | Thickness (stroke width) of the regression line.              | 2             |
+| strokeDashArray   | number[]   | Array of numbers for dashed line pattern (e.g., `[5, 5]`).    | undefined     |
+| isAnimated        | boolean    | When true, animates the regression line drawing.              | false         |
+| animationDuration | number     | Duration (in milliseconds) for the regression line animation. | 800           |
 
 ---
 
 ### Text / labels related props
 
-| Prop         | Type      | Description                                                  | Default value |
-| ------------ | --------- | ------------------------------------------------------------ | ------------- |
-| textFontSize | number    | Font size of data point text (for example when showing `y`). | 10            |
-| textColor    | string    | Color of the data point text.                                | 'black'       |
-| textFontFamily | string  | Font family of the data point text.                           | \_            |
-| textFontWeight | FontWeight | Font weight of the data point text.                          | \_            |
-| textShiftX   | number    | Horizontal shift applied to data point text.                 | 0             |
-| textShiftY   | number    | Vertical shift applied to data point text.                   | 0             |
+| Prop           | Type       | Description                                              | Default value |
+| -------------- | ---------- | -------------------------------------------------------- | ------------- |
+| textFontSize   | number     | Font size of bubble text (for example when showing `y`). | 10            |
+| textColor      | string     | Color of the bubble text.                                | 'black'       |
+| textFontFamily | string     | Font family of the bubble text.                          | \_            |
+| textFontWeight | FontWeight | Font weight of the bubble text.                          | \_            |
+| textShiftX     | number     | Horizontal shift applied to bubble text.                 | 0             |
+| textShiftY     | number     | Vertical shift applied to bubble text.                   | 0             |
 
 ---
 
@@ -377,7 +378,7 @@ export interface bubbleDataItem {
   secondaryLabel?: string;
   secondaryLabelComponent?: Function;
   secondaryLabelTextStyle?: StyleProp<TextStyle>;
-  dataPointText?: string;
+  bubbleText?: string;
   textShiftX?: number;
   textShiftY?: number;
   textColor?: string;
@@ -385,32 +386,32 @@ export interface bubbleDataItem {
   textFontFamily?: string;
   textFontWeight?: FontWeight;
   spacing?: number;
-  hideDataPoint?: boolean;
-  dataPointHeight?: number;
-  dataPointWidth?: number;
-  dataPointColor?: string;
-  dataPointShape?: string;
-  customDataPoint?: Function;
+  hideBubble?: boolean;
+  bubbleHeight?: number;
+  bubbleWidth?: number;
+  bubbleColor?: string;
+  bubbleShape?: string;
+  customBubble?: Function;
   stripHeight?: number;
   stripWidth?: number;
   stripColor?: ColorValue | string | any;
   stripOpacity?: number;
   stripStrokeDashArray?: number[];
-  focusedDataPointShape?: string;
-  focusedDataPointWidth?: number;
-  focusedDataPointHeight?: number;
-  focusedDataPointColor?: ColorValue | string | any;
-  focusedDataPointRadius?: number;
-  focusedCustomDataPoint?: Function;
-  dataPointLabelComponent?: Function;
-  focusedDataPointLabelComponent?: Function;
-  dataPointLabelWidth?: number;
-  dataPointLabelShiftX?: number;
-  dataPointLabelShiftY?: number;
+  focusedBubbleShape?: string;
+  focusedBubbleWidth?: number;
+  focusedBubbleHeight?: number;
+  focusedBubbleColor?: ColorValue | string | any;
+  focusedBubbleRadius?: number;
+  focusedCustomBubble?: Function;
+  labelComponent?: Function;
+  focusedLabelComponent?: Function;
+  labelWidth?: number;
+  labelShiftX?: number;
+  labelShiftY?: number;
   showStrip?: boolean;
   showVerticalLine?: boolean;
   verticalLineHeight?: number;
-  verticalLineUptoDataPoint?: boolean;
+  verticalLineUptoBubble?: boolean;
   verticalLineColor?: ColorValue;
   verticalLineThickness?: number;
   verticalLineStrokeDashArray?: number[];
@@ -433,73 +434,73 @@ export interface bubbleDataItem {
 }
 ```
 
-| Key                            | Value type           | Description                                                                        |
-| ------------------------------ | -------------------- | ---------------------------------------------------------------------------------- |
-| y                              | number               | Y value of the bubble representing its vertical position.                          |
-| label                          | string               | Label text appearing under the X axis for this bubble.                             |
-| labelTextStyle                 | StyleProp<TextStyle> | Style object for the primary label text.                                           |
-| labelComponent                 | Function             | Custom label component rendered under the X axis.                                  |
-| secondaryLabel                 | string               | Label text appearing above the secondary X‑axis (top) for this bubble.             |
-| secondaryLabelComponent        | Function             | Custom component for the secondary label.                                          |
-| secondaryLabelTextStyle        | StyleProp<TextStyle> | Style of the secondary label text.                                                 |
-| dataPointText                  | string               | Text shown near the bubble (e.g. value, percentage).                               |
-| textShiftX                     | number               | Horizontal shift applied to `dataPointText`.                                       |
-| textShiftY                     | number               | Vertical shift applied to `dataPointText`.                                         |
-| textColor                      | string               | Color of `dataPointText`.                                                          |
-| textFontSize                   | number               | Font size of `dataPointText`.                                                      |
-| textFontFamily                 | string               | Font family of `dataPointText`.                                                    |
-| textFontWeight                 | FontWeight           | Font weight of `dataPointText`.                                                    |
-| spacing                        | number               | Distance between this bubble and the next bubble.                                  |
-| hideDataPoint                  | boolean              | Hides this bubble while keeping other ones visible.                                |
-| dataPointHeight                | number               | Height of this bubble when rectangular.                                            |
-| dataPointWidth                 | number               | Width of this bubble when rectangular.                                             |
-| r                              | number               | Radius of this bubble when circular (alternative to `dataPointRadius`).            |
-| dataPointColor                 | string               | Color of this bubble only.                                                         |
-| dataPointShape                 | string               | Shape of this bubble only (`'circle'`, `'rect'`, etc.).                            |
-| customDataPoint                | Function             | Custom renderer for this bubble only.                                              |
-| showStrip                      | boolean              | Shows a vertical strip for this bubble (even when not focused).                    |
-| stripHeight                    | number               | Height of the vertical strip associated with this bubble.                          |
-| stripWidth                     | number               | Width of the vertical strip associated with this bubble.                           |
-| stripColor                     | ColorValue           | Color of the vertical strip associated with this bubble.                           |
-| stripOpacity                   | number               | Opacity of the vertical strip associated with this bubble.                         |
-| stripStrokeDashArray           | number[]             | `[dashWidth, dashGap]` for dashed strip associated with this bubble.               |
-| focusedDataPointShape          | string               | Shape of this bubble when focused.                                                 |
-| focusedDataPointWidth          | number               | Width of this bubble when focused (rectangular).                                   |
-| focusedDataPointHeight         | number               | Height of this bubble when focused (rectangular).                                  |
-| focusedDataPointColor          | ColorValue           | Color of this bubble when focused.                                                 |
-| focusedDataPointRadius         | number               | Radius of this bubble when focused (circular).                                     |
-| focusedCustomDataPoint         | Function             | Custom renderer for this bubble only when focused.                                 |
-| dataPointLabelComponent        | Function             | Custom component rendered above this bubble.                                       |
-| focusedDataPointLabelComponent | Function             | Custom component rendered above this bubble only when focused.                     |
-| dataPointLabelWidth            | number               | Width of the label shown beside this bubble.                                       |
-| dataPointLabelShiftX           | number               | Horizontal shift of this bubble's label.                                           |
-| dataPointLabelShiftY           | number               | Vertical shift of this bubble's label.                                             |
-| showVerticalLine               | boolean              | Shows a vertical line at this bubble's X position.                                 |
-| verticalLineHeight             | number               | Height of the vertical line associated with this bubble.                           |
-| verticalLineUptoDataPoint      | boolean              | When true, vertical line's height is limited to this bubble's Y value.             |
-| verticalLineColor              | ColorValue           | Color of the vertical line associated with this bubble.                            |
-| verticalLineThickness          | number               | Thickness of the vertical line associated with this bubble.                        |
-| verticalLineStrokeDashArray    | number[]             | `[dashWidth, dashGap]` of the vertical line to create dashed/dotted effect.        |
-| verticalLineShift              | number               | Horizontal shift applied to this bubble's vertical line.                           |
-| verticalLineZIndex             | number               | Z‑index of the vertical line associated with this bubble.                          |
-| verticalLineSpacing            | number               | Distance between this bubble's vertical line and others (when there are multiple). |
-| verticalLineStrokeLinecap      | Linecap              | Linecap of this bubble's vertical line.                                            |
-| pointerShiftX                  | number               | Shifts the pointer (if any) for this bubble horizontally.                          |
-| pointerShiftY                  | number               | Shifts the pointer (if any) for this bubble vertically.                            |
-| onPress                        | Function             | Callback function called when this bubble is pressed.                              |
-| onContextMenu                  | Function             | Web‑only context menu handler.                                                     |
-| onMouseEnter                   | Function             | Web‑only mouse‑enter handler.                                                      |
-| onMouseLeave                   | Function             | Web‑only mouse‑leave handler.                                                      |
-| showXAxisIndex                 | boolean              | Shows an X‑axis index marker for this bubble only.                                 |
-| hidePointer                    | boolean              | Hides the pointer for this bubble when using pointer configuration.                |
-| x                              | number               | Custom X value (in data space) for this bubble. When provided, the X position is calculated as `x * xScale`. When not provided, the position is auto-calculated based on the bubble's index and total width, accounting for the bubble's radius. | \_ |
-| borderWidth                    | number               | Border width around this individual bubble.                                        |
-| borderColor                    | ColorValue           | Border color around this individual bubble.                                        |
-| borderOpacity                 | number               | Opacity of the border around this individual bubble.                               |
-| opacity                        | number               | Opacity of this individual bubble.                                                 |
+| Key                         | Value type           | Description                                                                                                                                                                                                                                      |
+| --------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --- |
+| y                           | number               | Y value of the bubble representing its vertical position.                                                                                                                                                                                        |
+| label                       | string               | Label text appearing under the X axis for this bubble.                                                                                                                                                                                           |
+| labelTextStyle              | StyleProp<TextStyle> | Style object for the primary label text.                                                                                                                                                                                                         |
+| labelComponent              | Function             | Custom label component rendered under the X axis.                                                                                                                                                                                                |
+| secondaryLabel              | string               | Label text appearing above the secondary X‑axis (top) for this bubble.                                                                                                                                                                           |
+| secondaryLabelComponent     | Function             | Custom component for the secondary label.                                                                                                                                                                                                        |
+| secondaryLabelTextStyle     | StyleProp<TextStyle> | Style of the secondary label text.                                                                                                                                                                                                               |
+| bubbleText                  | string               | Text shown near the bubble (e.g. value, percentage).                                                                                                                                                                                             |
+| textShiftX                  | number               | Horizontal shift applied to `bubbleText`.                                                                                                                                                                                                        |
+| textShiftY                  | number               | Vertical shift applied to `bubbleText`.                                                                                                                                                                                                          |
+| textColor                   | string               | Color of `bubbleText`.                                                                                                                                                                                                                           |
+| textFontSize                | number               | Font size of `bubbleText`.                                                                                                                                                                                                                       |
+| textFontFamily              | string               | Font family of `bubbleText`.                                                                                                                                                                                                                     |
+| textFontWeight              | FontWeight           | Font weight of `bubbleText`.                                                                                                                                                                                                                     |
+| spacing                     | number               | Distance between this bubble and the next bubble.                                                                                                                                                                                                |
+| hideBubble                  | boolean              | Hides this bubble while keeping other ones visible.                                                                                                                                                                                              |
+| bubbleHeight                | number               | Height of this bubble when rectangular.                                                                                                                                                                                                          |
+| bubbleWidth                 | number               | Width of this bubble when rectangular.                                                                                                                                                                                                           |
+| r                           | number               | Radius of this bubble when circular (alternative to `bubbleRadius`).                                                                                                                                                                             |
+| bubbleColor                 | string               | Color of this bubble only.                                                                                                                                                                                                                       |
+| bubbleShape                 | string               | Shape of this bubble only (`'circle'`, `'rect'`, etc.).                                                                                                                                                                                          |
+| customBubble                | Function             | Custom renderer for this bubble only.                                                                                                                                                                                                            |
+| showStrip                   | boolean              | Shows a vertical strip for this bubble (even when not focused).                                                                                                                                                                                  |
+| stripHeight                 | number               | Height of the vertical strip associated with this bubble.                                                                                                                                                                                        |
+| stripWidth                  | number               | Width of the vertical strip associated with this bubble.                                                                                                                                                                                         |
+| stripColor                  | ColorValue           | Color of the vertical strip associated with this bubble.                                                                                                                                                                                         |
+| stripOpacity                | number               | Opacity of the vertical strip associated with this bubble.                                                                                                                                                                                       |
+| stripStrokeDashArray        | number[]             | `[dashWidth, dashGap]` for dashed strip associated with this bubble.                                                                                                                                                                             |
+| focusedBubbleShape          | string               | Shape of this bubble when focused.                                                                                                                                                                                                               |
+| focusedBubbleWidth          | number               | Width of this bubble when focused (rectangular).                                                                                                                                                                                                 |
+| focusedBubbleHeight         | number               | Height of this bubble when focused (rectangular).                                                                                                                                                                                                |
+| focusedBubbleColor          | ColorValue           | Color of this bubble when focused.                                                                                                                                                                                                               |
+| focusedBubbleRadius         | number               | Radius of this bubble when focused (circular).                                                                                                                                                                                                   |
+| focusedCustomBubble         | Function             | Custom renderer for this bubble only when focused.                                                                                                                                                                                               |
+| labelComponent              | Function             | Custom component rendered above this bubble.                                                                                                                                                                                                     |
+| focusedLabelComponent       | Function             | Custom component rendered above this bubble only when focused.                                                                                                                                                                                   |
+| labelWidth                  | number               | Width of the label shown beside this bubble.                                                                                                                                                                                                     |
+| labelShiftX                 | number               | Horizontal shift of this bubble's label.                                                                                                                                                                                                         |
+| labelShiftY                 | number               | Vertical shift of this bubble's label.                                                                                                                                                                                                           |
+| showVerticalLine            | boolean              | Shows a vertical line at this bubble's X position.                                                                                                                                                                                               |
+| verticalLineHeight          | number               | Height of the vertical line associated with this bubble.                                                                                                                                                                                         |
+| verticalLineUptoBubble      | boolean              | When true, vertical line's height is limited to this bubble's Y value.                                                                                                                                                                           |
+| verticalLineColor           | ColorValue           | Color of the vertical line associated with this bubble.                                                                                                                                                                                          |
+| verticalLineThickness       | number               | Thickness of the vertical line associated with this bubble.                                                                                                                                                                                      |
+| verticalLineStrokeDashArray | number[]             | `[dashWidth, dashGap]` of the vertical line to create dashed/dotted effect.                                                                                                                                                                      |
+| verticalLineShift           | number               | Horizontal shift applied to this bubble's vertical line.                                                                                                                                                                                         |
+| verticalLineZIndex          | number               | Z‑index of the vertical line associated with this bubble.                                                                                                                                                                                        |
+| verticalLineSpacing         | number               | Distance between this bubble's vertical line and others (when there are multiple).                                                                                                                                                               |
+| verticalLineStrokeLinecap   | Linecap              | Linecap of this bubble's vertical line.                                                                                                                                                                                                          |
+| pointerShiftX               | number               | Shifts the pointer (if any) for this bubble horizontally.                                                                                                                                                                                        |
+| pointerShiftY               | number               | Shifts the pointer (if any) for this bubble vertically.                                                                                                                                                                                          |
+| onPress                     | Function             | Callback function called when this bubble is pressed.                                                                                                                                                                                            |
+| onContextMenu               | Function             | Web‑only context menu handler.                                                                                                                                                                                                                   |
+| onMouseEnter                | Function             | Web‑only mouse‑enter handler.                                                                                                                                                                                                                    |
+| onMouseLeave                | Function             | Web‑only mouse‑leave handler.                                                                                                                                                                                                                    |
+| showXAxisIndex              | boolean              | Shows an X‑axis index marker for this bubble only.                                                                                                                                                                                               |
+| hidePointer                 | boolean              | Hides the pointer for this bubble when using pointer configuration.                                                                                                                                                                              |
+| x                           | number               | Custom X value (in data space) for this bubble. When provided, the X position is calculated as `x * xScale`. When not provided, the position is auto-calculated based on the bubble's index and total width, accounting for the bubble's radius. | \_  |
+| borderWidth                 | number               | Border width around this individual bubble.                                                                                                                                                                                                      |
+| borderColor                 | ColorValue           | Border color around this individual bubble.                                                                                                                                                                                                      |
+| borderOpacity               | number               | Opacity of the border around this individual bubble.                                                                                                                                                                                             |
+| opacity                     | number               | Opacity of this individual bubble.                                                                                                                                                                                                               |
 
 **Alert**\
-When you are using the `dataPointLabelComponent`, make sure to provide appropriate `dataPointsHeight` and `dataPointsWidth` values (either on the item itself or directly as props on `<BubbleChart>`). Otherwise the labels might appear shifted from their intended positions.
+When you are using the `labelComponent`, make sure to provide appropriate `bubblesHeight` and `bubblesWidth` values (either on the item itself or directly as props on `<BubbleChart>`). Otherwise the labels might appear shifted from their intended positions.
 
 ---
 
@@ -522,12 +523,13 @@ const getX = (index: number): number => {
       ? (props.data?.[index].x ?? 0) * xScale
       : Math.min(
           totalWidth - (props.data?.[index].r ?? BubbleDefaults.bubblesRadius),
-          ((index + 1) * totalWidth) / (props.data?.length ?? 1)
+          ((index + 1) * totalWidth) / (props.data?.length ?? 1),
         );
   return val;
 };
 ```
 
 This allows you to either:
+
 1. **Use explicit X values**: Provide `x` values in your data for precise positioning (useful for scatter plots or when you need specific X coordinates).
 2. **Use automatic spacing**: Omit `x` values to let the chart automatically space bubbles evenly across the available width.
