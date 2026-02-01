@@ -69,6 +69,7 @@ const RenderVerticalLines = (props: any) => {
       }}>
       <Svg height={containerHeightIncludingBelowXAxis} width={totalWidth}>
         {verticalLinesAr.map((item: any, index: number) => {
+          if (!index && chartType === chartTypes.BUBBLE) return null;
           let totalSpacing = initialSpacing;
           if (verticalLinesSpacing) {
             totalSpacing = verticalLinesSpacing * (index + 1);
