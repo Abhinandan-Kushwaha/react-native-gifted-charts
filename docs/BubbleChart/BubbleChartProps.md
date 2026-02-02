@@ -59,10 +59,6 @@ Each element of the `data` array is a `bubbleDataItem`:
 | bubbleText                  | string               | Text shown near the bubble (e.g. value, percentage).                                                                                                                                                                             |
 | textShiftX                  | number               | Horizontal shift applied to `bubbleText`.                                                                                                                                                                                        |
 | textShiftY                  | number               | Vertical shift applied to `bubbleText`                                                                                                                                                                                           |
-| textColor                   | string               | Color of `bubbleText`.                                                                                                                                                                                                           |
-| textFontSize                | number               | Font size of `bubbleText`.                                                                                                                                                                                                       |
-| textFontFamily              | string               | Font family of `bubbleText`.                                                                                                                                                                                                     |
-| textFontWeight              | FontWeight           | Font weight of `bubbleTex                                                                                                                                                                                                        |
 | spacing                     | number               | Distance between this bubble and the next bubble.                                                                                                                                                                                |
 | hideBubble                  | boolean              | Hides this bubble while keeping other ones visible.                                                                                                                                                                              |
 | bubbleHeight                | number               | Height of this bubble when rectangular.                                                                                                                                                                                          |
@@ -131,10 +127,6 @@ export interface bubbleDataItem {
   bubbleText?: string;
   textShiftX?: number;
   textShiftY?: number;
-  textColor?: string;
-  textFontSize?: number;
-  textFontFamily?: string;
-  textFontWeight?: FontWeight;
   spacing?: number;
   hideBubble?: boolean;
   bubbleHeight?: number;
