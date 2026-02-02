@@ -42,6 +42,184 @@ Document might be inaccurate. Expect fast revisions/changes.
 
 ---
 
+## Item description (`bubbleDataItem`)
+
+Each element of the `data` array is a `bubbleDataItem`:
+
+
+| Key                         | Value type           | Description                                                                                                                                                                                                                      |
+| --------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| y                           | number               | Y value of the bubble representing its vertical position                                                                                                                                                                         |
+| label                       | string               | Label text appearing under the X axis for this bubble.                                                                                                                                                                           |
+| labelTextStyle              | StyleProp<TextStyle> | Style object for the primary label text.                                                                                                                                                                                         |
+| labelComponent              | Function             | Custom label component rendered under the X axis.                                                                                                                                                                                |
+| secondaryLabel              | string               | Label text appearing above the secondary X‑axis (top) for this bubble.                                                                                                                                                           |
+| secondaryLabelComponent     | Function             | Custom component for the secondary label.                                                                                                                                                                                        |
+| secondaryLabelTextStyle     | StyleProp<TextStyle> | Style of the secondary label text.                                                                                                                                                                                               |
+| bubbleText                  | string               | Text shown near the bubble (e.g. value, percentage).                                                                                                                                                                             |
+| textShiftX                  | number               | Horizontal shift applied to `bubbleText`.                                                                                                                                                                                        |
+| textShiftY                  | number               | Vertical shift applied to `bubbleText`                                                                                                                                                                                           |
+| textColor                   | string               | Color of `bubbleText`.                                                                                                                                                                                                           |
+| textFontSize                | number               | Font size of `bubbleText`.                                                                                                                                                                                                       |
+| textFontFamily              | string               | Font family of `bubbleText`.                                                                                                                                                                                                     |
+| textFontWeight              | FontWeight           | Font weight of `bubbleTex                                                                                                                                                                                                        |
+| spacing                     | number               | Distance between this bubble and the next bubble.                                                                                                                                                                                |
+| hideBubble                  | boolean              | Hides this bubble while keeping other ones visible.                                                                                                                                                                              |
+| bubbleHeight                | number               | Height of this bubble when rectangular.                                                                                                                                                                                          |
+| bubbleWidth                 | number               | Width of this bubble when rect                                                                                                                                                                                                   |
+| r                           | number               | Radius of this bubble when circular (alternative to `bubbleRadius`).                                                                                                                                                             |
+| bubbleColor                 | string               | Color of this bubble only.                                                                                                                                                                                                       |
+| bubbleShape                 | string               | Shape of this bubble only (`'circle'`, `'rect'`, etc.).                                                                                                                                                                          |
+| customBubble                | Function             | Custom renderer for this bubble only.                                                                                                                                                                                            |
+| showStrip                   | boolean              | Shows a vertical strip for this bubble (even when not focused).                                                                                                                                                                  |
+| stripHeight                 | number               | Height of the vertical strip associated with this bubble.                                                                                                                                                                        |
+| stripWidth                  | number               | Width of the vertical strip associated with this bubble.                                                                                                                                                                         |
+| stripColor                  | ColorValue           | Color of the vertical strip associated with this bubble.                                                                                                                                                                         |
+| stripOpacity                | number               | Opacity of the vertical strip associated with this bubble.                                                                                                                                                                       |
+| stripStrokeDashArray        | number[]             | `[dashWidth, dashGap]` for dashed strip associated with this bubble.                                                                                                                                                             |
+| focusedBubbleShape          | string               | Shape of this bubble when focused.                                                                                                                                                                                               |
+| focusedBubbleWidth          | number               | Width of this bubble when focused (rectangular).                                                                                                                                                                                 |
+| focusedBubbleHeight         | number               | Height of this bubble when focused (rectangular).                                                                                                                                                                                |
+| focusedBubbleColor          | ColorValue           | Color of this bubble when focused.                                                                                                                                                                                               |
+| focusedBubbleRadius         | number               | Radius of this bubble when focused (circular).                                                                                                                                                                                   |
+| focusedCustomBubble         | Function             | Custom renderer for this bubble only when focused.                                                                                                                                                                               |
+| labelComponent              | Function             | Custom component rendered above this bubble.                                                                                                                                                                                     |
+| focusedLabelComponent       | Function             | Custom component rendered above this bubble only when focused.                                                                                                                                                                   |
+| labelWidth                  | number               | Width of the label shown beside this bubble.                                                                                                                                                                                     |
+| labelShiftX                 | number               | Horizontal shift of this bubble's label.                                                                                                                                                                                         |
+| labelShiftY                 | number               | Vertical shift of this bubble's label.                                                                                                                                                                                           |
+| showVerticalLine            | boolean              | Shows a vertical line at this bubble's X position.                                                                                                                                                                               |
+| verticalLineHeight          | number               | Height of the vertical line associated with this bubble.                                                                                                                                                                         |
+| verticalLineUptoBubble      | boolean              | When true, vertical line's height is limited to this bubble's Y value.                                                                                                                                                           |
+| verticalLineColor           | ColorValue           | Color of the vertical line associated with this bubble.                                                                                                                                                                          |
+| verticalLineThickness       | number               | Thickness of the vertical line associated with this bubble.                                                                                                                                                                      |
+| verticalLineStrokeDashArray | number[]             | `[dashWidth, dashGap]` of the vertical line to create dashed/dotted effect.                                                                                                                                                      |
+| verticalLineShift           | number               | Horizontal shift applied to this bubble's vertical line.                                                                                                                                                                         |
+| verticalLineZIndex          | number               | Z‑index of the vertical line associated with this bubble.                                                                                                                                                                        |
+| verticalLineSpacing         | number               | Distance between this bubble's vertical line and others (when there are multiple).                                                                                                                                               |
+| verticalLineStrokeLinecap   | Linecap              | Linecap of this bubble's vertical line.                                                                                                                                                                                          |
+| pointerShiftX               | number               | Shifts the pointer (if any) for this bubble horizontally.                                                                                                                                                                        |
+| pointerShiftY               | number               | Shifts the pointer (if any) for this bubble vertically.                                                                                                                                                                          |
+| onPress                     | Function             | Callback function called when this bubble is pressed.                                                                                                                                                                            |
+| onContextMenu               | Function             | Web‑only context menu handler.                                                                                                                                                                                                   |
+| onMouseEnter                | Function             | Web‑only mouse‑enter handler.                                                                                                                                                                                                    |
+| onMouseLeave                | Function             | Web‑only mouse‑leave handler.                                                                                                                                                                                                    |
+| showXAxisIndex              | boolean              | Shows an X‑axis index marker for this bubble only.                                                                                                                                                                               |
+| hidePointer                 | boolean              | Hides the pointer for this bubble when using pointer configuration.                                                                                                                                                              |
+| x                           | number               | Custom X value for this bubble. When provided, the X position is calculated as `x * xScale`. When not provided, the position is auto-calculated based on the bubble's index and total width, accounting for the bubble's radius. |
+| borderWidth                 | number               | Border width around this individual bubble.                                                                                                                                                                                      |
+| borderColor                 | ColorValue           | Border color around this individual bubble.                                                                                                                                                                                      |
+| borderOpacity               | number               | Opacity of the border around this individual bubble.                                                                                                                                                                             |
+| opacity                     | number               | Opacity of this individual bubble.                                                                                                                                                                                               |
+
+**Alert**\
+When you are using the `labelComponent`, make sure to provide appropriate `bubblesHeight` and `bubblesWidth` values (either on the item itself or directly as props on `<BubbleChart>`). Otherwise the labels might appear shifted from their intended positions.
+
+### bubbleDataItem
+
+```ts
+export interface bubbleDataItem {
+  y: number;
+  x?: number;
+  r?: number;
+  label?: string;
+  labelComponent?: Function;
+  labelTextStyle?: StyleProp<TextStyle>;
+  secondaryLabel?: string;
+  secondaryLabelComponent?: Function;
+  secondaryLabelTextStyle?: StyleProp<TextStyle>;
+  bubbleText?: string;
+  textShiftX?: number;
+  textShiftY?: number;
+  textColor?: string;
+  textFontSize?: number;
+  textFontFamily?: string;
+  textFontWeight?: FontWeight;
+  spacing?: number;
+  hideBubble?: boolean;
+  bubbleHeight?: number;
+  bubbleWidth?: number;
+  bubbleColor?: string;
+  bubbleShape?: string;
+  customBubble?: Function;
+  stripHeight?: number;
+  stripWidth?: number;
+  stripColor?: ColorValue | string | any;
+  stripOpacity?: number;
+  stripStrokeDashArray?: number[];
+  focusedBubbleShape?: string;
+  focusedBubbleWidth?: number;
+  focusedBubbleHeight?: number;
+  focusedBubbleColor?: ColorValue | string | any;
+  focusedBubbleRadius?: number;
+  focusedCustomBubble?: Function;
+  labelComponent?: Function;
+  focusedLabelComponent?: Function;
+  labelWidth?: number;
+  labelShiftX?: number;
+  labelShiftY?: number;
+  showStrip?: boolean;
+  showVerticalLine?: boolean;
+  verticalLineHeight?: number;
+  verticalLineUptoBubble?: boolean;
+  verticalLineColor?: ColorValue;
+  verticalLineThickness?: number;
+  verticalLineStrokeDashArray?: number[];
+  verticalLineShift?: number;
+  verticalLineZIndex?: number;
+  verticalLineSpacing?: number;
+  verticalLineStrokeLinecap?: Linecap;
+  pointerShiftX?: number;
+  pointerShiftY?: number;
+  onPress?: Function;
+  onContextMenu?: Function;
+  onMouseEnter?: Function;
+  onMouseLeave?: Function;
+  showXAxisIndex?: boolean;
+  hidePointer?: boolean;
+  borderWidth?: number;
+  borderColor?: ColorValue;
+  borderOpacity?: number;
+  opacity?: number;
+}
+```
+
+
+---
+
+### X and Y Coordinate Positioning
+
+The BubbleChart uses a coordinate system where:
+
+- **Y coordinate**: Always required. The `y` value represents the vertical position in data space and is converted to screen coordinates using the `getY()` function based on `maxY`, `containerHeight`, and other Y-axis configuration.
+
+- **X coordinate**: Optional. The X positioning works as follows:
+  - **If `x` is provided**: The bubble's X position is calculated as `x * xScale`, where `xScale` is the scaling factor that converts data space X values to screen coordinates.
+  - **If `x` is not provided**: The X position is auto-calculated based on the bubble's index, evenly distributing bubbles across the chart width while accounting for the bubble's radius to prevent overflow.
+
+The `getX()` function implementation:
+
+```ts
+const getX = (index: number): number => {
+  const val =
+    props.data?.[index].x !== undefined
+      ? (props.data?.[index].x ?? 0) * xScale
+      : Math.min(
+          totalWidth - (props.data?.[index].r ?? BubbleDefaults.bubblesRadius),
+          ((index + 1) * totalWidth) / (props.data?.length ?? 1),
+        );
+  return val;
+};
+```
+
+This allows you to either:
+
+1. **Use explicit X values**: Provide `x` values in your data for precise positioning (useful for scatter plots or when you need specific X coordinates).
+2. **Use automatic spacing**: Omit `x` values to let the chart automatically space bubbles evenly across the available width.
+
+---
+---
+
 ### Animation and rendering
 
 | Prop                            | Type    | Description                                                                                                            | Default value |
@@ -362,174 +540,3 @@ maxX = xNoOfSections * xStepValue;
 ```
 
 ---
-
-### Item description (`bubbleDataItem`)
-
-Each element of the `data` array is a `bubbleDataItem`:
-
-```ts
-export interface bubbleDataItem {
-  y: number;
-  x?: number;
-  r?: number;
-  label?: string;
-  labelComponent?: Function;
-  labelTextStyle?: StyleProp<TextStyle>;
-  secondaryLabel?: string;
-  secondaryLabelComponent?: Function;
-  secondaryLabelTextStyle?: StyleProp<TextStyle>;
-  bubbleText?: string;
-  textShiftX?: number;
-  textShiftY?: number;
-  textColor?: string;
-  textFontSize?: number;
-  textFontFamily?: string;
-  textFontWeight?: FontWeight;
-  spacing?: number;
-  hideBubble?: boolean;
-  bubbleHeight?: number;
-  bubbleWidth?: number;
-  bubbleColor?: string;
-  bubbleShape?: string;
-  customBubble?: Function;
-  stripHeight?: number;
-  stripWidth?: number;
-  stripColor?: ColorValue | string | any;
-  stripOpacity?: number;
-  stripStrokeDashArray?: number[];
-  focusedBubbleShape?: string;
-  focusedBubbleWidth?: number;
-  focusedBubbleHeight?: number;
-  focusedBubbleColor?: ColorValue | string | any;
-  focusedBubbleRadius?: number;
-  focusedCustomBubble?: Function;
-  labelComponent?: Function;
-  focusedLabelComponent?: Function;
-  labelWidth?: number;
-  labelShiftX?: number;
-  labelShiftY?: number;
-  showStrip?: boolean;
-  showVerticalLine?: boolean;
-  verticalLineHeight?: number;
-  verticalLineUptoBubble?: boolean;
-  verticalLineColor?: ColorValue;
-  verticalLineThickness?: number;
-  verticalLineStrokeDashArray?: number[];
-  verticalLineShift?: number;
-  verticalLineZIndex?: number;
-  verticalLineSpacing?: number;
-  verticalLineStrokeLinecap?: Linecap;
-  pointerShiftX?: number;
-  pointerShiftY?: number;
-  onPress?: Function;
-  onContextMenu?: Function;
-  onMouseEnter?: Function;
-  onMouseLeave?: Function;
-  showXAxisIndex?: boolean;
-  hidePointer?: boolean;
-  borderWidth?: number;
-  borderColor?: ColorValue;
-  borderOpacity?: number;
-  opacity?: number;
-}
-```
-
-| Key                         | Value type           | Description                                                                                                                                                                                                                      |
-| --------------------------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| y                           | number               | Y value of the bubble representing its vertical position                                                                                                                                                                         |
-| label                       | string               | Label text appearing under the X axis for this bubble.                                                                                                                                                                           |
-| labelTextStyle              | StyleProp<TextStyle> | Style object for the primary label text.                                                                                                                                                                                         |
-| labelComponent              | Function             | Custom label component rendered under the X axis.                                                                                                                                                                                |
-| secondaryLabel              | string               | Label text appearing above the secondary X‑axis (top) for this bubble.                                                                                                                                                           |
-| secondaryLabelComponent     | Function             | Custom component for the secondary label.                                                                                                                                                                                        |
-| secondaryLabelTextStyle     | StyleProp<TextStyle> | Style of the secondary label text.                                                                                                                                                                                               |
-| bubbleText                  | string               | Text shown near the bubble (e.g. value, percentage).                                                                                                                                                                             |
-| textShiftX                  | number               | Horizontal shift applied to `bubbleText`.                                                                                                                                                                                        |
-| textShiftY                  | number               | Vertical shift applied to `bubbleText`                                                                                                                                                                                           |
-| textColor                   | string               | Color of `bubbleText`.                                                                                                                                                                                                           |
-| textFontSize                | number               | Font size of `bubbleText`.                                                                                                                                                                                                       |
-| textFontFamily              | string               | Font family of `bubbleText`.                                                                                                                                                                                                     |
-| textFontWeight              | FontWeight           | Font weight of `bubbleTex                                                                                                                                                                                                        |
-| spacing                     | number               | Distance between this bubble and the next bubble.                                                                                                                                                                                |
-| hideBubble                  | boolean              | Hides this bubble while keeping other ones visible.                                                                                                                                                                              |
-| bubbleHeight                | number               | Height of this bubble when rectangular.                                                                                                                                                                                          |
-| bubbleWidth                 | number               | Width of this bubble when rect                                                                                                                                                                                                   |
-| r                           | number               | Radius of this bubble when circular (alternative to `bubbleRadius`).                                                                                                                                                             |
-| bubbleColor                 | string               | Color of this bubble only.                                                                                                                                                                                                       |
-| bubbleShape                 | string               | Shape of this bubble only (`'circle'`, `'rect'`, etc.).                                                                                                                                                                          |
-| customBubble                | Function             | Custom renderer for this bubble only.                                                                                                                                                                                            |
-| showStrip                   | boolean              | Shows a vertical strip for this bubble (even when not focused).                                                                                                                                                                  |
-| stripHeight                 | number               | Height of the vertical strip associated with this bubble.                                                                                                                                                                        |
-| stripWidth                  | number               | Width of the vertical strip associated with this bubble.                                                                                                                                                                         |
-| stripColor                  | ColorValue           | Color of the vertical strip associated with this bubble.                                                                                                                                                                         |
-| stripOpacity                | number               | Opacity of the vertical strip associated with this bubble.                                                                                                                                                                       |
-| stripStrokeDashArray        | number[]             | `[dashWidth, dashGap]` for dashed strip associated with this bubble.                                                                                                                                                             |
-| focusedBubbleShape          | string               | Shape of this bubble when focused.                                                                                                                                                                                               |
-| focusedBubbleWidth          | number               | Width of this bubble when focused (rectangular).                                                                                                                                                                                 |
-| focusedBubbleHeight         | number               | Height of this bubble when focused (rectangular).                                                                                                                                                                                |
-| focusedBubbleColor          | ColorValue           | Color of this bubble when focused.                                                                                                                                                                                               |
-| focusedBubbleRadius         | number               | Radius of this bubble when focused (circular).                                                                                                                                                                                   |
-| focusedCustomBubble         | Function             | Custom renderer for this bubble only when focused.                                                                                                                                                                               |
-| labelComponent              | Function             | Custom component rendered above this bubble.                                                                                                                                                                                     |
-| focusedLabelComponent       | Function             | Custom component rendered above this bubble only when focused.                                                                                                                                                                   |
-| labelWidth                  | number               | Width of the label shown beside this bubble.                                                                                                                                                                                     |
-| labelShiftX                 | number               | Horizontal shift of this bubble's label.                                                                                                                                                                                         |
-| labelShiftY                 | number               | Vertical shift of this bubble's label.                                                                                                                                                                                           |
-| showVerticalLine            | boolean              | Shows a vertical line at this bubble's X position.                                                                                                                                                                               |
-| verticalLineHeight          | number               | Height of the vertical line associated with this bubble.                                                                                                                                                                         |
-| verticalLineUptoBubble      | boolean              | When true, vertical line's height is limited to this bubble's Y value.                                                                                                                                                           |
-| verticalLineColor           | ColorValue           | Color of the vertical line associated with this bubble.                                                                                                                                                                          |
-| verticalLineThickness       | number               | Thickness of the vertical line associated with this bubble.                                                                                                                                                                      |
-| verticalLineStrokeDashArray | number[]             | `[dashWidth, dashGap]` of the vertical line to create dashed/dotted effect.                                                                                                                                                      |
-| verticalLineShift           | number               | Horizontal shift applied to this bubble's vertical line.                                                                                                                                                                         |
-| verticalLineZIndex          | number               | Z‑index of the vertical line associated with this bubble.                                                                                                                                                                        |
-| verticalLineSpacing         | number               | Distance between this bubble's vertical line and others (when there are multiple).                                                                                                                                               |
-| verticalLineStrokeLinecap   | Linecap              | Linecap of this bubble's vertical line.                                                                                                                                                                                          |
-| pointerShiftX               | number               | Shifts the pointer (if any) for this bubble horizontally.                                                                                                                                                                        |
-| pointerShiftY               | number               | Shifts the pointer (if any) for this bubble vertically.                                                                                                                                                                          |
-| onPress                     | Function             | Callback function called when this bubble is pressed.                                                                                                                                                                            |
-| onContextMenu               | Function             | Web‑only context menu handler.                                                                                                                                                                                                   |
-| onMouseEnter                | Function             | Web‑only mouse‑enter handler.                                                                                                                                                                                                    |
-| onMouseLeave                | Function             | Web‑only mouse‑leave handler.                                                                                                                                                                                                    |
-| showXAxisIndex              | boolean              | Shows an X‑axis index marker for this bubble only.                                                                                                                                                                               |
-| hidePointer                 | boolean              | Hides the pointer for this bubble when using pointer configuration.                                                                                                                                                              |
-| x                           | number               | Custom X value for this bubble. When provided, the X position is calculated as `x * xScale`. When not provided, the position is auto-calculated based on the bubble's index and total width, accounting for the bubble's radius. |
-| borderWidth                 | number               | Border width around this individual bubble.                                                                                                                                                                                      |
-| borderColor                 | ColorValue           | Border color around this individual bubble.                                                                                                                                                                                      |
-| borderOpacity               | number               | Opacity of the border around this individual bubble.                                                                                                                                                                             |
-| opacity                     | number               | Opacity of this individual bubble.                                                                                                                                                                                               |
-
-**Alert**\
-When you are using the `labelComponent`, make sure to provide appropriate `bubblesHeight` and `bubblesWidth` values (either on the item itself or directly as props on `<BubbleChart>`). Otherwise the labels might appear shifted from their intended positions.
-
----
-
-### X and Y Coordinate Positioning
-
-The BubbleChart uses a coordinate system where:
-
-- **Y coordinate**: Always required. The `y` value represents the vertical position in data space and is converted to screen coordinates using the `getY()` function based on `maxY`, `containerHeight`, and other Y-axis configuration.
-
-- **X coordinate**: Optional. The X positioning works as follows:
-  - **If `x` is provided**: The bubble's X position is calculated as `x * xScale`, where `xScale` is the scaling factor that converts data space X values to screen coordinates.
-  - **If `x` is not provided**: The X position is auto-calculated based on the bubble's index, evenly distributing bubbles across the chart width while accounting for the bubble's radius to prevent overflow.
-
-The `getX()` function implementation:
-
-```ts
-const getX = (index: number): number => {
-  const val =
-    props.data?.[index].x !== undefined
-      ? (props.data?.[index].x ?? 0) * xScale
-      : Math.min(
-          totalWidth - (props.data?.[index].r ?? BubbleDefaults.bubblesRadius),
-          ((index + 1) * totalWidth) / (props.data?.length ?? 1),
-        );
-  return val;
-};
-```
-
-This allows you to either:
-
-1. **Use explicit X values**: Provide `x` values in your data for precise positioning (useful for scatter plots or when you need specific X coordinates).
-2. **Use automatic spacing**: Omit `x` values to let the chart automatically space bubbles evenly across the available width.
