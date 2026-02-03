@@ -1,3 +1,17 @@
+### 🎉 1.4.73
+
+Further improvements in Bubble Charts-
+
+- Auto compute Y-axis and X-axis label values, taking into account the radii of bubbles, to avoid cutting off
+- Fix `xAxisLabelTexts` and `xRoundToDigits`
+- Prop to format bubble labels -> `formatBubbleLabel`
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.72
 
 Made Bubble Charts production ready! <br />
