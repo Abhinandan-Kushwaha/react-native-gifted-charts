@@ -24,7 +24,7 @@ const AnimatedLine = Animated.createAnimatedComponent(Line);
 export const BubbleChart = (props: BubbleChartPropsType) => {
   const opacityValue = useMemo(() => new Animated.Value(0), []);
   const pointsOpacityValue = useMemo(() => new Animated.Value(0), []);
-  const {secondaryXAxis} = props;
+  const {secondaryXAxis, xAxisLabelTextStyle, formatBubbleLabel} = props;
   const {
     barAndLineChartsWrapperProps,
     totalWidth,
@@ -75,6 +75,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     regressionLineX2,
     regressionLineY2,
     regressionLineConfig,
+    scatterChart,
   } = useBubbleChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -248,7 +249,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
           rotateLabel && {transform: [{rotate: '60deg'}]},
         ]}>
         <Text
-          style={{textAlign: 'center'}}
+          style={[{textAlign: 'center'}, xAxisLabelTextStyle]}
           allowFontScaling={allowFontScaling}
           numberOfLines={xAxisTextNumberOfLines}>
           {label}
@@ -282,7 +283,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
         ]}>
         <Text
           allowFontScaling={allowFontScaling}
-          style={{textAlign: 'center'}}
+          style={[{textAlign: 'center'}, xAxisLabelTextStyle]}
           numberOfLines={xAxisTextNumberOfLines}>
           {label}
         </Text>
@@ -290,7 +291,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     );
   };
 
-  const renderDataPoints = (
+  const renderBubbles = (
     hideBubbles: any,
     dataForRender: any,
     originalDataFromProps: any,
@@ -300,10 +301,6 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     bubsColor: any,
     bubsRadius: any,
     labelFontSize: any,
-    // textColor: any,
-    // textFontSize: any,
-    // textFontFamily: any,
-    // textFontWeight: any,
     startIndex: any,
     endIndex: any,
     isSecondary: any,
@@ -392,6 +389,9 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
         !showTextOnFocus && !showValuesAsDataPointsText
           ? item.label
           : text.toString();
+      const formattedTextLabel = textLabel
+        ? (formatBubbleLabel?.(textLabel) ?? textLabel)
+        : '';
       const textStyle = (item.labelTextStyle ?? labelTextStyle ?? {}) as any;
       const fontSize =
         textStyle.fontSize || item.labelFontSize || labelFontSize;
@@ -568,17 +568,18 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                   isWebApp ? (
                     <ForeignObject
                       height={svgHeight}
-                      width={labelWidth}
+                      width={totalWidth}
                       x={
-                        initialSpacing +
-                        (item.labelShiftX || props.labelShiftX || 0) -
+                        getX(index) -
                         labelWidth / 2 +
-                        spacing * index
+                        6 +
+                        (item.labelShiftX || props.labelShiftX || 0)
                       }
                       y={
-                        containerHeight +
+                        getYOrSecondaryY(item.y) -
+                        10 +
                         (item.labelShiftY || props.labelShiftY || 0) -
-                        (item.y * containerHeight) / maxValue
+                        (scatterChart ? bubblesRadius + 10 : 0)
                       }>
                       {showBubbleLabelOnFocus
                         ? index === selectedIndex &&
@@ -600,7 +601,8 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                         top:
                           getYOrSecondaryY(item.y) -
                           defaultFontSize / 1.5 +
-                          (item.labelShiftY || props.labelShiftY || 0),
+                          (item.labelShiftY || props.labelShiftY || 0) -
+                          (scatterChart ? bubblesRadius + 10 : 0),
                         opacity: isAnimated ? appearingDataPoints : 1,
                       }}>
                       {showBubbleLabelOnFocus
@@ -612,30 +614,59 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                     </Animated.View>
                   )
                 ) : null
-              ) : textLabel ? (
+              ) : formattedTextLabel ? (
                 !showTextOnFocus || index === selectedIndex ? (
-                  <Animated.Text
-                    style={{
-                      ...textStyle,
-                      position: 'absolute',
-                      left:
+                  isWebApp ? (
+                    <ForeignObject
+                      height={svgHeight}
+                      width={totalWidth}
+                      x={
                         getX(index) -
                         Math.min(
                           bubblesRadius,
-                          (textLabel.length * fontSize) / 3,
+                          (formattedTextLabel.length * fontSize) / 3,
                         ) +
-                        (item.labelShiftX || props.labelShiftX || 0),
-                      top:
+                        (item.labelShiftX || props.labelShiftX || 0)
+                      }
+                      y={
                         getYOrSecondaryY(item.y) -
-                        fontSize / 1.5 +
-                        (item.labelShiftY || props.labelShiftY || 0),
-                      fontSize,
-                      opacity: isAnimated
-                        ? appearingDataPoints
-                        : (textStyle.opacity ?? 1),
-                    }}>
-                    {textLabel}
-                  </Animated.Text>
+                        Math.max(10, fontSize / 1.5) +
+                        (item.labelShiftY || props.labelShiftY || 0) -
+                        (scatterChart ? bubblesRadius + 10 : 0)
+                      }>
+                      <Text
+                        style={{
+                          ...textStyle,
+                          fontSize,
+                        }}>
+                        {formattedTextLabel}
+                      </Text>
+                    </ForeignObject>
+                  ) : (
+                    <Animated.Text
+                      style={{
+                        ...textStyle,
+                        position: 'absolute',
+                        left:
+                          getX(index) -
+                          Math.min(
+                            bubblesRadius,
+                            (formattedTextLabel.length * fontSize) / 3,
+                          ) +
+                          (item.labelShiftX || props.labelShiftX || 0),
+                        top:
+                          getYOrSecondaryY(item.y) -
+                          fontSize / 1.5 +
+                          (item.labelShiftY || props.labelShiftY || 0) -
+                          (scatterChart ? bubblesRadius + 10 : 0),
+                        fontSize,
+                        opacity: isAnimated
+                          ? appearingDataPoints
+                          : (textStyle.opacity ?? 1),
+                      }}>
+                      {formattedTextLabel}
+                    </Animated.Text>
+                  )
                 ) : null
               ) : null}
               {/* Workaround to fix the issue - focusedCustomBubble not rendering for focused data, (when both customBubble and focusedCustomBubble are used together)*/}
@@ -669,7 +700,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
           height={svgHeight}
           width={totalWidth}
           onPress={props.onBackgroundPress}>
-          {renderDataPoints(
+          {renderBubbles(
             hideBubbles,
             props.data,
             props.data,
@@ -679,10 +710,6 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
             bubblesColor,
             bubblesRadius,
             labelFontSize,
-            // textColor,
-            // textFontSize,
-            // textFontFamily,
-            // textFontWeight,
             startIndex,
             endIndex,
             false,
