@@ -104,10 +104,10 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 <PieChart data = {data} />
 <PopulationPyramid data = {[{left:10,right:12}, {left:9,right:8}]} />
 <RadarChart data = {[50, 80, 90, 70]} />
-<BubbleChart data = {
+<BubbleChart data = {[
   {x: 20, y: 4, r: 10},
   {x: 40, y: 6, r: 20},
-} />
+]} />
 
 // For Horizontal Bar chart, just add the prop horizontal to the <BarChart/> component
 
