@@ -2,9 +2,17 @@ import {
   BubbleChartPropsType,
   BubbleDefaults,
   useBubbleChart,
+  withinMinMaxRange,
 } from 'gifted-charts-core';
 import BarAndLineChartsWrapper from '../Components/BarAndLineChartsWrapper';
-import {Fragment, useCallback, useEffect, useMemo, useRef} from 'react';
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import {
   Animated,
   Easing,
@@ -13,8 +21,17 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import {Circle, ForeignObject, Rect, Svg, Line} from 'react-native-svg';
-import {isWebApp, screenWidth} from '../utils';
+import {
+  Circle,
+  ForeignObject,
+  Rect,
+  Svg,
+  Line,
+  RadialGradient,
+  Stop,
+  Defs,
+} from 'react-native-svg';
+import {isAndroid, isWebApp, screenWidth} from '../utils';
 import {bubbleDataItem} from 'gifted-charts-core';
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -26,6 +43,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
   const pointsOpacityValue = useMemo(() => new Animated.Value(0), []);
   const {secondaryXAxis, xAxisLabelTextStyle, formatBubbleLabel} = props;
   const {
+    data,
     barAndLineChartsWrapperProps,
     totalWidth,
     animationDuration,
@@ -68,6 +86,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     borderColor,
     borderWidth,
     opacity,
+    borderOpacity,
     xAxisLabelTexts,
     showRegressionLine,
     regressionLineX1,
@@ -76,6 +95,11 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     regressionLineY2,
     regressionLineConfig,
     scatterChart,
+    maxRadius,
+    minRadius,
+    extraWidthDueToBubble,
+    showGradient,
+    centerColorForGradient,
   } = useBubbleChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -100,32 +124,45 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
 
   const growingRadii = useMemo(
     () =>
-      (props.data ?? []).map(item =>
+      (data ?? []).map(item =>
         progress.interpolate({
           inputRange: [0, 1],
-          outputRange: [0, item.r ?? bubblesRadius],
+          outputRange: [
+            0,
+            withinMinMaxRange(item.r ?? bubblesRadius, maxRadius, minRadius),
+          ],
         }),
       ),
-    [props.data, progress],
+    [data, progress],
   );
 
-  const growingHeight = (props.data ?? []).map((_, i) =>
+  const growingHeight = (data ?? []).map((_, i) =>
     progress.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, props.data?.[i].bubbleHeight ?? bubblesHeight],
+      outputRange: [0, data?.[i].bubbleHeight ?? bubblesHeight],
     }),
   );
 
-  const growingWidth = (props.data ?? []).map((_, i) =>
+  const growingWidth = (data ?? []).map((_, i) =>
     progress.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, props.data?.[i].bubbleWidth ?? bubblesWidth],
+      outputRange: [0, data?.[i].bubbleWidth ?? bubblesWidth],
     }),
   );
 
   const appearingDataPoints = pointsOpacityValue.interpolate({
     inputRange: [0, 1],
     outputRange: [0, opacity],
+  });
+
+  const appearingDataPointsAndroid = pointsOpacityValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, opacity / 2], // hack to show slightly transparent bubbles while animating, as gradient on Android can't be animated
+  });
+
+  const appearingBorder = pointsOpacityValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, borderOpacity],
   });
 
   const drawRegressionLine = useCallback(() => {
@@ -202,6 +239,8 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     }).start();
   }, [pointsOpacityValue]);
 
+  const [isAnimationOver, setIsAnimationOver] = useState(false);
+
   useEffect(() => {
     if (isAnimated) {
       decreaseWidth();
@@ -211,6 +250,11 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
         bubblesHeightsWidthsGrow();
       } else {
         radiiGrow();
+      }
+      if (isAndroid) {
+        setTimeout(() => {
+          setIsAnimationOver(true);
+        }, animationDuration + 20);
       }
     }
     if (regressionLineConfig.isAnimated) {
@@ -231,6 +275,9 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
   // };
 
   const renderLabel = (top: boolean, index: number, label: string) => {
+    const left = index
+      ? initialSpacing + spacing * index - spacing / 2
+      : initialSpacing / 2;
     return (
       <View
         style={[
@@ -243,13 +290,13 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
               : -xAxisTextNumberOfLines * 18 - (containerHeight - 200) / 20,
             zIndex: 10,
             width: spacing + labelsExtraHeight,
-            left: initialSpacing + spacing * index - spacing / 2,
+            left,
             height: props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
         ]}>
         <Text
-          style={[{textAlign: 'center'}, xAxisLabelTextStyle]}
+          style={[{textAlign: index ? 'center' : 'left'}, xAxisLabelTextStyle]}
           allowFontScaling={allowFontScaling}
           numberOfLines={xAxisTextNumberOfLines}>
           {label}
@@ -259,6 +306,9 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
   };
 
   const renderAnimatedLabel = (top: boolean, index: number, label: string) => {
+    const left = index
+      ? initialSpacing + spacing * index - spacing / 2
+      : initialSpacing / 2;
     return (
       <Animated.View
         style={[
@@ -275,15 +325,15 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                 ? 10
                 : -xAxisTextNumberOfLines * 18,
             zIndex: 10,
-            width: spacing,
-            left: initialSpacing + spacing * index - spacing / 2,
+            width: spacing + labelsExtraHeight,
+            left,
             opacity: appearingOpacity,
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
         ]}>
         <Text
           allowFontScaling={allowFontScaling}
-          style={[{textAlign: 'center'}, xAxisLabelTextStyle]}
+          style={[{textAlign: index ? 'center' : 'left'}, xAxisLabelTextStyle]}
           numberOfLines={xAxisTextNumberOfLines}>
           {label}
         </Text>
@@ -344,11 +394,14 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
           item.focusedBubbleColor ||
           props.focusedBubbleColor ||
           BubbleDefaults.focusedBubbleColor;
-        bubblesRadius =
+        bubblesRadius = withinMinMaxRange(
           item.focusedBubbleRadius ??
-          props.focusedBubbleRadius ??
-          item.r ??
-          bubsRadius;
+            props.focusedBubbleRadius ??
+            item.r ??
+            bubsRadius,
+          maxRadius,
+          minRadius,
+        );
         if (showTextOnFocus) {
           text = item.label;
         }
@@ -367,7 +420,11 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
         bubblesWidth = item.bubbleWidth || bubsWidth;
         bubblesHeight = item.bubbleHeight || bubsHeight;
         dataPointsColor = item.bubbleColor || bubsColor;
-        bubblesRadius = item.r ?? bubsRadius;
+        bubblesRadius = withinMinMaxRange(
+          item.r ?? bubsRadius,
+          maxRadius,
+          minRadius,
+        );
         if (showTextOnFocus) {
           text = '';
         }
@@ -396,6 +453,10 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
       const fontSize =
         textStyle.fontSize || item.labelFontSize || labelFontSize;
       const defaultFontSize = 14;
+
+      const fillColorForAnimatedGradientOnAndroid = isAnimationOver
+        ? `url(#radial${index})`
+        : dataPointsColor;
 
       return (
         <Fragment key={index}>
@@ -489,12 +550,13 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                             : 'none'
                           : dataPointsColor
                       }
+                      fillOpacity={isAnimated ? appearingDataPoints : opacity}
                       stroke={item.borderColor ?? borderColor}
                       strokeWidth={item.borderWidth ?? borderWidth}
                       strokeOpacity={
                         item.borderOpacity ??
                         props.borderOpacity ??
-                        (isAnimated ? appearingDataPoints : opacity)
+                        (isAnimated ? appearingBorder : borderOpacity)
                       }
                       onPress={() => {
                         item.onPress
@@ -526,19 +588,27 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                       cy={getYOrSecondaryY(item.y)}
                       r={isAnimated ? growingRadii[index] : bubblesRadius}
                       fill={
-                        showBubbleOnFocus
-                          ? index === selectedIndex
-                            ? dataPointsColor
-                            : 'none'
+                        (item.showGradient ?? showGradient)
+                          ? isAndroid && isAnimated
+                            ? fillColorForAnimatedGradientOnAndroid
+                            : `url(#radial${index})`
                           : dataPointsColor
                       }
-                      opacity={isAnimated ? appearingDataPoints : opacity}
+                      fillOpacity={
+                        isAnimated
+                          ? isAndroid && showGradient
+                            ? isAnimationOver
+                              ? opacity
+                              : appearingDataPointsAndroid
+                            : appearingDataPoints
+                          : opacity
+                      }
                       stroke={item.borderColor ?? borderColor}
                       strokeWidth={item.borderWidth ?? borderWidth}
                       strokeOpacity={
                         item.borderOpacity ??
                         props.borderOpacity ??
-                        (isAnimated ? appearingDataPoints : opacity)
+                        (isAnimated ? appearingBorder : borderOpacity)
                       }
                       onPress={() => {
                         item.onPress
@@ -691,19 +761,42 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
         style={[
           svgWrapperViewStyle as ViewStyle,
           {
-            width: totalWidth,
+            width: totalWidth + extraWidthDueToBubble,
             height: containerHeightIncludingBelowXAxis,
             //   zIndex,
           },
         ]}>
         <Svg
           height={svgHeight}
-          width={totalWidth}
+          width={totalWidth + extraWidthDueToBubble}
           onPress={props.onBackgroundPress}>
+          {showGradient && (
+            <Defs>
+              {data?.map((item, index) => (
+                <RadialGradient
+                  key={index}
+                  id={`radial${index}`}
+                  cx="50%"
+                  cy="50%"
+                  r="50%">
+                  <Stop
+                    offset="0%"
+                    stopColor={
+                      item.centerColorForGradient ?? centerColorForGradient
+                    }
+                  />
+                  <Stop
+                    offset="100%"
+                    stopColor={item.bubbleColor || bubblesColor}
+                  />
+                </RadialGradient>
+              ))}
+            </Defs>
+          )}
           {renderBubbles(
             hideBubbles,
-            props.data,
-            props.data,
+            data,
+            data,
             bubblesShape,
             bubblesWidth,
             bubblesHeight,

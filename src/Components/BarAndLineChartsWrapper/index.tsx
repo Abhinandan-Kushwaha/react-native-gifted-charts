@@ -197,7 +197,9 @@ const BarAndLineChartsWrapper = (props: BarAndLineChartsWrapperTypes) => {
             position: 'absolute',
             bottom: chartType === chartTypes.LINE_BI_COLOR ? 0 : xAxisThickness,
           },
-          !!props.width && {width: props.width + extraWidthDueToDataPoint},
+          (!!props.width || chartType === chartTypes.BUBBLE) && {
+            width: (props.width ?? totalWidth) + extraWidthDueToDataPoint,
+          },
           horizontal && {
             width:
               (props.width ?? totalWidth) + (props.width ? endSpacing : -20),
