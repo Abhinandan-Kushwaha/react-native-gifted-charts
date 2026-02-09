@@ -1,3 +1,28 @@
+### 🎉 1.4.74
+
+Further improvements in Bubble Charts-
+
+1. Added the props `minRadius` and `maxRadius` to control the max and min radii of bubbles in Bubble charts. The final radius of a bubble is calculated as follows-
+
+```js
+const givenRadius = item.r ?? bubblesRadius;
+const actualRadius = Math.min(maxRadius, Math.max(minRadius, givenRadius));
+```
+
+`minRadius` defaults to 8, while `maxRadius` defaults to 20% of chart height.
+
+2. Smart auto-computation of `xStepValue` and `yStepValue` to elegantly distribute the bubbles, making optimal use of the chart space.
+
+3. Added the props `showGradient` and `centerColorForGradient` to add gradient effect to bubbles. `showGradient` defaults to **true** for Bubble charts and **false** for Scatter charts. `centerColorForGradient` defaults to 'white'.
+
+4. Set and animate border opacity independently from the bubble opacity.
+
+---
+
+---
+
+---
+
 ### 🎉 1.4.73
 
 Further improvements in Bubble Charts-
@@ -28,17 +53,19 @@ See the props table here- https://github.com/Abhinandan-Kushwaha/react-native-gi
 ### ✨ Features added-
 
 1. Added `BubbleChart` component which receives data as an array of {x,y,r} values.
-Example-
+   Example-
+
 ```js
 <BubbleChart
-   data={[
-      {x:20, y: 4, r: 10},
-      {x:40, y: 6, r: 20},
-      {x:30, y: 8, r: 60},
-      {x:120, y: 5, r: 40}
-   ]}
+  data={[
+    {x: 20, y: 4, r: 10},
+    {x: 40, y: 6, r: 20},
+    {x: 30, y: 8, r: 60},
+    {x: 120, y: 5, r: 40},
+  ]}
 />
 ```
+
 The props of Bubble chart are similar to those of Line chart. The `r` in the data array is analagous to `dataPointRadius` in the Line chart.
 See the props table here- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/blob/master/docs/BubbleChart/BubbleChartProps.md
 
@@ -95,14 +122,13 @@ type RadarChartContainerProps = {
 3. Fixed the issue- "Selecting a stack bar does not currently work, as `setSelectedIndex` is wrongly setting a number instead of an array." Thanks to [Louis Zawadzki](https://github.com/louiszawadzki) for his PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1189
 
 4. Fixed- "functionality issue for `toggleFocusOnPress` prop and incorrect color issue for `focusOnPress` prop in PieChart component". Thanks to [Sri Harsha D V](https://github.com/HASH-0021) for his PR - https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1072. <br />
-This fixes- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1087
+   This fixes- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1087
 
 5. Fixed the issue- "`focusedPieIndex` not working."
 
 ### 🔨 Refactor
 
 1. Changed the default Pie and donut colors from bright colors like cyan, orange, purple etc to different shades of gray. Also set the the default text color in Pie and donut charts to black.
-
 
 ---
 
@@ -114,12 +140,12 @@ This fixes- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/is
 
 ### ✨ Features added-
 
-1. Added support for tooltip *(dataPointLabelComponent)* for Line chart inside Bar chart, using the properties `dataPointLabelComponent` and `showDataPointLabelOnFocus` inside the **`lineConfig`** prop. _dataPointLabelComponent_ is a callback function with 2 params- item and index. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1185
+1. Added support for tooltip _(dataPointLabelComponent)_ for Line chart inside Bar chart, using the properties `dataPointLabelComponent` and `showDataPointLabelOnFocus` inside the **`lineConfig`** prop. _dataPointLabelComponent_ is a callback function with 2 params- item and index. See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1185
 
 ### 🐛 Bug fixes
 
 1. Fixed the issue - "customDataPoint property breaks the app after updating to Expo SDK 52 and React Native 0.76". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/995 <br />
-See the refactor below.
+   See the refactor below.
 
 2. Fixed the issue - "Reduce of empty array with no initial value in piechart". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/169
 
@@ -129,12 +155,10 @@ See the refactor below.
 
 5. Fixed the issue - "customDataPoint Animation not working in 1.4.63". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1141
 
-
 ### 🔨 Refactor
 
-In Line chart, for `customDataPoint` and `dataPointLabelComponent`, used `<ForeignObject>` only for web, and used regular `View` in case of Android and iOS. This change was needed because *ForeignObject* from **react-native-svg** is known to have issues on Android and iOS. This fixes https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/995. <br />
+In Line chart, for `customDataPoint` and `dataPointLabelComponent`, used `<ForeignObject>` only for web, and used regular `View` in case of Android and iOS. This change was needed because _ForeignObject_ from **react-native-svg** is known to have issues on Android and iOS. This fixes https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/995. <br />
 Also see https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1035
-
 
 ---
 
