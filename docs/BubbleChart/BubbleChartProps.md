@@ -34,8 +34,8 @@ Document might be inaccurate. Expect fast revisions/changes.
 | showFractionalXAxis    | boolean          | When true, allows fractional values on the X axis.                                                                       | false                       |
 | xRoundToDigits         | number           | Number of decimal digits to which X axis values are rounded.                                                             | 1                           |
 | spacing                | number           | Horizontal distance between 2 consecutive labels on the X-axis.                                                          | 50                          |
-| initialSpacing         | number           | Distance of the first bubble from the Y axis.                                                                            | 20                          |
-| endSpacing             | number           | Padding/distance added at the end of the chart after the last label on the X-axis.                                       | 20                          |
+| initialSpacing         | number           | Distance of the first bubble from the Y axis.                                                                            | 0                           |
+| endSpacing             | number           | Padding/distance added at the end of the chart after the last label on the X-axis.                                       | 4                           |
 | backgroundColor        | ColorValue       | Background color of the chart.                                                                                           | \_                          |
 | customBackground       | CustomBackground | Object used to set a custom background component.                                                                        | \_                          |
 | parentWidth            | number           | Explicit width of the parent container (helps with layout/calculations).                                                 | \_                          |
