@@ -46,6 +46,8 @@ Document might be inaccurate. Expect fast revisions/changes.
 | showGradient           | boolean          | To show gradient effect in bubbles                                                                                       | scatterChart ? false : true |
 | centerColorForGradient | ColorValue       | Color at the center of the bubbles when showGradient is true                                                             | 'white'                     |
 
+**Note** Gradient colors can be set using the `⁨centerColorForGradient`⁩ and the regular ⁨`bubblesColor`⁩ props. Also these values can be set inside data array for individual items.
+
 ---
 
 ## Item description (`bubbleDataItem`)
