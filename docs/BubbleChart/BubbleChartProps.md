@@ -11,6 +11,7 @@ Document might be inaccurate. Expect fast revisions/changes.
 | Prop                   | Type             | Description                                                                                                              | Default value               |
 | ---------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
 | data                   | bubbleDataItem[] | Array of items representing bubbles on the chart. Each item is described in the `bubbleDataItem` table.                  | \_                          |
+| dataSet                | DataSetForBubbleChart[] | array of data sets                                                                                                       | \_                          |
 | width                  | number           | Width of the Bubble chart.                                                                                               | width of the parent         |
 | height                 | number           | Height of the Bubble chart (excluding X‑axis labels).                                                                    | 200                         |
 | bubblesRadius          | number           | Radius of the bubbles                                                                                                    | 10                          |
@@ -120,7 +121,7 @@ When you are using the `labelComponent`, make sure to provide appropriate `bubbl
 ### bubbleDataItem
 
 ```ts
-export interface bubbleDataItem {
+interface bubbleDataItem {
   y: number;
   x?: number;
   r?: number;
@@ -179,6 +180,20 @@ export interface bubbleDataItem {
   borderColor?: ColorValue;
   borderOpacity?: number;
   opacity?: number;
+}
+```
+
+### dataSet
+
+Similar to Line charts, You can pass an array of data using the `dataSet` prop. dataSet is an array of objects of type `DataSetForBubbleChart` decsribed below-
+
+```ts
+interface DataSetForBubbleChart {
+  data: bubbleDataItem[];
+  showRegressionLine?: boolean;
+  regressionLineConfig?: RegressionLineConfig;
+  bubblesColor?: ColorValue;
+  borderColor?: ColorValue;
 }
 ```
 
@@ -376,28 +391,47 @@ This allows you to either:
 
 ### Bubble appearance props
 
-| Prop                     | Type                        | Description                                                                        | Default value |
-| ------------------------ | --------------------------- | ---------------------------------------------------------------------------------- | ------------- |
-| hideBubbles              | boolean                     | Hides all bubbles when true (they can still be used for touch / focus).            | false         |
-| bubblesHeight            | number                      | Height of the bubble when its shape is rectangular.                                | 6             |
-| bubblesWidth             | number                      | Width of the bubble when its shape is rectangular.                                 | 6             |
-| bubblesRadius            | number                      | Radius of the bubble when its shape is circular.                                   | 3             |
-| bubblesColor             | string                      | Default color of bubbles.                                                          | 'skyblue'     |
-| bubblesShape             | string                      | Shape of bubbles (`'circle'`, `'rect'`, custom values handled in custom renderer). | 'circle'      |
-| customBubble             | Function                    | Custom bubble renderer for all items.                                              | \_            |
-| focusedBubbleShape       | string                      | Shape of currently focused bubble.                                                 | bubblesShape  |
-| focusedBubbleWidth       | number                      | Width of the focused bubble when rectangular.                                      | bubblesWidth  |
-| focusedBubbleHeight      | number                      | Height of the focused bubble when rectangular.                                     | bubblesHeight |
-| focusedBubbleColor       | ColorValue \| string \| any | Color of the focused bubble.                                                       | bubblesColor  |
-| focusedBubbleRadius      | number                      | Radius of focused bubble when circular.                                            | bubblesRadius |
-| focusedCustomBubble      | Function                    | Custom renderer for the focused bubble only.                                       | \_            |
-| labelWidth               | number                      | Width of the label displayed near a bubble.                                        | 40            |
-| labelShiftX              | number                      | Horizontal shift of the bubble label relative to the bubble.                       | 0             |
-| labelShiftY              | number                      | Vertical shift of the bubble label relative to the bubble.                         | 0             |
-| showValuesAsBubbleLabels | boolean                     | Shows the `y` value of each bubble as text near the bubble.                        | false         |
-| borderWidth              | number                      | Border width around the chart area.                                                | 1             |
-| borderColor              | ColorValue                  | Border color around the chart area.                                                | 'skyblue'     |
-| borderOpacity            | number                      | Opacity of the border around the chart area.                                       | 1             |
+| Prop                     | Type                        | Description                                                                        | Default value                 |
+| ------------------------ | --------------------------- | ---------------------------------------------------------------------------------- | ----------------------------- |
+| hideBubbles              | boolean                     | Hides all bubbles when true (they can still be used for touch / focus).            | false                         |
+| bubblesHeight            | number                      | Height of the bubble when its shape is rectangular.                                | 6                             |
+| bubblesWidth             | number                      | Width of the bubble when its shape is rectangular.                                 | 6                             |
+| bubblesRadius            | number                      | Radius of the bubble when its shape is circular.                                   | 3                             |
+| bubblesColor             | string                      | Default color of bubbles.                                                          | defaultBubbleColors[index%10] |
+| bubblesShape             | string                      | Shape of bubbles (`'circle'`, `'rect'`, custom values handled in custom renderer). | 'circle'                      |
+| customBubble             | Function                    | Custom bubble renderer for all items.                                              | \_                            |
+| focusedBubbleShape       | string                      | Shape of currently focused bubble.                                                 | bubblesShape                  |
+| focusedBubbleWidth       | number                      | Width of the focused bubble when rectangular.                                      | bubblesWidth                  |
+| focusedBubbleHeight      | number                      | Height of the focused bubble when rectangular.                                     | bubblesHeight                 |
+| focusedBubbleColor       | ColorValue \| string \| any | Color of the focused bubble.                                                       | bubblesColor                  |
+| focusedBubbleRadius      | number                      | Radius of focused bubble when circular.                                            | bubblesRadius                 |
+| focusedCustomBubble      | Function                    | Custom renderer for the focused bubble only.                                       | \_                            |
+| labelWidth               | number                      | Width of the label displayed near a bubble.                                        | 40                            |
+| labelShiftX              | number                      | Horizontal shift of the bubble label relative to the bubble.                       | 0                             |
+| labelShiftY              | number                      | Vertical shift of the bubble label relative to the bubble.                         | 0                             |
+| labelFontSize            | number                      | font size of the bubble labels                                                     | 10                            |
+| labelTextStyle           | Style object                | style of the bubble labels                                                         | \_                            |
+| labelMaxLength           | number                      | max length of the bubble labels                                                    | 16                            |
+| labelComponent           | (item, index) => Component  | custom label component for the bubbles                                             | \_                            |
+| showValuesAsBubbleLabels | boolean                     | Shows the `y` value of each bubble as text near the bubble.                        | false                         |
+| borderWidth              | number                      | Border width around the chart area.                                                | 1                             |
+| borderColor              | ColorValue                  | Border color around the chart area.                                                | defaultBubbleColors[index%10] |
+| borderOpacity            | number                      | Opacity of the border around the chart area.                                       | 1                             |
+
+```js
+const defaultBubbleColors = [
+  '#7cb5ec',
+  '#434348',
+  '#90ed7d',
+  '#f7a35c',
+  '#8085e9',
+  '#f15c80',
+  '#e4d354',
+  '#2b908f',
+  '#f45b5b',
+  '#91e8e1',
+];
+```
 
 ---
 

@@ -29,6 +29,7 @@ export {
   EdgePosition,
   type DataSet,
   type DataSetNullSafe,
+  type DataSetForBubbleChart,
   type Linecap,
   type RulesConfig,
   type LabelsPosition,
