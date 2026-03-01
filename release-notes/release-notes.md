@@ -1,3 +1,34 @@
+### 🎉 1.4.75
+
+Further improvements in Bubble Charts-
+
+1. Added support for `dataSet` in Bubble charts. `dataSet` is an array of objects of type `DataSetForBubbleChart` decsribed below-
+
+```ts
+interface DataSetForBubbleChart {
+  data: bubbleDataItem[];
+  showRegressionLine?: boolean;
+  regressionLineConfig?: RegressionLineConfig;
+  bubblesColor?: ColorValue;
+  borderColor?: ColorValue;
+}
+```
+
+2. Added a prop named `labelMaxLength` to max set the length of the bubble labels. Defaults to 16. Labelas bigger than this are ellipsized.
+
+3. Added 10 default colors for bubbles.
+
+4. Fixed the issue- "left most bubble cutting off"
+
+5. Centered the bubble labels
+
+
+---
+
+---
+
+---
+
 ### 🎉 1.4.74
 
 Further improvements in Bubble Charts-

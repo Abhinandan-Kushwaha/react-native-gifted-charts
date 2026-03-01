@@ -8,43 +8,44 @@ Document might be inaccurate. Expect fast revisions/changes.
 
 ### Basic props
 
-| Prop                   | Type             | Description                                                                                                              | Default value               |
-| ---------------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
-| data                   | bubbleDataItem[] | Array of items representing bubbles on the chart. Each item is described in the `bubbleDataItem` table.                  | \_                          |
-| width                  | number           | Width of the Bubble chart.                                                                                               | width of the parent         |
-| height                 | number           | Height of the Bubble chart (excluding X‑axis labels).                                                                    | 200                         |
-| bubblesRadius          | number           | Radius of the bubbles                                                                                                    | 10                          |
-| minRadius              | number           | Min radius of the bubbles -> actual radius of the bubble rendered = Math.max(r, minRadius)                               | 8                           |
-| maxRadius              | number           | Max radius of the bubbles -> actual radius of the bubble rendered = Math.min(r, maxRadius)                               | 20% of chart height         |
-| opacity                | number           | Opacity of the bubbles                                                                                                   | 0.7                         |
-| yNoOfSections          | number           | Number of sections in the Y axis (above X axis).                                                                         | 10                          |
-| ySectionColors         | ColorValue[]     | Background colors of the horizontal sections of the chart.                                                               | backgroundColor             |
-| maxY                   | number           | Maximum Y value shown on the Y axis.                                                                                     | 200                         |
-| mostNegativeY          | number           | Most negative Y value shown on the Y axis (when your data has negative values).                                          | \_                          |
-| yStepHeight            | number           | Height (in px) of one section of the Y axis.                                                                             | 20                          |
-| yStepValue             | number           | Value represented by a single section of the Y axis.                                                                     | 20                          |
-| yNegativeStepValue     | number           | Value of one section of the Y axis for negative values.                                                                  | yStepValue                  |
-| showFractionalYAxis    | boolean          | When true, allows fractional values on the Y axis.                                                                       | false                       |
-| yRoundToDigits         | number           | Number of decimal digits to which Y axis values are rounded.                                                             | 1                           |
-| xNoOfSections          | number           | Number of sections in the X axis.                                                                                        | \_                          |
-| maxX                   | number           | Maximum X value shown on the X axis.                                                                                     | \_                          |
-| mostNegativeX          | number           | Most negative X value shown on the X axis (when your data has negative values).                                          | \_                          |
-| xStepHeight            | number           | Height (in px) of one section of the X axis.                                                                             | \_                          |
-| xStepValue             | number           | Value represented by a single section of the X axis.                                                                     | \_                          |
-| showFractionalXAxis    | boolean          | When true, allows fractional values on the X axis.                                                                       | false                       |
-| xRoundToDigits         | number           | Number of decimal digits to which X axis values are rounded.                                                             | 1                           |
-| spacing                | number           | Horizontal distance between 2 consecutive bubbles.                                                                       | 50                          |
-| initialSpacing         | number           | Distance of the first bubble from the Y axis.                                                                            | 20                          |
-| endSpacing             | number           | Padding/distance added at the end of the chart after the last bubble.                                                    | 20                          |
-| backgroundColor        | ColorValue       | Background color of the chart.                                                                                           | \_                          |
-| customBackground       | CustomBackground | Object used to set a custom background component.                                                                        | \_                          |
-| parentWidth            | number           | Explicit width of the parent container (helps with layout/calculations).                                                 | \_                          |
-| onlyPositive           | boolean          | When true, converts negative values to 0 while plotting.                                                                 | false                       |
-| labelsExtraHeight      | number           | Extra height reserved for X‑axis labels.                                                                                 | 0                           |
-| adjustToWidth          | boolean          | Auto‑computes `spacing` to fit the chart in the available width.                                                         | false                       |
-| scatterChart           | boolean          | Scatter chart is similar to bubble chart, it just positions the bubble labels above the data point, instead of inside it | false                       |
-| showGradient           | boolean          | To show gradient effect in bubbles                                                                                       | scatterChart ? false : true |
-| centerColorForGradient | ColorValue       | Color at the center of the bubbles when showGradient is true                                                             | 'white'                     |
+| Prop                   | Type                    | Description                                                                                                              | Default value               |
+| ---------------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------- |
+| data                   | bubbleDataItem[]        | Array of items representing bubbles on the chart. Each item is described in the `bubbleDataItem` table.                  | \_                          |
+| dataSet                | DataSetForBubbleChart[] | array of data sets                                                                                                       | \_                          |
+| width                  | number                  | Width of the Bubble chart.                                                                                               | width of the parent         |
+| height                 | number                  | Height of the Bubble chart (excluding X‑axis labels).                                                                    | 200                         |
+| bubblesRadius          | number                  | Radius of the bubbles                                                                                                    | 10                          |
+| minRadius              | number                  | Min radius of the bubbles -> actual radius of the bubble rendered = Math.max(r, minRadius)                               | 8                           |
+| maxRadius              | number                  | Max radius of the bubbles -> actual radius of the bubble rendered = Math.min(r, maxRadius)                               | 20% of chart height         |
+| opacity                | number                  | Opacity of the bubbles                                                                                                   | 0.7                         |
+| yNoOfSections          | number                  | Number of sections in the Y axis (above X axis).                                                                         | 10                          |
+| ySectionColors         | ColorValue[]            | Background colors of the horizontal sections of the chart.                                                               | backgroundColor             |
+| maxY                   | number                  | Maximum Y value shown on the Y axis.                                                                                     | 200                         |
+| mostNegativeY          | number                  | Most negative Y value shown on the Y axis (when your data has negative values).                                          | \_                          |
+| yStepHeight            | number                  | Height (in px) of one section of the Y axis.                                                                             | 20                          |
+| yStepValue             | number                  | Value represented by a single section of the Y axis.                                                                     | 20                          |
+| yNegativeStepValue     | number                  | Value of one section of the Y axis for negative values.                                                                  | yStepValue                  |
+| showFractionalYAxis    | boolean                 | When true, allows fractional values on the Y axis.                                                                       | false                       |
+| yRoundToDigits         | number                  | Number of decimal digits to which Y axis values are rounded.                                                             | 1                           |
+| xNoOfSections          | number                  | Number of sections in the X axis.                                                                                        | \_                          |
+| maxX                   | number                  | Maximum X value shown on the X axis.                                                                                     | \_                          |
+| mostNegativeX          | number                  | Most negative X value shown on the X axis (when your data has negative values).                                          | \_                          |
+| xStepHeight            | number                  | Height (in px) of one section of the X axis.                                                                             | \_                          |
+| xStepValue             | number                  | Value represented by a single section of the X axis.                                                                     | \_                          |
+| showFractionalXAxis    | boolean                 | When true, allows fractional values on the X axis.                                                                       | false                       |
+| xRoundToDigits         | number                  | Number of decimal digits to which X axis values are rounded.                                                             | 1                           |
+| spacing                | number                  | Horizontal distance between 2 consecutive bubbles.                                                                       | 50                          |
+| initialSpacing         | number                  | Distance of the first bubble from the Y axis.                                                                            | 20                          |
+| endSpacing             | number                  | Padding/distance added at the end of the chart after the last bubble.                                                    | 20                          |
+| backgroundColor        | ColorValue              | Background color of the chart.                                                                                           | \_                          |
+| customBackground       | CustomBackground        | Object used to set a custom background component.                                                                        | \_                          |
+| parentWidth            | number                  | Explicit width of the parent container (helps with layout/calculations).                                                 | \_                          |
+| onlyPositive           | boolean                 | When true, converts negative values to 0 while plotting.                                                                 | false                       |
+| labelsExtraHeight      | number                  | Extra height reserved for X‑axis labels.                                                                                 | 0                           |
+| adjustToWidth          | boolean                 | Auto‑computes `spacing` to fit the chart in the available width.                                                         | false                       |
+| scatterChart           | boolean                 | Scatter chart is similar to bubble chart, it just positions the bubble labels above the data point, instead of inside it | false                       |
+| showGradient           | boolean                 | To show gradient effect in bubbles                                                                                       | scatterChart ? false : true |
+| centerColorForGradient | ColorValue              | Color at the center of the bubbles when showGradient is true                                                             | 'white'                     |
 
 **Note** Gradient colors can be set using the `⁨centerColorForGradient`⁩ and the regular ⁨`bubblesColor`⁩ props. Also these values can be set inside data array for individual items.
 
@@ -120,7 +121,7 @@ When you are using the `labelComponent`, make sure to provide appropriate `bubbl
 ### bubbleDataItem
 
 ```ts
-export interface bubbleDataItem {
+interface bubbleDataItem {
   y: number;
   x?: number;
   r?: number;
@@ -179,6 +180,20 @@ export interface bubbleDataItem {
   borderColor?: ColorValue;
   borderOpacity?: number;
   opacity?: number;
+}
+```
+
+### dataSet
+
+Similar to Line charts, You can pass an array of data using the `dataSet` prop. dataSet is an array of objects of type `DataSetForBubbleChart` decsribed below-
+
+```ts
+interface DataSetForBubbleChart {
+  data: bubbleDataItem[];
+  showRegressionLine?: boolean;
+  regressionLineConfig?: RegressionLineConfig;
+  bubblesColor?: ColorValue;
+  borderColor?: ColorValue;
 }
 ```
 
@@ -376,28 +391,47 @@ This allows you to either:
 
 ### Bubble appearance props
 
-| Prop                     | Type                        | Description                                                                        | Default value |
-| ------------------------ | --------------------------- | ---------------------------------------------------------------------------------- | ------------- |
-| hideBubbles              | boolean                     | Hides all bubbles when true (they can still be used for touch / focus).            | false         |
-| bubblesHeight            | number                      | Height of the bubble when its shape is rectangular.                                | 6             |
-| bubblesWidth             | number                      | Width of the bubble when its shape is rectangular.                                 | 6             |
-| bubblesRadius            | number                      | Radius of the bubble when its shape is circular.                                   | 3             |
-| bubblesColor             | string                      | Default color of bubbles.                                                          | 'skyblue'     |
-| bubblesShape             | string                      | Shape of bubbles (`'circle'`, `'rect'`, custom values handled in custom renderer). | 'circle'      |
-| customBubble             | Function                    | Custom bubble renderer for all items.                                              | \_            |
-| focusedBubbleShape       | string                      | Shape of currently focused bubble.                                                 | bubblesShape  |
-| focusedBubbleWidth       | number                      | Width of the focused bubble when rectangular.                                      | bubblesWidth  |
-| focusedBubbleHeight      | number                      | Height of the focused bubble when rectangular.                                     | bubblesHeight |
-| focusedBubbleColor       | ColorValue \| string \| any | Color of the focused bubble.                                                       | bubblesColor  |
-| focusedBubbleRadius      | number                      | Radius of focused bubble when circular.                                            | bubblesRadius |
-| focusedCustomBubble      | Function                    | Custom renderer for the focused bubble only.                                       | \_            |
-| labelWidth               | number                      | Width of the label displayed near a bubble.                                        | 40            |
-| labelShiftX              | number                      | Horizontal shift of the bubble label relative to the bubble.                       | 0             |
-| labelShiftY              | number                      | Vertical shift of the bubble label relative to the bubble.                         | 0             |
-| showValuesAsBubbleLabels | boolean                     | Shows the `y` value of each bubble as text near the bubble.                        | false         |
-| borderWidth              | number                      | Border width around the chart area.                                                | 1             |
-| borderColor              | ColorValue                  | Border color around the chart area.                                                | 'skyblue'     |
-| borderOpacity            | number                      | Opacity of the border around the chart area.                                       | 1             |
+| Prop                     | Type                        | Description                                                                        | Default value                 |
+| ------------------------ | --------------------------- | ---------------------------------------------------------------------------------- | ----------------------------- |
+| hideBubbles              | boolean                     | Hides all bubbles when true (they can still be used for touch / focus).            | false                         |
+| bubblesHeight            | number                      | Height of the bubble when its shape is rectangular.                                | 6                             |
+| bubblesWidth             | number                      | Width of the bubble when its shape is rectangular.                                 | 6                             |
+| bubblesRadius            | number                      | Radius of the bubble when its shape is circular.                                   | 3                             |
+| bubblesColor             | string                      | Default color of bubbles.                                                          | defaultBubbleColors[index%10] |
+| bubblesShape             | string                      | Shape of bubbles (`'circle'`, `'rect'`, custom values handled in custom renderer). | 'circle'                      |
+| customBubble             | Function                    | Custom bubble renderer for all items.                                              | \_                            |
+| focusedBubbleShape       | string                      | Shape of currently focused bubble.                                                 | bubblesShape                  |
+| focusedBubbleWidth       | number                      | Width of the focused bubble when rectangular.                                      | bubblesWidth                  |
+| focusedBubbleHeight      | number                      | Height of the focused bubble when rectangular.                                     | bubblesHeight                 |
+| focusedBubbleColor       | ColorValue \| string \| any | Color of the focused bubble.                                                       | bubblesColor                  |
+| focusedBubbleRadius      | number                      | Radius of focused bubble when circular.                                            | bubblesRadius                 |
+| focusedCustomBubble      | Function                    | Custom renderer for the focused bubble only.                                       | \_                            |
+| labelWidth               | number                      | Width of the label displayed near a bubble.                                        | 40                            |
+| labelShiftX              | number                      | Horizontal shift of the bubble label relative to the bubble.                       | 0                             |
+| labelShiftY              | number                      | Vertical shift of the bubble label relative to the bubble.                         | 0                             |
+| labelFontSize            | number                      | font size of the bubble labels                                                     | 10                            |
+| labelTextStyle           | Style object                | style of the bubble labels                                                         | \_                            |
+| labelMaxLength           | number                      | max length of the bubble labels                                                    | 16                            |
+| labelComponent           | (item, index) => Component  | custom label component for the bubbles                                             | \_                            |
+| showValuesAsBubbleLabels | boolean                     | Shows the `y` value of each bubble as text near the bubble.                        | false                         |
+| borderWidth              | number                      | Border width around the chart area.                                                | 1                             |
+| borderColor              | ColorValue                  | Border color around the chart area.                                                | defaultBubbleColors[index%10] |
+| borderOpacity            | number                      | Opacity of the border around the chart area.                                       | 1                             |
+
+```js
+const defaultBubbleColors = [
+  '#7cb5ec',
+  '#434348',
+  '#90ed7d',
+  '#f7a35c',
+  '#8085e9',
+  '#f15c80',
+  '#e4d354',
+  '#2b908f',
+  '#f45b5b',
+  '#91e8e1',
+];
+```
 
 ---
 
