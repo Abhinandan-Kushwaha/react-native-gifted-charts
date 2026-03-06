@@ -121,7 +121,7 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 
 <PieChart data = {data} donut />
 
-// For Scatter chart, just add the prop scatterChart to the <PieChart/> component
+// For Scatter chart, just add the prop scatterChart to the <BubbleChart/> component
 
 <BubbleChart
   data = {[
