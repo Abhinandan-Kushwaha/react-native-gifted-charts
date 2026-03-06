@@ -55,7 +55,7 @@ See the **[release changes by version here.](release-notes/release-notes.md)**
   
   <tr>
     <td><img src='/demos/crossHair.gif' alt='' height=280 /></td>
-    <td><img src='/demos/bubble.png' alt='' width=270 height=300/></td>
+    <td><img src='/demos/bubble.png' alt='' height=280/></td>
   <tr>
     <td><img src='/demos/radar.png' alt='' height=280 width=320/></td>
     <td><img src='/demos/ppnLabelled.png' alt='' height=280 width=300/></td>
