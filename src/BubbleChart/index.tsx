@@ -42,7 +42,12 @@ const AnimatedLine = Animated.createAnimatedComponent(Line);
 export const BubbleChart = (props: BubbleChartPropsType) => {
   const opacityValue = useMemo(() => new Animated.Value(0), []);
   const pointsOpacityValue = useMemo(() => new Animated.Value(0), []);
-  const {secondaryXAxis, xAxisLabelTextStyle, formatBubbleLabel} = props;
+  const {
+    secondaryXAxis,
+    xAxisLabelTextStyle,
+    formatBubbleLabel,
+    regressionLinesBehindBubbles,
+  } = props;
   const {
     data,
     barAndLineChartsWrapperProps,
@@ -265,7 +270,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     regressionLineX2,
     regressionLineY1,
     regressionLineY2,
-    regressionLineConfigs,
+    // regressionLineConfigs,
     regressionLineCoordinates,
     animatedRegressionLineXValues,
     animatedRegressionLineYValues,
@@ -354,8 +359,8 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     isAnimated,
     bubblesShape,
     regressionLineConfig.isAnimated,
-    regressionLineConfigs,
-    drawRegressionLine,
+    // regressionLineConfigs,
+    // drawRegressionLine,
   ]);
 
   const svgHeight =
@@ -383,7 +388,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
               ? containerHeight +
                 60 +
                 (secondaryXAxis?.labelsDistanceFromXaxis ?? 15)
-              : -xAxisTextNumberOfLines * 18 - (containerHeight - 200) / 20,
+              : -xAxisTextNumberOfLines * 18 - (containerHeight - 200) / 20 - 4,
             zIndex: 10,
             width: spacing + labelsExtraHeight,
             left,
@@ -419,7 +424,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                 (secondaryXAxis?.labelsDistanceFromXaxis ?? 15)
               : rotateLabel
                 ? 10
-                : -xAxisTextNumberOfLines * 18,
+                : -xAxisTextNumberOfLines * 18 - 4,
             zIndex: 10,
             width: spacing + labelsExtraHeight,
             left,
@@ -566,8 +571,12 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
         borderColor ??
         defaultBubbleColors[index % defaultBubbleColors.length];
 
+      const bubbleKey = `${key}-${item.indexUsedInDevForDataSet ?? ''}-${
+        item.label ?? ''
+      }-${index}`;
+
       return (
-        <Fragment key={index}>
+        <Fragment key={bubbleKey}>
           {focusEnabled ? (
             <>
               {key === lastLineNumber - 1 ? (
@@ -624,7 +633,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                   <ForeignObject
                     height={svgHeight}
                     width={totalWidth}
-                    x={getX(item.indexUsedInDevForDataSet ?? index)}
+                    x={getX(item.indexUsedInDevForDataSet ?? index, index)}
                     y={getYOrSecondaryY(item.y) - bubblesHeight / 2}>
                     {customBubble(item, index)}
                   </ForeignObject>
@@ -635,7 +644,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                       // height: svgHeight,
                       // width: totalWidth,
                       left:
-                        getX(item.indexUsedInDevForDataSet ?? index) -
+                        getX(item.indexUsedInDevForDataSet ?? index, index) -
                         bubblesWidth / 2,
                       top: getYOrSecondaryY(item.y) - bubblesHeight / 2,
                       opacity: isAnimated ? appearingOpacity : 1,
@@ -645,11 +654,11 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                 )
               ) : null}
               {bubblesShape === 'rectangular' ? (
-                <Fragment key={index}>
+                <Fragment key={`rectBub-${index}`}>
                   {customBubble ? null : (
                     <AnimatedRect
                       x={
-                        getX(item.indexUsedInDevForDataSet ?? index) -
+                        getX(item.indexUsedInDevForDataSet ?? index, index) -
                         bubblesWidth / 2
                       }
                       y={getYOrSecondaryY(item.y) - bubblesHeight / 2}
@@ -694,10 +703,10 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                   )}
                 </Fragment>
               ) : (
-                <Fragment key={index}>
+                <Fragment key={`bubble-${index}`}>
                   {customBubble ? null : (
                     <AnimatedCircle
-                      cx={getX(item.indexUsedInDevForDataSet ?? index)} // <-- here
+                      cx={getX(item.indexUsedInDevForDataSet ?? index, index)} // <-- here
                       cy={getYOrSecondaryY(item.y)}
                       r={isAnimated ? growingRadii[index] : bubblesRadius}
                       fill={
@@ -753,7 +762,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                       height={svgHeight}
                       width={totalWidth}
                       x={
-                        getX(item.indexUsedInDevForDataSet ?? index) -
+                        getX(item.indexUsedInDevForDataSet ?? index, index) -
                         labelWidth / 2 +
                         6 +
                         (item.labelShiftX || props.labelShiftX || 0)
@@ -778,7 +787,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                         height: svgHeight,
                         width: labelWidth,
                         left:
-                          getX(item.indexUsedInDevForDataSet ?? index) -
+                          getX(item.indexUsedInDevForDataSet ?? index, index) -
                           defaultFontSize / 2 +
                           (item.labelShiftX || props.labelShiftX || 0),
                         top:
@@ -804,7 +813,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                       height={svgHeight}
                       width={totalWidth}
                       x={
-                        getX(item.indexUsedInDevForDataSet ?? index) -
+                        getX(item.indexUsedInDevForDataSet ?? index, index) -
                         (formattedTextLabel.length * fontSize) / 4 +
                         (item.labelShiftX || props.labelShiftX || 0)
                       }
@@ -828,7 +837,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                         ...textStyle,
                         position: 'absolute',
                         left:
-                          getX(item.indexUsedInDevForDataSet ?? index) -
+                          getX(item.indexUsedInDevForDataSet ?? index, index) -
                           (formattedTextLabel.length * fontSize) / 4 +
                           (item.labelShiftX || props.labelShiftX || 0),
                         top:
@@ -856,7 +865,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
   };
   const svgWrapperViewStyle = {
     position: 'absolute',
-    top: 0, // 281 + xAxisLabelsVerticalShift + labelsExtraHeight - xAxisThickness,
+    top: xAxisLabelsVerticalShift, // 281 + xAxisLabelsVerticalShift + labelsExtraHeight - xAxisThickness,
     left: 0,
     zIndex: 1,
     transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
@@ -879,47 +888,54 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
           onPress={props.onBackgroundPress}>
           {showGradient && (
             <Defs>
-              {data?.map((item, index) => (
-                <RadialGradient
-                  key={index}
-                  id={`radial${index}`}
-                  cx="50%"
-                  cy="50%"
-                  r="50%">
-                  <Stop
-                    offset="0%"
-                    stopColor={
-                      item.centerColorForGradient ?? centerColorForGradient
-                    }
-                  />
-                  <Stop
-                    offset="100%"
-                    stopColor={
-                      item.bubbleColor ||
-                      bubblesColor ||
-                      defaultBubbleColors[index % defaultBubbleColors.length]
-                    }
-                  />
-                </RadialGradient>
-              ))}
+              {data?.map((item, index) => {
+                const gradientKey = `radial-gradient-${
+                  item.indexUsedInDevForDataSet ?? ''
+                }-${item.label ?? ''}-${index}`;
+                return (
+                  <RadialGradient
+                    key={gradientKey}
+                    id={`radial${index}`}
+                    cx="50%"
+                    cy="50%"
+                    r="50%">
+                    <Stop
+                      offset="0%"
+                      stopColor={
+                        item.centerColorForGradient ?? centerColorForGradient
+                      }
+                    />
+                    <Stop
+                      offset="100%"
+                      stopColor={
+                        item.bubbleColor ||
+                        bubblesColor ||
+                        defaultBubbleColors[index % defaultBubbleColors.length]
+                      }
+                    />
+                  </RadialGradient>
+                );
+              })}
             </Defs>
           )}
-          {renderBubbles(
-            hideBubbles,
-            data,
-            data,
-            bubblesShape,
-            bubblesWidth,
-            bubblesHeight,
-            bubblesColor,
-            bubblesRadius,
-            labelFontSize,
-            startIndex,
-            endIndex,
-            false,
-            showValuesAsBubbleLabels,
-            0,
-          )}
+          {!regressionLinesBehindBubbles
+            ? renderBubbles(
+                hideBubbles,
+                data,
+                data,
+                bubblesShape,
+                bubblesWidth,
+                bubblesHeight,
+                bubblesColor,
+                bubblesRadius,
+                labelFontSize,
+                startIndex,
+                endIndex,
+                false,
+                showValuesAsBubbleLabels,
+                0,
+              )
+            : null}
           {regressionLineConfigs.length ? (
             regressionLineConfigs.map((config, index) => {
               const {
@@ -971,10 +987,29 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
               strokeDasharray={regressionLineConfig.strokeDashArray}
             />
           ) : null}
+          {regressionLinesBehindBubbles
+            ? renderBubbles(
+                hideBubbles,
+                data,
+                data,
+                bubblesShape,
+                bubblesWidth,
+                bubblesHeight,
+                bubblesColor,
+                bubblesRadius,
+                labelFontSize,
+                startIndex,
+                endIndex,
+                false,
+                showValuesAsBubbleLabels,
+                0,
+              )
+            : null}
         </Svg>
         {xAxisLabelTexts?.map((label: string, index: number) => {
+          const labelKey = `${label}-${index}`;
           return (
-            <View key={index}>
+            <View key={labelKey}>
               {isAnimated
                 ? renderAnimatedLabel(false, index, label)
                 : renderLabel(false, index, label)}

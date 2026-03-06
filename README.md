@@ -20,7 +20,7 @@
     <img src="/demos/redditLogo.png" height="auto" width="32" height="32" />
   </a>
 </p>
-The most loved library for Bar, Line, Area, Pie, Donut, Stacked Bar, Population Pyramid, Radar and Bubble charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
+The most loved library for Bar, Line, Area, Pie, Donut, Stacked Bar, Population Pyramid, Radar, Bubble and Scatter charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
 
 ### Yet another chart library? Why?
 
@@ -44,24 +44,24 @@ The exact same piece of code that you write to render charts in react-native, ca
 
 See the **[release changes by version here.](release-notes/release-notes.md)**
 
-<img src='/demos/bars.png' alt=''/>
-<img src='/demos/lineArea.png' alt=''/>
-<img src='/demos/blues.png' alt=''/>
+<img src='/demos/bars.png' alt='Bar Chart'/>
+<img src='/demos/lineArea.png' alt='Line and Area Chart'/>
+<img src='/demos/blues.png' alt='Bar and Pie Chart'/>
 <table>
   <tr>
-    <td><img src='/demos/scrollLine.gif' alt='' width=320 height=280/></td>
-    <td><img src='/demos/animatedDataLine.gif' alt='' width=320 height=260/></td>
+    <td><img src='/demos/scrollLine.gif' alt='Area Chart with Pointer' width=320 height=280/></td>
+    <td><img src='/demos/animatedDataLine.gif' alt='Area Chart with Changing Data' width=320 height=260/></td>
   </tr>
   
   <tr>
-    <td><img src='/demos/crossHair.gif' alt='' height=280 /></td>
-    <td><img src='/demos/movingBars.gif' alt='' width=270 height=300/></td>
+    <td><img src='/demos/crossHair.gif' alt='Area Chart with Crosshair' height=280 /></td>
+    <td><img src='/demos/bubble.png' alt='Bubble Chart' height=280/></td>
   <tr>
-    <td><img src='/demos/radar.png' alt='' height=280 width=320/></td>
-    <td><img src='/demos/ppnLabelled.png' alt='' height=280 width=300/></td>
+    <td><img src='/demos/radar.png' alt='Radar Chart' height=280 width=320/></td>
+    <td><img src='/demos/ppnLabelled.png' alt='Population Pyramid Chart' height=280 width=300/></td>
   </tr>
 </table>
-<img src='/demos/pieExt.png' alt='' height=280 />
+<img src='/demos/pieExt.png' alt='Donut Chart with External Labels' height=280 />
 
 ---
 
@@ -120,6 +120,16 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 // For Donut chart, just add the prop donut to the <PieChart/> component
 
 <PieChart data = {data} donut />
+
+// For Scatter chart, just add the prop scatterChart to the <PieChart/> component
+
+<BubbleChart
+  data = {[
+    {x: 20, y: 4, r: 10},
+    {x: 40, y: 6, r: 20},
+  ]}
+  scatterChart
+/>
 ```
 
 ## Props tables
