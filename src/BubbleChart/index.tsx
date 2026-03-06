@@ -388,7 +388,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
               ? containerHeight +
                 60 +
                 (secondaryXAxis?.labelsDistanceFromXaxis ?? 15)
-              : -xAxisTextNumberOfLines * 18 - (containerHeight - 200) / 20,
+              : -xAxisTextNumberOfLines * 18 - (containerHeight - 200) / 20 - 4,
             zIndex: 10,
             width: spacing + labelsExtraHeight,
             left,
@@ -424,7 +424,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                 (secondaryXAxis?.labelsDistanceFromXaxis ?? 15)
               : rotateLabel
                 ? 10
-                : -xAxisTextNumberOfLines * 18,
+                : -xAxisTextNumberOfLines * 18 - 4,
             zIndex: 10,
             width: spacing + labelsExtraHeight,
             left,
@@ -837,7 +837,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                         ...textStyle,
                         position: 'absolute',
                         left:
-                          getX(item.indexUsedInDevForDataSet ?? index) -
+                          getX(item.indexUsedInDevForDataSet ?? index, index) -
                           (formattedTextLabel.length * fontSize) / 4 +
                           (item.labelShiftX || props.labelShiftX || 0),
                         top:

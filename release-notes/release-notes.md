@@ -3,9 +3,18 @@
 Further improvements in Bubble Charts-
 
 1. Added the prop `regressionLinesBehindBubbles` to Bubbles charts. When set to true, the regression line will appear behind the Bubbles.
-2. Added the properties `seriesBubblesColor` and `seriesBubblesBorderColor` to dataSet in Bubble charts.
-3. Inside `regressionLineConfig`, adjusted `x1, y1` and `x2, y2` to correspond to actual data values. Earliear they were pixel values.
-4. Auto-compute x-Axis spacing based on chart width.
+2. Added the props `minX` and `xAxisOffset`. <br />
+`minX` is Used to define the minimum possible X-value. `xAxisOffset` is used to set the X-value at origin (left-most x-value).
+
+```js
+const initialX =
+  props.xAxisOffset ??
+  Math.max(props.minX ?? -Infinity, leftMostReachingBubblesX);
+```
+
+3. Added the properties `seriesBubblesColor` and `seriesBubblesBorderColor` to dataSet in Bubble charts.
+4. Inside `regressionLineConfig`, adjusted `x1, y1` and `x2, y2` to correspond to actual data values. Earliear they were pixel values.
+5. Auto-compute x-Axis spacing based on chart width.
 
 ---
 

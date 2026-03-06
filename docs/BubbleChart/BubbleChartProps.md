@@ -344,6 +344,8 @@ This allows you to either:
 | secondaryXAxis                 | XAxisConfig               | Configuration of a secondary X‑axis (typically at the top).                                   | values of primary X‑axis     |
 | formatYLabel                   | (label: string) => string | Callback that receives and returns a formatted Y axis label.                                  | \_                           |
 | formatXLabel                   | (label: string) => string | Callback that receives and returns a formatted X axis label.                                  | \_                           |
+| minX                           | number                    | Used to define the minimum possible X-value.                                                  | -Infinity                    |
+| xAxisOffset                    | number                    | The X-value at origin. In other words, the left-most X-value                                  | \_                           |
 | autoRoundLabels                | boolean                   | automatically round off the Axes' labels to the nearest multiple of 5                         | false                        |
 | autoRoundLabelsY               | boolean                   | automatically round off the Y-Axis' labels to the nearest multiple of 5                       | autoRoundLabels ?? false     |
 | autoRoundLabelsX               | boolean                   | automatically round off the X-Axis' labels to the nearest multiple of 5                       | autoRoundLabels ?? false     |
@@ -352,6 +354,14 @@ This allows you to either:
 <br/>
 
 **Note** The props `autoRoundLabels`, `autoRoundLabelsY` and `autoRoundLabelsX` are not working properly as of now, but included here as they may be corrected in future.
+
+#### initialX calculation (left-most X)
+
+```js
+const initialX =
+  props.xAxisOffset ??
+  Math.max(props.minX ?? -Infinity, leftMostReachingBubblesX);
+```
 
 ---
 
@@ -454,7 +464,6 @@ type RegressionLineConfig = {
   x2?: number;
   y1?: number;
   y2?: number;
-
 };
 ```
 
