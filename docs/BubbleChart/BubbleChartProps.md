@@ -30,7 +30,6 @@ Document might be inaccurate. Expect fast revisions/changes.
 | xNoOfSections          | number                  | Number of sections in the X axis.                                                                                        | \_                          |
 | maxX                   | number                  | Maximum X value shown on the X axis.                                                                                     | \_                          |
 | mostNegativeX          | number                  | Most negative X value shown on the X axis (when your data has negative values).                                          | \_                          |
-| xStepHeight            | number                  | Height (in px) of one section of the X axis.                                                                             | \_                          |
 | xStepValue             | number                  | Value represented by a single section of the X axis.                                                                     | \_                          |
 | showFractionalXAxis    | boolean                 | When true, allows fractional values on the X axis.                                                                       | false                       |
 | xRoundToDigits         | number                  | Number of decimal digits to which X axis values are rounded.                                                             | 1                           |
@@ -164,8 +163,6 @@ interface bubbleDataItem {
   verticalLineColor?: ColorValue;
   verticalLineThickness?: number;
   verticalLineStrokeDashArray?: number[];
-  verticalLineShift?: number;
-  verticalLineZIndex?: number;
   verticalLineSpacing?: number;
   verticalLineStrokeLinecap?: Linecap;
   pointerShiftX?: number;
@@ -192,8 +189,8 @@ interface DataSetForBubbleChart {
   data: bubbleDataItem[];
   showRegressionLine?: boolean;
   regressionLineConfig?: RegressionLineConfig;
-  bubblesColor?: ColorValue;
-  borderColor?: ColorValue;
+  seriesBubblesColor?: ColorValue;
+  seriesBubblesBorderColor?: ColorValue;
 }
 ```
 
@@ -437,10 +434,11 @@ const defaultBubbleColors = [
 
 ### Regression line props
 
-| Prop                 | Type                 | Description                                                                                | Default value |
-| -------------------- | -------------------- | ------------------------------------------------------------------------------------------ | ------------- |
-| showRegressionLine   | boolean              | Shows a regression line calculated from the bubbles using weighted regression.             | false         |
-| regressionLineConfig | RegressionLineConfig | Configuration object for the regression line (color, opacity, thickness, strokeDashArray). | \_            |
+| Prop                         | Type                 | Description                                                                                | Default value |
+| ---------------------------- | -------------------- | ------------------------------------------------------------------------------------------ | ------------- |
+| showRegressionLine           | boolean              | Shows a regression line calculated from the bubbles using weighted regression.             | false         |
+| regressionLineConfig         | RegressionLineConfig | Configuration object for the regression line (color, opacity, thickness, strokeDashArray). | \_            |
+| regressionLinesBehindBubbles | boolean              | When set to true, the regression line will appear behind the Bubbles                       | \_            |
 
 **RegressionLineConfig** has the following properties:
 
@@ -452,6 +450,11 @@ type RegressionLineConfig = {
   strokeDashArray?: number[];
   isAnimated?: boolean;
   animationDuration?: number;
+  x1?: number;
+  x2?: number;
+  y1?: number;
+  y2?: number;
+
 };
 ```
 

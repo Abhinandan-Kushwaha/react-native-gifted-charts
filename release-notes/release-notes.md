@@ -1,3 +1,18 @@
+### 🎉 1.4.76
+
+Further improvements in Bubble Charts-
+
+1. Added the prop `regressionLinesBehindBubbles` to Bubbles charts. When set to true, the regression line will appear behind the Bubbles.
+2. Added the properties `seriesBubblesColor` and `seriesBubblesBorderColor` to dataSet in Bubble charts.
+3. Inside `regressionLineConfig`, adjusted `x1, y1` and `x2, y2` to correspond to actual data values. Earliear they were pixel values.
+4. Auto-compute x-Axis spacing based on chart width.
+
+---
+
+---
+
+---
+
 ### 🎉 1.4.75
 
 Further improvements in Bubble Charts-
@@ -9,8 +24,8 @@ interface DataSetForBubbleChart {
   data: bubbleDataItem[];
   showRegressionLine?: boolean;
   regressionLineConfig?: RegressionLineConfig;
-  bubblesColor?: ColorValue;
-  borderColor?: ColorValue;
+  seriesBubblesColor?: ColorValue;
+  seriesBubblesBorderColor?: ColorValue;
 }
 ```
 
@@ -21,7 +36,6 @@ interface DataSetForBubbleChart {
 4. Fixed the issue- "left most bubble cutting off"
 
 5. Centered the bubble labels
-
 
 ---
 

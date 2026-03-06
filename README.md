@@ -20,7 +20,7 @@
     <img src="/demos/redditLogo.png" height="auto" width="32" height="32" />
   </a>
 </p>
-The most loved library for Bar, Line, Area, Pie, Donut, Stacked Bar, Population Pyramid, Radar and Bubble charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
+The most loved library for Bar, Line, Area, Pie, Donut, Stacked Bar, Population Pyramid, Radar, Bubble and Scatter charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
 
 ### Yet another chart library? Why?
 
@@ -55,7 +55,7 @@ See the **[release changes by version here.](release-notes/release-notes.md)**
   
   <tr>
     <td><img src='/demos/crossHair.gif' alt='' height=280 /></td>
-    <td><img src='/demos/movingBars.gif' alt='' width=270 height=300/></td>
+    <td><img src='/demos/bubble.png' alt='' width=270 height=300/></td>
   <tr>
     <td><img src='/demos/radar.png' alt='' height=280 width=320/></td>
     <td><img src='/demos/ppnLabelled.png' alt='' height=280 width=300/></td>
@@ -120,6 +120,16 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 // For Donut chart, just add the prop donut to the <PieChart/> component
 
 <PieChart data = {data} donut />
+
+// For Scatter chart, just add the prop scatterChart to the <PieChart/> component
+
+<BubbleChart
+  data = {[
+    {x: 20, y: 4, r: 10},
+    {x: 40, y: 6, r: 20},
+  ]}
+  scatterChart
+/>
 ```
 
 ## Props tables
