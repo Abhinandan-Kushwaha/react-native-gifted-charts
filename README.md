@@ -44,24 +44,24 @@ The exact same piece of code that you write to render charts in react-native, ca
 
 See the **[release changes by version here.](release-notes/release-notes.md)**
 
-<img src='/demos/bars.png' alt=''/>
-<img src='/demos/lineArea.png' alt=''/>
-<img src='/demos/blues.png' alt=''/>
+<img src='/demos/bars.png' alt='Bar Chart'/>
+<img src='/demos/lineArea.png' alt='Line and Area Chart'/>
+<img src='/demos/blues.png' alt='Bar and Pie Chart'/>
 <table>
   <tr>
-    <td><img src='/demos/scrollLine.gif' alt='' width=320 height=280/></td>
-    <td><img src='/demos/animatedDataLine.gif' alt='' width=320 height=260/></td>
+    <td><img src='/demos/scrollLine.gif' alt='Area Chart with Pointer' width=320 height=280/></td>
+    <td><img src='/demos/animatedDataLine.gif' alt='Area Chart with Changing Data' width=320 height=260/></td>
   </tr>
   
   <tr>
-    <td><img src='/demos/crossHair.gif' alt='' height=280 /></td>
-    <td><img src='/demos/bubble.png' alt='' height=280/></td>
+    <td><img src='/demos/crossHair.gif' alt='Area Chart with Crosshair' height=280 /></td>
+    <td><img src='/demos/bubble.png' alt='Bubble Chart' height=280/></td>
   <tr>
-    <td><img src='/demos/radar.png' alt='' height=280 width=320/></td>
-    <td><img src='/demos/ppnLabelled.png' alt='' height=280 width=300/></td>
+    <td><img src='/demos/radar.png' alt='Radar Chart' height=280 width=320/></td>
+    <td><img src='/demos/ppnLabelled.png' alt='Population Pyramid Chart' height=280 width=300/></td>
   </tr>
 </table>
-<img src='/demos/pieExt.png' alt='' height=280 />
+<img src='/demos/pieExt.png' alt='Donut Chart with External Labels' height=280 />
 
 ---
 
