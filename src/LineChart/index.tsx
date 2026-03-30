@@ -1786,7 +1786,7 @@ export const LineChart = (props: LineChartPropsType) => {
     factor = Math.max(factor, 0);
     let item, y;
     item = (data0 ?? data)[factor];
-    if (!item.hidePointer) {
+    if (item && !item.hidePointer) {
       let z =
         getX(
           dataSet?.length ? cumulativeSpacingForSet[0] : cumulativeSpacing1,
