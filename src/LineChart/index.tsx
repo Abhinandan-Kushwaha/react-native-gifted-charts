@@ -734,9 +734,9 @@ export const LineChart = (props: LineChartPropsType) => {
               {key === lastLineNumber - 1 ? (
                 <Rect
                   x={initialSpacing + (spacing * index - spacing / 2)}
-                  y={8}
+                  y={0}
                   width={spacing}
-                  height={containerHeight - 0}
+                  height={containerHeightIncludingBelowXAxis}
                   fill={'none'}
                   onPressIn={evt => {
                     const locationY = evt.nativeEvent.locationY; // Note that we have another property named pageY which can be useful
