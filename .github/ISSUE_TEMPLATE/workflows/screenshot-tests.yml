@@ -1,0 +1,79 @@
+name: PR Screenshot Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  screenshot-tests:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout react-native-gifted-charts
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies (gifted-charts)
+        run: npm install
+
+      - name: Build react-native-gifted-charts
+        run: npm run build
+
+      - name: Pack local library
+        run: npm pack
+
+      - name: Checkout TestingCharts repo
+        uses: actions/checkout@v4
+        with:
+          repository: Abhinandan-Kushwaha/TestingCharts
+          path: TestingCharts
+
+      - name: Create branch from PR name
+        run: |
+          cd TestingCharts
+          BRANCH_NAME="${{ github.event.pull_request.title }}"
+          BRANCH_NAME=$(echo "$BRANCH_NAME" | tr ' ' '-' | tr -cd '[:alnum:]-_')
+          git fetch origin pre-merge
+          git checkout pre-merge
+          git pull origin pre-merge
+          git checkout -b "$BRANCH_NAME"
+          echo "Using branch: $BRANCH_NAME"
+
+      - name: Install generated package in TestingCharts
+        run: |
+          cd TestingCharts
+          npm install ../*.tgz
+
+      - name: Install dependencies (TestingCharts)
+        run: |
+          cd TestingCharts
+          npm install
+
+      - name: Build TestingCharts
+        run: |
+          cd TestingCharts
+          npm run build
+
+      - name: Run screenshot tests
+        run: |
+          cd TestingCharts
+          npm run ss-test
+
+      # Android emulator boot step
+      - name: Run Android app on emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          profile: pixel_6
+          script: |
+            cd TestingCharts
+            npm run android
