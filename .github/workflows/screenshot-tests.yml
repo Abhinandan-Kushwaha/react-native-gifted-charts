@@ -161,3 +161,11 @@ jobs:
           fi
           kill "$SS_TEST_PID" 2>/dev/null || true
           echo "Screenshot tests completed successfully"
+
+      - name: Upload screenshot test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ss-test-report
+          path: |
+            TestingCharts/ss-test/test.html
+            TestingCharts/ss-test/**/*.png
