@@ -20,6 +20,11 @@ jobs:
         with:
           node-version: 18
           cache: npm
+
+      - name: Setup Python for node-gyp
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       
       - name: Install dependencies (gifted-charts)
         run: rm -rf node_modules package-lock.json && npm install --legacy-peer-deps
@@ -54,17 +59,22 @@ jobs:
 
       - name: Install canvas system dependencies
         run: |
-          brew update
+          export HOMEBREW_NO_AUTO_UPDATE=1
           brew install pkg-config cairo pango libpng jpeg giflib librsvg pixman
 
       - name: Verify pkg-config
         run: |
+          export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig:/opt/homebrew/share/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig"
           pkg-config --libs pangocairo || true
           brew list
 
       - name: Install dependencies (TestingCharts)
         run: |
           cd TestingCharts
+          export PKG_CONFIG_PATH="/opt/homebrew/lib/pkgconfig:/opt/homebrew/share/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig"
+          export LDFLAGS="-L/opt/homebrew/lib -L/usr/local/lib"
+          export CPPFLAGS="-I/opt/homebrew/include -I/usr/local/include"
+          export npm_config_python="$(which python3)"
           npm install
 
       - name: Build TestingCharts
