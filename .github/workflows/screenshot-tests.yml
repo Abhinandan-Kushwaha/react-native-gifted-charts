@@ -83,6 +83,13 @@ jobs:
           echo "Using PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
           npm install
 
+      - name: Enable user namespaces for Puppeteer sandbox
+        run: |
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 || true
+          sudo sysctl -w kernel.unprivileged_userns_clone=1 || true
+          sysctl kernel.apparmor_restrict_unprivileged_userns || true
+          sysctl kernel.unprivileged_userns_clone || true
+
       - name: Run screenshot tests
         run: |
           cd TestingCharts
