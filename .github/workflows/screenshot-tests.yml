@@ -111,12 +111,6 @@ jobs:
           nohup npm run ss-test > /tmp/ss-test.log 2>&1 &
           echo "SS_TEST_PID=$!" >> "$GITHUB_ENV"
 
-      - name: Reset adb before emulator start
-        run: |
-          adb kill-server || true
-          adb start-server
-          adb devices
-
       # Android emulator boot step
       - name: Run Android app on emulator
         uses: reactivecircus/android-emulator-runner@v2
@@ -128,6 +122,8 @@ jobs:
           emulator-options: -no-snapshot -no-window -noaudio -no-boot-anim -gpu swiftshader_indirect -camera-back none -camera-front none
           emulator-boot-timeout: 1200
           script: |
+            adb kill-server || true
+            adb start-server
             adb devices
             adb reconnect offline || true
             adb wait-for-device
