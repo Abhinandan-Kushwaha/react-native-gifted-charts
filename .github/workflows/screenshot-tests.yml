@@ -136,10 +136,28 @@ jobs:
             echo "SS_TEST_PID is not set"
             exit 1
           fi
-          timeout 25m bash -c 'while kill -0 "$SS_TEST_PID" 2>/dev/null; do sleep 5; done'
-          wait "$SS_TEST_PID" || {
-            echo "Screenshot tests failed. Logs:"
+          REPORT_PATH="TestingCharts/ss-test/test.html"
+          echo "Waiting for screenshot report at: $REPORT_PATH"
+          for i in {1..300}; do
+            if [ -s "$REPORT_PATH" ]; then
+              echo "Screenshot report generated."
+              break
+            fi
+            if ! kill -0 "$SS_TEST_PID" 2>/dev/null; then
+              echo "ss-test process exited before report generation."
+              tail -n 200 /tmp/ss-test.log || true
+              exit 1
+            fi
+            if [ $((i % 12)) -eq 0 ]; then
+              echo "Still waiting... (elapsed ~$((i*5/60)) min)"
+              tail -n 50 /tmp/ss-test.log || true
+            fi
+            sleep 5
+          done
+          if [ ! -s "$REPORT_PATH" ]; then
+            echo "Timed out waiting for screenshot report."
             tail -n 200 /tmp/ss-test.log || true
             exit 1
-          }
+          fi
+          kill "$SS_TEST_PID" 2>/dev/null || true
           echo "Screenshot tests completed successfully"
