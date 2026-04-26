@@ -128,8 +128,7 @@ jobs:
             adb reconnect offline || true
             adb wait-for-device
             adb shell getprop sys.boot_completed
-            cd TestingCharts
-            npm run android -- --no-packager
+            cd TestingCharts && npm run android -- --no-packager
 
       - name: Wait for screenshot tests to complete
         run: |
