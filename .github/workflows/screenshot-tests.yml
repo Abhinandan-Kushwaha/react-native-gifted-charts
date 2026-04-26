@@ -83,11 +83,6 @@ jobs:
           echo "Using PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
           npm install
 
-      - name: Build TestingCharts
-        run: |
-          cd TestingCharts
-          npm run build
-
       - name: Run screenshot tests
         run: |
           cd TestingCharts
