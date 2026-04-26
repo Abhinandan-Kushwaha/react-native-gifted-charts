@@ -57,6 +57,11 @@ jobs:
           brew update
           brew install pkg-config cairo pango libpng jpeg giflib librsvg pixman
 
+      - name: Verify pkg-config
+        run: |
+          pkg-config --libs pangocairo || true
+          brew list
+
       - name: Install dependencies (TestingCharts)
         run: |
           cd TestingCharts
