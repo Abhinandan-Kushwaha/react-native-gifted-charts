@@ -9,7 +9,7 @@ on:
 
 jobs:
   screenshot-tests:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout react-native-gifted-charts
@@ -18,8 +18,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
           cache: npm
+
+      - name: Setup Python for node-gyp
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       
       - name: Install dependencies (gifted-charts)
         run: rm -rf node_modules package-lock.json && npm install --legacy-peer-deps
@@ -52,20 +57,59 @@ jobs:
           cd TestingCharts
           npm install ../*.tgz
 
+      - name: Install canvas system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            pkg-config \
+            libcairo2-dev \
+            libpango1.0-dev \
+            libjpeg-dev \
+            libpng-dev \
+            libgif-dev \
+            librsvg2-dev
+          echo "npm_config_python=$(which python3)" >> "$GITHUB_ENV"
+
+      - name: Verify pkg-config
+        run: |
+          pkg-config --modversion pango
+          pkg-config --modversion cairo
+          pkg-config --libs pangocairo
+
       - name: Install dependencies (TestingCharts)
         run: |
           cd TestingCharts
+          echo "Using PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
           npm install
 
-      - name: Build TestingCharts
+      - name: Enable user namespaces for Puppeteer sandbox
         run: |
-          cd TestingCharts
-          npm run build
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 || true
+          sudo sysctl -w kernel.unprivileged_userns_clone=1 || true
+          sysctl kernel.apparmor_restrict_unprivileged_userns || true
+          sysctl kernel.unprivileged_userns_clone || true
 
-      - name: Run screenshot tests
+      - name: Start TestingCharts web server (port 8081)
         run: |
           cd TestingCharts
-          npm run ss-test
+          nohup npm start -- --port 8081 > /tmp/testingcharts-web.log 2>&1 &
+          for i in {1..90}; do
+            if curl -fsS http://127.0.0.1:8081 > /dev/null; then
+              echo "TestingCharts web server is up on :8081"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "TestingCharts web server did not start in time"
+          cat /tmp/testingcharts-web.log || true
+          exit 1
+
+      - name: Start screenshot tests in background
+        run: |
+          cd TestingCharts
+          nohup npm run ss-test > /tmp/ss-test.log 2>&1 &
+          echo "SS_TEST_PID=$!" >> "$GITHUB_ENV"
 
       # Android emulator boot step
       - name: Run Android app on emulator
@@ -74,6 +118,54 @@ jobs:
           api-level: 34
           arch: x86_64
           profile: pixel_6
+          disable-animations: true
+          emulator-options: -no-snapshot -no-window -noaudio -no-boot-anim -gpu swiftshader_indirect -camera-back none -camera-front none
+          emulator-boot-timeout: 1200
           script: |
-            cd TestingCharts
-            npm run android
+            adb kill-server || true
+            adb start-server
+            adb devices
+            adb reconnect offline || true
+            adb wait-for-device
+            adb shell getprop sys.boot_completed
+            cd TestingCharts && npm run android -- --no-packager
+
+      - name: Wait for screenshot tests to complete
+        run: |
+          if [ -z "$SS_TEST_PID" ]; then
+            echo "SS_TEST_PID is not set"
+            exit 1
+          fi
+          REPORT_PATH="TestingCharts/ss-test/test.html"
+          echo "Waiting for screenshot report at: $REPORT_PATH"
+          for i in {1..300}; do
+            if [ -s "$REPORT_PATH" ]; then
+              echo "Screenshot report generated."
+              break
+            fi
+            if ! kill -0 "$SS_TEST_PID" 2>/dev/null; then
+              echo "ss-test process exited before report generation."
+              tail -n 200 /tmp/ss-test.log || true
+              exit 1
+            fi
+            if [ $((i % 12)) -eq 0 ]; then
+              echo "Still waiting... (elapsed ~$((i*5/60)) min)"
+              tail -n 50 /tmp/ss-test.log || true
+            fi
+            sleep 5
+          done
+          if [ ! -s "$REPORT_PATH" ]; then
+            echo "Timed out waiting for screenshot report."
+            tail -n 200 /tmp/ss-test.log || true
+            exit 1
+          fi
+          kill "$SS_TEST_PID" 2>/dev/null || true
+          echo "Screenshot tests completed successfully"
+
+      - name: Upload screenshot test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ss-test-report
+          path: |
+            TestingCharts/ss-test/test.html
+            TestingCharts/ss-test/**/*.png
