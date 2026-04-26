@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
           cache: npm
       
       - name: Install dependencies (gifted-charts)
@@ -51,6 +51,10 @@ jobs:
         run: |
           cd TestingCharts
           npm install ../*.tgz
+
+      - name: Install canvas system dependencies
+        run: |
+          brew install pkg-config cairo pango libpng jpeg giflib librsvg
 
       - name: Install dependencies (TestingCharts)
         run: |
