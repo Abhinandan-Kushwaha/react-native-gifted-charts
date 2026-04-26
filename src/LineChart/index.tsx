@@ -563,7 +563,7 @@ export const LineChart = (props: LineChartPropsType) => {
           rotateLabel && {transform: [{rotate: '60deg'}]},
         ]}>
         {labelComponent ? (
-          labelComponent()
+          labelComponent(label)
         ) : (
           <Text
             style={[{textAlign: 'center'}, labelTextStyle]}
@@ -606,7 +606,7 @@ export const LineChart = (props: LineChartPropsType) => {
           rotateLabel && {transform: [{rotate: '60deg'}]},
         ]}>
         {labelComponent ? (
-          labelComponent()
+          labelComponent(label)
         ) : (
           <Text
             allowFontScaling={allowFontScaling}
