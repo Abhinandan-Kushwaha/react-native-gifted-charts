@@ -90,6 +90,21 @@ jobs:
           sysctl kernel.apparmor_restrict_unprivileged_userns || true
           sysctl kernel.unprivileged_userns_clone || true
 
+      - name: Start TestingCharts web server (port 8081)
+        run: |
+          cd TestingCharts
+          nohup npm start -- --port 8081 > /tmp/testingcharts-web.log 2>&1 &
+          for i in {1..90}; do
+            if curl -fsS http://127.0.0.1:8081 > /dev/null; then
+              echo "TestingCharts web server is up on :8081"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "TestingCharts web server did not start in time"
+          cat /tmp/testingcharts-web.log || true
+          exit 1
+
       - name: Run screenshot tests
         run: |
           cd TestingCharts
