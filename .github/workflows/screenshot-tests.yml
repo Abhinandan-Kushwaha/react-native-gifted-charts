@@ -9,7 +9,7 @@ on:
 
 jobs:
   screenshot-tests:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout react-native-gifted-charts
@@ -59,20 +59,23 @@ jobs:
 
       - name: Install canvas system dependencies
         run: |
-          export HOMEBREW_NO_AUTO_UPDATE=1
-          brew install pkg-config cairo pango libpng jpeg giflib librsvg pixman
-          echo "PKG_CONFIG_PATH=/opt/homebrew/lib/pkgconfig:/opt/homebrew/share/pkgconfig:/opt/homebrew/opt/pango/lib/pkgconfig:/opt/homebrew/opt/cairo/lib/pkgconfig:/opt/homebrew/opt/libpng/lib/pkgconfig:/opt/homebrew/opt/jpeg/lib/pkgconfig:/opt/homebrew/opt/giflib/lib/pkgconfig:/opt/homebrew/opt/librsvg/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig" >> "$GITHUB_ENV"
-          echo "LDFLAGS=-L/opt/homebrew/lib -L/usr/local/lib" >> "$GITHUB_ENV"
-          echo "CPPFLAGS=-I/opt/homebrew/include -I/usr/local/include" >> "$GITHUB_ENV"
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            pkg-config \
+            libcairo2-dev \
+            libpango1.0-dev \
+            libjpeg-dev \
+            libpng-dev \
+            libgif-dev \
+            librsvg2-dev
           echo "npm_config_python=$(which python3)" >> "$GITHUB_ENV"
 
       - name: Verify pkg-config
         run: |
-          echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
           pkg-config --modversion pango
           pkg-config --modversion cairo
           pkg-config --libs pangocairo
-          brew list
 
       - name: Install dependencies (TestingCharts)
         run: |
