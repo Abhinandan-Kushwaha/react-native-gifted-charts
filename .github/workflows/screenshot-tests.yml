@@ -105,10 +105,11 @@ jobs:
           cat /tmp/testingcharts-web.log || true
           exit 1
 
-      - name: Run screenshot tests
+      - name: Start screenshot tests in background
         run: |
           cd TestingCharts
-          npm run ss-test
+          nohup npm run ss-test > /tmp/ss-test.log 2>&1 &
+          echo "SS_TEST_PID=$!" >> "$GITHUB_ENV"
 
       # Android emulator boot step
       - name: Run Android app on emulator
@@ -120,3 +121,17 @@ jobs:
           script: |
             cd TestingCharts
             npm run android
+
+      - name: Wait for screenshot tests to complete
+        run: |
+          if [ -z "$SS_TEST_PID" ]; then
+            echo "SS_TEST_PID is not set"
+            exit 1
+          fi
+          timeout 25m bash -c 'while kill -0 "$SS_TEST_PID" 2>/dev/null; do sleep 5; done'
+          wait "$SS_TEST_PID" || {
+            echo "Screenshot tests failed. Logs:"
+            tail -n 200 /tmp/ss-test.log || true
+            exit 1
+          }
+          echo "Screenshot tests completed successfully"
