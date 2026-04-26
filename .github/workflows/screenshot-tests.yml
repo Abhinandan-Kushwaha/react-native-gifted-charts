@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: 20
           cache: npm
+      
+      - name: Install dependencies (gifted-charts)
+        run: rm -rf node_modules package-lock.json && npm install --legacy-peer-deps
 
       - name: Build react-native-gifted-charts
         run: npm run build
