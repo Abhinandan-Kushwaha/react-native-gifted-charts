@@ -30,6 +30,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     yAxisOffset,
     highlightEnabled,
     lowlightOpacity,
+    disableForeignObject,
   } = props;
 
   const firstBarWidth = data[0].barWidth ?? barWidth;
@@ -57,6 +58,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     opacity,
     svgHeight,
     totalWidth,
+    disableForeignObject,
   };
 
   const specificVerticalLinesProps = {
@@ -80,6 +82,7 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     containerHeight,
     maxValue,
     yAxisOffset,
+    disableForeignObject,
   };
 
   const renderAnimatedLine = () => {

@@ -1,10 +1,22 @@
+## 🎉 1.4.77
+
+1. Added the prop `disableForeignObject` to Bar, Line and Bubble charts to disable using <ForeignObject> while rendering native component in SVG. This fixes https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1100
+2. Fixed the issue "CustomDatapoint of LineData not rendered Properly in BarChart". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1227
+3. Added unique key to <AnimatedLine> in `renderChartContent` function of Bubble chart to fix the unique key warning.
+
+---
+
+---
+
+---
+
 ### 🎉 1.4.76
 
 Further improvements in Bubble Charts-
 
 1. Added the prop `regressionLinesBehindBubbles` to Bubbles charts. When set to true, the regression line will appear behind the Bubbles.
 2. Added the props `minX` and `xAxisOffset`. <br />
-`minX` is Used to define the minimum possible X-value. `xAxisOffset` is used to set the X-value at origin (left-most x-value).
+   `minX` is Used to define the minimum possible X-value. `xAxisOffset` is used to set the X-value at origin (left-most x-value).
 
 ```js
 const initialX =

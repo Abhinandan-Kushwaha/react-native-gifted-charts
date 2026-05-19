@@ -58,6 +58,7 @@
 | edgePosition                       | EdgePosition              | Used only for stepCharts to specify the edge positions of the steps                                                                                  | EdgePosition.AFTER_DATA_POINT |
 | onlyPositive                       | boolean                   | when this prop is truthy, it converts negative values to 0                                                                                           | false                         |
 | onBackgroundPress                  | Function                  | Callback function called on pressing the chart body (outside of the are under chart in case of area charts)                                          | \_                            |
+| disableForeignObject               | boolean                   | prop to disable using <ForeignObject> while rendering native component in SVG.                                                                       | false                         |
 
 **Note (onScrollEndDrag) :** the `direction` can be `-1`(indicating scroll end to left hand side) or `1`(indicating scrol end to right hand side). You can customise the `endReachedOffset` to determine the offset from "end"
 **Note 2** `animateTogether` whose default value is _false_ is overrided to _true_ if the `colors` prop is used.
@@ -555,6 +556,7 @@ lineGradientComponent={()=>{
   );
 }}
 ```
+
 <img src="https://user-images.githubusercontent.com/20596944/279773819-7dcc9cc7-2948-4eae-b391-beeeeaa20c05.png" height=200 alt="gradient" />
 
 **Note**
@@ -574,6 +576,7 @@ type LineSegment = {
   strokeDashArray?: Array<number>;
 };
 ```
+
 <img src="https://private-user-images.githubusercontent.com/20596944/284423459-b09d2da1-21ff-4370-8546-c29671f8208a.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjM4ODI4NTEsIm5iZiI6MTc2Mzg4MjU1MSwicGF0aCI6Ii8yMDU5Njk0NC8yODQ0MjM0NTktYjA5ZDJkYTEtMjFmZi00MzcwLTg1NDYtYzI5NjcxZjgyMDhhLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTExMjMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUxMTIzVDA3MjIzMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWFhNmU4MzVlODRjMzAwNTFkZTg5ZDc5OGVjNDY4MzJkOWM2NDE1ZDc2N2VkYzgzYzliYzljNTgzOWRkZjI5ZjkmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.wYIRLPSavW0hgubCN7SdU5xTk_tjg0HSdeN4aAPzq2g" height=200 alt="segment" />
 
 ---

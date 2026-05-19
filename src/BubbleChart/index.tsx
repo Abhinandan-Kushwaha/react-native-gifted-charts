@@ -109,6 +109,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
     extraWidthDueToBubble,
     showGradient,
     centerColorForGradient,
+    disableForeignObject,
   } = useBubbleChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -629,7 +630,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
           {hideBubbles ? null : (
             <>
               {customBubble ? (
-                isWebApp ? (
+                isWebApp && !disableForeignObject ? (
                   <ForeignObject
                     height={svgHeight}
                     width={totalWidth}
@@ -757,7 +758,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
               )}
               {labelComponent ? (
                 !showTextOnFocus || index === selectedIndex ? (
-                  isWebApp ? (
+                  isWebApp && !disableForeignObject ? (
                     <ForeignObject
                       height={svgHeight}
                       width={totalWidth}
@@ -808,7 +809,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
                 ) : null
               ) : formattedTextLabel ? (
                 !showTextOnFocus || index === selectedIndex ? (
-                  isWebApp ? (
+                  isWebApp && !disableForeignObject ? (
                     <ForeignObject
                       height={svgHeight}
                       width={totalWidth}
@@ -948,6 +949,7 @@ export const BubbleChart = (props: BubbleChartPropsType) => {
               const animatedY = animatedRegressionLineYValues[index];
               return (
                 <AnimatedLine
+                  key={`regression-line-${index}`}
                   x1={regressionLineX1}
                   y1={regressionLineY1}
                   x2={

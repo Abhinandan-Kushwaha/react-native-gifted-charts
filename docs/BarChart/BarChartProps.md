@@ -63,6 +63,7 @@
 | lowlightOpacity              | number                    | the opacity of the un-highlighted bars when one of them is highlighted                                                                            | 0.3                 |
 | highlightedBarIndex          | number \| number[]        | the index(or indices) of the highlighted bar(s)                                                                                                   | -1                  |
 | onBackgroundPress            | Function                  | Callback function called on pressing the chart body (outside of the bars). Helps ufocus/unselect after focusing/selecting a Bar                   | \_                  |
+| disableForeignObject         | boolean                   | prop to disable using <ForeignObject> while rendering native component in SVG.                                                                    | false               |
 
 **Note:** `onBackgroundPress` will not work if pointer feature is used in the chart (using the `pointerConfig` prop.)
 

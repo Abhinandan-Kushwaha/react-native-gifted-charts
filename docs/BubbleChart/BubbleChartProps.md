@@ -1,7 +1,5 @@
 # Bubble Chart props
 
-## \[WIP\] Development of Bubble chart is in progress.
-
 Document might be inaccurate. Expect fast revisions/changes.
 
 **Note:** The props of Bubble chart are similar to those of Line chart. The `r` in the data array is analagous to `bubbleRadius` in the Line chart.
@@ -45,8 +43,9 @@ Document might be inaccurate. Expect fast revisions/changes.
 | scatterChart           | boolean                 | Scatter chart is similar to bubble chart, it just positions the bubble labels above the data point, instead of inside it | false                       |
 | showGradient           | boolean                 | To show gradient effect in bubbles                                                                                       | scatterChart ? false : true |
 | centerColorForGradient | ColorValue              | Color at the center of the bubbles when showGradient is true                                                             | 'white'                     |
+| disableForeignObject   | boolean                 | prop to disable using <ForeignObject> while rendering native component in SVG.                                           | false                       |
 
-**Note** Gradient colors can be set using the `⁨centerColorForGradient`⁩ and the regular ⁨`bubblesColor`⁩ props. Also these values can be set inside data array for individual items.
+**Note** Gradient colors can be set using the `centerColorForGradient` and the regular `bubblesColor` props. Also these values can be set inside data array for individual items.
 
 ---
 

@@ -21,11 +21,11 @@ export const renderDataPoints = (props: DataPointProps) => {
     firstBarWidth,
     yAxisLabelWidth,
     spacing,
-    selectedIndex,
     yAxisOffset,
     opacity,
     svgHeight,
     totalWidth,
+    disableForeignObject,
   } = props;
 
   const {
@@ -91,7 +91,7 @@ export const renderDataPoints = (props: DataPointProps) => {
                   width: lineConfig.dataPointsWidth,
                   top:
                     containerHeight -
-                    (value * containerHeight) / maxValue -
+                    ((value - yAxisOffset) * containerHeight) / maxValue -
                     (item.shiftY ?? lineConfig.shiftY ?? 0),
                   left: getXForLineInBar(
                     index,
@@ -202,7 +202,7 @@ export const renderDataPoints = (props: DataPointProps) => {
               yAxisOffset,
             );
 
-            if (isWebApp)
+            if (isWebApp && !disableForeignObject)
               return (
                 <ForeignObject
                   height={svgHeight}
