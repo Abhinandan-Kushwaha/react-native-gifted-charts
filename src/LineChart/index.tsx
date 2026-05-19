@@ -341,10 +341,10 @@ export const LineChart = (props: LineChartPropsType) => {
     selectedLineNumber,
     handleFocus,
     handleUnFocus,
-    stepValue,
     pointerItemLocal,
     allowFontScaling,
     colors,
+    disableForeignObject,
   } = useLineChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -628,8 +628,6 @@ export const LineChart = (props: LineChartPropsType) => {
     }
   };
 
-  // const [selectedLineNumber, setSelectedLineNumber] = useState(-1);
-
   const renderDataPoints = (
     hideDataPoints: any,
     dataForRender: any,
@@ -745,38 +743,13 @@ export const LineChart = (props: LineChartPropsType) => {
                   onPressOut={handleUnFocus}
                 />
               ) : null}
-              {/* {unFocusOnPressOut ? ( // remove strip on onFocus
-                <Rect
-                  onPressIn={(evt) => {
-                    const locationY = evt.nativeEvent.locationY
-                    onStripPress(item, index)
-                  }}
-                  onPressOut={() =>
-                    setTimeout(() => setSelectedIndex(-1), delayBeforeUnFocus)
-                  }
-                  x={initialSpacing + (spacing * index - spacing / 2)}
-                  y={8}
-                  width={spacing}
-                  height={containerHeight - 0}
-                  fill={'none'}
-                />
-              ) : (
-                <Rect
-                  onPress={() => onStripPress(item, index)}
-                  x={initialSpacing + (spacing * index - spacing / 2)}
-                  y={8}
-                  width={spacing}
-                  height={containerHeight}
-                  fill={'none'}
-                />
-              )} */}
             </>
           ) : null}
           {/* {renderStrips(item, index, key)} // handled with strips coming from geifted-charts-core */}
           {hideDataPoints ? null : (
             <>
               {customDataPoint ? (
-                isWebApp ? (
+                isWebApp && !disableForeignObject ? (
                   <ForeignObject
                     height={svgHeight}
                     width={totalWidth}
@@ -871,7 +844,7 @@ export const LineChart = (props: LineChartPropsType) => {
               )}
               {dataPointLabelComponent ? (
                 !showTextOnFocus || index === selectedIndex ? (
-                  isWebApp ? (
+                  isWebApp && !disableForeignObject ? (
                     <ForeignObject
                       height={svgHeight}
                       width={dataPointLabelWidth}
