@@ -1,6 +1,6 @@
 ## 🎉 1.4.77
 
-1. Added the prop `disableForeignObject` to Bar, Line and Bubble charts to disable using <ForeignObject> while rendering native component in SVG. This fixes https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1100
+1. Added the prop `disableForeignObject` to Bar, Line and Bubble charts to disable using `<ForeignObject>` while rendering native component in SVG. This fixes https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1100
 2. Fixed the issue "CustomDatapoint of LineData not rendered Properly in BarChart". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1227
 3. Added unique key to <AnimatedLine> in `renderChartContent` function of Bubble chart to fix the unique key warning.
 
