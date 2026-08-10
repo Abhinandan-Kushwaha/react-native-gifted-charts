@@ -108,6 +108,10 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
   {x: 20, y: 4, r: 10},
   {x: 40, y: 6, r: 20},
 ]} />
+<CandleStickChart data = {[
+  {open: 82, close: 76, high: 90, low: 60},
+  {open: 50, close: 57, high: 71, low: 44},
+]} />
 
 // For Horizontal Bar chart, just add the prop horizontal to the <BarChart/> component
 
