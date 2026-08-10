@@ -50,7 +50,7 @@ See the **[release changes by version here.](release-notes/release-notes.md)**
 <table>
   <tr>
     <td><img src='/demos/scrollLine.gif' alt='Area Chart with Pointer' width=320 height=280/></td>
-    <td><img src='/demos/candle.png' alt='Candle Stick Chart' width=360 height=260/></td>
+    <td><img src='/demos/candle.png' alt='Candle Stick Chart' width=368 height=260/></td>
   </tr>
   
   <tr>
