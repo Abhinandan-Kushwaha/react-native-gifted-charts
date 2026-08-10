@@ -139,7 +139,7 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 **3. [PieChart and DonutChart props](docs/PieChart/PieChartProps.md)** \
 **4. [Population Pyramid props](docs/PopulationPyramid/PopulationPyramid.md)** \
 **5. [RadarChart props](docs/RadarChart/RadarChartProps.md)** \
-**6. [BubbleChart props](docs/BubbleChart/BubbleChartProps.md)**
+**6. [BubbleChart props](docs/BubbleChart/BubbleChartProps.md)** \
 **7. [CandleStickChart props](docs/CandleStickChart/CandleStickChartProps.md)**
 
 ## 🤝 Contributing
