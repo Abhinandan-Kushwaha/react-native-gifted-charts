@@ -52,6 +52,8 @@ const RenderBars = (props: RenderBarsPropsType) => {
     highlightEnabled,
     highlightedBarIndex,
     lowlightOpacity,
+    isCandleStickChart,
+    showValuesAsBottomLabel,
   } = props;
 
   const {heightFactor, barHeight, tooltipProps} = useRenderBars(props);
@@ -306,6 +308,8 @@ const RenderBars = (props: RenderBarsPropsType) => {
         barBorderColor={barBorderColor}
         commonStyleForBar={commonStyleForBar}
         barStyleWithBackground={barStyleWithBackground}
+        isCandleStickChart={isCandleStickChart}
+        showValuesAsBottomLabel={showValuesAsBottomLabel}
       />
     );
     return (

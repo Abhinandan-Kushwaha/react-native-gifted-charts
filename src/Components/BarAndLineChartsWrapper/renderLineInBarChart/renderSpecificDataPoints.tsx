@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import {Fragment} from 'react';
 import {getXForLineInBar, getYForLineInBar} from 'gifted-charts-core';
 import {Circle, Rect, Text as CanvasText} from 'react-native-svg';
 

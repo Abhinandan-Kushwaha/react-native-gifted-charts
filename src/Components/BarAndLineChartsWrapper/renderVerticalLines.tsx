@@ -1,4 +1,3 @@
-import React from 'react';
 import {View} from 'react-native';
 import {chartTypes} from 'gifted-charts-core';
 import {Line, Svg} from 'react-native-svg';
@@ -16,6 +15,7 @@ const RenderVerticalLines = (props: any) => {
     verticalLinesColor,
     verticalLinesStrokeDashArray,
     verticalLinesShift,
+    verticalLinesMarginBottom,
     verticalLinesUptoDataPoint,
     verticalLinesStrokeLinecap,
     xAxisThickness,
@@ -122,6 +122,13 @@ const RenderVerticalLines = (props: any) => {
               ? (item.verticalLineShift ?? verticalLinesShift)
               : verticalLinesShift;
 
+          const verticalLinesMarginBottomLocal =
+            chartType === chartTypes.BAR
+              ? (item.verticalLineMarginBottom ??
+                verticalLinesMarginBottom ??
+                0)
+              : (verticalLinesMarginBottom ?? 0);
+
           const x =
             verticalLinesShiftLocal +
             2 +
@@ -136,7 +143,8 @@ const RenderVerticalLines = (props: any) => {
               ? {
                   y2:
                     containerHeightIncludingBelowXAxis -
-                    heightAdjustmentDueToStrokeLinecap,
+                    heightAdjustmentDueToStrokeLinecap -
+                    verticalLinesMarginBottomLocal,
                   stroke:
                     (item.verticalLineColor ?? verticalLinesColor) ||
                     'lightgray',
@@ -153,7 +161,8 @@ const RenderVerticalLines = (props: any) => {
               : {
                   y2:
                     containerHeightIncludingBelowXAxis -
-                    heightAdjustmentDueToStrokeLinecap,
+                    heightAdjustmentDueToStrokeLinecap -
+                    verticalLinesMarginBottomLocal,
                   stroke: verticalLinesColor || 'lightgray',
                   strokeWidth: verticalLinesThickness || 2,
                   strokeDasharray: verticalLinesStrokeDashArray ?? '',
@@ -168,7 +177,8 @@ const RenderVerticalLines = (props: any) => {
               y1={
                 extendedContainerHeight -
                 getHeightOfVerticalLine(index) +
-                heightAdjustmentDueToStrokeLinecap
+                heightAdjustmentDueToStrokeLinecap -
+                verticalLinesMarginBottomLocal
               }
               x2={x}
             />
