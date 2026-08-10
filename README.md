@@ -20,7 +20,7 @@
     <img src="/demos/redditLogo.png" height="auto" width="32" height="32" />
   </a>
 </p>
-The most loved library for Bar, Line, Area, Pie, Donut, Stacked Bar, Population Pyramid, Radar, Bubble and Scatter charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
+The most loved library for Bar, Line, Area, Pie, Donut, Stacked Bar, Population Pyramid, Radar, Bubble, Scatter and Candle Stick charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.
 
 ### Yet another chart library? Why?
 
