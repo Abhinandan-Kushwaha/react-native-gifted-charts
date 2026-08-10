@@ -94,7 +94,7 @@ Please note that `react-native-svg` and `react-native-linear-gradient`/`expo-lin
 The simplest usage of various types of charts can be done as below-
 
 ```js
-import { BarChart, LineChart, PieChart, PopulationPyramid, RadarChart, BubbleChart } from "react-native-gifted-charts";
+import { BarChart, LineChart, PieChart, PopulationPyramid, RadarChart, BubbleChart, CandleStickChart } from "react-native-gifted-charts";
 
 // ...
 const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
