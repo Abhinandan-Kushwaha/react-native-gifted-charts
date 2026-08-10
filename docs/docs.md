@@ -7,3 +7,4 @@
 **[5. Population Pyramid props](PopulationPyramid/PopulationPyramid.md)** \
 **[6. RadarChart props](RadarChart/RadarChartProps.md)** \
 **[7. BubbleChart props](BubbleChart/BubbleChartProps.md)**
+**[7. CandleStickChart props](CandleStickChart/CandleStickChartProps.md)**
