@@ -20,7 +20,12 @@ import {Pointer} from '../Components/common/Pointer';
 import {screenWidth} from '../utils';
 import RenderLineInBarChart from '../Components/BarAndLineChartsWrapper/renderLineInBarChart';
 
-export const BarChart = (props: BarChartPropsType) => {
+interface BarChartPropsTypeWithIsCandle extends BarChartPropsType {
+  isCandleStickChart?: boolean;
+  showValuesAsBottomLabel?: boolean;
+}
+
+export const BarChart = (props: BarChartPropsTypeWithIsCandle) => {
   const heightValue = useMemo(() => new Animated.Value(0), []);
   const opacityValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
@@ -441,6 +446,8 @@ export const BarChart = (props: BarChartPropsType) => {
           capRadius={props.capRadius}
           autoShiftLabels={autoShiftLabels}
           barStyle={props.barStyle}
+          isCandleStickChart={props.isCandleStickChart}
+          showValuesAsBottomLabel={props.showValuesAsBottomLabel}
           {...getPropsCommonForBarAndStack(item, index)}
         />
       ));

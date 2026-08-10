@@ -1,3 +1,37 @@
+### 🎉 1.4.78
+
+### ✨ Features added-
+
+Added support for **Candle Stick Charts** <br/><br/>
+<img src='/demos/candle.png' alt='Candle Stick Chart' width=320 height=260/>
+
+Candle Stick chart can be rendered using `<CandleStickChart>` component. It supports all the props of Bar chart, and has a few additional props.
+The data format for Candle stick chart is `candleStickDataItem[]` where candleStickDataItem must have below mentioned mandatory properties-
+```ts
+interface candleStickDataItem {
+  open: number
+  close: number
+  high: number
+  low: number
+}
+```
+
+### 🐛 Bug fixes
+
+Fixed the issue- "Secondary Y-axis stacked bar segments are positioned using the primary Y-axis". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1236. <br />
+Thanks to [Yathavan](https://github.com/yathu) for his PR https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/117
+
+### 🔨 Refactor
+
+Removed unused `renderSpecificVerticalLines`
+
+---
+
+---
+
+---
+
+
 ## 🎉 1.4.77
 
 1. Added the prop `disableForeignObject` to Bar, Line and Bubble charts to disable using `<ForeignObject>` while rendering native component in SVG. This fixes https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1100

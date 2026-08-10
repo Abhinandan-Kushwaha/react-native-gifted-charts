@@ -6,10 +6,12 @@ export {LineChartBicolor} from './LineChart/LineChartBicolor';
 export {PopulationPyramid} from './PopulationPyramid';
 export {RadarChart} from './RadarChart';
 export {BubbleChart} from './BubbleChart';
+export {CandleStickChart} from './CandleStickChart';
 
 export {
   type barDataItem,
   type barDataItemNullSafe,
+  type candleStickDataItem,
   type stackDataItem,
   type BarChartPropsType,
   type StackedBarChartPropsType,
@@ -22,6 +24,7 @@ export {
   type LineChartBicolorPropsType,
   type popnPyramidDataItem,
   type PopulationPyramidPropsType,
+  type CandleStickChartPropsType,
   chartTypes,
   ruleTypes,
   CurveType,

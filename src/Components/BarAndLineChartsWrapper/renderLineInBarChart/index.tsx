@@ -1,7 +1,5 @@
-import React from 'react';
 import {View, Animated} from 'react-native';
 import Svg, {Path} from 'react-native-svg';
-import {renderSpecificVerticalLines} from './renderSpecificVerticalLines';
 import {renderDataPoints} from './renderDataPoints';
 import {renderSpecificDataPoints} from './renderSpecificDataPoints';
 import {LineInBarChartPropsType} from 'gifted-charts-core';
@@ -11,7 +9,6 @@ import {isIos, isWebApp} from '../../../utils';
 const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
   const {
     yAxisLabelWidth,
-    initialSpacing,
     spacing,
     containerHeight,
     lineConfig,
@@ -61,17 +58,6 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     disableForeignObject,
   };
 
-  const specificVerticalLinesProps = {
-    data,
-    barWidth,
-    yAxisLabelWidth,
-    initialSpacing,
-    spacing,
-    containerHeight,
-    lineConfig,
-    maxValue,
-  };
-
   const specificDataPointsProps = {
     data,
     barWidth,
@@ -111,8 +97,6 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
             strokeDasharray={lineConfig.strokeDashArray}
           />
 
-          {renderSpecificVerticalLines(specificVerticalLinesProps)}
-
           {!lineConfig.hideDataPoints
             ? renderDataPoints(dataPointsProps)
             : renderSpecificDataPoints(specificDataPointsProps)}
@@ -129,6 +113,8 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
     );
   };
 
+  const totalWidthWithEndSpacing = totalWidth + spacing;
+
   const renderLine = () => {
     return (
       <View
@@ -138,14 +124,14 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
           height: svgHeight,
           left: 6 - yAxisLabelWidth,
           bottom: -10 + xAxisLabelsVerticalShift, //stepHeight * -0.5 + xAxisThickness,
-          width: totalWidth,
+          width: totalWidthWithEndSpacing,
           zIndex: lineBehindBars ? -1 : 100000,
           // backgroundColor: 'rgba(200,150,150,0.1)'
         }}>
         <Svg
           pointerEvents={isIos ? 'none' : 'box-none'}
           height={svgHeightProp}
-          width={isWebApp ? totalWidth : undefined}>
+          width={isWebApp ? totalWidthWithEndSpacing : undefined}>
           <Path
             d={points}
             fill="none"
@@ -154,7 +140,6 @@ const RenderLineInBarChart = (props: LineInBarChartPropsType) => {
             strokeWidth={lineConfig.thickness}
             strokeDasharray={lineConfig.strokeDashArray}
           />
-          {renderSpecificVerticalLines(specificVerticalLinesProps)}
 
           {!lineConfig.hideDataPoints
             ? renderDataPoints(dataPointsProps)

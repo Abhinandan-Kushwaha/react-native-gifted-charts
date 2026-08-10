@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef} from 'react';
 import {View, Text, Animated} from 'react-native';
 import Svg, {Defs, Rect} from 'react-native-svg';
 import Cap from '../Components/BarSpecificComponents/cap';
@@ -21,14 +21,20 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
     intactTopLabel,
     showValuesAsTopLabel,
     topLabelContainerStyle,
+    bottomLabelContainerStyle,
     topLabelTextStyle,
+    bottomLabelTextStyle,
     commonStyleForBar,
     barStyleWithBackground,
     yAxisOffset,
     height,
+    barMarginBottom = 0,
+    isCandleStickChart,
+    showValuesAsBottomLabel,
   } = props;
   const barWidth = item.barWidth ?? bWidth; // setting width in state for animation purpose
   const topLabelPosition = (item.barWidth || barWidth || 30) * -1;
+  const bottomLabelPosition = height - barMarginBottom;
   const animatedHeight = useRef(new Animated.Value(0)).current; // initial height = 0
   const animatedLabelHeight = useRef(
     new Animated.Value(height + topLabelPosition),
@@ -37,7 +43,7 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
   const elevate = () => {
     Animated.parallel([
       Animated.timing(animatedHeight, {
-        toValue: height,
+        toValue: height - (isCandleStickChart ? barMarginBottom : 0),
         duration: animationDuration,
         useNativeDriver: false,
       }),
@@ -63,8 +69,10 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
             position: 'absolute',
             bottom: 0,
             width: barWidth,
-            overflow: 'hidden',
-            height: noAnimation ? height : animatedHeight,
+            overflow: isCandleStickChart ? 'visible' : 'hidden',
+            height: noAnimation
+              ? height - (isCandleStickChart ? barMarginBottom : 0)
+              : animatedHeight,
           },
           item.barStyle || barStyle,
         ]}>
@@ -160,6 +168,36 @@ const Animated2DWithGradient = (props: Animated2DWithGradientPropsType) => {
             <Text style={topLabelTextStyle}>{item.value + yAxisOffset}</Text>
           ) : (
             item.topLabelComponent?.()
+          )}
+        </Animated.View>
+      ) : null}
+      {isCandleStickChart &&
+      (item.bottomLabelComponent || showValuesAsBottomLabel) ? (
+        <Animated.View
+          style={[
+            {
+              position: 'absolute',
+              top: noAnimation ? bottomLabelPosition : animatedLabelHeight,
+              height: item.barWidth || barWidth || 30,
+              width: item.barWidth || barWidth || 30,
+              justifyContent:
+                (props.horizontal && !intactTopLabel) || item.value < 0
+                  ? 'center'
+                  : 'flex-end',
+              alignItems: 'center',
+              opacity: opacity,
+            },
+            item.value < 0 && {transform: [{rotate: '180deg'}]},
+            props.horizontal &&
+              !intactTopLabel && {transform: [{rotate: '270deg'}]},
+            bottomLabelContainerStyle ?? item.bottomLabelContainerStyle,
+          ]}>
+          {showValuesAsBottomLabel ? (
+            <Text style={bottomLabelTextStyle}>
+              {(item.lowerValue ?? 0) + yAxisOffset}
+            </Text>
+          ) : (
+            item.bottomLabelComponent?.()
           )}
         </Animated.View>
       ) : null}
