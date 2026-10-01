@@ -154,7 +154,8 @@ So, all the three must be used together. Using any 1 or 2 of them may produce ab
 
 | Key                            | Value type           | Description                                                                                                                          |
 | ------------------------------ | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| value                          | number               | Value of the item representing representing its position                                                                             |
+| value                          | number               | Value of the item representing representing its position along the y Axis                                                            |
+| x                              | number               | position of the data point along the x axis. Works only when each data point has a x value                                           |
 | onPress                        | function             | Function called on pressing the data point                                                                                           |
 | label                          | string               | Label text appearing under the X axis                                                                                                |
 | labelTextStyle                 | StyleProp<TextStyle> | Style object for the label text appearing under the X axis                                                                           |
@@ -296,7 +297,11 @@ When you are using the `dataPointLabelComponent`, make sure to provide the `data
 | secondaryXAxis                 | XAxisConfig                   | properties of the secondary X-axis (appearing at the top of the chart)                                            | values of the primary X-axis |
 | allowFontScaling               | boolean                       | to toggle fontScaling for X and Y-axis label texts                                                                | true                         |
 | floatingYAxisLabels            | boolean                       | to render the Y-axis labels above the chart content                                                               | false                        |
+| xOffset                        | number                        | Starting value on X axis (after initialSpacing)                                                                   | least x value                |
+| xScale                         | number                        | Scale factor for the X axis                                                                                       | xRange / width               |
+| alignVerticalLinesWithXValues  | boolean                       |
 
+**Note** The x values and the related props like `xOffset` and `xScale` work only when every data point has a x value. If x is missing in any data point, every point loses its x, and is positioned as per `spacing`.
 **Note** If you are setting yAxisSide to yAxisSide.RIGHT, make sure to specify the width of the chart, using the `width` prop
 
 ```ts

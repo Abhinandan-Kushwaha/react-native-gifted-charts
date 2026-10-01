@@ -18,7 +18,7 @@ import {
 import {screenWidth} from '../utils';
 
 export const LineChartBicolor = (props: LineChartBicolorPropsType) => {
-  const scrollRef = useRef();
+  const scrollRef = useRef(null);
   // const heightValue = useMemo(() => new Animated.Value(0), []);
   const widthValue = useMemo(() => new Animated.Value(0), []);
   const opacityValue = useMemo(() => new Animated.Value(0), []);
