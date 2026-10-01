@@ -1,3 +1,14 @@
+### 🎉 1.4.80
+
+More precise determination of the nearest data point while using pointers in Line charts. <br />
+This is a fix for Line charts with pointerConfig and data with user-defined x-values. <br />
+
+---
+
+---
+
+---
+
 ## 🎉 1.4.79
 
 ### ✨ Features added-

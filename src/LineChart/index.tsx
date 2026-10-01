@@ -351,6 +351,8 @@ export const LineChart = (props: LineChartPropsType) => {
     parentWidth: props.parentWidth ?? screenWidth,
   });
 
+  const {principalCumulativeSpacing} = barAndLineChartsWrapperProps;
+
   const svgHeight =
     containerHeightIncludingBelowXAxis +
     (props.overflowBottom ?? dataPointsRadius1);
@@ -1516,8 +1518,8 @@ export const LineChart = (props: LineChartPropsType) => {
           getClipRange(startIndex, endIndex, clipRangeId)}
         {isNthAreaChart ? (
           props.interpolateMissingValues === false &&
-            data.some(
-              (item: any) => isNaN(item.originalValue), // if we have a null/undefined value in data & interpolation is disabled, then don't render area
+          data.some(
+            (item: any) => isNaN(item.originalValue), // if we have a null/undefined value in data & interpolation is disabled, then don't render area
           ) ? null : animateOnDataChange && animatedFillPath ? (
             <AnimatedPath
               onPress={props.onChartAreaPress}
@@ -1766,7 +1768,24 @@ export const LineChart = (props: LineChartPropsType) => {
   };
 
   const activatePointers = (x: number) => {
-    let factor = (x - initialSpacing) / (props.spacing1 ?? spacing); // getClosestValueFromSpacingArray(cumulativeSpacing1,x-initialSpacing)
+    let factor = -1,
+      closestX = 0;
+    if (doAllPointsHaveX) {
+      let minDiff = Infinity,
+        minDiffIndex = -1;
+      principalCumulativeSpacing.forEach((space, index) => {
+        const actualX = space + initialSpacing; // this is derived from getX defined in gifted-charts-core
+        const diff = Math.abs(x - actualX);
+        if (diff < minDiff) {
+          minDiff = diff;
+          minDiffIndex = index;
+          closestX = actualX;
+        }
+      });
+      factor = minDiffIndex;
+    } else {
+      factor = (x - initialSpacing) / (props.spacing1 ?? spacing);
+    }
     factor = Math.round(factor);
     factor = Math.min(factor, (data0 ?? data).length - 1);
     factor = Math.max(factor, 0);
@@ -1774,10 +1793,12 @@ export const LineChart = (props: LineChartPropsType) => {
     item = (data0 ?? data)[factor];
     if (item && !item.hidePointer) {
       let z =
-        getX(
-          dataSet?.length ? cumulativeSpacingForSet[0] : cumulativeSpacing1,
-          factor,
-        ) -
+        (doAllPointsHaveX
+          ? closestX
+          : getX(
+              dataSet?.length ? cumulativeSpacingForSet[0] : cumulativeSpacing1,
+              factor,
+            )) -
         (pointerRadius || pointerWidth / 2) -
         1;
       setPointerX(Math.max(0.1, z)); // 0.1 is to avoid pointer going out of the chart, See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/925
@@ -2190,7 +2211,9 @@ export const LineChart = (props: LineChartPropsType) => {
 
       const actualStripHeight =
         currentStripHeight ||
-        ((item.originalValue ?? 0) * containerHeight) / maxValue - 2 + overflowTop;
+        ((item.originalValue ?? 0) * containerHeight) / maxValue -
+          2 +
+          overflowTop;
       return (
         <Line
           key={'strip' + (ind * 10000 + index)}
@@ -2248,21 +2271,11 @@ export const LineChart = (props: LineChartPropsType) => {
                           renderStrips(item, index, ind),
                         );
                       })
-                    : data?.map((item, index) =>
-                        renderStrips(item, index, 0),
-                      )}
-                  {data2?.map((item, index) =>
-                    renderStrips(item, index, 1),
-                  )}
-                  {data3?.map((item, index) =>
-                    renderStrips(item, index, 2),
-                  )}
-                  {data4?.map((item, index) =>
-                    renderStrips(item, index, 3),
-                  )}
-                  {data5?.map((item, index) =>
-                    renderStrips(item, index, 4),
-                  )}
+                    : data?.map((item, index) => renderStrips(item, index, 0))}
+                  {data2?.map((item, index) => renderStrips(item, index, 1))}
+                  {data3?.map((item, index) => renderStrips(item, index, 2))}
+                  {data4?.map((item, index) => renderStrips(item, index, 3))}
+                  {data5?.map((item, index) => renderStrips(item, index, 4))}
                   {secondaryData?.map((item, index) =>
                     renderStrips(item, index, 5),
                   )}
