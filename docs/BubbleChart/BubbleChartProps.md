@@ -1,7 +1,5 @@
 # Bubble Chart props
 
-Document might be inaccurate. Expect fast revisions/changes.
-
 **Note:** The props of Bubble chart are similar to those of Line chart. The `r` in the data array is analagous to `bubbleRadius` in the Line chart.
 
 ### Basic props
