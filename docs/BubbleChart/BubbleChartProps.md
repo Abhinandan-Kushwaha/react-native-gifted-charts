@@ -177,6 +177,25 @@ interface bubbleDataItem {
 }
 ```
 
+### Regression Line
+
+The regression line can be displayed on the bubble chart by setting the `showRegressionLine` prop to true in the data set. The appearance and behavior of the regression line can be customized using the `regressionLineConfig` prop.
+
+```ts
+interface RegressionLineConfig {
+  thickness?: number
+  color?: ColorValue
+  opacity?: number
+  strokeDashArray?: number[]
+  isAnimated?: boolean
+  animationDuration?: number
+  x1?: number
+  x2?: number
+  y1?: number
+  y2?: number
+}
+```
+
 ### dataSet
 
 Similar to Line charts, You can pass an array of data using the `dataSet` prop. dataSet is an array of objects of type `DataSetForBubbleChart` decsribed below-
