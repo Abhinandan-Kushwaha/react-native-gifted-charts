@@ -418,6 +418,7 @@ export const BarChart = (props: BarChartPropsTypeWithIsCandle) => {
             // highlightedStackIndex={props.highlightedStackIndex??-1}
             selectedIndex={selectedIndex[0]}
             {...stackRestProps}
+            item={item}
           />
         );
       });
@@ -449,6 +450,7 @@ export const BarChart = (props: BarChartPropsTypeWithIsCandle) => {
           isCandleStickChart={props.isCandleStickChart}
           showValuesAsBottomLabel={props.showValuesAsBottomLabel}
           {...getPropsCommonForBarAndStack(item, index)}
+          item={item}
         />
       ));
     }

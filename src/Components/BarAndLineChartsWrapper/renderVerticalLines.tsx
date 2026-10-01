@@ -8,6 +8,7 @@ const RenderVerticalLines = (props: any) => {
     verticalLinesAr,
     verticalLinesSpacing,
     spacing,
+    alignVerticalLinesWithXValues,
     initialSpacing,
     verticalLinesZIndex,
     verticalLinesHeight,
@@ -29,6 +30,7 @@ const RenderVerticalLines = (props: any) => {
     containerHeightIncludingBelowXAxis,
     totalWidth,
     xAxisLabelsVerticalShift,
+    spacingArray
   } = props;
 
   const getHeightOfVerticalLine = (index: number) => {
@@ -136,7 +138,7 @@ const RenderVerticalLines = (props: any) => {
               ? totalSpacing - 1
               : verticalLinesSpacing
                 ? verticalLinesSpacing * (index + 1)
-                : index * spacing + (initialSpacing - 2));
+                : (alignVerticalLinesWithXValues ? spacingArray[index] : index * spacing) + (initialSpacing - 2));
 
           const lineProps =
             chartType === chartTypes.BAR // This logic exists because we have renderSpecificVerticalLines in Line Charts which I would love to deprecate at the earliest, because that functionality gets handled here elegantly

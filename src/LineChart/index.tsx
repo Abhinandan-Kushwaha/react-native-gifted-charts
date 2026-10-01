@@ -345,6 +345,7 @@ export const LineChart = (props: LineChartPropsType) => {
     allowFontScaling,
     colors,
     disableForeignObject,
+    doAllPointsHaveX,
   } = useLineChart({
     ...props,
     parentWidth: props.parentWidth ?? screenWidth,
@@ -557,7 +558,9 @@ export const LineChart = (props: LineChartPropsType) => {
               : 54 - xAxisTextNumberOfLines * 18,
             zIndex: 10,
             width: spacing + labelsExtraHeight,
-            left: spacing * index - spacing / 2,
+            left:
+              (doAllPointsHaveX ? cumulativeSpacing1[index] : spacing * index) -
+              spacing / 2,
             height: props.xAxisLabelsHeight ?? xAxisTextNumberOfLines * 18,
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
@@ -600,7 +603,9 @@ export const LineChart = (props: LineChartPropsType) => {
                 : 54 - xAxisTextNumberOfLines * 18,
             zIndex: 10,
             width: spacing,
-            left: spacing * index - spacing / 2,
+            left:
+              (doAllPointsHaveX ? cumulativeSpacing1[index] : spacing * index) -
+              spacing / 2,
             opacity: appearingOpacity,
           },
           rotateLabel && {transform: [{rotate: '60deg'}]},
@@ -631,7 +636,6 @@ export const LineChart = (props: LineChartPropsType) => {
   const renderDataPoints = (
     hideDataPoints: any,
     dataForRender: any,
-    originalDataFromProps: any,
     dataPtsShape: any,
     dataPtsWidth: any,
     dataPtsHeight: any,
@@ -716,7 +720,7 @@ export const LineChart = (props: LineChartPropsType) => {
       }
 
       if (showValuesAsDataPointsText) {
-        text = originalDataFromProps[index].value;
+        text = item.originalValue;
       }
 
       const dataPointLabelWidth = item.dataPointLabelWidth
@@ -731,7 +735,13 @@ export const LineChart = (props: LineChartPropsType) => {
             <>
               {key === lastLineNumber - 1 ? (
                 <Rect
-                  x={initialSpacing + (spacing * index - spacing / 2)}
+                  x={
+                    initialSpacing +
+                    ((doAllPointsHaveX
+                      ? spacingArray[index]
+                      : spacing * index) -
+                      spacing / 2)
+                  }
                   y={0}
                   width={spacing}
                   height={containerHeightIncludingBelowXAxis}
@@ -854,7 +864,9 @@ export const LineChart = (props: LineChartPropsType) => {
                           props.dataPointLabelShiftX ||
                           0) -
                         dataPointLabelWidth / 2 +
-                        spacing * index
+                        (doAllPointsHaveX
+                          ? spacingArray[index]
+                          : spacing * index)
                       }
                       y={
                         containerHeight +
@@ -882,7 +894,9 @@ export const LineChart = (props: LineChartPropsType) => {
                             props.dataPointLabelShiftX ||
                             0) -
                           dataPointLabelWidth / 2 +
-                          spacing * index,
+                          (doAllPointsHaveX
+                            ? spacingArray[index]
+                            : spacing * index),
                         top:
                           containerHeight +
                           (item.dataPointLabelShiftY ||
@@ -1048,7 +1062,7 @@ export const LineChart = (props: LineChartPropsType) => {
     if (!pointerYLocal) return;
     if (
       hidePointerDataPointForMissingValues &&
-      typeof props.data?.[pointerIndex]?.value !== 'number'
+      typeof data?.[pointerIndex]?.originalValue !== 'number'
     )
       return null;
 
@@ -1325,7 +1339,7 @@ export const LineChart = (props: LineChartPropsType) => {
             return renderDataPoints(
               hideDataPoints ?? hideDataPoints1,
               data,
-              adjustToOffset(data, -(props.yAxisOffset ?? 0)),
+              // adjustToOffset(data, -(props.yAxisOffset ?? 0)),
               dataPointsShape ?? dataPointsShape1,
               dataPointsWidth ?? dataPointsWidth1,
               dataPointsHeight ?? dataPointsHeight1,
@@ -1349,7 +1363,7 @@ export const LineChart = (props: LineChartPropsType) => {
         {renderDataPoints(
           hideDataPoints1,
           data,
-          props.data,
+          // props.data,
           dataPointsShape1,
           dataPointsWidth1,
           dataPointsHeight1,
@@ -1368,7 +1382,7 @@ export const LineChart = (props: LineChartPropsType) => {
           ? renderDataPoints(
               hideDataPoints2,
               data2,
-              props.data2,
+              // props.data2,
               dataPointsShape2,
               dataPointsWidth2,
               dataPointsHeight2,
@@ -1388,7 +1402,7 @@ export const LineChart = (props: LineChartPropsType) => {
           ? renderDataPoints(
               hideDataPoints3,
               data3,
-              props.data3,
+              // props.data3,
               dataPointsShape3,
               dataPointsWidth3,
               dataPointsHeight3,
@@ -1408,7 +1422,7 @@ export const LineChart = (props: LineChartPropsType) => {
           ? renderDataPoints(
               hideDataPoints4,
               data4,
-              props.data4,
+              // props.data4,
               dataPointsShape4,
               dataPointsWidth4,
               dataPointsHeight4,
@@ -1428,7 +1442,7 @@ export const LineChart = (props: LineChartPropsType) => {
           ? renderDataPoints(
               hideDataPoints5,
               data5,
-              props.data5,
+              // props.data5,
               dataPointsShape5,
               dataPointsWidth5,
               dataPointsHeight5,
@@ -1448,7 +1462,7 @@ export const LineChart = (props: LineChartPropsType) => {
           ? renderDataPoints(
               secondaryLineConfig.hideDataPoints,
               secondaryData,
-              props.secondaryData,
+              // props.secondaryData,
               secondaryLineConfig.dataPointsShape,
               secondaryLineConfig.dataPointsWidth,
               secondaryLineConfig.dataPointsHeight,
@@ -1478,7 +1492,7 @@ export const LineChart = (props: LineChartPropsType) => {
     fillPoints: any,
     startIndex: number,
     endIndex: number,
-    propsData: any,
+    data: any,
     clipRangeId: string,
     currentLineThickness: number | undefined,
     spreadAreaData: {lower: number; upper: number}[] | undefined,
@@ -1502,8 +1516,8 @@ export const LineChart = (props: LineChartPropsType) => {
           getClipRange(startIndex, endIndex, clipRangeId)}
         {isNthAreaChart ? (
           props.interpolateMissingValues === false &&
-          propsData.some(
-            (item: any) => isNaN(item.value), // if we have a null/undefined value in data & interpolation is disabled, then don't render area
+            data.some(
+              (item: any) => isNaN(item.originalValue), // if we have a null/undefined value in data & interpolation is disabled, then don't render area
           ) ? null : animateOnDataChange && animatedFillPath ? (
             <AnimatedPath
               onPress={props.onChartAreaPress}
@@ -1571,7 +1585,6 @@ export const LineChart = (props: LineChartPropsType) => {
     key: any,
     hideDataPoints: any,
     data: any,
-    propsData: any,
     dataPointsShape: any,
     dataPointsWidth: any,
     dataPointsHeight: any,
@@ -1659,7 +1672,7 @@ export const LineChart = (props: LineChartPropsType) => {
           fillPoints,
           startIndex,
           endIndex,
-          propsData,
+          data,
           clipRangeId,
           currentLineThickness,
           spreadAreaData,
@@ -1722,7 +1735,7 @@ export const LineChart = (props: LineChartPropsType) => {
           ? renderDataPoints(
               hideDataPoints,
               data,
-              propsData,
+              // propsData,
               dataPointsShape,
               dataPointsWidth,
               dataPointsHeight,
@@ -1883,7 +1896,6 @@ export const LineChart = (props: LineChartPropsType) => {
     arrowFillColor: any,
     hideDataPoints: any,
     paramData: any,
-    propsData: any,
     dataPointsShape: any,
     dataPointsWidth: any,
     dataPointsHeight: any,
@@ -1988,7 +2000,6 @@ export const LineChart = (props: LineChartPropsType) => {
           key,
           hideDataPoints,
           paramData,
-          propsData,
           dataPointsShape,
           dataPointsWidth,
           dataPointsHeight,
@@ -2027,7 +2038,6 @@ export const LineChart = (props: LineChartPropsType) => {
     arrowFillColor: any,
     hideDataPoints: any,
     paramsData: any,
-    propsData: any,
     dataPointsShape: any,
     dataPointsWidth: any,
     dataPointsHeight: any,
@@ -2130,7 +2140,6 @@ export const LineChart = (props: LineChartPropsType) => {
           key,
           hideDataPoints,
           paramsData,
-          propsData,
           dataPointsShape,
           dataPointsWidth,
           dataPointsHeight,
@@ -2177,17 +2186,23 @@ export const LineChart = (props: LineChartPropsType) => {
         : containerHeight -
           (item.dataPointHeight ?? dataPointsHeight1) / 2 +
           14 -
-          ((item.value ?? 0) * containerHeight) / maxValue;
+          ((item.originalValue ?? 0) * containerHeight) / maxValue;
 
       const actualStripHeight =
         currentStripHeight ||
-        ((item.value ?? 0) * containerHeight) / maxValue - 2 + overflowTop;
+        ((item.originalValue ?? 0) * containerHeight) / maxValue - 2 + overflowTop;
       return (
         <Line
           key={'strip' + (ind * 10000 + index)}
-          x1={initialSpacing + spacing * index}
+          x1={
+            initialSpacing +
+            (doAllPointsHaveX ? cumulativeSpacing1[index] : spacing * index)
+          }
           y1={y1}
-          x2={initialSpacing + spacing * index}
+          x2={
+            initialSpacing +
+            (doAllPointsHaveX ? cumulativeSpacing1[index] : spacing * index)
+          }
           y2={y1 + actualStripHeight + 2}
           strokeWidth={currentStripWidth}
           stroke={currentStripColor}
@@ -2233,22 +2248,22 @@ export const LineChart = (props: LineChartPropsType) => {
                           renderStrips(item, index, ind),
                         );
                       })
-                    : props.data?.map((item, index) =>
+                    : data?.map((item, index) =>
                         renderStrips(item, index, 0),
                       )}
-                  {props.data2?.map((item, index) =>
+                  {data2?.map((item, index) =>
                     renderStrips(item, index, 1),
                   )}
-                  {props.data3?.map((item, index) =>
+                  {data3?.map((item, index) =>
                     renderStrips(item, index, 2),
                   )}
-                  {props.data4?.map((item, index) =>
+                  {data4?.map((item, index) =>
                     renderStrips(item, index, 3),
                   )}
-                  {props.data5?.map((item, index) =>
+                  {data5?.map((item, index) =>
                     renderStrips(item, index, 4),
                   )}
-                  {props.secondaryData?.map((item, index) =>
+                  {secondaryData?.map((item, index) =>
                     renderStrips(item, index, 5),
                   )}
                 </>
@@ -2281,7 +2296,7 @@ export const LineChart = (props: LineChartPropsType) => {
                     arrowFillColorsFromSet?.[index],
                     set.hideDataPoints ?? hideDataPoints1,
                     set.data,
-                    adjustToOffset(set.data, -(props.yAxisOffset ?? 0)), // need the actual values passed by user
+                    // adjustToOffset(set.data, -(props.yAxisOffset ?? 0)), // need the actual values passed by user
                     set.dataPointsShape ?? dataPointsShape1,
                     set.dataPointsWidth ?? dataPointsWidth1,
                     set.dataPointsHeight ?? dataPointsHeight1,
@@ -2317,7 +2332,7 @@ export const LineChart = (props: LineChartPropsType) => {
                     arrowFillColorsFromSet?.[index],
                     set.hideDataPoints ?? hideDataPoints1,
                     set.data,
-                    adjustToOffset(set.data, -(props.yAxisOffset ?? 0)), // need the actual values passed by user
+                    // adjustToOffset(set.data, -(props.yAxisOffset ?? 0)), // need the actual values passed by user
                     set.dataPointsShape ?? dataPointsShape1,
                     set.dataPointsWidth ?? dataPointsWidth1,
                     set.dataPointsHeight ?? dataPointsHeight1,
@@ -2357,7 +2372,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 arrowFillColor1,
                 hideDataPoints1,
                 data,
-                props.data,
+                // props.data,
                 dataPointsShape1,
                 dataPointsWidth1,
                 dataPointsHeight1,
@@ -2392,7 +2407,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 arrowFillColor1,
                 hideDataPoints1,
                 data,
-                props.data,
+                // props.data,
                 dataPointsShape1,
                 dataPointsWidth1,
                 dataPointsHeight1,
@@ -2430,7 +2445,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 secondaryLineConfig.arrowConfig?.fillColor,
                 secondaryLineConfig.hideDataPoints,
                 secondaryData,
-                props.secondaryData,
+                // props.secondaryData,
                 secondaryLineConfig.dataPointsShape,
                 secondaryLineConfig.dataPointsWidth,
                 secondaryLineConfig.dataPointsHeight,
@@ -2465,7 +2480,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 secondaryLineConfig.arrowConfig?.fillColor,
                 secondaryLineConfig.hideDataPoints,
                 secondaryData,
-                props.secondaryData,
+                // props.secondaryData,
                 secondaryLineConfig.dataPointsShape,
                 secondaryLineConfig.dataPointsWidth,
                 secondaryLineConfig.dataPointsHeight,
@@ -2504,7 +2519,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 arrowFillColor2,
                 hideDataPoints2,
                 data2,
-                props.data2,
+                // props.data2,
                 dataPointsShape2,
                 dataPointsWidth2,
                 dataPointsHeight2,
@@ -2539,7 +2554,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 arrowFillColor2,
                 hideDataPoints2,
                 data2,
-                props.data2,
+                // props.data2,
                 dataPointsShape2,
                 dataPointsWidth2,
                 dataPointsHeight2,
@@ -2578,7 +2593,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 arrowFillColor3,
                 hideDataPoints3,
                 data3,
-                props.data3,
+                // props.data3,
                 dataPointsShape3,
                 dataPointsWidth3,
                 dataPointsHeight3,
@@ -2613,7 +2628,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 arrowFillColor3,
                 hideDataPoints3,
                 data3,
-                props.data3,
+                // props.data3,
                 dataPointsShape3,
                 dataPointsWidth3,
                 dataPointsHeight3,
@@ -2652,7 +2667,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 arrowFillColor4,
                 hideDataPoints4,
                 data4,
-                props.data4,
+                // props.data4,
                 dataPointsShape4,
                 dataPointsWidth4,
                 dataPointsHeight4,
@@ -2687,7 +2702,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 arrowFillColor4,
                 hideDataPoints4,
                 data4,
-                props.data4,
+                // props.data4,
                 dataPointsShape4,
                 dataPointsWidth4,
                 dataPointsHeight4,
@@ -2726,7 +2741,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 arrowFillColor5,
                 hideDataPoints5,
                 data5,
-                props.data5,
+                // props.data5,
                 dataPointsShape5,
                 dataPointsWidth5,
                 dataPointsHeight5,
@@ -2761,7 +2776,7 @@ export const LineChart = (props: LineChartPropsType) => {
                 arrowFillColor5,
                 hideDataPoints5,
                 data5,
-                props.data5,
+                // props.data5,
                 dataPointsShape5,
                 dataPointsWidth5,
                 dataPointsHeight5,
@@ -2812,7 +2827,9 @@ export const LineChart = (props: LineChartPropsType) => {
         ) : null}
         {(data0 ?? data).map((item: lineDataItem, index: number) => {
           const secondaryLabel =
-            item.secondaryLabel ?? secondaryXAxis?.labelTexts?.[index] ?? '';
+            item.secondaryLabel ??
+            secondaryXAxis?.labelTexts?.[index] ??
+            (doAllPointsHaveX ? (item.x ?? '').toString() : '');
           const secondaryLabelTextStyle =
             item.secondaryLabelTextStyle ??
             secondaryXAxis?.labelsTextStyle ??
@@ -2827,7 +2844,9 @@ export const LineChart = (props: LineChartPropsType) => {
                     item.label ||
                       (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
                         ? props.xAxisLabelTexts[index]
-                        : ''),
+                        : doAllPointsHaveX
+                          ? (item.x ?? '').toString()
+                          : ''),
                     item.labelTextStyle || props.xAxisLabelTextStyle,
                     item.labelComponent,
                   )
@@ -2837,7 +2856,9 @@ export const LineChart = (props: LineChartPropsType) => {
                     item.label ||
                       (props.xAxisLabelTexts && props.xAxisLabelTexts[index]
                         ? props.xAxisLabelTexts[index]
-                        : ''),
+                        : doAllPointsHaveX
+                          ? (item.x ?? '').toString()
+                          : ''),
                     item.labelTextStyle || props.xAxisLabelTextStyle,
                     item.labelComponent,
                   )}
@@ -2886,6 +2907,7 @@ export const LineChart = (props: LineChartPropsType) => {
       renderChartContent={renderChartContent}
       remainingScrollViewProps={remainingScrollViewProps}
       nestedScrollEnabled={props.nestedScrollEnabled}
+      alignVerticalLinesWithXValues={props.alignVerticalLinesWithXValues}
     />
   );
 };

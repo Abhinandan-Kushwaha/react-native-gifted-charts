@@ -1,3 +1,31 @@
+## 🎉 1.4.79
+
+### ✨ Features added-
+
+Line charts now support **x** values in the data array. This gives us freedom to plot the data points at any (x,y) location in the chart. <br />
+Added the property `x` to the lineDataItem objects in the data array. Added below props to Line charts-
+1. `xOffset` _(number)_
+2. `xScale` _(number)_
+3. `alignVerticalLinesWithXValues` _(boolean)_
+
+<br />
+
+**Note** This feature works only when every data point has a x value.
+
+
+### 🔨 Refactor
+
+1. Update React Native version retrieval method. Use `Platform.constants.reactNativeVersion` instead of require('react-native/package.json').version. Thanks to [Davyd NRB](https://github.com/retyui) for his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1240 
+2. Updated all dependencies and dev dependencies to their latest versions
+3. Added return types to the hooks returned by `gifted-charts-core`
+
+---
+
+---
+
+---
+
+
 ### 🎉 1.4.78
 
 ### ✨ Features added-
@@ -19,7 +47,7 @@ interface candleStickDataItem {
 ### 🐛 Bug fixes
 
 Fixed the issue- "Secondary Y-axis stacked bar segments are positioned using the primary Y-axis". See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1236. <br />
-Thanks to [Yathavan](https://github.com/yathu) for his PR https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/117
+Thanks to [Yathavan](https://github.com/yathu) for his PR  https://github.com/Abhinandan-Kushwaha/gifted-charts-core/pull/117
 
 ### 🔨 Refactor
 
