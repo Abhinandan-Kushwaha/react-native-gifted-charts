@@ -138,13 +138,13 @@ const data=[ {value:50}, {value:80}, {value:90}, {value:70} ]
 
 ## Props tables
 
-**1. [BarChart, Horizontal BarChart and Stacked Bar Chart props](docs/BarChart/BarChartProps.md)** \
-**2. [LineChart and AreaChart props](docs/LineChart/LineChartProps.md)** \
-**3. [PieChart and DonutChart props](docs/PieChart/PieChartProps.md)** \
-**4. [Population Pyramid props](docs/PopulationPyramid/PopulationPyramid.md)** \
-**5. [RadarChart props](docs/RadarChart/RadarChartProps.md)** \
-**6. [BubbleChart props](docs/BubbleChart/BubbleChartProps.md)** \
-**7. [CandleStickChart props](docs/CandleStickChart/CandleStickChartProps.md)**
+**1. [Bar Chart, Horizontal Bar Chart and Stacked Bar Chart props](docs/BarChart/BarChartProps.md)** \
+**2. [Line Chart and Area Chart props](docs/LineChart/LineChartProps.md)** \
+**3. [Bubble Chart props](docs/BubbleChart/BubbleChartProps.md)** \
+**4. [Candle Stick Chart props](docs/CandleStickChart/CandleStickChartProps.md)** \
+**5. [Pie Chart and Donut Chart props](docs/PieChart/PieChartProps.md)** \
+**6. [Radar Chart props](docs/RadarChart/RadarChartProps.md)** \
+**7. [Population Pyramid props](docs/PopulationPyramid/PopulationPyramid.md)**
 
 ## 🤝 Contributing
 
