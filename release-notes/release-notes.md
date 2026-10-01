@@ -10,8 +10,8 @@ Added the property `x` to the lineDataItem objects in the data array. Added belo
 
 <br />
 
-**Note** This feature works only when every data point has a x value.
-
+**Note** This feature works only when every data point has a x value. <br />
+See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/discussions/1242
 
 ### 🔨 Refactor
 
