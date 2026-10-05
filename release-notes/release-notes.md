@@ -1,3 +1,14 @@
+### 🎉 1.4.81
+
+1. Added fallback for `Platform.constants.reactNativeVersion`, as it may not be available in some environments like on React Native Web. Thanks to [Trần Đình Huy](https://github.com/huytdps13400) for his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1247 <br />
+2. Omit press handlers for inert data points in Line and Area charts. Once again, thanks to [Trần Đình Huy](https://github.com/huytdps13400) for his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1246
+
+---
+
+---
+
+---
+
 ### 🎉 1.4.80
 
 More precise determination of the nearest data point while using pointers in Line charts. <br />
