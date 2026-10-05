@@ -1,6 +1,6 @@
 {
   "name": "react-native-gifted-charts",
-  "version": "1.4.80",
+  "version": "1.4.81",
   "description": "The most complete library for Bar, Line, Area, Pie, Donut, Stacked Bar, Population Pyramid, Radar, Bubble, Scatter and Candle Stick charts in React Native. Allows 2D, 3D, gradient, animations and live data updates.",
   "main": "dist/index.js",
   "files": [
