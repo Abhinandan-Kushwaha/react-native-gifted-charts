@@ -805,20 +805,24 @@ export const LineChart = (props: LineChartPropsType) => {
                             : 'none'
                           : dataPointsColor
                       }
-                      onPress={() => {
-                        item.onPress
-                          ? item.onPress(item, index)
-                          : props.onPress
-                            ? props.onPress(item, index)
-                            : focusEnabled
-                              ? handleFocus(index, item, 0, onStripPress)
-                              : null;
-                      }}
-                      onPressOut={() => {
-                        if (!item.onPress && !props.onPress && focusEnabled) {
-                          handleUnFocus();
-                        }
-                      }}
+                      {...(item.onPress || props.onPress || focusEnabled
+                        ? {
+                            onPress: () => {
+                              item.onPress
+                                ? item.onPress(item, index)
+                                : props.onPress
+                                  ? props.onPress(item, index)
+                                  : focusEnabled
+                                    ? handleFocus(index, item, 0, onStripPress)
+                                    : null;
+                            },
+                            onPressOut: () => {
+                              if (!item.onPress && !props.onPress && focusEnabled) {
+                                handleUnFocus();
+                              }
+                            },
+                          }
+                        : {})}
                     />
                   )}
                 </Fragment>
@@ -836,20 +840,24 @@ export const LineChart = (props: LineChartPropsType) => {
                             : 'none'
                           : dataPointsColor
                       }
-                      onPress={() => {
-                        item.onPress
-                          ? item.onPress(item, index)
-                          : props.onPress
-                            ? props.onPress(item, index)
-                            : focusEnabled
-                              ? handleFocus(index, item, 0, onStripPress)
-                              : null;
-                      }}
-                      onPressOut={() => {
-                        if (!item.onPress && !props.onPress && focusEnabled) {
-                          handleUnFocus();
-                        }
-                      }}
+                      {...(item.onPress || props.onPress || focusEnabled
+                        ? {
+                            onPress: () => {
+                              item.onPress
+                                ? item.onPress(item, index)
+                                : props.onPress
+                                  ? props.onPress(item, index)
+                                  : focusEnabled
+                                    ? handleFocus(index, item, 0, onStripPress)
+                                    : null;
+                            },
+                            onPressOut: () => {
+                              if (!item.onPress && !props.onPress && focusEnabled) {
+                                handleUnFocus();
+                              }
+                            },
+                          }
+                        : {})}
                     />
                   )}
                 </Fragment>
