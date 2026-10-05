@@ -1,7 +1,7 @@
 import {useEffect, useRef} from 'react';
 import {Dimensions, Platform} from 'react-native';
 
-const versionObj = Platform.constants.reactNativeVersion;
+const versionObj = Platform.constants?.reactNativeVersion ?? {};
 const {
   major: msb,
   minor: mid,
