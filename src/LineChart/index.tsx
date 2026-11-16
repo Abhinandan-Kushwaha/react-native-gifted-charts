@@ -1775,7 +1775,42 @@ export const LineChart = (props: LineChartPropsType) => {
     );
   };
 
+  // Responder move events arrive for every touch sample, but the pointer snaps to
+  // data points, so most samples resolve to the same pointer state. Writing that
+  // state again re-rendered the whole chart on every sample (always for dataSet,
+  // whose pointer arrays were rebuilt each time), which can flood the JS thread
+  // during fast swipes over long series. Only write values that changed during the
+  // current gesture. The cache is cleared when a gesture starts or ends, when the
+  // pointer is hidden after release, and when the data changes, since other code
+  // paths write the same state.
+  const lastPointerState = useRef<{source: unknown; values: Map<Function, unknown>}>({
+    source: null,
+    values: new Map(),
+  });
+  const resetPointerCache = () => {
+    lastPointerState.current = {source: null, values: new Map()};
+  };
+  const isSamePointerValue = (a: unknown, b: unknown) =>
+    Object.is(a, b) ||
+    (Array.isArray(a) &&
+      Array.isArray(b) &&
+      a.length === b.length &&
+      a.every((v, i) => Object.is(v, b[i])));
+  const setIfChanged = <T,>(setter: (value: T) => void, value: T) => {
+    const {values} = lastPointerState.current;
+    if (values.has(setter) && isSamePointerValue(values.get(setter), value)) {
+      return;
+    }
+    values.set(setter, value);
+    setter(value);
+  };
+
   const activatePointers = (x: number) => {
+    const pointerSource = dataSet ?? data0 ?? data;
+    if (lastPointerState.current.source !== pointerSource) {
+      resetPointerCache();
+      lastPointerState.current.source = pointerSource;
+    }
     let factor = -1,
       closestX = 0;
     if (doAllPointsHaveX) {
@@ -1809,15 +1844,15 @@ export const LineChart = (props: LineChartPropsType) => {
             )) -
         (pointerRadius || pointerWidth / 2) -
         1;
-      setPointerX(Math.max(0.1, z)); // 0.1 is to avoid pointer going out of the chart, See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/925
-      setPointerIndex(factor);
+      setIfChanged(setPointerX, Math.max(0.1, z)); // 0.1 is to avoid pointer going out of the chart, See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/925
+      setIfChanged(setPointerIndex, factor);
       y =
         containerHeight -
         (item.value * containerHeight) / maxValue -
         (pointerRadius || pointerHeight / 2) +
         10;
-      setPointerY(y);
-      setPointerItem(item);
+      setIfChanged(setPointerY, y);
+      setIfChanged(setPointerItem, item);
     }
     if (data2 && data2.length) {
       item = data2[factor];
@@ -1827,8 +1862,8 @@ export const LineChart = (props: LineChartPropsType) => {
           (item.value * containerHeight) / maxValue -
           (pointerRadius || pointerHeight / 2) +
           10;
-        setPointerY2(y);
-        setPointerItem2(item);
+        setIfChanged(setPointerY2, y);
+        setIfChanged(setPointerItem2, item);
       }
     }
     if (data3 && data3.length) {
@@ -1839,8 +1874,8 @@ export const LineChart = (props: LineChartPropsType) => {
           (item.value * containerHeight) / maxValue -
           (pointerRadius || pointerHeight / 2) +
           10;
-        setPointerY3(y);
-        setPointerItem3(item);
+        setIfChanged(setPointerY3, y);
+        setIfChanged(setPointerItem3, item);
       }
     }
     if (data4 && data4.length) {
@@ -1851,8 +1886,8 @@ export const LineChart = (props: LineChartPropsType) => {
           (item.value * containerHeight) / maxValue -
           (pointerRadius || pointerHeight / 2) +
           10;
-        setPointerY4(y);
-        setPointerItem4(item);
+        setIfChanged(setPointerY4, y);
+        setIfChanged(setPointerItem4, item);
       }
     }
     if (data5 && data5.length) {
@@ -1863,8 +1898,8 @@ export const LineChart = (props: LineChartPropsType) => {
           (item.value * containerHeight) / maxValue -
           (pointerRadius || pointerHeight / 2) +
           10;
-        setPointerY5(y);
-        setPointerItem5(item);
+        setIfChanged(setPointerY5, y);
+        setIfChanged(setPointerItem5, item);
       }
     }
     if (secondaryData?.length) {
@@ -1875,9 +1910,9 @@ export const LineChart = (props: LineChartPropsType) => {
           (item.value * containerHeight) / secondaryMaxValue -
           (pointerRadius || pointerHeight / 2) +
           10;
-        setSecondaryPointerY(y);
+        setIfChanged(setSecondaryPointerY, y);
         // @ts-ignore
-        setSecondaryPointerItem(item);
+        setIfChanged(setSecondaryPointerItem, item);
       }
     }
     if (dataSet?.length) {
@@ -1899,9 +1934,9 @@ export const LineChart = (props: LineChartPropsType) => {
           : 0;
         return y;
       });
-      setPointerItemsForSet(pointerItemsForSetLocal);
-      setSecondaryPointerItemsForSet(secondaryPointerItemsForSetLocal);
-      setPointerYsForDataSet(ysForDataSet);
+      setIfChanged(setPointerItemsForSet, pointerItemsForSetLocal);
+      setIfChanged(setSecondaryPointerItemsForSet, secondaryPointerItemsForSetLocal);
+      setIfChanged(setPointerYsForDataSet, ysForDataSet);
     }
   };
 
@@ -1953,6 +1988,7 @@ export const LineChart = (props: LineChartPropsType) => {
         }
         onResponderGrant={evt => {
           if (!pointerConfig) return;
+          resetPointerCache();
           setResponderStartTime(evt.timeStamp);
           if (activatePointersOnLongPress) {
             return;
@@ -1969,7 +2005,7 @@ export const LineChart = (props: LineChartPropsType) => {
           ) {
             return;
           } else {
-            setResponderActive(true);
+            setIfChanged(setResponderActive, true);
           }
           let x = evt.nativeEvent.locationX;
           let px = evt.nativeEvent.pageX;
@@ -1989,8 +2025,12 @@ export const LineChart = (props: LineChartPropsType) => {
           setResponderStartTime(0);
           if (resetPointerIndexOnRelease) setPointerIndex(-1);
           setResponderActive(false);
+          resetPointerCache();
           if (!persistPointer)
-            setTimeout(() => setPointerX(0), pointerVanishDelay);
+            setTimeout(() => {
+              setPointerX(0);
+              resetPointerCache();
+            }, pointerVanishDelay);
           pointerConfig?.onResponderEnd?.();
         }}
         onResponderTerminationRequest={evt => false}
@@ -2093,6 +2133,7 @@ export const LineChart = (props: LineChartPropsType) => {
         }
         onResponderGrant={evt => {
           if (!pointerConfig) return;
+          resetPointerCache();
           setResponderStartTime(evt.timeStamp);
           if (activatePointersOnLongPress) {
             return;
@@ -2109,7 +2150,7 @@ export const LineChart = (props: LineChartPropsType) => {
           ) {
             return;
           } else {
-            setResponderActive(true);
+            setIfChanged(setResponderActive, true);
           }
           let x = evt.nativeEvent.locationX;
           if (
@@ -2129,8 +2170,12 @@ export const LineChart = (props: LineChartPropsType) => {
           setResponderStartTime(0);
           if (resetPointerIndexOnRelease) setPointerIndex(-1);
           setResponderActive(false);
+          resetPointerCache();
           if (!persistPointer)
-            setTimeout(() => setPointerX(0), pointerVanishDelay);
+            setTimeout(() => {
+              setPointerX(0);
+              resetPointerCache();
+            }, pointerVanishDelay);
           pointerConfig?.onResponderEnd?.();
         }}
         onResponderTerminationRequest={evt => false}
