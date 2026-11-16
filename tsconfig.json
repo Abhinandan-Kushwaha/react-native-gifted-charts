@@ -18,6 +18,7 @@
       "moduleResolution": "nodenext",
       "resolveJsonModule": true,
       "isolatedModules": true,
+      "importHelpers": true,
       "jsx": "react-jsx"
     },
     "include": [
