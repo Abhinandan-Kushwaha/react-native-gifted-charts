@@ -10,7 +10,6 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
     pointerX,
     pointerLabelWidth,
     pointerRadius,
-    pointerWidth,
     pointerYLocal,
     pointerStripUptoDataPoint,
     pointerStripHeight,
@@ -35,6 +34,12 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
     width,
   } = props;
 
+  const containerHeightIncludingBelowXAxis = containsNegative
+    ? props.containerHeightIncludingBelowXAxis
+    : containerHeight;
+
+  const isNegative = pointerItemLocal[0].value < 0;
+
   const {top, left} = getTopAndLeftForStripAndLabel(props);
 
   if (isNaN(top) || typeof top !== 'number') return null;
@@ -54,9 +59,9 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
           style={{
             position: 'absolute',
             left: -pointerStripWidth / 4,
-            top: containsNegative ? 0 : -pointerYLocal + 8 + xAxisThickness,
+            top: -pointerYLocal + 8 + xAxisThickness,
             width,
-            height: containerHeight,
+            height: containerHeightIncludingBelowXAxis,
           }}>
           <Svg>
             <Line
@@ -76,8 +81,10 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
               }
               y1={
                 pointerStripUptoDataPoint
-                  ? pointerYLocal + pointerRadius - 4
-                  : containerHeight - pointerStripHeight
+                  ? isNegative
+                    ? containerHeight
+                    : pointerYLocal + pointerRadius - 4
+                  : 0
               }
               x2={
                 pointerX +
@@ -86,7 +93,13 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
                 pointerStripWidth / 2 +
                 (pointerItemLocal[0]?.pointerShiftX || 0)
               }
-              y2={containerHeight}
+              y2={
+                pointerStripUptoDataPoint
+                  ? isNegative
+                    ? pointerYLocal + pointerRadius - 4
+                    : containerHeight
+                  : containerHeightIncludingBelowXAxis
+              }
             />
             {horizontalStripConfig && (
               <Line

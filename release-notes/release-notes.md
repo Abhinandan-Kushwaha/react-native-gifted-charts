@@ -1,3 +1,35 @@
+# 🎉 1.4.82 Major release
+
+## ✨ Features added-
+
+Native Linear Gradient for those using React Native version `0.87` and above. This removes dependency on `react-native-linear-gradient` / `expo-linear-gradient` packages. Thanks to [Freddy Harris](https://github.com/Freddy03h) and [Davyd NRB](https://github.com/retyui) for suggesting this.
+
+<i>**Note:** If your React Native version is below `0.87`, you must install `react-native-linear-gradient` (or `expo-linear-gradient` for Expo projects).</i><br />
+See-
+- https://stackoverflow.com/a/80017174/7533126
+- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1241
+
+## 🐛 Bug fixes
+
+Fixed `pointerConfig` related issues in case of negative values.
+
+## 🔨 Refactor
+
+1. Skip redundant pointer state updates when a user drags the pointer in Line and Area charts. This will improve performance for `pointerConfig` & avoid several unnecessary renders during pointer drag. Thanks to [Mohith Gajjela](https://github.com/Mohith26) for his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1252 <br />
+This fixes- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1200 and https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/issues/1221
+
+
+2. Added `"importHelpers": true` in tsconfig of both - gifted-charts-core and react-native-gifted-charts. This reduces bundle size by removing redundant inlining of helpers in the bundle. Thanks to [Davyd NRB](https://github.com/retyui) for his suggestion.
+
+3. Include src directory in the bundle. Thanks to [Davyd NRB](https://github.com/retyui). See https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1249
+
+
+---
+
+---
+
+---
+
 ### 🎉 1.4.81
 
 1. Added fallback for `Platform.constants.reactNativeVersion`, as it may not be available in some environments like on React Native Web. Thanks to [Trần Đình Huy](https://github.com/huytdps13400) for his PR- https://github.com/Abhinandan-Kushwaha/react-native-gifted-charts/pull/1247 <br />
