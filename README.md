@@ -70,16 +70,16 @@ See the **[release changes by version here.](release-notes/release-notes.md)**
 ### React Native CLI
 
 ```sh
-npm install react-native-gifted-charts react-native-linear-gradient react-native-svg
+npm install react-native-gifted-charts react-native-svg
 ```
 
 ### Expo
 
 ```sh
-npx expo install react-native-gifted-charts expo-linear-gradient react-native-svg
+npx expo install react-native-gifted-charts react-native-svg
 ```
 
-Please note that `react-native-svg` and `react-native-linear-gradient`/`expo-linear-gradient` are needed for the library to work, so make sure they are installed in your project. <br />
+If your React Native version is below `0.87`, please install `react-native-linear-gradient` (or `expo-linear-gradient` for Expo projects). <br />
 **[gifted-charts-core](https://www.npmjs.com/package/gifted-charts-core)** contains the mathematical and logical utilities used by this library.
 
 # 📚 Docs & Demos 🎦

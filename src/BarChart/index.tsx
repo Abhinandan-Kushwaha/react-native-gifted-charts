@@ -81,6 +81,7 @@ export const BarChart = (props: BarChartPropsTypeWithIsCandle) => {
     pointerIndex,
     setPointerIndex,
     maxValue,
+    mostNegativeValue,
     responderStartTime,
     setResponderActive,
     activatePointersDelay,
@@ -198,6 +199,7 @@ export const BarChart = (props: BarChartPropsTypeWithIsCandle) => {
       showPointerStrip,
       pointerStripWidth,
       containerHeight,
+      containerHeightIncludingBelowXAxis,
       xAxisThickness,
       pointerStripColor,
       pointerConfig,
@@ -208,7 +210,7 @@ export const BarChart = (props: BarChartPropsTypeWithIsCandle) => {
       pointerIndex,
       width: totalWidth,
       screenWidth,
-      containsNegative: false,
+      containsNegative: mostNegativeValue < 0,
     });
   };
 
@@ -237,7 +239,7 @@ export const BarChart = (props: BarChartPropsTypeWithIsCandle) => {
 
     let item, y;
     item = chartData[factor];
-    let stackSum = 0;
+    let stackSum;
     if ('stacks' in item) {
       stackSum = item.stacks.reduce(
         (acc: number, stack: any) => acc + (stack.value ?? 0),

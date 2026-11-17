@@ -817,7 +817,11 @@ export const LineChart = (props: LineChartPropsType) => {
                                     : null;
                             },
                             onPressOut: () => {
-                              if (!item.onPress && !props.onPress && focusEnabled) {
+                              if (
+                                !item.onPress &&
+                                !props.onPress &&
+                                focusEnabled
+                              ) {
                                 handleUnFocus();
                               }
                             },
@@ -852,7 +856,11 @@ export const LineChart = (props: LineChartPropsType) => {
                                     : null;
                             },
                             onPressOut: () => {
-                              if (!item.onPress && !props.onPress && focusEnabled) {
+                              if (
+                                !item.onPress &&
+                                !props.onPress &&
+                                focusEnabled
+                              ) {
                                 handleUnFocus();
                               }
                             },
@@ -1134,6 +1142,7 @@ export const LineChart = (props: LineChartPropsType) => {
       showPointerStrip,
       pointerStripWidth,
       containerHeight,
+      containerHeightIncludingBelowXAxis,
       xAxisThickness,
       pointerStripColor,
       pointerConfig,
@@ -1783,7 +1792,10 @@ export const LineChart = (props: LineChartPropsType) => {
   // current gesture. The cache is cleared when a gesture starts or ends, when the
   // pointer is hidden after release, and when the data changes, since other code
   // paths write the same state.
-  const lastPointerState = useRef<{source: unknown; values: Map<Function, unknown>}>({
+  const lastPointerState = useRef<{
+    source: unknown;
+    values: Map<Function, unknown>;
+  }>({
     source: null,
     values: new Map(),
   });
@@ -1935,7 +1947,10 @@ export const LineChart = (props: LineChartPropsType) => {
         return y;
       });
       setIfChanged(setPointerItemsForSet, pointerItemsForSetLocal);
-      setIfChanged(setSecondaryPointerItemsForSet, secondaryPointerItemsForSetLocal);
+      setIfChanged(
+        setSecondaryPointerItemsForSet,
+        secondaryPointerItemsForSetLocal,
+      );
       setIfChanged(setPointerYsForDataSet, ysForDataSet);
     }
   };

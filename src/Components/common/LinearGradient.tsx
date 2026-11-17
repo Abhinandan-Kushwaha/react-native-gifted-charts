@@ -1,6 +1,7 @@
 import React from 'react';
+import {rnVersion} from '../../utils';
 
-type LinearGradientProps = {
+export type LinearGradientProps = {
   style?: any;
   start?: {x: number; y: number};
   end?: {x: number; y: number};
@@ -10,17 +11,22 @@ type LinearGradientProps = {
 
 let LinearGradient: React.FC<LinearGradientProps>;
 
-try {
-  // for bare react-native projects
-  LinearGradient = require('react-native-linear-gradient').LinearGradient;
-} catch (e) {
+if (rnVersion >= 870000) {
+  // React Native 0.87 and above
+  LinearGradient = require('./NativeLinearGradient').default;
+} else {
   try {
-    // for expo-based projects
-    LinearGradient = require('expo-linear-gradient').LinearGradient;
+    // for bare react-native projects
+    LinearGradient = require('react-native-linear-gradient').LinearGradient;
   } catch (e) {
-    throw new Error(
-      'Gradient package was not found. Make sure "react-native-linear-gradient" or "expo-linear-gradient" is installed',
-    );
+    try {
+      // for expo-based projects
+      LinearGradient = require('expo-linear-gradient').LinearGradient;
+    } catch (e) {
+      throw new Error(
+        'Gradient package was not found. Make sure "react-native-linear-gradient" or "expo-linear-gradient" is installed',
+      );
+    }
   }
 }
 
