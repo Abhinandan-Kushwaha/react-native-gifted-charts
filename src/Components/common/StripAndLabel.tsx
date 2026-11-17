@@ -84,7 +84,7 @@ export const StripAndLabel = (props: StripAndLabelProps) => {
                   ? isNegative
                     ? containerHeight
                     : pointerYLocal + pointerRadius - 4
-                  : 0
+                  : containerHeight - pointerStripHeight
               }
               x2={
                 pointerX +
