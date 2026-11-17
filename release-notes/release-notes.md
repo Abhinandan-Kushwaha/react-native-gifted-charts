@@ -1,3 +1,13 @@
+### 🎉 1.4.83
+
+Minor patch for a bug in pointerStripHeight.
+
+---
+
+---
+
+---
+
 # 🎉 1.4.82 Major release
 
 ## ✨ Features added-
